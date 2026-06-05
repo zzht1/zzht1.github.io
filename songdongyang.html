@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>送东阳马生序 · 宋濂</title>
+    <style>
+        :root {
+            --bg: #fdfaf5;
+            --text: #2c2416;
+            --text-secondary: #5c5347;
+            --accent: #b8860b;
+            --accent-light: #f0e6d3;
+            --border: #e0d8c8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: "Noto Serif SC", "Source Han Serif SC", "STSong", "SimSun", "Songti SC", serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 纸张纹理 */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(139, 119, 90, 0.015) 2px,
+                    rgba(139, 119, 90, 0.015) 4px
+                );
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .article {
+            position: relative;
+            z-index: 1;
+            max-width: 680px;
+            width: 100%;
+            padding: 5rem 2rem 4rem;
+        }
+
+        /* ===== 标题区 ===== */
+        .header {
+            text-align: center;
+            margin-bottom: 3.5rem;
+            padding-bottom: 2.5rem;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+        }
+
+        .header::after {
+            content: '◆';
+            position: absolute;
+            bottom: -0.55em;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg);
+            padding: 0 0.8em;
+            color: var(--accent);
+            font-size: 0.6rem;
+            letter-spacing: 0;
+        }
+
+        .title {
+            font-size: 2.6rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            line-height: 1.4;
+            margin-bottom: 0.6rem;
+            color: #1a1006;
+        }
+
+        .author {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            letter-spacing: 0.06em;
+            font-weight: 400;
+        }
+
+        .author .dynasty {
+            color: #8c7a5e;
+            font-size: 0.95rem;
+        }
+
+        /* ===== 正文 ===== */
+        .content p {
+            font-size: 1.15rem;
+            line-height: 2.1;
+            text-indent: 2em;
+            margin-bottom: 1.8rem;
+            letter-spacing: 0.02em;
+            text-align: justify;
+        }
+
+        /* 首段首字放大 */
+        .content p:first-child::first-letter {
+            float: left;
+            font-size: 3.4rem;
+            line-height: 0.85;
+            margin-right: 0.12em;
+            margin-top: 0.04em;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        /* 段落间装饰 */
+        .section-break {
+            text-align: center;
+            margin: 2.2rem 0;
+            color: var(--border);
+            font-size: 0.7rem;
+            letter-spacing: 0.6em;
+            user-select: none;
+        }
+
+        /* ===== 底部 ===== */
+        .footer {
+            margin-top: 3.5rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .footer a {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.95rem;
+            letter-spacing: 0.04em;
+            transition: color 0.2s;
+        }
+
+        .footer a:hover {
+            color: #9a6f0a;
+        }
+
+        .footer .note {
+            display: block;
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: #b0a392;
+        }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 600px) {
+            .article {
+                padding: 3rem 1.2rem 2.5rem;
+            }
+            .title {
+                font-size: 1.8rem;
+                letter-spacing: 0.04em;
+            }
+            .content p {
+                font-size: 1.05rem;
+                line-height: 2;
+                text-indent: 1.6em;
+                margin-bottom: 1.3rem;
+            }
+            .content p:first-child::first-letter {
+                font-size: 2.8rem;
+            }
+        }
+
+        /* 打印样式 */
+        @media print {
+            body { background: white; }
+            .article { max-width: 100%; padding: 2rem; }
+            .footer a { color: var(--text); }
+        }
+    </style>
+</head>
+<body>
+    <article class="article">
+
+        <header class="header">
+            <h1 class="title">送东阳马生序</h1>
+            <p class="author">
+                <span class="dynasty">〔明〕</span>&ensp;宋&ensp;濂
+            </p>
+        </header>
+
+        <div class="content">
+
+            <p>余幼时即嗜学。家贫，无从致书以观，每假借于藏书之家，手自笔录，计日以还。天大寒，砚冰坚，手指不可屈伸，弗之怠。录毕，走送之，不敢稍逾约。以是人多以书假余，余因得遍观群书。既加冠，益慕圣贤之道，又患无硕师名人与游，尝趋百里外，从乡之先达执经叩问。先达德隆望尊，门人弟子填其室，未尝稍降辞色。余立侍左右，援疑质理，俯身倾耳以请；或遇其叱咄，色愈恭，礼愈至，不敢出一言以复；俟其欣悦，则又请焉。故余虽愚，卒获有所闻。</p>
+
+            <div class="section-break">· · ·</div>
+
+            <p>当余之从师也，负箧曳屣，行深山巨谷中，穷冬烈风，大雪深数尺，足肤皲裂而不知。至舍，四支僵劲不能动，媵人持汤沃灌，以衾拥覆，久而乃和。寓逆旅，主人日再食，无鲜肥滋味之享。同舍生皆被绮绣，戴朱缨宝饰之帽，腰白玉之环，左佩刀，右备容臭，烨然若神人；余则缊袍敝衣处其间，略无慕艳意。以中有足乐者，不知口体之奉不若人也。盖余之勤且艰若此。</p>
+
+            <div class="section-break">· · ·</div>
+
+            <p>今虽耄老，未有所成，犹幸预君子之列，而承天子之宠光，缀公卿之后，日侍坐备顾问，四海亦谬称其氏名，况才之过于余者乎？</p>
+
+            <div class="section-break">· · ·</div>
+
+            <p>今诸生学于太学，县官日有廪稍之供，父母岁有裘葛之遗，无冻馁之患矣；坐大厦之下而诵诗书，无奔走之劳矣；有司业、博士为之师，未有问而不告、求而不得者也；凡所宜有之书，皆集于此，不必若余之手录，假诸人而后见也。其业有不精、德有不成者，非天质之卑，则心不若余之专耳，岂他人之过哉！</p>
+
+            <div class="section-break">· · ·</div>
+
+            <p>东阳马生君则，在太学已二年，流辈甚称其贤。余朝京师，生以乡人子谒余，撰长书以为贽，辞甚畅达，与之论辨，言和而色夷。自谓少时用心于学甚劳，是可谓善学者矣！其将归见其亲也，余故道为学之难以告之。谓余勉乡人以学者，余之志也；诋我夸际遇之盛而骄乡人者，岂知余者哉！</p>
+
+        </div>
+
+        <footer class="footer">
+            <a href="/">← 返回首页</a>
+            <span class="note">zzht.me · 丙午年</span>
+        </footer>
+
+    </article>
+</body>
+</html>
