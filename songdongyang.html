@@ -182,7 +182,125 @@
             body { background: white; }
             .article { max-width: 100%; padding: 2rem; }
             .footer a { color: var(--text); }
+            .anno-toolbar, .anno-note-panel { display: none !important; }
         }
+
+        /* ===== 划词标注功能 ===== */
+        mark.hl {
+            padding: 1px 0;
+            border-radius: 2px;
+            cursor: pointer;
+            transition: filter 0.15s;
+        }
+        mark.hl:hover { filter: brightness(0.92); }
+        mark.hl.has-note {
+            border-bottom: 1.5px dashed rgba(0,0,0,0.3);
+        }
+
+        /* 浮动工具栏 */
+        .anno-toolbar {
+            position: absolute;
+            display: none;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 10px;
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+            z-index: 100;
+            font-family: sans-serif;
+            border: 1px solid #eee;
+        }
+        .anno-toolbar.visible { display: flex; }
+        .anno-toolbar .sep {
+            width: 1px; height: 18px;
+            background: #e0e0e0; margin: 0 2px;
+        }
+        .anno-toolbar .color-dot {
+            width: 20px; height: 20px;
+            border-radius: 50%; border: 2px solid transparent;
+            cursor: pointer; transition: transform 0.15s;
+            flex-shrink: 0;
+        }
+        .anno-toolbar .color-dot:hover { transform: scale(1.2); }
+        .anno-toolbar .act-btn {
+            background: none; border: none;
+            cursor: pointer; padding: 2px 4px;
+            font-size: 15px; line-height: 1;
+            color: #666; transition: color 0.15s;
+        }
+        .anno-toolbar .act-btn:hover { color: #333; }
+
+        /* 批注输入面板 */
+        .anno-note-panel {
+            position: absolute;
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            padding: 8px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+            z-index: 101;
+            width: 260px;
+            font-family: sans-serif;
+            border: 1px solid #eee;
+        }
+        .anno-note-panel.visible { display: flex; }
+        .anno-note-panel textarea {
+            width: 100%; height: 60px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 6px 8px;
+            font-size: 13px;
+            font-family: inherit;
+            resize: vertical;
+            outline: none;
+        }
+        .anno-note-panel textarea:focus { border-color: var(--accent); }
+        .anno-note-panel .note-actions {
+            display: flex; justify-content: flex-end; gap: 6px;
+        }
+        .anno-note-panel .note-actions button {
+            padding: 3px 12px; border-radius: 4px;
+            border: 1px solid #ddd; background: #fff;
+            cursor: pointer; font-size: 12px;
+        }
+        .anno-note-panel .note-actions .save-btn {
+            background: var(--accent); color: #fff; border-color: var(--accent);
+        }
+
+        /* 批注弹出框 */
+        .anno-panel {
+            position: absolute;
+            display: none;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.18);
+            padding: 10px 14px;
+            max-width: 280px; min-width: 120px;
+            z-index: 100;
+            font-family: sans-serif;
+            font-size: 14px;
+            border: 1px solid #eee;
+        }
+        .anno-panel.visible { display: block; }
+        .anno-panel .note-text {
+            color: #444; line-height: 1.6; margin-bottom: 8px;
+            white-space: pre-wrap;
+        }
+        .anno-panel .no-note { color: #aaa; font-style: italic; }
+        .anno-panel .panel-btns {
+            display: flex; gap: 6px;
+            border-top: 1px solid #eee; padding-top: 8px;
+        }
+        .anno-panel .panel-btns button {
+            background: none; border: 1px solid #ddd;
+            border-radius: 4px; padding: 3px 10px;
+            cursor: pointer; font-size: 12px; color: #666;
+        }
+        .anno-panel .panel-btns button:hover { background: #f5f5f5; }
+        .anno-panel .panel-btns .del-btn:hover { color: #c00; border-color: #c00; }
     </style>
 </head>
 <body>
@@ -223,5 +341,328 @@
         </footer>
 
     </article>
+    <!-- 划词标注：浮动工具栏 -->
+    <div class="anno-toolbar" id="annoToolbar">
+        <span class="color-dot" data-color="yellow" style="background:#fff3b0"></span>
+        <span class="color-dot" data-color="green" style="background:#c6f6c9"></span>
+        <span class="color-dot" data-color="blue" style="background:#bbdefb"></span>
+        <span class="color-dot" data-color="pink" style="background:#f8bbd0"></span>
+        <span class="color-dot" data-color="orange" style="background:#ffe0b2"></span>
+        <span class="sep"></span>
+        <button class="act-btn" id="btnNote" title="添加批注">✎</button>
+    </div>
+
+    <!-- 批注输入面板 -->
+    <div class="anno-note-panel" id="notePanel">
+        <textarea id="noteInput" placeholder="输入你的批注…"></textarea>
+        <div class="note-actions">
+            <button id="noteCancel">取消</button>
+            <button id="noteSave" class="save-btn">保存</button>
+        </div>
+    </div>
+
+    <!-- 批注弹出框 -->
+    <div class="anno-panel" id="annoPanel">
+        <div class="note-text" id="panelNote"></div>
+        <div class="panel-btns">
+            <button id="panelEdit">编辑</button>
+            <button id="panelDel" class="del-btn">删除</button>
+        </div>
+    </div>
+
+    <script>
+    (function () {
+        /* ===== 配置 ===== */
+        var COLORS = {
+            yellow: '#fff3b0', green: '#c6f6c9', blue: '#bbdefb',
+            pink:   '#f8bbd0', orange: '#ffe0b2'
+        };
+        var STORAGE_KEY = 'anno_songdongyang';
+
+        /* ===== 状态 ===== */
+        var marks = [];      // { id, pIdx, start, end, color, note }
+        var uid = 0;
+        var pendingNoteMarkId = null;
+
+        /* ===== DOM ===== */
+        var toolbar    = document.getElementById('annoToolbar');
+        var notePanel  = document.getElementById('notePanel');
+        var noteInput  = document.getElementById('noteInput');
+        var panel      = document.getElementById('annoPanel');
+        var panelNote  = document.getElementById('panelNote');
+        var paragraphs = document.querySelectorAll('.content > p');
+        var savedSel   = null;  // 保存的选区（用于批注面板关闭后恢复）
+
+        /* ===== 工具函数 ===== */
+        function escHtml(s) {
+            var d = document.createElement('div');
+            d.textContent = s;
+            return d.innerHTML;
+        }
+
+        // 获取选区在某个 p 元素内的文字偏移
+        function getOffsets(range, p) {
+            var s = 0, e = 0, node;
+            for (node = range.startContainer; node && node !== p; node = node.parentNode) {
+                var prev = node.previousSibling;
+                while (prev) { s += (prev.textContent || '').length; prev = prev.previousSibling; }
+            }
+            for (node = range.endContainer; node && node !== p; node = node.parentNode) {
+                var prev2 = node.previousSibling;
+                while (prev2) { e += (prev2.textContent || '').length; prev2 = prev2.previousSibling; }
+            }
+            return { start: s + range.startOffset, end: e + range.endOffset };
+        }
+
+        /* ===== 持久化 ===== */
+        function save() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(marks));
+            } catch (e) { /* 忽略存储错误 */ }
+        }
+
+        function loadAll() {
+            try {
+                var raw = localStorage.getItem(STORAGE_KEY);
+                if (raw) {
+                    marks = JSON.parse(raw);
+                    uid = marks.reduce(function (m, a) { return Math.max(m, a.id); }, 0) + 1;
+                    // 对每个段落重新渲染标注
+                    var touched = {};
+                    marks.forEach(function (a) { touched[a.pIdx] = true; });
+                    Object.keys(touched).forEach(function (idx) {
+                        rerenderP(parseInt(idx));
+                    });
+                }
+            } catch (e) { marks = []; }
+        }
+
+        /* ===== 选区处理 ===== */
+        function showToolbar(range) {
+            var rect = range.getBoundingClientRect();
+            toolbar.style.left = (rect.left + window.scrollX + rect.width / 2 - 100) + 'px';
+            toolbar.style.top  = (rect.top  + window.scrollY - 44) + 'px';
+            toolbar.classList.add('visible');
+        }
+
+        function hideAll() {
+            toolbar.classList.remove('visible');
+            notePanel.classList.remove('visible');
+            panel.classList.remove('visible');
+            pendingNoteMarkId = null;
+        }
+
+        function onSelection() {
+            hideAll();
+            var sel = window.getSelection();
+            if (!sel.rangeCount) return;
+            var range = sel.getRangeAt(0);
+            if (range.collapsed) return;
+            var text = range.toString().trim();
+            if (!text) return;
+            for (var i = 0; i < paragraphs.length; i++) {
+                if (paragraphs[i].contains(range.startContainer) && paragraphs[i].contains(range.endContainer)) {
+                    savedSel = { pIdx: i, range: range.cloneRange() };
+                    showToolbar(range);
+                    return;
+                }
+            }
+        }
+
+        /* ===== 高亮操作 ===== */
+        function doHighlight(color) {
+            if (!savedSel) return;
+            var p = paragraphs[savedSel.pIdx];
+            var range = savedSel.range;
+            var off = getOffsets(range, p);
+            if (off.start === off.end) return;
+
+            // 移除该范围内已有的 mark
+            removeInRange(savedSel.pIdx, off.start, off.end);
+
+            var id = uid++;
+            var markData = { id: id, pIdx: savedSel.pIdx, start: off.start, end: off.end, color: color, note: '' };
+            marks.push(markData);
+
+            // 重新渲染该段落
+            rerenderP(savedSel.pIdx);
+            save();
+            window.getSelection().removeAllRanges();
+            hideAll();
+        }
+
+        // 移除与 [start, end] 有重叠的标注
+        function removeInRange(pIdx, start, end) {
+            marks = marks.filter(function (a) {
+                if (a.pIdx !== pIdx) return true;
+                return !(a.start < end && a.end > start);
+            });
+        }
+
+        // 重新渲染某个段落的所有标注
+        function rerenderP(pIdx) {
+            var p = paragraphs[pIdx];
+            if (!p) return;
+            var text = p.textContent;
+            var pMarks = marks.filter(function (a) { return a.pIdx === pIdx; });
+            if (pMarks.length === 0) {
+                p.textContent = text;
+                return;
+            }
+            pMarks.sort(function (a, b) { return a.start - b.start; });
+
+            var html = '';
+            var cursor = 0;
+            pMarks.forEach(function (a) {
+                if (a.start > cursor) html += escHtml(text.substring(cursor, a.start));
+                var cls = 'hl' + (a.note ? ' has-note' : '');
+                var title = a.note ? ' title="' + escHtml(a.note) + '"' : '';
+                html += '<mark class="' + cls + '" data-id="' + a.id + '" style="background:' + a.color + '"' + title + '>'
+                    + escHtml(text.substring(a.start, a.end)) + '</mark>';
+                cursor = a.end;
+            });
+            if (cursor < text.length) html += escHtml(text.substring(cursor));
+            p.innerHTML = html;
+        }
+
+        /* ===== 批注操作 ===== */
+        function openNotePanel(markId, anchorRect) {
+            var m = marks.find(function (a) { return a.id === markId; });
+            if (!m) return;
+            pendingNoteMarkId = markId;
+            noteInput.value = m.note || '';
+            notePanel.style.left = anchorRect.left + window.scrollX + 'px';
+            notePanel.style.top  = anchorRect.bottom + window.scrollY + 8 + 'px';
+            notePanel.classList.add('visible');
+            setTimeout(function () { noteInput.focus(); }, 50);
+        }
+
+        function saveNote() {
+            if (pendingNoteMarkId === null) return;
+            var m = marks.find(function (a) { return a.id === pendingNoteMarkId; });
+            if (m) {
+                m.note = noteInput.value.trim();
+                rerenderP(m.pIdx);
+                save();
+            }
+            notePanel.classList.remove('visible');
+            pendingNoteMarkId = null;
+        }
+
+        function openPanelForMark(markEl) {
+            var id = parseInt(markEl.getAttribute('data-id'));
+            var m = marks.find(function (a) { return a.id === id; });
+            if (!m) return;
+            panelNote.textContent = m.note || '';
+            panelNote.className = m.note ? 'note-text' : 'note-text no-note';
+            if (!m.note) panelNote.textContent = '暂无批注';
+
+            var rect = markEl.getBoundingClientRect();
+            panel.style.left = rect.left + window.scrollX + 'px';
+            panel.style.top  = rect.bottom + window.scrollY + 8 + 'px';
+            panel.classList.add('visible');
+            panel.setAttribute('data-mark-id', id);
+        }
+
+        function deleteMark() {
+            var id = parseInt(panel.getAttribute('data-mark-id'));
+            var m = marks.find(function (a) { return a.id === id; });
+            if (m) {
+                marks = marks.filter(function (a) { return a.id !== id; });
+                rerenderP(m.pIdx);
+                save();
+            }
+            panel.classList.remove('visible');
+        }
+
+        function editMarkNote() {
+            var id = parseInt(panel.getAttribute('data-mark-id'));
+            var m = marks.find(function (a) { return a.id === id; });
+            if (!m) return;
+            panel.classList.remove('visible');
+            var markEl = document.querySelector('mark[data-id="' + id + '"]');
+            if (markEl) {
+                openNotePanel(id, markEl.getBoundingClientRect());
+            }
+        }
+
+        /* ===== 事件绑定 ===== */
+
+        // 颜色点击 → 高亮
+        toolbar.querySelectorAll('.color-dot').forEach(function (dot) {
+            dot.addEventListener('click', function (e) {
+                e.stopPropagation();
+                doHighlight(dot.getAttribute('data-color'));
+            });
+        });
+
+        // 批注按钮
+        document.getElementById('btnNote').addEventListener('click', function (e) {
+            e.stopPropagation();
+            if (!savedSel) return;
+            // 先检查选区内是否已有 mark
+            var markEl = savedSel.range.startContainer.nodeType === 1
+                ? savedSel.range.startContainer.closest && savedSel.range.startContainer.closest('mark.hl')
+                : savedSel.range.startContainer.parentElement.closest && savedSel.range.startContainer.parentElement.closest('mark.hl');
+            if (markEl && document.querySelector('.content').contains(markEl)) {
+                openNotePanel(parseInt(markEl.getAttribute('data-id')), savedSel.range.getBoundingClientRect());
+            } else {
+                doHighlight('#fff3b0');
+                // doHighlight 会清除选区，需要找到刚创建的 mark
+                var lastMark = marks[marks.length - 1];
+                if (lastMark) {
+                    var el = document.querySelector('mark[data-id="' + lastMark.id + '"]');
+                    if (el) openNotePanel(lastMark.id, el.getBoundingClientRect());
+                }
+            }
+        });
+
+        // 批注面板保存/取消
+        document.getElementById('noteSave').addEventListener('click', saveNote);
+        document.getElementById('noteCancel').addEventListener('click', function () {
+            notePanel.classList.remove('visible');
+            pendingNoteMarkId = null;
+        });
+        noteInput.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) saveNote();
+        });
+
+        // 点击 mark → 显示批注面板
+        document.querySelector('.content').addEventListener('click', function (e) {
+            var markEl = e.target.closest && e.target.closest('mark.hl');
+            if (markEl) {
+                e.stopPropagation();
+                openPanelForMark(markEl);
+            }
+        });
+
+        // 面板按钮
+        document.getElementById('panelEdit').addEventListener('click', editMarkNote);
+        document.getElementById('panelDel').addEventListener('click', deleteMark);
+
+        // 点击空白处关闭弹出
+        document.addEventListener('click', function (e) {
+            if (!toolbar.contains(e.target)) toolbar.classList.remove('visible');
+            if (!notePanel.contains(e.target)) notePanel.classList.remove('visible');
+            if (!panel.contains(e.target) && !e.target.closest('mark.hl')) {
+                panel.classList.remove('visible');
+            }
+        });
+
+        // Escape 关闭
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') hideAll();
+        });
+
+        // 选区变化监听
+        document.addEventListener('mouseup', function () { setTimeout(onSelection, 10); });
+        document.addEventListener('keyup', function (e) {
+            if (e.shiftKey || e.ctrlKey || e.metaKey) setTimeout(onSelection, 10);
+        });
+
+        /* ===== 初始化 ===== */
+        loadAll();
+    })();
+    </script>
 </body>
 </html>
