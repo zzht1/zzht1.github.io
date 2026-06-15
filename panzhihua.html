@@ -1,0 +1,2296 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>攀枝花7日旅游攻略 - 城东区青年人才公寓出发</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap');
+
+  :root {
+    --primary: #E85D3A;
+    --primary-light: #FF8A65;
+    --primary-dark: #BF360C;
+    --accent: #FFB300;
+    --accent-light: #FFD54F;
+    --bg: #FFF8F0;
+    --bg-card: #FFFFFF;
+    --text: #2D2D2D;
+    --text-light: #6B7280;
+    --text-white: #FFFFFF;
+    --shadow: 0 4px 24px rgba(0,0,0,0.08);
+    --shadow-hover: 0 8px 40px rgba(0,0,0,0.15);
+    --radius: 16px;
+    --radius-sm: 10px;
+    --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* Hero Section */
+  .hero {
+    position: relative;
+    height: 100vh;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 30%, #0f3460 60%, #e94560 100%);
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff' fill-opacity='0.05' d='M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,224C672,213,768,171,864,149.3C960,128,1056,128,1152,149.3C1248,171,1344,213,1392,234.7L1440,256L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E") no-repeat bottom;
+    background-size: cover;
+  }
+
+  .hero-particles {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    overflow: hidden;
+  }
+
+  .particle {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    animation: float 15s infinite ease-in-out;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.3; }
+    50% { transform: translateY(-80px) rotate(180deg); opacity: 0.8; }
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 0 20px;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.25);
+    padding: 8px 24px;
+    border-radius: 50px;
+    color: var(--text-white);
+    font-size: 14px;
+    letter-spacing: 2px;
+    margin-bottom: 24px;
+    animation: fadeInDown 0.8s ease;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 900;
+    color: var(--text-white);
+    text-shadow: 0 4px 30px rgba(0,0,0,0.3);
+    margin-bottom: 16px;
+    animation: fadeInUp 0.8s ease 0.2s both;
+  }
+
+  .hero h1 span {
+    background: linear-gradient(90deg, var(--accent), var(--primary-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    color: rgba(255,255,255,0.8);
+    font-weight: 300;
+    margin-bottom: 40px;
+    animation: fadeInUp 0.8s ease 0.4s both;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    color: var(--text-white);
+    padding: 16px 40px;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 8px 30px rgba(232,93,58,0.4);
+    transition: var(--transition);
+    animation: fadeInUp 0.8s ease 0.6s both;
+  }
+
+  .hero-cta:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(232,93,58,0.6);
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.6);
+    font-size: 14px;
+    animation: bounce 2s infinite;
+    z-index: 2;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(10px); }
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Navigation */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255,248,240,0.9);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    padding: 0 20px;
+    transition: var(--transition);
+  }
+
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: 12px 0;
+  }
+
+  .nav-inner::-webkit-scrollbar { display: none; }
+
+  .nav-btn {
+    flex-shrink: 0;
+    padding: 8px 20px;
+    border-radius: 50px;
+    border: none;
+    background: transparent;
+    color: var(--text-light);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    font-family: inherit;
+    white-space: nowrap;
+  }
+
+  .nav-btn:hover { background: rgba(232,93,58,0.08); color: var(--primary); }
+  .nav-btn.active {
+    background: var(--primary);
+    color: var(--text-white);
+    box-shadow: 0 4px 15px rgba(232,93,58,0.3);
+  }
+
+  /* Main Container */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* Section */
+  .section {
+    display: none;
+    padding: 40px 0 80px;
+    animation: sectionIn 0.5s ease;
+  }
+
+  .section.active { display: block; }
+
+  @keyframes sectionIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .section-header h2 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .section-header p {
+    color: var(--text-light);
+    font-size: 1.05rem;
+  }
+
+  /* Day Cards */
+  .day-card {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 32px;
+    overflow: hidden;
+    transition: var(--transition);
+  }
+
+  .day-card:hover { box-shadow: var(--shadow-hover); }
+
+  .day-header {
+    padding: 28px 32px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    user-select: none;
+    transition: var(--transition);
+  }
+
+  .day-header:hover { background: rgba(232,93,58,0.03); }
+
+  .day-number {
+    width: 60px;
+    height: 60px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-weight: 900;
+    font-size: 1.3rem;
+    color: white;
+  }
+
+  .day-1 .day-number { background: linear-gradient(135deg, #E85D3A, #FF8A65); }
+  .day-2 .day-number { background: linear-gradient(135deg, #1976D2, #42A5F5); }
+  .day-3 .day-number { background: linear-gradient(135deg, #388E3C, #66BB6A); }
+  .day-4 .day-number { background: linear-gradient(135deg, #7B1FA2, #BA68C8); }
+  .day-5 .day-number { background: linear-gradient(135deg, #F57C00, #FFB74D); }
+  .day-6 .day-number { background: linear-gradient(135deg, #00796B, #4DB6AC); }
+  .day-7 .day-number { background: linear-gradient(135deg, #C62828, #EF5350); }
+
+  .day-info { flex: 1; }
+  .day-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 4px; }
+  .day-subtitle { color: var(--text-light); font-size: 0.9rem; }
+
+  .day-toggle {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: rgba(232,93,58,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    flex-shrink: 0;
+  }
+
+  .day-toggle svg {
+    width: 20px; height: 20px;
+    fill: var(--primary);
+    transition: var(--transition);
+  }
+
+  .day-card.open .day-toggle { background: var(--primary); }
+  .day-card.open .day-toggle svg { fill: white; transform: rotate(180deg); }
+
+  .day-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .day-card.open .day-body { max-height: 3000px; }
+
+  .day-content {
+    padding: 0 32px 32px;
+  }
+
+  /* Timeline */
+  .timeline {
+    position: relative;
+    padding-left: 32px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--primary-light), var(--accent-light));
+    border-radius: 2px;
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 28px;
+  }
+
+  .timeline-item:last-child { margin-bottom: 0; }
+
+  .timeline-dot {
+    position: absolute;
+    left: -30px;
+    top: 6px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--primary);
+    border: 3px solid var(--bg-card);
+    box-shadow: 0 0 0 2px var(--primary-light);
+  }
+
+  .timeline-time {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 4px;
+    letter-spacing: 1px;
+  }
+
+  .timeline-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .timeline-desc {
+    color: var(--text-light);
+    font-size: 0.92rem;
+    line-height: 1.8;
+  }
+
+  .timeline-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 12px;
+    border-radius: 50px;
+    font-size: 0.78rem;
+    font-weight: 500;
+  }
+
+  .tag-food { background: #FFF3E0; color: #E65100; }
+  .tag-spot { background: #E8F5E9; color: #2E7D32; }
+  .tag-transport { background: #E3F2FD; color: #1565C0; }
+  .tag-tip { background: #FFF8E1; color: #F57F17; }
+  .tag-cost { background: #FCE4EC; color: #C62828; }
+
+  /* Spot Cards */
+  .spot-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 24px;
+  }
+
+  .spot-card {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: var(--transition);
+    cursor: pointer;
+  }
+
+  .spot-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-hover);
+  }
+
+  .spot-img {
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+  }
+
+  .spot-img::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60%;
+    background: linear-gradient(transparent, rgba(0,0,0,0.6));
+  }
+
+  .spot-rating {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(255,255,255,0.95);
+    padding: 4px 10px;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--primary);
+    z-index: 1;
+  }
+
+  .spot-category {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    background: var(--primary);
+    color: white;
+    padding: 4px 14px;
+    border-radius: 50px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    z-index: 1;
+  }
+
+  .spot-info { padding: 20px; }
+  .spot-name { font-size: 1.15rem; font-weight: 700; margin-bottom: 8px; }
+  .spot-desc { color: var(--text-light); font-size: 0.9rem; margin-bottom: 12px; line-height: 1.7; }
+
+  .spot-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 0.82rem;
+    color: var(--text-light);
+  }
+
+  .spot-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  /* Food Section */
+  .food-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  .food-card {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 24px;
+    transition: var(--transition);
+    border-left: 4px solid transparent;
+  }
+
+  .food-card:hover {
+    border-left-color: var(--primary);
+    transform: translateX(4px);
+  }
+
+  .food-emoji {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+  }
+
+  .food-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .food-desc {
+    color: var(--text-light);
+    font-size: 0.88rem;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+
+  .food-price {
+    display: inline-block;
+    background: #FFF3E0;
+    color: #E65100;
+    padding: 4px 12px;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  /* Budget Section */
+  .budget-table {
+    width: 100%;
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    border-collapse: collapse;
+  }
+
+  .budget-table th {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    padding: 16px 24px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  .budget-table td {
+    padding: 16px 24px;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 0.92rem;
+  }
+
+  .budget-table tr:last-child td { border-bottom: none; }
+
+  .budget-table tr:hover td { background: rgba(232,93,58,0.03); }
+
+  .budget-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    color: white;
+    padding: 24px 32px;
+    border-radius: var(--radius);
+    margin-top: 24px;
+    box-shadow: 0 8px 30px rgba(232,93,58,0.3);
+  }
+
+  .budget-total-label { font-size: 1.1rem; font-weight: 500; }
+  .budget-total-amount { font-size: 2rem; font-weight: 900; }
+
+  /* Transport Section */
+  .transport-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+  }
+
+  .transport-card {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 28px;
+    transition: var(--transition);
+  }
+
+  .transport-card:hover { box-shadow: var(--shadow-hover); }
+
+  .transport-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    margin-bottom: 16px;
+  }
+
+  .transport-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; }
+  .transport-card p { color: var(--text-light); font-size: 0.9rem; line-height: 1.8; }
+
+  /* Tips Section */
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 20px;
+  }
+
+  .tip-card {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 28px;
+    transition: var(--transition);
+  }
+
+  .tip-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+
+  .tip-icon {
+    font-size: 2rem;
+    margin-bottom: 14px;
+  }
+
+  .tip-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; }
+  .tip-card p { color: var(--text-light); font-size: 0.9rem; line-height: 1.8; }
+
+  /* Checklist */
+  .checklist {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 32px;
+  }
+
+  .checklist h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .check-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid #f5f5f5;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+
+  .check-item:last-child { border-bottom: none; }
+
+  .check-item:hover { padding-left: 8px; }
+
+  .check-box {
+    width: 24px;
+    height: 24px;
+    border-radius: 8px;
+    border: 2px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    flex-shrink: 0;
+  }
+
+  .check-item.checked .check-box {
+    background: var(--primary);
+    border-color: var(--primary);
+  }
+
+  .check-item.checked .check-box::after {
+    content: '\2713';
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .check-item.checked .check-text {
+    text-decoration: line-through;
+    color: var(--text-light);
+  }
+
+  .check-text { font-size: 0.95rem; }
+
+  /* Progress Bar */
+  .progress-bar {
+    background: #f0f0f0;
+    border-radius: 50px;
+    height: 8px;
+    margin-top: 20px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    border-radius: 50px;
+    transition: width 0.5s ease;
+  }
+
+  .progress-text {
+    text-align: center;
+    margin-top: 8px;
+    font-size: 0.85rem;
+    color: var(--text-light);
+  }
+
+  /* Modal */
+  .modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(8px);
+    z-index: 200;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .modal-overlay.show { display: flex; }
+
+  .modal {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    max-width: 600px;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    animation: modalIn 0.3s ease;
+  }
+
+  @keyframes modalIn {
+    from { opacity: 0; transform: scale(0.9) translateY(20px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  .modal-header {
+    padding: 24px 28px;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .modal-header h3 { font-size: 1.2rem; font-weight: 700; }
+
+  .modal-close {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: #f5f5f5;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+  }
+
+  .modal-close:hover { background: var(--primary); color: white; }
+
+  .modal-body { padding: 28px; }
+  .modal-body p { margin-bottom: 16px; line-height: 1.8; color: var(--text); font-size: 0.95rem; }
+  .modal-body h4 { font-weight: 700; margin: 20px 0 10px; color: var(--primary); }
+
+  /* Back to Top */
+  .back-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: white;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(232,93,58,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: var(--transition);
+  }
+
+  .back-top.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .back-top:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(232,93,58,0.6);
+  }
+
+  /* Map placeholder */
+  .map-container {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    margin-bottom: 32px;
+  }
+
+  .map-visual {
+    height: 400px;
+    background: linear-gradient(135deg, #e8f4f8, #d1ecf1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .map-pin {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    transform: translate(-50%, -100%);
+    cursor: pointer;
+    transition: var(--transition);
+    z-index: 2;
+  }
+
+  .map-pin:hover { transform: translate(-50%, -100%) scale(1.2); z-index: 3; }
+
+  .map-pin-dot {
+    width: 40px;
+    height: 40px;
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  }
+
+  .map-pin-dot span {
+    transform: rotate(45deg);
+    font-size: 16px;
+  }
+
+  .map-pin-label {
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    background: rgba(0,0,0,0.75);
+    color: white;
+    padding: 2px 10px;
+    border-radius: 50px;
+    font-size: 0.72rem;
+    font-weight: 500;
+    opacity: 0;
+    transition: var(--transition);
+  }
+
+  .map-pin:hover .map-pin-label { opacity: 1; bottom: -14px; }
+
+  .map-legend {
+    padding: 20px 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: var(--text-light);
+  }
+
+  .legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-light);
+    font-size: 0.85rem;
+    border-top: 1px solid rgba(0,0,0,0.06);
+  }
+
+  /* Weather widget */
+  .weather-bar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+
+  .weather-day {
+    background: var(--bg-card);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow);
+    padding: 16px;
+    text-align: center;
+    transition: var(--transition);
+    cursor: pointer;
+  }
+
+  .weather-day:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+  .weather-day.active { border: 2px solid var(--primary); }
+
+  .weather-label { font-size: 0.8rem; color: var(--text-light); margin-bottom: 8px; font-weight: 600; }
+  .weather-icon { font-size: 2rem; margin-bottom: 8px; }
+  .weather-temp { font-size: 0.9rem; font-weight: 700; }
+  .weather-range { font-size: 0.75rem; color: var(--text-light); }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero { min-height: 500px; }
+    .hero h1 { font-size: 2rem; }
+    .spot-grid, .food-grid, .tips-grid, .transport-cards { grid-template-columns: 1fr; }
+    .weather-bar { grid-template-columns: repeat(4, 1fr); }
+    .day-header { padding: 20px; }
+    .day-content { padding: 0 20px 20px; }
+    .budget-table th, .budget-table td { padding: 12px 16px; font-size: 0.85rem; }
+    .map-visual { height: 300px; }
+  }
+
+  @media (max-width: 480px) {
+    .weather-bar { grid-template-columns: repeat(3, 1fr); }
+    .budget-total { flex-direction: column; text-align: center; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Hero -->
+<section class="hero" id="hero">
+  <div class="hero-particles" id="particles"></div>
+  <div class="hero-content">
+    <div class="hero-badge">SICHUAN PANZHIHUA</div>
+    <h1>攀枝花 <span>7日深度游</span></h1>
+    <p class="hero-sub">阳光花城 · 康养胜地 — 从城东区青年人才公寓出发</p>
+    <button class="hero-cta" onclick="scrollToNav()">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+      开始探索
+    </button>
+  </div>
+  <div class="scroll-hint">向下滑动 ↓</div>
+</section>
+
+<!-- Navigation -->
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <button class="nav-btn active" data-section="itinerary">行程安排</button>
+    <button class="nav-btn" data-section="spots">景点图鉴</button>
+    <button class="nav-btn" data-section="food">美食地图</button>
+    <button class="nav-btn" data-section="transport">交通指南</button>
+    <button class="nav-btn" data-section="budget">预算参考</button>
+    <button class="nav-btn" data-section="tips">实用贴士</button>
+    <button class="nav-btn" data-section="checklist">行前清单</button>
+  </div>
+</nav>
+
+<div class="container">
+
+  <!-- Itinerary Section -->
+  <div class="section active" id="itinerary">
+    <div class="section-header">
+      <h2>7日行程安排</h2>
+      <p>从城东区青年人才公寓出发，深度探索攀枝花及周边</p>
+    </div>
+
+    <!-- Weather -->
+    <div class="weather-bar">
+      <div class="weather-day active" data-day="1">
+        <div class="weather-label">Day 1</div>
+        <div class="weather-icon">☀️</div>
+        <div class="weather-temp">28°C</div>
+        <div class="weather-range">18° / 28°</div>
+      </div>
+      <div class="weather-day" data-day="2">
+        <div class="weather-label">Day 2</div>
+        <div class="weather-icon">🌤️</div>
+        <div class="weather-temp">27°C</div>
+        <div class="weather-range">17° / 27°</div>
+      </div>
+      <div class="weather-day" data-day="3">
+        <div class="weather-label">Day 3</div>
+        <div class="weather-icon">☀️</div>
+        <div class="weather-temp">30°C</div>
+        <div class="weather-range">19° / 30°</div>
+      </div>
+      <div class="weather-day" data-day="4">
+        <div class="weather-label">Day 4</div>
+        <div class="weather-icon">⛅</div>
+        <div class="weather-temp">26°C</div>
+        <div class="weather-range">16° / 26°</div>
+      </div>
+      <div class="weather-day" data-day="5">
+        <div class="weather-label">Day 5</div>
+        <div class="weather-icon">☀️</div>
+        <div class="weather-temp">29°C</div>
+        <div class="weather-range">18° / 29°</div>
+      </div>
+      <div class="weather-day" data-day="6">
+        <div class="weather-label">Day 6</div>
+        <div class="weather-icon">🌤️</div>
+        <div class="weather-temp">27°C</div>
+        <div class="weather-range">17° / 27°</div>
+      </div>
+      <div class="weather-day" data-day="7">
+        <div class="weather-label">Day 7</div>
+        <div class="weather-icon">☀️</div>
+        <div class="weather-temp">28°C</div>
+        <div class="weather-range">18° / 28°</div>
+      </div>
+    </div>
+
+    <!-- Day 1 -->
+    <div class="day-card day-1 open">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-number">D1</div>
+        <div class="day-info">
+          <div class="day-title">抵达 & 城东区初探</div>
+          <div class="day-subtitle">安顿入住 · 周边漫步 · 适应环境</div>
+        </div>
+        <div class="day-toggle">
+          <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="day-content">
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-time">上午 09:00 - 12:00</div>
+              <div class="timeline-title">抵达攀枝花</div>
+              <div class="timeline-desc">乘飞机抵达攀枝花保安营机场，或乘火车抵达攀枝花站。从机场/火车站打车前往城东区青年人才公寓，约20-30分钟车程。办理入住、整理行李。</div>
+              <div class="timeline-tags">
+                <span class="tag tag-transport">🚕 机场打车约40元</span>
+                <span class="tag tag-tip">💡 建议提前联系公寓确认入住</span>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-time">中午 12:00 - 13:30</div>
+              <div class="timeline-title">午餐：城东区地道川菜</div>
+              <div class="timeline-desc">在公寓附近的餐馆品尝当地川菜。推荐尝试攀枝花特色的盐边菜，口味偏辣鲜，以当地新鲜食材为主。可以试试豆花饭、回锅肉等家常菜。</div>
+              <div class="timeline-tags">
+                <span class="tag tag-food">🍜 人均 30-50元</span>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-time">下午 14:00 - 17:00</div>
+              <div class="timeline-title">攀枝花公园 & 竹湖园</div>
+              <div class="timeline-desc">步行或骑行前往攀枝花公园，这是市区最大的综合性公园，绿树成荫，可以远眺金沙江。随后前往竹湖园公园，湖畔漫步，感受这座阳光城市的悠闲节奏。</div>
+              <div class="timeline-tags">
+                <span class="tag tag-spot">🌳 免费开放</span>
+                <span class="tag tag-transport">🚶 步行约15分钟</span>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-time">傍晚 17:30 - 20:00</div>
+              <div class="timeline-title">金沙江畔日落 & 晚餐</div>
+              <div class="timeline-desc">沿金沙江散步，欣赏夕阳映照江面的壮美景色。晚餐可在江边啤酒广场附近觅食，品尝攀枝花烧烤和冷淡杯。</div>
+              <div class="timeline-tags">
+                <span class="tag tag-food">🍖 烧烤人均 50-80元</span>
+                <span class="tag tag-spot">🌅 推荐拍照点</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 2 -->
+    <div class="day-card day-2">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-number">D2</div>
+        <div class="day-info">
+          <div class="day-title">阿署达花舞人间 & 三线建设博物馆</div>
+          <div class="day-subtitle">花海奇观 · 历史记忆 · 文化探索</div>
+        </div>
+        <div class="day-toggle">
+          <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="day-content">
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-time">上午 08:00 - 12:00</div>
+              <div class="timeline-title">阿署达花舞人间景区</div>
+              <div class="timeline-desc">距城东区约15公里，是攀枝花最知名的花卉主题景区。园区占地广阔，拥有数百种花卉品种，四季花开不断。漫步花海之中，拍照打卡，感受"阳光花城"的魅力。春季可赏三角梅、凤凰花，秋冬则有格桑花和波斯菊盛开。</div>
+              <div class="timeline-tags">
+                <span class="tag tag-spot">🌸 门票约 40元</span>
+                <span class="tag tag-transport">🚌 公交/打车约25分钟</span>
+                <span class="tag tag-tip">💡 建议穿浅色衣服拍照</span>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-time">中午 12:00 - 13:30</div>
+              <div class="timeline-title">景区周边农家乐</div>
+              <div class="timeline-desc">在阿署达村附近的农家乐用餐，品尝正宗的乡村农家菜。推荐坨坨肉、石磨豆花、凉拌折耳根等当地特色。</div>
+              <div class="timeline-tags">
+                <span class="tag tag-food">🥘 人均 40-60元</span>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-time">下午 14:00 - 17:00</div>
+              <div class="timeline-title">中国三线建设博物馆</div>
+              <div class="timeline-desc">国内最大的三线建设主题博物馆，全面展示了上世纪60-70年代三线建设的壮阔历史。攀枝花因三线建设而生，这座博物馆是了解这座城市前世今天的最佳窗口。馆内珍藏大量实物、图片和影像资料。</div>
+              <div class="timeline-tags">
+                <span class="tag tag-spot">🏛️ 免费（需预约）</span>
+                <span class="tag tag-tip">💡 建议预留2小时参观</span>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-time">晚上 18:00 - 20:00</div>
+              <div class="timeline-title">东区商业街晚餐</div>
+              <div class="timeline-desc">返回城东区，在商业街觅食。推荐品尝攀枝花特色的盐边油底肉、攀枝花块菌（松露）炖鸡等。</div>
+              <div class="timeline-tags">
+                <span class="tag tag-food">🍗 人均 50-80元</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 3 -->
+    <div class="day-card day-3">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-number">D3</div>
+        <div class="day-info">
+          <div class="day-title">二滩水电站 & 雅砻江大峡谷</div>
+          <div class="day-subtitle">世纪工程 · 高峡平湖 · 自然壮景</div>
+        </div>
+        <div class="day-toggle">
+          <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="day-content">
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-time">上午 07:30 - 12:00</div>
+              <div class="timeline-title">二滩水电站</div>
+              <div class="timeline-desc">驱车前往盐边县二滩水电站（约1.5小时车程），这是20世纪中国建成的最大水电站，大坝高240米，气势磅礴。可参观展览馆了解建设历程，登上观景台俯瞰壮观的大坝和碧绿的库区水面。雅砻江在此被截流形成壮丽的高峡平湖。</div>
+              <div class="timeline-tags">
+                <span class="tag tag-spot">⚡ 门票约 30元</span>
+                <span class="tag tag-transport">🚗 包车/拼车前往</span>
+                <span class="tag tag-tip">💡 带上外套，坝区风大</span>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-time">中午 12:00 - 13:30</div>
+              <div class="timeline-title">盐边县城午餐</div>
+              <div class="timeline-desc">在盐边县城品尝当地特色——盐边菜是攀枝花地区独具特色的地方菜系。必点盐边牛肉、油底肉、泡菜鱼，风味独特。</div>
+              <div class="timeline-tags">
+                <span class="tag tag-food">🥩 人均 40-60元</span>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-time">下午 14:00 - 17:30</div>
+              <div class="timeline-title">雅砻江大峡谷 & 欧方营地</div>
+              <div class="timeline-desc">沿雅砻江畔驱车游览大峡谷风光，两岸山势险峻，江水碧绿如翡翠。途经欧方营地（二滩建设时期外国专家住所），感受中西文化交融的历史遗迹。</div>
+              <div class="timeline-tags">
+                <span class="tag tag-spot">🏞️ 沿途风光免费</span>
+                <span class="tag tag-tip">📸 多个停车拍照点</span>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-time">晚上 18:30 - 20:00</div>
+              <div class="timeline-title">返回城东区晚餐</div>
+              <div class="timeline-desc">返回公寓休整，在附近品尝火锅或冷淡杯，推荐朝天椒火锅城。</div>
+              <div class="timeline-tags">
+                <span class="tag tag-food">🍲 火锅人均 70-100元</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 4 -->
+    <div class="day-card day-4">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-number">D4</div>
+        <div class="day-info">
+          <div class="day-title">格萨拉生态旅游区</div>
+          <div class="day-subtitle">原始森林 · 天坑地漏 · 彝族风情</div>
+        </div>
+        <div class="day-toggle">
+          <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="day-content">
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-time">上午 07:00 - 12:00</div>
+              <div class="timeline-title">格萨拉地质公园</div>
+              <div class="timeline-desc">早起出发前往盐边县格萨拉生态旅游区（车程约2.5-3小时），这里是攀枝花最具原始野性的自然景区。拥有壮观的天坑地漏群、原始森林、高山草甸和瀑布群。徒步穿越核心景区，感受大自然的鬼斧神工。建议走天坑群环线步道。</div>
+              <div class="timeline-tags">
+                <span class="tag tag-spot">🌲 门票约 60元</span>
+                <span class="tag tag-transport">🚗 建议包车或自驾</span>
+                <span class="tag tag-tip">💡 穿登山鞋，带够水和干粮</span>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-time">中午 12:00 - 13:00</div>
+              <div class="timeline-title">景区内野餐 / 彝族特色餐</div>
+              <div class="timeline-desc">在景区内的休息区用餐，或品尝当地彝族特色餐——坨坨肉、荞麦粑粑、酸菜洋芋。</div>
+              <div class="timeline-tags">
+                <span class="tag tag-food">🍖 人均 40-50元</span>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-time">下午 13:00 - 17:00</div>
+              <div class="timeline-title">深度徒步 & 绿石林</div>
+              <div class="timeline-desc">继续探索格萨拉的绿石林景区，形态各异的石灰岩被苔藓覆盖，宛如绿色迷宫。沿途有机会遇到野生猕猴。登高远眺，群山连绵，云雾缭绕如仙境。</div>
+              <div class="timeline-tags">
+                <span class="tag tag-spot">🥾 徒步约3-4小时</span>
+                <span class="tag tag-tip">⚠️ 注意山路安全</span>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-time">晚上 18:00 - 20:00</div>
+              <div class="timeline-title">返回城东区</div>
+              <div class="timeline-desc">驱车返回城东区，晚餐从简，在公寓附近吃碗面或抄手即可。早点休息，为明天的行程养精蓄锐。</div>
+              <div class="timeline-tags">
+                <span class="tag tag-food">🍜 人均 20-30元</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 5 -->
+    <div class="day-card day-5">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-number">D5</div>
+        <div class="day-info">
+          <div class="day-title">米易县一日游</div>
+          <div class="day-subtitle">溶洞探秘 · 颛顼故里 · 水果王国</div>
+        </div>
+        <div class="day-toggle">
+          <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="day-content">
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-time">上午 07:30 - 11:00</div>
+              <div class="timeline-title">米易龙潭溶洞</div>
+              <div class="timeline-desc">驱车前往米易县（约1.5小时），游览龙潭溶洞景区。溶洞全长约2000米，洞内钟乳石千姿百态，在灯光映照下美轮美奂。洞内常年恒温18°C左右，是天然的避暑胜地。被誉为"西南第一洞"。</div>
+              <div class="timeline-tags">
+                <span class="tag tag-spot">🕳️ 门票约 50元</span>
+                <span class="tag tag-transport">🚗 包车/拼车前往</span>
+                <span class="tag tag-tip">💡 洞内凉，带件薄外套</span>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-time">中午 11:30 - 13:00</div>
+              <div class="timeline-title">米易县城特色午餐</div>
+              <div class="timeline-desc">米易是著名的水果之乡，午餐后可逛逛当地水果市场，品尝新鲜的芒果、枇杷、石榴等热带水果（依季节而定）。午餐推荐铜火锅或米易特色米粉。</div>
+              <div class="timeline-tags">
+                <span class="tag tag-food">🍲 人均 40-60元</span>
+                <span class="tag tag-spot">🥭 路边水果摊必逛</span>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-time">下午 13:30 - 16:30</div>
+              <div class="timeline-title">颛顼龙洞 & 安宁河风光</div>
+              <div class="timeline-desc">游览颛顼龙洞景区，传说上古帝王颛顼曾在此生活。景区融合了溶洞、瀑布和上古文化。之后沿安宁河谷驱车，欣赏田园风光和成片的芒果园。</div>
+              <div class="timeline-tags">
+                <span class="tag tag-spot">🐉 门票约 40元</span>
+                <span class="tag tag-tip">📸 安宁河畔适合航拍</span>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-time">傍晚 17:00 - 20:00</div>
+              <div class="timeline-title">返回东区 · 夜市小吃</div>
+              <div class="timeline-desc">返回城东区，晚上逛夜市，品尝各种小吃：凉粉、凉面、烧烤串串、冰粉等。</div>
+              <div class="timeline-tags">
+                <span class="tag tag-food">🍢 小吃人均 30-50元</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 6 -->
+    <div class="day-card day-6">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-number">D6</div>
+        <div class="day-info">
+          <div class="day-title">迤沙拉古村 & 红格温泉</div>
+          <div class="day-subtitle">彝族古村落 · 六百年历史 · 温泉康养</div>
+        </div>
+        <div class="day-toggle">
+          <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="day-content">
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-time">上午 08:00 - 12:00</div>
+              <div class="timeline-title">迤沙拉历史文化名村</div>
+              <div class="timeline-desc">驱车前往仁和区迤沙拉村（约1.5小时），这是中国最大的彝族自然村，有600多年历史。村落依山而建，保留了独特的"谈经古乐"和彝族传统建筑。漫步古村，探访百年老宅，聆听非遗"谈经古乐"，感受彝族文化的深厚底蕴。</div>
+              <div class="timeline-tags">
+                <span class="tag tag-spot">🏘️ 免费开放</span>
+                <span class="tag tag-transport">🚗 包车前往</span>
+                <span class="tag tag-tip">💡 尊重当地民族风俗</span>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-time">中午 12:00 - 13:30</div>
+              <div class="timeline-title">迤沙拉彝族特色餐</div>
+              <div class="timeline-desc">在村中品尝正宗彝族餐：坨坨肉、杆杆酒、荞粑粑、烤全羊（需提前预订）。体验彝族待客的热情与淳朴。</div>
+              <div class="timeline-tags">
+                <span class="tag tag-food">🐑 人均 50-80元</span>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-time">下午 14:30 - 18:00</div>
+              <div class="timeline-title">红格温泉康养</div>
+              <div class="timeline-desc">前往盐边县红格镇泡温泉（约1小时车程）。红格温泉是攀枝花著名的康养资源，水温42-58°C，富含多种矿物质。在温泉度假村泡上半天，洗去几日来的疲劳。有室内池、室外池和SPA可供选择。</div>
+              <div class="timeline-tags">
+                <span class="tag tag-spot">♨️ 温泉约 80-150元</span>
+                <span class="tag tag-tip">💡 带泳衣和洗漱用品</span>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-time">晚上 19:00 - 20:30</div>
+              <div class="timeline-title">红格镇晚餐后返回</div>
+              <div class="timeline-desc">在红格镇用完晚餐再返回城东区。推荐品尝当地河鱼和野菜。</div>
+              <div class="timeline-tags">
+                <span class="tag tag-food">🐟 人均 50-70元</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 7 -->
+    <div class="day-card day-7">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-number">D7</div>
+        <div class="day-info">
+          <div class="day-title">市区休闲 & 返程</div>
+          <div class="day-subtitle">采购伴手礼 · 悠闲告别 · 期待重逢</div>
+        </div>
+        <div class="day-toggle">
+          <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="day-content">
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-time">上午 08:30 - 11:00</div>
+              <div class="timeline-title">苏铁保护区 & 早起晨练</div>
+              <div class="timeline-desc">早起在金沙江畔晨练散步，然后前往攀枝花苏铁自然保护区。这里保存着大面积的野生苏铁（铁树）群落，是距今2亿多年的"活化石"。园区步道适合轻松漫步，感受自然与远古的交融。</div>
+              <div class="timeline-tags">
+                <span class="tag tag-spot">🌿 门票约 20元</span>
+                <span class="tag tag-tip">💡 适合轻松半日游</span>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-time">中午 11:00 - 13:00</div>
+              <div class="timeline-title">采购伴手礼 & 午餐</div>
+              <div class="timeline-desc">前往城东区商圈或超市采购伴手礼。推荐：攀枝花芒果干、块菌（松露）制品、盐边牛肉、彝族手工银饰等。午餐在附近吃一顿地道的攀枝花菜作为告别餐。</div>
+              <div class="timeline-tags">
+                <span class="tag tag-food">🛍️ 伴手礼约 100-200元</span>
+                <span class="tag tag-food">🍽️ 午餐人均 50-80元</span>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-time">下午 14:00 - 16:00</div>
+              <div class="timeline-title">收拾行李 & 前往机场/火车站</div>
+              <div class="timeline-desc">回到青年人才公寓收拾行李，检查随身物品。提前1.5-2小时出发前往机场或火车站，预留充足时间。</div>
+              <div class="timeline-tags">
+                <span class="tag tag-transport">🚕 打车约30-40元</span>
+                <span class="tag tag-tip">⏰ 建议提前2小时到机场</span>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-time">下午/傍晚</div>
+              <div class="timeline-title">告别阳光花城</div>
+              <div class="timeline-desc">带着满满的回忆和伴手礼，踏上归途。攀枝花的阳光、美食和淳朴的人情味，一定会让你期待下一次重逢。</div>
+              <div class="timeline-tags">
+                <span class="tag tag-tip">👋 攀枝花欢迎你再来！</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Spots Section -->
+  <div class="section" id="spots">
+    <div class="section-header">
+      <h2>景点图鉴</h2>
+      <p>攀枝花及周边必去景点一览</p>
+    </div>
+
+    <!-- Interactive Map -->
+    <div class="map-container">
+      <div class="map-visual" id="mapVisual">
+        <!-- SVG Map Background -->
+        <svg width="100%" height="100%" viewBox="0 0 1000 400" preserveAspectRatio="xMidYMid slice" style="position:absolute;top:0;left:0;">
+          <!-- Mountains -->
+          <path d="M0,350 Q100,200 200,280 Q300,180 400,250 Q500,150 600,230 Q700,170 800,260 Q900,190 1000,300 L1000,400 L0,400 Z" fill="#c8e6c9" opacity="0.5"/>
+          <path d="M0,370 Q150,280 300,330 Q450,260 600,310 Q750,240 900,320 L1000,400 L0,400 Z" fill="#a5d6a7" opacity="0.4"/>
+          <!-- River -->
+          <path d="M0,320 C200,310 300,340 500,315 C700,290 800,330 1000,310" stroke="#42a5f5" stroke-width="4" fill="none" opacity="0.6"/>
+          <text x="500" y="340" text-anchor="middle" fill="#1976d2" font-size="12" opacity="0.5">金沙江 / 雅砻江</text>
+          <!-- Roads -->
+          <path d="M480,200 L300,180 L150,250" stroke="#bdbdbd" stroke-width="2" fill="none" stroke-dasharray="8,4"/>
+          <path d="M480,200 L650,150 L800,200" stroke="#bdbdbd" stroke-width="2" fill="none" stroke-dasharray="8,4"/>
+          <path d="M480,200 L400,300 L300,350" stroke="#bdbdbd" stroke-width="2" fill="none" stroke-dasharray="8,4"/>
+        </svg>
+
+        <!-- Map Pins -->
+        <div class="map-pin" style="left:48%;top:48%" onclick="showSpotDetail('home')">
+          <div class="map-pin-dot" style="background:#E85D3A"><span>🏠</span></div>
+          <div class="map-pin-label">青年人才公寓</div>
+        </div>
+        <div class="map-pin" style="left:55%;top:35%" onclick="showSpotDetail('ashuda')">
+          <div class="map-pin-dot" style="background:#E91E63"><span>🌸</span></div>
+          <div class="map-pin-label">阿署达花舞人间</div>
+        </div>
+        <div class="map-pin" style="left:42%;top:42%" onclick="showSpotDetail('museum')">
+          <div class="map-pin-dot" style="background:#795548"><span>🏛️</span></div>
+          <div class="map-pin-label">三线建设博物馆</div>
+        </div>
+        <div class="map-pin" style="left:25%;top:35%" onclick="showSpotDetail('ertan')">
+          <div class="map-pin-dot" style="background:#1976D2"><span>⚡</span></div>
+          <div class="map-pin-label">二滩水电站</div>
+        </div>
+        <div class="map-pin" style="left:12%;top:28%" onclick="showSpotDetail('gesala')">
+          <div class="map-pin-dot" style="background:#388E3C"><span>🌲</span></div>
+          <div class="map-pin-label">格萨拉地质公园</div>
+        </div>
+        <div class="map-pin" style="left:72%;top:25%" onclick="showSpotDetail('miyi')">
+          <div class="map-pin-dot" style="background:#7B1FA2"><span>🕳️</span></div>
+          <div class="map-pin-label">米易龙潭溶洞</div>
+        </div>
+        <div class="map-pin" style="left:65%;top:55%" onclick="showSpotDetail('yishala')">
+          <div class="map-pin-dot" style="background:#F57C00"><span>🏘️</span></div>
+          <div class="map-pin-label">迤沙拉古村</div>
+        </div>
+        <div class="map-pin" style="left:30%;top:50%" onclick="showSpotDetail('hongge')">
+          <div class="map-pin-dot" style="background:#00796B"><span>♨️</span></div>
+          <div class="map-pin-label">红格温泉</div>
+        </div>
+        <div class="map-pin" style="left:52%;top:55%" onclick="showSpotDetail('park')">
+          <div class="map-pin-dot" style="background:#4CAF50"><span>🌳</span></div>
+          <div class="map-pin-label">攀枝花公园</div>
+        </div>
+        <div class="map-pin" style="left:45%;top:58%" onclick="showSpotDetail('sutie')">
+          <div class="map-pin-dot" style="background:#2E7D32"><span>🌿</span></div>
+          <div class="map-pin-label">苏铁保护区</div>
+        </div>
+      </div>
+      <div class="map-legend">
+        <div class="legend-item"><div class="legend-dot" style="background:#E85D3A"></div>住宿基地</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#E91E63"></div>花卉景观</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#1976D2"></div>水利工程</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#388E3C"></div>自然生态</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#7B1FA2"></div>溶洞奇观</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#F57C00"></div>人文古迹</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#00796B"></div>温泉康养</div>
+      </div>
+    </div>
+
+    <!-- Spot Grid -->
+    <div class="spot-grid">
+      <div class="spot-card" onclick="showSpotDetail('ashuda')">
+        <div class="spot-img" style="background:linear-gradient(135deg, #fce4ec, #f8bbd0);">
+          <div class="spot-rating">4.5</div>
+          <div class="spot-category">花卉景观</div>
+        </div>
+        <div class="spot-info">
+          <div class="spot-name">阿署达花舞人间</div>
+          <div class="spot-desc">攀枝花最具代表性的花卉主题景区，数百种花卉四季轮放，是"阳光花城"的最佳注脚。适合拍照打卡和亲子出游。</div>
+          <div class="spot-meta">
+            <div class="spot-meta-item">📍 东区银江镇</div>
+            <div class="spot-meta-item">🕐 3-4小时</div>
+            <div class="spot-meta-item">💰 约40元</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="spot-card" onclick="showSpotDetail('ertan')">
+        <div class="spot-img" style="background:linear-gradient(135deg, #e3f2fd, #bbdefb);">
+          <div class="spot-rating">4.7</div>
+          <div class="spot-category">水利工程</div>
+        </div>
+        <div class="spot-info">
+          <div class="spot-name">二滩水电站</div>
+          <div class="spot-desc">20世纪中国最大水电站，240米高坝截断雅砻江，形成壮观的高峡平湖。是工程奇迹与自然美景的完美结合。</div>
+          <div class="spot-meta">
+            <div class="spot-meta-item">📍 盐边县</div>
+            <div class="spot-meta-item">🕐 半天</div>
+            <div class="spot-meta-item">💰 约30元</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="spot-card" onclick="showSpotDetail('gesala')">
+        <div class="spot-img" style="background:linear-gradient(135deg, #e8f5e9, #c8e6c9);">
+          <div class="spot-rating">4.6</div>
+          <div class="spot-category">自然生态</div>
+        </div>
+        <div class="spot-info">
+          <div class="spot-name">格萨拉地质公园</div>
+          <div class="spot-desc">原始森林、天坑地漏群、高山草甸和瀑布群交织的自然秘境。绿石林如翡翠迷宫，是徒步爱好者的天堂。</div>
+          <div class="spot-meta">
+            <div class="spot-meta-item">📍 盐边县</div>
+            <div class="spot-meta-item">🕐 一整天</div>
+            <div class="spot-meta-item">💰 约60元</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="spot-card" onclick="showSpotDetail('miyi')">
+        <div class="spot-img" style="background:linear-gradient(135deg, #f3e5f5, #e1bee7);">
+          <div class="spot-rating">4.4</div>
+          <div class="spot-category">溶洞奇观</div>
+        </div>
+        <div class="spot-info">
+          <div class="spot-name">米易龙潭溶洞</div>
+          <div class="spot-desc">被誉为"西南第一洞"，全长约2000米。洞内钟乳石在灯光下美轮美奂，恒温18°C，是避暑纳凉的好去处。</div>
+          <div class="spot-meta">
+            <div class="spot-meta-item">📍 米易县</div>
+            <div class="spot-meta-item">🕐 2-3小时</div>
+            <div class="spot-meta-item">💰 约50元</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="spot-card" onclick="showSpotDetail('yishala')">
+        <div class="spot-img" style="background:linear-gradient(135deg, #fff3e0, #ffe0b2);">
+          <div class="spot-rating">4.5</div>
+          <div class="spot-category">人文古迹</div>
+        </div>
+        <div class="spot-info">
+          <div class="spot-name">迤沙拉历史文化名村</div>
+          <div class="spot-desc">中国最大彝族自然村，600年历史。保留"谈经古乐"非遗和独特彝族建筑，是体验彝族文化的绝佳之地。</div>
+          <div class="spot-meta">
+            <div class="spot-meta-item">📍 仁和区</div>
+            <div class="spot-meta-item">🕐 3-4小时</div>
+            <div class="spot-meta-item">💰 免费</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="spot-card" onclick="showSpotDetail('hongge')">
+        <div class="spot-img" style="background:linear-gradient(135deg, #e0f2f1, #b2dfdb);">
+          <div class="spot-rating">4.3</div>
+          <div class="spot-category">温泉康养</div>
+        </div>
+        <div class="spot-info">
+          <div class="spot-name">红格温泉</div>
+          <div class="spot-desc">攀枝花著名温泉度假地，水温42-58°C，富含多种矿物质。室内外温泉池和SPA服务，是旅途劳顿后的最佳慰藉。</div>
+          <div class="spot-meta">
+            <div class="spot-meta-item">📍 盐边县红格镇</div>
+            <div class="spot-meta-item">🕐 半天</div>
+            <div class="spot-meta-item">💰 80-150元</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="spot-card" onclick="showSpotDetail('museum')">
+        <div class="spot-img" style="background:linear-gradient(135deg, #efebe9, #d7ccc8);">
+          <div class="spot-rating">4.6</div>
+          <div class="spot-category">历史人文</div>
+        </div>
+        <div class="spot-info">
+          <div class="spot-name">中国三线建设博物馆</div>
+          <div class="spot-desc">国内最大的三线建设主题博物馆，展示上世纪60-70年代的壮阔历史。攀枝花因三线建设而生，这里是了解城市的最佳窗口。</div>
+          <div class="spot-meta">
+            <div class="spot-meta-item">📍 东区</div>
+            <div class="spot-meta-item">🕐 2小时</div>
+            <div class="spot-meta-item">💰 免费</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="spot-card" onclick="showSpotDetail('park')">
+        <div class="spot-img" style="background:linear-gradient(135deg, #e8f5e9, #c8e6c9);">
+          <div class="spot-rating">4.2</div>
+          <div class="spot-category">城市公园</div>
+        </div>
+        <div class="spot-info">
+          <div class="spot-name">攀枝花公园 & 竹湖园</div>
+          <div class="spot-desc">市区最大的综合性公园，绿树成荫，可远眺金沙江。竹湖园湖畔漫步，感受阳光城市的悠闲节奏。</div>
+          <div class="spot-meta">
+            <div class="spot-meta-item">📍 城东区</div>
+            <div class="spot-meta-item">🕐 1-2小时</div>
+            <div class="spot-meta-item">💰 免费</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="spot-card" onclick="showSpotDetail('sutie')">
+        <div class="spot-img" style="background:linear-gradient(135deg, #e8f5e9, #a5d6a7);">
+          <div class="spot-rating">4.1</div>
+          <div class="spot-category">自然保护区</div>
+        </div>
+        <div class="spot-info">
+          <div class="spot-name">攀枝花苏铁自然保护区</div>
+          <div class="spot-desc">保存大面积野生苏铁（铁树）群落，距今2亿多年的"活化石"。园区步道轻松宜人，适合半日休闲游。</div>
+          <div class="spot-meta">
+            <div class="spot-meta-item">📍 西区/东区交界</div>
+            <div class="spot-meta-item">🕐 1-2小时</div>
+            <div class="spot-meta-item">💰 约20元</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Food Section -->
+  <div class="section" id="food">
+    <div class="section-header">
+      <h2>美食地图</h2>
+      <p>攀枝花不可错过的地道美味</p>
+    </div>
+
+    <div class="food-grid">
+      <div class="food-card">
+        <div class="food-emoji">🥩</div>
+        <div class="food-name">盐边油底肉</div>
+        <div class="food-desc">攀枝花最具代表性的地方菜。用猪油和香料慢火熬制，肉质酥烂、香味浓郁，是盐边菜的灵魂之作。</div>
+        <div class="food-price">人均 50-80元</div>
+      </div>
+
+      <div class="food-card">
+        <div class="food-emoji">🐟</div>
+        <div class="food-name">雅砻江鱼</div>
+        <div class="food-desc">取自雅砻江的鲜鱼，以酸菜鱼、黄辣丁等做法最为出名。鱼肉鲜嫩，汤底酸辣开胃，是攀枝花人的心头好。</div>
+        <div class="food-price">人均 60-100元</div>
+      </div>
+
+      <div class="food-card">
+        <div class="food-emoji">🍖</div>
+        <div class="food-name">彝族坨坨肉</div>
+        <div class="food-desc">彝族传统待客佳肴，大块猪肉白水煮熟后拌以辣椒、花椒、盐等调料，豪迈粗犷，肉香四溢。</div>
+        <div class="food-price">人均 50-80元</div>
+      </div>
+
+      <div class="food-card">
+        <div class="food-emoji">🍲</div>
+        <div class="food-name">铜火锅</div>
+        <div class="food-desc">攀枝花地区的特色火锅，铜锅涮烫，汤底以番茄或菌菇为主，配菜丰富。与川渝麻辣火锅风格迥异，更注重食材原味。</div>
+        <div class="food-price">人均 70-100元</div>
+      </div>
+
+      <div class="food-card">
+        <div class="food-emoji">🫕</div>
+        <div class="food-name">冷淡杯</div>
+        <div class="food-desc">攀枝花夜生活的标配。卤味拼盘配啤酒，鸭脖、鸡爪、毛豆、卤藕…三五好友围坐，边吃边聊，惬意至极。</div>
+        <div class="food-price">人均 40-70元</div>
+      </div>
+
+      <div class="food-card">
+        <div class="food-emoji">🥭</div>
+        <div class="food-name">热带水果</div>
+        <div class="food-desc">攀枝花是四川的热带水果基地。芒果、枇杷、石榴、莲雾、火龙果等应季水果，新鲜便宜，路边摊随处可买。</div>
+        <div class="food-price">10-30元/份</div>
+      </div>
+
+      <div class="food-card">
+        <div class="food-emoji">🍢</div>
+        <div class="food-name">攀枝花烧烤</div>
+        <div class="food-desc">与成都烧烤不同，攀枝花烧烤偏辣偏香，蘸碟以干碟为主。烤脑花、烤小猪肉、烤茄子都是必点。</div>
+        <div class="food-price">人均 50-80元</div>
+      </div>
+
+      <div class="food-card">
+        <div class="food-emoji">🍜</div>
+        <div class="food-name">盐边米粉</div>
+        <div class="food-desc">当地人的早餐首选。细滑的米粉配上浓郁的牛肉汤底或肥肠臊子，再加一勺红油辣椒，热辣鲜香。</div>
+        <div class="food-price">8-15元/碗</div>
+      </div>
+
+      <div class="food-card">
+        <div class="food-emoji">🫔</div>
+        <div class="food-name">荞麦粑粑</div>
+        <div class="food-desc">彝族传统面食，用荞麦粉制成，口感粗犷有嚼劲。可蘸蜂蜜或配汤食用，健康又饱腹。</div>
+        <div class="food-price">5-10元/份</div>
+      </div>
+
+      <div class="food-card">
+        <div class="food-emoji">🧁</div>
+        <div class="food-name">块菌（松露）炖鸡</div>
+        <div class="food-desc">攀枝花是中国块菌主产区之一。用当地新鲜松露炖土鸡，汤色金黄、香气馥郁，是高端又地道的味觉体验。</div>
+        <div class="food-price">人均 80-150元</div>
+      </div>
+
+      <div class="food-card">
+        <div class="food-emoji">🥤</div>
+        <div class="food-name">冰粉 & 凉糕</div>
+        <div class="food-desc">消暑神器。红糖冰粉冰凉滑嫩，配上花生碎、葡萄干和红糖水；凉糕软糯清甜，是夏日必备甜品。</div>
+        <div class="food-price">5-10元/碗</div>
+      </div>
+
+      <div class="food-card">
+        <div class="food-emoji">🌶️</div>
+        <div class="food-name">豆花饭</div>
+        <div class="food-desc">最接地气的攀枝花午餐。嫩豆花配上一碗白米饭和一碟蘸水，简单却令人回味。是当地人日常的最爱。</div>
+        <div class="food-price">8-15元/份</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Transport Section -->
+  <div class="section" id="transport">
+    <div class="section-header">
+      <h2>交通指南</h2>
+      <p>如何到达攀枝花以及在当地的出行方式</p>
+    </div>
+
+    <div class="transport-cards">
+      <div class="transport-card">
+        <div class="transport-icon" style="background:#E3F2FD;">✈️</div>
+        <h3>飞机</h3>
+        <p>攀枝花保安营机场（PZI）有直飞成都、重庆、北京等城市的航线。机场距市区约20公里，打车到城东区约40元，30分钟车程。建议提前在携程或去哪儿比价购票。</p>
+      </div>
+
+      <div class="transport-card">
+        <div class="transport-icon" style="background:#FFF3E0;">🚄</div>
+        <h3>火车</h3>
+        <p>攀枝花站是成昆铁路上的重要站点。从成都出发约5-7小时（快车），也可体验经典的成昆慢火车（5633/5634次），全程约10小时，票价仅几十元，沿途风光绝美。</p>
+      </div>
+
+      <div class="transport-card">
+        <div class="transport-icon" style="background:#E8F5E9;">🚗</div>
+        <h3>自驾 / 包车</h3>
+        <p>攀枝花周边景点分散，自驾或包车最为方便。市区到二滩约1.5小时，到格萨拉约2.5-3小时，到米易约1.5小时。可在当地找包车师傅，日包车约400-600元。</p>
+      </div>
+
+      <div class="transport-card">
+        <div class="transport-icon" style="background:#FCE4EC;">🚌</div>
+        <h3>公交车</h3>
+        <p>市区公交线路覆盖主要景点和商业区，票价1-2元。从城东区到攀枝花公园、竹湖园等市区景点可乘公交直达。远郊景点需转乘或搭乘长途客运。</p>
+      </div>
+
+      <div class="transport-card">
+        <div class="transport-icon" style="background:#F3E5F5;">🚕</div>
+        <h3>出租车 / 网约车</h3>
+        <p>市区打车起步价约5元，城东区到市中心约10-15元。推荐使用滴滴出行，覆盖广泛。到机场约40元，到火车站约15-20元。</p>
+      </div>
+
+      <div class="transport-card">
+        <div class="transport-icon" style="background:#E0F2F1;">🚶</div>
+        <h3>步行 / 骑行</h3>
+        <p>城东区内的攀枝花公园、竹湖园、金沙江畔等景点步行即可到达。市区有共享单车可骑，沿江骑行非常惬意。注意攀枝花是山城，部分路段坡度较大。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Budget Section -->
+  <div class="section" id="budget">
+    <div class="section-header">
+      <h2>预算参考</h2>
+      <p>7天行程费用估算（每人）</p>
+    </div>
+
+    <table class="budget-table">
+      <thead>
+        <tr>
+          <th>费用项目</th>
+          <th>明细说明</th>
+          <th>预估金额</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>住宿</strong></td>
+          <td>青年人才公寓（7晚，假设已安排或短租）</td>
+          <td>0 - 700元</td>
+        </tr>
+        <tr>
+          <td><strong>大交通</strong></td>
+          <td>往返机票/火车票（视出发城市）</td>
+          <td>800 - 2000元</td>
+        </tr>
+        <tr>
+          <td><strong>市内交通</strong></td>
+          <td>包车3天 + 打车/公交4天</td>
+          <td>800 - 1200元</td>
+        </tr>
+        <tr>
+          <td><strong>餐饮</strong></td>
+          <td>7天三餐 + 小吃零食（每天80-120元）</td>
+          <td>560 - 840元</td>
+        </tr>
+        <tr>
+          <td><strong>门票</strong></td>
+          <td>各景点门票合计</td>
+          <td>200 - 300元</td>
+        </tr>
+        <tr>
+          <td><strong>温泉</strong></td>
+          <td>红格温泉 1次</td>
+          <td>80 - 150元</td>
+        </tr>
+        <tr>
+          <td><strong>伴手礼</strong></td>
+          <td>芒果干、松露制品、彝族银饰等</td>
+          <td>100 - 300元</td>
+        </tr>
+        <tr>
+          <td><strong>其他</strong></td>
+          <td>应急药品、防晒用品、通讯等</td>
+          <td>100 - 200元</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="budget-total">
+      <div class="budget-total-label">7天预估总花费（每人）</div>
+      <div class="budget-total-amount">约 2,640 - 5,690 元</div>
+    </div>
+
+    <div style="margin-top:24px; padding:20px; background:var(--bg-card); border-radius:var(--radius); box-shadow:var(--shadow);">
+      <p style="color:var(--text-light); font-size:0.9rem; line-height:1.8;">
+        <strong>省钱提示：</strong>包车可以和其他旅客拼车分摊费用；部分景点可购买联票优惠；住宿选青年人才公寓性价比高；当地水果和米粉等小吃物美价廉；淡季（3-5月、10-11月）机票和住宿更便宜。
+      </p>
+    </div>
+  </div>
+
+  <!-- Tips Section -->
+  <div class="section" id="tips">
+    <div class="section-header">
+      <h2>实用贴士</h2>
+      <p>让你的攀枝花之旅更顺畅的小建议</p>
+    </div>
+
+    <div class="tips-grid">
+      <div class="tip-card">
+        <div class="tip-icon">☀️</div>
+        <h3>气候与穿着</h3>
+        <p>攀枝花属南亚热带气候，年日照超2700小时，素有"阳光花城"之称。夏季炎热（可达38°C），冬季温暖舒适（15-25°C）。紫外线强烈，防晒霜和墨镜是必备。山区早晚温差大，带件薄外套。</p>
+      </div>
+
+      <div class="tip-card">
+        <div class="tip-icon">🗓️</div>
+        <h3>最佳旅行时间</h3>
+        <p>11月至次年4月是攀枝花的旅游黄金期，此时北方寒冷而攀枝花温暖如春，是避寒康养的好时节。芒果季在6-9月，水果爱好者可选择此时前往。</p>
+      </div>
+
+      <div class="tip-card">
+        <div class="tip-icon">💊</div>
+        <h3>健康与安全</h3>
+        <p>攀枝花市区海拔约1000-1200米，一般不会有高原反应。但前往格萨拉等高海拔地区（可达2500米+），注意缓慢活动。随身携带防暑药品和肠胃药。山区徒步穿防滑登山鞋。</p>
+      </div>
+
+      <div class="tip-card">
+        <div class="tip-icon">📱</div>
+        <h3>通讯与支付</h3>
+        <p>手机信号在市区和主要景区覆盖良好，格萨拉等偏远山区可能信号较弱。微信和支付宝在全市广泛使用，但建议携带少量现金以备山区小店需要。</p>
+      </div>
+
+      <div class="tip-card">
+        <div class="tip-icon">🎒</div>
+        <h3>必备物品</h3>
+        <p>防晒霜（SPF50+）、墨镜、遮阳帽、薄外套、登山鞋、充电宝、泳衣（泡温泉）、雨伞/雨衣（夏季多雨）、少量现金、身份证件。</p>
+      </div>
+
+      <div class="tip-card">
+        <div class="tip-icon">🏛️</div>
+        <h3>文化尊重</h3>
+        <p>攀枝花是多民族聚居区，彝族、傈僳族等少数民族文化丰富。参观民族村寨时请尊重当地风俗习惯，拍照前先征得同意，进彝族家庭注意礼节。</p>
+      </div>
+
+      <div class="tip-card">
+        <div class="tip-icon">🚗</div>
+        <h3>出行建议</h3>
+        <p>远郊景点（二滩、格萨拉、米易）建议包车或拼车，提前在网上或酒店前台找师傅。山路弯道多，晕车的朋友备好晕车药。自驾的朋友注意山路限速。</p>
+      </div>
+
+      <div class="tip-card">
+        <div class="tip-icon">📸</div>
+        <h3>拍照推荐</h3>
+        <p>二滩大坝全景、格萨拉天坑、迤沙拉古村、金沙江日落、阿署达花海都是出片率极高的拍摄点。日出日落时段光线最佳。穿浅色或白色衣服拍花海更好看。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Checklist Section -->
+  <div class="section" id="checklist">
+    <div class="section-header">
+      <h2>行前清单</h2>
+      <p>勾选确认，出发前不遗漏</p>
+    </div>
+
+    <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap:24px;">
+      <div class="checklist">
+        <h3>📋 证件 & 预订</h3>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-text">身份证（必带）</div>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-text">机票/火车票确认</div>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-text">公寓入住确认</div>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-text">三线建设博物馆预约</div>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-text">包车/拼车联系确认</div>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-text">旅行保险购买</div>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+        <div class="progress-text">0 / 6 已完成</div>
+      </div>
+
+      <div class="checklist">
+        <h3>🎒 随身物品</h3>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-text">防晒霜（SPF50+）</div>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-text">墨镜 & 遮阳帽</div>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-text">薄外套 & 换洗衣物</div>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-text">登山鞋 / 运动鞋</div>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-text">泳衣（温泉用）</div>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-text">充电宝 & 充电线</div>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-text">雨伞 / 雨衣</div>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-text">少量现金</div>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+        <div class="progress-text">0 / 8 已完成</div>
+      </div>
+
+      <div class="checklist">
+        <h3>💊 药品 & 健康</h3>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-text">肠胃药</div>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-text">感冒药</div>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-text">晕车药</div>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-text">创可贴 & 碘伏</div>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-text">驱蚊液</div>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+        <div class="progress-text">0 / 5 已完成</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modal" onclick="closeModal(event)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal-header">
+      <h3 id="modalTitle">景点详情</h3>
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<!-- Back to Top -->
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<!-- Footer -->
+<footer class="footer">
+  <p>攀枝花7日旅游攻略 · 城东区青年人才公寓出发 · 阳光花城等你来</p>
+</footer>
+
+<script>
+// Particles
+(function() {
+  const container = document.getElementById('particles');
+  for (let i = 0; i < 20; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = Math.random() * 8 + 4;
+    p.style.width = size + 'px';
+    p.style.height = size + 'px';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.top = Math.random() * 100 + '%';
+    p.style.animationDelay = Math.random() * 15 + 's';
+    p.style.animationDuration = (Math.random() * 10 + 10) + 's';
+    container.appendChild(p);
+  }
+})();
+
+// Navigation
+const navBtns = document.querySelectorAll('.nav-btn');
+const sections = document.querySelectorAll('.section');
+
+navBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    navBtns.forEach(b => b.classList.remove('active'));
+    sections.forEach(s => s.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.section).classList.add('active');
+    window.scrollTo({ top: document.getElementById('mainNav').offsetTop - 10, behavior: 'smooth' });
+  });
+});
+
+// Day toggle
+function toggleDay(header) {
+  const card = header.closest('.day-card');
+  card.classList.toggle('open');
+}
+
+// Weather day click
+document.querySelectorAll('.weather-day').forEach(d => {
+  d.addEventListener('click', () => {
+    document.querySelectorAll('.weather-day').forEach(w => w.classList.remove('active'));
+    d.classList.add('active');
+    const dayNum = parseInt(d.dataset.day);
+    const dayCards = document.querySelectorAll('.day-card');
+    dayCards.forEach(c => c.classList.remove('open'));
+    if (dayCards[dayNum - 1]) {
+      dayCards[dayNum - 1].classList.add('open');
+      dayCards[dayNum - 1].scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+// Checklist
+function toggleCheck(item) {
+  item.classList.toggle('checked');
+  const checklist = item.closest('.checklist');
+  const total = checklist.querySelectorAll('.check-item').length;
+  const checked = checklist.querySelectorAll('.check-item.checked').length;
+  const pct = Math.round(checked / total * 100);
+  checklist.querySelector('.progress-fill').style.width = pct + '%';
+  checklist.querySelector('.progress-text').textContent = checked + ' / ' + total + ' 已完成';
+}
+
+// Back to top
+window.addEventListener('scroll', () => {
+  const btn = document.getElementById('backTop');
+  if (window.scrollY > 500) {
+    btn.classList.add('show');
+  } else {
+    btn.classList.remove('show');
+  }
+});
+
+// Scroll to nav
+function scrollToNav() {
+  document.getElementById('mainNav').scrollIntoView({ behavior: 'smooth' });
+}
+
+// Spot detail modal
+const spotDetails = {
+  home: {
+    title: '青年人才公寓（住宿基地）',
+    body: `<p>位于城东区的青年人才公寓是本次旅行的住宿基地，地理位置便利，周边餐饮、超市、公交站等生活配套齐全。</p>
+    <h4>周边配套</h4>
+    <p>步行范围内有多家川菜馆、面馆和便利店。距攀枝花公园和竹湖园步行约15分钟，距金沙江畔步行约10分钟。</p>
+    <h4>交通优势</h4>
+    <p>靠近城东区公交站，可方便前往市区各景点。打车到火车站约15分钟，到机场约30分钟。</p>`
+  },
+  ashuda: {
+    title: '阿署达花舞人间',
+    body: `<p>阿署达花舞人间是攀枝花最具代表性的花卉主题景区，位于东区银江镇阿署达村，距城东区约15公里。</p>
+    <h4>景区亮点</h4>
+    <p>园区占地广阔，拥有数百种花卉品种。春季三角梅和凤凰花盛开，热烈奔放；秋冬时节格桑花和波斯菊铺满山坡，如梦似幻。是拍照打卡的绝佳去处。</p>
+    <h4>游玩建议</h4>
+    <p>建议上午前往（光线好），游览时间3-4小时。穿浅色或白色衣服拍照效果最佳。景区内有农家乐可用午餐。</p>
+    <h4>实用信息</h4>
+    <p>门票约40元 | 距城东区打车约25分钟 | 建议游玩3-4小时</p>`
+  },
+  ertan: {
+    title: '二滩水电站',
+    body: `<p>二滩水电站是20世纪中国建成的最大水电站，位于盐边县境内的雅砻江上，大坝高240米，是当时亚洲第一高坝。</p>
+    <h4>景区亮点</h4>
+    <p>站在观景台上，可以俯瞰大坝的磅礴气势和库区的碧绿水面。展览馆内展示了水电站的建设历程，是工程技术爱好者的天堂。大坝泄洪时的壮观场面更是震撼人心。</p>
+    <h4>周边游览</h4>
+    <p>可顺路游览雅砻江大峡谷和欧方营地（二滩建设时期外国专家住所），感受中西文化交融的历史。</p>
+    <h4>实用信息</h4>
+    <p>门票约30元 | 距城东区约1.5小时车程 | 坝区风大带外套 | 建议游玩半天</p>`
+  },
+  gesala: {
+    title: '格萨拉地质公园',
+    body: `<p>格萨拉生态旅游区位于盐边县西北部，是攀枝花最具原始野性的自然景区，拥有壮观的天坑地漏群、原始森林、高山草甸和瀑布群。</p>
+    <h4>景区亮点</h4>
+    <p>天坑地漏群是景区的核心奇观，巨大的天坑深不见底，令人叹为观止。绿石林区域形态各异的石灰岩被苔藓覆盖，宛如翡翠迷宫。沿途有机会遇到野生猕猴。</p>
+    <h4>游玩建议</h4>
+    <p>这是一整天的行程，建议早上7点出发。穿登山鞋，带够水和干粮。景区内有简单的彝族特色午餐。下午可深度徒步绿石林。</p>
+    <h4>实用信息</h4>
+    <p>门票约60元 | 距城东区约2.5-3小时车程 | 需要一整天 | 穿登山鞋</p>`
+  },
+  miyi: {
+    title: '米易龙潭溶洞',
+    body: `<p>米易龙潭溶洞位于米易县，被誉为"西南第一洞"，全长约2000米，是四川最大的溶洞之一。</p>
+    <h4>景区亮点</h4>
+    <p>洞内钟乳石千姿百态，在精心设计的灯光映照下美轮美奂。洞内常年恒温18°C左右，是夏季避暑的绝佳去处。石笋、石柱、石幔、石花应有尽有，大自然的鬼斧神工令人赞叹。</p>
+    <h4>米易特色</h4>
+    <p>米易是著名的"水果之乡"，可品尝新鲜的芒果、枇杷、石榴等热带水果。还可游览颛顼龙洞景区，了解上古帝王颛顼的传说。</p>
+    <h4>实用信息</h4>
+    <p>门票约50元 | 距城东区约1.5小时车程 | 洞内恒温18°C带外套 | 建议游玩半天</p>`
+  },
+  yishala: {
+    title: '迤沙拉历史文化名村',
+    body: `<p>迤沙拉位于仁和区，是中国最大的彝族自然村，有600多年历史，被列为中国历史文化名村。</p>
+    <h4>景区亮点</h4>
+    <p>村落依山而建，保留了大量传统彝族建筑。最独特的是"谈经古乐"——一种融合了儒释道和彝族音乐的古老乐种，被列入国家级非物质文化遗产。漫步古村，时光仿佛倒流数百年。</p>
+    <h4>文化体验</h4>
+    <p>可以体验彝族传统饮食（坨坨肉、荞麦粑粑）、聆听谈经古乐演奏、参观百年老宅。注意尊重当地民族风俗，拍照前征得同意。</p>
+    <h4>实用信息</h4>
+    <p>免费开放 | 距城东区约1.5小时车程 | 建议游玩3-4小时 | 尊重当地风俗</p>`
+  },
+  hongge: {
+    title: '红格温泉',
+    body: `<p>红格温泉位于盐边县红格镇，是攀枝花最著名的温泉度假地，以优质的温泉资源和康养环境闻名。</p>
+    <h4>温泉特色</h4>
+    <p>温泉水温42-58°C，富含偏硅酸、锶、锂等多种对人体有益的矿物质。度假区设有室内池、室外池、儿童池和SPA理疗等多种选择，适合各个年龄段的游客。</p>
+    <h4>康养体验</h4>
+    <p>攀枝花是全国知名的康养城市，红格温泉是其康养资源的核心。在经历了几天的高强度游览后，泡上半天温泉是最好的放松方式。</p>
+    <h4>实用信息</h4>
+    <p>温泉约80-150元 | 距城东区约1小时车程 | 带泳衣和洗漱用品 | 建议游玩半天</p>`
+  },
+  museum: {
+    title: '中国三线建设博物馆',
+    body: `<p>中国三线建设博物馆位于攀枝花市区，是国内最大的三线建设主题博物馆，全面展示了上世纪60-70年代那场改变中国工业格局的壮阔历史。</p>
+    <h4>展馆内容</h4>
+    <p>馆内珍藏大量实物、图片和影像资料，生动再现了数十万建设者从全国各地奔赴西南山区的感人故事。攀枝花这座城市本身就是三线建设的产物，因钢铁而建、因矿业而兴。</p>
+    <h4>参观建议</h4>
+    <p>建议预留2小时以上参观时间，部分展厅需要预约。馆内有讲解服务，建议租借语音导览或跟随讲解员，能更好地理解展品背后的故事。</p>
+    <h4>实用信息</h4>
+    <p>免费开放（需预约）| 位于市区 | 建议游玩2小时以上 | 提前网上预约</p>`
+  },
+  park: {
+    title: '攀枝花公园 & 竹湖园',
+    body: `<p>攀枝花公园是市区最大的综合性公园，竹湖园则是城东区一处宁静的湖畔公园，两者都是感受当地生活气息的好去处。</p>
+    <h4>攀枝花公园</h4>
+    <p>公园绿树成荫，有多条登山步道，登顶可俯瞰整个攀枝花城区和金沙江的壮丽全景。园内设有游乐设施和健身器材，是市民休闲的首选之地。</p>
+    <h4>竹湖园</h4>
+    <p>湖畔漫步，杨柳依依，环境清幽。适合傍晚时分悠闲散步，感受攀枝花这座阳光城市的慢节奏生活。</p>
+    <h4>实用信息</h4>
+    <p>免费开放 | 距青年人才公寓步行约15分钟 | 建议游玩1-2小时</p>`
+  },
+  sutie: {
+    title: '攀枝花苏铁自然保护区',
+    body: `<p>攀枝花苏铁自然保护区保存着大面积的野生苏铁（铁树）群落，是距今2亿多年的"活化石"，具有极高的科学研究价值。</p>
+    <h4>景区亮点</h4>
+    <p>苏铁是地球上最古老的种子植物之一，恐龙时代就已存在。保护区内数千株野生苏铁错落分布，形态古朴壮观。园区步道平缓，适合轻松漫步，沿途有科普展板介绍苏铁知识。</p>
+    <h4>游玩建议</h4>
+    <p>作为第7天的轻松半日游非常合适，不需要太多体力。漫步其中，感受远古生命的顽强与静谧。</p>
+    <h4>实用信息</h4>
+    <p>门票约20元 | 市区附近 | 建议游玩1-2小时 | 步道平缓适合休闲</p>`
+  }
+};
+
+function showSpotDetail(key) {
+  const detail = spotDetails[key];
+  if (!detail) return;
+  document.getElementById('modalTitle').textContent = detail.title;
+  document.getElementById('modalBody').innerHTML = detail.body;
+  document.getElementById('modal').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(e) {
+  if (e && e.target !== document.getElementById('modal') && e.target !== document.querySelector('.modal-close')) return;
+  document.getElementById('modal').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+// Close modal with close button
+document.querySelector('.modal-close').addEventListener('click', function() {
+  document.getElementById('modal').classList.remove('show');
+  document.body.style.overflow = '';
+});
+
+// Keyboard ESC to close modal
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    document.getElementById('modal').classList.remove('show');
+    document.body.style.overflow = '';
+  }
+});
+</script>
+
+</body>
+</html>
