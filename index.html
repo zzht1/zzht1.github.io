@@ -1,39 +1,188 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZZHT</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-            display: flex; justify-content: center; align-items: center;
-            min-height: 100vh; background: #fafafa; color: #333;
-        }
-        .container { text-align: center; padding: 2rem; }
-        h1 { font-size: 3rem; margin-bottom: 1rem; }
-        p { font-size: 1.2rem; color: #666; margin-bottom: 0.5rem; }
-        a { color: #0366d6; text-decoration: none; }
-        a:hover { text-decoration: underline; }
-        .links { margin-top: 2rem; display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
-        .links a {
-            padding: 0.6rem 1.5rem; border: 1px solid #d0d0d0; border-radius: 6px;
-            color: #333; transition: all 0.2s;
-        }
-        .links a:hover { border-color: #333; text-decoration: none; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZZHT</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #fafaf8;
+    color: #2c2c2c;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  .page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 12vh 24px 10vh;
+  }
+
+  /* Header */
+  .site-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(2.8rem, 8vw, 4.5rem);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    color: #1a1a1a;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+  .site-sub {
+    font-size: 1.05rem;
+    color: #888;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    margin-bottom: 8vh;
+  }
+  .site-sub em {
+    font-style: normal;
+    color: #b8860b;
+  }
+
+  /* Projects */
+  .projects { list-style: none; }
+  .project {
+    padding: 36px 0;
+    border-bottom: 1px solid #e8e4dc;
+    position: relative;
+    transition: padding-left 0.4s cubic-bezier(.4,0,.2,1);
+  }
+  .project:first-child { border-top: 1px solid #e8e4dc; }
+  .project:hover { padding-left: 16px; }
+  .project:hover .project-arrow { opacity: 1; transform: translateX(0); }
+  .project:hover .project-name { color: #8b2500; }
+  .project-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  .project-name {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #333;
+    transition: color 0.3s;
+    display: inline;
+  }
+  .project-meta {
+    font-size: 0.82rem;
+    color: #aaa;
+    margin-top: 8px;
+    font-weight: 300;
+  }
+  .project-meta span + span::before {
+    content: '·';
+    margin: 0 8px;
+    color: #ccc;
+  }
+  .project-desc {
+    font-size: 0.92rem;
+    color: #777;
+    margin-top: 10px;
+    line-height: 1.7;
+    max-width: 560px;
+  }
+  .project-arrow {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateX(-8px) translateY(-50%);
+    font-size: 1.5rem;
+    color: #8b2500;
+    opacity: 0;
+    transition: all 0.3s;
+    pointer-events: none;
+  }
+
+  /* Footer */
+  .site-footer {
+    margin-top: 10vh;
+    padding-top: 24px;
+    border-top: 1px solid #e8e4dc;
+    font-size: 0.82rem;
+    color: #bbb;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .site-footer a {
+    color: #999;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .site-footer a:hover { color: #8b2500; }
+
+  /* Decorative dot */
+  .dot-accent {
+    display: inline-block;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #8b2500;
+    margin-right: 10px;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+  }
+
+  @media (max-width: 600px) {
+    .page { padding: 8vh 18px 6vh; }
+    .site-title { font-size: 2.2rem; }
+    .project-name { font-size: 1.15rem; }
+    .project-arrow { display: none; }
+  }
+</style>
 </head>
 <body>
-    <div class="container">
-        <h1>ZZHT</h1>
-        <p>个人网站建设中</p>
-        <div class="links">
-            <a href="panzhihua.html">攀枝花7日旅游攻略</a>
-            <a href="songdongyang.html">送东阳马生序</a>
-            <a href="the-wire.html">The Wire 火线全景指南</a>
-            <a href="https://github.com/zzht1">GitHub</a>
-        </div>
-    </div>
+<div class="page">
+
+  <h1 class="site-title">ZZHT</h1>
+  <p class="site-sub">一些<em>不务正业</em>的小玩意儿</p>
+
+  <ul class="projects">
+    <li class="project">
+      <a class="project-link" href="rulin-waishi.html">
+        <div class="project-name"><span class="dot-accent"></span>儒林外史 · 人物志</div>
+        <div class="project-meta"><span>交互网站</span><span>古典文学</span><span>20 人物 · 5 条游历路线</span></div>
+        <div class="project-desc">以交互式地图、关系图谱和时间线，梳理吴敬梓笔下形形色色的士林群像。可搜索、筛选、查看人物关系与游历路线。</div>
+      </a>
+      <div class="project-arrow">→</div>
+    </li>
+    <li class="project">
+      <a class="project-link" href="panzhihua.html">
+        <div class="project-name"><span class="dot-accent"></span>攀枝花 7 日游攻略</div>
+        <div class="project-meta"><span>交互网站</span><span>旅行规划</span></div>
+        <div class="project-desc">以城东区青年人才公寓为基地的攀枝花深度游指南，含行程时间轴、景点地图、美食推荐与行前清单。</div>
+      </a>
+      <div class="project-arrow">→</div>
+    </li>
+    <li class="project">
+      <a class="project-link" href="songdongyang.html">
+        <div class="project-name"><span class="dot-accent"></span>松东洋</div>
+        <div class="project-meta"><span>交互网站</span></div>
+        <div class="project-desc"></div>
+      </a>
+      <div class="project-arrow">→</div>
+    </li>
+    <li class="project">
+      <a class="project-link" href="the-wire.html">
+        <div class="project-name"><span class="dot-accent"></span>The Wire · 火线全解析</div>
+        <div class="project-meta"><span>交互网站</span><span>美剧分析</span></div>
+        <div class="project-desc">对 HBO 经典美剧《火线》的全方位深度解析与人物梳理。</div>
+      </a>
+      <div class="project-arrow">→</div>
+    </li>
+  </ul>
+
+  <footer class="site-footer">
+    <span>© ZZHT</span>
+    <a href="https://github.com/zzht1">GitHub ↗</a>
+  </footer>
+
+</div>
 </body>
 </html>
