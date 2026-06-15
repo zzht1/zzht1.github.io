@@ -1,38 +1,2089 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZZHT</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-            display: flex; justify-content: center; align-items: center;
-            min-height: 100vh; background: #fafafa; color: #333;
-        }
-        .container { text-align: center; padding: 2rem; }
-        h1 { font-size: 3rem; margin-bottom: 1rem; }
-        p { font-size: 1.2rem; color: #666; margin-bottom: 0.5rem; }
-        a { color: #0366d6; text-decoration: none; }
-        a:hover { text-decoration: underline; }
-        .links { margin-top: 2rem; display: flex; gap: 1.5rem; justify-content: center; }
-        .links a {
-            padding: 0.6rem 1.5rem; border: 1px solid #d0d0d0; border-radius: 6px;
-            color: #333; transition: all 0.2s;
-        }
-        .links a:hover { border-color: #333; text-decoration: none; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Wire · 火线 — 巴尔的摩全景指南</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  :root {
+    --bg-primary: #0a0a0c;
+    --bg-secondary: #121218;
+    --bg-card: #1a1a24;
+    --bg-card-hover: #22222e;
+    --text-primary: #e8e6e3;
+    --text-secondary: #9a9590;
+    --text-muted: #5a5652;
+    --accent-red: #c0392b;
+    --accent-amber: #d4a017;
+    --accent-blue: #2980b9;
+    --accent-green: #27ae60;
+    --accent-purple: #8e44ad;
+    --border-color: #2a2a36;
+    --season1: #c0392b;
+    --season2: #2980b9;
+    --season3: #d4a017;
+    --season4: #27ae60;
+    --season5: #8e44ad;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans SC', sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg-primary); }
+  ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+
+  /* ===== HERO ===== */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(192,57,43,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 30%, rgba(41,128,185,0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 80%, rgba(212,160,23,0.05) 0%, transparent 50%);
+    animation: heroGlow 12s ease-in-out infinite alternate;
+  }
+
+  @keyframes heroGlow {
+    0% { opacity: 0.6; }
+    100% { opacity: 1; }
+  }
+
+  .hero-content { position: relative; z-index: 2; padding: 2rem; }
+
+  .hero-wire {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--accent-red);
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    opacity: 0.8;
+  }
+
+  .hero h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(4rem, 12vw, 10rem);
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, #e8e6e3 0%, #9a9590 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-subtitle {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(1rem, 3vw, 1.6rem);
+    font-weight: 300;
+    color: var(--text-secondary);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-quote {
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    font-style: italic;
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    line-height: 1.8;
+  }
+
+  .hero-quote .author {
+    display: block;
+    font-style: normal;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 0.5rem;
+    letter-spacing: 2px;
+  }
+
+  .hero-meta {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+  }
+
+  .hero-meta-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .hero-meta-item .value {
+    font-family: 'Oswald', sans-serif;
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--accent-amber);
+  }
+
+  .hero-meta-item .label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-muted);
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    animation: bounce 2s infinite;
+    cursor: pointer;
+  }
+
+  .scroll-hint .arrow { font-size: 1.2rem; }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  /* ===== NAV ===== */
+  .nav-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10,10,12,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
+    padding: 0;
+  }
+
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: stretch;
+    overflow-x: auto;
+  }
+
+  .nav-tab {
+    flex: 1;
+    padding: 1rem 1.2rem;
+    text-align: center;
+    cursor: pointer;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s;
+    white-space: nowrap;
+    user-select: none;
+  }
+
+  .nav-tab:hover { color: var(--text-primary); background: rgba(255,255,255,0.03); }
+  .nav-tab.active { color: var(--text-primary); border-bottom-color: var(--accent-red); }
+
+  /* ===== SECTION ===== */
+  .section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 1.5rem;
+  }
+
+  .section-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .section-desc {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-bottom: 3rem;
+    max-width: 700px;
+  }
+
+  /* ===== SEASON TIMELINE ===== */
+  .season-timeline {
+    position: relative;
+    padding-left: 3rem;
+  }
+
+  .season-timeline::before {
+    content: '';
+    position: absolute;
+    left: 0.5rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom,
+      var(--season1) 0%, var(--season1) 20%,
+      var(--season2) 20%, var(--season2) 40%,
+      var(--season3) 40%, var(--season3) 60%,
+      var(--season4) 60%, var(--season4) 80%,
+      var(--season5) 80%, var(--season5) 100%
+    );
+  }
+
+  .season-block {
+    position: relative;
+    margin-bottom: 3rem;
+    cursor: pointer;
+  }
+
+  .season-dot {
+    position: absolute;
+    left: -2.55rem;
+    top: 1.2rem;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 3px solid;
+    background: var(--bg-primary);
+    transition: all 0.3s;
+    z-index: 2;
+  }
+
+  .season-block:hover .season-dot { transform: scale(1.3); }
+
+  .season-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.2rem 1.5rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    transition: all 0.3s;
+  }
+
+  .season-block:hover .season-header {
+    background: var(--bg-card-hover);
+    border-color: rgba(255,255,255,0.1);
+    transform: translateX(6px);
+  }
+
+  .season-number {
+    font-family: 'Oswald', sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1;
+    min-width: 60px;
+  }
+
+  .season-header-text { flex: 1; }
+
+  .season-header-text h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+  }
+
+  .season-header-text .season-meta-line {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-top: 0.3rem;
+  }
+
+  .season-toggle {
+    font-size: 1.4rem;
+    color: var(--text-muted);
+    transition: transform 0.3s;
+  }
+
+  .season-block.open .season-toggle { transform: rotate(180deg); }
+
+  .season-detail {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, padding 0.3s ease;
+    background: var(--bg-secondary);
+    border-radius: 0 0 12px 12px;
+    margin-top: -8px;
+    padding: 0 1.5rem;
+  }
+
+  .season-block.open .season-detail {
+    max-height: 2000px;
+    padding: 1.5rem;
+  }
+
+  .season-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .detail-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 1.2rem;
+  }
+
+  .detail-card h4 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .detail-card h4 .icon { font-size: 1rem; }
+
+  .detail-card p, .detail-card li {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  .detail-card ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .detail-card ul li {
+    padding: 0.3rem 0;
+    padding-left: 1rem;
+    position: relative;
+  }
+
+  .detail-card ul li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+    opacity: 0.5;
+  }
+
+  .char-tag {
+    display: inline-block;
+    padding: 0.25rem 0.7rem;
+    margin: 0.2rem;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: var(--text-secondary);
+    transition: all 0.2s;
+  }
+
+  .char-tag:hover {
+    background: rgba(255,255,255,0.1);
+    color: var(--text-primary);
+    cursor: help;
+  }
+
+  .synopsis {
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+    line-height: 1.9;
+  }
+
+  .episode-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(42px, 1fr));
+    gap: 0.4rem;
+    margin-top: 0.5rem;
+  }
+
+  .ep-num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 500;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.06);
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .ep-num:hover {
+    background: rgba(255,255,255,0.1);
+    color: var(--text-primary);
+    transform: scale(1.1);
+  }
+
+  /* ===== LOCATIONS MAP ===== */
+  .locations-section { background: var(--bg-secondary); padding: 4rem 0; }
+
+  .loc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.2rem;
+  }
+
+  .loc-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: all 0.3s;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .loc-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 3px;
+    transition: all 0.3s;
+  }
+
+  .loc-card:hover {
+    border-color: rgba(255,255,255,0.12);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+  }
+
+  .loc-card .loc-icon {
+    font-size: 2rem;
+    margin-bottom: 0.8rem;
+    display: block;
+  }
+
+  .loc-card h4 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.3rem;
+  }
+
+  .loc-card .loc-season {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+
+  .loc-card p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  .loc-card .loc-real {
+    margin-top: 0.8rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid var(--border-color);
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* ===== CHARACTERS ===== */
+  .char-filter {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+
+  .filter-btn {
+    padding: 0.5rem 1.2rem;
+    border-radius: 25px;
+    border: 1px solid var(--border-color);
+    background: transparent;
+    color: var(--text-secondary);
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .filter-btn:hover { border-color: rgba(255,255,255,0.2); color: var(--text-primary); }
+  .filter-btn.active { background: var(--accent-red); border-color: var(--accent-red); color: #fff; }
+
+  .char-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+
+  .char-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.3rem;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .char-card:hover {
+    border-color: rgba(255,255,255,0.12);
+    transform: translateY(-2px);
+  }
+
+  .char-card .char-role {
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+  }
+
+  .char-card h4 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.3rem;
+  }
+
+  .char-card .char-actor {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-family: 'JetBrains Mono', monospace;
+    margin-bottom: 0.8rem;
+  }
+
+  .char-card p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .char-card .season-badges {
+    margin-top: 0.8rem;
+    display: flex;
+    gap: 0.3rem;
+  }
+
+  .s-badge {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.65rem;
+    font-weight: 600;
+    font-family: 'JetBrains Mono', monospace;
+    color: #fff;
+    opacity: 0.9;
+  }
+
+  /* ===== QUOTES ===== */
+  .quotes-section { background: var(--bg-secondary); padding: 4rem 0; }
+
+  .quote-carousel {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .quote-track {
+    display: flex;
+    transition: transform 0.5s ease;
+  }
+
+  .quote-slide {
+    min-width: 100%;
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+
+  .quote-text {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(1.4rem, 3vw, 2.2rem);
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    line-height: 1.5;
+    max-width: 800px;
+    margin: 0 auto 1.5rem;
+    color: var(--text-primary);
+  }
+
+  .quote-author {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+  }
+
+  .quote-nav {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .quote-nav button {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--border-color);
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .quote-nav button:hover { background: rgba(255,255,255,0.08); color: var(--text-primary); }
+
+  .quote-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .quote-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--text-muted);
+    opacity: 0.3;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .quote-dot.active { opacity: 1; background: var(--accent-red); transform: scale(1.3); }
+
+  /* ===== THEMES ===== */
+  .theme-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.2rem;
+  }
+
+  .theme-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.8rem;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .theme-card:hover {
+    border-color: rgba(255,255,255,0.12);
+    transform: translateY(-3px);
+  }
+
+  .theme-card .theme-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .theme-card h4 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+  }
+
+  .theme-card p {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  /* ===== STATS ===== */
+  .stats-section { background: var(--bg-secondary); padding: 4rem 0; }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.2rem;
+  }
+
+  .stat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .stat-value {
+    font-family: 'Oswald', sans-serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--accent-amber), var(--accent-red));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 0.3rem;
+  }
+
+  /* ===== LEGACY ===== */
+  .legacy-content {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 2;
+    max-width: 800px;
+  }
+
+  .legacy-content p { margin-bottom: 1.2rem; }
+
+  .legacy-content strong {
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    text-align: center;
+    padding: 3rem 1.5rem;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-muted);
+    font-size: 0.8rem;
+  }
+
+  .footer a { color: var(--accent-red); text-decoration: none; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .season-timeline { padding-left: 2rem; }
+    .season-timeline::before { left: 0.3rem; }
+    .season-dot { left: -1.8rem; }
+    .season-number { font-size: 2rem; min-width: 40px; }
+    .nav-tab { padding: 0.8rem 0.6rem; font-size: 0.72rem; letter-spacing: 1px; }
+    .section { padding: 3rem 1rem; }
+  }
+
+  /* ===== ANIMATIONS ===== */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Tooltip for episodes */
+  .ep-tooltip {
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #222;
+    color: var(--text-primary);
+    padding: 0.6rem 0.9rem;
+    border-radius: 8px;
+    font-size: 0.78rem;
+    white-space: nowrap;
+    z-index: 999;
+    pointer-events: none;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  }
+
+  .ep-num:hover .ep-tooltip { display: block; }
+
+  /* Season color utilities */
+  .s1-color { color: var(--season1); }
+  .s2-color { color: var(--season2); }
+  .s3-color { color: var(--season3); }
+  .s4-color { color: var(--season4); }
+  .s5-color { color: var(--season5); }
+
+  .bg-s1 { background: var(--season1); }
+  .bg-s2 { background: var(--season2); }
+  .bg-s3 { background: var(--season3); }
+  .bg-s4 { background: var(--season4); }
+  .bg-s5 { background: var(--season5); }
+
+  .border-s1 { border-color: var(--season1); }
+  .border-s2 { border-color: var(--season2); }
+  .border-s3 { border-color: var(--season3); }
+  .border-s4 { border-color: var(--season4); }
+  .border-s5 { border-color: var(--season5); }
+
+  /* ===== MAP ===== */
+  .map-wrap {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+  }
+  #baltimore-map {
+    width: 100%;
+    height: 560px;
+    z-index: 1;
+  }
+  .map-legend {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+  .map-legend .legend-btn {
+    padding: 0.45rem 1rem;
+    border-radius: 25px;
+    border: 1px solid var(--border-color);
+    background: transparent;
+    color: var(--text-secondary);
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.25s;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .map-legend .legend-btn:hover { border-color: rgba(255,255,255,0.2); color: var(--text-primary); }
+  .map-legend .legend-btn.active { color: #fff; }
+  .map-legend .legend-btn .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .leaflet-popup-content-wrapper {
+    background: #1a1a24 !important;
+    color: #e8e6e3 !important;
+    border: 1px solid #2a2a36 !important;
+    border-radius: 10px !important;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.5) !important;
+  }
+  .leaflet-popup-tip { background: #1a1a24 !important; }
+  .leaflet-popup-content { margin: 12px 16px !important; font-family: 'Noto Sans SC', sans-serif !important; }
+  .leaflet-popup-content h4 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
+  .leaflet-popup-content .popup-season {
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .leaflet-popup-content p {
+    font-size: 0.8rem;
+    color: #9a9590;
+    line-height: 1.5;
+    margin: 0;
+  }
+  .leaflet-popup-content .popup-real {
+    margin-top: 6px;
+    padding-top: 6px;
+    border-top: 1px solid #2a2a36;
+    font-size: 0.7rem;
+    color: #5a5652;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .leaflet-container { background: #f0ede8 !important; }
+
+  /* ===== CHARACTER GRAPH ===== */
+  .graph-wrap {
+    position: relative;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.3);
+  }
+  #char-graph { width: 100%; height: 650px; cursor: grab; }
+  #char-graph:active { cursor: grabbing; }
+  .graph-node circle {
+    stroke-width: 2px;
+    cursor: pointer;
+    transition: r 0.2s;
+  }
+  .graph-node text {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    fill: #e8e6e3;
+    pointer-events: none;
+    text-anchor: middle;
+    paint-order: stroke;
+    stroke: #0a0a0c;
+    stroke-width: 3px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .graph-link {
+    stroke-opacity: 0.25;
+    transition: stroke-opacity 0.3s;
+  }
+  .graph-node.dimmed circle { opacity: 0.1; }
+  .graph-node.dimmed text { opacity: 0.08; }
+  .graph-link.dimmed { stroke-opacity: 0.03; }
+  .graph-node.highlighted circle { stroke-width: 3px; }
+  .graph-link.highlighted { stroke-opacity: 0.7; stroke-width: 2.5px; }
+  .graph-controls {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+  .graph-info {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    background: rgba(10,10,12,0.88);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 12px 16px;
+    max-width: 320px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 10;
+  }
+  .graph-info.show { opacity: 1; }
+  .graph-info h4 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+  }
+  .graph-info .gi-actor {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-family: 'JetBrains Mono', monospace;
+    margin-bottom: 6px;
+  }
+  .graph-info .gi-desc {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+  .graph-group-legend {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: rgba(10,10,12,0.8);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 10px 14px;
+    z-index: 10;
+  }
+  .graph-group-legend .gl-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    padding: 2px 0;
+  }
+  .graph-group-legend .gl-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+</style>
 </head>
 <body>
-    <div class="container">
-        <h1>ZZHT</h1>
-        <p>个人网站建设中</p>
-        <div class="links">
-            <a href="panzhihua.html">攀枝花7日旅游攻略</a>
-            <a href="songdongyang.html">送东阳马生序</a>
-            <a href="https://github.com/zzht1">GitHub</a>
-        </div>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="top">
+  <div class="hero-content">
+    <span class="hero-wire">HBO Original Series · 2002—2008</span>
+    <h1>THE WIRE</h1>
+    <p class="hero-subtitle">火 线 · 巴尔的摩全景</p>
+    <blockquote class="hero-quote">
+      "The Greek thinks I'm gonna let him live? He's in a country he don't know, he don't speak the language, he ain't got no friends… He can't even get a cab to take him to the airport."
+      <span class="author">— Stringer Bell</span>
+    </blockquote>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <span class="value">5</span>
+        <span class="label">季</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="value">60</span>
+        <span class="label">集</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="value">8</span>
+        <span class="label">艾美奖</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="value">9.3</span>
+        <span class="label">IMDb</span>
+      </div>
     </div>
+  </div>
+  <div class="scroll-hint" onclick="document.getElementById('content').scrollIntoView({behavior:'smooth'})">
+    <span>向下探索</span>
+    <span class="arrow">↓</span>
+  </div>
+</section>
+
+<!-- ===== NAV BAR ===== -->
+<nav class="nav-bar" id="content">
+  <div class="nav-inner">
+    <div class="nav-tab active" data-section="seasons">剧集时间线</div>
+    <div class="nav-tab" data-section="locations">地点</div>
+    <div class="nav-tab" data-section="characters">人物</div>
+    <div class="nav-tab" data-section="quotes">经典台词</div>
+    <div class="nav-tab" data-section="themes">主题</div>
+    <div class="nav-tab" data-section="legacy">遗产</div>
+  </div>
+</nav>
+
+<!-- ===== SEASONS ===== -->
+<section class="section fade-in" id="seasons">
+  <h2 class="section-title">剧集时间线</h2>
+  <p class="section-desc">《火线》以巴尔的摩为舞台，每季聚焦城市的一个切面——从街头毒品交易到码头工人，从政治博弈到教育困境，最终落在媒体的失语。点击每季展开详情。</p>
+
+  <div class="season-timeline">
+
+    <!-- Season 1 -->
+    <div class="season-block" data-season="1">
+      <div class="season-dot border-s1" style="border-color:var(--season1)"></div>
+      <div class="season-header">
+        <span class="season-number s1-color">01</span>
+        <div class="season-header-text">
+          <h3>街头 · The Streets</h3>
+          <div class="season-meta-line">2002.06 — 2002.09 · 13集 · 毒品交易与执法</div>
+        </div>
+        <span class="season-toggle">▾</span>
+      </div>
+      <div class="season-detail">
+        <div class="season-detail-grid">
+          <div class="detail-card">
+            <h4><span class="icon">📖</span> 剧情梗概</h4>
+            <p class="synopsis">巴尔的摩西区，毒品帝国在Barksdale家族的掌控下运转如企业。侦探Jimmy McNulty不顾上级反对，推动成立专案组，利用窃听手段（wiretap）渗透Avon Barksdale的组织。然而警局内部的官僚政治、升迁博弈与资源争夺，不断阻碍着调查的推进。与此同时，街头底层人物——线人Bubbles、持枪劫匪Omar Little、毒贩D'Angelo——各自在体制的缝隙中挣扎求存。</p>
+          </div>
+          <div class="detail-card">
+            <h4><span class="icon">👤</span> 核心角色</h4>
+            <div>
+              <span class="char-tag" title="西区重案组探员，才华横溢却桀骜不驯">Jimmy McNulty</span>
+              <span class="char-tag" title="Barksdale组织头目，街头霸主">Avon Barksdale</span>
+              <span class="char-tag" title="Barksdale的二把手，商业头脑极强">Stringer Bell</span>
+              <span class="char-tag" title="Avon的侄子，在街头和良知间挣扎">D'Angelo Barksdale</span>
+              <span class="char-tag" title="持散弹枪的街头侠客，'Omar is coming!'">Omar Little</span>
+              <span class="char-tag" title="专案组负责人，正直但受困于体制">Cedric Daniels</span>
+              <span class="char-tag" title="女探员，McNulty最可靠的战友">Kima Greggs</span>
+              <span class="char-tag" title="街头线人，瘾君子，善良而令人心碎">Bubbles</span>
+              <span class="char-tag" title="街头毒贩/打手，忠诚而暴力">Wee-Bey</span>
+            </div>
+          </div>
+          <div class="detail-card">
+            <h4><span class="icon">📍</span> 关键地点</h4>
+            <ul>
+              <li>Franklin Terrace — 公屋项目，毒品交易核心</li>
+              <li>西区警察局 — 专案组基地</li>
+              <li>The Pit（低层公屋） — 街头毒贩的日常据点</li>
+              <li>巴尔的摩法院 — 审判与法律博弈</li>
+              <li>Orlando's — Avon的脱衣舞俱乐部</li>
+            </ul>
+          </div>
+          <div class="detail-card">
+            <h4><span class="icon">🎬</span> 集数</h4>
+            <div class="episode-list">
+              <div class="ep-num" style="position:relative">01<span class="ep-tooltip">The Target</span></div>
+              <div class="ep-num" style="position:relative">02<span class="ep-tooltip">The Detail</span></div>
+              <div class="ep-num" style="position:relative">03<span class="ep-tooltip">The Buys</span></div>
+              <div class="ep-num" style="position:relative">04<span class="ep-tooltip">Old Cases</span></div>
+              <div class="ep-num" style="position:relative">05<span class="ep-tooltip">The Pager</span></div>
+              <div class="ep-num" style="position:relative">06<span class="ep-tooltip">The Wire</span></div>
+              <div class="ep-num" style="position:relative">07<span class="ep-tooltip">One Arrest</span></div>
+              <div class="ep-num" style="position:relative">08<span class="ep-tooltip">Lessons</span></div>
+              <div class="ep-num" style="position:relative">09<span class="ep-tooltip">Game Day</span></div>
+              <div class="ep-num" style="position:relative">10<span class="ep-tooltip">The Cost</span></div>
+              <div class="ep-num" style="position:relative">11<span class="ep-tooltip">The Hunt</span></div>
+              <div class="ep-num" style="position:relative">12<span class="ep-tooltip">Cleaning Up</span></div>
+              <div class="ep-num" style="position:relative">13<span class="ep-tooltip">Sentencing</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Season 2 -->
+    <div class="season-block" data-season="2">
+      <div class="season-dot" style="border-color:var(--season2)"></div>
+      <div class="season-header">
+        <span class="season-number s2-color">02</span>
+        <div class="season-header-text">
+          <h3>码头 · The Docks</h3>
+          <div class="season-meta-line">2003.06 — 2003.08 · 12集 · 港口工会与走私</div>
+        </div>
+        <span class="season-toggle">▾</span>
+      </div>
+      <div class="season-detail">
+        <div class="season-detail-grid">
+          <div class="detail-card">
+            <h4><span class="icon">📖</span> 剧情梗概</h4>
+            <p class="synopsis">视线从街头转向巴尔的摩港口。码头工会主席Frank Sobotka为拯救濒临消亡的工会和工人阶级的生计，不惜与走私集团合作筹集政治献金。他的侄子Nick在合法工作和犯罪之间越陷越深，儿子Ziggy则用荒诞的行为掩饰内心的绝望。与此同时，Barksdale组织在Avon入狱后由Stringer Bell代管，开始了"企业化转型"。港口女警Beadie Russell意外卷入一场涉及人口走私的跨国案件。</p>
+          </div>
+          <div class="detail-card">
+            <h4><span class="icon">👤</span> 核心角色</h4>
+            <div>
+              <span class="char-tag" title="码头工会主席，悲剧性的工人领袖">Frank Sobotka</span>
+              <span class="char-tag" title="Frank的侄子，在两个世界间摇摆">Nick Sobotka</span>
+              <span class="char-tag" title="Frank的儿子，荒诞而可悲">Ziggy Sobotka</span>
+              <span class="char-tag" title="港口女警，善良坚韧">Beadie Russell</span>
+              <span class="char-tag" title="希腊走私集团的二把手">Spiros 'Vondas' Vondakopoulos</span>
+              <span class="char-tag" title="神秘的跨国走私幕后主使">The Greek</span>
+              <span class="char-tag" title="代管Barksdale组织的实用主义者">Stringer Bell</span>
+              <span class="char-tag" title="街头毒贩，被Nick带入港口世界">Frog</span>
+            </div>
+          </div>
+          <div class="detail-card">
+            <h4><span class="icon">📍</span> 关键地点</h4>
+            <ul>
+              <li>巴尔的摩港 · 码头 — 集装箱与走私通道</li>
+              <li>工会大厅 — 工人阶级的最后堡垒</li>
+              <li>Sobotka家 — 工人家庭生活的缩影</li>
+              <li>The Greek的咖啡馆 — 走私帝国的指挥所</li>
+              <li>运河街仓库 — 赃物交易场所</li>
+            </ul>
+          </div>
+          <div class="detail-card">
+            <h4><span class="icon">🎬</span> 集数</h4>
+            <div class="episode-list">
+              <div class="ep-num" style="position:relative">01<span class="ep-tooltip">Ebb Tide</span></div>
+              <div class="ep-num" style="position:relative">02<span class="ep-tooltip">Collateral Damage</span></div>
+              <div class="ep-num" style="position:relative">03<span class="ep-tooltip">Hot Shots</span></div>
+              <div class="ep-num" style="position:relative">04<span class="ep-tooltip">Hard Cases</span></div>
+              <div class="ep-num" style="position:relative">05<span class="ep-tooltip">Undertow</span></div>
+              <div class="ep-num" style="position:relative">06<span class="ep-tooltip">All Prologue</span></div>
+              <div class="ep-num" style="position:relative">07<span class="ep-tooltip">Backwash</span></div>
+              <div class="ep-num" style="position:relative">08<span class="ep-tooltip">Duck and Cover</span></div>
+              <div class="ep-num" style="position:relative">09<span class="ep-tooltip">Stray Rounds</span></div>
+              <div class="ep-num" style="position:relative">10<span class="ep-tooltip">Storm Warnings</span></div>
+              <div class="ep-num" style="position:relative">11<span class="ep-tooltip">Bad Dreams</span></div>
+              <div class="ep-num" style="position:relative">12<span class="ep-tooltip">Port in a Storm</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Season 3 -->
+    <div class="season-block" data-season="3">
+      <div class="season-dot" style="border-color:var(--season3)"></div>
+      <div class="season-header">
+        <span class="season-number s3-color">03</span>
+        <div class="season-header-text">
+          <h3>政治 · City Hall</h3>
+          <div class="season-meta-line">2004.09 — 2004.12 · 12集 · 政治改革与Hamsterdam</div>
+        </div>
+        <span class="season-toggle">▾</span>
+      </div>
+      <div class="season-detail">
+        <div class="season-detail-grid">
+          <div class="detail-card">
+            <h4><span class="icon">📖</span> 剧情梗概</h4>
+            <p class="synopsis">第三季将镜头对准巴尔的摩的政治舞台。市议员Tommy Carcetti怀抱着改革理想参选市长，与在任的Royce展开角逐。西区警长Bunny Colvin大胆实施"Hamsterdam"计划——在特定区域默许毒品交易，以期降低整体犯罪率。这一社会实验短暂见效却最终被政治吞噬。与此同时，Avon出狱后与Stringer Bell因路线分歧走向决裂，新兴毒枭Marlo Stanfield开始崛起。前打手Cutty试图回归正途。</p>
+          </div>
+          <div class="detail-card">
+            <h4><span class="icon">👤</span> 核心角色</h4>
+            <div>
+              <span class="char-tag" title="西区警长，Hamsterdam的设计者">Howard 'Bunny' Colvin</span>
+              <span class="char-tag" title="野心勃勃的市议员">Tommy Carcetti</span>
+              <span class="char-tag" title="冷酷的新兴毒枭，不按规矩出牌">Marlo Stanfield</span>
+              <span class="char-tag" title="出狱后与Stringer路线分歧加剧">Avon Barksdale</span>
+              <span class="char-tag" title="试图将毒品帝国企业化">Stringer Bell</span>
+              <span class="char-tag" title="前Barksdale打手，努力脱离街头">Dennis 'Cutty' Wise</span>
+              <span class="char-tag" title="Marlo的杀手搭档">Chris Partlow & Felicia 'Snoop' Pearson</span>
+            </div>
+          </div>
+          <div class="detail-card">
+            <h4><span class="icon">📍</span> 关键地点</h4>
+            <ul>
+              <li>Hamsterdam — 被默许的"毒品自由区"</li>
+              <li>巴尔的摩市政厅 — 权力角逐的舞台</li>
+              <li>西区警区 — Colvin的辖区和实验场</li>
+              <li>Marlo的地盘 — 新的街头势力版图</li>
+              <li>Cutty的拳击馆 — 街头少年的避风港</li>
+            </ul>
+          </div>
+          <div class="detail-card">
+            <h4><span class="icon">🎬</span> 集数</h4>
+            <div class="episode-list">
+              <div class="ep-num" style="position:relative">01<span class="ep-tooltip">Time After Time</span></div>
+              <div class="ep-num" style="position:relative">02<span class="ep-tooltip">All Due Respect</span></div>
+              <div class="ep-num" style="position:relative">03<span class="ep-tooltip">Dead Soldiers</span></div>
+              <div class="ep-num" style="position:relative">04<span class="ep-tooltip">Hamsterdam</span></div>
+              <div class="ep-num" style="position:relative">05<span class="ep-tooltip">Straight and True</span></div>
+              <div class="ep-num" style="position:relative">06<span class="ep-tooltip">Homecoming</span></div>
+              <div class="ep-num" style="position:relative">07<span class="ep-tooltip">Back Burners</span></div>
+              <div class="ep-num" style="position:relative">08<span class="ep-tooltip">Moral Midgetry</span></div>
+              <div class="ep-num" style="position:relative">09<span class="ep-tooltip">Slapstick</span></div>
+              <div class="ep-num" style="position:relative">10<span class="ep-tooltip">Reformation</span></div>
+              <div class="ep-num" style="position:relative">11<span class="ep-tooltip">Middle Ground</span></div>
+              <div class="ep-num" style="position:relative">12<span class="ep-tooltip">Mission Accomplished</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Season 4 -->
+    <div class="season-block" data-season="4">
+      <div class="season-dot" style="border-color:var(--season4)"></div>
+      <div class="season-header">
+        <span class="season-number s4-color">04</span>
+        <div class="season-header-text">
+          <h3>学校 · The Schools</h3>
+          <div class="season-meta-line">2006.09 — 2006.12 · 13集 · 教育体制与少年命运</div>
+        </div>
+        <span class="season-toggle">▾</span>
+      </div>
+      <div class="season-detail">
+        <div class="season-detail-grid">
+          <div class="detail-card">
+            <h4><span class="icon">📖</span> 剧情梗概</h4>
+            <p class="synopsis">被广泛誉为全剧最佳的一季。镜头深入巴尔的摩西区的一所公立中学，跟随四个十三岁的男孩——Dukie、Randy、Michael和Namond。前警探Prez成为他们的教师，试图在体制的荒谬中为孩子们打开一扇窗。与此同时，Marlo Stanfield的势力扩张变得愈发残忍——Chris和Snoop将尸体封藏在废弃排屋的墙中。Carcetti当选市长后，很快发现政治理想与现实之间的鸿沟。这一季最令人震撼的主题是：体制如何辜负了最脆弱的孩子。</p>
+          </div>
+          <div class="detail-card">
+            <h4><span class="icon">👤</span> 核心角色</h4>
+            <div>
+              <span class="char-tag" title="瘦弱聪慧的男孩，被家庭忽视">Dukie (Dukie Weems)</span>
+              <span class="char-tag" title="善良乐观的男孩，因告密陷入困境">Randy Wagstaff</span>
+              <span class="char-tag" title="沉默寡言，被迫走上街头">Michael Lee</span>
+              <span class="char-tag" title="Bodie的侄子，街头与课堂间的挣扎">Namond Brice</span>
+              <span class="char-tag" title="前警探转行教师，笨拙但真诚">Roland 'Prez' Pryzbylewski</span>
+              <span class="char-tag" title="冷酷无情的毒枭">Marlo Stanfield</span>
+              <span class="char-tag" title="Marlo的左膀右臂，冷血杀手">Chris Partlow</span>
+              <span class="char-tag" title="Marlo的执行者，面无表情的女杀手">Snoop</span>
+            </div>
+          </div>
+          <div class="detail-card">
+            <h4><span class="icon">📍</span> 关键地点</h4>
+            <ul>
+              <li>Edward J. Tilghman中学 — 四个男孩的学校</li>
+              <li>废弃排屋（Vacants） — Marlo的"坟墓"</li>
+              <li>西区街角 — 孩子们的成长环境</li>
+              <li>市政厅 — Carcetti的市长办公室</li>
+              <li>Colvin的社区研究项目 — 另一个视角的教育</li>
+            </ul>
+          </div>
+          <div class="detail-card">
+            <h4><span class="icon">🎬</span> 集数</h4>
+            <div class="episode-list">
+              <div class="ep-num" style="position:relative">01<span class="ep-tooltip">Boys of Summer</span></div>
+              <div class="ep-num" style="position:relative">02<span class="ep-tooltip">Soft Eyes</span></div>
+              <div class="ep-num" style="position:relative">03<span class="ep-tooltip">Home Room</span></div>
+              <div class="ep-num" style="position:relative">04<span class="ep-tooltip">Refugees</span></div>
+              <div class="ep-num" style="position:relative">05<span class="ep-tooltip">Alliances</span></div>
+              <div class="ep-num" style="position:relative">06<span class="ep-tooltip">Margin of Error</span></div>
+              <div class="ep-num" style="position:relative">07<span class="ep-tooltip">Unto Others</span></div>
+              <div class="ep-num" style="position:relative">08<span class="ep-tooltip">Corner Boys</span></div>
+              <div class="ep-num" style="position:relative">09<span class="ep-tooltip">Know Your Place</span></div>
+              <div class="ep-num" style="position:relative">10<span class="ep-tooltip">Misgivings</span></div>
+              <div class="ep-num" style="position:relative">11<span class="ep-tooltip">A New Day</span></div>
+              <div class="ep-num" style="position:relative">12<span class="ep-tooltip">That's Got His Own</span></div>
+              <div class="ep-num" style="position:relative">13<span class="ep-tooltip">Final Grades</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Season 5 -->
+    <div class="season-block" data-season="5">
+      <div class="season-dot" style="border-color:var(--season5)"></div>
+      <div class="season-header">
+        <span class="season-number s5-color">05</span>
+        <div class="season-header-text">
+          <h3>媒体 · The Paper</h3>
+          <div class="season-meta-line">2008.01 — 2008.03 · 10集 · 新闻业与终极循环</div>
+        </div>
+        <span class="season-toggle">▾</span>
+      </div>
+      <div class="season-detail">
+        <div class="season-detail-grid">
+          <div class="detail-card">
+            <h4><span class="icon">📖</span> 剧情梗概</h4>
+            <p class="synopsis">最终季聚焦《巴尔的摩太阳报》编辑部。在普利策奖压力和发行量下滑的夹击下，严肃的新闻报道被 sensationalism 和造假取代。记者Scott Templeton编造新闻获得嘉奖，而真正关注底层的声音被系统性消音。McNulty为争取警方资源，伪造了一个"连环杀手"的案件，事情逐渐失控。Marlo最终被绳之以法，但街头的权力真空迅速被填补——新一轮的游戏已经开始。Omar的陨落和Bubbles的重生构成了全剧最深沉的情感弧线。大结局与第一季首尾呼应，揭示了体制的终极真相：一切都在循环。</p>
+          </div>
+          <div class="detail-card">
+            <h4><span class="icon">👤</span> 核心角色</h4>
+            <div>
+              <span class="char-tag" title="伪造连环杀手案，走向极端">Jimmy McNulty</span>
+              <span class="char-tag" title="编造新闻的记者">Scott Templeton</span>
+              <span class="char-tag" title="坚守新闻理想的老编辑">Gus Haynes</span>
+              <span class="char-tag" title="追求奖项而非真相的主编">Thomas Klebanow</span>
+              <span class="char-tag" title="Marlo走向覆灭">Marlo Stanfield</span>
+              <span class="char-tag" title="街头传奇的最终归宿">Omar Little</span>
+              <span class="char-tag" title="从瘾君子到重获新生">Bubbles</span>
+              <span class="char-tag" title="新一代街头少年的命运轮回">Michael → 新 Omar</span>
+            </div>
+          </div>
+          <div class="detail-card">
+            <h4><span class="icon">📍</span> 关键地点</h4>
+            <ul>
+              <li>《巴尔的摩太阳报》编辑部 — 新闻业的战场</li>
+              <li>无家可归者营地 — McNulty伪造案件的现场</li>
+              <li>街头 — 权力更替的永恒舞台</li>
+              <li>Bubbles的地下室 — 重生之路的起点</li>
+              <li>法庭与监狱 — 正义的有限兑现</li>
+            </ul>
+          </div>
+          <div class="detail-card">
+            <h4><span class="icon">🎬</span> 集数</h4>
+            <div class="episode-list">
+              <div class="ep-num" style="position:relative">01<span class="ep-tooltip">More with Less</span></div>
+              <div class="ep-num" style="position:relative">02<span class="ep-tooltip">Unconfirmed Reports</span></div>
+              <div class="ep-num" style="position:relative">03<span class="ep-tooltip">Not for Attribution</span></div>
+              <div class="ep-num" style="position:relative">04<span class="ep-tooltip">Transitions</span></div>
+              <div class="ep-num" style="position:relative">05<span class="ep-tooltip">React Quotes</span></div>
+              <div class="ep-num" style="position:relative">06<span class="ep-tooltip">The Dickensian Aspect</span></div>
+              <div class="ep-num" style="position:relative">07<span class="ep-tooltip">Took</span></div>
+              <div class="ep-num" style="position:relative">08<span class="ep-tooltip">Clarifications</span></div>
+              <div class="ep-num" style="position:relative">09<span class="ep-tooltip">Late Editions</span></div>
+              <div class="ep-num" style="position:relative">10<span class="ep-tooltip">-30-</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== LOCATIONS MAP ===== -->
+<section class="locations-section" id="locations">
+  <div class="section fade-in">
+    <h2 class="section-title">巴尔的摩地图</h2>
+    <p class="section-desc">《火线》全程在巴尔的摩实景拍摄。地图标注了各季核心地点，点击标记可查看详细信息。按季节筛选查看。</p>
+
+    <div class="map-legend" id="mapLegend">
+      <button class="legend-btn active" data-mseason="all" style="border-color:rgba(255,255,255,0.2)">
+        全部地点
+      </button>
+      <button class="legend-btn" data-mseason="1">
+        <span class="dot" style="background:var(--season1)"></span> 第一季 · 街头
+      </button>
+      <button class="legend-btn" data-mseason="2">
+        <span class="dot" style="background:var(--season2)"></span> 第二季 · 码头
+      </button>
+      <button class="legend-btn" data-mseason="3">
+        <span class="dot" style="background:var(--season3)"></span> 第三季 · 政治
+      </button>
+      <button class="legend-btn" data-mseason="4">
+        <span class="dot" style="background:var(--season4)"></span> 第四季 · 学校
+      </button>
+      <button class="legend-btn" data-mseason="5">
+        <span class="dot" style="background:var(--season5)"></span> 第五季 · 媒体
+      </button>
+    </div>
+
+    <div class="map-wrap">
+      <div id="baltimore-map"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CHARACTERS GRAPH ===== -->
+<section class="section fade-in" id="characters">
+  <h2 class="section-title">人物关系图谱</h2>
+  <p class="section-desc">《火线》塑造了美剧史上最丰满的群像。拖拽节点探索角色关系，悬停查看详情，按阵营筛选聚焦不同群体。实线代表合作/联盟，虚线代表对抗/冲突。</p>
+
+  <div class="graph-controls" id="graphControls">
+    <button class="filter-btn active" data-group="all">全部</button>
+    <button class="filter-btn" data-group="barksdale" style="--fc:var(--accent-red)">Barksdale</button>
+    <button class="filter-btn" data-group="marlo" style="--fc:var(--accent-red)">Marlo 组织</button>
+    <button class="filter-btn" data-group="police" style="--fc:var(--accent-blue)">警察/执法</button>
+    <button class="filter-btn" data-group="dock" style="--fc:var(--accent-green)">码头</button>
+    <button class="filter-btn" data-group="politics" style="--fc:var(--accent-amber)">政治</button>
+    <button class="filter-btn" data-group="school" style="--fc:var(--season4)">教育/少年</button>
+    <button class="filter-btn" data-group="media" style="--fc:var(--accent-purple)">媒体</button>
+    <button class="filter-btn" data-group="other" style="--fc:var(--text-muted)">其他</button>
+  </div>
+
+  <div class="graph-wrap">
+    <svg id="char-graph"></svg>
+    <div class="graph-info" id="graphInfo">
+      <h4 id="giName"></h4>
+      <div class="gi-actor" id="giActor"></div>
+      <div class="gi-desc" id="giDesc"></div>
+    </div>
+    <div class="graph-group-legend">
+      <div class="gl-item"><span class="gl-dot" style="background:#c0392b"></span> Barksdale 组织</div>
+      <div class="gl-item"><span class="gl-dot" style="background:#e74c3c"></span> Marlo 组织</div>
+      <div class="gl-item"><span class="gl-dot" style="background:#2980b9"></span> 警察 / 执法</div>
+      <div class="gl-item"><span class="gl-dot" style="background:#27ae60"></span> 码头</div>
+      <div class="gl-item"><span class="gl-dot" style="background:#d4a017"></span> 政治</div>
+      <div class="gl-item"><span class="gl-dot" style="background:#16a085"></span> 教育 / 少年</div>
+      <div class="gl-item"><span class="gl-dot" style="background:#8e44ad"></span> 媒体</div>
+      <div class="gl-item"><span class="gl-dot" style="background:#7f8c8d"></span> 其他</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== QUOTES ===== -->
+<section class="quotes-section" id="quotes">
+  <div class="section fade-in">
+    <h2 class="section-title">经典台词</h2>
+    <p class="section-desc">《火线》的对白以巴尔的摩方言和街头俚语为基础，每句话都承载着角色和体制的重量。</p>
+
+    <div class="quote-carousel">
+      <div class="quote-track" id="quoteTrack">
+        <div class="quote-slide">
+          <p class="quote-text">"A man gotta have a code."</p>
+          <p class="quote-author">— Omar Little</p>
+        </div>
+        <div class="quote-slide">
+          <p class="quote-text">"It's all in the game, yo."</p>
+          <p class="quote-author">— Stringer Bell</p>
+        </div>
+        <div class="quote-slide">
+          <p class="quote-text">"You come at the king, you best not miss."</p>
+          <p class="quote-author">— Omar Little</p>
+        </div>
+        <div class="quote-slide">
+          <p class="quote-text">"The world is a bigger place than the f***ing corner."</p>
+          <p class="quote-author">— Avon Barksdale</p>
+        </div>
+        <div class="quote-slide">
+          <p class="quote-text">"We used to make something in this country. We made the best steel in the world here. Now they put a f***ing Wal-Mart where the Sparrows Point mill used to be."</p>
+          <p class="quote-author">— Frank Sobotka</p>
+        </div>
+        <div class="quote-slide">
+          <p class="quote-text">"What the f*** did I do? You think I'm dumb? I'm not the one who put a guy in a wall."</p>
+          <p class="quote-author">— Snoop</p>
+        </div>
+        <div class="quote-slide">
+          <p class="quote-text">"The police are not here to solve crimes. They're here to clear cases. Two very different things."</p>
+          <p class="quote-author">— Jimmy McNulty</p>
+        </div>
+        <div class="quote-slide">
+          <p class="quote-text">"You want it to be one way. But it's the other way."</p>
+          <p class="quote-author">— Marlo Stanfield</p>
+        </div>
+        <div class="quote-slide">
+          <p class="quote-text">"Got the shotgun. Got the briefcase. It's all in the game, yo."</p>
+          <p class="quote-author">— Omar Little</p>
+        </div>
+        <div class="quote-slide">
+          <p class="quote-text">"We ain't gotta dream no more. We got to be awake."</p>
+          <p class="quote-author">— Bubbles</p>
+        </div>
+      </div>
+      <div class="quote-nav">
+        <button onclick="moveQuote(-1)">←</button>
+        <button onclick="moveQuote(1)">→</button>
+      </div>
+      <div class="quote-dots" id="quoteDots"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== THEMES ===== -->
+<section class="section fade-in" id="themes">
+  <h2 class="section-title">核心主题</h2>
+  <p class="section-desc">《火线》远不止是一部犯罪剧。主创David Simon说："这部剧讲的是美国城市，以及我们如何共同生活。"</p>
+
+  <div class="theme-cards">
+    <div class="theme-card">
+      <div class="theme-icon">⚙️</div>
+      <h4>体制的异化</h4>
+      <p>无论是警局、学校、报社还是街头，每个体制都在追求自身的指标（Juking the stats）而非其本应承担的使命。警察追求案件数量而非正义，学校追求考试分数而非教育，媒体追求普利策奖而非真相。体制吞噬了其中的个体。</p>
+    </div>
+    <div class="theme-card">
+      <div class="theme-icon">🔄</div>
+      <h4>轮回与宿命</h4>
+      <p>每一代街头少年——Wallace、D'Angelo、Bodie、Michael——都在重复上一代的命运。大结局中，新一代少年站在与第一季相同的街角，游戏换了玩家，但规则不变。"The king stay the king."</p>
+    </div>
+    <div class="theme-card">
+      <div class="theme-icon">📊</div>
+      <h4>数据游戏</h4>
+      <p>"Juking the stats"贯穿全剧——警察压低犯罪数据、学校刷高考试成绩、媒体制造虚假报道。数字被操纵以服务于权力者的需要，真实的苦难被抹去。这是对绩效考核文化的深刻批判。</p>
+    </div>
+    <div class="theme-card">
+      <div class="theme-icon">🏗️</div>
+      <h4>美国城市的衰败</h4>
+      <p>巴尔的摩是全美国的缩影——去工业化、种族隔离、贫困的代际传递、公共服务的溃败。废弃排屋、空置工厂、被遗忘的码头工人，共同构成了一幅后工业时代美国城市的群像。</p>
+    </div>
+    <div class="theme-card">
+      <div class="theme-icon">⚖️</div>
+      <h4>灰色道德</h4>
+      <p>《火线》中没有纯粹的好人或坏人。McNulty为破案不择手段，Omar有自己的荣誉准则，Marlo冷酷但也渴望"合法身份"。每个人都在自己的困境中做出选择，而选择的空间被体制所限定。</p>
+    </div>
+    <div class="theme-card">
+      <div class="theme-icon">👁️</div>
+      <h4>监控与权力</h4>
+      <p>Wiretap（窃听）既是剧名来源，也是权力的象征——谁有权监听谁？技术让监控成为可能，但决定监听对象的永远是权力结构。专案组的窃听暴露了毒品帝国，也暴露了执法机构本身的荒谬。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STATS ===== -->
+<section class="stats-section" id="stats">
+  <div class="section fade-in">
+    <h2 class="section-title">数据纵览</h2>
+    <p class="section-desc">一些关于《火线》的数字。</p>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-value">5</div>
+        <div class="stat-label">季数</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">60</div>
+        <div class="stat-label">总集数</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">2002—08</div>
+        <div class="stat-label">播出年份</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">9.3</div>
+        <div class="stat-label">IMDb 评分</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">94%</div>
+        <div class="stat-label">烂番茄新鲜度</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">8</div>
+        <div class="stat-label">艾美奖</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">6</div>
+        <div class="stat-label">年拍摄周期</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">1</div>
+        <div class="stat-label">城市：巴尔的摩</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LEGACY ===== -->
+<section class="section fade-in" id="legacy">
+  <h2 class="section-title">遗产与影响</h2>
+  <p class="section-desc">《火线》首播时收视率并不亮眼，但它在之后的岁月里被重新评价，成为公认的史上最伟大电视剧之一。</p>
+
+  <div class="legacy-content">
+    <p><strong>播出时的冷遇。</strong>《火线》在HBO播出期间从未获得高收视率，也几乎未获主流奖项认可。它没有炫目的特效、没有明星光环、叙事节奏缓慢且充满行话。然而，正是这种不妥协的真实性，让它在DVD时代和流媒体时代被反复发现。</p>
+
+    <p><strong>奥巴马的评价。</strong>前美国总统奥巴马曾多次公开表示《火线》是他最爱的电视剧。他说："它不只是娱乐，它是对美国城市最诚实的审视。"哈佛大学、杜克大学等学府已将《火线》纳入社会学和公共政策课程。</p>
+
+    <p><strong>对现实的影响。</strong>剧中揭示的诸多问题——警察数据造假、教育体制失败、港口工会困境、新闻业的堕落——在播出多年后依然是美国社会的核心议题。2015年的巴尔的摩骚乱更是让这部剧被重新审视：现实中的巴尔的摩，似乎与剧中并无二致。</p>
+
+    <p><strong>创作者的延续。</strong>David Simon 之后创作了《Treme》（新奥尔良爵士乐社区）、《Show Me a Hero》（住房隔离）、《The Deuce》（纽约色情业）和《We Own This City》（巴尔的摩警察丑闻），延续了"用叙事解剖美国体制"的创作路径。《火线》的编剧团队中还包括犯罪小说家George Pelecanos和Richard Price。</p>
+
+    <p><strong>为什么《火线》至今重要。</strong>在一个娱乐至上的时代，《火线》坚持用电视剧的形式做社会学调查。它不给你一个英雄来拯救世界，而是让你看到：世界是如何运转的，以及为什么没有人能改变它。正如剧中反复暗示的那样——"It's all in the game."</p>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <p>The Wire (2002—2008) · HBO Original Series · Created by David Simon</p>
+  <p style="margin-top:0.5rem;">本页面为粉丝制作的非官方指南 · 所有版权归HBO及原版权方所有</p>
+  <p style="margin-top:1rem">
+    <a href="https://en.wikipedia.org/wiki/The_Wire" target="_blank">Wikipedia</a> ·
+    <a href="https://www.imdb.com/title/tt0306414/" target="_blank">IMDb</a>
+  </p>
+</footer>
+
+<script>
+// ===== Season Accordion =====
+document.querySelectorAll('.season-block').forEach(block => {
+  block.querySelector('.season-header').addEventListener('click', () => {
+    const wasOpen = block.classList.contains('open');
+    document.querySelectorAll('.season-block').forEach(b => b.classList.remove('open'));
+    if (!wasOpen) block.classList.add('open');
+  });
+});
+
+// ===== Nav Tabs =====
+const tabs = document.querySelectorAll('.nav-tab');
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    tabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    const target = document.getElementById(tab.dataset.section);
+    if (target) {
+      const offset = document.querySelector('.nav-bar').offsetHeight;
+      const top = target.getBoundingClientRect().top + window.pageYOffset - offset - 20;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  });
+});
+
+// ===== Active nav on scroll =====
+const sectionIds = ['seasons', 'locations', 'characters', 'quotes', 'themes', 'stats', 'legacy'];
+window.addEventListener('scroll', () => {
+  const navHeight = document.querySelector('.nav-bar').offsetHeight;
+  let current = sectionIds[0];
+  sectionIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && el.getBoundingClientRect().top <= navHeight + 60) current = id;
+  });
+  tabs.forEach(t => t.classList.toggle('active', t.dataset.section === current));
+});
+
+// ===== Quote Carousel =====
+let currentQuote = 0;
+const quoteTrack = document.getElementById('quoteTrack');
+const totalQuotes = quoteTrack.children.length;
+const dotsContainer = document.getElementById('quoteDots');
+for (let i = 0; i < totalQuotes; i++) {
+  const dot = document.createElement('div');
+  dot.className = 'quote-dot' + (i === 0 ? ' active' : '');
+  dot.addEventListener('click', () => goToQuote(i));
+  dotsContainer.appendChild(dot);
+}
+function goToQuote(index) {
+  currentQuote = index;
+  quoteTrack.style.transform = `translateX(-${index * 100}%)`;
+  document.querySelectorAll('.quote-dot').forEach((d, i) => d.classList.toggle('active', i === index));
+}
+function moveQuote(dir) {
+  let next = currentQuote + dir;
+  if (next < 0) next = totalQuotes - 1;
+  if (next >= totalQuotes) next = 0;
+  goToQuote(next);
+}
+setInterval(() => moveQuote(1), 6000);
+
+// ===== Fade-in on scroll =====
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// ===================================================================
+// ===== LEAFLET MAP =====
+// ===================================================================
+(function() {
+  const seasonColors = { '1':'#c0392b', '2':'#2980b9', '3':'#d4a017', '4':'#27ae60', '5':'#8e44ad' };
+
+  const locations = [
+    { name:'Franklin Terrace 公屋', lat:39.2895, lng:-76.6350, season:'1', desc:'Barksdale帝国的心脏，高耸公屋塔楼是毒品交易主战场', real:'Franklin Terrace Projects, W Baltimore St' },
+    { name:'The Pit（低层公屋）', lat:39.2870, lng:-76.6400, season:'1', desc:'McCulloh低层公屋区，D\'Angelo和Wallace日常贩毒的场所', real:'McCulloh Homes, W Fayette St' },
+    { name:'Orlando\'s 脱衣舞俱乐部', lat:39.2830, lng:-76.6280, season:'1', desc:'Avon Barksdale的前台据点和社交场所', real:'西区某商业街区' },
+    { name:'巴尔的摩法院', lat:39.2910, lng:-76.6110, season:'1', desc:'审判与法律博弈的舞台，专案组多次在此遭遇挫败', real:'Baltimore City Circuit Court' },
+    { name:'西区警察局', lat:39.2855, lng:-76.6420, season:'1', desc:'专案组的基地，McNulty和Daniels在此策划窃听行动', real:'Western District Police Station' },
+    { name:'巴尔的摩港 · 码头', lat:39.2720, lng:-76.5650, season:'2', desc:'集装箱码头——工会与走私集团合作的舞台', real:'Canton / Dundalk Marine Terminal' },
+    { name:'工会大厅', lat:39.2740, lng:-76.5720, season:'2', desc:'Frank Sobotka的工会总部，工人阶级的最后堡垒', real:'IBLA Union Hall, Canton' },
+    { name:'The Greek 的咖啡馆', lat:39.2880, lng:-76.6050, season:'2', desc:'神秘走私主使的指挥所，外表普通却掌控整个走私网络', real:'Fells Point 地区' },
+    { name:'Sobotka 家', lat:39.2750, lng:-76.5680, season:'2', desc:'Frank的住所——工人家庭生活的缩影', real:'Canton 社区排屋' },
+    { name:'巴尔的摩市政厅', lat:39.2905, lng:-76.6105, season:'3', desc:'权力角逐中心，Carcetti从议员走向市长的舞台', real:'Baltimore City Hall, 100 N Holliday St' },
+    { name:'Hamsterdam 自由区', lat:39.2960, lng:-76.6480, season:'3', desc:'Colvin警长的社会实验——默许毒品交易的"自由区"', real:'虚构概念，基于西欧毒品政策' },
+    { name:'Cutty 拳击馆', lat:39.2870, lng:-76.6380, season:'3', desc:'前打手Cutty开设的拳击馆，街头少年的避风港', real:'西区社区拳击馆' },
+    { name:'Marlo 的地盘', lat:39.2930, lng:-76.6500, season:'3', desc:'新兴毒枭Marlo Stanfield的势力范围', real:'西区北部街角' },
+    { name:'Tilghman 中学', lat:39.2880, lng:-76.6440, season:'4', desc:'Dukie、Randy、Michael、Namond命运交汇的校园', real:'西区公立中学' },
+    { name:'废弃排屋（Vacants）', lat:39.2910, lng:-76.6460, season:'4', desc:'Chris和Snoop将尸体封在墙内的隐秘坟墓', real:'西区大量空置排屋' },
+    { name:'Randy 的寄养家庭', lat:39.2860, lng:-76.6410, season:'4', desc:'Randy短暂拥有温暖家庭的地方，却因告密被毁', real:'西区社区' },
+    { name:'《巴尔的摩太阳报》', lat:39.2900, lng:-76.6100, season:'5', desc:'最终季舞台——新闻编辑部，真假新闻的角力场', real:'The Baltimore Sun, 501 N Calvert St' },
+    { name:'无家可归者营地', lat:39.2840, lng:-76.6200, season:'5', desc:'McNulty伪造"连环杀手"的案发现场', real:'市中心边缘地带' },
+    { name:'Bubbles 的地下室', lat:39.2865, lng:-76.6370, season:'5', desc:'Bubbles戒毒后重获新生的起点——从地下室走向地面', real:'西区社区' },
+  ];
+
+  const map = L.map('baltimore-map', {
+    center: [39.2900, -76.6200],
+    zoom: 13,
+    zoomControl: false
+  });
+
+  L.control.zoom({ position: 'topright' }).addTo(map);
+
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',
+    maxZoom: 19
+  }).addTo(map);
+
+  const markers = {};
+  locations.forEach(loc => {
+    const color = seasonColors[loc.season];
+    const icon = L.divIcon({
+      className: '',
+      html: `<div style="width:20px;height:20px;border-radius:50%;background:${color};border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,0.35),0 0 0 2px ${color}44;transition:transform 0.2s"></div>`,
+      iconSize: [20, 20],
+      iconAnchor: [10, 10]
+    });
+    const marker = L.marker([loc.lat, loc.lng], { icon }).addTo(map);
+    marker.bindPopup(`
+      <h4>${loc.name}</h4>
+      <div class="popup-season" style="color:${color}">第${loc.season}季</div>
+      <p>${loc.desc}</p>
+      <div class="popup-real">实景: ${loc.real}</div>
+    `);
+    markers[loc.season] = markers[loc.season] || [];
+    markers[loc.season].push(marker);
+  });
+
+  // Season filter
+  document.querySelectorAll('#mapLegend .legend-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#mapLegend .legend-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const s = btn.dataset.mseason;
+
+      Object.keys(markers).forEach(season => {
+        markers[season].forEach(m => {
+          if (s === 'all' || season === s) {
+            m.addTo(map);
+            m.getElement().style.transform = 'scale(1)';
+          } else {
+            map.removeLayer(m);
+          }
+        });
+      });
+
+      // Fly to season bounds
+      if (s !== 'all' && markers[s]) {
+        const group = L.featureGroup(markers[s]);
+        map.flyToBounds(group.getBounds().pad(0.15), { duration: 0.8 });
+      } else {
+        map.flyTo([39.2900, -76.6200], 13, { duration: 0.8 });
+      }
+    });
+  });
+})();
+
+// ===================================================================
+// ===== D3 FORCE-DIRECTED GRAPH =====
+// ===================================================================
+(function() {
+  const groupColors = {
+    barksdale: '#c0392b', marlo: '#e74c3c', police: '#2980b9',
+    dock: '#27ae60', politics: '#d4a017', school: '#16a085',
+    media: '#8e44ad', other: '#7f8c8d'
+  };
+
+  const nodes = [
+    { id:'mcnulty', name:'McNulty', actor:'Dominic West', group:'police', r:20, desc:'西区重案组探员，才华横溢却桀骜不驯，用谎言推动调查，是全剧的核心驱动力' },
+    { id:'omar', name:'Omar Little', actor:'Michael K. Williams', group:'other', r:18, desc:'持散弹枪的街头劫匪，专抢毒贩，有自己的荣誉准则，全剧最具魅力的角色' },
+    { id:'avon', name:'Avon Barksdale', actor:'Wood Harris', group:'barksdale', r:17, desc:'西区毒品帝国创建者，信奉地盘和暴力法则的纯粹街头人物' },
+    { id:'stringer', name:'Stringer Bell', actor:'Idris Elba', group:'barksdale', r:17, desc:'Barksdale二把手，白天读经济学，试图将毒品帝国企业化' },
+    { id:'dangelo', name:"D'Angelo", actor:'Larry Gilliard Jr.', group:'barksdale', r:13, desc:'Avon的侄子，在街头生活和道德良知间痛苦挣扎' },
+    { id:'bubbles', name:'Bubbles', actor:'Andre Royo', group:'other', r:15, desc:'街头线人和瘾君子，全剧最温暖的角色，戒瘾之路贯穿全剧' },
+    { id:'daniels', name:'Daniels', actor:'Lance Reddick', group:'police', r:16, desc:'专案组负责人，后晋升为警察局长，体制内正直的少数人' },
+    { id:'kima', name:'Kima Greggs', actor:'Sonja Sohn', group:'police', r:13, desc:'女探员，McNulty最可靠的战友，刚毅果敢' },
+    { id:'frank', name:'Frank Sobotka', actor:'Chris Bauer', group:'dock', r:15, desc:'码头工会主席，为拯救工会不惜与走私犯合作，工人阶级的希腊式悲剧' },
+    { id:'nick', name:'Nick Sobotka', actor:'Pablo Schreiber', group:'dock', r:11, desc:'Frank的侄子，在合法工作和犯罪之间越陷越深' },
+    { id:'ziggy', name:'Ziggy Sobotka', actor:'James Ransone', group:'dock', r:9, desc:'Frank的儿子，用荒诞行为掩饰内心绝望' },
+    { id:'beadie', name:'Beadie Russell', actor:'Amy Ryan', group:'police', r:11, desc:'港口女警，善良坚韧，意外卷入跨国走私案' },
+    { id:'greek', name:'The Greek', actor:'Bill Zorzi', group:'dock', r:10, desc:'神秘的跨国走私幕后主使，全剧最神秘的人物' },
+    { id:'vondas', name:'Vondas', actor:'Paul Ben-Victor', group:'dock', r:9, desc:'希腊走私集团二把手' },
+    { id:'colvin', name:'Bunny Colvin', actor:'Robert Wisdom', group:'police', r:15, desc:'西区警长，Hamsterdam计划设计者，全剧最具远见的体制内人物' },
+    { id:'carcetti', name:'Carcetti', actor:'Aidan Gillen', group:'politics', r:16, desc:'从市议员到市长，改革理想在政治现实中被逐渐吞噬' },
+    { id:'marlo', name:'Marlo Stanfield', actor:'Jamie Hector', group:'marlo', r:17, desc:'新一代冷酷毒枭，纯粹以暴力和恐惧统治' },
+    { id:'chris', name:'Chris Partlow', actor:'Gbenga Akinnagbe', group:'marlo', r:13, desc:'Marlo的左膀右臂，冷血杀手' },
+    { id:'snoop', name:'Snoop', actor:'Felicia Pearson', group:'marlo', r:12, desc:'面无表情的女杀手，将尸体封在废弃排屋的墙中' },
+    { id:'cutty', name:'Cutty', actor:'Chad Coleman', group:'barksdale', r:12, desc:'前Barksdale打手，出狱后开设拳击馆，努力脱离街头' },
+    { id:'wee_bey', name:'Wee-Bey', actor:'Hassan Johnson', group:'barksdale', r:10, desc:'Barksdale组织的忠诚打手' },
+    { id:'bodie', name:'Bodie', actor:'J.D. Williams', group:'barksdale', r:12, desc:'街头毒贩，聪明但最终难逃街头宿命' },
+    { id:'prez', name:'Prez', actor:'Jim True-Frost', group:'school', r:12, desc:'前笨拙警探转行教师，在第四季找到真正使命' },
+    { id:'dukie', name:'Dukie', actor:'Jermaine Crawford', group:'school', r:11, desc:'瘦弱聪慧的男孩，被家庭忽视，最终走向街头' },
+    { id:'randy', name:'Randy', actor:'Maestro Harrell', group:'school', r:11, desc:'善良乐观的男孩，因告密被街头报复，命运悲惨' },
+    { id:'michael', name:'Michael', actor:'Tristan Wilds', group:'school', r:11, desc:'沉默寡言，被迫成为Marlo的杀手，最终成为"新Omar"' },
+    { id:'namond', name:'Namond', actor:'Julito McCullum', group:'school', r:10, desc:'Bodie侄子，在街头与课堂间挣扎，最终被Colvin收养' },
+    { id:'gus', name:'Gus Haynes', actor:'Clark Johnson', group:'media', r:12, desc:'《太阳报》城市版编辑，坚守严肃新闻理想的道德支柱' },
+    { id:'templeton', name:'Templeton', actor:'Brandon Young', group:'media', r:9, desc:'编造假新闻却获得嘉奖的记者，媒体堕落的象征' },
+    { id:'jay', name:'Jay Landsman', actor:'Delaney Williams', group:'police', r:10, desc:'警探组长，世故圆滑但有自己的生存哲学' },
+    { id:'freamon', name:'Freamon', actor:'Clarke Peters', group:'police', r:13, desc:'资深探员，窃听专家，沉稳睿智，是专案组的定海神针' },
+  ];
+
+  const links = [
+    // Barksdale hierarchy
+    { source:'avon', target:'stringer', type:'alliance', label:'搭档/二把手' },
+    { source:'avon', target:'dangelo', type:'alliance', label:'叔侄' },
+    { source:'avon', target:'wee_bey', type:'alliance', label:'忠诚打手' },
+    { source:'avon', target:'bodie', type:'alliance', label:'街头指挥' },
+    { source:'stringer', target:'dangelo', type:'alliance', label:'管理' },
+    { source:'stringer', target:'bodie', type:'alliance', label:'管理' },
+    { source:'avon', target:'cutty', type:'alliance', label:'旧部' },
+    { source:'stringer', target:'avon', type:'conflict', label:'路线分歧/决裂' },
+    // Marlo hierarchy
+    { source:'marlo', target:'chris', type:'alliance', label:'心腹杀手' },
+    { source:'marlo', target:'snoop', type:'alliance', label:'执行者' },
+    { source:'marlo', target:'michael', type:'alliance', label:'招募为杀手' },
+    // Barksdale vs Marlo
+    { source:'marlo', target:'avon', type:'conflict', label:'地盘争夺' },
+    { source:'marlo', target:'stringer', type:'conflict', label:'权力斗争' },
+    { source:'marlo', target:'bodie', type:'conflict', label:'街头对抗' },
+    // Police
+    { source:'mcnulty', target:'daniels', type:'alliance', label:'专案组战友' },
+    { source:'mcnulty', target:'kima', type:'alliance', label:'最可靠的搭档' },
+    { source:'mcnulty', target:'freamon', type:'alliance', label:'破案搭档' },
+    { source:'daniels', target:'kima', type:'alliance', label:'上下级/信任' },
+    { source:'daniels', target:'freamon', type:'alliance', label:'专案组' },
+    { source:'mcnulty', target:'jay', type:'alliance', label:'同事/损友' },
+    { source:'mcnulty', target:'beadie', type:'alliance', label:'第二季搭档' },
+    // Police vs Street
+    { source:'mcnulty', target:'avon', type:'conflict', label:'主要调查目标' },
+    { source:'mcnulty', target:'stringer', type:'conflict', label:'窃听追踪' },
+    { source:'mcnulty', target:'marlo', type:'conflict', label:'第五季对峙' },
+    { source:'daniels', target:'avon', type:'conflict', label:'执法对立面' },
+    { source:'freamon', target:'stringer', type:'conflict', label:'窃听专家 vs 反侦察' },
+    // Omar vs Organizations
+    { source:'omar', target:'avon', type:'conflict', label:'抢劫Barksdale' },
+    { source:'omar', target:'stringer', type:'conflict', label:'追杀Stringer' },
+    { source:'omar', target:'marlo', type:'conflict', label:'最终对决' },
+    { source:'omar', target:'bubbles', type:'alliance', label:'街头友谊' },
+    // Dock
+    { source:'frank', target:'nick', type:'alliance', label:'叔侄' },
+    { source:'frank', target:'ziggy', type:'alliance', label:'父子' },
+    { source:'frank', target:'greek', type:'alliance', label:'走私合作' },
+    { source:'nick', target:'vondas', type:'alliance', label:'走私交易' },
+    { source:'greek', target:'vondas', type:'alliance', label:'上下级' },
+    { source:'beadie', target:'frank', type:'conflict', label:'调查关系' },
+    { source:'frank', target:'mcnulty', type:'conflict', label:'间接调查' },
+    // Politics
+    { source:'carcetti', target:'colvin', type:'alliance', label:'政治与警务实交' },
+    { source:'carcetti', target:'daniels', type:'alliance', label:'任命为局长' },
+    { source:'colvin', target:'mcnulty', type:'alliance', label:'西区警长与探员' },
+    { source:'colvin', target:'namond', type:'alliance', label:'收养/拯救' },
+    { source:'carcetti', target:'mcnulty', type:'conflict', label:'预算限制/政治需要' },
+    // School
+    { source:'prez', target:'dukie', type:'alliance', label:'老师与学生' },
+    { source:'prez', target:'randy', type:'alliance', label:'老师与学生' },
+    { source:'prez', target:'michael', type:'alliance', label:'老师与学生' },
+    { source:'prez', target:'namond', type:'alliance', label:'老师与学生' },
+    { source:'prez', target:'daniels', type:'alliance', label:'前同事' },
+    { source:'dukie', target:'randy', type:'alliance', label:'同窗好友' },
+    { source:'dukie', target:'michael', type:'alliance', label:'同窗好友' },
+    { source:'randy', target:'namond', type:'alliance', label:'同窗好友' },
+    { source:'michael', target:'chris', type:'conflict', label:'被迫依附' },
+    // Media
+    { source:'gus', target:'templeton', type:'conflict', label:'真假新闻之争' },
+    { source:'gus', target:'mcnulty', type:'alliance', label:'新闻线索' },
+    // Bubbles connections
+    { source:'bubbles', target:'mcnulty', type:'alliance', label:'线人关系' },
+    { source:'bubbles', target:'kima', type:'alliance', label:'线人/保护' },
+  ];
+
+  const svg = d3.select('#char-graph');
+  const container = document.querySelector('.graph-wrap');
+  const width = container.clientWidth;
+  const height = 650;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const g = svg.append('g');
+
+  // Zoom
+  const zoom = d3.zoom()
+    .scaleExtent([0.3, 3])
+    .on('zoom', (event) => g.attr('transform', event.transform));
+  svg.call(zoom);
+
+  // Arrow markers
+  const defs = svg.append('defs');
+  defs.append('marker')
+    .attr('id', 'arrow')
+    .attr('viewBox', '0 -5 10 10')
+    .attr('refX', 20)
+    .attr('refY', 0)
+    .attr('markerWidth', 6)
+    .attr('markerHeight', 6)
+    .attr('orient', 'auto')
+    .append('path')
+    .attr('d', 'M0,-5L10,0L0,5')
+    .attr('fill', '#555');
+
+  const simulation = d3.forceSimulation(nodes)
+    .force('link', d3.forceLink(links).id(d => d.id).distance(d => {
+      if (d.type === 'conflict') return 140;
+      return 80;
+    }).strength(0.4))
+    .force('charge', d3.forceManyBody().strength(-300))
+    .force('center', d3.forceCenter(width / 2, height / 2))
+    .force('collision', d3.forceCollide().radius(d => d.r + 8))
+    .force('x', d3.forceX(width / 2).strength(0.05))
+    .force('y', d3.forceY(height / 2).strength(0.05));
+
+  const linkG = g.append('g');
+  const nodeG = g.append('g');
+
+  const linkElements = linkG.selectAll('line')
+    .data(links)
+    .enter().append('line')
+    .attr('class', 'graph-link')
+    .attr('stroke', d => d.type === 'conflict' ? '#c0392b55' : '#ffffff22')
+    .attr('stroke-width', d => d.type === 'conflict' ? 1.5 : 1.2)
+    .attr('stroke-dasharray', d => d.type === 'conflict' ? '5,4' : 'none');
+
+  const nodeElements = nodeG.selectAll('g')
+    .data(nodes)
+    .enter().append('g')
+    .attr('class', 'graph-node')
+    .call(d3.drag()
+      .on('start', dragStart)
+      .on('drag', dragging)
+      .on('end', dragEnd));
+
+  nodeElements.append('circle')
+    .attr('r', d => d.r)
+    .attr('fill', d => groupColors[d.group])
+    .attr('stroke', d => d3.color(groupColors[d.group]).brighter(0.8));
+
+  nodeElements.append('text')
+    .text(d => d.name)
+    .attr('dy', d => d.r + 14);
+
+  // Info panel
+  const infoPanel = document.getElementById('graphInfo');
+  const giName = document.getElementById('giName');
+  const giActor = document.getElementById('giActor');
+  const giDesc = document.getElementById('giDesc');
+
+  nodeElements.on('mouseenter', function(event, d) {
+    giName.textContent = d.name;
+    giActor.textContent = d.actor;
+    giDesc.textContent = d.desc;
+    infoPanel.classList.add('show');
+
+    // Highlight connected
+    const connected = new Set();
+    links.forEach(l => {
+      const sid = typeof l.source === 'object' ? l.source.id : l.source;
+      const tid = typeof l.target === 'object' ? l.target.id : l.target;
+      if (sid === d.id) connected.add(tid);
+      if (tid === d.id) connected.add(sid);
+    });
+    connected.add(d.id);
+
+    nodeElements.classed('dimmed', n => !connected.has(n.id));
+    nodeElements.classed('highlighted', n => n.id === d.id);
+    linkElements.classed('dimmed', l => {
+      const sid = typeof l.source === 'object' ? l.source.id : l.source;
+      const tid = typeof l.target === 'object' ? l.target.id : l.target;
+      return sid !== d.id && tid !== d.id;
+    });
+    linkElements.classed('highlighted', l => {
+      const sid = typeof l.source === 'object' ? l.source.id : l.source;
+      const tid = typeof l.target === 'object' ? l.target.id : l.target;
+      return sid === d.id || tid === d.id;
+    });
+  });
+
+  nodeElements.on('mouseleave', function() {
+    infoPanel.classList.remove('show');
+    nodeElements.classed('dimmed', false).classed('highlighted', false);
+    linkElements.classed('dimmed', false).classed('highlighted', false);
+  });
+
+  simulation.on('tick', () => {
+    linkElements
+      .attr('x1', d => d.source.x)
+      .attr('y1', d => d.source.y)
+      .attr('x2', d => d.target.x)
+      .attr('y2', d => d.target.y);
+    nodeElements.attr('transform', d => {
+      d.x = Math.max(d.r, Math.min(width - d.r, d.x));
+      d.y = Math.max(d.r, Math.min(height - d.r, d.y));
+      return `translate(${d.x},${d.y})`;
+    });
+  });
+
+  function dragStart(event, d) {
+    if (!event.active) simulation.alphaTarget(0.3).restart();
+    d.fx = d.x; d.fy = d.y;
+  }
+  function dragging(event, d) { d.fx = event.x; d.fy = event.y; }
+  function dragEnd(event, d) {
+    if (!event.active) simulation.alphaTarget(0);
+    d.fx = null; d.fy = null;
+  }
+
+  // Group filter
+  document.querySelectorAll('#graphControls .filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#graphControls .filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const grp = btn.dataset.group;
+
+      nodeElements.each(function(d) {
+        const el = d3.select(this);
+        if (grp === 'all' || d.group === grp) {
+          el.classed('dimmed', false);
+          el.select('circle').attr('opacity', 1);
+          el.select('text').attr('opacity', 1);
+        } else {
+          el.classed('dimmed', true);
+          el.select('circle').attr('opacity', 0.1);
+          el.select('text').attr('opacity', 0.08);
+        }
+      });
+
+      linkElements.each(function(l) {
+        const el = d3.select(this);
+        const sid = typeof l.source === 'object' ? l.source.id : l.source;
+        const tid = typeof l.target === 'object' ? l.target.id : l.target;
+        const sNode = nodes.find(n => n.id === sid);
+        const tNode = nodes.find(n => n.id === tid);
+        if (grp === 'all' || (sNode.group === grp && tNode.group === grp)) {
+          el.classed('dimmed', false);
+          el.attr('stroke-opacity', 0.25);
+        } else if (grp === 'all' || sNode.group === grp || tNode.group === grp) {
+          el.classed('dimmed', false);
+          el.attr('stroke-opacity', 0.12);
+        } else {
+          el.classed('dimmed', true);
+          el.attr('stroke-opacity', 0.03);
+        }
+      });
+    });
+  });
+
+})();
+</script>
 </body>
 </html>
