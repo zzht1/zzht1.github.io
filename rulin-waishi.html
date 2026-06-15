@@ -1,0 +1,1920 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>儒林外史 · 人物志</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+  :root {
+    --ink: #2c2c2c;
+    --ink-light: #555;
+    --ink-faint: #888;
+    --paper: #faf6f0;
+    --paper-deep: #f0e8d8;
+    --accent: #8b2500;
+    --accent-light: #c4533a;
+    --accent-bg: rgba(139,37,0,0.06);
+    --gold: #b8860b;
+    --gold-light: #daa520;
+    --jade: #2e8b57;
+    --jade-light: #3cb371;
+    --blue: #4a6fa5;
+    --purple: #6b4c8a;
+    --border: #d4c5a9;
+    --shadow: rgba(44,44,44,0.08);
+    --radius: 8px;
+    --transition: 0.3s ease;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+
+  /* ===== Header ===== */
+  .hero {
+    position: relative;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%);
+    color: #fff;
+    text-align: center;
+    padding: 60px 20px 50px;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.5;
+  }
+  .hero-content { position: relative; z-index: 1; }
+  .hero h1 {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 3em;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    margin-bottom: 8px;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+  }
+  .hero h1 span {
+    display: inline-block;
+    color: var(--gold-light);
+    font-size: 0.5em;
+    vertical-align: middle;
+    margin: 0 12px;
+    opacity: 0.7;
+  }
+  .hero .subtitle {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 1.15em;
+    color: rgba(255,255,255,0.75);
+    letter-spacing: 0.3em;
+    margin-bottom: 6px;
+  }
+  .hero .author-info {
+    font-size: 0.9em;
+    color: rgba(255,255,255,0.5);
+    margin-top: 10px;
+  }
+  .hero .stats-bar {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+  }
+  .hero .stat-item {
+    text-align: center;
+  }
+  .hero .stat-num {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 2em;
+    font-weight: 700;
+    color: var(--gold-light);
+  }
+  .hero .stat-label {
+    font-size: 0.85em;
+    color: rgba(255,255,255,0.6);
+  }
+
+  /* ===== Navigation Tabs ===== */
+  .nav-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(250,246,240,0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 20px;
+  }
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    overflow-x: auto;
+  }
+  .nav-tab {
+    padding: 14px 22px;
+    font-size: 0.95em;
+    cursor: pointer;
+    border: none;
+    background: none;
+    color: var(--ink-light);
+    font-family: 'Noto Sans SC', sans-serif;
+    white-space: nowrap;
+    position: relative;
+    transition: color var(--transition);
+  }
+  .nav-tab:hover { color: var(--accent); }
+  .nav-tab.active {
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .nav-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 22px; right: 22px;
+    height: 3px;
+    background: var(--accent);
+    border-radius: 3px 3px 0 0;
+  }
+
+  /* ===== Main Layout ===== */
+  .main-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 20px 60px;
+  }
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* ===== Search & Filter ===== */
+  .toolbar {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .search-box {
+    flex: 1;
+    min-width: 240px;
+    position: relative;
+  }
+  .search-box input {
+    width: 100%;
+    padding: 12px 16px 12px 44px;
+    border: 2px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 0.95em;
+    font-family: 'Noto Sans SC', sans-serif;
+    background: #fff;
+    transition: border-color var(--transition);
+    outline: none;
+  }
+  .search-box input:focus { border-color: var(--accent); }
+  .search-box::before {
+    content: '🔍';
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.1em;
+    opacity: 0.5;
+  }
+
+  .filter-chips {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .chip {
+    padding: 8px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 20px;
+    background: #fff;
+    cursor: pointer;
+    font-size: 0.85em;
+    transition: all var(--transition);
+    font-family: 'Noto Sans SC', sans-serif;
+  }
+  .chip:hover { border-color: var(--accent); color: var(--accent); }
+  .chip.active {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }
+
+  /* ===== Character Cards Grid ===== */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .char-card {
+    background: #fff;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    padding: 24px;
+    cursor: pointer;
+    transition: all var(--transition);
+    position: relative;
+    overflow: hidden;
+  }
+  .char-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px var(--shadow);
+    border-color: var(--accent-light);
+  }
+  .char-card .card-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+  .char-card .avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Noto Serif SC', serif;
+    font-size: 1.3em;
+    font-weight: 700;
+    color: #fff;
+    flex-shrink: 0;
+  }
+  .char-card .card-name {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 1.25em;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .char-card .card-alias {
+    font-size: 0.82em;
+    color: var(--ink-faint);
+    margin-top: 2px;
+  }
+  .char-card .card-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+  .tag {
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.75em;
+    font-weight: 500;
+  }
+  .tag-category { background: var(--accent-bg); color: var(--accent); }
+  .tag-chapter { background: rgba(74,111,165,0.1); color: var(--blue); }
+  .char-card .card-desc {
+    font-size: 0.88em;
+    color: var(--ink-light);
+    line-height: 1.7;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .char-card .card-footer {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8em;
+    color: var(--ink-faint);
+  }
+  .char-card .card-footer .famous {
+    font-style: italic;
+    max-width: 70%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .card-indicator {
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px;
+    height: 100%;
+  }
+
+  /* ===== Modal ===== */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 200;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px 20px;
+    overflow-y: auto;
+  }
+  .modal-overlay.show { display: flex; }
+  .modal {
+    background: var(--paper);
+    border-radius: 12px;
+    max-width: 720px;
+    width: 100%;
+    position: relative;
+    animation: modalIn 0.3s ease;
+    overflow: hidden;
+  }
+  @keyframes modalIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .modal-close {
+    position: absolute;
+    top: 16px; right: 16px;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255,255,255,0.9);
+    font-size: 1.3em;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background var(--transition);
+  }
+  .modal-close:hover { background: #fff; }
+  .modal-banner {
+    height: 120px;
+    display: flex;
+    align-items: center;
+    padding: 0 40px;
+    position: relative;
+  }
+  .modal-banner::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 40px;
+    background: linear-gradient(transparent, var(--paper));
+  }
+  .modal-avatar {
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Noto Serif SC', serif;
+    font-size: 2em;
+    font-weight: 900;
+    color: #fff;
+    border: 4px solid var(--paper);
+    position: relative;
+    z-index: 5;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+  .modal-header-info {
+    margin-left: 20px;
+    position: relative;
+    z-index: 5;
+  }
+  .modal-header-info h2 {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 1.8em;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.3);
+  }
+  .modal-header-info .modal-sub {
+    color: rgba(255,255,255,0.8);
+    font-size: 0.9em;
+  }
+  .modal-body {
+    padding: 30px 40px 40px;
+  }
+  .modal-section {
+    margin-bottom: 24px;
+  }
+  .modal-section h3 {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 1.05em;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--accent-bg);
+  }
+  .modal-section p, .modal-section ul {
+    font-size: 0.92em;
+    color: var(--ink-light);
+    line-height: 1.9;
+  }
+  .modal-section ul {
+    padding-left: 1.2em;
+  }
+  .modal-section li {
+    margin-bottom: 6px;
+  }
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .info-item {
+    background: #fff;
+    padding: 12px 16px;
+    border-radius: var(--radius);
+    border: 1px solid #eee;
+  }
+  .info-item .info-label {
+    font-size: 0.78em;
+    color: var(--ink-faint);
+    margin-bottom: 4px;
+  }
+  .info-item .info-value {
+    font-size: 0.92em;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .quote-block {
+    background: var(--accent-bg);
+    border-left: 4px solid var(--accent);
+    padding: 16px 20px;
+    border-radius: 0 var(--radius) var(--radius) 0;
+    font-family: 'Noto Serif SC', serif;
+    font-size: 0.95em;
+    color: var(--ink);
+    line-height: 1.8;
+  }
+  .relation-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .relation-tag {
+    padding: 6px 14px;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    font-size: 0.85em;
+    cursor: pointer;
+    transition: all var(--transition);
+  }
+  .relation-tag:hover {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }
+
+  /* ===== Relationship Map ===== */
+  .relation-map-container {
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    position: relative;
+  }
+  .map-toolbar {
+    padding: 14px 20px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .map-toolbar .legend {
+    display: flex;
+    gap: 16px;
+    margin-left: auto;
+    flex-wrap: wrap;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.82em;
+    color: var(--ink-light);
+  }
+  .legend-dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+  }
+  .map-svg-wrap {
+    width: 100%;
+    overflow: auto;
+    padding: 20px;
+  }
+  .map-svg-wrap svg {
+    display: block;
+    margin: 0 auto;
+  }
+
+  /* ===== Timeline ===== */
+  .timeline-era {
+    text-align: center;
+    font-family: 'Noto Serif SC', serif;
+    font-size: 1.1em;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 40px;
+    letter-spacing: 0.1em;
+  }
+  .timeline-era small {
+    display: block;
+    font-size: 0.72em;
+    color: var(--ink-faint);
+    font-weight: 400;
+    margin-top: 4px;
+    letter-spacing: 0;
+  }
+  .timeline-container {
+    position: relative;
+    padding: 0;
+    max-width: 920px;
+    margin: 0 auto;
+  }
+  .timeline-container::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, transparent 0%, var(--border) 4%, var(--border) 96%, transparent 100%);
+    transform: translateX(-50%);
+  }
+  .timeline-item {
+    position: relative;
+    width: 43%;
+    margin-bottom: 48px;
+    padding: 22px 26px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: #fff;
+    transition: all 0.35s cubic-bezier(.4,0,.2,1);
+  }
+  .timeline-item:nth-child(odd) { margin-right: auto; }
+  .timeline-item:nth-child(even) { margin-left: auto; }
+  .timeline-item:hover {
+    box-shadow: 0 8px 32px rgba(139,37,0,0.08);
+    border-color: var(--accent-light);
+    transform: translateY(-4px);
+  }
+  .timeline-dot {
+    position: absolute;
+    top: 28px;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 3px solid var(--paper);
+    box-shadow: 0 0 0 2px var(--accent), 0 0 14px rgba(139,37,0,0.18);
+    z-index: 2;
+  }
+  .timeline-item:nth-child(odd) .timeline-dot { right: -9%; transform: translateX(50%); }
+  .timeline-item:nth-child(even) .timeline-dot { left: -9%; transform: translateX(-50%); }
+  .timeline-year-badge {
+    position: absolute;
+    top: 22px;
+    background: var(--accent);
+    color: #fff;
+    padding: 4px 14px;
+    border-radius: 14px;
+    font-size: 0.74em;
+    font-weight: 600;
+    white-space: nowrap;
+    font-family: 'Noto Serif SC', serif;
+    z-index: 3;
+    box-shadow: 0 2px 8px rgba(139,37,0,0.2);
+  }
+  .timeline-item:nth-child(odd) .timeline-year-badge { right: -52%; transform: translateX(50%); }
+  .timeline-item:nth-child(even) .timeline-year-badge { left: -52%; transform: translateX(-50%); }
+  .timeline-chapter {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 0.8em;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 6px;
+    opacity: 0.75;
+  }
+  .timeline-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 1.15em;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--ink);
+  }
+  .timeline-chars {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+  .timeline-char-tag {
+    padding: 3px 10px;
+    background: var(--accent-bg);
+    color: var(--accent);
+    border-radius: 12px;
+    font-size: 0.78em;
+    cursor: pointer;
+    transition: all var(--transition);
+  }
+  .timeline-char-tag:hover { background: var(--accent); color: #fff; }
+  .timeline-desc {
+    font-size: 0.86em;
+    color: var(--ink-light);
+    line-height: 1.8;
+  }
+  @media (max-width: 768px) {
+    .timeline-container::before { left: 24px; }
+    .timeline-item, .timeline-item:nth-child(odd), .timeline-item:nth-child(even) {
+      width: calc(100% - 56px);
+      margin-left: 56px;
+      margin-right: 0;
+    }
+    .timeline-item:nth-child(odd) .timeline-dot,
+    .timeline-item:nth-child(even) .timeline-dot {
+      left: -32px; right: auto; transform: none;
+    }
+    .timeline-item:nth-child(odd) .timeline-year-badge,
+    .timeline-item:nth-child(even) .timeline-year-badge {
+      position: static; transform: none; display: inline-block; margin-bottom: 8px;
+    }
+  }
+
+  /* ===== Overview Section ===== */
+  .overview-intro {
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    padding: 36px 40px;
+    margin-bottom: 30px;
+  }
+  .overview-intro h2 {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 1.5em;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+  .overview-intro p {
+    font-size: 0.95em;
+    color: var(--ink-light);
+    line-height: 2;
+    margin-bottom: 12px;
+  }
+  .category-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .cat-card {
+    background: linear-gradient(135deg, var(--paper) 0%, var(--paper-deep) 100%);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all var(--transition);
+  }
+  .cat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--shadow);
+  }
+  .cat-card .cat-icon {
+    font-size: 2em;
+    margin-bottom: 10px;
+  }
+  .cat-card .cat-name {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 1.1em;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .cat-card .cat-count {
+    font-size: 0.82em;
+    color: var(--ink-faint);
+  }
+
+  /* ===== No Results ===== */
+  .no-results {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--ink-faint);
+    font-size: 1.1em;
+  }
+  .no-results .big-icon { font-size: 3em; margin-bottom: 12px; }
+
+  /* ===== Footer ===== */
+  .site-footer {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--ink-faint);
+    font-size: 0.85em;
+    border-top: 1px solid var(--border);
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 768px) {
+    .hero h1 { font-size: 2em; letter-spacing: 0.08em; }
+    .hero .stats-bar { gap: 24px; }
+    .nav-tab { padding: 12px 16px; font-size: 0.88em; }
+    .main-container { padding: 20px 14px 40px; }
+    .modal-body { padding: 24px 20px 30px; }
+    .modal-banner { padding: 0 20px; height: 100px; }
+    .info-grid { grid-template-columns: 1fr; }
+    .cards-grid { grid-template-columns: 1fr; }
+    .overview-intro { padding: 24px 20px; }
+  }
+  @media (max-width: 480px) {
+    .hero { padding: 40px 14px 30px; }
+    .hero h1 { font-size: 1.6em; }
+    .modal-header-info h2 { font-size: 1.4em; }
+  }
+
+  /* ===== Travel Route Map ===== */
+  .travel-map-wrap {
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .travel-map-header {
+    padding: 20px 28px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .travel-map-header h3 {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 1.2em;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .map-content {
+    display: flex;
+    min-height: 400px;
+  }
+  .map-svg-container {
+    flex: 1;
+    padding: 20px;
+    min-width: 0;
+  }
+  .map-svg-container svg { width: 100%; height: auto; }
+  .route-sidebar {
+    width: 280px;
+    padding: 24px;
+    border-left: 1px solid #eee;
+    flex-shrink: 0;
+  }
+  .route-sidebar h4 {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 1em;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: var(--ink);
+  }
+  .route-btn {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    background: #fff;
+    cursor: pointer;
+    transition: all var(--transition);
+    width: 100%;
+    text-align: left;
+    font-family: 'Noto Sans SC', sans-serif;
+  }
+  .route-btn:hover {
+    border-color: var(--accent-light);
+    box-shadow: 0 2px 8px var(--shadow);
+  }
+  .route-btn.active {
+    border-color: var(--accent);
+    background: var(--accent-bg);
+  }
+  .route-color {
+    width: 4px;
+    min-height: 36px;
+    border-radius: 2px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .route-info { flex: 1; }
+  .route-name {
+    font-weight: 600;
+    font-size: 0.95em;
+    color: var(--ink);
+    display: block;
+    margin-bottom: 2px;
+  }
+  .route-path {
+    font-size: 0.8em;
+    color: var(--ink-faint);
+    line-height: 1.5;
+  }
+  .map-legend-bar {
+    padding: 12px 24px;
+    border-top: 1px solid #eee;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    font-size: 0.82em;
+    color: var(--ink-light);
+  }
+  .map-legend-bar .leg-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .map-legend-bar .leg-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+  }
+  @keyframes routeDashFlow {
+    to { stroke-dashoffset: -24; }
+  }
+  @media (max-width: 900px) {
+    .map-content { flex-direction: column; }
+    .route-sidebar { width: 100%; border-left: none; border-top: 1px solid #eee; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Hero Header -->
+<header class="hero">
+  <div class="hero-content">
+    <div class="subtitle">吴敬梓 著 · 清代讽刺小说</div>
+    <h1>儒<span>林</span>外<span>史</span></h1>
+    <div class="subtitle" style="letter-spacing:0.5em; font-size:0.9em; margin-top:2px;">人 物 志</div>
+    <div class="author-info">全书五十六回 · 描绘明清士林百态</div>
+    <div class="stats-bar">
+      <div class="stat-item"><div class="stat-num" id="totalChars">0</div><div class="stat-label">收录人物</div></div>
+      <div class="stat-item"><div class="stat-num">56</div><div class="stat-label">全书回目</div></div>
+      <div class="stat-item"><div class="stat-num" id="totalCats">0</div><div class="stat-label">人物分类</div></div>
+      <div class="stat-item"><div class="stat-num" id="totalEvents">0</div><div class="stat-label">经典事件</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- Navigation -->
+<nav class="nav-bar">
+  <div class="nav-inner">
+    <button class="nav-tab active" data-section="overview">概览</button>
+    <button class="nav-tab" data-section="characters">人物图鉴</button>
+    <button class="nav-tab" data-section="relations">关系图谱</button>
+    <button class="nav-tab" data-section="travelmap">游历地图</button>
+    <button class="nav-tab" data-section="timeline">情节时间线</button>
+  </div>
+</nav>
+
+<!-- Main Content -->
+<div class="main-container">
+
+  <!-- ====== Overview Section ====== -->
+  <section id="overview" class="section active">
+    <div class="overview-intro">
+      <h2>关于本书</h2>
+      <p>《儒林外史》是清代吴敬梓所著的长篇讽刺小说，全书共五十六回，成书于乾隆十四年（1749年）。作品以封建社会知识分子为主要描写对象，通过描绘士林群像，深刻揭露了科举制度对读书人灵魂的腐蚀与毒害。</p>
+      <p>全书没有贯穿始终的中心人物和核心事件，而是以"连环套"式的结构，一个个人物故事前后衔接，展现了一幅封建社会士人阶层的生活画卷。从王冕的高洁隐逸开篇，到市井奇人的收束，吴敬梓以冷峻犀利的笔触，刻画了形形色色的读书人——有痴迷功名者，有慷慨豪侠者，有迂腐可笑者，也有洁身自好者。</p>
+    </div>
+    <h3 style="font-family:'Noto Serif SC',serif; font-size:1.2em; margin-bottom:16px; color:var(--ink);">人物分类</h3>
+    <div class="category-cards" id="categoryCards"></div>
+  </section>
+
+  <!-- ====== Characters Section ====== -->
+  <section id="characters" class="section">
+    <div class="toolbar">
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="搜索人物姓名、字号、身份...">
+      </div>
+      <div class="filter-chips" id="filterChips"></div>
+    </div>
+    <div class="cards-grid" id="cardsGrid"></div>
+    <div class="no-results" id="noResults" style="display:none;">
+      <div class="big-icon">📜</div>
+      <div>未找到匹配的人物</div>
+    </div>
+  </section>
+
+  <!-- ====== Relations Section ====== -->
+  <section id="relations" class="section">
+    <div class="relation-map-container">
+      <div class="map-toolbar">
+        <span style="font-family:'Noto Serif SC',serif; font-weight:600; color:var(--ink);">人物关系图谱</span>
+        <div class="legend">
+          <div class="legend-item"><div class="legend-dot" style="background:#8b2500;"></div>师承/举荐</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#b8860b;"></div>亲属</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#2e8b57;"></div>交游/知己</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#4a6fa5;"></div>同僚/同年</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#999; border:1px dashed #666;"></div>对立/恩怨</div>
+        </div>
+      </div>
+      <div class="map-svg-wrap" id="relationMap"></div>
+    </div>
+  </section>
+
+  <!-- ====== Timeline Section ====== -->
+  <section id="timeline" class="section">
+    <h3 style="font-family:'Noto Serif SC',serif; font-size:1.2em; margin-bottom:24px; color:var(--ink);">经典情节 · 时间线</h3>
+    <div class="timeline-container" id="timelineContainer"></div>
+  </section>
+
+  <!-- ====== Travel Map Section ====== -->
+  <section id="travelmap" class="section">
+    <div class="travel-map-wrap">
+      <div class="travel-map-header">
+        <h3>人物游历地图</h3>
+        <span style="font-size:0.85em; color:var(--ink-faint);">点击人物按钮查看路线，可同时选择多人对比</span>
+      </div>
+      <div class="map-content">
+        <div class="map-svg-container" id="travelMapSvg"></div>
+        <div class="route-sidebar">
+          <h4>人物游历路线</h4>
+          <div id="routeButtons"></div>
+          <div style="margin-top:16px; padding-top:14px; border-top:1px solid #eee; font-size:0.82em; color:var(--ink-faint);">
+            <div style="margin-bottom:6px;"><strong style="color:var(--ink);">地图说明</strong></div>
+            <div>《儒林外史》故事遍及大江南北，从京城到岭南，从东海之滨到川陕大地。可同时点选多个人物查看路线，地图上红色菱形标记为各事件发生地点，悬停城市可查看关联人物与事件。</div>
+          </div>
+        </div>
+      </div>
+      <div class="map-legend-bar">
+        <div class="leg-item"><div class="leg-dot" style="background:#8b2500;"></div>科举迷途</div>
+        <div class="leg-item"><div class="leg-dot" style="background:#2e8b57;"></div>高士隐者</div>
+        <div class="leg-item"><div class="leg-dot" style="background:#6b4c8a;"></div>名士风流</div>
+        <div class="leg-item"><div class="leg-dot" style="background:#4a6fa5;"></div>官僚士绅</div>
+        <div class="leg-item"><div class="leg-dot" style="background:#b8860b;"></div>市井小人</div>
+        <div class="leg-item"><div class="leg-dot" style="background:#2e8b57;"></div>市井奇人</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modalContent"></div>
+</div>
+
+<footer class="site-footer">
+  儒林外史 · 人物志 — 基于吴敬梓原著整理 · 仅供学习参考
+</footer>
+
+<script>
+// =====================================================
+// DATA
+// =====================================================
+const CATEGORIES = {
+  'all':      { name: '全部',   icon: '📖', color: '#555' },
+  'gaoshi':   { name: '高士隐者', icon: '🏔️', color: '#2e8b57', desc: '洁身自好、不慕功名' },
+  'keming':   { name: '科举迷途', icon: '📜', color: '#8b2500', desc: '痴迷功名、可悲可叹' },
+  'mingshi':  { name: '名士风流', icon: '🍶', color: '#6b4c8a', desc: '放浪形骸、慷慨豪侠' },
+  'liaoguan': { name: '官僚士绅', icon: '🏛️', color: '#4a6fa5', desc: '宦海沉浮、形形色色' },
+  'xiaoren':  { name: '市井小人', icon: '🎭', color: '#b8860b', desc: '趋炎附势、丑态百出' },
+  'qiren':     { name: '市井奇人', icon: '✨', color: '#2e8b57', desc: '身怀绝技、不随流俗' }
+};
+
+const CHARACTERS = [
+  {
+    id: 'wangmian',
+    name: '王冕',
+    alias: '字元章，号煮石山农',
+    category: 'gaoshi',
+    color: '#2e8b57',
+    chapters: '第1回',
+    identity: '诸暨农家子弟，自学成才的画家隐士',
+    personality: '孤傲清高、孝顺母亲、蔑视权贵、不与世俗同流合污',
+    story: '王冕自幼家贫，放牛为生，却天资聪颖，自学画画，终成画荷名家。他为人至孝，有好吃食必先奉母。朝廷权贵慕名求画，他断然拒绝。吴王朱元璋征召，他避走会稽山中，终身不仕。王冕是全书开篇的理想人格，代表了不为功名所动的高洁品格。',
+    famousScene: '拒画荷花、避走会稽山',
+    quote: '我一介布衣，不求闻达于诸侯，只愿闲云野鹤度此生。',
+    relations: [
+      { name: '吴王(朱元璋)', type: '对立', desc: '拒绝其征召' },
+      { name: '秦老', type: '交游', desc: '少年时的邻居好友' },
+      { name: '翟买办', type: '对立', desc: '为权贵索画被拒' }
+    ]
+  },
+  {
+    id: 'zhoujin',
+    name: '周进',
+    alias: '字蒉轩',
+    category: 'keming',
+    color: '#8b2500',
+    chapters: '第2-3回',
+    identity: '老童生，后官至国子监司业',
+    personality: '痴迷科举、屡试不第而不放弃、迂腐执着、得志后知恩图报',
+    story: '周进年过花甲仍是个童生，在薛家集教馆为生，受尽年轻秀才梅玖的嘲弄。后丢了教职，随姐夫金有余去省城做生意。参观贡院时触景生情，伤心欲绝，一头撞在号板上，众人拉都拉不住。几个商人同情他，凑钱替他捐了监生。此后一路中举、中进士，官至国子监司业。他后来在广东学道任上识拔了老童生范进。',
+    famousScene: '贡院撞号板 — 触景生情，哭到口吐鲜血',
+    quote: '苦读了几十年书，连个秀才也没中过！',
+    relations: [
+      { name: '范进', type: '师承', desc: '在广东学道任上录取范进' },
+      { name: '金有余', type: '亲属', desc: '姐夫，带他去做生意' },
+      { name: '梅玖', type: '对立', desc: '嘲弄他的年轻秀才' },
+      { name: '荀玫', type: '师承', desc: '在汶上县教过的学生' }
+    ]
+  },
+  {
+    id: 'fanjin',
+    name: '范进',
+    alias: '',
+    category: 'keming',
+    color: '#8b2500',
+    chapters: '第3-4回',
+    identity: '老童生，后中举人，钦点山东学道',
+    personality: '深陷科举执念、贫寒卑微、中举后喜极而疯、后来也变得世故圆滑',
+    story: '范进考了二十多次，到五十四岁还是个童生。周进做广东学道时阅卷，初看范进的卷子觉得不好，再三阅读后渐觉有意味，终于取为第一名。范进得知中举的消息，喜极而疯，满街高叫"噫！好了！我中了！"众人束手无策，最后由平日里对他刻薄的丈人胡屠户一巴掌打醒。其母也因欢喜过度而亡。后范进在高要知县汤奉处打秋风，最终做到山东学道。',
+    famousScene: '中举发疯 — "噫！好了！我中了！"',
+    quote: '噫！好了！我中了！',
+    relations: [
+      { name: '周进', type: '师承', desc: '座师，录取并识拔了他' },
+      { name: '胡屠户', type: '亲属', desc: '岳父，平日对他百般羞辱' },
+      { name: '张静斋', type: '交游', desc: '同去打秋风的举人' },
+      { name: '汤奉', type: '同僚', desc: '高要知县' }
+    ]
+  },
+  {
+    id: 'yanjiansheng',
+    name: '严监生',
+    alias: '名致和，字大育',
+    category: 'xiaoren',
+    color: '#b8860b',
+    chapters: '第5-6回',
+    identity: '监生，严贡生之弟',
+    personality: '胆小怕事、极其吝啬、守财奴形象',
+    story: '严监生家财万贯却吝啬至极，平日里猪肉都舍不得多买一斤。他花重金了结哥哥严贡生的官司，又花银子将妾赵氏扶正。妻子王氏去世后，赵氏扶正之事引发纠纷。严监生因心疼银子而郁郁成疾，病入膏肓。临死之际，他伸出两个指头迟迟不肯咽气，众人百般猜测不得其解，直到赵氏猜到是嫌灯里点了两茎灯草费油，挑去一根后，他才点点头，放心断气。',
+    famousScene: '两根灯草 — 临死不瞑目，只因灯费油',
+    quote: '（伸出两个指头，死不瞑目）',
+    relations: [
+      { name: '严贡生', type: '亲属', desc: '兄长，横行霸道' },
+      { name: '赵氏', type: '亲属', desc: '妾室，后扶正为妻' },
+      { name: '王氏', type: '亲属', desc: '原配妻子' }
+    ]
+  },
+  {
+    id: 'yangongsheng',
+    name: '严贡生',
+    alias: '名大位，字致中',
+    category: 'xiaoren',
+    color: '#b8860b',
+    chapters: '第5-6回',
+    identity: '贡生，严监生之兄',
+    personality: '横行霸道、欺压良善、仗势欺人、无耻之尤',
+    story: '严贡生是严监生的哥哥，性格与弟弟截然不同。他横行乡里，鱼肉百姓，强占邻居的猪，赖船家的船钱，欺压弟媳赵氏。弟弟死后，他强夺赵氏的家产，逼赵氏称自己为"二老爷"，还要把赵氏赶出家门。他的种种恶行，与兄弟严监生的吝啬形成了"严氏二丑"的经典对照。',
+    famousScene: '强占邻猪、赖船钱、欺压弟媳赵氏',
+    quote: '',
+    relations: [
+      { name: '严监生', type: '亲属', desc: '弟弟' },
+      { name: '赵氏', type: '对立', desc: '弟弟死后欺压弟媳' }
+    ]
+  },
+  {
+    id: 'kuangchaoren',
+    name: '匡超人',
+    alias: '名迥',
+    category: 'keming',
+    color: '#8b2500',
+    chapters: '第15-20回',
+    identity: '拆字少年出身，后为秀才',
+    personality: '早期质朴孝顺，后期黑化堕落、忘恩负义、吹牛撒谎',
+    story: '匡超人出身贫寒，在集市上以拆字算命为生，为人孝顺，悉心照料生病的父亲，令人感动。知县李本瑛识拔他做了秀才。然而他后来结交了潘三爷等恶友，学会了伪造文书、替人代考等不法勾当。潘三爷入狱后，他急忙撇清关系。他抛妻进京攀附权贵，妻子病故竟漠不关心，变成了一个衣冠禽兽。匡超人的堕落是全书最触目惊心的人物转变。',
+    famousScene: '从孝子到堕落 — 撇清与潘三爷的关系，弃妻进京',
+    quote: '潘三哥的事，我一点也不知道！（撇清关系）',
+    relations: [
+      { name: '马二先生', type: '师承', desc: '初识的恩人，资助他读书' },
+      { name: '李本瑛', type: '师承', desc: '识拔他为秀才的知县' },
+      { name: '潘三爷', type: '交游', desc: '结交的恶友，教他作恶' },
+      { name: '景兰江', type: '交游', desc: '在杭州结交的斗方诗人' }
+    ]
+  },
+  {
+    id: 'dushaoqing',
+    name: '杜少卿',
+    alias: '号少卿，天长杜府公子',
+    category: 'mingshi',
+    color: '#6b4c8a',
+    chapters: '第31-34回',
+    identity: '名士，世族子弟，被认为是作者的化身',
+    personality: '豪爽慷慨、蔑视功名、重情重孝、离经叛道、挥金如土',
+    story: '杜少卿出身天长杜府世家，为人极为豪爽，对家仆慷慨大方，致使家产被管家等人侵吞殆尽。他蔑视科举功名，认为"秀才未见得好似奴才"。家产散尽后移居南京，与妻子同游清凉山，在当时是惊世骇俗之举。朝廷荐举博学鸿词科，他装病推辞不就。后来倡议并参与修祭泰伯祠大典，体现了他对真儒精神的追求。杜少卿被公认为吴敬梓的自我写照。',
+    famousScene: '携妻游清凉山、装病辞博学鸿词科',
+    quote: '那些功名富贵，我看来如同粪土一般。',
+    relations: [
+      { name: '迟衡山', type: '交游', desc: '至交好友，共同倡议祭泰伯祠' },
+      { name: '庄绍光', type: '交游', desc: '南京名士，志同道合' },
+      { name: '虞博士', type: '交游', desc: '泰伯祠大祭的主祭' },
+      { name: '鲍廷玺', type: '交游', desc: '戏子出身的友人' },
+      { name: '韦四太爷', type: '对立', desc: '骗他钱财的管家之流' }
+    ]
+  },
+  {
+    id: 'louer',
+    name: '娄中堂二公子',
+    alias: '娄瓒',
+    category: 'liaoguan',
+    color: '#4a6fa5',
+    chapters: '第8-11回',
+    identity: '湖州官宦子弟，娄中堂之子',
+    personality: '附庸风雅、好结交名士、实则见识平庸、被人利用',
+    story: '娄中堂的两个公子，自以为风雅好士，广交宾客。他们久慕杨执中是"大才"，三顾茅庐去拜访，谁知杨执中不过是个不学无术、连盐都卖不出去的迂腐之人。两位公子又结交了权勿用（谐音"全无用"）等伪名士，大摆诗会，附庸风雅。这些"名士"实则互相吹捧、招摇撞骗。后来蘧公孙识破骗局，二位公子方才醒悟。这段故事辛辣讽刺了所谓"名士"的虚伪与可笑。',
+    famousScene: '三顾"茅庐"请杨执中、西湖诗会闹剧',
+    quote: '此公大才，我等当三顾而请之。',
+    relations: [
+      { name: '娄大公子', type: '亲属', desc: '兄弟，一同附庸风雅' },
+      { name: '杨执中', type: '交游', desc: '错认为高人的迂腐之人' },
+      { name: '权勿用', type: '交游', desc: '伪名士，谐音"全无用"' },
+      { name: '蘧公孙', type: '交游', desc: '识破骗局之人' }
+    ]
+  },
+  {
+    id: 'maer',
+    name: '马二先生',
+    alias: '名纯上，字静',
+    category: 'xiaoren',
+    color: '#b8860b',
+    chapters: '第13-15回',
+    identity: '选家（编选八股文范本为生），处州人',
+    personality: '迂腐老实、迷信科举、但本性善良、乐于助人',
+    story: '马二先生以选编八股文（时文）为生，是科举制度的忠实信徒。他游西湖时，不看山水美景，只关心八股文章，对西湖名胜毫无感触，令人啼笑皆非。然而他为人善良慷慨，与匡超人初识便倾力相助，不仅资助银两，还谆谆教诲。马二先生代表了被科举制度深深束缚、却本性不坏的一类读书人。',
+    famousScene: '游西湖不看风景只看文章',
+    quote: '文章是天下之公器，科举是正途出身。',
+    relations: [
+      { name: '匡超人', type: '师承', desc: '初识即慷慨资助并教导' },
+      { name: '蘧公孙', type: '交游', desc: '在杭州结识' }
+    ]
+  },
+  {
+    id: 'gongshenglu',
+    name: '鲍文卿',
+    alias: '',
+    category: 'qiren',
+    color: '#2e8b57',
+    chapters: '第24-26回',
+    identity: '南京戏班名角，戏子出身',
+    personality: '知恩图报、义薄云天、虽为戏子却有士人风骨',
+    story: '鲍文卿是南京有名的戏子，却有着超越身份的侠义精神。向知县（向鼎）曾有恩于他，他感念不忘。后来向知县落难，鲍文卿不顾身份卑微，挺身而出相助。他还收养了孤儿鲍廷玺，视如己出，悉心教养。鲍文卿虽身处社会底层，其品德操守却远胜许多读书人，是书中"真名士"的代表之一。',
+    famousScene: '知恩图报救助向知县、收养鲍廷玺',
+    quote: '向老爷的恩情，小人至死不敢忘。',
+    relations: [
+      { name: '向鼎', type: '交游', desc: '感恩图报的恩人' },
+      { name: '鲍廷玺', type: '亲属', desc: '养子，悉心教养' }
+    ]
+  },
+  {
+    id: 'niubuyi',
+    name: '牛布衣',
+    alias: '名瑶，字瑶圃',
+    category: 'mingshi',
+    color: '#6b4c8a',
+    chapters: '第7回、第20回',
+    identity: '嘉兴诗人，游历四方',
+    personality: '有真才实学、漂泊江湖、命途多舛',
+    story: '牛布衣是一位有真才学的诗人，游历各地，结交名士。他曾在范进处做客。后来在芜湖关客居生病，临终前将诗稿托付给老和尚，嘱咐交给知己之人。死后由牛浦郎冒名顶替，闹出许多笑话。牛布衣的客死他乡与身后遭遇，是全书最令人感慨的故事之一。',
+    famousScene: '客死芜湖关、托付诗稿',
+    quote: '',
+    relations: [
+      { name: '牛浦郎', type: '对立', desc: '死后被其冒名顶替' },
+      { name: '范进', type: '交游', desc: '曾做客范进府上' }
+    ]
+  },
+  {
+    id: 'chihs',
+    name: '迟衡山',
+    alias: '名均',
+    category: 'mingshi',
+    color: '#6b4c8a',
+    chapters: '第33-37回',
+    identity: '南京名士',
+    personality: '重礼仪、有担当、追求真儒理想',
+    story: '迟衡山是南京名士，与杜少卿交好。他最重要的事迹是倡议修祭泰伯祠，恢复古礼。他认为当时士风败坏，应以泰伯的让德为榜样，重振士人精神。在他的倡议和杜少卿等人的支持下，终于促成了泰伯祠大祭，由虞博士主祭。这一事件是全书的高潮，代表了作者对真儒理想的寄托。',
+    famousScene: '倡议修祭泰伯祠',
+    quote: '泰伯是天下第一等让德之人，我辈当以古礼祭之。',
+    relations: [
+      { name: '杜少卿', type: '交游', desc: '至交好友' },
+      { name: '虞博士', type: '交游', desc: '请其担任泰伯祠主祭' },
+      { name: '庄绍光', type: '交游', desc: '共同筹划祭典' }
+    ]
+  },
+  {
+    id: 'zhuangshaoguang',
+    name: '庄绍光',
+    alias: '名尚志',
+    category: 'gaoshi',
+    color: '#2e8b57',
+    chapters: '第34-35回',
+    identity: '南京名士，真儒',
+    personality: '淡泊名利、学问渊博、不慕荣华',
+    story: '庄绍光是南京的名士，学问渊博，品行端正。朝廷征召他入京觐见，他虽然去了，但坚决推辞官职，不久便返回南京，继续过着清静的读书生活。他与杜少卿、迟衡山等人交好，共同参与泰伯祠大祭。庄绍光代表了不为名利所动、追求真学问的儒者形象。',
+    famousScene: '应召入京却坚辞不就',
+    quote: '',
+    relations: [
+      { name: '杜少卿', type: '交游', desc: '志同道合的好友' },
+      { name: '迟衡山', type: '交游', desc: '共同筹划泰伯祠祭典' }
+    ]
+  },
+  {
+    id: 'yuboshi',
+    name: '虞博士',
+    alias: '名育德',
+    category: 'gaoshi',
+    color: '#2e8b57',
+    chapters: '第36-37回',
+    identity: '国子监博士，真儒',
+    personality: '中规中矩、与世无争、博爱乡邻、温厚纯良',
+    story: '虞育德是国子监博士，为人温厚纯良，与世无争。他在乡里广施善行，帮助穷人，教化百姓。被众人推举为泰伯祠大祭的主祭人，代表了作者心目中真正的儒者风范——不是夸夸其谈的名士，而是知行合一、身体力行的君子。',
+    famousScene: '担任泰伯祠大祭主祭',
+    quote: '',
+    relations: [
+      { name: '杜少卿', type: '交游', desc: '受其敬重的真儒' },
+      { name: '迟衡山', type: '交游', desc: '被推举为主祭' },
+      { name: '庄绍光', type: '交游', desc: '共同参与祭典' }
+    ]
+  },
+  {
+    id: 'hutuohu',
+    name: '胡屠户',
+    alias: '',
+    category: 'xiaoren',
+    color: '#b8860b',
+    chapters: '第3回',
+    identity: '范进的岳父，屠户',
+    personality: '势利眼、前倨后恭、嫌贫爱富',
+    story: '胡屠户是范进的丈人，平日里对范进百般羞辱，骂他"尖嘴猴腮"、"癞蛤蟆想吃天鹅肉"。范进中举后，他立即变了嘴脸，称范进为"贤婿老爷"、"天上的星宿"。众人让他打醒发疯的范进，他竟不敢动手，说是打了"文曲星"会遭报应。后来还是喝了几碗酒壮胆，才一巴掌打醒范进。胡屠户是讽刺市井小人势利嘴脸的经典形象。',
+    famousScene: '打醒发疯的范进 — 前倨后恭',
+    quote: '我那里敢打他！他是天上的星宿！',
+    relations: [
+      { name: '范进', type: '亲属', desc: '女婿，前后态度截然不同' }
+    ]
+  },
+  {
+    id: 'niupulang',
+    name: '牛浦郎',
+    alias: '',
+    category: 'xiaoren',
+    color: '#b8860b',
+    chapters: '第21-24回',
+    identity: '杂货店少年，后冒充诗人',
+    personality: '虚荣浅薄、不学无术、招摇撞骗',
+    story: '牛浦郎是芜湖的一个杂货店少年，在庙里读书时偶然得到牛布衣的诗稿。他发现自己与牛布衣同姓，便冒名顶替，以"牛布衣"自居，拿着诗稿到处招摇撞骗，结交官绅。他不懂诗却装诗人，闹出许多笑话。牛浦郎的故事深刻讽刺了当时附庸风雅的社会风气。',
+    famousScene: '冒充牛布衣招摇撞骗',
+    quote: '',
+    relations: [
+      { name: '牛布衣', type: '对立', desc: '冒用其名字和诗稿' }
+    ]
+  },
+  {
+    id: 'guxiaozi',
+    name: '郭孝子',
+    alias: '名力，字铁山',
+    category: 'gaoshi',
+    color: '#2e8b57',
+    chapters: '第38-40回',
+    identity: '王惠之子，一生寻父',
+    personality: '至孝、坚韧不拔、不畏艰险',
+    story: '郭孝子的父亲王惠（后改名郭父）在宁王叛乱时被迫从军，事败后隐姓埋名逃亡。郭孝子为寻找父亲，历尽千辛万苦，跋涉二十年，走遍四川、陕西等地。南京的名士们被他的孝心感动，纷纷资助他。最终在陕西找到父亲，但父亲因惧祸不敢相认。父亲死后，他背负遗骨回乡安葬。郭孝子是全书中"孝"的典型代表。',
+    famousScene: '二十年寻父、负骨还乡',
+    quote: '为人子者，不知父之所在，何以为人！',
+    relations: [
+      { name: '王惠', type: '亲属', desc: '父亲，隐姓埋名逃亡' },
+      { name: '杜少卿', type: '交游', desc: '资助他寻父' }
+    ]
+  },
+  {
+    id: 'qugongzi',
+    name: '蘧公孙',
+    alias: '名来旬',
+    category: 'liaoguan',
+    color: '#4a6fa5',
+    chapters: '第8-13回',
+    identity: '南昌太守蘧祐之孙',
+    personality: '有才识、能辨真伪、但也有些世故',
+    story: '蘧公孙出身官宦世家，祖父蘧祐为南昌太守。他年少有才学，曾在娄府做客，目睹了娄公子结交伪名士的闹剧。他后来得到一本《高青丘集诗话》，被人利用刊刻牟利，引发了一场文字官司。蘧公孙的经历展现了士林中名利交织的复杂关系。',
+    famousScene: '识破娄府伪名士、高青丘诗话事件',
+    quote: '',
+    relations: [
+      { name: '娄中堂二公子', type: '交游', desc: '在其府上做客' },
+      { name: '马二先生', type: '交游', desc: '在杭州结识' }
+    ]
+  },
+  {
+    id: 'panSan',
+    name: '潘三爷',
+    alias: '潘自业',
+    category: 'xiaoren',
+    color: '#b8860b',
+    chapters: '第18-20回',
+    identity: '衙门中人，包揽词讼',
+    personality: '奸诈狡猾、胆大包天、教唆人犯罪',
+    story: '潘三爷是杭州衙门里的包揽词讼之人，与匡超人结交后，教他伪造文书、替人代考、包揽官司。后来事情败露，潘三爷被拿问入狱。在狱中他请求匡超人帮忙，匡超人却急忙撇清关系，拒绝相助。潘三爷的故事揭示了科举体制下滋生的腐败与黑幕。',
+    famousScene: '教匡超人代考舞弊、入狱后被撇清',
+    quote: '',
+    relations: [
+      { name: '匡超人', type: '交游', desc: '教其犯罪，后被其撇清' }
+    ]
+  },
+  {
+    id: 'baotingxi',
+    name: '鲍廷玺',
+    alias: '',
+    category: 'qiren',
+    color: '#2e8b57',
+    chapters: '第25-27回、第31回',
+    identity: '鲍文卿养子，戏班出身',
+    personality: '知恩感恩、有情有义、虽卑微却有骨气',
+    story: '鲍廷玺原是被鲍文卿收养的孤儿，在戏班中长大。鲍文卿死后，他受到养母（鲍文卿妻子）的排挤和欺侮，被迫离开。后来流落南京，遇到了杜少卿等人，得到帮助。他虽出身戏子，却有情有义，在杜少卿落魄时仍不忘旧情。鲍廷玺的故事串联起了从戏班到名士圈的社会各阶层。',
+    famousScene: '被养母赶出家门、在南京得杜少卿相助',
+    quote: '',
+    relations: [
+      { name: '鲍文卿', type: '亲属', desc: '养父，对他恩重如山' },
+      { name: '杜少卿', type: '交游', desc: '在南京结识并受其帮助' }
+    ]
+  }
+];
+
+const TIMELINE_EVENTS = [
+  { chapter: '第一回', year: '元末明初 · 约1360年代', title: '王冕画荷 · 高洁开篇', chars: ['王冕'], desc: '楔子。农家子弟王冕自学成才，画荷成名，拒绝权贵征召，隐居会稽山。全书以高洁理想开篇。' },
+  { chapter: '第二回', year: '成化末年 · 约1487年', title: '周进坐馆 · 受尽嘲弄', chars: ['周进','梅玖'], desc: '花甲老童生周进在薛家集教馆，被年轻秀才梅玖嘲弄羞辱，后丢了教职。' },
+  { chapter: '第三回', year: '弘治初年 · 约1490年', title: '周进撞号板 · 范进中举', chars: ['周进','范进','胡屠户'], desc: '周进参观贡院触景生情，撞号板痛哭。商人资助他捐监生，一路中举做官。范进中举喜极而疯。' },
+  { chapter: '第五回', year: '弘治年间 · 约1495年', title: '严监生两根灯草', chars: ['严监生','赵氏','严贡生'], desc: '吝啬鬼严监生临死伸出两个指头不咽气，原来嫌灯里多点了一茎灯草费油。' },
+  { chapter: '第六回', year: '弘治年间 · 约1496年', title: '严贡生横行霸道', chars: ['严贡生','赵氏'], desc: '严贡生强占邻居家猪、赖船钱，弟弟死后欺压弟媳赵氏，强夺家产。' },
+  { chapter: '第八至十一回', year: '正德末年 · 约1519年', title: '娄公子西湖闹剧', chars: ['娄中堂二公子','杨执中','权勿用','蘧公孙'], desc: '娄府二位公子附庸风雅，三顾茅庐请"高人"杨执中，结交伪名士权勿用，西湖诗会大闹笑话。此年正值宁王朱宸濠叛乱。' },
+  { chapter: '第十三至十四回', year: '嘉靖前期 · 约1525年', title: '马二先生游西湖', chars: ['马二先生','蘧公孙'], desc: '选家马二先生游览西湖，不看山水只看文章，迂腐可笑却又为人善良。' },
+  { chapter: '第十五至二十回', year: '嘉靖年间 · 约1528年', title: '匡超人堕落之路', chars: ['匡超人','马二先生','潘三爷','牛布衣'], desc: '从孝顺的拆字少年到结交恶友、代考舞弊、弃妻进京，匡超人一步步堕落为衣冠禽兽。牛布衣客死芜湖关。' },
+  { chapter: '第二十一至二十四回', year: '嘉靖九年 · 1530年', title: '牛浦郎冒名行骗', chars: ['牛浦郎','牛布衣'], desc: '杂货店少年牛浦郎捡到牛布衣遗稿，冒名顶替四处招摇撞骗，丑态百出。' },
+  { chapter: '第二十四至二十六回', year: '嘉靖十六年 · 1537年', title: '鲍文卿义薄云天', chars: ['鲍文卿','鲍廷玺','向鼎'], desc: '戏子鲍文卿知恩图报救助向知县，收养孤儿鲍廷玺。虽为戏子却有士人风骨。' },
+  { chapter: '第三十一至三十四回', year: '嘉靖中期 · 约1552年', title: '杜少卿豪侠风流', chars: ['杜少卿','迟衡山','庄绍光'], desc: '天长杜府公子杜少卿挥金如土，携妻游清凉山，装病辞博学鸿词科，展现真名士风度。' },
+  { chapter: '第三十六至三十七回', year: '嘉靖三十五年 · 1556年', title: '泰伯祠大祭', chars: ['虞博士','迟衡山','杜少卿','庄绍光'], desc: '全书高潮。迟衡山倡议、杜少卿等人支持、虞博士主祭，以古礼祭祀泰伯，寄托真儒理想。' },
+  { chapter: '第三十八至四十回', year: '嘉靖后期 · 约1565年', title: '郭孝子万里寻父', chars: ['郭孝子'], desc: '郭孝子跋涉二十年，走遍川陕寻找隐姓埋名的父亲（因宁王之乱逃亡），最终负骨还乡。至孝感天动地。' },
+  { chapter: '第五十五回', year: '万历二十三年 · 1595年', title: '四大奇人 · 收束全书', chars: [], desc: '季遐年（写字）、王太（下棋）、盖宽（画画）、荆元（弹琴），四位市井奇人身怀绝技却不慕功名。全书以"市井中有四大奇人"收束，寄寓深意。' }
+];
+
+// =====================================================
+// INIT
+// =====================================================
+document.addEventListener('DOMContentLoaded', () => {
+  initStats();
+  initOverview();
+  initNavTabs();
+  initFilters();
+  renderCards();
+  initTimeline();
+  initRelationMap();
+  initMap();
+  initSearch();
+});
+
+function initStats() {
+  document.getElementById('totalChars').textContent = CHARACTERS.length;
+  const cats = new Set(CHARACTERS.map(c => c.category));
+  document.getElementById('totalCats').textContent = Object.keys(CATEGORIES).length - 1;
+  document.getElementById('totalEvents').textContent = TIMELINE_EVENTS.length;
+}
+
+// ===== Navigation =====
+function initNavTabs() {
+  document.querySelectorAll('.nav-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById(tab.dataset.section).classList.add('active');
+    });
+  });
+}
+
+// ===== Overview =====
+function initOverview() {
+  const container = document.getElementById('categoryCards');
+  Object.entries(CATEGORIES).forEach(([key, cat]) => {
+    if (key === 'all') return;
+    const count = CHARACTERS.filter(c => c.category === key).length;
+    const card = document.createElement('div');
+    card.className = 'cat-card';
+    card.innerHTML = `
+      <div class="cat-icon">${cat.icon}</div>
+      <div class="cat-name">${cat.name}</div>
+      <div class="cat-count">${count} 人 · ${cat.desc}</div>
+    `;
+    card.addEventListener('click', () => {
+      document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.querySelector('[data-section="characters"]').classList.add('active');
+      document.getElementById('characters').classList.add('active');
+      setActiveFilter(key);
+    });
+    container.appendChild(card);
+  });
+}
+
+// ===== Filters =====
+let activeFilter = 'all';
+function initFilters() {
+  const container = document.getElementById('filterChips');
+  Object.entries(CATEGORIES).forEach(([key, cat]) => {
+    const chip = document.createElement('button');
+    chip.className = 'chip' + (key === 'all' ? ' active' : '');
+    chip.textContent = cat.icon + ' ' + cat.name;
+    chip.dataset.cat = key;
+    chip.addEventListener('click', () => setActiveFilter(key));
+    container.appendChild(chip);
+  });
+}
+function setActiveFilter(key) {
+  activeFilter = key;
+  document.querySelectorAll('.chip').forEach(c => c.classList.toggle('active', c.dataset.cat === key));
+  renderCards();
+}
+
+// ===== Search =====
+function initSearch() {
+  const input = document.getElementById('searchInput');
+  input.addEventListener('input', () => renderCards());
+}
+
+// ===== Cards =====
+function renderCards() {
+  const query = document.getElementById('searchInput').value.trim().toLowerCase();
+  const grid = document.getElementById('cardsGrid');
+  const noResults = document.getElementById('noResults');
+  grid.innerHTML = '';
+
+  let filtered = CHARACTERS.filter(c => {
+    if (activeFilter !== 'all' && c.category !== activeFilter) return false;
+    if (query) {
+      const text = (c.name + c.alias + c.identity + c.personality + c.story).toLowerCase();
+      return text.includes(query);
+    }
+    return true;
+  });
+
+  if (filtered.length === 0) {
+    noResults.style.display = 'block';
+    return;
+  }
+  noResults.style.display = 'none';
+
+  filtered.forEach(char => {
+    const cat = CATEGORIES[char.category];
+    const card = document.createElement('div');
+    card.className = 'char-card';
+    card.innerHTML = `
+      <div class="card-indicator" style="background:${char.color};"></div>
+      <div class="card-header">
+        <div class="avatar" style="background:${char.color};">${char.name.charAt(0)}</div>
+        <div>
+          <div class="card-name">${char.name}</div>
+          ${char.alias ? `<div class="card-alias">${char.alias}</div>` : ''}
+        </div>
+      </div>
+      <div class="card-tags">
+        <span class="tag tag-category" style="background:${char.color}15; color:${char.color};">${cat.icon} ${cat.name}</span>
+        <span class="tag tag-chapter">${char.chapters}</span>
+      </div>
+      <div class="card-desc">${char.story.substring(0, 100)}...</div>
+      <div class="card-footer">
+        <span>${char.identity.substring(0, 16)}${char.identity.length > 16 ? '...' : ''}</span>
+        <span>${char.famousScene ? char.famousScene.substring(0, 12) : ''}</span>
+      </div>
+    `;
+    card.addEventListener('click', () => showModal(char));
+    grid.appendChild(card);
+  });
+}
+
+// ===== Modal =====
+function showModal(char) {
+  const cat = CATEGORIES[char.category];
+  const overlay = document.getElementById('modalOverlay');
+  const modal = document.getElementById('modalContent');
+
+  let relationsHTML = '';
+  if (char.relations && char.relations.length > 0) {
+    relationsHTML = `
+      <div class="modal-section">
+        <h3>人物关系</h3>
+        <div class="relation-list">
+          ${char.relations.map(r => {
+            const rchar = CHARACTERS.find(c => c.name === r.name || c.alias.includes(r.name));
+            return `<span class="relation-tag" data-charid="${rchar ? rchar.id : ''}" title="${r.desc}">
+              ${r.name}
+              <small style="color:var(--ink-faint); margin-left:4px;">${r.type}</small>
+            </span>`;
+          }).join('')}
+        </div>
+      </div>
+    `;
+  }
+
+  let quoteHTML = '';
+  if (char.quote) {
+    quoteHTML = `
+      <div class="modal-section">
+        <h3>经典语录</h3>
+        <div class="quote-block">${char.quote}</div>
+      </div>
+    `;
+  }
+
+  modal.innerHTML = `
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-banner" style="background: linear-gradient(135deg, ${char.color} 0%, ${char.color}cc 100%);">
+      <div class="modal-avatar" style="background:${char.color};">${char.name.charAt(0)}</div>
+      <div class="modal-header-info">
+        <h2>${char.name}</h2>
+        <div class="modal-sub">${char.alias || char.identity}</div>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div class="modal-section">
+        <div class="info-grid">
+          <div class="info-item">
+            <div class="info-label">身份</div>
+            <div class="info-value">${char.identity}</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">出场回目</div>
+            <div class="info-value">${char.chapters}</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">人物类型</div>
+            <div class="info-value">${cat.icon} ${cat.name}</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">经典情节</div>
+            <div class="info-value">${char.famousScene || '—'}</div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-section">
+        <h3>性格特征</h3>
+        <p>${char.personality}</p>
+      </div>
+      <div class="modal-section">
+        <h3>人物故事</h3>
+        <p>${char.story}</p>
+      </div>
+      ${quoteHTML}
+      ${relationsHTML}
+    </div>
+  `;
+
+  overlay.classList.add('show');
+  document.body.style.overflow = 'hidden';
+
+  // Bind relation tag clicks
+  modal.querySelectorAll('.relation-tag').forEach(tag => {
+    tag.addEventListener('click', () => {
+      const id = tag.dataset.charid;
+      if (id) {
+        const rchar = CHARACTERS.find(c => c.id === id);
+        if (rchar) showModal(rchar);
+      }
+    });
+  });
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('modalOverlay').addEventListener('click', e => {
+  if (e.target === e.currentTarget) closeModal();
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// ===== Timeline =====
+function initTimeline() {
+  const container = document.getElementById('timelineContainer');
+  const eraDiv = document.createElement('div');
+  eraDiv.className = 'timeline-era';
+  eraDiv.innerHTML = '元末明初 至 万历年间<small>全书故事跨越约二百三十年（约1360—1595），涵盖成化、弘治、正德、嘉靖、隆庆、万历六朝</small>';
+  container.parentNode.insertBefore(eraDiv, container);
+
+  TIMELINE_EVENTS.forEach((evt, idx) => {
+    const item = document.createElement('div');
+    item.className = 'timeline-item';
+    item.innerHTML = `
+      <div class="timeline-dot"></div>
+      <div class="timeline-year-badge">${evt.year || ''}</div>
+      <div class="timeline-chapter">${evt.chapter}</div>
+      <div class="timeline-title">${evt.title}</div>
+      <div class="timeline-chars">
+        ${evt.chars.map(name => {
+          const ch = CHARACTERS.find(c => c.name === name);
+          return `<span class="timeline-char-tag" data-charid="${ch ? ch.id : ''}">${name}</span>`;
+        }).join('')}
+      </div>
+      <div class="timeline-desc">${evt.desc}</div>
+    `;
+    item.querySelectorAll('.timeline-char-tag').forEach(tag => {
+      tag.addEventListener('click', e => {
+        e.stopPropagation();
+        const ch = CHARACTERS.find(c => c.id === tag.dataset.charid);
+        if (ch) showModal(ch);
+      });
+    });
+    container.appendChild(item);
+  });
+}
+
+// ===== Relation Map =====
+function initRelationMap() {
+  const container = document.getElementById('relationMap');
+
+  // Define nodes with positions
+  const nodes = [
+    { id: 'wangmian', x: 100, y: 80, name: '王冕', color: '#2e8b57', group: 'gaoshi' },
+    { id: 'zhoujin', x: 300, y: 60, name: '周进', color: '#8b2500', group: 'keming' },
+    { id: 'fanjin', x: 450, y: 60, name: '范进', color: '#8b2500', group: 'keming' },
+    { id: 'hutuohu', x: 540, y: 130, name: '胡屠户', color: '#b8860b', group: 'xiaoren' },
+    { id: 'yanjiansheng', x: 300, y: 200, name: '严监生', color: '#b8860b', group: 'xiaoren' },
+    { id: 'yangongsheng', x: 440, y: 200, name: '严贡生', color: '#b8860b', group: 'xiaoren' },
+    { id: 'louer', x: 600, y: 200, name: '娄公子', color: '#4a6fa5', group: 'liaoguan' },
+    { id: 'qugongzi', x: 730, y: 140, name: '蘧公孙', color: '#4a6fa5', group: 'liaoguan' },
+    { id: 'maer', x: 170, y: 330, name: '马二先生', color: '#b8860b', group: 'xiaoren' },
+    { id: 'kuangchaoren', x: 340, y: 340, name: '匡超人', color: '#8b2500', group: 'keming' },
+    { id: 'panSan', x: 470, y: 380, name: '潘三爷', color: '#b8860b', group: 'xiaoren' },
+    { id: 'niubuyi', x: 600, y: 340, name: '牛布衣', color: '#6b4c8a', group: 'mingshi' },
+    { id: 'niupulang', x: 730, y: 380, name: '牛浦郎', color: '#b8860b', group: 'xiaoren' },
+    { id: 'gongshenglu', x: 170, y: 460, name: '鲍文卿', color: '#2e8b57', group: 'qiren' },
+    { id: 'baotingxi', x: 340, y: 490, name: '鲍廷玺', color: '#2e8b57', group: 'qiren' },
+    { id: 'dushaoqing', x: 500, y: 500, name: '杜少卿', color: '#6b4c8a', group: 'mingshi' },
+    { id: 'chihs', x: 660, y: 490, name: '迟衡山', color: '#6b4c8a', group: 'mingshi' },
+    { id: 'zhuangshaoguang', x: 780, y: 540, name: '庄绍光', color: '#2e8b57', group: 'gaoshi' },
+    { id: 'yuboshi', x: 660, y: 600, name: '虞博士', color: '#2e8b57', group: 'gaoshi' },
+    { id: 'guxiaozi', x: 340, y: 600, name: '郭孝子', color: '#2e8b57', group: 'gaoshi' },
+  ];
+
+  const edges = [
+    { from: 'zhoujin', to: 'fanjin', type: '师承', color: '#8b2500' },
+    { from: 'fanjin', to: 'hutuohu', type: '亲属', color: '#b8860b' },
+    { from: 'yanjiansheng', to: 'yangongsheng', type: '亲属', color: '#b8860b' },
+    { from: 'louer', to: 'qugongzi', type: '交游', color: '#2e8b57' },
+    { from: 'maer', to: 'kuangchaoren', type: '师承', color: '#8b2500' },
+    { from: 'kuangchaoren', to: 'panSan', type: '交游', color: '#999', dash: true },
+    { from: 'niubuyi', to: 'niupulang', type: '对立', color: '#999', dash: true },
+    { from: 'gongshenglu', to: 'baotingxi', type: '亲属', color: '#b8860b' },
+    { from: 'baotingxi', to: 'dushaoqing', type: '交游', color: '#2e8b57' },
+    { from: 'dushaoqing', to: 'chihs', type: '交游', color: '#2e8b57' },
+    { from: 'chihs', to: 'zhuangshaoguang', type: '交游', color: '#2e8b57' },
+    { from: 'chihs', to: 'yuboshi', type: '交游', color: '#2e8b57' },
+    { from: 'dushaoqing', to: 'zhuangshaoguang', type: '交游', color: '#2e8b57' },
+    { from: 'dushaoqing', to: 'yuboshi', type: '同僚', color: '#4a6fa5' },
+    { from: 'dushaoqing', to: 'guxiaozi', type: '交游', color: '#2e8b57' },
+    { from: 'qugongzi', to: 'maer', type: '交游', color: '#2e8b57' },
+    { from: 'fanjin', to: 'niubuyi', type: '交游', color: '#2e8b57' },
+  ];
+
+  const svgW = 900, svgH = 680;
+  let svg = `<svg viewBox="0 0 ${svgW} ${svgH}" width="100%" xmlns="http://www.w3.org/2000/svg" style="font-family:'Noto Sans SC',sans-serif;">`;
+
+  // Draw edges
+  edges.forEach(e => {
+    const n1 = nodes.find(n => n.id === e.from);
+    const n2 = nodes.find(n => n.id === e.to);
+    if (!n1 || !n2) return;
+    const dashAttr = e.dash ? 'stroke-dasharray="6,4"' : '';
+    svg += `<line x1="${n1.x}" y1="${n1.y}" x2="${n2.x}" y2="${n2.y}" stroke="${e.color}" stroke-width="1.5" stroke-opacity="0.4" ${dashAttr}/>`;
+    const mx = (n1.x + n2.x) / 2, my = (n1.y + n2.y) / 2;
+    svg += `<text x="${mx}" y="${my - 4}" text-anchor="middle" font-size="9" fill="${e.color}" opacity="0.7">${e.type}</text>`;
+  });
+
+  // Draw nodes
+  nodes.forEach(n => {
+    svg += `<g class="map-node" data-id="${n.id}" style="cursor:pointer;">`;
+    svg += `<circle cx="${n.x}" cy="${n.y}" r="26" fill="${n.color}" opacity="0.15" stroke="${n.color}" stroke-width="2"/>`;
+    svg += `<circle cx="${n.x}" cy="${n.y}" r="18" fill="${n.color}"/>`;
+    svg += `<text x="${n.x}" y="${n.y + 5}" text-anchor="middle" font-size="11" fill="#fff" font-weight="700" font-family="'Noto Serif SC',serif">${n.name.charAt(0)}</text>`;
+    svg += `<text x="${n.x}" y="${n.y + 44}" text-anchor="middle" font-size="11" fill="#333" font-weight="500">${n.name}</text>`;
+    svg += `</g>`;
+  });
+
+  svg += '</svg>';
+  container.innerHTML = svg;
+
+  // Bind clicks
+  container.querySelectorAll('.map-node').forEach(node => {
+    node.addEventListener('click', () => {
+      const char = CHARACTERS.find(c => c.id === node.dataset.id);
+      if (char) showModal(char);
+    });
+  });
+}
+
+
+// ===== Travel Route Map =====
+function initMap() {
+  const cities = {
+    beijing:   { name: '京师',   x: 590, y: 155, region: '直隶' },
+    jinan:     { name: '济南',   x: 585, y: 245, region: '山东' },
+    wenshang:  { name: '汶上',   x: 555, y: 268, region: '山东' },
+    gaoYao:    { name: '高要',   x: 500, y: 618, region: '广东' },
+    guangzhou: { name: '广州',   x: 530, y: 640, region: '广东' },
+    zhuji:     { name: '诸暨',   x: 640, y: 400, region: '浙江' },
+    kuaiji:    { name: '会稽山', x: 660, y: 420, region: '浙江' },
+    hangzhou:  { name: '杭州',   x: 635, y: 382, region: '浙江' },
+    huzhou:    { name: '湖州',   x: 615, y: 368, region: '浙江' },
+    jiaxing:   { name: '嘉兴',   x: 648, y: 372, region: '浙江' },
+    chuzhou_z: { name: '处州',   x: 625, y: 418, region: '浙江' },
+    wuhu:      { name: '芜湖',   x: 580, y: 395, region: '安徽' },
+    nanjing:   { name: '南京',   x: 590, y: 350, region: '江南' },
+    tianchang: { name: '天长',   x: 580, y: 330, region: '安徽' },
+    yueqing:   { name: '乐清',   x: 655, y: 445, region: '浙江' },
+    xian:      { name: '西安',   x: 370, y: 275, region: '陕西' },
+    chengdu:   { name: '成都',   x: 275, y: 425, region: '四川' },
+    nanchang:  { name: '南昌',   x: 545, y: 450, region: '江西' },
+    taizhou:   { name: '泰州',   x: 612, y: 342, region: '江苏' },
+    xuzhou:    { name: '徐州',   x: 555, y: 302, region: '江苏' },
+    luoyang:   { name: '洛阳',   x: 460, y: 288, region: '河南' },
+    wuchang:   { name: '武昌',   x: 488, y: 418, region: '湖广' },
+    fuzhou:    { name: '福州',   x: 628, y: 505, region: '福建' }
+  };
+
+  const routes = [
+    { id:'wangmian', name:'王冕', color:'#2e8b57', desc:'诸暨→会稽山（隐居）', path:['zhuji','kuaiji'] },
+    { id:'zhoujin', name:'周进', color:'#c0392b', desc:'汶上→济南→广东→京师', path:['wenshang','jinan','gaoYao','beijing'] },
+    { id:'fanjin', name:'范进', color:'#e74c3c', desc:'广东→高要→山东（学道）', path:['guangzhou','gaoYao','jinan'] },
+    { id:'kuangchaoren', name:'匡超人', color:'#d35400', desc:'乐清→杭州→京师→杭州', path:['yueqing','hangzhou','beijing','hangzhou'] },
+    { id:'dushaoqing', name:'杜少卿', color:'#6b4c8a', desc:'天长→南京（名士风流）', path:['tianchang','nanjing'] },
+    { id:'guxiaozi', name:'郭孝子', color:'#27ae60', desc:'南京→武昌→成都→西安', path:['nanjing','wuchang','chengdu','xian'] },
+    { id:'maer', name:'马二先生', color:'#e67e22', desc:'处州→杭州（选文游西湖）', path:['chuzhou_z','hangzhou'] },
+    { id:'louer', name:'娄公子', color:'#3498db', desc:'湖州→杭州（西湖诗会）', path:['huzhou','hangzhou'] },
+    { id:'niubuyi', name:'牛布衣', color:'#9b59b6', desc:'嘉兴→高要→芜湖（客死）', path:['jiaxing','gaoYao','wuhu'] },
+    { id:'baotingxi', name:'鲍廷玺', color:'#1abc9c', desc:'南京→天长→南京', path:['nanjing','tianchang','nanjing'] },
+    { id:'zhuangshaoguang', name:'庄绍光', color:'#16a085', desc:'南京→京师→南京（辞官）', path:['nanjing','beijing','nanjing'] },
+    { id:'niupulang', name:'牛浦郎', color:'#f39c12', desc:'芜湖→南京（冒名行骗）', path:['wuhu','nanjing'] },
+  ];
+
+  const events = [
+    { id:'e1',  city:'zhuji',    title:'王冕画荷', chapter:'第1回', dx:-18, dy:-18 },
+    { id:'e2',  city:'wenshang', title:'周进撞号板', chapter:'第3回', dx:12, dy:-18 },
+    { id:'e3',  city:'gaoYao',   title:'范进中举发疯', chapter:'第3回', dx:-20, dy:-18 },
+    { id:'e4',  city:'gaoYao',   title:'严监生两根灯草', chapter:'第5回', dx:-20, dy:14 },
+    { id:'e5',  city:'gaoYao',   title:'严贡生横行', chapter:'第6回', dx:-20, dy:32 },
+    { id:'e6',  city:'hangzhou', title:'娄公子西湖诗会', chapter:'第8回', dx:12, dy:-18 },
+    { id:'e7',  city:'hangzhou', title:'马二先生游西湖', chapter:'第13回', dx:12, dy:0 },
+    { id:'e8',  city:'hangzhou', title:'匡超人代考舞弊', chapter:'第19回', dx:12, dy:18 },
+    { id:'e9',  city:'wuhu',     title:'牛布衣客死', chapter:'第20回', dx:-18, dy:-18 },
+    { id:'e10', city:'wuhu',     title:'牛浦郎冒名', chapter:'第21回', dx:-18, dy:14 },
+    { id:'e11', city:'nanjing',  title:'鲍文卿义举', chapter:'第25回', dx:12, dy:-18 },
+    { id:'e12', city:'nanjing',  title:'杜少卿携妻游山', chapter:'第33回', dx:12, dy:0 },
+    { id:'e13', city:'nanjing',  title:'泰伯祠大祭', chapter:'第37回', dx:12, dy:18 },
+    { id:'e14', city:'chengdu',  title:'郭孝子寻父', chapter:'第38回', dx:12, dy:-16 },
+  ];
+
+  const container = document.getElementById('travelMapSvg');
+  const btnContainer = document.getElementById('routeButtons');
+  const activeRoutes = new Set();
+
+  routes.forEach(route => {
+    const btn = document.createElement('button');
+    btn.className = 'route-btn';
+    btn.dataset.routeId = route.id;
+    btn.innerHTML = `
+      <div class="route-color" style="background:${route.color};"></div>
+      <div class="route-info">
+        <span class="route-name">${route.name}</span>
+        <span class="route-path">${route.desc}</span>
+      </div>
+    `;
+    btn.addEventListener('click', () => toggleRoute(route.id));
+    btnContainer.appendChild(btn);
+  });
+
+  function toggleRoute(id) {
+    if (activeRoutes.has(id)) activeRoutes.delete(id);
+    else activeRoutes.add(id);
+    btnContainer.querySelectorAll('.route-btn').forEach(b => {
+      b.classList.toggle('active', activeRoutes.has(b.dataset.routeId));
+    });
+    renderMapSVG();
+  }
+
+  function getCurve(fromCity, toCity, routeIdx) {
+    const mx = (fromCity.x + toCity.x)/2, my = (fromCity.y + toCity.y)/2;
+    const dx = toCity.x - fromCity.x, dy = toCity.y - fromCity.y;
+    const len = Math.sqrt(dx*dx + dy*dy) || 1;
+    const baseOff = Math.min(35, len * 0.18);
+    const multiOff = routeIdx * 18;
+    const nx = -dy / len, ny = dx / len;
+    return { cx: mx + nx*(baseOff+multiOff), cy: my + ny*(baseOff+multiOff) };
+  }
+
+  function renderMapSVG() {
+    const W = 780, H = 700;
+    let svg = `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="font-family:'Noto Sans SC',sans-serif;">`;
+    svg += `<defs>
+      <filter id="mapGlow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="none" stroke="var(--accent)" stroke-width="1.5"/></marker>
+    </defs>`;
+    svg += `<rect width="${W}" height="${H}" fill="#faf8f4" rx="8"/>`;
+    for (let i=100;i<W;i+=100) svg+=`<line x1="${i}" y1="0" x2="${i}" y2="${H}" stroke="#e8e0d0" stroke-width="0.3"/>`;
+    for (let i=100;i<H;i+=100) svg+=`<line x1="0" y1="${i}" x2="${W}" y2="${i}" stroke="#e8e0d0" stroke-width="0.3"/>`;
+
+    // China outline
+    svg += `<path d="M600,65 C635,55 680,55 720,85 C745,105 755,125 748,145 C740,158 725,152 705,148 C685,145 665,150 652,158 C645,165 650,178 665,188 C680,198 695,195 710,210 C718,218 715,230 708,242 C700,258 695,275 690,295 C685,315 680,330 675,345 C668,358 662,370 658,382 C652,395 658,408 660,415 C658,425 655,435 658,448 C660,462 655,478 648,495 C640,510 630,525 618,540 C605,555 590,568 575,580 C560,592 545,605 530,620 C515,638 498,652 480,662 C460,672 440,670 418,660 C395,648 370,638 345,628 C320,618 295,600 272,578 C250,555 235,528 222,498 C210,468 198,438 188,405 C178,372 168,338 160,305 C152,272 148,240 150,210 C155,178 165,152 182,130 C200,108 225,92 255,80 C290,68 328,60 370,55 C415,50 460,50 505,52 C545,55 575,58 600,65 Z" fill="#f5f0e6" stroke="#c5b89e" stroke-width="1.8" stroke-linejoin="round"/>`;
+
+    // Rivers
+    svg += `<path d="M220,430 Q320,415 400,420 Q470,418 530,405 Q570,395 600,385 Q630,380 658,382" fill="none" stroke="#b8d4e8" stroke-width="2" stroke-dasharray="8,4" opacity="0.5"/>`;
+    svg += `<text x="420" y="408" font-size="10" fill="#7ba8c4" opacity="0.6" font-style="italic">长 江</text>`;
+    svg += `<path d="M200,260 Q300,230 380,250 Q450,265 500,260 Q550,255 585,248 Q620,230 660,188" fill="none" stroke="#c4b080" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.4"/>`;
+    svg += `<text x="430" y="248" font-size="9" fill="#a09060" opacity="0.5" font-style="italic">黄 河</text>`;
+
+    // Province labels
+    [{n:'直隶',x:585,y:118},{n:'山东',x:612,y:255},{n:'江苏',x:622,y:318},{n:'浙江',x:668,y:415},{n:'江西',x:535,y:478},{n:'安徽',x:555,y:388},{n:'河南',x:458,y:278},{n:'陕西',x:358,y:258},{n:'四川',x:265,y:448},{n:'湖广',x:468,y:448},{n:'广东',x:505,y:600},{n:'福建',x:638,y:525}].forEach(p => {
+      svg += `<text x="${p.x}" y="${p.y}" font-size="12" fill="#c5b89e" font-family="'Noto Serif SC',serif" opacity="0.5" text-anchor="middle">${p.n}</text>`;
+    });
+
+    // ====== ACTIVE ROUTES ======
+    const activeArr = [...activeRoutes];
+    activeArr.forEach((routeId, routeIdx) => {
+      const route = routes.find(r => r.id === routeId);
+      if (!route) return;
+      for (let i = 0; i < route.path.length - 1; i++) {
+        const from = cities[route.path[i]];
+        let toIdx = i + 1;
+        if (route.path[toIdx] === route.path[i] && toIdx+1 < route.path.length) toIdx++;
+        const to = cities[route.path[toIdx]];
+        if (!from || !to) continue;
+        const {cx, cy} = getCurve(from, to, routeIdx % 4);
+        svg += `<path d="M${from.x},${from.y} Q${cx},${cy} ${to.x},${to.y}" stroke="${route.color}" stroke-width="10" fill="none" opacity="0.08" stroke-linecap="round"/>`;
+        svg += `<path d="M${from.x},${from.y} Q${cx},${cy} ${to.x},${to.y}" stroke="${route.color}" stroke-width="3" fill="none" stroke-dasharray="10,6" stroke-linecap="round" marker-end="url(#arrow)" style="animation:routeDashFlow 0.8s linear infinite;"/>`;
+        svg += `<circle cx="${cx}" cy="${cy}" r="10" fill="${route.color}"/>`;
+        svg += `<text x="${cx}" y="${cy+4}" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">${i+1}</text>`;
+      }
+    });
+
+    // ====== EVENT MARKERS ======
+    events.forEach(evt => {
+      const city = cities[evt.city];
+      if (!city) return;
+      const ex = city.x + evt.dx, ey = city.y + evt.dy;
+      svg += `<g style="cursor:pointer;">`;
+      svg += `<title>${evt.chapter}：${evt.title}</title>`;
+      svg += `<rect x="${ex-3}" y="${ey-3}" width="6" height="6" rx="1" fill="#c0392b" transform="rotate(45,${ex},${ey})" stroke="#fff" stroke-width="1"/>`;
+      svg += `<text x="${ex+8}" y="${ey+3}" font-size="8.5" fill="#8b2500" font-weight="500">${evt.title}</text>`;
+      svg += `</g>`;
+    });
+
+    // ====== CITY MARKERS ======
+    const labelOffsets = {
+      beijing:{x:10,y:-6,a:'start'},jinan:{x:10,y:5,a:'start'},wenshang:{x:-10,y:-6,a:'end'},
+      gaoYao:{x:-10,y:5,a:'end'},guangzhou:{x:10,y:5,a:'start'},zhuji:{x:10,y:-4,a:'start'},
+      kuaiji:{x:10,y:5,a:'start'},hangzhou:{x:10,y:-4,a:'start'},huzhou:{x:-10,y:-4,a:'end'},
+      jiaxing:{x:10,y:4,a:'start'},chuzhou_z:{x:10,y:5,a:'start'},wuhu:{x:-10,y:-6,a:'end'},
+      nanjing:{x:-10,y:-6,a:'end'},tianchang:{x:-10,y:-4,a:'end'},yueqing:{x:10,y:5,a:'start'},
+      xian:{x:10,y:5,a:'start'},chengdu:{x:-10,y:5,a:'end'},nanchang:{x:10,y:5,a:'start'},
+      taizhou:{x:10,y:-4,a:'start'},xuzhou:{x:-10,y:4,a:'end'},luoyang:{x:10,y:5,a:'start'},
+      wuchang:{x:10,y:5,a:'start'},fuzhou:{x:10,y:5,a:'start'}
+    };
+
+    Object.entries(cities).forEach(([id, city]) => {
+      const onRoutes = activeArr.filter(rid => routes.find(r=>r.id===rid)?.path.includes(id));
+      const isActive = onRoutes.length > 0;
+      const r = isActive ? 7 : 4.5;
+      const sw = isActive ? 2.5 : 1.5;
+      const fc = isActive ? (routes.find(r=>r.id===onRoutes[0])?.color||'#333') : '#444';
+      const charsHere = routes.filter(r=>r.path.includes(id)).map(r=>r.name);
+      const evtsHere = events.filter(e=>e.city===id).map(e=>e.title);
+      let tip = `${city.name}（${city.region}）`;
+      if(charsHere.length) tip += `\n途经人物：${[...new Set(charsHere)].join('、')}`;
+      if(evtsHere.length) tip += `\n事件：${evtsHere.join('、')}`;
+
+      svg += `<g style="cursor:pointer;"><title>${tip}</title>`;
+      if(isActive) svg += `<circle cx="${city.x}" cy="${city.y}" r="${r+4}" fill="${fc}" opacity="0.12"/>`;
+      svg += `<circle cx="${city.x}" cy="${city.y}" r="${r}" fill="${fc}" stroke="#fff" stroke-width="${sw}"/>`;
+      const lo = labelOffsets[id] || {x:10,y:4,a:'start'};
+      svg += `<text x="${city.x+lo.x}" y="${city.y+lo.y}" text-anchor="${lo.a}" font-size="${isActive?12:10.5}" fill="${isActive?fc:'#333'}" font-weight="${isActive?700:400}" font-family="'Noto Serif SC',serif">${city.name}</text>`;
+      svg += `</g>`;
+    });
+
+    // Compass + Scale
+    svg += `<g transform="translate(720,620)"><circle cx="0" cy="0" r="22" fill="#f5f0e6" stroke="#c5b89e" stroke-width="1"/><text x="0" y="-8" text-anchor="middle" font-size="11" fill="#888" font-weight="600">N</text><path d="M0,-5 L3,8 L0,5 L-3,8 Z" fill="#c5b89e"/></g>`;
+    svg += `<g transform="translate(60,650)"><line x1="0" y1="0" x2="80" y2="0" stroke="#999" stroke-width="1.5"/><line x1="0" y1="-4" x2="0" y2="4" stroke="#999" stroke-width="1.5"/><line x1="80" y1="-4" x2="80" y2="4" stroke="#999" stroke-width="1.5"/><text x="40" y="14" text-anchor="middle" font-size="9" fill="#999">≈ 500里</text></g>`;
+
+    svg += '</svg>';
+    container.innerHTML = svg;
+  }
+
+  renderMapSVG();
+}
+</script>
+</body>
+</html>
