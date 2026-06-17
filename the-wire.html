@@ -945,14 +945,17 @@
     overflow: hidden;
     box-shadow: 0 8px 40px rgba(0,0,0,0.3);
   }
-  #char-graph { width: 100%; height: 650px; cursor: grab; }
+  #char-graph { width: 100%; height: 720px; cursor: grab; }
   #char-graph:active { cursor: grabbing; }
   .graph-node circle {
-    stroke-width: 2px;
     cursor: pointer;
-    transition: r 0.2s;
+    transition: stroke-width 0.2s;
   }
-  .graph-node text {
+  .graph-node image {
+    cursor: pointer;
+    transition: opacity 0.3s;
+  }
+  .graph-node text.name-label {
     font-family: 'Oswald', sans-serif;
     font-size: 11px;
     fill: #e8e6e3;
@@ -968,10 +971,12 @@
     stroke-opacity: 0.25;
     transition: stroke-opacity 0.3s;
   }
-  .graph-node.dimmed circle { opacity: 0.1; }
-  .graph-node.dimmed text { opacity: 0.08; }
+  .graph-node.dimmed circle { opacity: 0.08; }
+  .graph-node.dimmed image { opacity: 0.06; }
+  .graph-node.dimmed text { opacity: 0.06; }
   .graph-link.dimmed { stroke-opacity: 0.03; }
-  .graph-node.highlighted circle { stroke-width: 3px; }
+  .graph-node.highlighted circle { stroke-width: 4px; stroke-opacity: 1; }
+  .graph-node.highlighted image { filter: brightness(1.15); }
   .graph-link.highlighted { stroke-opacity: 0.7; stroke-width: 2.5px; }
   .graph-controls {
     display: flex;
@@ -1036,6 +1041,104 @@
     border-radius: 50%;
     flex-shrink: 0;
   }
+
+  /* ===== NARRATIVE THREADS (SVG Diagram) ===== */
+  .threads-section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px 24px 80px;
+  }
+  .threads-season-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .threads-season-tab {
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: 2px solid rgba(255,255,255,0.08);
+    background: var(--bg-card);
+    color: var(--text-secondary);
+    transition: all 0.25s;
+    white-space: nowrap;
+  }
+  .threads-season-tab:hover {
+    border-color: rgba(255,255,255,0.18);
+    background: var(--bg-card-hover);
+  }
+  .threads-season-tab.active { color: #fff; border-color: transparent; }
+  .threads-season-tab[data-s="1"].active { background: var(--season1); }
+  .threads-season-tab[data-s="2"].active { background: var(--season2); }
+  .threads-season-tab[data-s="3"].active { background: var(--season3); }
+  .threads-season-tab[data-s="4"].active { background: var(--season4); }
+  .threads-season-tab[data-s="5"].active { background: var(--season5); }
+
+  .threads-intro {
+    text-align: center;
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    margin-bottom: 24px;
+    line-height: 1.7;
+    max-width: 620px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .thread-diagram-wrap {
+    background: var(--bg-card);
+    border-radius: 16px;
+    padding: 28px 20px 20px;
+    border: 1px solid rgba(255,255,255,0.04);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    animation: threadFade 0.35s ease;
+  }
+  @keyframes threadFade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  #threadDiagram { width: 100%; min-width: 520px; display: block; }
+
+  .thread-legend {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+    margin-top: 24px;
+  }
+  .thread-legend-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.04);
+  }
+  .thread-legend-bar {
+    width: 4px;
+    min-height: 36px;
+    border-radius: 2px;
+    flex-shrink: 0;
+    align-self: stretch;
+  }
+  .thread-legend-text .tl-name {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 2px;
+  }
+  .thread-legend-text .tl-chars {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+
+  @media (max-width: 600px) {
+    .threads-section { padding: 40px 12px 60px; }
+    .thread-diagram-wrap { padding: 16px 10px 12px; }
+    .thread-legend { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>
@@ -1081,6 +1184,7 @@
     <div class="nav-tab active" data-section="seasons">剧集时间线</div>
     <div class="nav-tab" data-section="locations">地点</div>
     <div class="nav-tab" data-section="characters">人物</div>
+    <div class="nav-tab" data-section="threads">叙事线</div>
     <div class="nav-tab" data-section="quotes">经典台词</div>
     <div class="nav-tab" data-section="themes">主题</div>
     <div class="nav-tab" data-section="legacy">遗产</div>
@@ -1472,6 +1576,25 @@
   </div>
 </section>
 
+<!-- ===== NARRATIVE THREADS ===== -->
+<section class="threads-section fade-in" id="threads">
+  <h2 class="section-title">叙事线</h2>
+  <p class="section-desc">每季同时推进多条平行故事线，在某些节点交汇碰撞。点击季标签切换。</p>
+
+  <div class="threads-season-tabs">
+    <div class="threads-season-tab active" data-s="1">第一季 · 街头</div>
+    <div class="threads-season-tab" data-s="2">第二季 · 码头</div>
+    <div class="threads-season-tab" data-s="3">第三季 · 政治</div>
+    <div class="threads-season-tab" data-s="4">第四季 · 学校</div>
+    <div class="threads-season-tab" data-s="5">第五季 · 媒体</div>
+  </div>
+
+  <p class="threads-intro" id="threadsIntro"></p>
+  <div class="thread-diagram-wrap">
+    <svg id="threadDiagram"></svg>
+  </div>
+  <div class="thread-legend" id="threadLegend"></div>
+</section>
 <!-- ===== QUOTES ===== -->
 <section class="quotes-section" id="quotes">
   <div class="section fade-in">
@@ -1666,7 +1789,7 @@ tabs.forEach(tab => {
 });
 
 // ===== Active nav on scroll =====
-const sectionIds = ['seasons', 'locations', 'characters', 'quotes', 'themes', 'stats', 'legacy'];
+const sectionIds = ['seasons', 'locations', 'characters', 'threads', 'quotes', 'themes', 'stats', 'legacy'];
 window.addEventListener('scroll', () => {
   const navHeight = document.querySelector('.nav-bar').offsetHeight;
   let current = sectionIds[0];
@@ -1706,6 +1829,204 @@ const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
 }, { threshold: 0.1 });
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// ===== Narrative Threads — SVG Diagram =====
+(function() {
+  const seasonData = {
+    1: {
+      intro: '围绕巴尔的摩西区毒品交易，三线在窃听主轴上交汇。',
+      threads: [
+        { name: '专案组调查', color: '#3b82f6', chars: 'McNulty · Daniels · Kima · Greggs · Sydnor' },
+        { name: 'Barksdale帝国', color: '#ef4444', chars: 'Avon · Stringer · D\'Angelo · Wee-Bey' },
+        { name: 'The Pit街头', color: '#f59e0b', chars: 'Wallace · Bodie · Poot' },
+        { name: 'Omar', color: '#a78bfa', chars: 'Omar Little · Brandon' },
+        { name: '官僚政治', color: '#6b7280', chars: 'Burrell · Rawls · Phelan' },
+      ],
+      events: [
+        { y: 0.18, type: 'event', thread: 0, label: 'McNulty 越级汇报\n调查启动' },
+        { y: 0.36, type: 'conv', from: 0, to: 1, label: '窃听开始 — 专案组窥见 Barksdale 运作' },
+        { y: 0.52, type: 'conv', from: 1, to: 2, label: 'Wallace 被处死 — D\'Angelo 道德觉醒' },
+        { y: 0.68, type: 'conv', from: 0, to: 3, label: 'Omar 庭审作证 — 搅动权力格局' },
+        { y: 0.86, type: 'conv', from: 0, to: 4, label: '高层拆散专案组 — 体制吞噬调查' },
+      ]
+    },
+    2: {
+      intro: '镜头从街头转向码头，讲述正在消亡的工人阶级。',
+      threads: [
+        { name: '码头工会', color: '#2563eb', chars: 'Frank · Ziggy · Nick · Horseface' },
+        { name: '走私网络', color: '#06b6d4', chars: 'The Greek · Spike · Sergei' },
+        { name: '警察调查', color: '#3b82f6', chars: 'Bunk · Beadie · Valchek' },
+        { name: 'Stringer企业化', color: '#ef4444', chars: 'Stringer Bell · Avon' },
+      ],
+      events: [
+        { y: 0.22, type: 'conv', from: 0, to: 1, label: 'Frank 与走私集团合作 — 用利润拯救工会' },
+        { y: 0.45, type: 'conv', from: 0, to: 2, label: 'Valchek 因窗户捐赠发起调查' },
+        { y: 0.65, type: 'conv', from: 1, to: 2, label: '调查追踪到国际走私网络' },
+        { y: 0.85, type: 'event', thread: 0, label: 'Frank 之死 —\n工人阶级的希腊悲剧' },
+      ]
+    },
+    3: {
+      intro: '四条线同时推进：从市政厅到街头，理想与现实的碰撞。',
+      threads: [
+        { name: '政治竞选', color: '#eab308', chars: 'Carcetti · Norman · Royce · Watkins' },
+        { name: 'Hamsterdam', color: '#22c55e', chars: 'Colvin · Bodie · Bubbles' },
+        { name: 'Barksdale内战', color: '#ef4444', chars: 'Avon · Stringer · Slim Charles · Prop Joe' },
+        { name: 'Marlo崛起', color: '#a855f7', chars: 'Marlo · Chris Partlow' },
+      ],
+      events: [
+        { y: 0.18, type: 'event', thread: 2, label: 'Avon 出狱\n发现帝国已变' },
+        { y: 0.38, type: 'conv', from: 1, to: 0, label: 'Hamsterdam 成功 → 成为竞选政治炸弹' },
+        { y: 0.56, type: 'conv', from: 2, to: 3, label: 'Stringer 与 Avon 决裂 — 街头逻辑 vs 商业逻辑' },
+        { y: 0.72, type: 'conv', from: 2, to: 1, label: 'Stringer 向警方出卖 Avon — Omar 终结 Stringer' },
+        { y: 0.88, type: 'conv', from: 3, to: 2, label: 'Marlo 暴力挑战旧秩序 — 加速 Barksdale 瓦解' },
+      ]
+    },
+    4: {
+      intro: '四个十三岁男孩站在人生十字路口：体制如何辜负最脆弱的孩子？',
+      threads: [
+        { name: '四个少年', color: '#14b8a6', chars: 'Michael · Dukie · Randy · Namond' },
+        { name: 'Marlo扩张', color: '#ef4444', chars: 'Marlo · Chris · Snoop · O-Dog' },
+        { name: '市政过渡', color: '#eab308', chars: 'Carcetti · Norman · Burrell' },
+        { name: 'Prez教学', color: '#3b82f6', chars: 'Prez · Colvin · Bubbles' },
+      ],
+      events: [
+        { y: 0.15, type: 'event', thread: 3, label: 'Prez 走进教室\n笨拙但真诚' },
+        { y: 0.35, type: 'conv', from: 0, to: 1, label: 'Michael 被迫为 Marlo 工作' },
+        { y: 0.52, type: 'conv', from: 0, to: 3, label: 'Prez 的课堂 = 四个少年的世界' },
+        { y: 0.68, type: 'conv', from: 3, to: 0, label: 'Colvin 通过 Prez 收养 Namond' },
+        { y: 0.85, type: 'conv', from: 1, to: 2, label: '墙壁藏尸 → 美化犯罪数据 → 政治纵容暴力' },
+      ]
+    },
+    5: {
+      intro: '当媒体也开始追逐点击率，谁还在守望这座城市？一切结束，一切重新开始。',
+      threads: [
+        { name: '新闻编辑室', color: '#8b5cf6', chars: 'Gus · Templeton · Alma · Whiting' },
+        { name: '伪造连环案', color: '#ef4444', chars: 'McNulty · Bunk · Daniels · Freamon' },
+        { name: 'Marlo覆灭', color: '#f97316', chars: 'Marlo · Prop Joe · Omar · Freamon' },
+        { name: '大结局·轮回', color: '#94a3b8', chars: '全员' },
+      ],
+      events: [
+        { y: 0.18, type: 'event', thread: 1, label: 'McNulty 伪造\n"连环杀手"案' },
+        { y: 0.36, type: 'conv', from: 0, to: 1, label: '媒体追逐伪造案 — Templeton 造假获嘉奖' },
+        { y: 0.54, type: 'conv', from: 1, to: 2, label: '伪造案推动真正调查 — Freamon 追踪资金流' },
+        { y: 0.72, type: 'conv', from: 2, to: 3, label: 'Marlo 被捕 → 走出监狱 → 身份无处安放' },
+        { y: 0.90, type: 'conv', from: 0, to: 3, label: '游戏从未改变 — 街角换了新面孔' },
+      ]
+    }
+  };
+
+  const legend = document.getElementById('threadLegend');
+  const intro = document.getElementById('threadsIntro');
+  const tabs = document.querySelectorAll('.threads-season-tab');
+  let current = '1';
+
+  function renderSeason(s) {
+    const d = seasonData[s];
+    if (!d) return;
+    current = s;
+    intro.textContent = d.intro;
+    tabs.forEach(t => t.classList.toggle('active', t.dataset.s === s));
+
+    const n = d.threads.length;
+    const vw = 800, padX = 55, labelH = 55, gap = 80;
+    const spacing = (vw - 2 * padX) / (n - 1 || 1);
+    const topY = labelH + 20, botY = topY + gap;
+    const vh = botY + 40;
+
+    const el = document.getElementById('threadDiagram');
+    el.setAttribute('viewBox', `0 0 ${vw} ${vh}`);
+
+    let h = '';
+
+    // Defs for glow
+    h += `<defs><filter id="evGlow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>`;
+
+    // Subtle background grid lines
+    d.events.forEach(e => {
+      const ey = topY + e.y * gap;
+      h += `<line x1="${padX - 20}" y1="${ey}" x2="${vw - padX + 20}" y2="${ey}" stroke="rgba(255,255,255,0.02)" stroke-width="1"/>`;
+    });
+
+    // Convergence zones
+    d.events.filter(e => e.type === 'conv').forEach(e => {
+      const ey = topY + e.y * gap;
+      const x1 = padX + e.from * spacing - 15;
+      const x2 = padX + e.to * spacing + 15;
+      h += `<rect x="${x1}" y="${ey - 16}" width="${x2 - x1}" height="32" rx="8" fill="rgba(255,255,255,0.035)"/>`;
+      // Convergence bar
+      h += `<line x1="${padX + e.from * spacing}" y1="${ey}" x2="${padX + e.to * spacing}" y2="${ey}" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" stroke-dasharray="4,4"/>`;
+      // Diamond markers at both ends
+      [e.from, e.to].forEach(ti => {
+        const cx = padX + ti * spacing;
+        h += `<polygon points="${cx},${ey - 5} ${cx + 5},${ey} ${cx},${ey + 5} ${cx - 5},${ey}" fill="${d.threads[ti].color}" opacity="0.7"/>`;
+      });
+      // Label
+      h += `<text x="${(padX + e.from * spacing + padX + e.to * spacing) / 2}" y="${ey - 22}" text-anchor="middle" fill="#8a8a9a" font-size="9.5" font-weight="500">${esc(e.label)}</text>`;
+    });
+
+    // Thread lines (drawn on top of convergence zones)
+    d.threads.forEach((t, i) => {
+      const x = padX + i * spacing;
+      h += `<line x1="${x}" y1="${topY}" x2="${x}" y2="${botY}" stroke="${t.color}" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>`;
+      // Top circle
+      h += `<circle cx="${x}" cy="${topY}" r="7" fill="${t.color}" opacity="0.9"/>`;
+      h += `<circle cx="${x}" cy="${topY}" r="3" fill="#1a1a24"/>`;
+      // Bottom circle
+      h += `<circle cx="${x}" cy="${botY}" r="5" fill="${t.color}" opacity="0.4"/>`;
+    });
+
+    // Event dots (solo events on single threads)
+    d.events.filter(e => e.type === 'event').forEach(e => {
+      const ey = topY + e.y * gap;
+      const x = padX + e.thread * spacing;
+      h += `<circle cx="${x}" cy="${ey}" r="6" fill="${d.threads[e.thread].color}" filter="url(#evGlow)"/>`;
+      h += `<circle cx="${x}" cy="${ey}" r="2.5" fill="#fff"/>`;
+      // Multi-line label
+      const lines = e.label.split('\n');
+      lines.forEach((line, li) => {
+        h += `<text x="${x}" y="${ey + 16 + li * 13}" text-anchor="middle" fill="#bbb" font-size="9.5" font-weight="500">${esc(line)}</text>`;
+      });
+    });
+
+    // Thread name labels at top
+    d.threads.forEach((t, i) => {
+      const x = padX + i * spacing;
+      const w = spacing * 0.85;
+      h += `<foreignObject x="${x - w / 2}" y="${topY - 46}" width="${w}" height="38">`;
+      h += `<div xmlns="http://www.w3.org/1999/xhtml" style="text-align:center;font-size:11px;font-weight:700;color:${t.color};line-height:1.25;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical">${esc(t.name)}</div>`;
+      h += `</foreignObject>`;
+    });
+
+    el.innerHTML = h;
+
+    // Legend
+    let lg = '';
+    d.threads.forEach(t => {
+      lg += `<div class="thread-legend-item">
+        <div class="thread-legend-bar" style="background:${t.color}"></div>
+        <div class="thread-legend-text">
+          <div class="tl-name">${esc(t.name)}</div>
+          <div class="tl-chars">${esc(t.chars)}</div>
+        </div>
+      </div>`;
+    });
+    legend.innerHTML = lg;
+
+    // Re-animate
+    const wrap = document.querySelector('.thread-diagram-wrap');
+    wrap.style.animation = 'none';
+    wrap.offsetHeight;
+    wrap.style.animation = 'threadFade 0.35s ease';
+  }
+
+  function esc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => renderSeason(tab.dataset.s));
+  });
+
+  renderSeason('1');
+})();
 
 // ===================================================================
 // ===== LEAFLET MAP =====
@@ -1808,37 +2129,37 @@ document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
   };
 
   const nodes = [
-    { id:'mcnulty', name:'McNulty', actor:'Dominic West', group:'police', r:20, desc:'西区重案组探员，才华横溢却桀骜不驯，用谎言推动调查，是全剧的核心驱动力' },
-    { id:'omar', name:'Omar Little', actor:'Michael K. Williams', group:'other', r:18, desc:'持散弹枪的街头劫匪，专抢毒贩，有自己的荣誉准则，全剧最具魅力的角色' },
-    { id:'avon', name:'Avon Barksdale', actor:'Wood Harris', group:'barksdale', r:17, desc:'西区毒品帝国创建者，信奉地盘和暴力法则的纯粹街头人物' },
-    { id:'stringer', name:'Stringer Bell', actor:'Idris Elba', group:'barksdale', r:17, desc:'Barksdale二把手，白天读经济学，试图将毒品帝国企业化' },
-    { id:'dangelo', name:"D'Angelo", actor:'Larry Gilliard Jr.', group:'barksdale', r:13, desc:'Avon的侄子，在街头生活和道德良知间痛苦挣扎' },
-    { id:'bubbles', name:'Bubbles', actor:'Andre Royo', group:'other', r:15, desc:'街头线人和瘾君子，全剧最温暖的角色，戒瘾之路贯穿全剧' },
-    { id:'daniels', name:'Daniels', actor:'Lance Reddick', group:'police', r:16, desc:'专案组负责人，后晋升为警察局长，体制内正直的少数人' },
-    { id:'kima', name:'Kima Greggs', actor:'Sonja Sohn', group:'police', r:13, desc:'女探员，McNulty最可靠的战友，刚毅果敢' },
-    { id:'frank', name:'Frank Sobotka', actor:'Chris Bauer', group:'dock', r:15, desc:'码头工会主席，为拯救工会不惜与走私犯合作，工人阶级的希腊式悲剧' },
-    { id:'nick', name:'Nick Sobotka', actor:'Pablo Schreiber', group:'dock', r:11, desc:'Frank的侄子，在合法工作和犯罪之间越陷越深' },
-    { id:'ziggy', name:'Ziggy Sobotka', actor:'James Ransone', group:'dock', r:9, desc:'Frank的儿子，用荒诞行为掩饰内心绝望' },
-    { id:'beadie', name:'Beadie Russell', actor:'Amy Ryan', group:'police', r:11, desc:'港口女警，善良坚韧，意外卷入跨国走私案' },
-    { id:'greek', name:'The Greek', actor:'Bill Zorzi', group:'dock', r:10, desc:'神秘的跨国走私幕后主使，全剧最神秘的人物' },
-    { id:'vondas', name:'Vondas', actor:'Paul Ben-Victor', group:'dock', r:9, desc:'希腊走私集团二把手' },
-    { id:'colvin', name:'Bunny Colvin', actor:'Robert Wisdom', group:'police', r:15, desc:'西区警长，Hamsterdam计划设计者，全剧最具远见的体制内人物' },
-    { id:'carcetti', name:'Carcetti', actor:'Aidan Gillen', group:'politics', r:16, desc:'从市议员到市长，改革理想在政治现实中被逐渐吞噬' },
-    { id:'marlo', name:'Marlo Stanfield', actor:'Jamie Hector', group:'marlo', r:17, desc:'新一代冷酷毒枭，纯粹以暴力和恐惧统治' },
-    { id:'chris', name:'Chris Partlow', actor:'Gbenga Akinnagbe', group:'marlo', r:13, desc:'Marlo的左膀右臂，冷血杀手' },
-    { id:'snoop', name:'Snoop', actor:'Felicia Pearson', group:'marlo', r:12, desc:'面无表情的女杀手，将尸体封在废弃排屋的墙中' },
-    { id:'cutty', name:'Cutty', actor:'Chad Coleman', group:'barksdale', r:12, desc:'前Barksdale打手，出狱后开设拳击馆，努力脱离街头' },
-    { id:'wee_bey', name:'Wee-Bey', actor:'Hassan Johnson', group:'barksdale', r:10, desc:'Barksdale组织的忠诚打手' },
-    { id:'bodie', name:'Bodie', actor:'J.D. Williams', group:'barksdale', r:12, desc:'街头毒贩，聪明但最终难逃街头宿命' },
-    { id:'prez', name:'Prez', actor:'Jim True-Frost', group:'school', r:12, desc:'前笨拙警探转行教师，在第四季找到真正使命' },
-    { id:'dukie', name:'Dukie', actor:'Jermaine Crawford', group:'school', r:11, desc:'瘦弱聪慧的男孩，被家庭忽视，最终走向街头' },
-    { id:'randy', name:'Randy', actor:'Maestro Harrell', group:'school', r:11, desc:'善良乐观的男孩，因告密被街头报复，命运悲惨' },
-    { id:'michael', name:'Michael', actor:'Tristan Wilds', group:'school', r:11, desc:'沉默寡言，被迫成为Marlo的杀手，最终成为"新Omar"' },
-    { id:'namond', name:'Namond', actor:'Julito McCullum', group:'school', r:10, desc:'Bodie侄子，在街头与课堂间挣扎，最终被Colvin收养' },
-    { id:'gus', name:'Gus Haynes', actor:'Clark Johnson', group:'media', r:12, desc:'《太阳报》城市版编辑，坚守严肃新闻理想的道德支柱' },
-    { id:'templeton', name:'Templeton', actor:'Brandon Young', group:'media', r:9, desc:'编造假新闻却获得嘉奖的记者，媒体堕落的象征' },
-    { id:'jay', name:'Jay Landsman', actor:'Delaney Williams', group:'police', r:10, desc:'警探组长，世故圆滑但有自己的生存哲学' },
-    { id:'freamon', name:'Freamon', actor:'Clarke Peters', group:'police', r:13, desc:'资深探员，窃听专家，沉稳睿智，是专案组的定海神针' },
+    { id:'mcnulty', name:'McNulty', actor:'Dominic West', group:'police', r:28, img:'http://mediad.publicbroadcasting.net/p/shared/npr/styles/x_large/nprshared/201501/375165494.jpg', desc:'西区重案组探员，才华横溢却桀骜不驯，用谎言推动调查，是全剧的核心驱动力' },
+    { id:'omar', name:'Omar Little', actor:'Michael K. Williams', group:'other', r:26, img:'http://gd-hbimg.huaban.com/4ba5cbef6f6626bd263d94ece98781c035693447a7dba-0VYZrS_fw658webp', desc:'持散弹枪的街头劫匪，专抢毒贩，有自己的荣誉准则，全剧最具魅力的角色' },
+    { id:'avon', name:'Avon Barksdale', actor:'Wood Harris', group:'barksdale', r:24, img:'', desc:'西区毒品帝国创建者，信奉地盘和暴力法则的纯粹街头人物' },
+    { id:'stringer', name:'Stringer Bell', actor:'Idris Elba', group:'barksdale', r:26, img:'', desc:'Barksdale二把手，白天读经济学，试图将毒品帝国企业化' },
+    { id:'dangelo', name:"D'Angelo", actor:'Larry Gilliard Jr.', group:'barksdale', r:20, img:'', desc:'Avon的侄子，在街头生活和道德良知间痛苦挣扎' },
+    { id:'bubbles', name:'Bubbles', actor:'Andre Royo', group:'other', r:22, img:'', desc:'街头线人和瘾君子，全剧最温暖的角色，戒瘾之路贯穿全剧' },
+    { id:'daniels', name:'Daniels', actor:'Lance Reddick', group:'police', r:24, img:'', desc:'专案组负责人，后晋升为警察局长，体制内正直的少数人' },
+    { id:'kima', name:'Kima Greggs', actor:'Sonja Sohn', group:'police', r:20, img:'', desc:'女探员，McNulty最可靠的战友，刚毅果敢' },
+    { id:'frank', name:'Frank Sobotka', actor:'Chris Bauer', group:'dock', r:22, img:'', desc:'码头工会主席，为拯救工会不惜与走私犯合作，工人阶级的希腊式悲剧' },
+    { id:'nick', name:'Nick Sobotka', actor:'Pablo Schreiber', group:'dock', r:18, img:'', desc:'Frank的侄子，在合法工作和犯罪之间越陷越深' },
+    { id:'ziggy', name:'Ziggy Sobotka', actor:'James Ransone', group:'dock', r:16, img:'', desc:'Frank的儿子，用荒诞行为掩饰内心绝望' },
+    { id:'beadie', name:'Beadie Russell', actor:'Amy Ryan', group:'police', r:18, img:'', desc:'港口女警，善良坚韧，意外卷入跨国走私案' },
+    { id:'greek', name:'The Greek', actor:'Bill Zorzi', group:'dock', r:16, img:'', desc:'神秘的跨国走私幕后主使，全剧最神秘的人物' },
+    { id:'vondas', name:'Vondas', actor:'Paul Ben-Victor', group:'dock', r:16, img:'', desc:'希腊走私集团二把手' },
+    { id:'colvin', name:'Bunny Colvin', actor:'Robert Wisdom', group:'police', r:22, img:'', desc:'西区警长，Hamsterdam计划设计者，全剧最具远见的体制内人物' },
+    { id:'carcetti', name:'Carcetti', actor:'Aidan Gillen', group:'politics', r:24, img:'', desc:'从市议员到市长，改革理想在政治现实中被逐渐吞噬' },
+    { id:'marlo', name:'Marlo Stanfield', actor:'Jamie Hector', group:'marlo', r:24, img:'http://cdn.vox-cdn.com/thumbor/GFNxcHOk_xFgbCpbgwh4Ndq5nZc=/0x0:3504x2336/1200x0/filters:focal(0x0:3504x2336):no_upscale()/cdn.vox-cdn.com/uploads/chorus_asset/file/19556933/merlin_4473374.jpg', desc:'新一代冷酷毒枭，纯粹以暴力和恐惧统治' },
+    { id:'chris', name:'Chris Partlow', actor:'Gbenga Akinnagbe', group:'marlo', r:20, img:'', desc:'Marlo的左膀右臂，冷血杀手' },
+    { id:'snoop', name:'Snoop', actor:'Felicia Pearson', group:'marlo', r:18, img:'', desc:'面无表情的女杀手，将尸体封在废弃排屋的墙中' },
+    { id:'cutty', name:'Cutty', actor:'Chad Coleman', group:'barksdale', r:18, img:'', desc:'前Barksdale打手，出狱后开设拳击馆，努力脱离街头' },
+    { id:'wee_bey', name:'Wee-Bey', actor:'Hassan Johnson', group:'barksdale', r:16, img:'', desc:'Barksdale组织的忠诚打手' },
+    { id:'bodie', name:'Bodie', actor:'J.D. Williams', group:'barksdale', r:18, img:'', desc:'街头毒贩，聪明但最终难逃街头宿命' },
+    { id:'prez', name:'Prez', actor:'Jim True-Frost', group:'school', r:18, img:'', desc:'前笨拙警探转行教师，在第四季找到真正使命' },
+    { id:'dukie', name:'Dukie', actor:'Jermaine Crawford', group:'school', r:16, img:'', desc:'瘦弱聪慧的男孩，被家庭忽视，最终走向街头' },
+    { id:'randy', name:'Randy', actor:'Maestro Harrell', group:'school', r:16, img:'', desc:'善良乐观的男孩，因告密被街头报复，命运悲惨' },
+    { id:'michael', name:'Michael', actor:'Tristan Wilds', group:'school', r:16, img:'', desc:'沉默寡言，被迫成为Marlo的杀手，最终成为"新Omar"' },
+    { id:'namond', name:'Namond', actor:'Julito McCullum', group:'school', r:16, img:'', desc:'Bodie侄子，在街头与课堂间挣扎，最终被Colvin收养' },
+    { id:'gus', name:'Gus Haynes', actor:'Clark Johnson', group:'media', r:18, img:'', desc:'《太阳报》城市版编辑，坚守严肃新闻理想的道德支柱' },
+    { id:'templeton', name:'Templeton', actor:'Brandon Young', group:'media', r:16, img:'', desc:'编造假新闻却获得嘉奖的记者，媒体堕落的象征' },
+    { id:'jay', name:'Jay Landsman', actor:'Delaney Williams', group:'police', r:16, img:'', desc:'警探组长，世故圆滑但有自己的生存哲学' },
+    { id:'freamon', name:'Freamon', actor:'Clarke Peters', group:'police', r:20, img:'', desc:'资深探员，窃听专家，沉稳睿智，是专案组的定海神针' },
   ];
 
   const links = [
@@ -1913,7 +2234,7 @@ document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
   const svg = d3.select('#char-graph');
   const container = document.querySelector('.graph-wrap');
   const width = container.clientWidth;
-  const height = 650;
+  const height = 720;
   svg.attr('viewBox', `0 0 ${width} ${height}`);
 
   const g = svg.append('g');
@@ -1924,12 +2245,12 @@ document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
     .on('zoom', (event) => g.attr('transform', event.transform));
   svg.call(zoom);
 
-  // Arrow markers
+  // Arrow markers — adjusted for larger node radii
   const defs = svg.append('defs');
   defs.append('marker')
     .attr('id', 'arrow')
     .attr('viewBox', '0 -5 10 10')
-    .attr('refX', 20)
+    .attr('refX', 30)
     .attr('refY', 0)
     .attr('markerWidth', 6)
     .attr('markerHeight', 6)
@@ -1938,16 +2259,26 @@ document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
     .attr('d', 'M0,-5L10,0L0,5')
     .attr('fill', '#555');
 
+  // Clip paths for circular photos
+  nodes.forEach(n => {
+    defs.append('clipPath')
+      .attr('id', 'clip-' + n.id)
+      .append('circle')
+      .attr('r', n.r - 3)
+      .attr('cx', 0)
+      .attr('cy', 0);
+  });
+
   const simulation = d3.forceSimulation(nodes)
     .force('link', d3.forceLink(links).id(d => d.id).distance(d => {
-      if (d.type === 'conflict') return 140;
-      return 80;
-    }).strength(0.4))
-    .force('charge', d3.forceManyBody().strength(-300))
+      if (d.type === 'conflict') return 160;
+      return 100;
+    }).strength(0.35))
+    .force('charge', d3.forceManyBody().strength(-420))
     .force('center', d3.forceCenter(width / 2, height / 2))
-    .force('collision', d3.forceCollide().radius(d => d.r + 8))
-    .force('x', d3.forceX(width / 2).strength(0.05))
-    .force('y', d3.forceY(height / 2).strength(0.05));
+    .force('collision', d3.forceCollide().radius(d => d.r + 10))
+    .force('x', d3.forceX(width / 2).strength(0.04))
+    .force('y', d3.forceY(height / 2).strength(0.04));
 
   const linkG = g.append('g');
   const nodeG = g.append('g');
@@ -1969,12 +2300,54 @@ document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
       .on('drag', dragging)
       .on('end', dragEnd));
 
+  // Outer ring (border)
   nodeElements.append('circle')
     .attr('r', d => d.r)
     .attr('fill', d => groupColors[d.group])
-    .attr('stroke', d => d3.color(groupColors[d.group]).brighter(0.8));
+    .attr('fill-opacity', 0.12)
+    .attr('stroke', d => d3.color(groupColors[d.group]).brighter(0.6))
+    .attr('stroke-width', 3)
+    .attr('stroke-opacity', 0.85);
+
+  // Character photo (clipped to circle) or initials fallback
+  nodeElements.each(function(d) {
+    const el = d3.select(this);
+    if (d.img) {
+      el.append('image')
+        .attr('href', d.img)
+        .attr('x', -(d.r - 3))
+        .attr('y', -(d.r - 3))
+        .attr('width', (d.r - 3) * 2)
+        .attr('height', (d.r - 3) * 2)
+        .attr('clip-path', 'url(#clip-' + d.id + ')')
+        .attr('preserveAspectRatio', 'xMidYMid slice')
+        .on('error', function() {
+          d3.select(this).remove();
+          el.append('text')
+            .attr('text-anchor', 'middle')
+            .attr('dy', '0.35em')
+            .attr('fill', groupColors[d.group])
+            .attr('font-size', (d.r * 0.55) + 'px')
+            .attr('font-family', "'Oswald', sans-serif")
+            .attr('font-weight', '600')
+            .attr('opacity', 0.85)
+            .text(d.name.split(' ').map(w => w[0]).join(''));
+        });
+    } else {
+      el.append('text')
+        .attr('text-anchor', 'middle')
+        .attr('dy', '0.35em')
+        .attr('fill', groupColors[d.group])
+        .attr('font-size', (d.r * 0.5) + 'px')
+        .attr('font-family', "'Oswald', sans-serif")
+        .attr('font-weight', '600')
+        .attr('opacity', 0.8)
+        .text(d.name.split(' ').map(w => w[0]).join(''));
+    }
+  });
 
   nodeElements.append('text')
+    .attr('class', 'name-label')
     .text(d => d.name)
     .attr('dy', d => d.r + 14);
 
@@ -2055,11 +2428,13 @@ document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
         if (grp === 'all' || d.group === grp) {
           el.classed('dimmed', false);
           el.select('circle').attr('opacity', 1);
-          el.select('text').attr('opacity', 1);
+          el.selectAll('image').attr('opacity', 1);
+          el.selectAll('text').attr('opacity', 1);
         } else {
           el.classed('dimmed', true);
-          el.select('circle').attr('opacity', 0.1);
-          el.select('text').attr('opacity', 0.08);
+          el.select('circle').attr('opacity', 0.08);
+          el.selectAll('image').attr('opacity', 0.06);
+          el.selectAll('text').attr('opacity', 0.06);
         }
       });
 
