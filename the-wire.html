@@ -1834,71 +1834,92 @@ document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 (function() {
   const seasonData = {
     1: {
-      intro: '围绕巴尔的摩西区毒品交易，三线在窃听主轴上交汇。',
+      intro: '围绕巴尔的摩西区毒品交易，五条线在窃听主轴上交汇。',
       threads: [
-        { name: '专案组调查', color: '#3b82f6', chars: 'McNulty · Daniels · Kima · Greggs · Sydnor' },
+        { name: '专案组调查', color: '#3b82f6', chars: 'McNulty · Daniels · Kima · Greggs · Sydnor · Freamon' },
         { name: 'Barksdale帝国', color: '#ef4444', chars: 'Avon · Stringer · D\'Angelo · Wee-Bey' },
-        { name: 'The Pit街头', color: '#f59e0b', chars: 'Wallace · Bodie · Poot' },
+        { name: 'The Pit街头', color: '#f59e0b', chars: 'Wallace · Bodie · Poot · Bubbles' },
         { name: 'Omar', color: '#a78bfa', chars: 'Omar Little · Brandon' },
-        { name: '官僚政治', color: '#6b7280', chars: 'Burrell · Rawls · Phelan' },
+        { name: '官僚政治', color: '#6b7280', chars: 'Burrell · Rawls · Phelan法官' },
       ],
       events: [
-        { y: 0.18, type: 'event', thread: 0, label: 'McNulty 越级汇报\n调查启动' },
-        { y: 0.36, type: 'conv', from: 0, to: 1, label: '窃听开始 — 专案组窥见 Barksdale 运作' },
-        { y: 0.52, type: 'conv', from: 1, to: 2, label: 'Wallace 被处死 — D\'Angelo 道德觉醒' },
-        { y: 0.68, type: 'conv', from: 0, to: 3, label: 'Omar 庭审作证 — 搅动权力格局' },
-        { y: 0.86, type: 'conv', from: 0, to: 4, label: '高层拆散专案组 — 体制吞噬调查' },
+        { y: 0.06, type: 'event', thread: 0, label: 'McNulty 庭审越级\n向法官 Phelan 汇报' },
+        { y: 0.16, type: 'conv', from: 0, to: 1, label: '窃听器安装 — 专案组开始窥探 Barksdale' },
+        { y: 0.27, type: 'event', thread: 1, label: 'Stringer 引入\n企业管理模式' },
+        { y: 0.37, type: 'conv', from: 1, to: 2, label: 'Wallace 被处死 — D\'Angelo 道德觉醒' },
+        { y: 0.47, type: 'event', thread: 2, label: 'Bubbles 成为\n专案组线人' },
+        { y: 0.56, type: 'conv', from: 0, to: 3, label: 'Omar 抢劫 Barksdale — 搅动权力格局' },
+        { y: 0.65, type: 'event', thread: 0, label: 'Kima 中枪\n调查升级' },
+        { y: 0.75, type: 'conv', from: 3, to: 1, label: 'Omar 庭审作证 — 意外成为关键证据' },
+        { y: 0.85, type: 'event', thread: 1, label: 'D\'Angelo 被捕\n拒绝合作' },
+        { y: 0.95, type: 'conv', from: 0, to: 4, label: '高层拆散专案组 — 体制的自我保护吞噬了调查' },
       ]
     },
     2: {
-      intro: '镜头从街头转向码头，讲述正在消亡的工人阶级。',
+      intro: '镜头从街头转向码头，讲述正在消亡的工人阶级。理解《火线》野心的关键一季。',
       threads: [
         { name: '码头工会', color: '#2563eb', chars: 'Frank · Ziggy · Nick · Horseface' },
-        { name: '走私网络', color: '#06b6d4', chars: 'The Greek · Spike · Sergei' },
-        { name: '警察调查', color: '#3b82f6', chars: 'Bunk · Beadie · Valchek' },
+        { name: '走私网络', color: '#06b6d4', chars: 'The Greek · Spike · Sergei · Eton' },
+        { name: '警察调查', color: '#3b82f6', chars: 'Bunk · Beadie · Valchek · McNulty' },
         { name: 'Stringer企业化', color: '#ef4444', chars: 'Stringer Bell · Avon' },
       ],
       events: [
-        { y: 0.22, type: 'conv', from: 0, to: 1, label: 'Frank 与走私集团合作 — 用利润拯救工会' },
-        { y: 0.45, type: 'conv', from: 0, to: 2, label: 'Valchek 因窗户捐赠发起调查' },
-        { y: 0.65, type: 'conv', from: 1, to: 2, label: '调查追踪到国际走私网络' },
-        { y: 0.85, type: 'event', thread: 0, label: 'Frank 之死 —\n工人阶级的希腊悲剧' },
+        { y: 0.06, type: 'event', thread: 0, label: 'Frank 为拯救工会\n开始与走私集团接触' },
+        { y: 0.16, type: 'conv', from: 0, to: 1, label: '工会与走私合作 — 用集装箱利润游说政客' },
+        { y: 0.26, type: 'event', thread: 0, label: 'Ziggy 杀人\n绝望的爆发' },
+        { y: 0.36, type: 'conv', from: 0, to: 2, label: 'Valchek 因窗户捐赠与 Frank 结怨 — 发起报复性调查' },
+        { y: 0.46, type: 'event', thread: 2, label: 'Beadie 发现集装箱\n中的尸体' },
+        { y: 0.56, type: 'conv', from: 2, to: 1, label: '调查从工会腐败追踪到国际走私网络' },
+        { y: 0.66, type: 'event', thread: 2, label: 'Nick 成为\n关键线人' },
+        { y: 0.76, type: 'event', thread: 3, label: 'Stringer 学习经济学\n推动毒品企业化' },
+        { y: 0.86, type: 'conv', from: 0, to: 2, label: 'Frank 被捕后坦白 — 但为时已晚' },
+        { y: 0.96, type: 'event', thread: 0, label: 'Frank 之死\n工人阶级的希腊悲剧' },
       ]
     },
     3: {
-      intro: '四条线同时推进：从市政厅到街头，理想与现实的碰撞。',
+      intro: '四条线同时推进：从市政厅到街头，理想与现实的碰撞达到高潮。',
       threads: [
-        { name: '政治竞选', color: '#eab308', chars: 'Carcetti · Norman · Royce · Watkins' },
+        { name: '政治竞选', color: '#eab308', chars: 'Carcetti · Norman · Royce · Watkins · Burrell' },
         { name: 'Hamsterdam', color: '#22c55e', chars: 'Colvin · Bodie · Bubbles' },
         { name: 'Barksdale内战', color: '#ef4444', chars: 'Avon · Stringer · Slim Charles · Prop Joe' },
-        { name: 'Marlo崛起', color: '#a855f7', chars: 'Marlo · Chris Partlow' },
+        { name: 'Marlo崛起', color: '#a855f7', chars: 'Marlo · Chris Partlow · Bodie' },
       ],
       events: [
-        { y: 0.18, type: 'event', thread: 2, label: 'Avon 出狱\n发现帝国已变' },
-        { y: 0.38, type: 'conv', from: 1, to: 0, label: 'Hamsterdam 成功 → 成为竞选政治炸弹' },
-        { y: 0.56, type: 'conv', from: 2, to: 3, label: 'Stringer 与 Avon 决裂 — 街头逻辑 vs 商业逻辑' },
-        { y: 0.72, type: 'conv', from: 2, to: 1, label: 'Stringer 向警方出卖 Avon — Omar 终结 Stringer' },
-        { y: 0.88, type: 'conv', from: 3, to: 2, label: 'Marlo 暴力挑战旧秩序 — 加速 Barksdale 瓦解' },
+        { y: 0.06, type: 'event', thread: 2, label: 'Avon 出狱\n发现帝国已变' },
+        { y: 0.15, type: 'event', thread: 0, label: 'Carcetti 宣布\n竞选市长' },
+        { y: 0.25, type: 'event', thread: 1, label: 'Colvin 警长提出\nHamsterdam 计划' },
+        { y: 0.35, type: 'conv', from: 1, to: 0, label: 'Hamsterdam 降低犯罪率 — 但成为竞选政治炸弹' },
+        { y: 0.45, type: 'event', thread: 3, label: 'Marlo 拒绝\nProp Joe 的合作提议' },
+        { y: 0.55, type: 'conv', from: 2, to: 3, label: 'Stringer 与 Avon 决裂 — 街头逻辑 vs 商业逻辑' },
+        { y: 0.65, type: 'event', thread: 0, label: 'Carcetti 赢得\n市长选举' },
+        { y: 0.75, type: 'conv', from: 2, to: 1, label: 'Stringer 向警方出卖 Avon — Omar 终结 Stringer' },
+        { y: 0.85, type: 'conv', from: 3, to: 2, label: 'Marlo 暴力扩张 — 加速 Barksdale 旧秩序瓦解' },
+        { y: 0.95, type: 'event', thread: 1, label: 'Hamsterdam 被\n政治扼杀' },
       ]
     },
     4: {
-      intro: '四个十三岁男孩站在人生十字路口：体制如何辜负最脆弱的孩子？',
+      intro: '四个十三岁男孩站在人生十字路口：体制如何辜负最脆弱的孩子？全剧最具情感冲击力的一季。',
       threads: [
         { name: '四个少年', color: '#14b8a6', chars: 'Michael · Dukie · Randy · Namond' },
         { name: 'Marlo扩张', color: '#ef4444', chars: 'Marlo · Chris · Snoop · O-Dog' },
-        { name: '市政过渡', color: '#eab308', chars: 'Carcetti · Norman · Burrell' },
+        { name: '市政过渡', color: '#eab308', chars: 'Carcetti · Norman · Burrell · Daniels' },
         { name: 'Prez教学', color: '#3b82f6', chars: 'Prez · Colvin · Bubbles' },
       ],
       events: [
-        { y: 0.15, type: 'event', thread: 3, label: 'Prez 走进教室\n笨拙但真诚' },
+        { y: 0.06, type: 'event', thread: 3, label: 'Prez 离开警局\n走进教室' },
+        { y: 0.15, type: 'conv', from: 3, to: 0, label: 'Prez 的课堂 = 四个少年的世界' },
+        { y: 0.25, type: 'event', thread: 1, label: 'Chris 与 Snoop\n开始墙壁藏尸' },
         { y: 0.35, type: 'conv', from: 0, to: 1, label: 'Michael 被迫为 Marlo 工作' },
-        { y: 0.52, type: 'conv', from: 0, to: 3, label: 'Prez 的课堂 = 四个少年的世界' },
-        { y: 0.68, type: 'conv', from: 3, to: 0, label: 'Colvin 通过 Prez 收养 Namond' },
-        { y: 0.85, type: 'conv', from: 1, to: 2, label: '墙壁藏尸 → 美化犯罪数据 → 政治纵容暴力' },
+        { y: 0.45, type: 'event', thread: 0, label: 'Randy 告密\n遭到街头报复' },
+        { y: 0.55, type: 'event', thread: 0, label: 'Dukie 被家庭忽视\n滑向深渊' },
+        { y: 0.65, type: 'conv', from: 3, to: 0, label: 'Colvin 通过 Prez 收养 Namond' },
+        { y: 0.75, type: 'conv', from: 1, to: 2, label: '墙壁藏尸 → 美化犯罪数据 → 政治纵容暴力' },
+        { y: 0.85, type: 'event', thread: 0, label: 'Michael 杀死\n继父 — 走上不归路' },
+        { y: 0.95, type: 'event', thread: 1, label: 'Marlo 成为\n西区新王' },
       ]
     },
     5: {
-      intro: '当媒体也开始追逐点击率，谁还在守望这座城市？一切结束，一切重新开始。',
+      intro: '当媒体也开始追逐点击率，谁还在守望这座城市？所有线索汇聚到"轮回"的结局。',
       threads: [
         { name: '新闻编辑室', color: '#8b5cf6', chars: 'Gus · Templeton · Alma · Whiting' },
         { name: '伪造连环案', color: '#ef4444', chars: 'McNulty · Bunk · Daniels · Freamon' },
@@ -1906,11 +1927,16 @@ document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
         { name: '大结局·轮回', color: '#94a3b8', chars: '全员' },
       ],
       events: [
-        { y: 0.18, type: 'event', thread: 1, label: 'McNulty 伪造\n"连环杀手"案' },
-        { y: 0.36, type: 'conv', from: 0, to: 1, label: '媒体追逐伪造案 — Templeton 造假获嘉奖' },
-        { y: 0.54, type: 'conv', from: 1, to: 2, label: '伪造案推动真正调查 — Freamon 追踪资金流' },
-        { y: 0.72, type: 'conv', from: 2, to: 3, label: 'Marlo 被捕 → 走出监狱 → 身份无处安放' },
-        { y: 0.90, type: 'conv', from: 0, to: 3, label: '游戏从未改变 — 街角换了新面孔' },
+        { y: 0.06, type: 'event', thread: 0, label: '《太阳报》裁员\n新闻业寒冬' },
+        { y: 0.15, type: 'event', thread: 1, label: 'McNulty 伪造\n"连环杀手"案' },
+        { y: 0.25, type: 'conv', from: 0, to: 1, label: '媒体追逐伪造案 — 制造公众恐慌' },
+        { y: 0.35, type: 'event', thread: 0, label: 'Templeton 编造假新闻\n却获普利策提名' },
+        { y: 0.45, type: 'conv', from: 1, to: 2, label: 'Freamon 追踪资金流 — 锁定 Marlo 组织' },
+        { y: 0.55, type: 'event', thread: 2, label: 'Prop Joe 被\nMarlo 清除' },
+        { y: 0.65, type: 'event', thread: 2, label: 'Omar 重返\n巴尔的摩复仇' },
+        { y: 0.75, type: 'conv', from: 2, to: 3, label: 'Marlo 被捕 → 出狱 → "国王"身份无处安放' },
+        { y: 0.85, type: 'event', thread: 3, label: 'Michael 成为\n"新 Omar"' },
+        { y: 0.95, type: 'conv', from: 0, to: 3, label: '游戏从未改变 — 街角换了新面孔，体制依旧' },
       ]
     }
   };
@@ -1920,6 +1946,8 @@ document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
   const tabs = document.querySelectorAll('.threads-season-tab');
   let current = '1';
 
+  function esc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
   function renderSeason(s) {
     const d = seasonData[s];
     if (!d) return;
@@ -1928,73 +1956,81 @@ document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
     tabs.forEach(t => t.classList.toggle('active', t.dataset.s === s));
 
     const n = d.threads.length;
-    const vw = 800, padX = 55, labelH = 55, gap = 80;
+    const vw = 800, padX = 55, labelH = 60, gap = 380;
     const spacing = (vw - 2 * padX) / (n - 1 || 1);
-    const topY = labelH + 20, botY = topY + gap;
-    const vh = botY + 40;
+    const topY = labelH + 25, botY = topY + gap;
+    const vh = botY + 45;
 
     const el = document.getElementById('threadDiagram');
-    el.setAttribute('viewBox', `0 0 ${vw} ${vh}`);
+    el.setAttribute('viewBox', '0 0 ' + vw + ' ' + vh);
 
     let h = '';
 
-    // Defs for glow
-    h += `<defs><filter id="evGlow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>`;
+    // Defs
+    h += '<defs>';
+    h += '<filter id="evGlow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>';
+    h += '</defs>';
 
-    // Subtle background grid lines
+    // Faint horizontal grid lines at each event
     d.events.forEach(e => {
       const ey = topY + e.y * gap;
-      h += `<line x1="${padX - 20}" y1="${ey}" x2="${vw - padX + 20}" y2="${ey}" stroke="rgba(255,255,255,0.02)" stroke-width="1"/>`;
+      h += '<line x1="' + (padX - 25) + '" y1="' + ey + '" x2="' + (vw - padX + 25) + '" y2="' + ey + '" stroke="rgba(255,255,255,0.018)" stroke-width="1"/>';
     });
 
     // Convergence zones
     d.events.filter(e => e.type === 'conv').forEach(e => {
       const ey = topY + e.y * gap;
-      const x1 = padX + e.from * spacing - 15;
-      const x2 = padX + e.to * spacing + 15;
-      h += `<rect x="${x1}" y="${ey - 16}" width="${x2 - x1}" height="32" rx="8" fill="rgba(255,255,255,0.035)"/>`;
-      // Convergence bar
-      h += `<line x1="${padX + e.from * spacing}" y1="${ey}" x2="${padX + e.to * spacing}" y2="${ey}" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" stroke-dasharray="4,4"/>`;
-      // Diamond markers at both ends
+      const x1 = padX + Math.min(e.from, e.to) * spacing;
+      const x2 = padX + Math.max(e.from, e.to) * spacing;
+      // Background rect
+      h += '<rect x="' + (x1 - 18) + '" y="' + (ey - 18) + '" width="' + (x2 - x1 + 36) + '" height="36" rx="10" fill="rgba(255,255,255,0.03)"/>';
+      // Dashed connecting line
+      h += '<line x1="' + x1 + '" y1="' + ey + '" x2="' + x2 + '" y2="' + ey + '" stroke="rgba(255,255,255,0.12)" stroke-width="1.5" stroke-dasharray="5,4"/>';
+      // Diamond markers
       [e.from, e.to].forEach(ti => {
         const cx = padX + ti * spacing;
-        h += `<polygon points="${cx},${ey - 5} ${cx + 5},${ey} ${cx},${ey + 5} ${cx - 5},${ey}" fill="${d.threads[ti].color}" opacity="0.7"/>`;
+        h += '<polygon points="' + cx + ',' + (ey - 5) + ' ' + (cx + 5) + ',' + ey + ' ' + cx + ',' + (ey + 5) + ' ' + (cx - 5) + ',' + ey + '" fill="' + d.threads[ti].color + '" opacity="0.75"/>';
       });
       // Label
-      h += `<text x="${(padX + e.from * spacing + padX + e.to * spacing) / 2}" y="${ey - 22}" text-anchor="middle" fill="#8a8a9a" font-size="9.5" font-weight="500">${esc(e.label)}</text>`;
+      const midX = (x1 + x2) / 2;
+      h += '<foreignObject x="' + (midX - 140) + '" y="' + (ey - 32) + '" width="280" height="18">';
+      h += '<div xmlns="http://www.w3.org/1999/xhtml" style="text-align:center;font-size:9.5px;font-weight:500;color:#8a8a9a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + esc(e.label) + '</div>';
+      h += '</foreignObject>';
     });
 
-    // Thread lines (drawn on top of convergence zones)
+    // Thread lines
     d.threads.forEach((t, i) => {
       const x = padX + i * spacing;
-      h += `<line x1="${x}" y1="${topY}" x2="${x}" y2="${botY}" stroke="${t.color}" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>`;
-      // Top circle
-      h += `<circle cx="${x}" cy="${topY}" r="7" fill="${t.color}" opacity="0.9"/>`;
-      h += `<circle cx="${x}" cy="${topY}" r="3" fill="#1a1a24"/>`;
-      // Bottom circle
-      h += `<circle cx="${x}" cy="${botY}" r="5" fill="${t.color}" opacity="0.4"/>`;
+      // Main line with slight opacity gradient
+      h += '<line x1="' + x + '" y1="' + topY + '" x2="' + x + '" y2="' + botY + '" stroke="' + t.color + '" stroke-width="3" stroke-linecap="round" opacity="0.5"/>';
+      // Top endpoint circle (ring style)
+      h += '<circle cx="' + x + '" cy="' + topY + '" r="8" fill="' + t.color + '" opacity="0.85"/>';
+      h += '<circle cx="' + x + '" cy="' + topY + '" r="4" fill="#1a1a24"/>';
+      // Bottom endpoint
+      h += '<circle cx="' + x + '" cy="' + botY + '" r="5" fill="' + t.color + '" opacity="0.35"/>';
     });
 
-    // Event dots (solo events on single threads)
+    // Event dots
     d.events.filter(e => e.type === 'event').forEach(e => {
       const ey = topY + e.y * gap;
       const x = padX + e.thread * spacing;
-      h += `<circle cx="${x}" cy="${ey}" r="6" fill="${d.threads[e.thread].color}" filter="url(#evGlow)"/>`;
-      h += `<circle cx="${x}" cy="${ey}" r="2.5" fill="#fff"/>`;
+      // Glow dot
+      h += '<circle cx="' + x + '" cy="' + ey + '" r="7" fill="' + d.threads[e.thread].color + '" filter="url(#evGlow)"/>';
+      h += '<circle cx="' + x + '" cy="' + ey + '" r="3" fill="#fff"/>';
       // Multi-line label
-      const lines = e.label.split('\n');
+      const lines = e.label.split('\\n');
       lines.forEach((line, li) => {
-        h += `<text x="${x}" y="${ey + 16 + li * 13}" text-anchor="middle" fill="#bbb" font-size="9.5" font-weight="500">${esc(line)}</text>`;
+        h += '<text x="' + x + '" y="' + (ey + 18 + li * 13) + '" text-anchor="middle" fill="#bbb" font-size="9.5" font-weight="500" font-family="\'Noto Sans SC\',sans-serif">' + esc(line) + '</text>';
       });
     });
 
     // Thread name labels at top
     d.threads.forEach((t, i) => {
       const x = padX + i * spacing;
-      const w = spacing * 0.85;
-      h += `<foreignObject x="${x - w / 2}" y="${topY - 46}" width="${w}" height="38">`;
-      h += `<div xmlns="http://www.w3.org/1999/xhtml" style="text-align:center;font-size:11px;font-weight:700;color:${t.color};line-height:1.25;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical">${esc(t.name)}</div>`;
-      h += `</foreignObject>`;
+      const w = Math.min(spacing * 0.82, 140);
+      h += '<foreignObject x="' + (x - w / 2) + '" y="' + (topY - 52) + '" width="' + w + '" height="44">';
+      h += '<div xmlns="http://www.w3.org/1999/xhtml" style="text-align:center;font-size:11.5px;font-weight:700;color:' + t.color + ';line-height:1.3;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical">' + esc(t.name) + '</div>';
+      h += '</foreignObject>';
     });
 
     el.innerHTML = h;
@@ -2002,13 +2038,12 @@ document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
     // Legend
     let lg = '';
     d.threads.forEach(t => {
-      lg += `<div class="thread-legend-item">
-        <div class="thread-legend-bar" style="background:${t.color}"></div>
-        <div class="thread-legend-text">
-          <div class="tl-name">${esc(t.name)}</div>
-          <div class="tl-chars">${esc(t.chars)}</div>
-        </div>
-      </div>`;
+      lg += '<div class="thread-legend-item">';
+      lg += '<div class="thread-legend-bar" style="background:' + t.color + '"></div>';
+      lg += '<div class="thread-legend-text">';
+      lg += '<div class="tl-name">' + esc(t.name) + '</div>';
+      lg += '<div class="tl-chars">' + esc(t.chars) + '</div>';
+      lg += '</div></div>';
     });
     legend.innerHTML = lg;
 
@@ -2018,8 +2053,6 @@ document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
     wrap.offsetHeight;
     wrap.style.animation = 'threadFade 0.35s ease';
   }
-
-  function esc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
   tabs.forEach(tab => {
     tab.addEventListener('click', () => renderSeason(tab.dataset.s));
