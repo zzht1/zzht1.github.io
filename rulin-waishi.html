@@ -855,9 +855,22 @@
     .map-content { flex-direction: column; }
     .route-sidebar { width: 100%; border-left: none; border-top: 1px solid #eee; }
   }
+  .back-home {
+    position: fixed; top: 20px; left: 20px; z-index: 999;
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 16px; border-radius: 20px;
+    background: rgba(250,246,240,0.92); color: #555;
+    font-size: 0.85rem; text-decoration: none;
+    border: 1px solid rgba(0,0,0,0.1);
+    backdrop-filter: blur(8px);
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  .back-home:hover { background: #fff; color: #b8860b; border-color: #b8860b; }
 </style>
 </head>
 <body>
+<a href="/" class="back-home">← 返回</a>
 
 <!-- Hero Header -->
 <header class="hero">
