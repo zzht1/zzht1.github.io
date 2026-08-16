@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moby-Dick; or, The Whale · 白鲸</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<style>
+/* ===== 设计语言：1851 · 捕鲸船航海日志 =====
+   视觉基因取自《白鲸》本身：泛黄书页与航海日志的纸色、
+   深海墨蓝的雕版线条、亚哈钉在桅杆上的西班牙金币、
+   抹香鲸的剪影与浪纹。 */
+:root {
+  --paper: #f6f0e2;          /* 书页纸色 */
+  --paper-deep: #ece2cc;     /* 深一档的纸 */
+  --card: #fbf6ea;           /* 卡片纸色 */
+  --ink: #26333b;            /* 墨蓝黑 */
+  --ink-soft: #5a6b74;
+  --ink-faint: #8b98a0;
+  --sea: #17636f;            /* 深海绿蓝 */
+  --sea-deep: #0f4550;
+  --gold: #9c7a28;           /* 西班牙金币 */
+  --blood: #8c3b2e;          /* 鱼叉铁锈 */
+  --border: #dccfae;
+  --border-soft: #e8dfc6;
+  --radius: 20px;
+  --radius-sm: 14px;
+  --serif: Georgia, "Palatino Linotype", "Times New Roman", "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+body {
+  font-family: var(--serif);
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: rgba(23,99,111,0.18); }
+
+/* 纸纹（极淡） */
+.paper-grain {
+  position: fixed; inset: 0; z-index: 0; opacity: 0.05; pointer-events: none;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ===== 顶部导航 ===== */
+.top-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 2rem; height: 58px;
+  background: rgba(246,240,226,0.92);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+.top-nav-back { color: var(--sea); font-size: 0.9rem; text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s; }
+.top-nav-back:hover { color: var(--sea-deep); }
+.top-nav-links { display: flex; gap: 1.5rem; list-style: none; }
+.top-nav-links a { font-size: 0.85rem; color: var(--ink-soft); text-decoration: none; letter-spacing: 0.06em; transition: color 0.2s; }
+.top-nav-links a:hover { color: var(--sea-deep); }
+
+/* ===== Hero · 扉页 ===== */
+.hero {
+  position: relative;
+  min-height: 100vh; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center;
+  padding: 8rem 2rem 6rem;
+}
+.hero-badge {
+  display: inline-block; padding: 0.42rem 1.3rem;
+  border: 1px solid var(--border); border-radius: 999px;
+  font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--ink-soft); margin-bottom: 2rem; background: var(--card);
+}
+.hero h1 {
+  font-size: clamp(3rem, 9vw, 6.2rem); font-weight: 700; letter-spacing: 0.06em;
+  color: var(--ink); line-height: 1.05; margin-bottom: 0.5rem;
+}
+.hero-sub {
+  font-style: italic; font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--ink-soft); letter-spacing: 0.14em; margin-bottom: 0.6rem;
+}
+.hero h2 {
+  font-size: clamp(1.05rem, 2.4vw, 1.5rem); font-weight: 400;
+  color: var(--sea-deep); letter-spacing: 0.34em; margin-bottom: 2.6rem;
+}
+.hero-whale { width: min(560px, 82vw); height: auto; margin: 0 0 2.6rem; }
+
+.hero-quote {
+  max-width: 640px; padding: 1.5rem 1.9rem; text-align: left;
+  background: var(--card); border: 1px solid var(--border-soft);
+  border-left: 3px solid var(--gold); border-radius: 0 var(--radius) var(--radius) 0;
+  font-style: italic; color: var(--ink-soft); font-size: 0.95rem; line-height: 2;
+}
+.hero-quote strong { color: var(--ink); font-style: normal; }
+
+.stats-row {
+  display: flex; justify-content: center; align-items: center;
+  gap: 0; flex-wrap: wrap; margin-top: 2.8rem;
+}
+.stat { text-align: center; padding: 0 1.6rem; }
+.stat + .stat { border-left: 1px solid var(--border); }
+.stat-num { font-size: 1.9rem; font-weight: 700; line-height: 1.15; color: var(--sea-deep); }
+.stat-label { font-size: 0.72rem; color: var(--ink-faint); margin-top: 0.2rem; letter-spacing: 0.14em; }
+
+.scroll-hint {
+  position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 0.3rem;
+  color: var(--ink-faint); font-size: 0.72rem; letter-spacing: 0.22em;
+  animation: buoy 2.6s ease-in-out infinite;
+}
+@keyframes buoy {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-6px); }
+}
+
+/* 浪纹分隔 */
+.wave-divider { display: block; width: 100%; height: 64px; margin-top: -64px; position: relative; z-index: 1; }
+
+/* ===== Section 通用 ===== */
+.section { position: relative; z-index: 1; padding: 5rem 2rem; max-width: 1120px; margin: 0 auto; }
+.section-head { text-align: center; margin-bottom: 3.2rem; }
+.section-kicker {
+  font-size: 0.72rem; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 0.7rem;
+}
+.section-head h2 {
+  font-size: clamp(1.7rem, 3.5vw, 2.2rem); font-weight: 700;
+  letter-spacing: 0.08em; color: var(--ink); margin-bottom: 0.9rem;
+}
+.section-orn { display: block; margin: 0 auto 1rem; color: var(--sea); opacity: 0.75; }
+.section-head p { color: var(--ink-soft); font-size: 0.92rem; max-width: 640px; margin: 0 auto; }
+
+/* 渐变装饰分割线 */
+.rule {
+  height: 1px; max-width: 560px; margin: 0 auto; border: none;
+  background: linear-gradient(90deg, transparent, var(--border) 30%, var(--gold) 50%, var(--border) 70%, transparent);
+}
+
+/* ===== 篇章结构 · 航海日志式时间线 ===== */
+.timeline { position: relative; padding-left: 3rem; }
+.timeline::before {
+  content: ''; position: absolute; left: 1.1rem; top: 0.6rem; bottom: 0.6rem;
+  width: 2px;
+  background: repeating-linear-gradient(180deg, var(--border) 0 7px, transparent 7px 13px);
+}
+.tl-item { position: relative; margin-bottom: 2.4rem; }
+.tl-item:last-child { margin-bottom: 0; }
+.tl-dot {
+  position: absolute; left: -2.62rem; top: 0.7rem;
+  width: 15px; height: 15px; border-radius: 50%;
+  background: var(--gold); border: 3px solid var(--paper);
+  box-shadow: 0 0 0 1px var(--border);
+}
+.tl-card {
+  background: var(--card); border: 1px solid var(--border-soft);
+  border-radius: var(--radius); padding: 1.7rem 1.9rem;
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+}
+.tl-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(38,51,59,0.08);
+  border-color: var(--border);
+}
+.tl-card-header { display: flex; align-items: baseline; gap: 1.2rem; flex-wrap: wrap; margin-bottom: 0.8rem; }
+.tl-num { font-size: 2.7rem; font-weight: 700; line-height: 1; color: var(--sea); flex-shrink: 0; letter-spacing: 0.02em; }
+.tl-title { font-size: 1.3rem; font-weight: 700; letter-spacing: 0.03em; }
+.tl-sub { font-size: 0.8rem; color: var(--ink-faint); margin-top: 0.15rem; letter-spacing: 0.05em; }
+.tl-desc { font-size: 0.92rem; color: var(--ink-soft); line-height: 1.95; margin-bottom: 0.8rem; }
+.tl-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.7rem; }
+.tl-tag {
+  padding: 0.2rem 0.65rem; border-radius: 999px; font-size: 0.72rem; letter-spacing: 0.04em;
+  background: rgba(23,99,111,0.06); color: var(--sea-deep);
+  border: 1px solid rgba(23,99,111,0.18);
+}
+.tl-toggle {
+  background: none; border: none; color: var(--sea); cursor: pointer;
+  font-size: 0.84rem; padding: 0.2rem 0; font-family: var(--serif);
+  letter-spacing: 0.05em; transition: color 0.2s;
+}
+.tl-toggle:hover { color: var(--sea-deep); text-decoration: underline; }
+.tl-details {
+  display: none; margin-top: 1rem; padding-top: 1rem;
+  border-top: 1px dashed var(--border);
+  font-size: 0.86rem; color: var(--ink-soft); line-height: 1.95;
+}
+.tl-details strong { color: var(--ink); }
+.tl-card.expanded .tl-details { display: block; }
+
+/* ===== 地图 ===== */
+.map-wrap { margin-bottom: 0.5rem; }
+.map-filters { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
+.map-fbtn, .graph-fbtn, .sl-btn {
+  padding: 0.38rem 1rem; border-radius: 999px; font-size: 0.8rem;
+  cursor: pointer; transition: all 0.2s; font-family: var(--serif);
+  background: transparent; border: 1px solid var(--border);
+  color: var(--ink-soft); letter-spacing: 0.04em;
+}
+.map-fbtn:hover, .graph-fbtn:hover, .sl-btn:hover { border-color: var(--sea); color: var(--sea-deep); }
+.map-fbtn.active, .graph-fbtn.active, .sl-btn.active {
+  background: var(--sea); border-color: var(--sea); color: #f9f4e6;
+}
+#map {
+  height: 440px; border-radius: var(--radius); overflow: hidden;
+  border: 1px solid var(--border); background: var(--paper-deep);
+}
+.map-caption { text-align: center; color: var(--ink-faint); font-size: 0.78rem; margin-top: 0.7rem; letter-spacing: 0.06em; }
+
+/* ===== 人物关系图谱 ===== */
+.graph-container {
+  position: relative; height: 520px; overflow: hidden;
+  background: var(--card); border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+}
+.graph-filters { display: flex; gap: 0.4rem; flex-wrap: wrap; padding: 1rem 1.1rem 0.4rem; }
+.graph-legend {
+  display: flex; gap: 1.4rem; flex-wrap: wrap; padding: 0.5rem 1.1rem 0.8rem;
+  font-size: 0.76rem; color: var(--ink-soft);
+}
+.graph-legend span { display: flex; align-items: center; gap: 0.4rem; }
+.graph-legend .solid { display: inline-block; width: 20px; height: 2px; background: rgba(23,99,111,0.55); border-radius: 2px; }
+.graph-legend .dashed { display: inline-block; width: 20px; height: 0; border-top: 2px dashed rgba(140,59,46,0.55); }
+#graphCanvas { display: block; width: 100%; height: calc(100% - 92px); cursor: grab; }
+#graphCanvas:active { cursor: grabbing; }
+
+/* ===== 叙事线 ===== */
+.storylines { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.3rem; }
+.sl-content {
+  background: var(--card); border: 1px solid var(--border-soft);
+  border-radius: var(--radius); padding: 1.7rem 1.8rem;
+}
+.sl-desc { font-size: 0.92rem; color: var(--ink-soft); margin-bottom: 1.3rem; line-height: 1.95; }
+.sl-threads { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 1rem; }
+.sl-thread {
+  padding: 1rem 1.1rem; background: rgba(236,226,204,0.45);
+  border: 1px solid var(--border-soft); border-radius: var(--radius-sm);
+}
+.sl-thread-title { font-size: 0.86rem; font-weight: 700; color: var(--sea-deep); margin-bottom: 0.35rem; letter-spacing: 0.03em; }
+.sl-thread-names { font-size: 0.8rem; color: var(--ink-faint); line-height: 1.7; }
+
+/* ===== 经典语录 · EXTRACTS ===== */
+.quotes-wrap { position: relative; overflow: hidden; }
+.quotes-track { display: flex; transition: transform 0.45s ease; }
+.quote-card {
+  min-width: 100%; padding: 2.4rem 2.6rem; background: var(--card);
+  border: 1px solid var(--border-soft); border-radius: var(--radius);
+}
+.quote-text {
+  font-size: 1.18rem; font-style: italic; color: var(--ink); line-height: 2;
+  margin-bottom: 1.1rem; padding-left: 1.5rem; border-left: 2px solid var(--gold);
+}
+.quote-author { font-size: 0.88rem; color: var(--sea); letter-spacing: 0.03em; }
+.quote-ctx { font-size: 0.8rem; color: var(--ink-faint); margin-top: 0.25rem; }
+.quotes-nav { display: flex; justify-content: center; align-items: center; gap: 1rem; margin-top: 1.5rem; }
+.quotes-nav button {
+  background: transparent; border: 1px solid var(--border);
+  color: var(--ink-soft); padding: 0.45rem 1.1rem; border-radius: 999px; cursor: pointer;
+  font-family: var(--serif); font-size: 0.84rem; letter-spacing: 0.04em; transition: all 0.2s;
+}
+.quotes-nav button:hover { background: var(--sea); border-color: var(--sea); color: #f9f4e6; }
+.quote-dots { display: flex; gap: 0.4rem; align-items: center; }
+.quote-dot {
+  width: 8px; height: 8px; border-radius: 50%; background: var(--border);
+  transition: all 0.3s; cursor: pointer;
+}
+.quote-dot.active { background: var(--gold); }
+
+/* ===== 核心主题 ===== */
+.themes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 1rem; }
+.theme-card {
+  background: var(--card); border: 1px solid var(--border-soft);
+  border-radius: var(--radius); padding: 1.6rem 1.7rem;
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+}
+.theme-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 26px rgba(38,51,59,0.08);
+  border-color: var(--border);
+}
+.theme-seal {
+  width: 46px; height: 46px; border-radius: 50%; margin-bottom: 0.9rem;
+  border: 1.5px solid var(--sea); color: var(--sea);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem; font-weight: 700; background: rgba(23,99,111,0.05);
+}
+.theme-card h4 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.5rem; letter-spacing: 0.04em; }
+.theme-card p { font-size: 0.88rem; color: var(--ink-soft); line-height: 1.9; }
+
+/* ===== 角色卡片 ===== */
+.char-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+.char-card {
+  background: var(--card); border: 1px solid var(--border-soft);
+  border-radius: var(--radius); padding: 1.4rem 1.5rem;
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+}
+.char-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 26px rgba(38,51,59,0.08);
+  border-color: var(--border);
+}
+.char-role { font-size: 0.7rem; letter-spacing: 0.16em; color: var(--gold); margin-bottom: 0.3rem; }
+.char-name { font-size: 1.14rem; font-weight: 700; margin-bottom: 0.4rem; letter-spacing: 0.02em; }
+.char-desc { font-size: 0.86rem; color: var(--ink-soft); line-height: 1.85; }
+
+/* ===== 数据纵览 ===== */
+.data-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 0.9rem; }
+.data-card {
+  text-align: center; padding: 1.5rem 0.8rem; background: var(--card);
+  border: 1px solid var(--border-soft); border-radius: var(--radius-sm);
+}
+.data-num { font-size: 2rem; font-weight: 700; line-height: 1.15; color: var(--sea-deep); }
+.data-label { font-size: 0.76rem; color: var(--ink-faint); margin-top: 0.3rem; letter-spacing: 0.1em; }
+
+/* ===== 遗产 ===== */
+.legacy-text { max-width: 780px; margin: 0 auto; }
+.legacy-text p { font-size: 0.96rem; color: var(--ink-soft); line-height: 2.05; margin-bottom: 1.4rem; }
+.legacy-text strong { color: var(--ink); }
+
+/* ===== Footer ===== */
+.site-footer { text-align: center; padding: 3.4rem 2rem; color: var(--ink-faint); font-size: 0.84rem; letter-spacing: 0.06em; }
+.site-footer .rule { margin-bottom: 2.4rem; }
+.site-footer a { color: var(--sea); text-decoration: none; }
+.site-footer a:hover { color: var(--sea-deep); text-decoration: underline; }
+
+/* ===== Leaflet 覆盖（纸色主题） ===== */
+.leaflet-container { background: var(--paper-deep) !important; font-family: var(--serif) !important; }
+.leaflet-control-zoom a {
+  background: var(--card) !important; color: var(--ink) !important;
+  border-color: var(--border) !important;
+}
+.leaflet-popup-content-wrapper {
+  background: var(--card) !important; color: var(--ink) !important;
+  border: 1px solid var(--border) !important; border-radius: var(--radius-sm) !important;
+  box-shadow: 0 8px 22px rgba(38,51,59,0.12) !important;
+}
+.leaflet-popup-tip { background: var(--card) !important; }
+.leaflet-popup-content { font-family: var(--serif) !important; line-height: 1.7 !important; }
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+  .top-nav { padding: 0 1rem; }
+  .top-nav-links { display: none; }
+  .section { padding: 3.2rem 1.1rem; }
+  .stats-row { gap: 0.6rem; }
+  .stat { padding: 0 0.9rem; }
+  .stat-num { font-size: 1.4rem; }
+  .hero { padding: 6.5rem 1.2rem 5rem; }
+  .char-grid, .themes-grid { grid-template-columns: 1fr; }
+  .data-grid { grid-template-columns: repeat(2, 1fr); }
+  .timeline { padding-left: 2.4rem; }
+  .tl-num { font-size: 2rem; }
+  .graph-container { height: 400px; }
+  #graphCanvas { height: calc(100% - 110px); }
+  .sl-threads { grid-template-columns: 1fr; }
+  .quote-card { padding: 1.6rem 1.4rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="paper-grain"></div>
+
+<!-- ====== Top Nav ====== -->
+<nav class="top-nav">
+  <a href="https://zzht.me" class="top-nav-back">← 返回</a>
+  <ul class="top-nav-links">
+    <li><a href="#timeline">篇章结构</a></li>
+    <li><a href="#map">航行路线</a></li>
+    <li><a href="#characters">核心角色</a></li>
+    <li><a href="#graph">人物关系</a></li>
+    <li><a href="#storylines">叙事线</a></li>
+    <li><a href="#quotes">经典语录</a></li>
+    <li><a href="#themes">核心主题</a></li>
+    <li><a href="#legacy">遗产</a></li>
+  </ul>
+</nav>
+
+<!-- ====== Hero · 扉页 ====== -->
+<header class="hero">
+  <div class="hero-badge">Herman Melville · 1851</div>
+  <h1>MOBY-DICK</h1>
+  <div class="hero-sub">or, The Whale</div>
+  <h2>白鲸 · 捕鲸船上的宇宙</h2>
+
+  <!-- 抹香鲸雕版剪影 -->
+  <svg class="hero-whale" viewBox="0 0 640 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="抹香鲸剪影">
+    <path d="M 78 110
+             C 74 94, 84 80, 108 74
+             C 160 62, 232 56, 300 57
+             C 360 58, 420 66, 464 80
+             C 492 88, 510 93, 524 95
+             C 542 84, 560 76, 582 70
+             C 570 84, 566 92, 566 99
+             C 566 106, 572 115, 586 126
+             C 564 120, 544 113, 524 108
+             C 500 112, 468 120, 428 128
+             C 366 140, 296 144, 230 141
+             C 178 138, 132 128, 100 118
+             C 88 114, 80 112, 78 110 Z"
+          fill="rgba(23,99,111,0.08)" stroke="#17636f" stroke-width="2.2" stroke-linejoin="round"/>
+    <path d="M 78 110 C 104 116, 136 119, 166 118" stroke="#17636f" stroke-width="1.6" stroke-linecap="round" opacity="0.8"/>
+    <circle cx="118" cy="94" r="2.6" fill="#26333b"/>
+    <path d="M 238 134 C 252 146, 272 156, 292 158 C 272 160, 250 152, 234 140 Z"
+          fill="rgba(23,99,111,0.14)" stroke="#17636f" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M 128 58 C 124 46, 116 38, 106 32" stroke="#17636f" stroke-width="1.6" stroke-linecap="round" opacity="0.55"/>
+    <path d="M 132 58 C 136 46, 144 38, 154 32" stroke="#17636f" stroke-width="1.6" stroke-linecap="round" opacity="0.55"/>
+  </svg>
+
+  <blockquote class="hero-quote">
+    "Call me Ishmael." —— 三个词开启的，不仅是一部小说，更是一部关于人类境况的百科全书。捕鲸船 Pequod 号从 Nantucket 出发，驶向的不是一条白鲸，而是存在本身的深渊。
+    <br><br>
+    <strong>赫尔曼·梅尔维尔</strong>，《白鲸》，1851年
+  </blockquote>
+  <div class="stats-row">
+    <div class="stat"><div class="stat-num">135</div><div class="stat-label">章节</div></div>
+    <div class="stat"><div class="stat-num">1</div><div class="stat-label">尾声</div></div>
+    <div class="stat"><div class="stat-num">1851</div><div class="stat-label">出版年份</div></div>
+    <div class="stat"><div class="stat-num">4.2</div><div class="stat-label">Goodreads 评分</div></div>
+    <div class="stat"><div class="stat-num">200k+</div><div class="stat-label">英文词数</div></div>
+  </div>
+  <div class="scroll-hint">
+    <span>向深处潜航</span>
+    <span>↓</span>
+  </div>
+</header>
+
+<!-- 浪纹分隔 -->
+<svg class="wave-divider" viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 40 Q 60 22 120 40 T 240 40 T 360 40 T 480 40 T 600 40 T 720 40 T 840 40 T 960 40 T 1080 40 T 1200 40 T 1320 40 T 1440 40 V80 H0 Z" fill="rgba(23,99,111,0.06)"/>
+  <path d="M0 54 Q 60 38 120 54 T 240 54 T 360 54 T 480 54 T 600 54 T 720 54 T 840 54 T 960 54 T 1080 54 T 1200 54 T 1320 54 T 1440 54 V80 H0 Z" fill="rgba(23,99,111,0.05)"/>
+  <path d="M0 40 Q 60 22 120 40 T 240 40 T 360 40 T 480 40 T 600 40 T 720 40 T 840 40 T 960 40 T 1080 40 T 1200 40 T 1320 40 T 1440 40" stroke="rgba(23,99,111,0.22)" stroke-width="1.4" fill="none"/>
+</svg>
+
+<!-- ====== 篇章结构 · Timeline ====== -->
+<section class="section" id="timeline">
+  <div class="section-head">
+    <div class="section-kicker">Book I – III · The Structure</div>
+    <h2>篇章结构</h2>
+    <svg class="section-orn" width="64" height="12" viewBox="0 0 64 12"><path d="M2 8 Q 9 2 16 8 T 30 8 T 44 8 T 58 8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    <p>《白鲸》以 Ishmael 为叙事者，三段式的结构如同一次从文明世界向深渊的坠落——从 Nantucket 出发，穿越三大洋，最终在赤道海域与白鲸相遇。点击每段展开详情。</p>
+  </div>
+  <div class="timeline">
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-card-header">
+          <span class="tl-num">01</span>
+          <div>
+            <div class="tl-title">启程 · The Departure</div>
+            <div class="tl-sub">第 1—22 章 · Nantucket 到出海</div>
+          </div>
+        </div>
+        <p class="tl-desc">Ishmael 来到新贝德福德的捕鲸者客栈，与标枪手 Queequeg 相遇、同床、结为挚友。他们一起前往 Nantucket 签约 Pequod 号。在登船前，神秘的以利亚发出不祥的警告。船长 Ahab 始终未露面——他的缺席比在场更令人不安。</p>
+        <div class="tl-tags">
+          <span class="tl-tag">Ishmael 登场</span>
+          <span class="tl-tag">Queequeg 结义</span>
+          <span class="tl-tag">签下契约</span>
+          <span class="tl-tag">以利亚的警告</span>
+        </div>
+        <button class="tl-toggle" onclick="this.parentElement.classList.toggle('expanded');this.textContent=this.parentElement.classList.contains('expanded')?'收起 ▲':'展开详情 ▼';">展开详情 ▼</button>
+        <div class="tl-details">
+          <strong>关键章节</strong><br>
+          第1章 "Loomings"（著名的 "Call me Ishmael" 开篇）、第3章 "The Spouter-Inn"（与 Queequeg 同床共枕）、第10章 "A Bosom Friend"（异教婚礼仪式）、第16章 "The Ship"（初见 Pequod 和 Ahab 的谜团）、第21章 "Going Aboard"（登船时以利亚的阴影）。<br><br>
+          <strong>关键地点</strong><br>
+          · 新贝德福德捕鲸者客栈（Spouter-Inn）—— Ishmael 与 Queequeg 相遇之地<br>
+          · 捕鲸者礼拜堂——石碑上铭刻着葬身大海的捕鲸人姓名<br>
+          · Nantucket 码头——Pequod 号起锚之处
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-card-header">
+          <span class="tl-num">02</span>
+          <div>
+            <div class="tl-title">航行 · The Voyage</div>
+            <div class="tl-sub">第 23—105 章 · 穿越大西洋、印度洋、太平洋</div>
+          </div>
+        </div>
+        <p class="tl-desc">Ahab 终于现身——一条鲸骨假腿，脸上蜿蜒的伤疤。他在甲板上钉上西班牙金币，向全体船员宣布此行的真正目的：猎杀那条白色的抹香鲸 Moby Dick。Pequod 号穿越大西洋、印度洋、太平洋，沿途遭遇九艘捕鲸船，每一次相遇都加深了命运之网。这一部分穿插了大量关于鲸类学、捕鲸技艺的"百科全书式"篇章。</p>
+        <div class="tl-tags">
+          <span class="tl-tag">Ahab 登场</span>
+          <span class="tl-tag">金币仪式</span>
+          <span class="tl-tag">九船相遇</span>
+          <span class="tl-tag">鲸类百科</span>
+          <span class="tl-tag">Fedallah 预言</span>
+        </div>
+        <button class="tl-toggle" onclick="this.parentElement.classList.toggle('expanded');this.textContent=this.parentElement.classList.contains('expanded')?'收起 ▲':'展开详情 ▼';">展开详情 ▼</button>
+        <div class="tl-details">
+          <strong>九次船遇（Gams）</strong><br>
+          · Goney 号（信天翁）—— 失联多年的凄凉重逢<br>
+          · Town-Ho 号 —— 讲述一场船上的叛乱与白鲸的首次神迹<br>
+          · Jeroboam 号 —— 狂热先知 Gabriel 对 Ahab 的诅咒<br>
+          · Jungfrau 号（德国处女）—— 燃油耗尽的绝望呼救<br>
+          · 法国 Rose-Bud 号 —— 臭鲸尸中的龙涎香<br>
+          · Samuel Enderby 号 —— Ahab 遇到同样被白鲸咬断手臂的船长 Boomer<br>
+          · Rachel 号 —— 寻找失踪船员的孩子（伏笔）<br>
+          · Delight 号 —— 刚被白鲸摧毁，抛下一具尸体<br>
+          · Pequod 号的孤独终结<br><br>
+          <strong>百科全书篇章</strong><br>
+          第32章 "Cetology"（鲸的分类学）、第42章 "The Whiteness of the Whale"、第55章 "Monstrous Pictures of Whales"、第74-86章（鲸头解剖学与面相学）、第103章 "Measurement of the Whale's Skeleton"。
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-card-header">
+          <span class="tl-num">03</span>
+          <div>
+            <div class="tl-title">追猎 · The Chase</div>
+            <div class="tl-sub">第 106—135 章 · 白鲸现身</div>
+          </div>
+        </div>
+        <p class="tl-desc">最后三十章是文学史上最壮丽的高潮。Ahab 拒绝了 Starbuck 的劝阻，损坏的象限仪被踩碎，雷电点燃了桅杆——一切预兆都被他解读为命运的指引。三天三夜的追击：第一天 Moby Dick 摧毁了捕鲸艇；第二天 Ahab 的假腿被咬断；第三天白鲸撞碎了 Pequod 号。船沉没时形成漩涡，吞噬了一切——只有 Ishmael 活着，被 Rachel 号救起。</p>
+        <div class="tl-tags">
+          <span class="tl-tag">Starbuck 劝阻</span>
+          <span class="tl-tag">圣艾尔摩之火</span>
+          <span class="tl-tag">三天追击</span>
+          <span class="tl-tag">Pequod 沉没</span>
+          <span class="tl-tag">Ishmael 独活</span>
+        </div>
+        <button class="tl-toggle" onclick="this.parentElement.classList.toggle('expanded');this.textContent=this.parentElement.classList.contains('expanded')?'收起 ▲':'展开详情 ▼';">展开详情 ▼</button>
+        <div class="tl-details">
+          <strong>三天追击</strong><br>
+          第133章 "The Chase — First Day"（白鲸首次反击，Ahab 落水）、第134章 "The Chase — Second Day"（Fedallah 的尸体被绳索绑在白鲸身上，预言实现）、第135章 "The Chase — Third Day"（Pequod 沉没，"Thus, I give up the spear!"）。<br><br>
+          <strong>尾声</strong><br>
+          Ishmael 被 Queequeg 的棺材救起——这口棺材此前是 Queequeg 在以为自己将死时打造的，后由木匠改为救生浮标。Rachel 号仍在寻找失踪的孩子，却找到了 Ishmael。<br><br>
+          <strong>关键地点</strong><br>
+          · 赤道太平洋海域 —— 白鲸的领地，也是 Pequod 的墓地<br>
+          · Pequod 号甲板 —— Ahab 踩碎象限仪，雷电点燃圣艾尔摩之火
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ====== 航行路线 · Map ====== -->
+<section class="section" id="map">
+  <div class="section-head">
+    <div class="section-kicker">The Pequod's Course</div>
+    <h2>Pequod 号航行路线</h2>
+    <svg class="section-orn" width="64" height="12" viewBox="0 0 64 12"><path d="M2 8 Q 9 2 16 8 T 30 8 T 44 8 T 58 8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    <p>《白鲸》的航行路线覆盖三大洋。从 Nantucket 出发，绕行好望角进入印度洋，穿越巽他海峡抵达太平洋，最终在赤道海域与 Moby Dick 相遇。按航段筛选查看。</p>
+  </div>
+  <div class="map-wrap">
+    <div class="map-filters">
+      <button class="map-fbtn active" data-leg="all">全部航段</button>
+      <button class="map-fbtn" data-leg="departure">启程 · 大西洋</button>
+      <button class="map-fbtn" data-leg="indian">印度洋</button>
+      <button class="map-fbtn" data-leg="pacific">太平洋</button>
+    </div>
+    <div id="map"></div>
+  </div>
+  <p class="map-caption">点击标记查看详情 · Leaflet | © OSM © CARTO</p>
+</section>
+
+<hr class="rule">
+
+<!-- ====== 核心角色 · Characters ====== -->
+<section class="section" id="characters">
+  <div class="section-head">
+    <div class="section-kicker">The Ship's Company</div>
+    <h2>核心角色</h2>
+    <svg class="section-orn" width="64" height="12" viewBox="0 0 64 12"><path d="M2 8 Q 9 2 16 8 T 30 8 T 44 8 T 58 8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    <p>《白鲸》塑造了文学史上最复杂的人物群像——从疯狂的船长到食人族的王子，从理性的声音到疯癫的鼓手，每个人物都是宇宙的一个切面。</p>
+  </div>
+  <div class="char-grid">
+    <div class="char-card">
+      <div class="char-role">叙事者 · 唯一幸存者</div>
+      <div class="char-name">Ishmael · 以实玛利</div>
+      <div class="char-desc">"Call me Ishmael." 一个对大海和鲸鱼充满哲学思考的普通水手。名字取自《圣经》中被放逐者——暗示了他作为"局外人"的视角。他既是故事讲述者，又是梅尔维尔探讨宇宙问题的代言人。</div>
+    </div>
+    <div class="char-card">
+      <div class="char-role">船长 · 悲剧英雄</div>
+      <div class="char-name">Ahab · 亚哈</div>
+      <div class="char-desc">Pequod 号船长，被 Moby Dick 咬断一条腿后陷入疯狂的复仇执念。名字取自《圣经》中邪恶的以色列王。他将白鲸视为宇宙中一切恶的化身，用西班牙金币悬赏，带领全船走向毁灭。</div>
+    </div>
+    <div class="char-card">
+      <div class="char-role">标枪手 · 异教徒王子</div>
+      <div class="char-name">Queequeg · 魁魁格</div>
+      <div class="char-desc">来自南太平洋 Kokovoko 岛的标枪手，全身刺满纹身。他与 Ishmael 的同床共枕和"异教婚礼"是全书最温暖的关系。他的棺材最终成为拯救 Ishmael 的浮标。</div>
+    </div>
+    <div class="char-card">
+      <div class="char-role">大副 · 理性的声音</div>
+      <div class="char-name">Starbuck · 斯塔巴克</div>
+      <div class="char-desc">来自 Nantucket 的贵格会教徒，勇敢而务实。他是全船唯一敢于质疑 Ahab 的人。在第三天的追击前，他曾举枪对准熟睡的 Ahab，却最终无法扣下扳机。星巴克咖啡品牌即以他命名。</div>
+    </div>
+    <div class="char-card">
+      <div class="char-role">二副 · 无忧的快乐</div>
+      <div class="char-name">Stubb · 斯塔布</div>
+      <div class="char-desc">来自 Cape Cod，永远叼着烟斗，在猎杀鲸鱼时也能哼着小曲。他的幽默与 Ahab 的阴郁形成鲜明对比，但在命运的漩涡面前，快乐同样无法幸免。</div>
+    </div>
+    <div class="char-card">
+      <div class="char-role">三副 · 笨拙的巨汉</div>
+      <div class="char-name">Flask · 弗拉斯克</div>
+      <div class="char-desc">绰号 King-Post，身材矮小但精力充沛。他对鲸鱼没有哲学思考、没有恐惧、没有仇恨——纯粹为了杀而杀。他的扁平化视角在 Ahab 的宇宙追问中形成另一重对照。</div>
+    </div>
+    <div class="char-card">
+      <div class="char-role">神秘的波斯祆教徒</div>
+      <div class="char-name">Fedallah · 费德拉</div>
+      <div class="char-desc">Ahab 秘密带上船的祆教徒，率领一队"幽灵船员"。他预言 Ahab 将在看到"麻绳绞架"和"非木棺材"之后死去，自己也会先于 Ahab 而死。他的预言以最残酷的方式一一应验。</div>
+    </div>
+    <div class="char-card">
+      <div class="char-role">少年侍者 · 恐惧的化身</div>
+      <div class="char-name">Pip · 皮普</div>
+      <div class="char-desc">黑人少年鼓手，在一次捕鲸中被遗弃在海中过久，获救后精神失常。Ahab 在疯癫的 Pip 身上看到了自己的影子——被上帝抛弃的灵魂。Ahab 对 Pip 的怜悯是全书最脆弱的时刻之一。</div>
+    </div>
+    <div class="char-card">
+      <div class="char-role">白鲸 · 宇宙之谜</div>
+      <div class="char-name">Moby Dick · 莫比·迪克</div>
+      <div class="char-desc">白色的抹香鲸。它不是简单的"反派"——它是 Ahab 投射一切仇恨的空白画布，是自然界冷漠力量的化身，是上帝沉默的隐喻。它的"白"是全书最核心的哲学命题之一。</div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ====== 人物关系图谱 · Graph ====== -->
+<section class="section" id="graph">
+  <div class="section-head">
+    <div class="section-kicker">A Web of Fate</div>
+    <h2>人物关系图谱</h2>
+    <svg class="section-orn" width="64" height="12" viewBox="0 0 64 12"><path d="M2 8 Q 9 2 16 8 T 30 8 T 44 8 T 58 8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    <p>《白鲸》的人物关系如同一张命运之网。拖拽节点探索角色关系，悬停查看详情，按阵营筛选聚焦不同群体。实线代表同盟/友谊，虚线代表对抗/冲突。</p>
+  </div>
+  <div class="graph-container">
+    <div class="graph-filters">
+      <button class="graph-fbtn active" data-group="all">全部</button>
+      <button class="graph-fbtn" data-group="pequod">Pequod 号船员</button>
+      <button class="graph-fbtn" data-group="mates">船长 & 大副们</button>
+      <button class="graph-fbtn" data-group="harpooneers">标枪手</button>
+      <button class="graph-fbtn" data-group="prophetic">预言/命运</button>
+    </div>
+    <div class="graph-legend">
+      <span><span class="solid"></span> 同盟/友谊</span>
+      <span><span class="dashed"></span> 对抗/冲突</span>
+    </div>
+    <canvas id="graphCanvas"></canvas>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ====== 叙事线 · Storylines ====== -->
+<section class="section" id="storylines">
+  <div class="section-head">
+    <div class="section-kicker">Parallel Threads</div>
+    <h2>叙事线</h2>
+    <svg class="section-orn" width="64" height="12" viewBox="0 0 64 12"><path d="M2 8 Q 9 2 16 8 T 30 8 T 44 8 T 58 8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    <p>每段篇章同时推进多条平行故事线，在某些节点交汇碰撞。点击篇章标签切换。</p>
+  </div>
+  <div class="storylines">
+    <button class="sl-btn active" data-sl="0">启程 · 第1-22章</button>
+    <button class="sl-btn" data-sl="1">航行 · 第23-105章</button>
+    <button class="sl-btn" data-sl="2">追猎 · 第106-135章</button>
+  </div>
+  <div class="sl-content" id="slContent">
+    <p class="sl-desc" id="slDesc">在 Nantucket 的寒冷冬日，五条故事线在捕鲸船 Pequod 号的甲板上汇聚。</p>
+    <div class="sl-threads" id="slThreads">
+      <div class="sl-thread"><div class="sl-thread-title">Ishmael 的自我放逐</div><div class="sl-thread-names">Ishmael · Queequeg · Peter Coffin 客栈老板</div></div>
+      <div class="sl-thread"><div class="sl-thread-title">Ahab 的隐藏</div><div class="sl-thread-names">Ahab（未见其人）· 以利亚 · Peleg & Bildad</div></div>
+      <div class="sl-thread"><div class="sl-thread-title">契约与命运</div><div class="sl-thread-names">Ishmael · Queequeg · Pequod 号签约</div></div>
+      <div class="sl-thread"><div class="sl-thread-title">捕鲸者的世界</div><div class="sl-thread-names">新贝德福德 · 捕鲸者礼拜堂 · 石碑上的名字</div></div>
+      <div class="sl-thread"><div class="sl-thread-title">海与岸的界限</div><div class="sl-thread-names">Nantucket 码头 · 最后的陆地 · 起锚出海</div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ====== 经典语录 · Quotes ====== -->
+<section class="section" id="quotes">
+  <div class="section-head">
+    <div class="section-kicker">Extracts</div>
+    <h2>经典语录</h2>
+    <svg class="section-orn" width="64" height="12" viewBox="0 0 64 12"><path d="M2 8 Q 9 2 16 8 T 30 8 T 44 8 T 58 8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    <p>《白鲸》的语言——时而如莎士比亚独白般磅礴，时而如捕鲸手册般精确——构成了英语文学中最独特的文体之一。</p>
+  </div>
+  <div class="quotes-wrap">
+    <div class="quotes-track" id="quotesTrack">
+      <div class="quote-card">
+        <div class="quote-text">Call me Ishmael. Some years ago — never mind how long precisely — having little or no money in my purse, and nothing particular to interest me on shore, I thought I would sail about a little and see the watery part of the world.</div>
+        <div class="quote-author">— Ishmael, 第1章 "Loomings"</div>
+        <div class="quote-ctx">文学史上最著名的开场白。三个词，一个世界的开启。</div>
+      </div>
+      <div class="quote-card">
+        <div class="quote-text">Towards thee I roll, thou all-destroying but unconquering whale; to the last I grapple with thee; from hell's heart I stab at thee; for hate's sake I spit my last breath at thee.</div>
+        <div class="quote-author">— Ahab, 第135章 "The Chase — Third Day"</div>
+        <div class="quote-ctx">Ahab 的最后遗言。即使被击败，他依然选择以恨意对抗宇宙。</div>
+      </div>
+      <div class="quote-card">
+        <div class="quote-text">It is not down on any map; true places never are.</div>
+        <div class="quote-author">— Ishmael, 第12章 "Biographical"</div>
+        <div class="quote-ctx">真正的目的地从不在地图上——它在我们无法测量的深处。</div>
+      </div>
+      <div class="quote-card">
+        <div class="quote-text">I know not all that may be coming, but be it what it will, I'll go to it laughing.</div>
+        <div class="quote-author">— Stubb, 第39章 "First Night-Watch"</div>
+        <div class="quote-ctx">Stubb 的人生哲学：面对未知的命运，以笑声迎之。</div>
+      </div>
+      <div class="quote-card">
+        <div class="quote-text">He piled upon the whale's white hump the sum of all the general rage and hate felt by his whole race from Adam down; and then, as if his chest had been a mortar, he burst his hot heart's shell upon it.</div>
+        <div class="quote-author">— 叙事者（关于 Ahab）, 第41章 "Moby Dick"</div>
+        <div class="quote-ctx">梅尔维尔对 Ahab 执念最精确的诊断：他把全人类的愤怒都投射到了白鲸身上。</div>
+      </div>
+      <div class="quote-card">
+        <div class="quote-text">Better to sleep with a sober cannibal than a drunken Christian.</div>
+        <div class="quote-author">— Ishmael, 第3章 "The Spouter-Inn"</div>
+        <div class="quote-ctx">Ishmael 决定与 Queequeg 同床时的内心独白，全书最幽默也最深刻的句子之一。</div>
+      </div>
+      <div class="quote-card">
+        <div class="quote-text">There is a wisdom that is woe; but there is a woe that is madness.</div>
+        <div class="quote-author">— Ishmael, 第96章 "The Try-Works"</div>
+        <div class="quote-ctx">有些智慧是悲痛的——有些悲痛是疯狂的。Ahab 越过了那条线。</div>
+      </div>
+      <div class="quote-card">
+        <div class="quote-text">And I only am escaped alone to tell thee.</div>
+        <div class="quote-author">— 尾声 · 引自《约伯记》1:15-19</div>
+        <div class="quote-ctx">小说的最后一句，引用圣经。Ishmael 独活，正如约伯的信使——但他带来的不是好消息。</div>
+      </div>
+    </div>
+  </div>
+  <div class="quotes-nav">
+    <button onclick="prevQuote()">← 上一条</button>
+    <div class="quote-dots" id="quoteDots"></div>
+    <button onclick="nextQuote()">下一条 →</button>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ====== 核心主题 · Themes ====== -->
+<section class="section" id="themes">
+  <div class="section-head">
+    <div class="section-kicker">The Whiteness of the Whale</div>
+    <h2>核心主题</h2>
+    <svg class="section-orn" width="64" height="12" viewBox="0 0 64 12"><path d="M2 8 Q 9 2 16 8 T 30 8 T 44 8 T 58 8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    <p>《白鲸》远不止是一部捕鲸冒险故事。梅尔维尔说："要写一部伟大的书，你必须选择一个伟大的主题。" 白鲸本身——它的白——就是那个无法被穷尽的主题。</p>
+  </div>
+  <div class="themes-grid">
+    <div class="theme-card">
+      <div class="theme-seal">白</div>
+      <h4>白色的多重意义</h4>
+      <p>第42章 "The Whiteness of the Whale" 是全书最著名的哲学篇章。白色既代表纯洁与神圣，也代表虚无与恐惧。Moby Dick 的白不是简单的颜色，而是自然界不可解读的符号——我们赋予意义，却永远无法确认。</p>
+    </div>
+    <div class="theme-card">
+      <div class="theme-seal">执</div>
+      <h4>执念与毁灭</h4>
+      <p>Ahab 不是被白鲸杀死的，是被自己的执念吞噬的。他将个人创伤升华为形而上学的复仇——攻击白鲸就是攻击上帝、命运和宇宙的不公。他的伟大与疯狂同源：一种拒绝接受人类局限的意志。</p>
+    </div>
+    <div class="theme-card">
+      <div class="theme-seal">书</div>
+      <h4>百科全书式叙事</h4>
+      <p>《白鲸》是一部"小说"无法框定的怪物。它交替穿插戏剧独白、科学论文、哲学随笔、捕鲸手册和圣经注释。这种形式上的混乱正好映射了 Ishmael（和梅尔维尔）试图用分类学驯服混沌宇宙的徒劳。</p>
+    </div>
+    <div class="theme-card">
+      <div class="theme-seal">共</div>
+      <h4>异质共存的可能</h4>
+      <p>Ishmael 和 Queequeg 的关系是全书最温柔的部分——一个白人清教徒与一个南太平洋"食人族"的婚姻般的友谊。梅尔维尔暗示：在捕鲸船这个微型宇宙中，种族、宗教和文化的界限可以被超越。</p>
+    </div>
+    <div class="theme-card">
+      <div class="theme-seal">海</div>
+      <h4>人类 vs. 自然</h4>
+      <p>捕鲸是19世纪最极端的工业活动——人类深入海洋，与地球上最大的生物搏斗。梅尔维尔没有简单地将捕鲸妖魔化，而是呈现了其中的勇气、技艺和残酷。大自然是冷漠的，既不是朋友也不是敌人。</p>
+    </div>
+    <div class="theme-card">
+      <div class="theme-seal">命</div>
+      <h4>命运与自由意志</h4>
+      <p>Ahab 认为自己被命运驱动，Starbuck 认为人可以自由选择，Ishmael 在两者之间摇摆。整部小说是一个巨大的占卜——从 Queequeg 纹身中的宇宙地图，到 Fedallah 的预言，每个人都在试图解读不可解读的征兆。</p>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ====== 数据纵览 · Data ====== -->
+<section class="section" id="data">
+  <div class="section-head">
+    <div class="section-kicker">The Ledger</div>
+    <h2>数据纵览</h2>
+    <svg class="section-orn" width="64" height="12" viewBox="0 0 64 12"><path d="M2 8 Q 9 2 16 8 T 30 8 T 44 8 T 58 8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    <p>一些关于《白鲸》的数字。</p>
+  </div>
+  <div class="data-grid">
+    <div class="data-card"><div class="data-num">135</div><div class="data-label">正文章节</div></div>
+    <div class="data-card"><div class="data-num">1</div><div class="data-label">尾声</div></div>
+    <div class="data-card"><div class="data-num">~209k</div><div class="data-label">英文词数</div></div>
+    <div class="data-card"><div class="data-num">1851</div><div class="data-label">出版年份</div></div>
+    <div class="data-card"><div class="data-num">~3,200</div><div class="data-label">初版印数</div></div>
+    <div class="data-card"><div class="data-num">1851</div><div class="data-label">初版（伦敦）</div></div>
+    <div class="data-card"><div class="data-num">1920s</div><div class="data-label">被重新发现</div></div>
+    <div class="data-card"><div class="data-num">4.2/5</div><div class="data-label">Goodreads</div></div>
+    <div class="data-card"><div class="data-num">30+</div><div class="data-label">语言译本</div></div>
+    <div class="data-card"><div class="data-num">∞</div><div class="data-label">解读可能性</div></div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ====== 遗产与影响 · Legacy ====== -->
+<section class="section" id="legacy">
+  <div class="section-head">
+    <div class="section-kicker">Reception &amp; Afterlife</div>
+    <h2>遗产与影响</h2>
+    <svg class="section-orn" width="64" height="12" viewBox="0 0 64 12"><path d="M2 8 Q 9 2 16 8 T 30 8 T 44 8 T 58 8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    <p>《白鲸》出版时遭遇了评论界的冷遇和商业失败。但在之后的岁月里，它被重新评价，成为公认的史上最伟大小说之一。</p>
+  </div>
+  <div class="legacy-text">
+    <p><strong>出版时的失败。</strong>《白鲸》在1851年出版时遭遇评论界冷遇和商业失败。梅尔维尔在世时仅卖出约3,200册（英国版），美国版更少。读者期待的是一本像《泰比》那样的南太平洋冒险故事，却得到了一部夹杂哲学、神学和鲸类解剖学的"怪物"。梅尔维尔终其一生未能从这次失败中恢复，晚年默默无闻地在纽约海关工作。</p>
+
+    <p><strong>20世纪的重新发现。</strong>1919年梅尔维尔诞辰百年之际，文学界开始重新评价《白鲸》。1921年 Raymond Weaver 的传记《Herman Melville: Mariner and Mystic》点燃了"梅尔维尔复兴"运动。D.H. 劳伦斯称其为"美国文学中最伟大的书之一"。到20世纪中叶，《白鲸》已被公认为美国文学的最高成就之一，与《哈克贝利·费恩历险记》和《了不起的盖茨比》并列。</p>
+
+    <p><strong>为什么它是一部"不可能的小说"。</strong>《白鲸》拒绝被归类。它同时是：海上冒险故事、捕鲸业百科全书、莎士比亚式悲剧、圣经寓言、哥特式恐怖、哲学论文、喜剧——所有这些被塞进一部书里。它用捕鲸船的微型世界映射整个宇宙，用一条白鲸承载所有不可回答的问题。正如 Jorge Luis Borges 所说："《白鲸》是一部无限的书的缩影。"</p>
+
+    <p><strong>流行文化的回响。</strong>Starbucks 咖啡以书中的大副命名（创始人的最初提议是 Pequod，被否决）。Marvel 漫画中的 Ahab 是绿巨人的宿敌。重金属乐队 Mastodon 的专辑《Leviathan》（2004）完全基于《白鲸》。电影改编包括 John Huston 1956年版（Gregory Peck 饰 Ahab，剧本由 Ray Bradbury 参与）和 Ron Howard 2015年《海洋深处》（讲述真实 Essex 号事件，即《白鲸》的灵感来源）。</p>
+
+    <p><strong>今天的《白鲸》。</strong>在一个气候变化、物种灭绝和全球化的时代，《白鲸》的阅读体验只会更加锋利。鲸鱼——这个被人类从灭绝边缘拉回来的物种——让梅尔维尔的捕鲸叙事有了新的层次。Ahab 的执念、Ishmael 的沉思、Queequeg 的纹身——这些依然是理解人类如何在冷漠宇宙中寻找意义的永恒坐标。正如梅尔维尔在书中所写："真正的目的地从不在地图上。"</p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <hr class="rule">
+  <p>© 2026 · Moby-Dick; or, The Whale · 致敬赫尔曼·梅尔维尔</p>
+  <p style="margin-top:0.4rem;"><a href="https://zzht.me">← 返回 zzht</a></p>
+</footer>
+
+<!-- ====== Scripts ====== -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+// ===== 1. Map =====
+(function() {
+  var map = L.map('map', { center: [10, -50], zoom: 2.5, zoomControl: true });
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; <a href="https://carto.com/">CARTO</a> &copy; <a href="https://www.openstreetmap.org/">OSM</a>',
+    maxZoom: 10
+  }).addTo(map);
+
+  var legColors = { departure: '#16697a', indian: '#9c7a28', pacific: '#8c3b2e' };
+  var allLocs = [
+    { name:'New Bedford · 新贝德福德', lat:41.636, lon:-70.934, desc:'Ishmael 来到捕鲸者客栈，遇见 Queequeg', leg:'departure', ch:'1-21' },
+    { name:'Nantucket · 楠塔基特', lat:41.284, lon:-70.100, desc:'Pequod 号出发港，美国捕鲸业的中心', leg:'departure', ch:'14-22' },
+    { name:'Azores · 亚速尔群岛', lat:37.741, lon:-25.676, desc:'Pequod 号航行经过的第一个陆地标志', leg:'departure', ch:'23+' },
+    { name:'Cape of Good Hope · 好望角', lat:-34.357, lon:18.474, desc:'绕行非洲南端进入印度洋', leg:'indian', ch:'52' },
+    { name:'Java Head · 爪哇角', lat:-6.8, lon:105.5, desc:'穿越巽他海峡，与 Jungfrau 号相遇', leg:'indian', ch:'81' },
+    { name:'Japanese Whaling Grounds', lat:32, lon:150, desc:'太平洋捕鲸场，与 Rachel 号相遇', leg:'pacific', ch:'128' },
+    { name:'Equator · 赤道追击海域', lat:-0.5, lon:-140, desc:'三天追击 · Moby Dick 出现 · Pequod 沉没', leg:'pacific', ch:'133-135' }
+  ];
+
+  var markers = [];
+  var lineGroups = { departure: [], indian: [], pacific: [] };
+
+  function mkIcon(c) { return L.divIcon({ className:'', html:'<div style="width:13px;height:13px;border-radius:50%;background:'+c+';border:2px solid #fbf6ea;box-shadow:0 0 0 1px rgba(38,51,59,0.3);"></div>', iconSize:[13,13], iconAnchor:[6.5,6.5] }); }
+
+  allLocs.forEach(function(loc, i) {
+    var m = L.marker([loc.lat, loc.lon], { icon: mkIcon(legColors[loc.leg]) })
+      .bindPopup('<strong>'+loc.name+'</strong><br><span style="font-size:0.75rem;color:#8b98a0;">第'+loc.ch+'章</span><br>'+loc.desc)
+      .addTo(map);
+    m._loc = loc; markers.push(m);
+    lineGroups[loc.leg].push([loc.lat, loc.lon]);
+  });
+
+  // Draw route lines
+  var allLines = {};
+  Object.keys(lineGroups).forEach(function(leg) {
+    if (lineGroups[leg].length > 1) {
+      allLines[leg] = L.polyline(lineGroups[leg], { color: legColors[leg], weight: 1.8, opacity: 0.55, dashArray: '6 6' }).addTo(map);
+    }
+  });
+
+  // Filters
+  document.querySelectorAll('.map-fbtn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.map-fbtn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      var leg = btn.dataset.leg;
+      markers.forEach(function(m) {
+        if (leg === 'all' || m._loc.leg === leg) { if (!map.hasLayer(m)) m.addTo(map); }
+        else { if (map.hasLayer(m)) m.remove(); }
+      });
+      Object.keys(allLines).forEach(function(l) {
+        if (leg === 'all' || l === leg) { if (!map.hasLayer(allLines[l])) allLines[l].addTo(map); }
+        else { if (map.hasLayer(allLines[l])) allLines[l].remove(); }
+      });
+    });
+  });
+})();
+
+// ===== 2. Relationship Graph =====
+(function() {
+  var canvas = document.getElementById('graphCanvas');
+  var ctx = canvas.getContext('2d');
+  var container = canvas.parentElement;
+  var W, H;
+
+  var nodes = [
+    { id:'ishmael', label:'Ishmael', group:'pequod', x:0, y:0 },
+    { id:'ahab', label:'Ahab', group:'mates', x:0, y:0 },
+    { id:'queequeg', label:'Queequeg', group:'harpooneers', x:0, y:0 },
+    { id:'starbuck', label:'Starbuck', group:'mates', x:0, y:0 },
+    { id:'stubb', label:'Stubb', group:'mates', x:0, y:0 },
+    { id:'flask', label:'Flask', group:'mates', x:0, y:0 },
+    { id:'fedallah', label:'Fedallah', group:'prophetic', x:0, y:0 },
+    { id:'pip', label:'Pip', group:'pequod', x:0, y:0 },
+    { id:'mobydick', label:'Moby Dick', group:'prophetic', x:0, y:0 },
+    { id:'tashtego', label:'Tashtego', group:'harpooneers', x:0, y:0 },
+    { id:'daggoo', label:'Daggoo', group:'harpooneers', x:0, y:0 }
+  ];
+
+  var edges = [
+    { from:'ishmael', to:'queequeg', type:'solid' },
+    { from:'ishmael', to:'ahab', type:'dashed' },
+    { from:'ahab', to:'starbuck', type:'dashed' },
+    { from:'ahab', to:'fedallah', type:'solid' },
+    { from:'ahab', to:'mobydick', type:'dashed' },
+    { from:'starbuck', to:'stubb', type:'solid' },
+    { from:'stubb', to:'flask', type:'solid' },
+    { from:'queequeg', to:'tashtego', type:'solid' },
+    { from:'queequeg', to:'daggoo', type:'solid' },
+    { from:'pip', to:'ahab', type:'solid' },
+    { from:'mobydick', to:'fedallah', type:'dashed' },
+    { from:'ishmael', to:'pip', type:'solid' }
+  ];
+
+  var activeGroup = 'all';
+  var offsetX = 0, offsetY = 0, dragging = false, dragStartX, dragStartY;
+  var hoveredNode = null;
+
+  function resize() {
+    var rect = container.getBoundingClientRect();
+    W = canvas.width = rect.width;
+    H = canvas.height = rect.height - 92;
+    layoutNodes();
+    draw();
+  }
+
+  function layoutNodes() {
+    var cx = W / 2, cy = H / 2, r = Math.min(W, H) * 0.35;
+    nodes.forEach(function(n, i) {
+      var angle = (i / nodes.length) * Math.PI * 2 - Math.PI / 2;
+      n.x = cx + Math.cos(angle) * r;
+      n.y = cy + Math.sin(angle) * r;
+    });
+  }
+
+  function serifFont(size, bold) {
+    return (bold ? 'bold ' : '') + size + 'px Georgia, "Noto Serif SC", "SimSun", serif';
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    // Edges
+    edges.forEach(function(e) {
+      var from = nodes.find(function(n) { return n.id === e.from; });
+      var to = nodes.find(function(n) { return n.id === e.to; });
+      if (!from || !to) return;
+      if (activeGroup !== 'all' && from.group !== activeGroup && to.group !== activeGroup) return;
+
+      ctx.beginPath();
+      ctx.moveTo(from.x + offsetX, from.y + offsetY);
+      ctx.lineTo(to.x + offsetX, to.y + offsetY);
+      ctx.strokeStyle = e.type === 'solid' ? 'rgba(23,99,111,0.45)' : 'rgba(140,59,46,0.5)';
+      ctx.lineWidth = e.type === 'solid' ? 1.4 : 1.1;
+      if (e.type === 'dashed') ctx.setLineDash([4, 4]);
+      else ctx.setLineDash([]);
+      ctx.stroke();
+    });
+    ctx.setLineDash([]);
+
+    // Nodes
+    nodes.forEach(function(n) {
+      if (activeGroup !== 'all' && n.group !== activeGroup) return;
+      var x = n.x + offsetX, y = n.y + offsetY;
+      var isHovered = hoveredNode === n;
+
+      ctx.beginPath();
+      ctx.arc(x, y, isHovered ? 22 : 18, 0, Math.PI * 2);
+      ctx.fillStyle = '#fbf6ea';
+      ctx.fill();
+      ctx.strokeStyle = isHovered ? 'rgba(15,69,80,0.9)' : 'rgba(23,99,111,0.5)';
+      ctx.lineWidth = isHovered ? 2 : 1.5;
+      ctx.stroke();
+
+      ctx.fillStyle = '#26333b';
+      ctx.font = serifFont(12, isHovered);
+      ctx.textAlign = 'center';
+      ctx.fillText(n.label, x, y + 34);
+
+      if (isHovered) {
+        ctx.fillStyle = '#17636f';
+        ctx.font = serifFont(10, false);
+        var groupLabel = { pequod:'Pequod船员', mates:'船长&大副', harpooneers:'标枪手', prophetic:'预言/命运' }[n.group];
+        ctx.fillText(groupLabel, x, y + 48);
+      }
+    });
+  }
+
+  canvas.addEventListener('mousedown', function(e) { dragging = true; dragStartX = e.clientX - offsetX; dragStartY = e.clientY - offsetY; canvas.style.cursor = 'grabbing'; });
+  canvas.addEventListener('mouseup', function() { dragging = false; canvas.style.cursor = 'grab'; });
+  canvas.addEventListener('mouseleave', function() { dragging = false; canvas.style.cursor = 'grab'; });
+  canvas.addEventListener('mousemove', function(e) {
+    if (dragging) { offsetX = e.clientX - dragStartX; offsetY = e.clientY - dragStartY; draw(); return; }
+    var mx = e.clientX - canvas.getBoundingClientRect().left, my = e.clientY - canvas.getBoundingClientRect().top;
+    hoveredNode = null;
+    nodes.forEach(function(n) {
+      if (activeGroup !== 'all' && n.group !== activeGroup) return;
+      var dx = mx - (n.x + offsetX), dy = my - (n.y + offsetY);
+      if (Math.sqrt(dx*dx + dy*dy) < 22) hoveredNode = n;
+    });
+    draw();
+    canvas.style.cursor = hoveredNode ? 'pointer' : 'grab';
+  });
+
+  document.querySelectorAll('.graph-fbtn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.graph-fbtn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      activeGroup = btn.dataset.group;
+      offsetX = 0; offsetY = 0;
+      draw();
+    });
+  });
+
+  window.addEventListener('resize', resize);
+  resize();
+})();
+
+// ===== 3. Storylines =====
+(function() {
+  var storyData = [
+    {
+      desc: '在 Nantucket 的寒冷冬日，五条故事线在捕鲸船 Pequod 号的甲板上汇聚。',
+      threads: [
+        { title:'Ishmael 的自我放逐', names:'Ishmael · Queequeg · Peter Coffin 客栈老板' },
+        { title:'Ahab 的隐藏', names:'Ahab（未见其人）· 以利亚 · Peleg & Bildad' },
+        { title:'契约与命运', names:'Ishmael · Queequeg · Pequod 号签约' },
+        { title:'捕鲸者的世界', names:'新贝德福德 · 捕鲸者礼拜堂 · 石碑上的名字' },
+        { title:'海与岸的界限', names:'Nantucket 码头 · 最后的陆地 · 起锚出海' }
+      ]
+    },
+    {
+      desc: '八十三条漫长的海上日夜，多条故事线在猎鲸、船遇和百科全书式的沉思中交错推进。',
+      threads: [
+        { title:'Ahab 的执念', names:'Ahab · Fedallah · 西班牙金币 · 幽灵船员' },
+        { title:'Ishmael 的沉思', names:'Ishmael · 鲸类学 · 白色的哲学 · 面相学' },
+        { title:'九次船遇', names:'Goney · Town-Ho · Jeroboam · Jungfrau · Rose-Bud · Enderby · Rachel · Delight' },
+        { title:'Starbuck 的挣扎', names:'Starbuck · 贵格会信仰 · 对 Ahab 的质疑 · 举枪的瞬间' },
+        { title:'捕鲸的日常', names:'Stubb · Flask · Queequeg · Tashtego · Daggoo · 标枪与绳索' }
+      ]
+    },
+    {
+      desc: '最后三十章，所有线索收束。三天三夜的追击中，预言、执念、理性与疯狂在赤道的烈日下碰撞。',
+      threads: [
+        { title:'三天追击', names:'Ahab · Moby Dick · 捕鲸艇 · 标枪 · "Thus, I give up the spear!"' },
+        { title:'预言的应验', names:'Fedallah · 麻绳绞架 · 非木棺材 · 先于 Ahab 而死' },
+        { title:'Starbuck 的最后努力', names:'Starbuck · 举枪 · 放弃 · 接受命运' },
+        { title:'Pequod 的沉没', names:'漩涡 · Tashtego 钉在桅顶 · 天空之鹰 · 一切归于深海' },
+        { title:'Ishmael 的独活', names:'Queequeg 的棺材 · Rachel 号 · "And I only am escaped alone to tell thee"' }
+      ]
+    }
+  ];
+
+  var slBtns = document.querySelectorAll('.sl-btn');
+  var slDesc = document.getElementById('slDesc');
+  var slThreads = document.getElementById('slThreads');
+
+  slBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      slBtns.forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      var idx = parseInt(btn.dataset.sl);
+      slDesc.textContent = storyData[idx].desc;
+      slThreads.innerHTML = storyData[idx].threads.map(function(t) {
+        return '<div class="sl-thread"><div class="sl-thread-title">'+t.title+'</div><div class="sl-thread-names">'+t.names+'</div></div>';
+      }).join('');
+    });
+  });
+})();
+
+// ===== 4. Quotes Slider =====
+(function() {
+  var track = document.getElementById('quotesTrack');
+  var dotsContainer = document.getElementById('quoteDots');
+  var cards = track.querySelectorAll('.quote-card');
+  var current = 0;
+
+  cards.forEach(function(_, i) {
+    var dot = document.createElement('span');
+    dot.className = 'quote-dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', function() { goTo(i); });
+    dotsContainer.appendChild(dot);
+  });
+
+  function goTo(i) {
+    current = i;
+    track.style.transform = 'translateX(-' + (current * 100) + '%)';
+    document.querySelectorAll('.quote-dot').forEach(function(d, j) { d.classList.toggle('active', j === current); });
+  }
+
+  window.prevQuote = function() { goTo((current - 1 + cards.length) % cards.length); };
+  window.nextQuote = function() { goTo((current + 1) % cards.length); };
+})();
+
+// ===== 5. 锚点即时定位（加载时） =====
+(function() {
+  if (location.hash) {
+    var t = document.querySelector(location.hash);
+    if (t) {
+      var y = t.getBoundingClientRect().top + window.scrollY - 70;
+      window.scrollTo({ top: y, behavior: 'instant' });
+    }
+  }
+})();
+</script>
+
+</body>
+</html>
