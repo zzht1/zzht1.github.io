@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="陀思妥耶夫斯基作品合集：罪与罚、卡拉马佐夫兄弟、白痴、群魔、地下室手记、被侮辱与被损害的——生平与作品融为同一条时间河流，每部各有其设计语言。">
+<title>陀思妥耶夫斯基 · 生平与作品 — zzht</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#15120e;
+  --bg2:#1d1813;
+  --bg3:#241d16;
+  --ink:#ece3d2;
+  --ink-soft:#b8ab92;
+  --ink-faint:#7d725c;
+  --gold:#c9a24a;
+  --gold-bright:#e3c074;
+  --line:rgba(201,162,74,.18);
+  --serif:'Noto Serif SC','Source Han Serif SC',serif;
+  --sans:'Noto Sans SC',-apple-system,BlinkMacSystemFont,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);
+  color:var(--ink);
+  background:var(--bg);
+  line-height:1.8;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+/* 暗处的烛光晕 */
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 60% 40% at 50% -8%, rgba(201,162,74,.10), transparent 60%),
+    radial-gradient(ellipse 50% 30% at 85% 110%, rgba(124,31,43,.10), transparent 60%);
+}
+::selection{background:rgba(201,162,74,.22)}
+a{color:inherit}
+.back-home{
+  position:fixed;top:18px;left:20px;z-index:120;
+  font-size:.85rem;color:var(--ink-soft);text-decoration:none;
+  padding:7px 14px;border-radius:999px;
+  background:rgba(21,18,14,.8);border:1px solid var(--line);
+  transition:all .25s;
+}
+.back-home:hover{color:var(--gold-bright);border-color:var(--gold)}
+
+.page{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:0 26px 10vh}
+
+/* ===== HERO ===== */
+.hero{
+  position:relative;padding:16vh 0 7vh;text-align:center;
+}
+.hero .frame{
+  position:relative;display:inline-block;padding:30px 46px;
+  border:1px solid var(--line);
+  margin-bottom:30px;
+}
+.hero .frame::before,.hero .frame::after{
+  content:'';position:absolute;width:14px;height:14px;border:1px solid var(--gold);
+}
+.hero .frame::before{top:-7px;left:-7px;border-right:none;border-bottom:none}
+.hero .frame::after{bottom:-7px;right:-7px;border-left:none;border-top:none}
+.hero-eyebrow{font-size:.8rem;letter-spacing:.42em;color:var(--gold);margin-bottom:20px;font-weight:400}
+.hero h1{
+  font-family:var(--serif);font-weight:900;
+  font-size:clamp(2.8rem,8vw,5rem);letter-spacing:.08em;line-height:1.05;
+}
+.hero-ru{
+  font-family:var(--serif);font-style:italic;color:var(--gold-bright);
+  font-size:clamp(1rem,2.4vw,1.4rem);letter-spacing:.18em;margin-top:14px;
+}
+.hero-years{
+  display:inline-flex;align-items:center;gap:14px;margin-top:20px;
+  color:var(--ink-soft);font-size:.92rem;letter-spacing:.18em;
+}
+.hero-years .v{color:var(--gold-bright);font-family:var(--serif);font-weight:700}
+.hero-years .dash{width:42px;height:1px;background:var(--line)}
+.hero-tag{
+  max-width:600px;margin:34px auto 0;color:var(--ink-soft);
+  font-family:var(--serif);font-size:1.08rem;line-height:2;letter-spacing:.02em;
+}
+.hero-tag em{font-style:normal;color:var(--gold-bright)}
+
+/* ===== 生平与作品 融合时间流 ===== */
+.flow-head{text-align:center;margin:8vh 0 5vh}
+.flow-head .k{font-size:.78rem;letter-spacing:.4em;color:var(--gold)}
+.flow-head h2{font-family:var(--serif);font-weight:700;font-size:1.7rem;letter-spacing:.1em;margin-top:8px}
+.flow-head p{
+  color:var(--ink-soft);font-size:.95rem;margin-top:14px;letter-spacing:.02em;
+  max-width:640px;margin-left:auto;margin-right:auto;line-height:2;
+}
+
+.flow{position:relative;max-width:880px;margin:0 auto;padding:6px 0 4vh}
+.flow::before{
+  content:'';position:absolute;left:150px;top:0;bottom:0;width:1px;
+  background:linear-gradient(180deg,transparent,var(--line) 5%,var(--line) 95%,transparent);
+}
+.flow-item{
+  position:relative;display:grid;grid-template-columns:150px 1fr;align-items:start;
+  padding:16px 0;
+}
+.flow-year{
+  text-align:right;padding-right:42px;padding-top:3px;
+  font-family:var(--serif);font-weight:700;color:var(--gold-bright);
+  font-size:1.05rem;letter-spacing:.04em;white-space:nowrap;
+}
+.flow-dot{
+  position:absolute;left:150px;top:26px;transform:translateX(-50%);
+  width:11px;height:11px;border-radius:50%;background:var(--gold);
+  box-shadow:0 0 0 4px rgba(201,162,74,.14);z-index:2;
+}
+.flow-dot.life{background:var(--ink-faint);box-shadow:0 0 0 4px rgba(125,114,92,.16)}
+.flow-dot.work{background:var(--accent);box-shadow:0 0 0 4px rgba(255,255,255,.06)}
+.flow-body{padding-left:42px}
+
+/* 生平节点（紧凑） */
+.flow-life .flow-title{font-family:var(--serif);font-size:1.14rem;color:var(--ink);margin-bottom:4px}
+.flow-life .flow-sub{font-size:.92rem;color:var(--ink-faint);line-height:1.85;max-width:560px}
+
+/* 作品节点（可点击卡片） */
+.flow-work .flow-card{
+  position:relative;display:block;text-decoration:none;
+  border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:4px;
+  background:linear-gradient(150deg,var(--bg2),var(--bg3));
+  padding:22px 28px 20px;overflow:hidden;
+  transition:transform .4s cubic-bezier(.4,0,.2,1),border-color .4s,box-shadow .4s;
+}
+.flow-work .flow-card::after{
+  content:'';position:absolute;inset:0;opacity:0;transition:opacity .45s;background:var(--glow);
+}
+.flow-work .flow-card:hover{
+  transform:translateX(7px);border-color:var(--accent);box-shadow:0 18px 44px -26px var(--accent);
+}
+.flow-work .flow-card:hover::after{opacity:.55}
+.flow-card .order{font-family:var(--serif);font-size:.78rem;letter-spacing:.3em;color:var(--accent);opacity:.85}
+.flow-card .cn{font-family:var(--serif);font-weight:700;font-size:1.55rem;letter-spacing:.05em;margin-top:5px;color:var(--ink);line-height:1.2}
+.flow-card .ru{font-family:var(--serif);font-style:italic;color:var(--accent);font-size:.86rem;letter-spacing:.07em;margin-top:3px}
+.flow-card .essence{font-size:.92rem;color:var(--ink-soft);margin-top:12px;line-height:1.9}
+.flow-card .fromlife{
+  font-size:.82rem;color:var(--ink-faint);margin-top:12px;line-height:1.8;
+  border-top:1px dashed var(--line);padding-top:11px;
+}
+.flow-card .fromlife b{color:var(--gold-bright);font-weight:400;font-family:var(--serif)}
+.flow-card .enter{
+  position:absolute;right:22px;top:20px;font-family:var(--serif);
+  font-size:1.3rem;color:var(--accent);opacity:0;transform:translateX(-8px);transition:all .35s;
+}
+.flow-card:hover .enter{opacity:1;transform:translateX(0)}
+
+/* 作品各自的配色与光晕 */
+.flow-work.cp{--accent:#c8603a;--glow:radial-gradient(ellipse 80% 80% at 92% 8%,rgba(200,96,58,.20),transparent 60%)}
+.flow-work.bk{--accent:#cf9b3a;--glow:radial-gradient(ellipse 80% 80% at 92% 8%,rgba(207,155,58,.22),transparent 60%)}
+.flow-work.id{--accent:#9aa6b8;--glow:radial-gradient(ellipse 80% 80% at 92% 8%,rgba(154,166,184,.24),transparent 60%)}
+.flow-work.dm{--accent:#d23a2f;--glow:radial-gradient(ellipse 80% 80% at 92% 8%,rgba(210,58,47,.24),transparent 60%)}
+.flow-work.nu{--accent:#9a9488;--glow:radial-gradient(ellipse 80% 80% at 92% 8%,rgba(154,148,136,.22),transparent 60%)}
+.flow-work.ii{--accent:#6f93b8;--glow:radial-gradient(ellipse 80% 80% at 92% 8%,rgba(111,147,184,.24),transparent 60%)}
+
+/* ===== footer ===== */
+.foot{
+  margin-top:6vh;padding-top:26px;border-top:1px solid var(--line);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;
+  font-size:.82rem;color:var(--ink-faint);letter-spacing:.05em;
+}
+.foot a{color:var(--ink-soft);text-decoration:none;transition:color .2s}
+.foot a:hover{color:var(--gold-bright)}
+
+@media(max-width:720px){
+  .flow::before{left:14px}
+  .flow-item{grid-template-columns:1fr;padding-left:36px}
+  .flow-year{text-align:left;padding-right:0;margin-bottom:5px}
+  .flow-dot{left:14px}
+  .flow-body{padding-left:0}
+  .flow-dot{top:12px}
+}
+</style>
+</head>
+<body>
+<a href="index.html" class="back-home">← 返回首页</a>
+<div class="page">
+
+  <header class="hero">
+    <div class="frame">
+      <div class="hero-eyebrow">ФЁДОР МИХАЙЛОВИЧ ДОСТОЕВСКИЙ</div>
+      <h1>陀思妥耶夫斯基</h1>
+      <div class="hero-ru">Фёдор Достоевский</div>
+    </div>
+    <div class="hero-years">
+      <span class="v">1821</span><span class="dash"></span><span class="v">1881</span>
+    </div>
+    <p class="hero-tag">在<em>苦难</em>与<em>信仰</em>之间，勘探人性的深渊。<br>他写的不只是小说，而是一个灵魂的自我审判。</p>
+  </header>
+
+  <div class="flow-head">
+    <div class="k">ЖИЗНЬ И КНИГИ</div>
+    <h2>生平与作品 · 同一条河流</h2>
+    <p>他的书不是从真空里写出来的。流放、癫痫、赌债、丧亲——每一次命运的锤击，都在下一部小说里留下了裂痕与光。下面把生平与作品编进同一条时间河流，每部作品都标着它从哪一段生命里长出来。</p>
+  </div>
+
+  <div class="flow">
+
+    <div class="flow-item flow-life">
+      <div class="flow-year">1821</div><span class="flow-dot life"></span>
+      <div class="flow-body">
+        <div class="flow-title">生于莫斯科</div>
+        <div class="flow-sub">军医之家，童年浸润于《圣经》与俄罗斯民间故事，也早早见识了穷人院里的苦难。</div>
+      </div>
+    </div>
+
+    <div class="flow-item flow-life">
+      <div class="flow-year">1849</div><span class="flow-dot life"></span>
+      <div class="flow-body">
+        <div class="flow-title">被捕与「假处决」</div>
+        <div class="flow-sub">因彼得拉舍夫斯基小组被捕，刑场临刑前一刻改判，流放鄂木斯克苦役四年。空想社会主义者死去了，追问信仰与罪恶的作家诞生了。</div>
+      </div>
+    </div>
+
+    <div class="flow-item flow-work ii">
+      <div class="flow-year">1861</div><span class="flow-dot work"></span>
+      <a class="flow-card" href="the-insulted.html">
+        <span class="order">陆 · 归来之作</span>
+        <div class="cn">被侮辱与被损害的</div>
+        <div class="ru">Униженные и оскорблённые</div>
+        <div class="essence">圣彼得堡的暮色里，被爱情与社会碾碎的弱者。一封写给所有受苦者的长信。</div>
+        <div class="fromlife"><b>从生活里来：</b>刚从西伯利亚归来，他以早年感伤现实主义，替被时代碾过的人发声。</div>
+        <span class="enter">→</span>
+      </a>
+    </div>
+
+    <div class="flow-item flow-work nu">
+      <div class="flow-year">1864</div><span class="flow-dot work"></span>
+      <a class="flow-card" href="notes-from-underground.html">
+        <span class="order">伍 · 内心独白之源</span>
+        <div class="cn">地下室手记</div>
+        <div class="ru">Записки из подполья</div>
+        <div class="essence">一个躲在地下室的失意小吏，用怨恨对抗整个理性的乌托邦。现代存在主义的源头。</div>
+        <div class="fromlife"><b>从生活里来：</b>妻子与兄长相继离世，癫痫与赌债缠身，他在绝望里写下现代人的第一篇内心独白。</div>
+        <span class="enter">→</span>
+      </a>
+    </div>
+
+    <div class="flow-item flow-work cp">
+      <div class="flow-year">1866</div><span class="flow-dot work"></span>
+      <a class="flow-card" href="crime-and-punishment.html">
+        <span class="order">壹 · 一举震动文坛</span>
+        <div class="cn">罪与罚</div>
+        <div class="ru">Преступление и наказание</div>
+        <div class="essence">彼得堡七月的酷热里，一桩九天之内犯下的罪，一场持续一生的罚。</div>
+        <div class="fromlife"><b>从生活里来：</b>在赌债与截稿的双重逼迫下，他把「理性能否越界」的诘问，押上了拉斯柯尔尼科夫的斧头。</div>
+        <span class="enter">→</span>
+      </a>
+    </div>
+
+    <div class="flow-item flow-work id">
+      <div class="flow-year">1868–69</div><span class="flow-dot work"></span>
+      <a class="flow-card" href="the-idiot.html">
+        <span class="order">叁 · 对善良的豪赌</span>
+        <div class="cn">白痴</div>
+        <div class="ru">Идиот</div>
+        <div class="essence">一个「绝对善良」的人回到污浊的人间，像一道过于明亮的光。</div>
+        <div class="fromlife"><b>从生活里来：</b>流亡欧洲、幼女夭折，他把对「彻底善良」的全部信仰，押在了梅什金公爵身上。</div>
+        <span class="enter">→</span>
+      </a>
+    </div>
+
+    <div class="flow-item flow-work dm">
+      <div class="flow-year">1871–72</div><span class="flow-dot work"></span>
+      <a class="flow-card" href="demons.html">
+        <span class="order">肆 · 一代人的预警</span>
+        <div class="cn">群魔</div>
+        <div class="ru">Бесы</div>
+        <div class="essence">当虚无主义化作恶魔附身。一个小省城，革命、阴谋与「人神」哲学撕碎了所有人。</div>
+        <div class="fromlife"><b>从生活里来：</b>以涅恰耶夫真实案件为骨，他写下对一代人因「上帝已死」而迷失的预警。</div>
+        <span class="enter">→</span>
+      </a>
+    </div>
+
+    <div class="flow-item flow-work bk">
+      <div class="flow-year">1879–80</div><span class="flow-dot work"></span>
+      <a class="flow-card" href="brothers-karamazov.html">
+        <span class="order">贰 · 信仰的终极辩词</span>
+        <div class="cn">卡拉马佐夫兄弟</div>
+        <div class="ru">Братья Карамазовы</div>
+        <div class="essence">一座教堂般的家族悲剧：四兄弟、一桩弑父疑案，与「宗教大法官」对信仰最锋利的诘问。</div>
+        <div class="fromlife"><b>从生活里来：</b>生命最后十年、健康崩坏之际，他写下了关于信仰与「美能拯救世界」的终极辩词。</div>
+        <span class="enter">→</span>
+      </a>
+    </div>
+
+    <div class="flow-item flow-life">
+      <div class="flow-year">1881</div><span class="flow-dot life"></span>
+      <div class="flow-body">
+        <div class="flow-title">逝于圣彼得堡</div>
+        <div class="flow-sub">葬礼有数万人送行。俄国文学的先知离世，而他与苦难角力的声音，至今仍在回声。</div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="foot">
+    <span>© <em style="font-style:normal;color:var(--ink-soft)">zzht</em> · 陀思妥耶夫斯基 · 生平与作品</span>
+    <a href="index.html">返回站点首页 ↗</a>
+  </footer>
+
+</div>
+</body>
+</html>
