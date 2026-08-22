@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="陀思妥耶夫斯基《被侮辱与被损害的》：圣彼得堡的暮色里，被爱情、门第与社会碾碎的弱者。一封写给所有受苦者的长信——伊万、娜塔莎、涅莉与瓦爾科夫斯基公爵。">
+<title>被侮辱与被损害的 · 陀思妥耶夫斯基 — zzht</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#1b2530;
+  --bg2:#243140;
+  --bg3:#2c3b4d;
+  --ink:#e6ecf2;
+  --ink-soft:#a7b6c6;
+  --ink-faint:#5a6b7d;
+  --tear:#5b7fa6;
+  --tear-bright:#7ea3c9;
+  --line:rgba(126,163,201,.18);
+  --serif:'Noto Serif SC','Source Han Serif SC',serif;
+  --sans:'Noto Sans SC',-apple-system,BlinkMacSystemFont,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--ink);background:var(--bg);line-height:1.8;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 60% 40% at 50% -8%, rgba(126,163,201,.12), transparent 60%),
+    radial-gradient(ellipse 55% 35% at 50% 112%, rgba(91,127,166,.12), transparent 60%)}
+::selection{background:rgba(126,163,201,.22)}
+a{color:inherit;text-decoration:none}
+.back-home{position:fixed;top:18px;left:20px;z-index:140;font-size:.85rem;color:var(--ink-soft);padding:7px 14px;border-radius:999px;background:rgba(27,37,48,.82);border:1px solid var(--line);transition:all .25s}
+.back-home:hover{color:var(--tear-bright);border-color:var(--tear)}
+.page{position:relative;z-index:1;max-width:980px;margin:0 auto;padding:0 24px 9vh}
+
+/* HERO：暮色信笺 */
+.hero{min-height:92vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:14vh 24px 7vh;position:relative}
+.hero-frame{position:relative;border:1px solid var(--line);border-radius:3px;padding:56px 44px;background:rgba(27,37,48,.4);max-width:640px}
+.hero-frame::before{content:'';position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,transparent,var(--tear),transparent);opacity:.6}
+.hero-eyebrow{font-size:.82rem;letter-spacing:.4em;color:var(--tear-bright);margin-bottom:18px;font-weight:400}
+.hero h1{font-family:var(--serif);font-weight:900;font-size:clamp(2.3rem,7.5vw,4.4rem);letter-spacing:.06em;line-height:1.1;color:var(--ink)}
+.hero-ru{font-family:var(--serif);font-style:italic;color:var(--tear-bright);font-size:clamp(.95rem,2.4vw,1.25rem);letter-spacing:.12em;margin-top:12px}
+.hero-sub{margin-top:18px;color:var(--ink-soft);font-family:var(--serif);font-size:1.02rem;line-height:1.95;letter-spacing:.02em;max-width:540px}
+.hero-divider{display:flex;align-items:center;gap:16px;margin:30px auto}
+.hero-divider::before,.hero-divider::after{content:'';width:70px;height:1px}
+.hero-divider::before{background:linear-gradient(90deg,transparent,rgba(126,163,201,.5))}
+.hero-divider::after{background:linear-gradient(270deg,transparent,rgba(126,163,201,.5))}
+.hero-meta{display:flex;flex-wrap:wrap;justify-content:center;gap:14px 44px;margin-top:34px}
+.hero-meta-item{text-align:center;min-width:64px}
+.hero-meta-item .v{display:block;font-family:var(--serif);font-weight:900;font-size:1.5rem;color:var(--tear-bright)}
+.hero-meta-item .l{font-size:.74rem;color:var(--ink-faint);letter-spacing:.14em;margin-top:2px}
+
+/* NAV */
+.nav-bar{position:sticky;top:0;z-index:110;background:rgba(27,37,48,.9);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);margin:0 -24px 6vh}
+.nav-inner{max-width:980px;margin:0 auto;display:flex;overflow-x:auto;gap:4px;padding:0 14px;scrollbar-width:none}
+.nav-inner::-webkit-scrollbar{display:none}
+.nav-tab{flex:0 0 auto;font-size:.86rem;color:var(--ink-faint);padding:16px 13px;cursor:pointer;white-space:nowrap;position:relative;transition:color .25s;letter-spacing:.04em}
+.nav-tab.active{color:var(--tear-bright)}
+.nav-tab.active::after{content:'';position:absolute;left:13px;right:13px;bottom:0;height:2px;background:linear-gradient(90deg,var(--tear),var(--tear-bright))}
+.nav-tab:hover{color:var(--ink)}
+
+/* SECTION */
+.section{padding:5vh 0;border-top:1px solid rgba(126,163,201,.08)}
+.section.wide{padding-left:0;padding-right:0}
+.section-title{font-family:var(--serif);font-weight:700;font-size:clamp(1.5rem,4vw,2rem);letter-spacing:.08em;color:var(--ink);display:flex;align-items:center;gap:14px}
+.section-title .idx{font-size:.8rem;color:var(--tear-bright);letter-spacing:.3em;font-weight:400}
+.section-desc{color:var(--ink-soft);font-size:.95rem;line-height:1.95;margin:14px 0 26px;max-width:680px}
+.section-desc em{font-style:normal;color:var(--tear-bright)}
+
+.ov-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:8px}
+.ov-card{border:1px solid var(--line);border-radius:4px;padding:22px 22px;background:linear-gradient(160deg,var(--bg2),var(--bg3))}
+.ov-card h4{font-family:var(--serif);color:var(--tear-bright);font-size:1.02rem;letter-spacing:.06em;margin-bottom:8px}
+.ov-card p{font-size:.9rem;color:var(--ink-soft);line-height:1.85}
+.ov-card .big{font-family:var(--serif);font-size:2.2rem;color:var(--tear);line-height:1}
+
+.steps{counter-reset:s;display:flex;flex-direction:column;gap:0;margin-top:6px}
+.step{position:relative;padding:22px 0 22px 64px;border-left:1px solid var(--line);margin-left:18px}
+.step::before{content:counter(s,upper-roman);counter-increment:s;position:absolute;left:-19px;top:18px;width:38px;height:38px;border-radius:50%;background:var(--bg3);border:1px solid var(--tear);color:var(--tear-bright);font-family:var(--serif);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:.9rem}
+.step h4{font-family:var(--serif);font-size:1.12rem;color:var(--ink);letter-spacing:.03em}
+.step .when{font-size:.76rem;color:var(--tear-bright);letter-spacing:.1em;margin:2px 0 8px}
+.step p{font-size:.9rem;color:var(--ink-soft);line-height:1.85}
+
+.char-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.char{border:1px solid var(--line);border-radius:4px;padding:18px 16px;background:linear-gradient(160deg,var(--bg2),var(--bg3));cursor:pointer;transition:transform .3s,border-color .3s}
+.char:hover{transform:translateY(-4px);border-color:var(--tear)}
+.char .role{font-size:.72rem;letter-spacing:.16em;color:var(--tear-bright)}
+.char .nm{font-family:var(--serif);font-weight:700;font-size:1.1rem;margin:6px 0 2px;color:var(--ink)}
+.char .en{font-size:.72rem;color:var(--ink-faint);font-style:italic}
+.char .one{font-size:.82rem;color:var(--ink-soft);margin-top:10px;line-height:1.7}
+
+.theme-block{display:grid;grid-template-columns:200px 1fr;gap:24px;padding:26px 0;border-bottom:1px solid rgba(126,163,201,.10)}
+.theme-block:last-child{border-bottom:none}
+.theme-side .no{font-family:var(--serif);font-size:2.4rem;color:var(--tear);line-height:1}
+.theme-side h3{font-family:var(--serif);font-size:1.2rem;color:var(--ink);margin-top:6px;letter-spacing:.04em}
+.theme-side .en{font-size:.76rem;color:var(--ink-faint);font-style:italic;letter-spacing:.06em;margin-top:4px}
+.theme-body p{font-size:.92rem;color:var(--ink-soft);line-height:1.9}
+.theme-keys{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px}
+.theme-key{font-size:.74rem;color:var(--tear-bright);border:1px solid var(--line);border-radius:999px;padding:4px 12px;letter-spacing:.04em}
+
+.quote-shell{position:relative;max-width:720px;margin:8px auto 0;border:1px solid var(--line);border-radius:6px;background:linear-gradient(160deg,var(--bg2),var(--bg3));padding:46px 56px 40px;text-align:center;overflow:hidden}
+.quote-mark{position:absolute;top:8px;left:20px;font-family:var(--serif);font-size:4rem;color:rgba(126,163,201,.16)}
+.q-viewport{overflow:hidden}
+.q-track{display:flex;transition:transform .6s cubic-bezier(.4,0,.2,1)}
+.q-slide{min-width:100%;padding:0 8px}
+.q-text{font-family:var(--serif);font-size:1.2rem;line-height:2;color:var(--ink);letter-spacing:.02em}
+.q-src{font-size:.82rem;color:var(--tear-bright);margin-top:18px;letter-spacing:.06em}
+.q-note{font-size:.82rem;color:var(--ink-faint);margin-top:6px;line-height:1.7;max-width:520px;margin-left:auto;margin-right:auto}
+.q-nav{position:absolute;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--tear);font-size:2rem;cursor:pointer;z-index:2;width:44px;height:44px;border-radius:50%;transition:background .2s}
+.q-nav:hover{background:rgba(126,163,201,.12)}
+.q-nav.prev{left:6px}.q-nav.next{right:6px}
+.q-dots{display:flex;justify-content:center;gap:8px;margin-top:22px}
+.q-dot{width:8px;height:8px;border-radius:50%;background:rgba(126,163,201,.3);cursor:pointer;transition:all .25s}
+.q-dot.active{background:var(--tear-bright);transform:scale(1.25)}
+
+.ver-list{display:grid;gap:12px;margin-top:6px}
+.ver{border:1px solid var(--line);border-radius:4px;padding:18px 20px;background:linear-gradient(160deg,var(--bg2),var(--bg3));display:flex;gap:16px;align-items:flex-start}
+.ver .yr{font-family:var(--serif);font-weight:700;color:var(--tear-bright);font-size:1.05rem;min-width:62px}
+.ver .vt{font-size:.9rem;color:var(--ink-soft);line-height:1.8}
+.ver .vt b{color:var(--ink);font-weight:600}
+
+.read-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:6px}
+.read{border:1px solid var(--line);border-radius:4px;padding:20px 18px;background:linear-gradient(160deg,var(--bg2),var(--bg3))}
+.read h4{font-family:var(--serif);color:var(--tear-bright);font-size:1rem;letter-spacing:.04em;margin-bottom:8px}
+.read p{font-size:.85rem;color:var(--ink-soft);line-height:1.8}
+
+.modal-mask{position:fixed;inset:0;background:rgba(8,12,18,.8);z-index:200;display:none;align-items:center;justify-content:center;padding:24px}
+.modal-mask.open{display:flex}
+.modal-box{position:relative;max-width:520px;width:100%;background:linear-gradient(160deg,var(--bg3),var(--bg2));border:1px solid var(--tear);border-radius:6px;padding:34px 34px 30px;box-shadow:0 30px 80px -30px #000}
+.modal-close{position:absolute;top:12px;right:16px;background:none;border:none;color:var(--ink-soft);font-size:1.6rem;cursor:pointer;line-height:1}
+.modal-close:hover{color:var(--tear-bright)}
+#mName{font-family:var(--serif);font-size:1.5rem;color:var(--ink);letter-spacing:.04em}
+#mRu{font-family:var(--serif);font-style:italic;color:var(--tear-bright);font-size:.95rem;margin-top:2px}
+#mRole{display:inline-block;font-size:.74rem;letter-spacing:.14em;color:var(--tear-bright);border:1px solid rgba(126,163,201,.4);border-radius:999px;padding:3px 12px;margin-top:12px}
+#mBody{margin-top:16px;font-size:.92rem;color:var(--ink-soft);line-height:1.95}
+
+.foot-coll{margin-top:9vh;border-top:1px solid var(--line);padding-top:30px}
+.foot-coll .ttl{font-family:var(--serif);font-size:1rem;color:var(--tear-bright);letter-spacing:.1em;margin-bottom:16px}
+.foot-links{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.foot-links a{border:1px solid var(--line);border-radius:4px;padding:14px 16px;transition:all .3s;background:linear-gradient(160deg,var(--bg2),var(--bg3))}
+.foot-links a:hover{border-color:var(--tear);transform:translateY(-3px)}
+.foot-links .cn{font-family:var(--serif);font-size:1rem;color:var(--ink)}
+.foot-links .ru{font-size:.72rem;color:var(--ink-faint);font-style:italic}
+.foot-links .here{color:var(--tear-bright)}
+.site-foot{margin-top:6vh;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-size:.82rem;color:var(--ink-faint)}
+.site-foot a{color:var(--ink-soft);transition:color .2s}
+.site-foot a:hover{color:var(--tear-bright)}
+
+.fade-in{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease}
+.fade-in.in{opacity:1;transform:none}
+
+@media(max-width:760px){
+  .ov-grid,.char-grid,.read-grid,.foot-links{grid-template-columns:1fr}
+  .theme-block{grid-template-columns:1fr;gap:10px}
+  .quote-shell{padding:40px 30px 34px}
+  .q-text{font-size:1.04rem}
+}
+</style>
+</head>
+<body>
+<a href="dostoevsky.html" class="back-home">← 返回合集</a>
+<div class="page">
+
+  <header class="hero">
+    <div class="hero-frame">
+      <div class="hero-eyebrow">ФЁДОР ДОСТОЕВСКИЙ · 1861</div>
+      <h1>被侮辱与被损害的</h1>
+      <div class="hero-ru">Униженные и оскорблённые</div>
+      <p class="hero-sub">圣彼得堡的暮色里，<br>被爱情、门第与社会碾碎的弱者。</p>
+      <div class="hero-divider">
+        <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true">
+          <path d="M20 6 C13 14 13 26 20 34 C27 26 27 14 20 6 Z" fill="none" stroke="#7ea3c9" stroke-width="1.4"/>
+          <path d="M20 12 C17 16 17 24 20 30" fill="none" stroke="#5b7fa6" stroke-width="1.2"/>
+          <circle cx="20" cy="34" r="1.6" fill="#7ea3c9"/>
+        </svg>
+      </div>
+      <div class="hero-meta">
+        <div class="hero-meta-item"><span class="v">4</span><span class="l">部结构</span></div>
+        <div class="hero-meta-item"><span class="v">2</span><span class="l">对爱情</span></div>
+        <div class="hero-meta-item"><span class="v">孤女</span><span class="l">涅莉</span></div>
+        <div class="hero-meta-item"><span class="v">1861</span><span class="l">发表年份</span></div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="nav-bar"><div class="nav-inner">
+    <div class="nav-tab active" data-section="overview">概览</div>
+    <div class="nav-tab" data-section="story">故事脉络</div>
+    <div class="nav-tab" data-section="characters">人物</div>
+    <div class="nav-tab" data-section="themes">主题</div>
+    <div class="nav-tab" data-section="quotes">名句</div>
+    <div class="nav-tab" data-section="versions">译本与影响</div>
+    <div class="nav-tab" data-section="reading">阅读指南</div>
+  </div></nav>
+
+  <section class="section fade-in" id="overview">
+    <h2 class="section-title"><span class="idx">Ⅰ</span>关于这本书</h2>
+    <p class="section-desc">这是陀氏流放归来后的<em>第一部重要长篇</em>，带着狄更斯的温情与感伤。它写的不是天才的罪，而是普通人的委屈——那些被生活轻轻碾过、却始终干净的人。</p>
+    <div class="ov-grid">
+      <div class="ov-card"><h4>一句话</h4><p>作家伊万深爱娜塔莎，娜塔莎却被年轻贵族阿辽沙带走；与此同时，孤女涅莉的身世揭开另一场被权贵摧毁的悲剧。</p></div>
+      <div class="ov-card"><h4>它的气质</h4><p>与后期的大部头不同，这部更「软」、更「暖」、更催泪。它相信受苦者身上仍有不灭的尊严与善良。</p></div>
+      <div class="ov-card"><div class="big">∞</div><h4 style="margin-top:6px">两封长信</h4><p>小说以伊万的回忆录式叙述展开，像一封写给所有受苦者的长信；涅莉母亲留下的日记，是另一封带血的信。</p></div>
+      <div class="ov-card"><h4>为何读它</h4><p>想看见陀氏「温柔」的那一面，从这里开始。它证明：他不仅会写深渊，也会写微光。</p></div>
+    </div>
+  </section>
+
+  <section class="section fade-in" id="story">
+    <h2 class="section-title"><span class="idx">Ⅱ</span>故事脉络</h2>
+    <p class="section-desc">两条被侮辱的命运线，在圣彼得堡的暮色里交缠。以下按阶段梳理。</p>
+    <div class="steps">
+      <div class="step"><h4>娜塔莎的出走</h4><div class="when">第一部</div><p>伊万深爱着邻居的女儿娜塔莎，可她被年轻贵族阿辽沙·瓦爾科夫斯基吸引，毅然离家投入其怀抱，与父亲决裂。伊万选择守护，而非占有。</p></div>
+      <div class="step"><h4>公爵的暗手</h4><div class="when">第二部</div><p>阿辽沙之父瓦爾科夫斯基公爵是个玩世不恭的恶棍：他想拆散儿子与娜塔莎（为谋娶富家女卡佳），又处心积虑坑害娜塔莎一家与老史密斯。</p></div>
+      <div class="step"><h4>涅莉的身世</h4><div class="when">第三部</div><p>伊万收留孤女涅莉。她的祖父史密斯被公爵坑害破产、忧愤而死；母亲（公爵的私生女）在贫病中离世。涅莉的骄傲与敏感，是另一场「被损害」的回响。</p></div>
+      <div class="step"><h4>两对爱情的摇摆</h4><div class="when">第三—四部</div><p>阿辽沙在娜塔莎与卡佳间反复无常，最终回到门第相当的卡佳；娜塔莎在爱与自尊间挣扎，始终得到伊万无私的守护。</p></div>
+      <div class="step"><h4>结局：微光与告别</h4><div class="when">尾声</div><p>娜塔莎回归父亲、与伊万保持精神之爱；涅莉病逝，临终前终于原谅。全书在泪与温柔里收束——被侮辱者，彼此救赎。</p></div>
+    </div>
+  </section>
+
+  <section class="section wide fade-in" id="characters">
+    <h2 class="section-title"><span class="idx">Ⅲ</span>人物</h2>
+    <p class="section-desc">点击卡片，看小传。这部没有「恶的哲人」，只有被命运拨弄的善人，与一个把人当棋子的公爵。</p>
+    <div class="char-grid" id="charGrid"></div>
+  </section>
+
+  <section class="section fade-in" id="themes">
+    <h2 class="section-title"><span class="idx">Ⅳ</span>核心主题</h2>
+    <p class="section-desc">几个彼此缠绕的思想支点——它们让这本书成为「弱者的安魂曲」。</p>
+    <div class="theme-block">
+      <div class="theme-side"><div class="no">壹</div><h3>被侮辱与被损害者</h3><div class="en">The Insulted and Injured</div></div>
+      <div class="theme-body"><p>书名即主题。娜塔莎、涅莉、史密斯——他们并非因罪受苦，而是因弱、因善、因爱被碾碎。陀氏把镜头对准「无辜的受难」，这是他一生未改的关切。</p><div class="theme-keys"><span class="theme-key">无辜的受难</span><span class="theme-key">弱者的尊严</span><span class="theme-key">温柔的注视</span></div></div>
+    </div>
+    <div class="theme-block">
+      <div class="theme-side"><div class="no">贰</div><h3>儿童的受害</h3><div class="en">The Child as Victim</div></div>
+      <div class="theme-body"><p>涅莉与她早逝的母亲，是两代被权贵摧毁的女性。孩子的苦难在陀氏笔下最不可饶恕，也最催人觉醒——这一母题后来在《卡拉马佐夫兄弟》里长成了参天大树。</p><div class="theme-keys"><span class="theme-key">涅莉的骄傲</span><span class="theme-key">母女两代</span><span class="theme-key">不可饶恕</span></div></div>
+    </div>
+    <div class="theme-block">
+      <div class="theme-side"><div class="no">叁</div><h3>无私的守护</h3><div class="en">Love without Possession</div></div>
+      <div class="theme-body"><p>伊万对娜塔莎的爱，不占有、不索取，只在她坠落时接住她。这是一种「基督式」的、去欲望化的爱，是陀氏给出的正面范本。</p><div class="theme-keys"><span class="theme-key">伊万的守护</span><span class="theme-key">不占有</span><span class="theme-key">接住坠落</span></div></div>
+    </div>
+    <div class="theme-block">
+      <div class="theme-side"><div class="no">肆</div><h3>门第与野心</h3><div class="en">Rank and Ambition</div></div>
+      <div class="theme-body"><p>瓦爾科夫斯基公爵代表以门第、金钱为尺度的冷酷世故；阿辽沙则在天真与软弱间，被这尺度牵着走。爱情在阶层面前，轻得不堪一击。</p><div class="theme-keys"><span class="theme-key">公爵的算计</span><span class="theme-key">阿辽沙的软弱</span><span class="theme-key">爱情的轻</span></div></div>
+    </div>
+    <div class="theme-block">
+      <div class="theme-side"><div class="no">伍</div><h3>宽恕与和解</h3><div class="en">Forgiveness and Reconciliation</div></div>
+      <div class="theme-body"><p>娜塔莎与父亲和解、涅莉临终的原谅——陀氏在这里给出的不是复仇，而是宽恕。受辱者彼此取暖，是寒夜里唯一的炉火。</p><div class="theme-keys"><span class="theme-key">父女和解</span><span class="theme-key">临终原谅</span><span class="theme-key">彼此取暖</span></div></div>
+    </div>
+  </section>
+
+  <section class="section fade-in" id="quotes">
+    <h2 class="section-title"><span class="idx">Ⅴ</span>名句</h2>
+    <p class="section-desc">几句话，从暮色走向微光——基本就是这本书的精神心电图。</p>
+    <div class="quote-shell">
+      <span class="quote-mark">❝</span>
+      <button class="q-nav prev" id="qPrev" aria-label="上一条">‹</button>
+      <div class="q-viewport"><div class="q-track" id="qTrack"></div></div>
+      <button class="q-nav next" id="qNext" aria-label="下一条">›</button>
+      <div class="q-dots" id="qDots"></div>
+    </div>
+  </section>
+
+  <section class="section fade-in" id="versions">
+    <h2 class="section-title"><span class="idx">Ⅵ</span>译本、改编与影响</h2>
+    <p class="section-desc">中文世界怎么读它，以及它在陀氏创作中的位置。</p>
+    <div class="ver-list">
+      <div class="ver"><span class="yr">1982</span><div class="vt"><b>翁文达 / 臧仲伦等译</b>：早期常见中译，收入多种选集。</div></div>
+      <div class="ver"><span class="yr">2004</span><div class="vt"><b>臧仲伦译</b>：较完整的全译本，语言更贴近当代。</div></div>
+      <div class="ver"><span class="yr">2014</span><div class="vt"><b>王英丽译</b> / 多版本并存：不同译本在「感伤气」的拿捏上各有侧重。</div></div>
+      <div class="ver"><span class="yr">影视</span><div class="vt">多次被改编为苏联电影与电视剧；其狄更斯式的情节线，亦常被搬上话剧舞台。</div></div>
+      <div class="ver"><span class="yr">位置</span><div class="vt">它介于早期《穷人》的温情与后期《罪与罚》的尖锐之间，是陀氏「从感伤走向思辨」的关键过渡。</div></div>
+    </div>
+  </section>
+
+  <section class="section fade-in" id="reading">
+    <h2 class="section-title"><span class="idx">Ⅶ</span>阅读指南</h2>
+    <p class="section-desc">它最易读、最催泪，适合作为陀氏的「入门」。</p>
+    <div class="read-grid">
+      <div class="read"><h4>当作长信读</h4><p>伊万是第一人称叙述者，带着回忆录的口吻。放松地读，像听一个老友讲往事。</p></div>
+      <div class="read"><h4>重点看涅莉</h4><p>孤女涅莉的线比爱情线更揪心，也更能代表书名「被损害」的真意。</p></div>
+      <div class="read"><h4>别嫌「狗血」</h4><p>它有明显的小说俗套（私生子、临终、巧合），但情感的真诚足以抵消。</p></div>
+      <div class="read"><h4>对照《卡拉马佐夫》</h4><p>「儿童的苦难」母题在此萌芽，到卡拉马佐夫长成了伊柳沙与「洋葱」。</p></div>
+      <div class="read"><h4>留意公爵</h4><p>瓦爾科夫斯基是陀氏早期「恶人」的雏形，可与后期斯麦尔佳科夫、斯塔夫罗金对照。</p></div>
+      <div class="read"><h4>准备好纸巾</h4><p>这不是一本冷静的书。允许自己被它弄哭，是它的本意。</p></div>
+    </div>
+  </section>
+
+  <div class="foot-coll fade-in">
+    <div class="ttl">陀思妥耶夫斯基作品合集 · 跳转</div>
+    <div class="foot-links">
+      <a href="crime-and-punishment.html"><div class="cn">罪与罚</div><div class="ru">Преступление и наказание</div></a>
+      <a href="brothers-karamazov.html"><div class="cn">卡拉马佐夫兄弟</div><div class="ru">Братья Карамазовы</div></a>
+      <a href="the-idiot.html"><div class="cn">白痴</div><div class="ru">Идиот</div></a>
+      <a href="demons.html"><div class="cn">群魔</div><div class="ru">Бесы</div></a>
+      <a href="notes-from-underground.html"><div class="cn">地下室手记</div><div class="ru">Записки из подполья</div></a>
+      <a href="the-insulted.html" class="here"><div class="cn">被侮辱与被损害的</div><div class="ru">Униженные и оскорблённые</div></a>
+    </div>
+  </div>
+
+  <footer class="site-foot">
+    <span>© <em style="font-style:normal;color:var(--ink-soft)">zzht</em> · 被侮辱与被损害的</span>
+    <a href="dostoevsky.html">← 返回陀思妥耶夫斯基作品合集</a>
+  </footer>
+
+</div>
+
+<div class="modal-mask" id="modalMask">
+  <div class="modal-box">
+    <button class="modal-close" id="modalClose" aria-label="关闭">×</button>
+    <h3 id="mName"></h3>
+    <div id="mRu"></div>
+    <span id="mRole"></span>
+    <div id="mBody"></div>
+  </div>
+</div>
+
+<script>
+const CHARACTERS=[
+  {id:'ivan',name:'伊万·彼得罗维奇',ru:'Ivan Petrovich',role:'叙述者',one:'青年作家，深爱娜塔莎却选择无私守护。',body:'伊万是本书的第一人称叙述者，也是陀氏的「正面男性」雏形。他爱娜塔莎，却在其出走后只做守护者、不图占有。他收留涅莉、接住每一个坠落的人——是书中「基督式之爱」的化身。'},
+  {id:'natasha',name:'娜塔莎',ru:'Natasha',role:'女主',one:'被阿辽沙带走、与父决裂的少女，在爱与自尊间挣扎。',body:'娜塔莎美丽、热烈而骄傲。她为爱情背离家庭，却在阿辽沙的摇摆中遍体鳞伤。她既渴望被爱，又放不下自尊——是「被侮辱」中最令人心碎的一个。'},
+  {id:'alyosha',name:'阿辽沙·瓦爾科夫斯基',ru:'Alyosha Valkovsky',role:'贵公子',one:'公爵之子，天真而软弱，在两段感情间反复。',body:'阿辽沙不是恶人，只是幼稚。他真心爱过娜塔莎，又被门第与卡佳牵走。他的「无罪之过」最令人无奈：伤害别人，并非出于恶意，而是出于轻。'},
+  {id:'prince',name:'瓦爾科夫斯基公爵',ru:'Prince Valkovsky',role:'反派',one:'玩世不恭的权贵，把人当棋子摆布。',body:'公爵是全书唯一的「冷恶」。他坑害史密斯、拆散儿子与娜塔莎、谋算一切婚姻与财产。陀氏借他写出：没有信仰的聪明，会堕落成精致的残忍。'},
+  {id:'nelly',name:'涅莉',ru:'Nelly',role:'孤女',one:'被公爵害得家破人亡的孤女，骄傲而濒死。',body:'涅莉是书中最刺心的存在。祖父被公爵坑死，母亲（公爵私生女）贫病离世，她自己流落街头、骄傲敏感，最终病逝。临终前她终于原谅——这是「被损害者」最干净的落点。'},
+  {id:'smith',name:'史密斯',ru:'Smith',role:'老人',one:'被公爵坑害破产、忧愤而死的老人。',body:'史密斯是涅莉的外祖父，一个体面的老艺人，被公爵的诡计夺走全部，含恨而死。他的悲剧，是「门第与阴谋」碾过弱者的第一桩。'},
+  {id:'masloboev',name:'马佐博耶夫',ru:'Masloboev',role:'探员',one:'退役军官，做私家侦探，粗中有细。',body:'马佐博耶夫是伊万的朋友，因其职业之便屡次相助。他粗鲁、贪杯却心存义气，是陀氏笔下「底层也可靠」的暖色注脚。'},
+  {id:'katya',name:'卡佳',ru:'Katya',role:'富家女',one:'门第相当的富家女，阿辽沙最终的归宿。',body:'卡佳代表「合适的婚姻」——有嫁妆、有地位。阿辽沙最终回到她身边，暗示爱情在阶层逻辑前的妥协。她本人并无大恶，却成了天平上那个更重的砝码。'}
+];
+
+const QUOTES=[
+  {text:'我们都是被侮辱与被损害的。',src:'——书中',note:'书名即判词，也是对所有弱者的点名。'},
+  {text:'爱，是无限的宽容，是不求回报的守护。',src:'——伊万',note:'他对娜塔莎的态度，是全书最干净的感情。'},
+  {text:'孩子的眼泪，最不该被任何人辜负。',src:'——书中',note:'陀氏对「儿童受难」最早的、最痛的发声。'},
+  {text:'苦难会过去，但伤痕不会——可我们仍要彼此取暖。',src:'——书中',note:'暮色里的微光：不和解于命运，却和解于人。'},
+  {text:'我骄傲，正因为我只剩下骄傲了。',src:'——涅莉',note:'一个孤女最后的铠甲，也是最脆的。'},
+  {text:'他把人当棋子，却忘了棋子也会疼。',src:'——论公爵',note:'对「精致残忍」的一句冷评。'},
+  {text:'原谅，是我能给你的、最后的体面。',src:'——涅莉临终',note:'被损害者反过来赦免了世界。'}
+];
+
+const $=(s,r=document)=>r.querySelector(s);
+const $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const grid=$('#charGrid');
+CHARACTERS.forEach(c=>{
+  const el=document.createElement('div');el.className='char';el.tabIndex=0;
+  el.innerHTML='<div class="role">'+c.role+'</div><div class="nm">'+c.name+'</div><div class="en">'+c.ru+'</div><div class="one">'+c.one+'</div>';
+  const open=()=>showModal(c);
+  el.addEventListener('click',open);
+  el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});
+  grid.appendChild(el);
+});
+const mask=$('#modalMask');
+function showModal(c){$('#mName').textContent=c.name;$('#mRu').textContent=c.ru;$('#mRole').textContent=c.role;$('#mBody').textContent=c.body;mask.classList.add('open');}
+$('#modalClose').addEventListener('click',()=>mask.classList.remove('open'));
+mask.addEventListener('click',e=>{if(e.target===mask)mask.classList.remove('open');});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')mask.classList.remove('open');});
+
+let qIdx=0,qTimer=null;const qTrack=$('#qTrack'),qDots=$('#qDots');
+QUOTES.forEach((q,i)=>{const s=document.createElement('div');s.className='q-slide';s.innerHTML='<div class="q-text">'+q.text+'</div><div class="q-src">'+q.src+'</div><div class="q-note">'+q.note+'</div>';qTrack.appendChild(s);const d=document.createElement('div');d.className='q-dot'+(i===0?' active':'');d.addEventListener('click',()=>goQ(i,true));qDots.appendChild(d);});
+$('#qPrev').addEventListener('click',()=>goQ((qIdx-1+QUOTES.length)%QUOTES.length,true));
+$('#qNext').addEventListener('click',()=>goQ((qIdx+1)%QUOTES.length,true));
+function goQ(i,m){qIdx=i;qTrack.style.transform='translateX(-'+(i*100)+'%)';$$('.q-dot').forEach((d,j)=>d.classList.toggle('active',j===i));if(m){stopQ();startQ();}}
+function startQ(){stopQ();qTimer=setInterval(()=>goQ((qIdx+1)%QUOTES.length),6500);}
+function stopQ(){if(qTimer){clearInterval(qTimer);qTimer=null;}}
+const qShell=$('.quote-shell');qShell.addEventListener('mouseenter',stopQ);qShell.addEventListener('mouseleave',startQ);startQ();
+
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
+$$('.fade-in').forEach(el=>io.observe(el));
+const tabs=$$('.nav-tab'),secs=tabs.map(t=>$('#'+t.dataset.section));
+tabs.forEach(t=>t.addEventListener('click',()=>{const s=$('#'+t.dataset.section);s&&s.scrollIntoView({behavior:'smooth',block:'start'});}));
+const spy=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){const id=e.target.id;tabs.forEach(t=>t.classList.toggle('active',t.dataset.section===id));}});},{rootMargin:'-45% 0px -50% 0px'});
+secs.forEach(s=>s&&spy.observe(s));
+</script>
+</body>
+</html>
