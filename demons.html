@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="陀思妥耶夫斯基《群魔》：以涅恰耶夫事件为骨，写虚无主义如何像恶魔般附身。斯塔夫罗金、彼得·韦尔霍文斯基、基里洛夫，与一座省城里被撕碎的灵魂。">
+<title>群魔 · 陀思妥耶夫斯基 — zzht</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0c0b0b;
+  --bg2:#141210;
+  --bg3:#1c1916;
+  --ink:#e9e4dd;
+  --ink-soft:#a39a8f;
+  --ink-faint:#6b6258;
+  --red:#b1121a;
+  --red-bright:#e03a2f;
+  --ash:#6b6258;
+  --line:rgba(224,58,47,.20);
+  --serif:'Noto Serif SC','Source Han Serif SC',serif;
+  --sans:'Noto Sans SC',-apple-system,BlinkMacSystemFont,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--ink);background:var(--bg);line-height:1.8;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background:
+  radial-gradient(ellipse 70% 45% at 50% -10%, rgba(177,18,26,.20), transparent 60%),
+  radial-gradient(ellipse 55% 35% at 50% 112%, rgba(224,58,47,.10), transparent 60%)}
+::selection{background:rgba(224,58,47,.26)}
+a{color:inherit;text-decoration:none}
+.back-home{position:fixed;top:18px;left:20px;z-index:140;font-size:.85rem;color:var(--ink-soft);padding:7px 14px;border-radius:999px;background:rgba(12,11,11,.82);border:1px solid var(--line);transition:all .25s}
+.back-home:hover{color:var(--red-bright);border-color:var(--red)}
+.page{position:relative;z-index:1;max-width:980px;margin:0 auto;padding:0 24px 9vh}
+
+/* HERO */
+.hero{min-height:92vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:14vh 24px 7vh;position:relative;overflow:hidden}
+.hero .slashes{position:absolute;inset:0;pointer-events:none;opacity:.16;
+  background:repeating-linear-gradient(58deg,transparent 0 26px,var(--red) 26px 28px,transparent 28px 60px)}
+.hero-frame{position:relative;border:1px solid var(--line);padding:42px 40px;background:rgba(12,11,11,.4)}
+.hero-eyebrow{font-size:.82rem;letter-spacing:.4em;color:var(--red-bright);margin-bottom:18px;font-weight:400}
+.hero h1{font-family:var(--serif);font-weight:900;font-size:clamp(2.8rem,9vw,5.4rem);letter-spacing:.1em;line-height:1.05;color:var(--ink)}
+.hero-ru{font-family:var(--serif);font-style:italic;color:var(--red-bright);font-size:clamp(1rem,2.6vw,1.35rem);letter-spacing:.14em;margin-top:12px}
+.hero-sub{margin-top:18px;color:var(--ink-soft);font-family:var(--serif);font-size:1.05rem;line-height:1.95;letter-spacing:.02em;max-width:560px}
+.hero-divider{display:flex;align-items:center;gap:16px;margin:30px auto}
+.hero-divider::before,.hero-divider::after{content:'';width:70px;height:2px}
+.hero-divider::before{background:linear-gradient(90deg,transparent,var(--red-bright))}
+.hero-divider::after{background:linear-gradient(270deg,transparent,var(--red-bright))}
+.hero-meta{display:flex;flex-wrap:wrap;justify-content:center;gap:14px 44px;margin-top:34px}
+.hero-meta-item{text-align:center;min-width:64px}
+.hero-meta-item .v{display:block;font-family:var(--serif);font-weight:900;font-size:1.5rem;color:var(--red-bright)}
+.hero-meta-item .l{font-size:.74rem;color:var(--ink-faint);letter-spacing:.14em;margin-top:2px}
+
+/* NAV */
+.nav-bar{position:sticky;top:0;z-index:110;background:rgba(12,11,11,.9);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);margin:0 -24px 6vh}
+.nav-inner{max-width:980px;margin:0 auto;display:flex;overflow-x:auto;gap:4px;padding:0 14px;scrollbar-width:none}
+.nav-inner::-webkit-scrollbar{display:none}
+.nav-tab{flex:0 0 auto;font-size:.86rem;color:var(--ink-faint);padding:16px 13px;cursor:pointer;white-space:nowrap;position:relative;transition:color .25s;letter-spacing:.04em}
+.nav-tab.active{color:var(--red-bright)}
+.nav-tab.active::after{content:'';position:absolute;left:13px;right:13px;bottom:0;height:2px;background:linear-gradient(90deg,var(--red),var(--red-bright))}
+.nav-tab:hover{color:var(--ink)}
+
+/* SECTION */
+.section{padding:5vh 0;border-top:1px solid rgba(224,58,47,.08)}
+.section.wide{padding-left:0;padding-right:0}
+.section-title{font-family:var(--serif);font-weight:700;font-size:clamp(1.5rem,4vw,2rem);letter-spacing:.08em;color:var(--ink);display:flex;align-items:center;gap:14px}
+.section-title .idx{font-size:.8rem;color:var(--red-bright);letter-spacing:.3em;font-weight:400}
+.section-desc{color:var(--ink-soft);font-size:.95rem;line-height:1.95;margin:14px 0 26px;max-width:680px}
+.section-desc em{font-style:normal;color:var(--red-bright)}
+
+.ov-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:8px}
+.ov-card{border:1px solid var(--line);border-radius:4px;padding:22px 22px;background:linear-gradient(160deg,var(--bg2),var(--bg3))}
+.ov-card h4{font-family:var(--serif);color:var(--red-bright);font-size:1.02rem;letter-spacing:.06em;margin-bottom:8px}
+.ov-card p{font-size:.9rem;color:var(--ink-soft);line-height:1.85}
+.ov-card .big{font-family:var(--serif);font-size:2.2rem;color:var(--red);line-height:1}
+
+.steps{counter-reset:s;display:flex;flex-direction:column;gap:0;margin-top:6px}
+.step{position:relative;padding:22px 0 22px 64px;border-left:2px solid var(--line);margin-left:18px}
+.step::before{content:counter(s,upper-roman);counter-increment:s;position:absolute;left:-20px;top:18px;width:38px;height:38px;border-radius:50%;background:var(--bg3);border:1px solid var(--red);color:var(--red-bright);font-family:var(--serif);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:.9rem}
+.step h4{font-family:var(--serif);font-size:1.12rem;color:var(--ink);letter-spacing:.03em}
+.step .when{font-size:.76rem;color:var(--red-bright);letter-spacing:.1em;margin:2px 0 8px}
+.step p{font-size:.9rem;color:var(--ink-soft);line-height:1.85}
+
+.char-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.char{border:1px solid var(--line);border-radius:4px;padding:18px 16px;background:linear-gradient(160deg,var(--bg2),var(--bg3));cursor:pointer;transition:transform .3s,border-color .3s}
+.char:hover{transform:translateY(-4px);border-color:var(--red)}
+.char .role{font-size:.72rem;letter-spacing:.16em;color:var(--red-bright)}
+.char .nm{font-family:var(--serif);font-weight:700;font-size:1.1rem;margin:6px 0 2px;color:var(--ink)}
+.char .en{font-size:.72rem;color:var(--ink-faint);font-style:italic}
+.char .one{font-size:.82rem;color:var(--ink-soft);margin-top:10px;line-height:1.7}
+
+.theme-block{display:grid;grid-template-columns:200px 1fr;gap:24px;padding:26px 0;border-bottom:1px solid rgba(224,58,47,.10)}
+.theme-block:last-child{border-bottom:none}
+.theme-side .no{font-family:var(--serif);font-size:2.4rem;color:var(--red);line-height:1}
+.theme-side h3{font-family:var(--serif);font-size:1.2rem;color:var(--ink);margin-top:6px;letter-spacing:.04em}
+.theme-side .en{font-size:.76rem;color:var(--ink-faint);font-style:italic;letter-spacing:.06em;margin-top:4px}
+.theme-body p{font-size:.92rem;color:var(--ink-soft);line-height:1.9}
+.theme-keys{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px}
+.theme-key{font-size:.74rem;color:var(--red-bright);border:1px solid var(--line);border-radius:999px;padding:4px 12px;letter-spacing:.04em}
+
+.quote-shell{position:relative;max-width:720px;margin:8px auto 0;border:1px solid var(--line);border-radius:6px;background:linear-gradient(160deg,var(--bg2),var(--bg3));padding:46px 56px 40px;text-align:center;overflow:hidden}
+.quote-mark{position:absolute;top:8px;left:20px;font-family:var(--serif);font-size:4rem;color:rgba(224,58,47,.18)}
+.q-viewport{overflow:hidden}
+.q-track{display:flex;transition:transform .6s cubic-bezier(.4,0,.2,1)}
+.q-slide{min-width:100%;padding:0 8px}
+.q-text{font-family:var(--serif);font-size:1.22rem;line-height:2;color:var(--ink);letter-spacing:.02em}
+.q-src{font-size:.82rem;color:var(--red-bright);margin-top:18px;letter-spacing:.06em}
+.q-note{font-size:.82rem;color:var(--ink-faint);margin-top:6px;line-height:1.7;max-width:520px;margin-left:auto;margin-right:auto}
+.q-nav{position:absolute;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--red);font-size:2rem;cursor:pointer;z-index:2;width:44px;height:44px;border-radius:50%;transition:background .2s}
+.q-nav:hover{background:rgba(224,58,47,.12)}
+.q-nav.prev{left:6px}.q-nav.next{right:6px}
+.q-dots{display:flex;justify-content:center;gap:8px;margin-top:22px}
+.q-dot{width:8px;height:8px;border-radius:50%;background:rgba(224,58,47,.3);cursor:pointer;transition:all .25s}
+.q-dot.active{background:var(--red-bright);transform:scale(1.25)}
+
+.ver-list{display:grid;gap:12px;margin-top:6px}
+.ver{border:1px solid var(--line);border-radius:4px;padding:18px 20px;background:linear-gradient(160deg,var(--bg2),var(--bg3));display:flex;gap:16px;align-items:flex-start}
+.ver .yr{font-family:var(--serif);font-weight:700;color:var(--red-bright);font-size:1.05rem;min-width:62px}
+.ver .vt{font-size:.9rem;color:var(--ink-soft);line-height:1.8}
+.ver .vt b{color:var(--ink);font-weight:600}
+
+.read-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:6px}
+.read{border:1px solid var(--line);border-radius:4px;padding:20px 18px;background:linear-gradient(160deg,var(--bg2),var(--bg3))}
+.read h4{font-family:var(--serif);color:var(--red-bright);font-size:1rem;letter-spacing:.04em;margin-bottom:8px}
+.read p{font-size:.85rem;color:var(--ink-soft);line-height:1.8}
+
+.modal-mask{position:fixed;inset:0;background:rgba(4,3,3,.8);z-index:200;display:none;align-items:center;justify-content:center;padding:24px}
+.modal-mask.open{display:flex}
+.modal-box{position:relative;max-width:520px;width:100%;background:linear-gradient(160deg,var(--bg3),var(--bg2));border:1px solid var(--red);border-radius:6px;padding:34px 34px 30px;box-shadow:0 30px 80px -30px #000}
+.modal-close{position:absolute;top:12px;right:16px;background:none;border:none;color:var(--ink-soft);font-size:1.6rem;cursor:pointer;line-height:1}
+.modal-close:hover{color:var(--red-bright)}
+#mName{font-family:var(--serif);font-size:1.5rem;color:var(--ink);letter-spacing:.04em}
+#mRu{font-family:var(--serif);font-style:italic;color:var(--red-bright);font-size:.95rem;margin-top:2px}
+#mRole{display:inline-block;font-size:.74rem;letter-spacing:.14em;color:var(--red-bright);border:1px solid rgba(224,58,47,.4);border-radius:999px;padding:3px 12px;margin-top:12px}
+#mBody{margin-top:16px;font-size:.92rem;color:var(--ink-soft);line-height:1.95}
+
+.foot-coll{margin-top:9vh;border-top:1px solid var(--line);padding-top:30px}
+.foot-coll .ttl{font-family:var(--serif);font-size:1rem;color:var(--red-bright);letter-spacing:.1em;margin-bottom:16px}
+.foot-links{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.foot-links a{border:1px solid var(--line);border-radius:4px;padding:14px 16px;transition:all .3s;background:linear-gradient(160deg,var(--bg2),var(--bg3))}
+.foot-links a:hover{border-color:var(--red);transform:translateY(-3px)}
+.foot-links .cn{font-family:var(--serif);font-size:1rem;color:var(--ink)}
+.foot-links .ru{font-size:.72rem;color:var(--ink-faint);font-style:italic}
+.foot-links .here{color:var(--red-bright)}
+.site-foot{margin-top:6vh;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-size:.82rem;color:var(--ink-faint)}
+.site-foot a{color:var(--ink-soft);transition:color .2s}
+.site-foot a:hover{color:var(--red-bright)}
+
+.fade-in{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease}
+.fade-in.in{opacity:1;transform:none}
+
+@media(max-width:760px){
+  .ov-grid,.char-grid,.read-grid,.foot-links{grid-template-columns:1fr}
+  .theme-block{grid-template-columns:1fr;gap:10px}
+  .quote-shell{padding:40px 30px 34px}
+  .q-text{font-size:1.05rem}
+}
+</style>
+</head>
+<body>
+<a href="dostoevsky.html" class="back-home">← 返回合集</a>
+<div class="page">
+
+  <header class="hero">
+    <div class="slashes"></div>
+    <div class="hero-frame">
+      <div class="hero-eyebrow">ФЁДОР ДОСТОЕВСКИЙ · 1871–1872</div>
+      <h1>群魔</h1>
+      <div class="hero-ru">Бесы</div>
+      <p class="hero-sub">当虚无主义化作恶魔附身——<br>一座俄国省城里，革命、阴谋与人神哲学撕碎了所有人。</p>
+      <div class="hero-divider">
+        <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true">
+          <path d="M6 34 L20 8 L34 34" fill="none" stroke="#e03a2f" stroke-width="1.8"/>
+          <path d="M13 34 L20 22 L27 34" fill="none" stroke="#b1121a" stroke-width="1.4"/>
+        </svg>
+      </div>
+      <div class="hero-meta">
+        <div class="hero-meta-item"><span class="v">3+结局</span><span class="l">部次结构</span></div>
+        <div class="hero-meta-item"><span class="v">五人组</span><span class="l">密谋核心</span></div>
+        <div class="hero-meta-item"><span class="v">弑神</span><span class="l">人神哲学</span></div>
+        <div class="hero-meta-item"><span class="v">1872</span><span class="l">完成年份</span></div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="nav-bar"><div class="nav-inner">
+    <div class="nav-tab active" data-section="overview">概览</div>
+    <div class="nav-tab" data-section="story">故事脉络</div>
+    <div class="nav-tab" data-section="characters">人物</div>
+    <div class="nav-tab" data-section="themes">主题</div>
+    <div class="nav-tab" data-section="quotes">名句</div>
+    <div class="nav-tab" data-section="versions">译本与影响</div>
+    <div class="nav-tab" data-section="reading">阅读指南</div>
+  </div></nav>
+
+  <section class="section fade-in" id="overview">
+    <h2 class="section-title"><span class="idx">Ⅰ</span>关于这本书</h2>
+    <p class="section-desc">《群魔》的骨，是真实的<em>涅恰耶夫事件</em>：一个青年革命者以「共同体」之名，唆使同伙谋杀了一名不愿服从的成员。陀氏借它写出：当人抛弃了上帝与道德，虚无会以怎样狰狞的面目现身。</p>
+    <div class="ov-grid">
+      <div class="ov-card"><h4>一句话</h4><p>一个神秘归来、内心空洞的贵族斯塔夫罗金，被激进分子彼得·韦尔霍文斯基当作旗帜，一座省城在密谋、纵火与谋杀中陷入疯狂。</p></div>
+      <div class="ov-card"><h4>题名何来</h4><p>取自福音书：耶稣把附在人身上的「群魔」赶入猪群，猪便冲下悬崖。陀氏以此隐喻：被驱逐的信仰，成了横冲直撞的破坏之力。</p></div>
+      <div class="ov-card"><div class="big">↑</div><h4 style="margin-top:6px">旧人 vs 新人</h4><p>一面是斯捷潘式的自由派「老朽」，一面是彼得式的「新人类」。陀氏冷酷地拆解了两种人都可能通往毁灭。</p></div>
+      <div class="ov-card"><h4>为何读它</h4><p>它写于一五十年前，却像预演了之后百年的诸多疯狂。读懂《群魔》，就读懂了「主义如何吃掉人」。</p></div>
+    </div>
+  </section>
+
+  <section class="section fade-in" id="story">
+    <h2 class="section-title"><span class="idx">Ⅱ</span>故事脉络</h2>
+    <p class="section-desc">从一座省城的闲言碎语，到一场吞噬一切的火灾。以下按阶段梳理。</p>
+    <div class="steps">
+      <div class="step"><h4>旧人的沙龙</h4><div class="when">第一部 · 序幕</div><p>自由派老知识分子斯捷潘·韦尔霍文斯基主持着省城的清谈沙龙。他的儿子彼得从国外归来，带来一套截然不同的、危险的「新」逻辑。</p></div>
+      <div class="step"><h4>彼得的五人组</h4><div class="when">第二部</div><p>彼得暗中组织了一个秘密小组，以「总起义」为名绑架、控制成员。他把归来的斯塔夫罗金奉为精神核心，却不让其真正掌权。</p></div>
+      <div class="step"><h4>沙托夫之死与基里洛夫之死</h4><div class="when">第二部末—第三部</div><p>小组因恐惧泄密，谋杀了曾退出、却仍信「人民与上帝」的沙托夫；工程师基里洛夫按「人神」哲学自杀，为彼得的计划作伪证。</p></div>
+      <div class="step"><h4>纵火、谋杀与逃亡</h4><div class="when">第三部</div><p>彼得煽动纵火与混乱，借机清除异己；列比亚德金兄妹被灭口。阴谋败露后，彼得仓皇逃往国外。</p></div>
+      <div class="step"><h4>结局：自尽与悔悟</h4><div class="when">尾声</div><p>斯塔夫罗金在留下忏悔式自白后上吊；斯捷潘在流落旅途的悔悟中离世。题名之意落定——恶魔被放出，终归落进大海。</p></div>
+    </div>
+  </section>
+
+  <section class="section wide fade-in" id="characters">
+    <h2 class="section-title"><span class="idx">Ⅲ</span>人物</h2>
+    <p class="section-desc">点击卡片，看小传。这是陀氏人物关系最「政治」的一部：每个人都被某种理念占有。</p>
+    <div class="char-grid" id="charGrid"></div>
+  </section>
+
+  <section class="section fade-in" id="themes">
+    <h2 class="section-title"><span class="idx">Ⅳ</span>核心主题</h2>
+    <p class="section-desc">几个彼此缠绕的思想支点——它们让《群魔》成为对「现代激进主义」最尖锐的预言。</p>
+    <div class="theme-block">
+      <div class="theme-side"><div class="no">壹</div><h3>虚无主义</h3><div class="en">Nihilism</div></div>
+      <div class="theme-body"><p>「既然没有上帝、没有不朽，那么一切都被允许。」当这句话从哲学命题变成行动纲领，道德便失去了地基。陀氏写的是虚无如何一步步吞噬具体的人。</p><div class="theme-keys"><span class="theme-key">一切都被允许</span><span class="theme-key">道德真空</span><span class="theme-key">破坏的快感</span></div></div>
+    </div>
+    <div class="theme-block">
+      <div class="theme-side"><div class="no">贰</div><h3>人神</h3><div class="en">The Man-God</div></div>
+      <div class="theme-body"><p>工程师基里洛夫相信：人若不再拜上帝，就该自己成为神——以「无惧死亡、自主自杀」来证明人的绝对自由。这是全书最危险、也最清醒的哲学。</p><div class="theme-keys"><span class="theme-key">以自杀证自由</span><span class="theme-key">基里洛夫</span><span class="theme-key">僭越的代价</span></div></div>
+    </div>
+    <div class="theme-block">
+      <div class="theme-side"><div class="no">叁</div><h3>恶魔附身</h3><div class="en">Demonic Possession</div></div>
+      <div class="theme-body"><p>题名即隐喻。被赶出人心的信仰，化作横冲直撞的「群魔」——革命、阴谋、自毁，都是同一种失魂的症候。陀氏把社会危机写成一场灵性的被附。</p><div class="theme-keys"><span class="theme-key">福音书隐喻</span><span class="theme-key">信仰被逐</span><span class="theme-key">破坏即症候</span></div></div>
+    </div>
+    <div class="theme-block">
+      <div class="theme-side"><div class="no">肆</div><h3>斯塔夫罗金的空洞</h3><div class="en">Stavrogin's Void</div></div>
+      <div class="theme-body"><p>斯塔夫罗金什么都能做、却什么都不信，这极致的自由反而成了极致的空虚。他是「一切都被允许」活生生的人形——迷人，却空无一物。</p><div class="theme-keys"><span class="theme-key">极致的自由</span><span class="theme-key">迷人的虚空</span><span class="theme-key">忏悔与自尽</span></div></div>
+    </div>
+    <div class="theme-block">
+      <div class="theme-side"><div class="no">伍</div><h3>新人 vs 旧人</h3><div class="en">New versus Old Men</div></div>
+      <div class="theme-body"><p>彼得的「新人类」与斯捷潘的「老自由派」看似对立，陀氏却让两者殊途同归地走向荒唐与毁灭——讽刺的是，二者都脱离了土地与人民。</p><div class="theme-keys"><span class="theme-key">两代人都迷失</span><span class="theme-key">脱离人民</span><span class="theme-key">讽刺的笔法</span></div></div>
+    </div>
+    <div class="theme-block">
+      <div class="theme-side"><div class="no">陆</div><h3>人民与上帝</h3><div class="en">The People and God</div></div>
+      <div class="theme-body"><p>沙托夫代表另一种答案：俄国人民本能地信上帝，激进主义终将与这信念相撞。这是陀氏在绝望中留给「俄罗斯灵魂」的一线生机。</p><div class="theme-keys"><span class="theme-key">沙托夫之信</span><span class="theme-key">土地的虔诚</span><span class="theme-key">一线生机</span></div></div>
+    </div>
+  </section>
+
+  <section class="section fade-in" id="quotes">
+    <h2 class="section-title"><span class="idx">Ⅴ</span>名句</h2>
+    <p class="section-desc">几句话，从命题走向鲜血——基本就是这本书的精神心电图。</p>
+    <div class="quote-shell">
+      <span class="quote-mark">❝</span>
+      <button class="q-nav prev" id="qPrev" aria-label="上一条">‹</button>
+      <div class="q-viewport"><div class="q-track" id="qTrack"></div></div>
+      <button class="q-nav next" id="qNext" aria-label="下一条">›</button>
+      <div class="q-dots" id="qDots"></div>
+    </div>
+  </section>
+
+  <section class="section fade-in" id="versions">
+    <h2 class="section-title"><span class="idx">Ⅵ</span>译本、改编与影响</h2>
+    <p class="section-desc">中文世界怎么读它，以及它留下的政治回响。</p>
+    <div class="ver-list">
+      <div class="ver"><span class="yr">1983</span><div class="vt"><b>南江译</b>：人民文学版，长期是主流全译本，注释详尽。</div></div>
+      <div class="ver"><span class="yr">2001</span><div class="vt"><b>臧仲伦译</b>：另一种全译本，语言更贴近当代口语。</div></div>
+      <div class="ver"><span class="yr">2021</span><div class="vt"><b>娄自良译</b>：较新译本，考据更细，译名更规范。</div></div>
+      <div class="ver"><span class="yr">影视</span><div class="vt">苏联/俄国多次改编为电影与话剧；书名英译多作 <b>Demons / The Possessed / Devils</b>，不同译本折射不同侧重。</div></div>
+      <div class="ver"><span class="yr">影响</span><div class="vt">它被视为对极权主义与激进主义的早期预警；以赛亚·伯林、汉娜·阿伦特等思想家都反复征引。也被误读为「反革命」，但它的锋芒其实双向。</div></div>
+    </div>
+  </section>
+
+  <section class="section fade-in" id="reading">
+    <h2 class="section-title"><span class="idx">Ⅶ</span>阅读指南</h2>
+    <p class="section-desc">它最「硬」、人名最密，但顺着政治线读会轻松很多。</p>
+    <div class="read-grid">
+      <div class="read"><h4>先认核心三人</h4><p>斯塔夫罗金（被崇拜的空壳）、彼得（操盘手）、基里洛夫（人神）。其余人物围着这三者转。</p></div>
+      <div class="read"><h4>读「斯塔夫罗金的忏悔」</h4><p>陀氏原计划单独发表的章节，是理解主人公空洞与罪感的关键，许多版本附于书末。</p></div>
+      <div class="read"><h4>别被人名劝退</h4><p>记不住全名没关系，抓住「谁属于彼得的小组」即可，阴谋线会自己清晰。</p></div>
+      <div class="read"><h4>与时代对读</h4><p>了解一点涅恰耶夫事件与俄国 1860 年代虚无主义，会极大提升代入感。</p></div>
+      <div class="read"><h4>留意讽刺</h4><p>陀氏在这部里罕见地辛辣幽默，那些沙龙闲谈与丑态，是该书的另一重乐趣。</p></div>
+      <div class="read"><h4>警惕简化</h4><p>它常被当作「反共宣传」误读。陀氏真正写的，是任何主义一旦脱离人，都会变成群魔。</p></div>
+    </div>
+  </section>
+
+  <div class="foot-coll fade-in">
+    <div class="ttl">陀思妥耶夫斯基作品合集 · 跳转</div>
+    <div class="foot-links">
+      <a href="crime-and-punishment.html"><div class="cn">罪与罚</div><div class="ru">Преступление и наказание</div></a>
+      <a href="brothers-karamazov.html"><div class="cn">卡拉马佐夫兄弟</div><div class="ru">Братья Карамазовы</div></a>
+      <a href="the-idiot.html"><div class="cn">白痴</div><div class="ru">Идиот</div></a>
+      <a href="demons.html" class="here"><div class="cn">群魔</div><div class="ru">Бесы</div></a>
+      <a href="notes-from-underground.html"><div class="cn">地下室手记</div><div class="ru">Записки из подполья</div></a>
+      <a href="the-insulted.html"><div class="cn">被侮辱与被损害的</div><div class="ru">Униженные и оскорблённые</div></a>
+    </div>
+  </div>
+
+  <footer class="site-foot">
+    <span>© <em style="font-style:normal;color:var(--ink-soft)">zzht</em> · 群魔</span>
+    <a href="dostoevsky.html">← 返回陀思妥耶夫斯基作品合集</a>
+  </footer>
+
+</div>
+
+<div class="modal-mask" id="modalMask">
+  <div class="modal-box">
+    <button class="modal-close" id="modalClose" aria-label="关闭">×</button>
+    <h3 id="mName"></h3>
+    <div id="mRu"></div>
+    <span id="mRole"></span>
+    <div id="mBody"></div>
+  </div>
+</div>
+
+<script>
+const CHARACTERS=[
+  {id:'stavrogin',name:'尼古拉·斯塔夫罗金',ru:'Nikolai Stavrogin',role:'核心',one:'神秘、空洞、迷人的贵族，被众人当作旗帜。',body:'斯塔夫罗金是全书最具魅力的谜。他勇敢、聪慧、无所不能，却什么都不信——极致的自由在他身上坍缩成极致的空虚。他诱拐、结婚又抛弃，最终在忏悔自白后上吊。他是「一切都被允许」活生生的人形。'},
+  {id:'pyotr',name:'彼得·韦尔霍文斯基',ru:'Pyotr Verkhovensky',role:'操盘手',one:'激进密谋者，以「总起义」之名操纵一群人。',body:'彼得是陀氏笔下最危险的小人：巧舌、无底线、擅长把理想变成控制术。他组建五人组、策划谋杀与纵火，把斯塔夫罗金当作傀儡旗帜，是「主义吃掉人」的具象。'},
+  {id:'kirillov',name:'阿列克谢·基里洛夫',ru:'Alexei Kirillov',role:'工程师',one:'信奉「人神」，以自杀证明人的绝对自由。',body:'基里洛夫是全书最纯粹的思想家。他认为人一旦不再拜上帝，就应自己成为神——而证明自由的终极方式，是自主地、无惧地结束自己的生命。他的自杀被彼得利用为伪证的一环。'},
+  {id:'shatov',name:'伊万·沙托夫',ru:'Ivan Shatov',role:'退出的革命者',one:'曾激进，后信「人民与上帝」，被小组谋杀。',body:'沙托夫一度投身革命，后脱离，转而相信俄国人民本能地信上帝。他说「人民就是上帝」，与彼得彻底对立。正因他可能泄密且信念相左，被小组谋杀——是书中最令人扼腕的牺牲。'},
+  {id:'stepan',name:'斯捷潘·韦尔霍文斯基',ru:'Stepan Verkhovensky',role:'旧自由派',one:'彼得的父亲，空谈的自由派老知识分子。',body:'斯捷潘主持省城沙龙，信奉抽象的「进步」却脱离土地与人民。他是「旧人」的代表，被儿子彻底超越与抛弃，最终在流落旅途的悔悟中平静离世。'},
+  {id:'liza',name:'丽莎·图申娜',ru:'Liza Tushina',role:'少女',one:'痴恋斯塔夫罗金，最终走向毁灭的贵族少女。',body:'丽莎骄傲而热烈，被斯塔夫罗金短暂吸引又残忍抛弃。她的悲剧写出「空洞的魅力」对旁人的灼伤——靠近他的人，几乎都被焚毁。'},
+  {id:'marya',name:'玛丽亚·列比亚德金娜',ru:'Marya Lebyadkina',role:'弃妇',one:'斯塔夫罗金隐秘的妻子，癫痴而纯洁。',body:'玛丽亚是斯塔夫罗金出于一时冲动娶下的跛足女子，被他遗弃在兄长处。她天真、虔诚、口出预言，是全书中最无辜也最凄楚的存在，最终与兄长一同被灭口。'},
+  {id:'captain',name:'列比亚德金上尉',ru:'Captain Lebyadkin',role:'无赖',one:'玛丽亚的兄长，酗酒妄语，被灭口。',body:'列比亚德金是破落军官，靠妹妹的「婚姻」敲诈勒索，醉酒胡言。他既是丑角的笑料，也是阴谋的牺牲品——与妹妹一同死于小组的清洗。'},
+  {id:'fedka',name:'费奥多尔（逃犯）',ru:'Fedka the Convict',role:'杀手',one:'被利用的逃犯，亲手执行数桩谋杀。',body:'费奥多尔是因冤案逃亡的苦役犯，被彼得收买去干脏活。他是「被时代碾碎后又被利用」的下层注脚，也是群魔中最原始的暴力之手。'}
+];
+
+const QUOTES=[
+  {text:'如果没有上帝，那么一切都被允许。',src:'——斯塔夫罗金的前提',note:'全书最危险的一句，后来被无数人引用、也无数次被误读。'},
+  {text:'人若不再拜上帝，就该自己成为神。',src:'——基里洛夫',note:'「人神」哲学的核心：以自主赴死证明绝对自由。'},
+  {text:'我需要美，因为那时我也许会不再杀人。',src:'——斯塔夫罗金',note:'一个空洞之人，竟把美当作阻止自己作恶的最后稻草。'},
+  {text:'新的开始，需要新的血液。',src:'——彼得·韦尔霍文斯基',note:'密谋者最冷酷的口号，也是无数风暴的序曲。'},
+  {text:'魔鬼央求耶稣容他进入猪群——猪便冲下悬崖。',src:'——题名出处',note:'福音书的隐喻：被逐的信仰，化作横冲直撞的破坏。'},
+  {text:'人民就是上帝。',src:'——沙托夫',note:'与虚无主义对峙的另一极：土地的、本能的虔诚。'},
+  {text:'谁也不爱任何人，这便是他们全部的自由。',src:'——书中',note:'对「无羁自由」反讽到底的一句。'}
+];
+
+const $=(s,r=document)=>r.querySelector(s);
+const $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const grid=$('#charGrid');
+CHARACTERS.forEach(c=>{
+  const el=document.createElement('div');el.className='char';el.tabIndex=0;
+  el.innerHTML='<div class="role">'+c.role+'</div><div class="nm">'+c.name+'</div><div class="en">'+c.ru+'</div><div class="one">'+c.one+'</div>';
+  const open=()=>showModal(c);
+  el.addEventListener('click',open);
+  el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});
+  grid.appendChild(el);
+});
+const mask=$('#modalMask');
+function showModal(c){$('#mName').textContent=c.name;$('#mRu').textContent=c.ru;$('#mRole').textContent=c.role;$('#mBody').textContent=c.body;mask.classList.add('open');}
+$('#modalClose').addEventListener('click',()=>mask.classList.remove('open'));
+mask.addEventListener('click',e=>{if(e.target===mask)mask.classList.remove('open');});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')mask.classList.remove('open');});
+
+let qIdx=0,qTimer=null;const qTrack=$('#qTrack'),qDots=$('#qDots');
+QUOTES.forEach((q,i)=>{const s=document.createElement('div');s.className='q-slide';s.innerHTML='<div class="q-text">'+q.text+'</div><div class="q-src">'+q.src+'</div><div class="q-note">'+q.note+'</div>';qTrack.appendChild(s);const d=document.createElement('div');d.className='q-dot'+(i===0?' active':'');d.addEventListener('click',()=>goQ(i,true));qDots.appendChild(d);});
+$('#qPrev').addEventListener('click',()=>goQ((qIdx-1+QUOTES.length)%QUOTES.length,true));
+$('#qNext').addEventListener('click',()=>goQ((qIdx+1)%QUOTES.length,true));
+function goQ(i,m){qIdx=i;qTrack.style.transform='translateX(-'+(i*100)+'%)';$$('.q-dot').forEach((d,j)=>d.classList.toggle('active',j===i));if(m){stopQ();startQ();}}
+function startQ(){stopQ();qTimer=setInterval(()=>goQ((qIdx+1)%QUOTES.length),6500);}
+function stopQ(){if(qTimer){clearInterval(qTimer);qTimer=null;}}
+const qShell=$('.quote-shell');qShell.addEventListener('mouseenter',stopQ);qShell.addEventListener('mouseleave',startQ);startQ();
+
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
+$$('.fade-in').forEach(el=>io.observe(el));
+const tabs=$$('.nav-tab'),secs=tabs.map(t=>$('#'+t.dataset.section));
+tabs.forEach(t=>t.addEventListener('click',()=>{const s=$('#'+t.dataset.section);s&&s.scrollIntoView({behavior:'smooth',block:'start'});}));
+const spy=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){const id=e.target.id;tabs.forEach(t=>t.classList.toggle('active',t.dataset.section===id));}});},{rootMargin:'-45% 0px -50% 0px'});
+secs.forEach(s=>s&&spy.observe(s));
+</script>
+</body>
+</html>
