@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="陀思妥耶夫斯基《白痴》：一个「绝对善良」的人回到污浊的人间，像一道过于明亮的光。癫痫瞬间的「无限和谐」，与美能否拯救世界的诘问。">
+<title>白痴 · 陀思妥耶夫斯基 — zzht</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f4f1ea;
+  --paper:#fbfaf6;
+  --bg-deep:#ece7db;
+  --ink:#23211c;
+  --ink-soft:#5a564c;
+  --ink-faint:#9a9488;
+  --gold:#b89a4e;
+  --gold-bright:#c9a85c;
+  --blue:#6f86a3;
+  --blue-bright:#8aa0bb;
+  --rose:#b6797f;
+  --line:rgba(120,108,80,.22);
+  --serif:'Noto Serif SC','Source Han Serif SC',serif;
+  --sans:'Noto Sans SC',-apple-system,BlinkMacSystemFont,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--ink);background:var(--bg);line-height:1.85;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 60% 40% at 50% -8%,rgba(184,154,78,.10),transparent 60%)}
+::selection{background:rgba(184,154,78,.22)}
+a{color:inherit;text-decoration:none}
+.back-home{position:fixed;top:18px;left:20px;z-index:140;font-size:.85rem;color:var(--ink-soft);padding:7px 14px;border-radius:999px;background:rgba(244,241,234,.85);border:1px solid var(--line);transition:all .25s}
+.back-home:hover{color:var(--gold-bright);border-color:var(--gold)}
+.page{position:relative;z-index:1;max-width:980px;margin:0 auto;padding:0 24px 9vh}
+
+/* HERO */
+.hero{min-height:92vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:14vh 24px 7vh;position:relative}
+.glow{position:absolute;top:14%;left:50%;transform:translateX(-50%);width:440px;height:440px;border-radius:50%;background:radial-gradient(circle,rgba(184,154,78,.20),rgba(184,154,78,.05) 45%,transparent 70%);pointer-events:none}
+.rose{margin-bottom:26px}
+.hero-eyebrow{font-size:.82rem;letter-spacing:.4em;color:var(--gold);margin-bottom:18px;font-weight:400;position:relative}
+.hero h1{font-family:var(--serif);font-weight:900;font-size:clamp(2.8rem,9vw,5.4rem);letter-spacing:.14em;line-height:1.05;color:var(--ink);position:relative}
+.hero-ru{font-family:var(--serif);font-style:italic;color:var(--blue);font-size:clamp(1rem,2.6vw,1.35rem);letter-spacing:.16em;margin-top:12px;position:relative}
+.hero-sub{margin-top:18px;color:var(--ink-soft);font-family:var(--serif);font-size:1.05rem;line-height:1.95;letter-spacing:.02em;max-width:560px;position:relative}
+.hero-divider{display:flex;align-items:center;gap:16px;margin:30px auto;position:relative}
+.hero-divider::before,.hero-divider::after{content:'';width:70px;height:1px}
+.hero-divider::before{background:linear-gradient(90deg,transparent,rgba(184,154,78,.6))}
+.hero-divider::after{background:linear-gradient(270deg,transparent,rgba(184,154,78,.6))}
+.hero-meta{display:flex;flex-wrap:wrap;justify-content:center;gap:14px 44px;margin-top:34px;position:relative}
+.hero-meta-item{text-align:center;min-width:64px}
+.hero-meta-item .v{display:block;font-family:var(--serif);font-weight:900;font-size:1.5rem;color:var(--gold-bright)}
+.hero-meta-item .l{font-size:.74rem;color:var(--ink-faint);letter-spacing:.14em;margin-top:2px}
+
+/* NAV */
+.nav-bar{position:sticky;top:0;z-index:110;background:rgba(244,241,234,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);margin:0 -24px 6vh}
+.nav-inner{max-width:980px;margin:0 auto;display:flex;overflow-x:auto;gap:4px;padding:0 14px;scrollbar-width:none}
+.nav-inner::-webkit-scrollbar{display:none}
+.nav-tab{flex:0 0 auto;font-size:.86rem;color:var(--ink-faint);padding:16px 13px;cursor:pointer;white-space:nowrap;position:relative;transition:color .25s;letter-spacing:.04em}
+.nav-tab.active{color:var(--gold-bright)}
+.nav-tab.active::after{content:'';position:absolute;left:13px;right:13px;bottom:0;height:2px;background:linear-gradient(90deg,var(--gold),var(--blue))}
+.nav-tab:hover{color:var(--ink)}
+
+/* SECTION */
+.section{padding:5vh 0;border-top:1px solid var(--line)}
+.section.wide{padding-left:0;padding-right:0}
+.section-title{font-family:var(--serif);font-weight:700;font-size:clamp(1.5rem,4vw,2rem);letter-spacing:.08em;color:var(--ink);display:flex;align-items:center;gap:14px}
+.section-title .idx{font-size:.8rem;color:var(--gold);letter-spacing:.3em;font-weight:400}
+.section-desc{color:var(--ink-soft);font-size:.95rem;line-height:1.95;margin:14px 0 26px;max-width:680px}
+.section-desc em{font-style:normal;color:var(--blue)}
+
+.ov-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:8px}
+.ov-card{border:1px solid var(--line);border-radius:4px;padding:22px 22px;background:linear-gradient(160deg,var(--paper),var(--bg-deep))}
+.ov-card h4{font-family:var(--serif);color:var(--gold-bright);font-size:1.02rem;letter-spacing:.06em;margin-bottom:8px}
+.ov-card p{font-size:.9rem;color:var(--ink-soft);line-height:1.85}
+.ov-card .big{font-family:var(--serif);font-size:2.2rem;color:var(--blue);line-height:1}
+
+.steps{counter-reset:s;display:flex;flex-direction:column;gap:0;margin-top:6px}
+.step{position:relative;padding:22px 0 22px 64px;border-left:1px solid var(--line);margin-left:18px}
+.step::before{content:counter(s,upper-roman);counter-increment:s;position:absolute;left:-19px;top:18px;width:38px;height:38px;border-radius:50%;background:var(--bg-deep);border:1px solid var(--gold);color:var(--gold-bright);font-family:var(--serif);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:.9rem}
+.step h4{font-family:var(--serif);font-size:1.12rem;color:var(--ink);letter-spacing:.03em}
+.step .when{font-size:.76rem;color:var(--blue);letter-spacing:.1em;margin:2px 0 8px}
+.step p{font-size:.9rem;color:var(--ink-soft);line-height:1.85}
+
+.char-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.char{border:1px solid var(--line);border-radius:4px;padding:18px 16px;background:linear-gradient(160deg,var(--paper),var(--bg-deep));cursor:pointer;transition:transform .3s,border-color .3s}
+.char:hover{transform:translateY(-4px);border-color:var(--gold)}
+.char .role{font-size:.72rem;letter-spacing:.16em;color:var(--gold)}
+.char .nm{font-family:var(--serif);font-weight:700;font-size:1.1rem;margin:6px 0 2px;color:var(--ink)}
+.char .en{font-size:.72rem;color:var(--ink-faint);font-style:italic}
+.char .one{font-size:.82rem;color:var(--ink-soft);margin-top:10px;line-height:1.7}
+
+.theme-block{display:grid;grid-template-columns:200px 1fr;gap:24px;padding:26px 0;border-bottom:1px solid var(--line)}
+.theme-block:last-child{border-bottom:none}
+.theme-side .no{font-family:var(--serif);font-size:2.4rem;color:var(--blue);line-height:1}
+.theme-side h3{font-family:var(--serif);font-size:1.2rem;color:var(--ink);margin-top:6px;letter-spacing:.04em}
+.theme-side .en{font-size:.76rem;color:var(--ink-faint);font-style:italic;letter-spacing:.06em;margin-top:4px}
+.theme-body p{font-size:.92rem;color:var(--ink-soft);line-height:1.9}
+.theme-keys{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px}
+.theme-key{font-size:.74rem;color:var(--gold-bright);border:1px solid var(--line);border-radius:999px;padding:4px 12px;letter-spacing:.04em}
+
+.quote-shell{position:relative;max-width:720px;margin:8px auto 0;border:1px solid var(--line);border-radius:6px;background:linear-gradient(160deg,var(--paper),var(--bg-deep));padding:46px 56px 40px;text-align:center;overflow:hidden}
+.quote-mark{position:absolute;top:8px;left:20px;font-family:var(--serif);font-size:4rem;color:rgba(184,154,78,.18)}
+.q-viewport{overflow:hidden}
+.q-track{display:flex;transition:transform .6s cubic-bezier(.4,0,.2,1)}
+.q-slide{min-width:100%;padding:0 8px}
+.q-text{font-family:var(--serif);font-size:1.22rem;line-height:2;color:var(--ink);letter-spacing:.02em}
+.q-src{font-size:.82rem;color:var(--gold-bright);margin-top:18px;letter-spacing:.06em}
+.q-note{font-size:.82rem;color:var(--ink-faint);margin-top:6px;line-height:1.7;max-width:520px;margin-left:auto;margin-right:auto}
+.q-nav{position:absolute;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--gold);font-size:2rem;cursor:pointer;z-index:2;width:44px;height:44px;border-radius:50%;transition:background .2s}
+.q-nav:hover{background:rgba(184,154,78,.12)}
+.q-nav.prev{left:6px}.q-nav.next{right:6px}
+.q-dots{display:flex;justify-content:center;gap:8px;margin-top:22px}
+.q-dot{width:8px;height:8px;border-radius:50%;background:rgba(184,154,78,.3);cursor:pointer;transition:all .25s}
+.q-dot.active{background:var(--gold-bright);transform:scale(1.25)}
+
+.ver-list{display:grid;gap:12px;margin-top:6px}
+.ver{border:1px solid var(--line);border-radius:4px;padding:18px 20px;background:linear-gradient(160deg,var(--paper),var(--bg-deep));display:flex;gap:16px;align-items:flex-start}
+.ver .yr{font-family:var(--serif);font-weight:700;color:var(--gold-bright);font-size:1.05rem;min-width:62px}
+.ver .vt{font-size:.9rem;color:var(--ink-soft);line-height:1.8}
+.ver .vt b{color:var(--ink);font-weight:600}
+
+.read-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:6px}
+.read{border:1px solid var(--line);border-radius:4px;padding:20px 18px;background:linear-gradient(160deg,var(--paper),var(--bg-deep))}
+.read h4{font-family:var(--serif);color:var(--gold-bright);font-size:1rem;letter-spacing:.04em;margin-bottom:8px}
+.read p{font-size:.85rem;color:var(--ink-soft);line-height:1.8}
+
+.modal-mask{position:fixed;inset:0;background:rgba(40,36,28,.5);z-index:200;display:none;align-items:center;justify-content:center;padding:24px}
+.modal-mask.open{display:flex}
+.modal-box{position:relative;max-width:520px;width:100%;background:linear-gradient(160deg,var(--paper),var(--bg-deep));border:1px solid var(--gold);border-radius:6px;padding:34px 34px 30px;box-shadow:0 30px 80px -30px rgba(0,0,0,.4)}
+.modal-close{position:absolute;top:12px;right:16px;background:none;border:none;color:var(--ink-soft);font-size:1.6rem;cursor:pointer;line-height:1}
+.modal-close:hover{color:var(--gold-bright)}
+#mName{font-family:var(--serif);font-size:1.5rem;color:var(--ink);letter-spacing:.04em}
+#mRu{font-family:var(--serif);font-style:italic;color:var(--gold-bright);font-size:.95rem;margin-top:2px}
+#mRole{display:inline-block;font-size:.74rem;letter-spacing:.14em;color:var(--blue);border:1px solid rgba(111,134,163,.4);border-radius:999px;padding:3px 12px;margin-top:12px}
+#mBody{margin-top:16px;font-size:.92rem;color:var(--ink-soft);line-height:1.95}
+
+.foot-coll{margin-top:9vh;border-top:1px solid var(--line);padding-top:30px}
+.foot-coll .ttl{font-family:var(--serif);font-size:1rem;color:var(--gold-bright);letter-spacing:.1em;margin-bottom:16px}
+.foot-links{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.foot-links a{border:1px solid var(--line);border-radius:4px;padding:14px 16px;transition:all .3s;background:linear-gradient(160deg,var(--paper),var(--bg-deep))}
+.foot-links a:hover{border-color:var(--gold);transform:translateY(-3px)}
+.foot-links .cn{font-family:var(--serif);font-size:1rem;color:var(--ink)}
+.foot-links .ru{font-size:.72rem;color:var(--ink-faint);font-style:italic}
+.foot-links .here{color:var(--gold-bright)}
+.site-foot{margin-top:6vh;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-size:.82rem;color:var(--ink-faint)}
+.site-foot a{color:var(--ink-soft);transition:color .2s}
+.site-foot a:hover{color:var(--gold-bright)}
+
+.fade-in{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease}
+.fade-in.in{opacity:1;transform:none}
+
+@media(max-width:760px){
+  .ov-grid,.char-grid,.read-grid,.foot-links{grid-template-columns:1fr}
+  .theme-block{grid-template-columns:1fr;gap:10px}
+  .quote-shell{padding:40px 30px 34px}
+  .q-text{font-size:1.05rem}
+}
+</style>
+</head>
+<body>
+<a href="dostoevsky.html" class="back-home">← 返回合集</a>
+<div class="page">
+
+  <header class="hero">
+    <div class="glow"></div>
+    <div class="rose">
+      <svg width="46" height="46" viewBox="0 0 46 46" aria-hidden="true">
+        <path d="M23 8 C18 14 18 22 23 28 C28 22 28 14 23 8 Z" fill="none" stroke="#b6797f" stroke-width="1.6"/>
+        <circle cx="23" cy="23" r="3" fill="#b6797f"/>
+        <path d="M23 28 C20 33 20 39 23 43 C26 39 26 33 23 28" fill="none" stroke="#b89a4e" stroke-width="1.4"/>
+      </svg>
+    </div>
+    <div class="hero-eyebrow">ФЁДОР ДОСТОЕВСКИЙ · 1868–1869</div>
+    <h1>白痴</h1>
+    <div class="hero-ru">Идиот</div>
+    <p class="hero-sub">一个「绝对善良」的人回到污浊的人间，<br>像一道过于明亮、让人睁不开眼的光。</p>
+    <div class="hero-divider">
+      <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="15" fill="none" stroke="#b89a4e" stroke-width="1.4"/>
+        <circle cx="20" cy="20" r="6" fill="none" stroke="#6f86a3" stroke-width="1.3"/>
+        <circle cx="20" cy="20" r="1.6" fill="#b6797f"/>
+      </svg>
+    </div>
+    <div class="hero-meta">
+      <div class="hero-meta-item"><span class="v">4</span><span class="l">部结构</span></div>
+      <div class="hero-meta-item"><span class="v">1</span><span class="l">个「好人」</span></div>
+      <div class="hero-meta-item"><span class="v">癫痫病</span><span class="l">瞬息之光</span></div>
+      <div class="hero-meta-item"><span class="v">1869</span><span class="l">完成年份</span></div>
+    </div>
+  </header>
+
+  <nav class="nav-bar"><div class="nav-inner">
+    <div class="nav-tab active" data-section="overview">概览</div>
+    <div class="nav-tab" data-section="story">故事脉络</div>
+    <div class="nav-tab" data-section="characters">人物</div>
+    <div class="nav-tab" data-section="themes">主题</div>
+    <div class="nav-tab" data-section="quotes">名句</div>
+    <div class="nav-tab" data-section="versions">译本与影响</div>
+    <div class="nav-tab" data-section="reading">阅读指南</div>
+  </div></nav>
+
+  <section class="section fade-in" id="overview">
+    <h2 class="section-title"><span class="idx">Ⅰ</span>关于这本书</h2>
+    <p class="section-desc">陀氏想写一个<em>「绝对善良的人」</em>——像基督那样的好人，放进十九世纪圣彼得堡的名利场里会怎样。答案是：他会被当成白痴。</p>
+    <div class="ov-grid">
+      <div class="ov-card"><h4>一句话</h4><p>从瑞士疗养院归来的癫痫公爵梅什金，怀着天真的善意闯入一群被金钱与欲望驱动的人中间，反而照出了每个人的不堪。</p></div>
+      <div class="ov-card"><h4>创作野心</h4><p>陀氏自述要塑造一个「无可指摘的正面人物」。但他没有把他写成圣人，而写成一个在世俗眼光里「不正常」的人。</p></div>
+      <div class="ov-card"><div class="big">∞</div><h4 style="margin-top:6px">光的隐喻</h4><p>梅什金发病前会体验到几秒钟「无限和谐的狂喜」——那是全书最神秘、也最珍贵的片刻，是陀氏亲历癫痫的馈赠。</p></div>
+      <div class="ov-card"><h4>结局</h4><p>两个男人为一个女人走向谋杀与疯狂，而那个「好人」在尸体旁彻底退回了白痴的状态。美，未能拯救，却照亮了一切。</p></div>
+    </div>
+  </section>
+
+  <section class="section fade-in" id="story">
+    <h2 class="section-title"><span class="idx">Ⅱ</span>故事脉络</h2>
+    <p class="section-desc">四个部分，像一场缓慢的日落：光越来越暗，直到熄灭。以下按阶段梳理。</p>
+    <div class="steps">
+      <div class="step"><h4>归来：列车上的相遇</h4><div class="when">第一部</div><p>梅什金公爵从瑞士归来，在火车上结识花花公子罗戈任，又得知他将迎娶美艳而伤痕累累的纳斯塔西娅。梅什金的天真，一开始就被所有人误读。</p></div>
+      <div class="step"><h4>生日宴：十万卢布焚毁</h4><div class="when">第一部末</div><p>纳斯塔西娅生日宴上，加尼亚被迫在她与罗戈任间抉择。梅什金求婚，想救她出泥潭；她却当众将罗戈任给的十万卢布扔进壁炉，转身逃走。</p></div>
+      <div class="step"><h4>两难：娜斯塔西娅与阿格拉娅</h4><div class="when">第二—三部</div><p>梅什金同时被纳斯塔西娅的苦难与阿格拉娅的骄傲吸引。他试图两边都保全，却因「想救所有人」而谁也没留住，善意变成了折磨。</p></div>
+      <div class="step"><h4>终局：尸体旁的狂喜熄灭</h4><div class="when">第四部</div><p>罗戈任在嫉妒中杀死纳斯塔西娅。梅什金找到她冰冷的尸体，坐在旁边——他的「白痴」状态彻底定型。全书在最温柔也最残酷的画面里收束。</p></div>
+    </div>
+  </section>
+
+  <section class="section wide fade-in" id="characters">
+    <h2 class="section-title"><span class="idx">Ⅲ</span>人物</h2>
+    <p class="section-desc">点击卡片，看小传。三个女人、两个男人，外加一个将死的少年，构成陀氏最令人心碎的群像。</p>
+    <div class="char-grid" id="charGrid"></div>
+  </section>
+
+  <section class="section fade-in" id="themes">
+    <h2 class="section-title"><span class="idx">Ⅳ</span>核心主题</h2>
+    <p class="section-desc">几个彼此纠缠的思想支点——它们让「白痴」成为陀氏对「善」最悲悯的一次提问。</p>
+    <div class="theme-block">
+      <div class="theme-side"><div class="no">壹</div><h3>绝对善良的人</h3><div class="en">The Positively Good Man</div></div>
+      <div class="theme-body"><p>梅什金是陀氏笔下的「基督式人物」：不评判、全接纳、本能地爱。但正是这种无差别的善，在算计的世界里寸步难行，甚至成了伤害的来源。</p><div class="theme-keys"><span class="theme-key">基督式</span><span class="theme-key">被误读为白痴</span><span class="theme-key">善的无力</span></div></div>
+    </div>
+    <div class="theme-block">
+      <div class="theme-side"><div class="no">贰</div><h3>癫痫与无限和谐</h3><div class="en">Epilepsy and Harmony</div></div>
+      <div class="theme-body"><p>梅什金发病前几秒，会感到「与整个宇宙合一」的极致宁静。陀氏以自身病体验写此狂喜——那是理性与道德都够不到的、先于语言的「美」。</p><div class="theme-keys"><span class="theme-key">瞬息狂喜</span><span class="theme-key">先于语言的美</span><span class="theme-key">身体的灵性</span></div></div>
+    </div>
+    <div class="theme-block">
+      <div class="theme-side"><div class="no">叁</div><h3>美能拯救世界</h3><div class="en">Beauty Will Save the World</div></div>
+      <div class="theme-body"><p>这句话由梅什金说出。纳斯塔西娅的美既令人救赎又令人毁灭；美在书中是一把双刃——它照亮，也灼伤。这句话从此成为陀氏最著名的箴言。</p><div class="theme-keys"><span class="theme-key">美与毁灭</span><span class="theme-key">纳斯塔西娅</span><span class="theme-key">拯救的悬疑</span></div></div>
+    </div>
+    <div class="theme-block">
+      <div class="theme-side"><div class="no">肆</div><h3>金钱与天真</h3><div class="en">Money versus Innocence</div></div>
+      <div class="theme-body"><p>十万卢布、遗产、嫁妆——金钱像幽灵贯穿全书，衡量着每个人的灵魂重量。梅什金对钱毫无概念，这份天真恰是他最珍贵、也最危险的特质。</p><div class="theme-keys"><span class="theme-key">十万卢布</span><span class="theme-key">天真的代价</span><span class="theme-key">灵魂的称量</span></div></div>
+    </div>
+    <div class="theme-block">
+      <div class="theme-side"><div class="no">伍</div><h3>苦难即见证</h3><div class="en">Suffering as Witness</div></div>
+      <div class="theme-body"><p>纳斯塔西娅的受辱、伊波利特将死的愤怒、梅什金最终的精神崩塌——陀氏借他们的苦，证明人之所以为人，正在于会痛、会怜悯、会替别人受。</p><div class="theme-keys"><span class="theme-key">受难的尊严</span><span class="theme-key">替人受苦</span><span class="theme-key">温柔的胜利</span></div></div>
+    </div>
+  </section>
+
+  <section class="section fade-in" id="quotes">
+    <h2 class="section-title"><span class="idx">Ⅴ</span>名句</h2>
+    <p class="section-desc">几句话，从光走向熄灭——基本就是这本书的精神心电图。</p>
+    <div class="quote-shell">
+      <span class="quote-mark">❝</span>
+      <button class="q-nav prev" id="qPrev" aria-label="上一条">‹</button>
+      <div class="q-viewport"><div class="q-track" id="qTrack"></div></div>
+      <button class="q-nav next" id="qNext" aria-label="下一条">›</button>
+      <div class="q-dots" id="qDots"></div>
+    </div>
+  </section>
+
+  <section class="section fade-in" id="versions">
+    <h2 class="section-title"><span class="idx">Ⅵ</span>译本、改编与影响</h2>
+    <p class="section-desc">中文世界怎么读它，银幕怎么拍它，以及它留下的回响。</p>
+    <div class="ver-list">
+      <div class="ver"><span class="yr">1958</span><div class="vt"><b>耿济之译</b>：最早中译，语言典雅，奠定了中文读者对「梅什金」的想象。</div></div>
+      <div class="ver"><span class="yr">1992</span><div class="vt"><b>荣如德译</b>：人民文学版，流畅准确，长期处于主流读本地位。</div></div>
+      <div class="ver"><span class="yr">2004</span><div class="vt"><b>臧仲伦译</b>：注释详尽的新全译本，语言更贴近当代。</div></div>
+      <div class="ver"><span class="yr">影视</span><div class="vt">苏联导演<b>伊万·佩耶夫（1958 电影）</b>多次改编；<b>黑泽明《白痴》（1951）</b>将其移植到战后日本，是影史经典。</div></div>
+      <div class="ver"><span class="yr">影响</span><div class="vt">「美能拯救世界」成为横跨文学、艺术与流行文化的名句；梅什金被视为现代文学中最动人的「好人」形象之一。</div></div>
+    </div>
+  </section>
+
+  <section class="section fade-in" id="reading">
+    <h2 class="section-title"><span class="idx">Ⅶ</span>阅读指南</h2>
+    <p class="section-desc">它比《罪与罚》更「慢」、更「软」，需要你放下评判去读。</p>
+    <div class="read-grid">
+      <div class="read"><h4>别急着定义他</h4><p>梅什金不是真的弱智，而是「不被世俗逻辑收编」。先放下「他到底傻不傻」的疑问。</p></div>
+      <div class="read"><h4>盯住两个女人</h4><p>纳斯塔西娅与阿格拉娅是同一枚硬币的两面，她们争夺的其实不是梅什金，而是「被救」的可能。</p></div>
+      <div class="read"><h4>留意那几秒</h4><p>梅什金的癫痫发作前兆描写极珍贵，那是陀氏以身体写出的「神性瞬间」。</p></div>
+      <div class="read"><h4>接受无解</h4><p>这本书不提供结论。「美能否拯救世界」是问句，不是答案。</p></div>
+      <div class="read"><h4>与卡拉马佐夫对读</h4><p>佐西马与梅什金是同一种「善」的两种化身——一个在信仰里站稳，一个在人间碎掉。</p></div>
+      <div class="read"><h4>慢下来</h4><p>对话绵长、情绪迂回。它适合深夜独处时读，而不是赶进度。</p></div>
+    </div>
+  </section>
+
+  <div class="foot-coll fade-in">
+    <div class="ttl">陀思妥耶夫斯基作品合集 · 跳转</div>
+    <div class="foot-links">
+      <a href="crime-and-punishment.html"><div class="cn">罪与罚</div><div class="ru">Преступление и наказание</div></a>
+      <a href="brothers-karamazov.html"><div class="cn">卡拉马佐夫兄弟</div><div class="ru">Братья Карамазовы</div></a>
+      <a href="the-idiot.html" class="here"><div class="cn">白痴</div><div class="ru">Идиот</div></a>
+      <a href="demons.html"><div class="cn">群魔</div><div class="ru">Бесы</div></a>
+      <a href="notes-from-underground.html"><div class="cn">地下室手记</div><div class="ru">Записки из подполья</div></a>
+      <a href="the-insulted.html"><div class="cn">被侮辱与被损害的</div><div class="ru">Униженные и оскорблённые</div></a>
+    </div>
+  </div>
+
+  <footer class="site-foot">
+    <span>© <em style="font-style:normal;color:var(--ink-soft)">zzht</em> · 白痴</span>
+    <a href="dostoevsky.html">← 返回陀思妥耶夫斯基作品合集</a>
+  </footer>
+
+</div>
+
+<div class="modal-mask" id="modalMask">
+  <div class="modal-box">
+    <button class="modal-close" id="modalClose" aria-label="关闭">×</button>
+    <h3 id="mName"></h3>
+    <div id="mRu"></div>
+    <span id="mRole"></span>
+    <div id="mBody"></div>
+  </div>
+</div>
+
+<script>
+const CHARACTERS=[
+  {id:'myshkin',name:'列夫·梅什金公爵',ru:'Prince Myshkin',role:'主人公',one:'从瑞士疗养院归来的癫痫公爵，天真到被所有人当成白痴。',body:'梅什金是陀氏理想中的「绝对善良者」。他富有同情、毫无城府，对金钱与名位毫无概念。他的善意既拯救人也灼伤人——因为他不愿伤害任何人，反而让所有人都陷入更深的纠葛。癫痫发作前的「无限和谐」体验，是全书最神秘的光。'},
+  {id:'nastasya',name:'纳斯塔西娅·菲利波夫娜',ru:'Nastasya Filippovna',role:'女主',one:'美艳、受伤、自我毁灭的女人，两个男人的争夺对象。',body:'纳斯塔西娅曾被富商托茨基占有，带着耻辱与骄傲活着。她渴望被救，却又认为自己「不配」被救，于是不断用自毁来试探、惩罚周围的人。她的美是双刃剑——既令人爱，也令人毁灭。'},
+  {id:'rogozhin',name:'帕尔芬·罗戈任',ru:'Parfyon Rogozhin',role:'情敌',one:'富商之子，炽烈而危险的占有者，最终扼杀了所爱。',body:'罗戈任以全部家当（十万卢布）换取纳斯塔西娅，他的爱是占有、是嫉妒、是毁灭。他与梅什金形成对照：一个以「全有或全无」的激情拥抱世界，最终被这激情反噬。'},
+  {id:'aglaya',name:'阿格拉娅·叶潘钦娜',ru:'Aglaya Epanchina',role:'少女',one:'骄傲、聪慧的贵族少女，梅什金的另一段爱。',body:'阿格拉娅是叶潘钦将军的小女儿，美丽而任性。她爱上梅什金，却受不了他的「不分彼此」与对纳斯塔西娅的牵挂。她代表「正常的」、世俗世界对梅什金的召唤，也是他未能留住的光。'},
+  {id:'ganya',name:'加尼亚·伊沃尔金',ru:'Gavrila (Ganya) Ivolgin',role:'野心家',one:'穷军官，为钱愿娶纳斯塔西娅，自尊与贪婪拉扯。',body:'加尼亚想借婚姻攀附、摆脱贫困，却在纳斯塔西娅生日宴上被当众羞辱。他是「被金钱绑架的体面人」的典型，自尊与算计在他体内剧烈冲突。'},
+  {id:'general',name:'叶潘钦将军',ru:'General Epanchin',role:'权贵',one:'阿格拉娅之父，体面而平庸的官僚。',body:'叶潘钦将军是圣彼得堡上流社会的中坚，精明、务实、毫无锋芒。他与梅什金的相处，写出世俗体面对「真善」的困惑与不耐。'},
+  {id:'ippolit',name:'伊波利特',ru:'Ippolit',role:'濒死少年',one:'患结核、将死的少年，写下《我的必要说明》。',body:'伊波利特是书中最刺人的声音：一个知道自己就要死去的年轻人，愤怒、偏激、渴望被记住。他的「自杀未遂」与长篇独白，是陀氏对青春、死亡与尊严的冷峻书写。'},
+  {id:'lebedev',name:'列别杰夫',ru:'Lebedev',role:'掮客',one:'八面玲珑的小人物，罗戈任的跟班与情报源。',body:'列别杰夫见风使舵、爱掉书袋，却也在关键时刻流露出善意。他是陀氏笔下「可笑又可悯」的众生相之一。'},
+  {id:'ptitsyn',name:'普季岑',ru:'Ptitsyn',role:'商人',one:'加尼亚的姐夫，精明的放贷者。',body:'普季岑代表务实的市民阶层，讲究体面与收益，是金钱逻辑正常运转时的样子，与梅什金的天真形成无声对照。'}
+];
+
+const QUOTES=[
+  {text:'美能拯救世界。',src:'——梅什金公爵',note:'全书最著名的箴言，也是一句悬而未决的问句。'},
+  {text:'我不悲伤，我只是……难过。',src:'——梅什金',note:'他那种无法被任何现成情绪词收编的温柔。'},
+  {text:'贫穷不是罪过，但赤贫是。',src:'——书中',note:'对体面与羞辱之间那条细线的精准把握。'},
+  {text:'人最怕的是什么？最怕的是自己拿定主意。',src:'——书中',note:'对怯懦与逃避的犀利一击。'},
+  {text:'也许，美真的能拯救世界——虽然我无力证明。',src:'——梅什金',note:'原句本就带着犹疑，这才显得真实。'},
+  {text:'我怕这喧闹，怕这笑声，怕这快乐……',src:'——梅什金',note:'一个「好人」对世俗狂欢的不适应症。'},
+  {text:'他不是白痴，他只是……太干净了。',src:'——旁人论梅什金',note:'点题的一句：问题不在他，而在世界。'}
+];
+
+const $=(s,r=document)=>r.querySelector(s);
+const $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const grid=$('#charGrid');
+CHARACTERS.forEach(c=>{
+  const el=document.createElement('div');el.className='char';el.tabIndex=0;
+  el.innerHTML='<div class="role">'+c.role+'</div><div class="nm">'+c.name+'</div><div class="en">'+c.ru+'</div><div class="one">'+c.one+'</div>';
+  const open=()=>showModal(c);
+  el.addEventListener('click',open);
+  el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});
+  grid.appendChild(el);
+});
+const mask=$('#modalMask');
+function showModal(c){$('#mName').textContent=c.name;$('#mRu').textContent=c.ru;$('#mRole').textContent=c.role;$('#mBody').textContent=c.body;mask.classList.add('open');}
+$('#modalClose').addEventListener('click',()=>mask.classList.remove('open'));
+mask.addEventListener('click',e=>{if(e.target===mask)mask.classList.remove('open');});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')mask.classList.remove('open');});
+
+let qIdx=0,qTimer=null;const qTrack=$('#qTrack'),qDots=$('#qDots');
+QUOTES.forEach((q,i)=>{const s=document.createElement('div');s.className='q-slide';s.innerHTML='<div class="q-text">'+q.text+'</div><div class="q-src">'+q.src+'</div><div class="q-note">'+q.note+'</div>';qTrack.appendChild(s);const d=document.createElement('div');d.className='q-dot'+(i===0?' active':'');d.addEventListener('click',()=>goQ(i,true));qDots.appendChild(d);});
+$('#qPrev').addEventListener('click',()=>goQ((qIdx-1+QUOTES.length)%QUOTES.length,true));
+$('#qNext').addEventListener('click',()=>goQ((qIdx+1)%QUOTES.length,true));
+function goQ(i,m){qIdx=i;qTrack.style.transform='translateX(-'+(i*100)+'%)';$$('.q-dot').forEach((d,j)=>d.classList.toggle('active',j===i));if(m){stopQ();startQ();}}
+function startQ(){stopQ();qTimer=setInterval(()=>goQ((qIdx+1)%QUOTES.length),6500);}
+function stopQ(){if(qTimer){clearInterval(qTimer);qTimer=null;}}
+const qShell=$('.quote-shell');qShell.addEventListener('mouseenter',stopQ);qShell.addEventListener('mouseleave',startQ);startQ();
+
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
+$$('.fade-in').forEach(el=>io.observe(el));
+const tabs=$$('.nav-tab'),secs=tabs.map(t=>$('#'+t.dataset.section));
+tabs.forEach(t=>t.addEventListener('click',()=>{const s=$('#'+t.dataset.section);s&&s.scrollIntoView({behavior:'smooth',block:'start'});}));
+const spy=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){const id=e.target.id;tabs.forEach(t=>t.classList.toggle('active',t.dataset.section===id));}});},{rootMargin:'-45% 0px -50% 0px'});
+secs.forEach(s=>s&&spy.observe(s));
+</script>
+</body>
+</html>
