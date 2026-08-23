@@ -9,183 +9,572 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#2a2826;
-  --bg2:#343130;
-  --bg3:#3d3a38;
-  --ink:#d8d3cc;
-  --ink-soft:#9a948c;
-  --ink-faint:#6f6a63;
-  --window:#8a9a8f;
-  --window-bright:#aab8ad;
-  --line:rgba(170,184,173,.16);
-  --serif:'Noto Serif SC','Source Han Serif SC',serif;
-  --sans:'Noto Sans SC',-apple-system,BlinkMacSystemFont,sans-serif;
+:root {
+  --bg: #efece6;          /* 地窖灰褐纸底 */
+  --paper: #f8f6f1;       /* 雪白面板 */
+  --paper-deep: #e6e2d8;
+  --ink: #262420;
+  --ink-soft: #57534a;
+  --ink-faint: #918c80;
+  --lime: #6e6a60;        /* 墙石灰 */
+  --lime-deep: #57534b;
+  --candle: #b07d1e;      /* 烛黄，极克制 */
+  --candle-soft: #d9a83f;
+  --seal: #9e3524;        /* 朱红印章 */
+  --border: #d7d1c3;
+  --serif: 'Noto Serif SC', 'STSong', 'SimSun', serif;
+  --sans: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
 }
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{font-family:var(--sans);color:var(--ink);background:var(--bg);line-height:1.8;overflow-x:hidden;-webkit-font-smoothing:antialiased}
-body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  color: var(--ink);
+  line-height: 1.75;
+  overflow-x: hidden;
+  /* 地窖墙上的潮斑与落雪：细碎的暗点 */
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(rgba(110,106,96,.07) 1px, transparent 1.4px),
+    radial-gradient(rgba(110,106,96,.045) 1px, transparent 1.4px),
+    linear-gradient(180deg, rgba(110,106,96,.12) 0%, rgba(239,236,230,0) 460px);
+  background-size: 26px 26px, 44px 44px, 100% 100%;
+  background-position: 0 0, 15px 21px, 0 0;
+}
+::selection { background: rgba(110,106,96,.22); }
+a { color: inherit; text-decoration: none; }
+
+/* 左上胶囊：回合集 */
+.back-home {
+  position: fixed; top: 18px; left: 20px; z-index: 120;
+  font-size: .85rem; color: var(--ink-soft);
+  padding: 7px 14px; border-radius: 999px;
+  background: rgba(239,236,230,.9);
+  border: 1px solid var(--border);
+  transition: all .25s;
+}
+.back-home:hover { color: var(--seal); border-color: var(--seal); transform: translateX(-2px); }
+
+/* ===== HERO：地面，地下室的入口 ===== */
+.hero {
+  min-height: 94vh;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  text-align: center;
+  padding: 14vh 24px 8vh;
+  position: relative;
+}
+.hero-wm {
+  position: absolute; top: 11%; left: 50%; transform: translateX(-50%);
+  font-family: var(--serif); font-style: italic;
+  font-size: clamp(2.6rem, 8vw, 5.6rem);
+  letter-spacing: .06em; white-space: nowrap;
+  color: rgba(110,106,96,.13);
+  pointer-events: none; user-select: none;
+}
+.hero-eyebrow {
+  font-size: .82rem; letter-spacing: .32em; color: var(--lime);
+  margin-bottom: 22px; font-weight: 400; position: relative;
+}
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(3.2rem, 10vw, 6.4rem);
+  font-weight: 900; letter-spacing: .14em; line-height: 1.12;
+  color: var(--ink); position: relative;
+}
+.hero-ru {
+  font-family: var(--serif); font-style: italic;
+  font-size: clamp(1rem, 2.6vw, 1.3rem);
+  color: var(--lime); letter-spacing: .2em;
+  margin-top: 14px; position: relative;
+}
+.hero-sub {
+  margin-top: 18px; color: var(--ink-soft); font-size: .97rem; font-weight: 300;
+  letter-spacing: .05em; line-height: 2; position: relative;
+}
+.hero-divider {
+  display: flex; align-items: center; gap: 18px;
+  margin: 30px auto; position: relative;
+}
+.hero-divider::before, .hero-divider::after { content: ''; width: 78px; height: 1px; }
+.hero-divider::before { background: linear-gradient(90deg, transparent, rgba(110,106,96,.55)); }
+.hero-divider::after { background: linear-gradient(270deg, transparent, rgba(110,106,96,.55)); }
+.hero-quote {
+  max-width: 560px; font-family: var(--serif); font-style: italic;
+  font-size: 1.08rem; color: var(--ink-soft); line-height: 2; position: relative;
+}
+.hero-quote .src { display: block; margin-top: 10px; font-size: .85rem; color: var(--ink-faint); font-style: normal; }
+.hero-meta {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 14px 46px;
+  margin-top: 48px; position: relative;
+}
+.hero-meta-item { text-align: center; min-width: 70px; }
+.hero-meta-item .value {
+  display: block; font-family: var(--serif); font-weight: 900;
+  font-size: 1.7rem; color: var(--lime-deep); line-height: 1.2;
+}
+.hero-meta-item .label { font-size: .78rem; color: var(--ink-faint); letter-spacing: .12em; }
+.scroll-hint {
+  position: absolute; bottom: 26px; left: 50%; transform: translateX(-50%);
+  font-size: .78rem; color: var(--ink-faint); cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  letter-spacing: .2em; user-select: none;
+}
+.scroll-hint .arrow { animation: bob 1.8s ease-in-out infinite; }
+@keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+
+/* ===== NAV ===== */
+.nav-bar {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(239,236,230,.96);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: flex; overflow-x: auto; scrollbar-width: none;
+  padding: 0 12px;
+}
+.nav-inner::-webkit-scrollbar { display: none; }
+.nav-tab {
+  flex: 0 0 auto; padding: 15px 18px; cursor: pointer;
+  font-size: .9rem; color: var(--ink-soft); letter-spacing: .06em;
+  position: relative; transition: color .25s; white-space: nowrap;
+  user-select: none;
+}
+.nav-tab::after {
+  content: ''; position: absolute; left: 18px; right: 18px; bottom: 0;
+  height: 2px; border-radius: 2px;
+  background: linear-gradient(90deg, var(--lime), var(--candle));
+  transform: scaleX(0); transition: transform .3s;
+}
+.nav-tab:hover { color: var(--ink); }
+.nav-tab.active { color: var(--lime-deep); font-weight: 500; }
+.nav-tab.active::after { transform: scaleX(1); }
+
+/* ===== 布局骨架：下地下室的台阶 ===== */
+.wrap { max-width: 1100px; margin: 0 auto; padding: 0 22px; }
+.section {
+  max-width: 1000px; padding: 88px 0 8px;
+  scroll-margin-top: 70px; position: relative;
+}
+.section.wide { max-width: 1060px; }
+.section-title {
+  font-family: var(--serif); font-size: clamp(1.7rem, 4vw, 2.3rem);
+  font-weight: 900; letter-spacing: .08em; color: var(--ink);
+  display: flex; align-items: baseline; gap: 16px;
+}
+.section-title .idx { font-size: .82rem; color: var(--lime); letter-spacing: .3em; font-weight: 400; }
+.section-title::after {
+  content: ''; display: block; width: 76px; height: 3px; margin-top: 14px;
+  background: linear-gradient(90deg, var(--lime), var(--candle), transparent);
+  border-radius: 2px;
+}
+.section-title .idx + .tt { display: inline-block; }
+.section-desc {
+  margin-top: 20px; color: var(--ink-soft); max-width: 720px;
+  font-size: .98rem; line-height: 2;
+}
+.section-desc em { font-style: italic; color: var(--lime-deep); font-family: var(--serif); }
+.fade-in { opacity: 0; transform: translateY(26px); transition: opacity .8s ease, transform .8s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* 桌面端：主要区块逐级下沉，一路下到底 */
+@media (min-width: 980px) {
+  .stepped {
+    margin-left: calc(var(--step, 0) * 44px);
+    margin-top: 30px;
+    border-top: 1px solid rgba(38,36,32,.16);
+  }
+  .stepped::before {
+    content: ''; position: absolute; left: -1px; top: -31px;
+    width: 1px; height: 31px; background: rgba(38,36,32,.16);
+  }
+  #overview.stepped { border-top-color: transparent; margin-top: 0; }
+  #overview.stepped::before { display: none; }
+}
+
+/* ===== OVERVIEW ===== */
+.ov-grid {
+  display: grid; grid-template-columns: 1.35fr 1fr; gap: 40px;
+  margin-top: 40px; align-items: start;
+}
+.ov-prose p { margin-bottom: 16px; color: var(--ink-soft); font-size: .97rem; line-height: 2.05; }
+.ov-prose p strong { color: var(--ink); font-weight: 600; }
+.ov-prose .lede {
+  font-family: var(--serif); font-size: 1.12rem; color: var(--ink); line-height: 2.1;
+}
+.ov-prose .lede::first-letter {
+  font-size: 2.6em; float: left; line-height: 1; padding-right: .12em;
+  color: var(--lime-deep); font-weight: 900;
+}
+.ov-panel {
+  background: var(--paper); border: 1px solid var(--border);
+  border-radius: 22px; padding: 30px 28px;
+  box-shadow: 0 10px 24px rgba(90,84,70,.08);
+}
+.ov-panel h3 {
+  font-family: var(--serif); font-size: 1.05rem; font-weight: 700; letter-spacing: .08em;
+  color: var(--lime-deep); margin-bottom: 10px;
+}
+.ov-panel .big {
+  font-family: var(--serif); font-size: 2.6rem; font-weight: 900;
+  color: var(--lime); line-height: 1.1; margin: 6px 0 10px;
+}
+.ov-panel p { font-size: .88rem; color: var(--ink-soft); line-height: 1.85; }
+.wall-note {
+  margin-top: 16px; padding-top: 12px;
+  border-top: 1px dashed var(--border);
+  font-size: .8rem; color: var(--ink-faint); font-style: italic; line-height: 1.8;
+}
+
+/* ===== STORY：两级台阶（第一部 / 第二部） ===== */
+.phase { margin-top: 44px; }
+.phase-head { display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap; }
+.phase-num {
+  font-family: var(--serif); font-size: 2rem; font-weight: 900;
+  color: var(--lime); line-height: 1;
+}
+.phase-head h3 { font-family: var(--serif); font-size: 1.25rem; font-weight: 700; letter-spacing: .05em; }
+.phase-head .ref { font-size: .8rem; color: var(--ink-faint); letter-spacing: .05em; }
+.phase-items {
+  margin-top: 20px; margin-left: 13px;
+  border-left: 2px solid rgba(110,106,96,.45);
+  padding-left: 26px;
+}
+.t-item {
+  position: relative; border-radius: 20px; padding: 14px 18px;
+  margin-bottom: 10px; cursor: pointer;
+  transition: background .25s;
+}
+.t-item:hover { background: var(--paper-deep); }
+.t-item::before {
+  content: ''; position: absolute; left: -33px; top: 24px;
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--bg); border: 2.5px solid var(--lime);
+  transition: background .25s;
+}
+.t-item.open::before { background: var(--lime); }
+.t-item-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.t-item-head h4 { font-size: 1rem; font-weight: 600; font-family: var(--serif); letter-spacing: .03em; }
+.t-ref {
+  font-size: .72rem; color: var(--lime-deep); background: rgba(110,106,96,.1);
+  padding: 2px 10px; border-radius: 999px; letter-spacing: .04em; white-space: nowrap;
+}
+.t-toggle { margin-left: auto; color: var(--ink-faint); font-size: .85rem; transition: transform .3s; }
+.t-item.open .t-toggle { transform: rotate(180deg); }
+.t-detail { max-height: 0; overflow: hidden; transition: max-height .45s ease; }
+.t-detail p {
+  padding-top: 10px; font-size: .9rem; color: var(--ink-soft); line-height: 1.95; max-width: 680px;
+}
+/* 桌面端：第二部再下沉一阶 */
+@media (min-width: 980px) {
+  #story .phase.p2 {
+    margin-left: 46px; position: relative; padding-top: 20px;
+    border-top: 1px solid rgba(38,36,32,.18);
+  }
+  #story .phase.p2::before {
+    content: ''; position: absolute; left: -1px; top: -21px;
+    width: 1px; height: 21px; background: rgba(38,36,32,.18);
+  }
+}
+
+/* ===== 台阶分界：从这里下到第二部 ===== */
+.hatch { margin: 70px 0 6px; padding: 26px 0; position: relative; }
+.hatch-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border) 18%, var(--lime) 50%, var(--border) 82%, transparent);
+}
+.hatch-inner {
+  display: flex; align-items: center; justify-content: center; flex-wrap: wrap;
+  gap: 20px 34px; margin-top: 24px;
+}
+.hatch-cap {
+  font-size: .78rem; letter-spacing: .34em; color: var(--ink-faint);
+}
+.hatch-part {
+  font-family: var(--serif); font-size: 1rem; color: var(--lime-deep);
+  letter-spacing: .1em;
+}
+.hatch-svg { display: block; }
+
+/* ===== CHARACTERS：地下室的档案 ===== */
+.filter-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px; }
+.filter-chip {
+  padding: 8px 18px; border-radius: 999px; cursor: pointer;
+  font-size: .85rem; color: var(--ink-soft);
+  background: var(--paper); border: 1px solid var(--border);
+  transition: all .25s; user-select: none;
+}
+.filter-chip:hover { transform: translateY(-2px); color: var(--ink); }
+.filter-chip.active {
+  background: var(--lime-deep); color: #f4f1ea; border-color: transparent;
+}
+.char-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px; margin-top: 30px;
+  counter-reset: dossier;
+}
+.char-card {
+  background: var(--paper); border: 1px solid var(--border); border-radius: 20px;
+  padding: 22px 22px 20px; cursor: pointer;
+  position: relative; overflow: hidden;
+  counter-increment: dossier;
+  transition: transform .3s cubic-bezier(.34,1.4,.5,1), box-shadow .3s, border-color .3s;
+}
+.char-card::before {
+  content: ''; position: absolute; top: 0; left: 22px; right: 22px; height: 3px;
+  border-radius: 0 0 4px 4px;
+  background: linear-gradient(90deg, var(--gc, var(--lime)), transparent);
+  opacity: .85;
+}
+.char-card::after {
+  content: '№ ' counter(dossier);
+  position: absolute; top: 14px; right: 18px;
+  font-family: var(--serif); font-size: .82rem; letter-spacing: .06em;
+  color: rgba(110,106,96,.5);
+}
+.char-card:hover, .char-card:focus-visible {
+  transform: translateY(-5px);
+  box-shadow: 0 14px 30px rgba(90,84,70,.16);
+  border-color: var(--gc, var(--lime));
+  outline: none;
+}
+.char-card .c-name { font-family: var(--serif); font-size: 1.12rem; font-weight: 700; }
+.char-card .c-ru { font-size: .76rem; color: var(--ink-faint); margin-top: 3px; font-style: italic; letter-spacing: .02em; }
+.char-card .c-role {
+  display: inline-block; margin-top: 8px; font-size: .72rem; letter-spacing: .1em;
+  color: var(--gc, var(--lime-deep));
+  border: 1px solid color-mix(in srgb, var(--gc, var(--lime)) 40%, var(--paper));
+  padding: 2px 10px; border-radius: 999px;
+}
+.char-card .c-desc { font-size: .85rem; color: var(--ink-soft); margin-top: 12px; line-height: 1.8; }
+.char-card.hidden { display: none; }
+
+/* modal */
+.modal-mask {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(38, 36, 32, .52);
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px; opacity: 0; pointer-events: none; transition: opacity .3s;
+}
+.modal-mask.show { opacity: 1; pointer-events: auto; }
+.modal-box {
+  background: var(--paper); border-radius: 24px; max-width: 560px; width: 100%;
+  max-height: 82vh; overflow-y: auto;
+  padding: 36px 34px; position: relative;
+  transform: translateY(18px); transition: transform .3s;
+  border-top: 4px solid var(--lime);
+}
+.modal-mask.show .modal-box { transform: translateY(0); }
+.modal-close {
+  position: absolute; top: 16px; right: 20px; cursor: pointer;
+  font-size: 1.3rem; color: var(--ink-faint); background: none; border: none;
+  transition: color .2s; line-height: 1;
+}
+.modal-close:hover { color: var(--seal); }
+.modal-box h3 { font-family: var(--serif); font-size: 1.5rem; font-weight: 900; }
+.modal-box .m-ru { font-style: italic; color: var(--ink-faint); font-size: .88rem; margin-top: 4px; }
+.modal-box .m-role {
+  display: inline-block; margin-top: 12px; font-size: .76rem; letter-spacing: .06em;
+  color: var(--lime-deep); background: rgba(110,106,96,.1); padding: 4px 14px; border-radius: 999px;
+}
+.modal-box .m-body { margin-top: 16px; font-size: .93rem; color: var(--ink-soft); line-height: 2.05; }
+
+/* ===== THEMES ===== */
+.mutter {
+  margin: 34px 0 6px; padding: 6px 0 6px 26px;
+  border-left: 3px solid rgba(110,106,96,.4);
+  font-family: var(--serif); font-style: italic;
+  font-size: clamp(1.15rem, 2.6vw, 1.45rem); color: var(--ink); line-height: 1.9;
+  max-width: 640px;
+}
+.mutter span { display: block; font-size: .8rem; color: var(--ink-faint); font-style: normal; margin-top: 6px; letter-spacing: .08em; }
+.theme-block {
+  display: grid; grid-template-columns: 220px 1fr; gap: 34px;
+  padding: 42px 0; align-items: start;
+}
+.theme-side { position: sticky; top: 84px; }
+.theme-no {
+  font-family: var(--serif); font-weight: 900; font-size: 1.05rem; letter-spacing: .2em;
+  color: var(--candle);
+}
+.theme-side h3 { font-family: var(--serif); font-size: 1.3rem; font-weight: 900; margin-top: 8px; line-height: 1.5; }
+.theme-side .t-en { font-size: .78rem; color: var(--ink-faint); font-style: italic; margin-top: 4px; letter-spacing: .03em; }
+.theme-body p { color: var(--ink-soft); font-size: .94rem; line-height: 2.05; margin-bottom: 14px; max-width: 640px; }
+.theme-body p b { color: var(--ink); font-weight: 600; }
+.theme-key {
+  display: inline-block; margin-top: 4px; margin-right: 8px; margin-bottom: 6px;
+  font-size: .74rem; color: var(--lime-deep); letter-spacing: .05em;
+  padding: 3px 12px; border-radius: 999px; border: 1px solid rgba(110,106,96,.35);
+  background: rgba(110,106,96,.07);
+}
+.theme-sep {
+  height: 1px; border: none;
+  background: linear-gradient(90deg, transparent, var(--border) 25%, var(--border) 75%, transparent);
+}
+
+/* ===== QUOTES：地下室本身——全合集最暗的一页 ===== */
+.quote-shell { margin-top: 38px; position: relative; }
+.quote-viewport { overflow: hidden; border-radius: 26px; }
+.quote-track { display: flex; transition: transform .6s cubic-bezier(.4,0,.2,1); }
+.q-slide {
+  flex: 0 0 100%; padding: 50px 8%;
   background:
-    radial-gradient(ellipse 40% 30% at 78% 14%, rgba(170,184,173,.10), transparent 55%),
-    radial-gradient(ellipse 60% 40% at 50% 115%, rgba(0,0,0,.4), transparent 60%)}
-::selection{background:rgba(170,184,173,.22)}
-a{color:inherit;text-decoration:none}
-.back-home{position:fixed;top:18px;left:20px;z-index:140;font-size:.85rem;color:var(--ink-soft);padding:7px 14px;border-radius:999px;background:rgba(42,40,38,.82);border:1px solid var(--line);transition:all .25s}
-.back-home:hover{color:var(--window-bright);border-color:var(--window)}
-.page{position:relative;z-index:1;max-width:980px;margin:0 auto;padding:0 24px 9vh}
+    radial-gradient(ellipse 60% 55% at 50% 0%, rgba(217,168,63,.13), transparent 70%),
+    #141210;
+  border: 1px solid #2e2a23; border-radius: 26px;
+  text-align: center;
+}
+.q-mark { font-family: var(--serif); font-size: 2.6rem; color: var(--candle-soft); line-height: 1; }
+.q-text {
+  font-family: var(--serif); font-style: italic;
+  font-size: clamp(1.05rem, 2.6vw, 1.35rem);
+  line-height: 2.1; color: #ead9a6; margin-top: 12px;
+}
+.q-src { margin-top: 18px; font-size: .85rem; color: var(--candle-soft); letter-spacing: .06em; }
+.q-note { margin-top: 8px; font-size: .82rem; color: #9a8c68; max-width: 520px; margin-left: auto; margin-right: auto; line-height: 1.8; }
+.quote-nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 42px; height: 42px; border-radius: 50%;
+  background: var(--paper); border: 1px solid var(--border);
+  color: var(--ink-soft); font-size: 1.1rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .25s; z-index: 5;
+}
+.quote-nav:hover { color: var(--lime-deep); border-color: var(--lime); transform: translateY(-50%) scale(1.08); }
+.quote-nav.prev { left: -14px; }
+.quote-nav.next { right: -14px; }
+.quote-dots { display: flex; justify-content: center; gap: 9px; margin-top: 22px; }
+.q-dot {
+  width: 8px; height: 8px; border-radius: 50%; background: var(--border);
+  cursor: pointer; transition: all .3s;
+}
+.q-dot.active { background: var(--candle); transform: scale(1.25); }
 
-/* HERO：地下室，一扇冷窗 */
-.hero{min-height:92vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:14vh 24px 7vh;position:relative}
-.hero-frame{position:relative;border:1px solid var(--line);border-radius:2px;padding:56px 40px;background:rgba(42,40,38,.5);max-width:620px;box-shadow:inset 0 0 60px rgba(0,0,0,.4)}
-.hero-frame::before{content:'';position:absolute;top:18px;right:18px;width:60px;height:88px;border:1px solid rgba(170,184,173,.28);background:linear-gradient(160deg,rgba(170,184,173,.16),transparent 70%);border-radius:2px}
-.hero-frame::after{content:'';position:absolute;top:21px;right:21px;width:54px;height:8px;background:rgba(170,184,173,.10)}
-.hero-eyebrow{font-size:.82rem;letter-spacing:.4em;color:var(--window);margin-bottom:18px;font-weight:400}
-.hero h1{font-family:var(--serif);font-weight:900;font-size:clamp(2.4rem,8vw,4.6rem);letter-spacing:.08em;line-height:1.06;color:var(--ink)}
-.hero-ru{font-family:var(--serif);font-style:italic;color:var(--window-bright);font-size:clamp(.95rem,2.4vw,1.25rem);letter-spacing:.12em;margin-top:12px}
-.hero-sub{margin-top:18px;color:var(--ink-soft);font-family:var(--serif);font-size:1.02rem;line-height:1.95;letter-spacing:.02em;max-width:520px}
-.hero-divider{display:flex;align-items:center;gap:16px;margin:30px auto}
-.hero-divider::before,.hero-divider::after{content:'';width:70px;height:1px}
-.hero-divider::before{background:linear-gradient(90deg,transparent,rgba(170,184,173,.5))}
-.hero-divider::after{background:linear-gradient(270deg,transparent,rgba(170,184,173,.5))}
-.hero-meta{display:flex;flex-wrap:wrap;justify-content:center;gap:14px 44px;margin-top:34px}
-.hero-meta-item{text-align:center;min-width:64px}
-.hero-meta-item .v{display:block;font-family:var(--serif);font-weight:900;font-size:1.5rem;color:var(--window-bright)}
-.hero-meta-item .l{font-size:.74rem;color:var(--ink-faint);letter-spacing:.14em;margin-top:2px}
+/* ===== VERSIONS：译本对照 ===== */
+.dual-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 30px; margin-top: 38px; }
+.v-panel {
+  background: var(--paper); border: 1px solid var(--border); border-radius: 22px;
+  padding: 28px 26px; box-shadow: 0 10px 24px rgba(90,84,70,.08);
+}
+.v-panel h3 {
+  font-family: var(--serif); font-size: 1.1rem; font-weight: 700; letter-spacing: .06em;
+  margin-bottom: 6px;
+}
+.v-panel .v-sub { font-size: .8rem; color: var(--ink-faint); margin-bottom: 18px; }
+.v-row {
+  padding: 14px 0; border-bottom: 1px dashed var(--border);
+  font-size: .88rem; color: var(--ink-soft); line-height: 1.8;
+}
+.v-row:last-child { border-bottom: none; }
+.v-row b { color: var(--ink); font-weight: 600; }
+.v-row .v-year {
+  font-family: var(--serif); color: var(--lime-deep); font-weight: 700; margin-right: 10px;
+}
+.v-row.rec { background: rgba(158,53,36,.04); border-radius: 20px; padding-left: 14px; padding-right: 14px; }
+.v-seal {
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--serif); font-weight: 900; font-size: .86rem;
+  color: var(--seal); border: 2px solid var(--seal); border-radius: 8px;
+  padding: 1px 8px; margin-right: 8px;
+  transform: rotate(-6deg); opacity: .92; letter-spacing: .05em;
+  vertical-align: 1px;
+}
+.v-rec {
+  margin-top: 14px; font-size: .82rem; color: var(--candle);
+  background: rgba(176,125,30,.09); border-radius: 14px; padding: 10px 14px; line-height: 1.7;
+}
+.v-panel.legacy .l-row {
+  padding: 14px 0; border-bottom: 1px dashed var(--border);
+  font-size: .88rem; color: var(--ink-soft); line-height: 1.9;
+}
+.v-panel.legacy .l-row:last-child { border-bottom: none; }
+.v-panel.legacy .l-row b { color: var(--ink); font-weight: 600; }
+.v-panel.legacy .l-tag {
+  font-size: .72rem; color: var(--lime-deep); background: rgba(110,106,96,.1);
+  padding: 2px 10px; border-radius: 999px; margin-right: 10px; letter-spacing: .06em;
+  white-space: nowrap;
+}
 
-/* NAV */
-.nav-bar{position:sticky;top:0;z-index:110;background:rgba(42,40,38,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);margin:0 -24px 6vh}
-.nav-inner{max-width:980px;margin:0 auto;display:flex;overflow-x:auto;gap:4px;padding:0 14px;scrollbar-width:none}
-.nav-inner::-webkit-scrollbar{display:none}
-.nav-tab{flex:0 0 auto;font-size:.86rem;color:var(--ink-faint);padding:16px 13px;cursor:pointer;white-space:nowrap;position:relative;transition:color .25s;letter-spacing:.04em}
-.nav-tab.active{color:var(--window-bright)}
-.nav-tab.active::after{content:'';position:absolute;left:13px;right:13px;bottom:0;height:2px;background:linear-gradient(90deg,var(--window),var(--window-bright))}
-.nav-tab:hover{color:var(--ink)}
+/* ===== READING ===== */
+.read-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 22px; margin-top: 36px;
+}
+.read-card {
+  background: var(--paper); border: 1px solid var(--border); border-radius: 22px;
+  padding: 28px 26px; transition: transform .3s, box-shadow .3s;
+  box-shadow: 0 6px 16px rgba(90,84,70,.06);
+}
+.read-card:hover { transform: translateY(-4px); box-shadow: 0 12px 26px rgba(90,84,70,.14); }
+.read-card h3 { font-family: var(--serif); font-size: 1.02rem; font-weight: 700; margin-bottom: 12px; color: var(--lime-deep); }
+.read-card p { font-size: .88rem; color: var(--ink-soft); line-height: 1.95; }
+.read-card p b { color: var(--ink); }
 
-/* SECTION */
-.section{padding:5vh 0;border-top:1px solid rgba(170,184,173,.08)}
-.section.wide{padding-left:0;padding-right:0}
-.section-title{font-family:var(--serif);font-weight:700;font-size:clamp(1.5rem,4vw,2rem);letter-spacing:.08em;color:var(--ink);display:flex;align-items:center;gap:14px}
-.section-title .idx{font-size:.8rem;color:var(--window);letter-spacing:.3em;font-weight:400}
-.section-desc{color:var(--ink-soft);font-size:.95rem;line-height:1.95;margin:14px 0 26px;max-width:680px}
-.section-desc em{font-style:normal;color:var(--window-bright)}
+/* ===== FOOTER：砖墙与题跋 ===== */
+.site-footer {
+  margin: 96px 0 0; padding: 34px 0 46px;
+  border-top: 1px solid var(--border);
+  font-size: .82rem; color: var(--ink-faint);
+}
+.foot-wall { display: flex; justify-content: center; margin-bottom: 18px; }
+.foot-epitaph {
+  text-align: center; font-family: var(--serif); font-style: italic;
+  color: var(--ink-soft); font-size: .92rem; line-height: 2; max-width: 620px;
+  margin: 0 auto 22px;
+}
+.foot-links {
+  display: flex; justify-content: center; flex-wrap: wrap; gap: 8px 22px;
+}
+.site-footer a { color: var(--ink-soft); transition: color .2s; }
+.site-footer a:hover { color: var(--seal); }
 
-.ov-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:8px}
-.ov-card{border:1px solid var(--line);border-radius:3px;padding:22px 22px;background:linear-gradient(160deg,var(--bg2),var(--bg3))}
-.ov-card h4{font-family:var(--serif);color:var(--window-bright);font-size:1.02rem;letter-spacing:.06em;margin-bottom:8px}
-.ov-card p{font-size:.9rem;color:var(--ink-soft);line-height:1.85}
-.ov-card .big{font-family:var(--serif);font-size:2.2rem;color:var(--window);line-height:1}
-
-.steps{counter-reset:s;display:flex;flex-direction:column;gap:0;margin-top:6px}
-.step{position:relative;padding:22px 0 22px 64px;border-left:1px solid var(--line);margin-left:18px}
-.step::before{content:counter(s,upper-roman);counter-increment:s;position:absolute;left:-19px;top:18px;width:38px;height:38px;border-radius:50%;background:var(--bg3);border:1px solid var(--window);color:var(--window-bright);font-family:var(--serif);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:.9rem}
-.step h4{font-family:var(--serif);font-size:1.12rem;color:var(--ink);letter-spacing:.03em}
-.step .when{font-size:.76rem;color:var(--window);letter-spacing:.1em;margin:2px 0 8px}
-.step p{font-size:.9rem;color:var(--ink-soft);line-height:1.85}
-
-.char-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.char{border:1px solid var(--line);border-radius:3px;padding:18px 16px;background:linear-gradient(160deg,var(--bg2),var(--bg3));cursor:pointer;transition:transform .3s,border-color .3s}
-.char:hover{transform:translateY(-4px);border-color:var(--window)}
-.char .role{font-size:.72rem;letter-spacing:.16em;color:var(--window-bright)}
-.char .nm{font-family:var(--serif);font-weight:700;font-size:1.1rem;margin:6px 0 2px;color:var(--ink)}
-.char .en{font-size:.72rem;color:var(--ink-faint);font-style:italic}
-.char .one{font-size:.82rem;color:var(--ink-soft);margin-top:10px;line-height:1.7}
-
-.theme-block{display:grid;grid-template-columns:200px 1fr;gap:24px;padding:26px 0;border-bottom:1px solid rgba(170,184,173,.10)}
-.theme-block:last-child{border-bottom:none}
-.theme-side .no{font-family:var(--serif);font-size:2.4rem;color:var(--window);line-height:1}
-.theme-side h3{font-family:var(--serif);font-size:1.2rem;color:var(--ink);margin-top:6px;letter-spacing:.04em}
-.theme-side .en{font-size:.76rem;color:var(--ink-faint);font-style:italic;letter-spacing:.06em;margin-top:4px}
-.theme-body p{font-size:.92rem;color:var(--ink-soft);line-height:1.9}
-.theme-keys{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px}
-.theme-key{font-size:.74rem;color:var(--window-bright);border:1px solid var(--line);border-radius:999px;padding:4px 12px;letter-spacing:.04em}
-
-.quote-shell{position:relative;max-width:720px;margin:8px auto 0;border:1px solid var(--line);border-radius:4px;background:linear-gradient(160deg,var(--bg2),var(--bg3));padding:46px 56px 40px;text-align:center;overflow:hidden}
-.quote-mark{position:absolute;top:8px;left:20px;font-family:var(--serif);font-size:4rem;color:rgba(170,184,173,.16)}
-.q-viewport{overflow:hidden}
-.q-track{display:flex;transition:transform .6s cubic-bezier(.4,0,.2,1)}
-.q-slide{min-width:100%;padding:0 8px}
-.q-text{font-family:var(--serif);font-size:1.18rem;line-height:2;color:var(--ink);letter-spacing:.02em}
-.q-src{font-size:.82rem;color:var(--window-bright);margin-top:18px;letter-spacing:.06em}
-.q-note{font-size:.82rem;color:var(--ink-faint);margin-top:6px;line-height:1.7;max-width:520px;margin-left:auto;margin-right:auto}
-.q-nav{position:absolute;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--window);font-size:2rem;cursor:pointer;z-index:2;width:44px;height:44px;border-radius:50%;transition:background .2s}
-.q-nav:hover{background:rgba(170,184,173,.12)}
-.q-nav.prev{left:6px}.q-nav.next{right:6px}
-.q-dots{display:flex;justify-content:center;gap:8px;margin-top:22px}
-.q-dot{width:8px;height:8px;border-radius:50%;background:rgba(170,184,173,.3);cursor:pointer;transition:all .25s}
-.q-dot.active{background:var(--window-bright);transform:scale(1.25)}
-
-.ver-list{display:grid;gap:12px;margin-top:6px}
-.ver{border:1px solid var(--line);border-radius:3px;padding:18px 20px;background:linear-gradient(160deg,var(--bg2),var(--bg3));display:flex;gap:16px;align-items:flex-start}
-.ver .yr{font-family:var(--serif);font-weight:700;color:var(--window-bright);font-size:1.05rem;min-width:62px}
-.ver .vt{font-size:.9rem;color:var(--ink-soft);line-height:1.8}
-.ver .vt b{color:var(--ink);font-weight:600}
-
-.read-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:6px}
-.read{border:1px solid var(--line);border-radius:3px;padding:20px 18px;background:linear-gradient(160deg,var(--bg2),var(--bg3))}
-.read h4{font-family:var(--serif);color:var(--window-bright);font-size:1rem;letter-spacing:.04em;margin-bottom:8px}
-.read p{font-size:.85rem;color:var(--ink-soft);line-height:1.8}
-
-.modal-mask{position:fixed;inset:0;background:rgba(10,9,8,.82);z-index:200;display:none;align-items:center;justify-content:center;padding:24px}
-.modal-mask.open{display:flex}
-.modal-box{position:relative;max-width:520px;width:100%;background:linear-gradient(160deg,var(--bg3),var(--bg2));border:1px solid var(--window);border-radius:4px;padding:34px 34px 30px;box-shadow:0 30px 80px -30px #000}
-.modal-close{position:absolute;top:12px;right:16px;background:none;border:none;color:var(--ink-soft);font-size:1.6rem;cursor:pointer;line-height:1}
-.modal-close:hover{color:var(--window-bright)}
-#mName{font-family:var(--serif);font-size:1.5rem;color:var(--ink);letter-spacing:.04em}
-#mRu{font-family:var(--serif);font-style:italic;color:var(--window-bright);font-size:.95rem;margin-top:2px}
-#mRole{display:inline-block;font-size:.74rem;letter-spacing:.14em;color:var(--window-bright);border:1px solid rgba(170,184,173,.4);border-radius:999px;padding:3px 12px;margin-top:12px}
-#mBody{margin-top:16px;font-size:.92rem;color:var(--ink-soft);line-height:1.95}
-
-.foot-coll{margin-top:9vh;border-top:1px solid var(--line);padding-top:30px}
-.foot-coll .ttl{font-family:var(--serif);font-size:1rem;color:var(--window-bright);letter-spacing:.1em;margin-bottom:16px}
-.foot-links{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.foot-links a{border:1px solid var(--line);border-radius:3px;padding:14px 16px;transition:all .3s;background:linear-gradient(160deg,var(--bg2),var(--bg3))}
-.foot-links a:hover{border-color:var(--window);transform:translateY(-3px)}
-.foot-links .cn{font-family:var(--serif);font-size:1rem;color:var(--ink)}
-.foot-links .ru{font-size:.72rem;color:var(--ink-faint);font-style:italic}
-.foot-links .here{color:var(--window-bright)}
-.site-foot{margin-top:6vh;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-size:.82rem;color:var(--ink-faint)}
-.site-foot a{color:var(--ink-soft);transition:color .2s}
-.site-foot a:hover{color:var(--window-bright)}
-
-.fade-in{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease}
-.fade-in.in{opacity:1;transform:none}
-
-@media(max-width:760px){
-  .ov-grid,.char-grid,.read-grid,.foot-links{grid-template-columns:1fr}
-  .theme-block{grid-template-columns:1fr;gap:10px}
-  .quote-shell{padding:40px 30px 34px}
-  .q-text{font-size:1.02rem}
+/* responsive */
+@media (max-width: 820px) {
+  .ov-grid { grid-template-columns: 1fr; }
+  .dual-grid { grid-template-columns: 1fr; }
+  .theme-block { grid-template-columns: 1fr; gap: 14px; }
+  .theme-side { position: static; }
+  .quote-nav.prev { left: 6px; } .quote-nav.next { right: 6px; }
+  .q-slide { padding: 42px 7%; }
+}
+@media (max-width: 520px) {
+  .section { padding-top: 66px; }
+  .hero { min-height: 88vh; padding-top: 16vh; }
+  .hero-wm { font-size: 2.2rem; }
+  .hero-meta { gap: 12px 26px; }
 }
 </style>
 </head>
 <body>
-<a href="dostoevsky.html" class="back-home">← 返回合集</a>
-<div class="page">
 
-  <header class="hero">
-    <div class="hero-frame">
-      <div class="hero-eyebrow">ФЁДОР ДОСТОЕВСКИЙ · 1864</div>
-      <h1>地下室手记</h1>
-      <div class="hero-ru">Записки из подполья</div>
-      <p class="hero-sub">一个躲在地下室的失意小吏，<br>用怨恨对抗整个理性的乌托邦。</p>
-      <div class="hero-divider">
-        <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true">
-          <rect x="6" y="8" width="28" height="24" rx="1" fill="none" stroke="#aab8ad" stroke-width="1.4"/>
-          <line x1="20" y1="8" x2="20" y2="32" stroke="#8a9a8f" stroke-width="1.2"/>
-          <rect x="11" y="13" width="6" height="5" fill="none" stroke="#aab8ad" stroke-width="1.1"/>
-        </svg>
-      </div>
-      <div class="hero-meta">
-        <div class="hero-meta-item"><span class="v">2</span><span class="l">部结构</span></div>
-        <div class="hero-meta-item"><span class="v">40岁</span><span class="l">叙述者</span></div>
-        <div class="hero-meta-item"><span class="v">湿雪</span><span class="l">第二部</span></div>
-        <div class="hero-meta-item"><span class="v">1864</span><span class="l">发表年份</span></div>
-      </div>
-    </div>
-  </header>
+<a href="dostoevsky.html" class="back-home">← 陀思妥耶夫斯基</a>
 
-  <nav class="nav-bar"><div class="nav-inner">
+<!-- ===== HERO：地面，地下室的入口 ===== -->
+<section class="hero" id="top">
+  <span class="hero-wm" aria-hidden="true">Записки из подполья</span>
+  <div class="hero-eyebrow">Fyodor Dostoevsky · 1864 · 彼得堡，地下一间</div>
+  <h1>地下室手记</h1>
+  <div class="hero-ru">Записки из подполья</div>
+  <div class="hero-sub">一个躲在地下室的失意小吏，<br>用怨恨对抗整个理性的乌托邦。</div>
+  <div class="hero-divider"><svg viewBox="0 0 72 34" width="62" height="29" aria-hidden="true"><g stroke="#6e6a60" stroke-width="1.4" fill="none" stroke-linecap="round"><rect x="8" y="5" width="56" height="25"/><path d="M8 13.3 H64"/><path d="M8 21.6 H64"/><path d="M27 5 V13.3"/><path d="M46 5 V13.3"/><path d="M18 13.3 V21.6"/><path d="M36 13.3 V21.6"/><path d="M54 13.3 V21.6"/><path d="M27 21.6 V30"/><path d="M46 21.6 V30"/></g></svg></div>
+  <blockquote class="hero-quote">
+    “我是个病人……我是个凶狠的人。我是个不讨人喜欢的人。”
+    <span class="src">— 地下人 · 开场白</span>
+  </blockquote>
+  <div class="hero-meta">
+    <div class="hero-meta-item"><span class="value">2</span><span class="label">部结构</span></div>
+    <div class="hero-meta-item"><span class="value">40岁</span><span class="label">叙述者</span></div>
+    <div class="hero-meta-item"><span class="value">湿雪</span><span class="label">第二部</span></div>
+    <div class="hero-meta-item"><span class="value">1864</span><span class="label">发表年份</span></div>
+  </div>
+  <div class="scroll-hint" onclick="document.getElementById('content').scrollIntoView({behavior:'smooth'})">
+    <span>下到地下室</span><span class="arrow">↓</span>
+  </div>
+</section>
+
+<!-- ===== NAV ===== -->
+<nav class="nav-bar" id="content">
+  <div class="nav-inner">
     <div class="nav-tab active" data-section="overview">概览</div>
     <div class="nav-tab" data-section="story">故事脉络</div>
     <div class="nav-tab" data-section="characters">人物</div>
@@ -193,180 +582,403 @@ a{color:inherit;text-decoration:none}
     <div class="nav-tab" data-section="quotes">名句</div>
     <div class="nav-tab" data-section="versions">译本与影响</div>
     <div class="nav-tab" data-section="reading">阅读指南</div>
-  </div></nav>
+  </div>
+</nav>
 
-  <section class="section fade-in" id="overview">
-    <h2 class="section-title"><span class="idx">Ⅰ</span>关于这本书</h2>
-    <p class="section-desc">它只有中篇的篇幅，却被萨特、加缪、卡夫卡奉为<em>存在主义之源</em>。一个无名无姓的「地下人」，用两万字的自言自语，预言了现代人全部的异化与拧巴。</p>
-    <div class="ov-grid">
-      <div class="ov-card"><h4>一句话</h4><p>一个退休的小公务员，躲进彼得堡的地下室，一边痛骂世界，一边剖析自己如何既恨世界、又离不开它。</p></div>
-      <div class="ov-card"><h4>两个声部</h4><p>第一部是锋利的理论独白（反理性乌托邦）；第二部是羞辱与温柔交织的叙事（他与妓女丽莎的一夜）。一冷一热，合成一个人。</p></div>
-      <div class="ov-card"><div class="big">2+2=5</div><h4 style="margin-top:6px">著名的挑衅</h4><p>地下人说：哪怕你用逻辑证明二二得四，我也要主张二二得五是我的自由。这是全书反抗的捷报。</p></div>
-      <div class="ov-card"><h4>为何读它</h4><p>因为它写的不是 1864 年的俄国，而是此刻屏幕前的你——那个明知该怎么做、却偏不的自己。</p></div>
-    </div>
-  </section>
+<div class="wrap">
 
-  <section class="section fade-in" id="story">
-    <h2 class="section-title"><span class="idx">Ⅱ</span>故事脉络</h2>
-    <p class="section-desc">从一间潮湿的地下室，走到一场湿雪之夜。以下按阶段梳理。</p>
-    <div class="steps">
-      <div class="step"><h4>地下：自我解剖</h4><div class="when">第一部</div><p>叙述者自陈：他是个「病人、凶狠、不讨人喜欢」的退役小吏，自愿蜷缩在地下室。他厌恶自己，也厌恶人群，却离不开他们。</p></div>
-      <div class="step"><h4>反驳水晶宫</h4><div class="when">第一部</div><p>他攻击当时流行的理性主义乌托邦——有人设想以「二二得四」与「水晶宫」建成幸福社会。他反驳：人宁可要自由与痛苦，也不要被安排的幸福。</p></div>
-      <div class="step"><h4>湿雪之夜：赴宴受辱</h4><div class="when">第二部</div><p>他强凑钱去赴旧同僚的晚餐，想「找补」昔日的羞辱，却再次被当作笑料。他尾随一位曾无视他的军官，却只敢跟到家门口。</p></div>
-      <div class="step"><h4>丽莎：倾诉与刺伤</h4><div class="when">第二部</div><p>酒醉后他闯入妓院，遇见年轻妓女丽莎。他罕见地袒露脆弱，带她回住处；可第二天又因羞耻，用最尖刻的轻蔑刺伤她。丽莎默默离去。</p></div>
-      <div class="step"><h4>回到地下</h4><div class="when">尾声</div><p>他再没见到丽莎。独白在此戛然而止，留下一个被自己的卑劣与清醒双重囚禁的灵魂——这正是「地下室」的寓意。</p></div>
+<!-- ===== OVERVIEW：第一部 · 独白 ===== -->
+<section class="section stepped fade-in" id="overview" style="--step:0">
+  <h2 class="section-title"><span class="idx">Ⅰ</span>关于这本书</h2>
+  <p class="section-desc">它只有中篇的篇幅，却被萨特、加缪、卡夫卡奉为<em>存在主义之源</em>。一个无名无姓的「地下人」，用两万字的自言自语，预言了现代人全部的异化与拧巴。</p>
+  <div class="ov-grid">
+    <div class="ov-prose">
+      <p class="lede">一个退休的小公务员，躲进彼得堡的地下室，一边痛骂世界，一边剖析自己如何既恨世界、又离不开它。</p>
+      <p>全书只有两个声部：<strong>第一部是锋利的理论独白</strong>，矛头对准「二二得四」与「水晶宫」筑成的理性乌托邦；<strong>第二部是羞辱与温柔交织的叙事</strong>——他与妓女丽莎的一夜。一冷一热，合成一个人。</p>
+      <p>为何读它？因为它写的不是 1864 年的俄国，而是<strong>此刻屏幕前的你</strong>——那个明知该怎么做、却偏不的自己。</p>
     </div>
-  </section>
+    <div class="ov-panel">
+      <h3>著名的挑衅</h3>
+      <div class="big">2+2=5</div>
+      <p>地下人说：哪怕你用逻辑证明二二得四，我也要主张二二得五是我的自由。这是全书反抗的捷报。</p>
+      <div class="wall-note">注：「二二得四」在书中是一堵石墙——地下人不肯向它低头，于是头破血流地撞了几十年。</div>
+    </div>
+  </div>
+</section>
 
-  <section class="section wide fade-in" id="characters">
-    <h2 class="section-title"><span class="idx">Ⅲ</span>人物</h2>
-    <p class="section-desc">点击卡片，看小传。这本书几乎没有「群像」，只有一个把自己拆开给别人看的叙述者，与一个被他灼伤的女孩。</p>
-    <div class="char-grid" id="charGrid"></div>
-  </section>
+<!-- ===== STORY ===== -->
+<section class="section stepped fade-in" id="story" style="--step:1">
+  <h2 class="section-title"><span class="idx">Ⅱ</span>故事脉络</h2>
+  <p class="section-desc">从一间潮湿的地下室，走到一场湿雪之夜。以下按阶段梳理，点击展开详情。</p>
 
-  <section class="section fade-in" id="themes">
-    <h2 class="section-title"><span class="idx">Ⅳ</span>核心主题</h2>
-    <p class="section-desc">几个彼此缠绕的思想支点——它们让这本「小册子」成为现代哲学的先声。</p>
-    <div class="theme-block">
-      <div class="theme-side"><div class="no">壹</div><h3>自由意志 vs 决定论</h3><div class="en">Free Will versus Determinism</div></div>
-      <div class="theme-body"><p>地下人宁可要「对自己有害」的选择，也不要被理性算定的「有益」。他用以牙还牙的任性，捍卫人最后一点不可被换算的自由。</p><div class="theme-keys"><span class="theme-key">二二得五</span><span class="theme-key">宁愿有害</span><span class="theme-key">不可换算</span></div></div>
-    </div>
-    <div class="theme-block">
-      <div class="theme-side"><div class="no">贰</div><h3>反抗水晶宫</h3><div class="en">Against the Crystal Palace</div></div>
-      <div class="theme-body"><p>「水晶宫」象征以科学理性建成、无痛苦却也无自由的乌托邦。地下人拒绝它：一个没有痛苦的世界，也剥夺了人之为人的挣扎与尊严。</p><div class="theme-keys"><span class="theme-key">理性乌托邦</span><span class="theme-key">幸福的牢笼</span><span class="theme-key">拒绝被安排</span></div></div>
-    </div>
-    <div class="theme-block">
-      <div class="theme-side"><div class="no">叁</div><h3>怨恨的惯性</h3><div class="en">The Inertia of Spite</div></div>
-      <div class="theme-body"><p>地下人反复伤害对自己好的人（丽莎），因为被善待照出了他的卑微。这种「以怨报善」的惯性，是自尊被碾压后的扭曲自卫。</p><div class="theme-keys"><span class="theme-key">以怨报善</span><span class="theme-key">羞耻的反弹</span><span class="theme-key">自毁的快感</span></div></div>
-    </div>
-    <div class="theme-block">
-      <div class="theme-side"><div class="no">肆</div><h3>意识即病痛</h3><div class="en">Consciousness as Illness</div></div>
-      <div class="theme-body"><p>「过分的意识是一种病。」地下人太清醒，反而寸步难行——他看穿一切动机，却因此谁也爱不了、谁也信不过。清醒成了诅咒。</p><div class="theme-keys"><span class="theme-key">清醒的瘫痪</span><span class="theme-key">看穿一切</span><span class="theme-key">行动的无能</span></div></div>
-    </div>
-    <div class="theme-block">
-      <div class="theme-side"><div class="no">伍</div><h3>受苦即存在</h3><div class="en">Suffering as Existence</div></div>
-      <div class="theme-body"><p>地下人坚持把「苦难」当作意识与自由的证词。他不快乐，却以不快乐确认自己「活著、在想、在反抗」——这是存在主义最早的低语。</p><div class="theme-keys"><span class="theme-key">苦是证据</span><span class="theme-key">存在的确认</span><span class="theme-key">先于存在主义</span></div></div>
-    </div>
-  </section>
-
-  <section class="section fade-in" id="quotes">
-    <h2 class="section-title"><span class="idx">Ⅴ</span>名句</h2>
-    <p class="section-desc">几句话，从独白走向湿雪——基本就是这本书的精神心电图。</p>
-    <div class="quote-shell">
-      <span class="quote-mark">❝</span>
-      <button class="q-nav prev" id="qPrev" aria-label="上一条">‹</button>
-      <div class="q-viewport"><div class="q-track" id="qTrack"></div></div>
-      <button class="q-nav next" id="qNext" aria-label="下一条">›</button>
-      <div class="q-dots" id="qDots"></div>
-    </div>
-  </section>
-
-  <section class="section fade-in" id="versions">
-    <h2 class="section-title"><span class="idx">Ⅵ</span>译本、改编与影响</h2>
-    <p class="section-desc">中文世界怎么读它，以及它如何在二十世纪引爆存在主义。</p>
-    <div class="ver-list">
-      <div class="ver"><span class="yr">1982</span><div class="vt"><b>臧仲伦译</b>：最早的常见中译之一，收入多种陀氏选集。</div></div>
-      <div class="ver"><span class="yr">1993</span><div class="vt"><b>刘文飞译</b> / <b>石玲译</b>：多种译本并存，语言风格各异。</div></div>
-      <div class="ver"><span class="yr">2014</span><div class="vt"><b>曾思艺译</b>：较新全译本，注释与导读更友好。</div></div>
-      <div class="ver"><span class="yr">影视/戏剧</span><div class="vt">常被改编为独角戏与广播剧——因其本就是一段绵延的独白；<b>《地下室》</b>意象频繁出现在现代电影里。</div></div>
-      <div class="ver"><span class="yr">影响</span><div class="vt">被萨特、加缪视为存在主义先声；卡夫卡、纳博科夫皆受其苦涩笔调浸染。「地下人」成了现代文学的原型角色。</div></div>
-    </div>
-  </section>
-
-  <section class="section fade-in" id="reading">
-    <h2 class="section-title"><span class="idx">Ⅶ</span>阅读指南</h2>
-    <p class="section-desc">它短，但不好读——因为叙述者会不断地自我推翻。</p>
-    <div class="read-grid">
-      <div class="read"><h4>容忍他自相矛盾</h4><p>地下人说的每句话，下一句就可能推翻。这正是重点：人本来就拧巴。</p></div>
-      <div class="read"><h4>先读第二部</h4><p>若被第一部的抽象劝退，不妨先从「湿雪之夜」读起，有了人物再回去看理论。</p></div>
-      <div class="read"><h4>别当议论文</h4><p>它不是哲学论文，而是一颗心的现场解剖。感受多于理解。</p></div>
-      <div class="read"><h4>对照《罪与罚》</h4><p>拉斯柯尔尼科夫是「行动的地下人」，两者是同一焦虑的两种出口。</p></div>
-      <div class="read"><h4>留意丽莎</h4><p>丽莎是全书的「光」。地下人伤害她，却也因她照见了自己的可鄙——这是仅有的救赎暗示。</p></div>
-      <div class="read"><h4>别急着认同</h4><p>地下人既可怜又可厌。陀氏没请你崇拜他，只请你认出他。</p></div>
-    </div>
-  </section>
-
-  <div class="foot-coll fade-in">
-    <div class="ttl">陀思妥耶夫斯基作品合集 · 跳转</div>
-    <div class="foot-links">
-      <a href="crime-and-punishment.html"><div class="cn">罪与罚</div><div class="ru">Преступление и наказание</div></a>
-      <a href="brothers-karamazov.html"><div class="cn">卡拉马佐夫兄弟</div><div class="ru">Братья Карамазовы</div></a>
-      <a href="the-idiot.html"><div class="cn">白痴</div><div class="ru">Идиот</div></a>
-      <a href="demons.html"><div class="cn">群魔</div><div class="ru">Бесы</div></a>
-      <a href="notes-from-underground.html" class="here"><div class="cn">地下室手记</div><div class="ru">Записки из подполья</div></a>
-      <a href="the-insulted.html"><div class="cn">被侮辱与被损害的</div><div class="ru">Униженные и оскорблённые</div></a>
+  <div class="phase p1">
+    <div class="phase-head"><span class="phase-num">Ⅰ</span><h3>第一部 · 独白</h3><span class="ref">地下：理论与自我解剖</span></div>
+    <div class="phase-items">
+      <div class="t-item"><div class="t-item-head"><h4>地下：自我解剖</h4><span class="t-ref">第一部</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>叙述者自陈：他是个「病人、凶狠、不讨人喜欢」的退役小吏，自愿蜷缩在地下室。他厌恶自己，也厌恶人群，却离不开他们。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>反驳水晶宫</h4><span class="t-ref">第一部</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>他攻击当时流行的理性主义乌托邦——有人设想以「二二得四」与「水晶宫」建成幸福社会。他反驳：人宁可要自由与痛苦，也不要被安排的幸福。</p></div></div>
     </div>
   </div>
 
-  <footer class="site-foot">
-    <span>© <em style="font-style:normal;color:var(--ink-soft)">zzht</em> · 地下室手记</span>
-    <a href="dostoevsky.html">← 返回陀思妥耶夫斯基作品合集</a>
-  </footer>
+  <div class="phase p2">
+    <div class="phase-head"><span class="phase-num">Ⅱ</span><h3>第二部 · 湿雪</h3><span class="ref">他真正走出地下室的那一夜</span></div>
+    <div class="phase-items">
+      <div class="t-item"><div class="t-item-head"><h4>湿雪之夜：赴宴受辱</h4><span class="t-ref">第二部</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>他强凑钱去赴旧同僚的晚餐，想「找补」昔日的羞辱，却再次被当作笑料。他尾随一位曾无视他的军官，却只敢跟到家门口。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>丽莎：倾诉与刺伤</h4><span class="t-ref">第二部</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>酒醉后他闯入妓院，遇见年轻妓女丽莎。他罕见地袒露脆弱，带她回住处；可第二天又因羞耻，用最尖刻的轻蔑刺伤她。丽莎默默离去。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>回到地下</h4><span class="t-ref">尾声</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>他再没见到丽莎。独白在此戛然而止，留下一个被自己的卑劣与清醒双重囚禁的灵魂——这正是「地下室」的寓意。</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CHARACTERS ===== -->
+<section class="section wide stepped fade-in" id="characters" style="--step:2">
+  <h2 class="section-title"><span class="idx">Ⅲ</span>人物</h2>
+  <p class="section-desc">这本书几乎没有「群像」，只有一个把自己拆开给别人看的叙述者，与一个被他灼伤的女孩。点击卡片看小传。</p>
+  <div class="filter-row" id="charFilters"></div>
+  <div class="char-grid" id="charGrid"></div>
+</section>
+
+<!-- ===== THEMES ===== -->
+<section class="section stepped fade-in" id="themes" style="--step:3">
+  <h2 class="section-title"><span class="idx">Ⅳ</span>核心主题</h2>
+  <p class="section-desc">几个彼此缠绕的思想支点——它们让这本「小册子」成为现代哲学的先声。</p>
+
+  <div class="mutter">“过分的意识，是一种病。”<span>— 地下人 · 他一边说，一边又把这句话说了一遍</span></div>
+
+  <div class="theme-block">
+    <div class="theme-side"><div class="theme-no">壹</div><h3>自由意志 vs 决定论</h3><div class="t-en">Free Will versus Determinism</div></div>
+    <div class="theme-body">
+      <p>地下人宁可要「对自己有害」的选择，也不要被理性算定的「有益」。他用以牙还牙的任性，捍卫人最后一点不可被换算的自由。</p>
+      <span class="theme-key">二二得五</span><span class="theme-key">宁愿有害</span><span class="theme-key">不可换算</span>
+    </div>
+  </div>
+  <hr class="theme-sep">
+  <div class="theme-block">
+    <div class="theme-side"><div class="theme-no">贰</div><h3>反抗水晶宫</h3><div class="t-en">Against the Crystal Palace</div></div>
+    <div class="theme-body">
+      <p>「水晶宫」象征以科学理性建成、无痛苦却也无自由的乌托邦。地下人拒绝它：一个没有痛苦的世界，也剥夺了人之为人的挣扎与尊严。</p>
+      <span class="theme-key">理性乌托邦</span><span class="theme-key">幸福的牢笼</span><span class="theme-key">拒绝被安排</span>
+    </div>
+  </div>
+  <hr class="theme-sep">
+  <div class="theme-block">
+    <div class="theme-side"><div class="theme-no">叁</div><h3>怨恨的惯性</h3><div class="t-en">The Inertia of Spite</div></div>
+    <div class="theme-body">
+      <p>地下人反复伤害对自己好的人（丽莎），因为被善待照出了他的卑微。这种「以怨报善」的惯性，是自尊被碾压后的扭曲自卫。</p>
+      <span class="theme-key">以怨报善</span><span class="theme-key">羞耻的反弹</span><span class="theme-key">自毁的快感</span>
+    </div>
+  </div>
+  <hr class="theme-sep">
+  <div class="theme-block">
+    <div class="theme-side"><div class="theme-no">肆</div><h3>意识即病痛</h3><div class="t-en">Consciousness as Illness</div></div>
+    <div class="theme-body">
+      <p>「过分的意识是一种病。」地下人太清醒，反而寸步难行——他看穿一切动机，却因此谁也爱不了、谁也信不过。清醒成了诅咒。</p>
+      <span class="theme-key">清醒的瘫痪</span><span class="theme-key">看穿一切</span><span class="theme-key">行动的无能</span>
+    </div>
+  </div>
+  <hr class="theme-sep">
+  <div class="theme-block">
+    <div class="theme-side"><div class="theme-no">伍</div><h3>受苦即存在</h3><div class="t-en">Suffering as Existence</div></div>
+    <div class="theme-body">
+      <p>地下人坚持把「苦难」当作意识与自由的证词。他不快乐，却以不快乐确认自己「活著、在想、在反抗」——这是存在主义最早的低语。</p>
+      <span class="theme-key">苦是证据</span><span class="theme-key">存在的确认</span><span class="theme-key">先于存在主义</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 台阶分界：第一部到此为止，往下是湿雪 ===== -->
+<div class="hatch fade-in">
+  <div class="hatch-line"></div>
+  <div class="hatch-inner">
+    <span class="hatch-cap">—— 台 阶 分 界 ——</span>
+    <svg class="hatch-svg" viewBox="0 0 250 74" width="220" height="65" aria-hidden="true">
+      <g stroke="#6e6a60" stroke-width="1.5" fill="none" stroke-linecap="round">
+        <path d="M8 12 H58 V28 H108 V44 H158 V60 H208"/>
+      </g>
+      <g stroke="#9a958a" stroke-width="1.1" fill="none" stroke-linecap="round">
+        <g transform="translate(224,18)"><path d="M0 -6 V6 M-5.2 -3 L5.2 3 M-5.2 3 L5.2 -3"/></g>
+        <g transform="translate(240,42)"><path d="M0 -5 V5 M-4.3 -2.5 L4.3 2.5 M-4.3 2.5 L4.3 -2.5"/></g>
+        <g transform="translate(206,66)"><path d="M0 -4.5 V4.5 M-3.9 -2.2 L3.9 2.2 M-3.9 2.2 L3.9 -2.2"/></g>
+      </g>
+    </svg>
+    <span class="hatch-part">第二部 · 湿雪 · 从这里一路下到底</span>
+  </div>
+</div>
+
+<!-- ===== QUOTES：地下室本身 ===== -->
+<section class="section stepped fade-in" id="quotes" style="--step:4">
+  <h2 class="section-title"><span class="idx">Ⅴ</span>名句</h2>
+  <p class="section-desc">几句话，从独白走向湿雪——基本就是这本书的精神心电图。这是全合集最暗的一页：因为地下室本来就黑，只有一支蜡烛。</p>
+  <div class="quote-shell">
+    <button class="quote-nav prev" id="qPrev" aria-label="上一条">‹</button>
+    <div class="quote-viewport"><div class="quote-track" id="qTrack"></div></div>
+    <button class="quote-nav next" id="qNext" aria-label="下一条">›</button>
+    <div class="quote-dots" id="qDots"></div>
+  </div>
+</section>
+
+<!-- ===== VERSIONS & LEGACY ===== -->
+<section class="section wide stepped fade-in" id="versions" style="--step:5">
+  <h2 class="section-title"><span class="idx">Ⅵ</span>译本、改编与影响</h2>
+  <p class="section-desc">中文世界怎么读它，以及它如何在二十世纪引爆存在主义。</p>
+  <div class="dual-grid">
+    <div class="v-panel">
+      <h3>中文译本比较</h3>
+      <div class="v-sub">均为常见通行译本，可按口味选择</div>
+      <div class="v-row rec"><span class="v-year">2020</span><span class="v-seal">荐</span><b>曾思艺 译</b> · 浙江文艺出版社 —— 较新的全译本，注释与导读友好，附译后记；上榜豆瓣年度榜单、口碑高，行文流畅犀利。</div>
+      <div class="v-row"><span class="v-year">1982</span><b>臧仲伦 译</b> · 译林出版社（收《双重人格·地下室手记》）—— 最早的常见中译之一，学院派老译，扎实可靠，收入多种陀氏选集。</div>
+      <div class="v-row"><span class="v-year">1993</span><b>刘文飞 译 / 石玲 译</b> —— 多种译本并存，语言风格各异，可作参照。</div>
+      <div class="v-rec">初读选曾思艺的犀利；译林臧仲伦本亦佳，适合收藏对照。</div>
+    </div>
+    <div class="v-panel legacy">
+      <h3>改编与影响</h3>
+      <div class="v-sub">一段绵延的独白，如何在后世回响</div>
+      <div class="l-row"><span class="l-tag">影视 / 戏剧</span>常被改编为独角戏与广播剧——因其本就是一段绵延的独白；<b>「地下室」</b>意象频繁出现在现代电影里。</div>
+      <div class="l-row"><span class="l-tag">影响</span>被萨特、加缪视为存在主义先声；卡夫卡、纳博科夫皆受其苦涩笔调浸染。<b>「地下人」</b>成了现代文学的原型角色。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== READING ===== -->
+<section class="section stepped fade-in" id="reading" style="--step:6">
+  <h2 class="section-title"><span class="idx">Ⅶ</span>阅读指南</h2>
+  <p class="section-desc">它短，但不好读——因为叙述者会不断地自我推翻。</p>
+  <div class="read-grid">
+    <div class="read-card"><h3>容忍他自相矛盾</h3><p>地下人说的每句话，下一句就可能推翻。这正是重点：<b>人本来就拧巴</b>。</p></div>
+    <div class="read-card"><h3>先读第二部</h3><p>若被第一部的抽象劝退，不妨先从「湿雪之夜」读起，<b>有了人物再回去看理论</b>。</p></div>
+    <div class="read-card"><h3>别当议论文</h3><p>它不是哲学论文，而是<b>一颗心的现场解剖</b>。感受多于理解。</p></div>
+    <div class="read-card"><h3>对照《罪与罚》</h3><p>拉斯柯尔尼科夫是「行动的地下人」，两者是<b>同一焦虑的两种出口</b>。</p></div>
+    <div class="read-card"><h3>留意丽莎</h3><p>丽莎是全书的「光」。地下人伤害她，却也因她照见了自己的可鄙——这是<b>仅有的救赎暗示</b>。</p></div>
+    <div class="read-card"><h3>别急着认同</h3><p>地下人既可怜又可厌。陀氏没请你崇拜他，<b>只请你认出他</b>。</p></div>
+  </div>
+</section>
+
+<!-- ===== FOOTER：到底了 ===== -->
+<footer class="site-footer">
+  <div class="foot-wall">
+    <svg viewBox="0 0 340 44" width="300" height="39" aria-hidden="true">
+      <g stroke="#6e6a60" stroke-width="1" fill="none" opacity=".65">
+        <path d="M10 40 H330"/>
+        <path d="M20 40 V6 H320 V40"/>
+        <path d="M20 17.3 H320"/><path d="M20 28.6 H320"/>
+        <path d="M80 6 V17.3"/><path d="M150 6 V17.3"/><path d="M220 6 V17.3"/><path d="M285 6 V17.3"/>
+        <path d="M50 17.3 V28.6"/><path d="M115 17.3 V28.6"/><path d="M185 17.3 V28.6"/><path d="M255 17.3 V28.6"/><path d="M305 17.3 V28.6"/>
+        <path d="M80 28.6 V40"/><path d="M150 28.6 V40"/><path d="M220 28.6 V40"/><path d="M285 28.6 V40"/>
+      </g>
+      <g stroke="#9a958a" stroke-width="1" fill="none" opacity=".8">
+        <g transform="translate(333,10)"><path d="M0 -5 V5 M-4.3 -2.5 L4.3 2.5 M-4.3 2.5 L4.3 -2.5"/></g>
+      </g>
+    </svg>
+  </div>
+  <p class="foot-epitaph">「二二得四简直是死亡。」——地下人这样抱怨，<br>于是这一页停在湿雪里，不再往下算了。 · © zzht</p>
+  <div class="foot-links">
+    <a href="index.html">返回首页</a>
+    <a href="dostoevsky.html">陀思妥耶夫斯基</a>
+    <a href="the-insulted.html">上一部 · 被侮辱与被损害的</a>
+    <a href="crime-and-punishment.html">下一部 · 罪与罚</a>
+    <a href="https://github.com/zzht1">GitHub ↗</a>
+  </div>
+</footer>
 
 </div>
 
+<!-- modal -->
 <div class="modal-mask" id="modalMask">
-  <div class="modal-box">
+  <div class="modal-box" id="modalBox">
     <button class="modal-close" id="modalClose" aria-label="关闭">×</button>
     <h3 id="mName"></h3>
-    <div id="mRu"></div>
-    <span id="mRole"></span>
-    <div id="mBody"></div>
+    <div class="m-ru" id="mRu"></div>
+    <span class="m-role" id="mRole"></span>
+    <div class="m-body" id="mBody"></div>
   </div>
 </div>
 
 <script>
-const CHARACTERS=[
-  {id:'under',name:'地下人',ru:'The Underground Man',role:'叙述者',one:'四十岁的退役小吏，自陈「病人、凶狠、不讨人喜欢」。',body:'全书唯一的核心。他无名无姓，蜷缩在彼得堡的地下室，既痛恨世界也痛恨自己。他过分清醒，因而寸步难行；他用怨恨与自我拆解，捍卫最后一点不可被安排的「自由」。他是现代文学里第一个「反英雄」原型。'},
-  {id:'liza',name:'丽莎',ru:'Liza',role:'妓女',one:'年轻的妓女，被地下人短暂地温柔以待，又被刺伤。',body:'丽莎是书中唯一的光。她在妓院遇见醉后的地下人，听见他罕见的坦诚，动了真情。可第二天，地下人因羞耻反噬，用最刻薄的话将她推走。她默默留下钱离去——她的温柔，照出了他的可鄙。'},
-  {id:'officer',name:'军官',ru:'The Officer',role:'旧识',one:'曾当众无视地下人的军官，成为他自卑的靶子。',body:'一次聚会中，军官径直从闲谈的人群里穿过，仿佛地下人不存在。这桩小事在地下人心里发酵多年，他尾随、幻想报复，却始终只敢跟到人家门口。这是「被无视」如何长成执念的标本。'},
-  {id:'simonov',name:'西蒙诺夫',ru:'Simonov',role:'旧同僚',one:'组织晚餐的旧同事，对地下人客气而疏离。',body:'西蒙诺夫是地下人昔日同事，办了一场晚餐。地下人强凑钱挤进去，想「找补」当年的体面，却反成笑料。西蒙诺夫代表那种不动声色、将人排除在外的「正常世界」。'},
-  {id:'apollon',name:'阿波隆',ru:'Apollon',role:'男仆',one:'地下人的仆人，以沉默的轻蔑反制主人的暴怒。',body:'阿波隆是古希腊式名字的现代仆役，他对主人的咆哮报以冷淡与拖延。地下人恨他，却又离不开他——主仆关系成了地下人「权力无能」的微型剧场。'},
-  {id:'madam',name:'妓院老鸨',ru:'The Madam',role:'配角',one:'地下人醉后闯入的妓院经营者。',body:'老鸨是第二部场景的背景人物，她的妓院是地下人与丽莎相遇的地点，也是彼得堡底层的一面镜子——人人都在出售点什么，包括尊严。'}
+/* ================= DATA ================= */
+const GROUPS = {
+  self:  { name: '地下室', color: '#6e6a60' },
+  light: { name: '光', color: '#b07d1e' },
+  world: { name: '周遭的人', color: '#7d8388' }
+};
+
+const CHARACTERS = [
+  { id:'under', name:'地下人', ru:'The Underground Man', group:'self', role:'叙述者',
+    desc:'四十岁的退役小吏，自陈「病人、凶狠、不讨人喜欢」。',
+    detail:'全书唯一的核心。他无名无姓，蜷缩在彼得堡的地下室，既痛恨世界也痛恨自己。他过分清醒，因而寸步难行；他用怨恨与自我拆解，捍卫最后一点不可被安排的「自由」。他是现代文学里第一个「反英雄」原型。' },
+  { id:'liza', name:'丽莎', ru:'Liza', group:'light', role:'妓女',
+    desc:'年轻的妓女，被地下人短暂地温柔以待，又被刺伤。',
+    detail:'丽莎是书中唯一的光。她在妓院遇见醉后的地下人，听见他罕见的坦诚，动了真情。可第二天，地下人因羞耻反噬，用最刻薄的话将她推走。她默默留下钱离去——她的温柔，照出了他的可鄙。' },
+  { id:'officer', name:'军官', ru:'The Officer', group:'world', role:'旧识',
+    desc:'曾当众无视地下人的军官，成为他自卑的靶子。',
+    detail:'一次聚会中，军官径直从闲谈的人群里穿过，仿佛地下人不存在。这桩小事在地下人心里发酵多年，他尾随、幻想报复，却始终只敢跟到人家门口。这是「被无视」如何长成执念的标本。' },
+  { id:'simonov', name:'西蒙诺夫', ru:'Simonov', group:'world', role:'旧同僚',
+    desc:'组织晚餐的旧同事，对地下人客气而疏离。',
+    detail:'西蒙诺夫是地下人昔日同事，办了一场晚餐。地下人强凑钱挤进去，想「找补」当年的体面，却反成笑料。西蒙诺夫代表那种不动声色、将人排除在外的「正常世界」。' },
+  { id:'apollon', name:'阿波隆', ru:'Apollon', group:'world', role:'男仆',
+    desc:'地下人的仆人，以沉默的轻蔑反制主人的暴怒。',
+    detail:'阿波隆是古希腊式名字的现代仆役，他对主人的咆哮报以冷淡与拖延。地下人恨他，却又离不开他——主仆关系成了地下人「权力无能」的微型剧场。' },
+  { id:'madam', name:'妓院老鸨', ru:'The Madam', group:'world', role:'配角',
+    desc:'地下人醉后闯入的妓院经营者。',
+    detail:'老鸨是第二部场景的背景人物，她的妓院是地下人与丽莎相遇的地点，也是彼得堡底层的一面镜子——人人都在出售点什么，包括尊严。' }
 ];
 
-const QUOTES=[
-  {text:'二二得四已经不是生活，而是死的开始。',src:'——地下人',note:'对理性乌托邦最著名的挑衅：确定性，意味着生命的终结。'},
-  {text:'人所需要的，不过是独立地想要什么，无论这想要的是什么。',src:'——地下人',note:'自由，先于「好」与「对」。'},
-  {text:'我是个病人……我是个凶狠的人。我是个不讨人喜欢的人。',src:'——地下人开场',note:'三句话，定下全书的调子：先把自己钉上耻辱柱。'},
-  {text:'人，无论何时何地，都喜欢想要他想要的东西——恰恰是他所想要的。',src:'——地下人',note:'哪怕那「想要」是自我毁灭的。'},
-  {text:'苦难——这是意识唯一的泉源。',src:'——地下人',note:'不痛苦，就无从确认自己「在想、在活」。'},
-  {text:'过分的意识，是一种病。',src:'——地下人',note:'太清醒反而寸步难行，这是现代性最早的症候描述。'},
-  {text:'我之所以在四十岁还活着，只是因为我一直没敢自杀。',src:'——地下人',note:'一句自嘲，却道尽存在主义的重量。'}
+const QUOTES = [
+  { text:'二二得四已经不是生活，而是死的开始。', src:'——地下人', note:'对理性乌托邦最著名的挑衅：确定性，意味着生命的终结。' },
+  { text:'人所需要的，不过是独立地想要什么，无论这想要的是什么。', src:'——地下人', note:'自由，先于「好」与「对」。' },
+  { text:'我是个病人……我是个凶狠的人。我是个不讨人喜欢的人。', src:'——地下人开场', note:'三句话，定下全书的调子：先把自己钉上耻辱柱。' },
+  { text:'人，无论何时何地，都喜欢想要他想要的东西——恰恰是他所想要的。', src:'——地下人', note:'哪怕那「想要」是自我毁灭的。' },
+  { text:'苦难——这是意识唯一的泉源。', src:'——地下人', note:'不痛苦，就无从确认自己「在想、在活」。' },
+  { text:'过分的意识，是一种病。', src:'——地下人', note:'太清醒反而寸步难行，这是现代性最早的症候描述。' },
+  { text:'我之所以在四十岁还活着，只是因为我一直没敢自杀。', src:'——地下人', note:'一句自嘲，却道尽存在主义的重量。' }
 ];
 
-const $=(s,r=document)=>r.querySelector(s);
-const $$=(s,r=document)=>[...r.querySelectorAll(s)];
-const grid=$('#charGrid');
-CHARACTERS.forEach(c=>{
-  const el=document.createElement('div');el.className='char';el.tabIndex=0;
-  el.innerHTML='<div class="role">'+c.role+'</div><div class="nm">'+c.name+'</div><div class="en">'+c.ru+'</div><div class="one">'+c.one+'</div>';
-  const open=()=>showModal(c);
-  el.addEventListener('click',open);
-  el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});
-  grid.appendChild(el);
+/* ================= HELPERS ================= */
+const $ = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+
+/* ================= NAV ================= */
+$$('.nav-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const el = document.getElementById(tab.dataset.section);
+    if (el) {
+      const y = el.getBoundingClientRect().top + window.pageYOffset - 56;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  });
 });
-const mask=$('#modalMask');
-function showModal(c){$('#mName').textContent=c.name;$('#mRu').textContent=c.ru;$('#mRole').textContent=c.role;$('#mBody').textContent=c.body;mask.classList.add('open');}
-$('#modalClose').addEventListener('click',()=>mask.classList.remove('open'));
-mask.addEventListener('click',e=>{if(e.target===mask)mask.classList.remove('open');});
-document.addEventListener('keydown',e=>{if(e.key==='Escape')mask.classList.remove('open');});
+function setupScrollspy() {
+  const tabs = $$('.nav-tab');
+  const secs = tabs.map(t => document.getElementById(t.dataset.section)).filter(Boolean);
+  const onScroll = () => {
+    const pos = window.scrollY + 140;
+    let cur = secs[0];
+    for (const s of secs) { if (s.offsetTop <= pos) cur = s; }
+    tabs.forEach(t => t.classList.toggle('active', t.dataset.section === cur.id));
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+}
 
-let qIdx=0,qTimer=null;const qTrack=$('#qTrack'),qDots=$('#qDots');
-QUOTES.forEach((q,i)=>{const s=document.createElement('div');s.className='q-slide';s.innerHTML='<div class="q-text">'+q.text+'</div><div class="q-src">'+q.src+'</div><div class="q-note">'+q.note+'</div>';qTrack.appendChild(s);const d=document.createElement('div');d.className='q-dot'+(i===0?' active':'');d.addEventListener('click',()=>goQ(i,true));qDots.appendChild(d);});
-$('#qPrev').addEventListener('click',()=>goQ((qIdx-1+QUOTES.length)%QUOTES.length,true));
-$('#qNext').addEventListener('click',()=>goQ((qIdx+1)%QUOTES.length,true));
-function goQ(i,m){qIdx=i;qTrack.style.transform='translateX(-'+(i*100)+'%)';$$('.q-dot').forEach((d,j)=>d.classList.toggle('active',j===i));if(m){stopQ();startQ();}}
-function startQ(){stopQ();qTimer=setInterval(()=>goQ((qIdx+1)%QUOTES.length),6500);}
-function stopQ(){if(qTimer){clearInterval(qTimer);qTimer=null;}}
-const qShell=$('.quote-shell');qShell.addEventListener('mouseenter',stopQ);qShell.addEventListener('mouseleave',startQ);startQ();
+/* ================= FADE IN ================= */
+function setupFadeIn() {
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: .06 });
+  $$('.fade-in').forEach(el => io.observe(el));
+}
 
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
-$$('.fade-in').forEach(el=>io.observe(el));
-const tabs=$$('.nav-tab'),secs=tabs.map(t=>$('#'+t.dataset.section));
-tabs.forEach(t=>t.addEventListener('click',()=>{const s=$('#'+t.dataset.section);s&&s.scrollIntoView({behavior:'smooth',block:'start'});}));
-const spy=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){const id=e.target.id;tabs.forEach(t=>t.classList.toggle('active',t.dataset.section===id));}});},{rootMargin:'-45% 0px -50% 0px'});
-secs.forEach(s=>s&&spy.observe(s));
+/* ================= TIMELINE ================= */
+function setupTimeline() {
+  $$('.t-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const open = item.classList.toggle('open');
+      const d = item.querySelector('.t-detail');
+      d.style.maxHeight = open ? d.scrollHeight + 'px' : '0px';
+    });
+  });
+}
+
+/* ================= CHARACTERS ================= */
+function setupCharacters() {
+  const grid = $('#charGrid');
+  const fRow = $('#charFilters');
+  const cats = [['all', '全部'], ...Object.entries(GROUPS).map(([k, g]) => [k, g.name])];
+  cats.forEach(([k, label], i) => {
+    const chip = document.createElement('div');
+    chip.className = 'filter-chip' + (i === 0 ? ' active' : '');
+    chip.textContent = label;
+    chip.dataset.k = k;
+    chip.addEventListener('click', () => {
+      $$('.filter-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      $$('.char-card').forEach(card => {
+        card.classList.toggle('hidden', k !== 'all' && card.dataset.group !== k);
+      });
+    });
+    fRow.appendChild(chip);
+  });
+
+  CHARACTERS.forEach(c => {
+    const g = GROUPS[c.group];
+    const card = document.createElement('div');
+    card.className = 'char-card';
+    card.dataset.group = c.group;
+    card.tabIndex = 0;
+    card.style.setProperty('--gc', g.color);
+    card.innerHTML =
+      '<div class="c-name">' + c.name + '</div>' +
+      '<div class="c-ru">' + c.ru + '</div>' +
+      '<span class="c-role">' + c.role + '</span>' +
+      '<div class="c-desc">' + c.desc + '</div>';
+    const open = () => openModal(c);
+    card.addEventListener('click', open);
+    card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
+    grid.appendChild(card);
+  });
+}
+function openModal(c) {
+  const g = GROUPS[c.group];
+  const mask = $('#modalMask');
+  $('#mName').textContent = c.name;
+  $('#mRu').textContent = c.ru;
+  const role = $('#mRole'); role.textContent = c.role + ' · ' + g.name; role.style.color = g.color; role.style.background = g.color + '14';
+  $('#mBody').textContent = c.detail;
+  $('#modalBox').style.borderTopColor = g.color;
+  mask.classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  $('#modalMask').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+/* ================= QUOTES ================= */
+let qIdx = 0, qTimer = null;
+function setupQuotes() {
+  const track = $('#qTrack');
+  QUOTES.forEach((q, i) => {
+    const s = document.createElement('div');
+    s.className = 'q-slide';
+    s.innerHTML = '<div class="q-mark">❝</div><div class="q-text">' + q.text + '</div>' +
+      '<div class="q-src">' + q.src + '</div><div class="q-note">' + q.note + '</div>';
+    track.appendChild(s);
+    const d = document.createElement('div');
+    d.className = 'q-dot' + (i === 0 ? ' active' : '');
+    d.addEventListener('click', () => goQuote(i, true));
+    $('#qDots').appendChild(d);
+  });
+  $('#qPrev').addEventListener('click', () => goQuote((qIdx - 1 + QUOTES.length) % QUOTES.length, true));
+  $('#qNext').addEventListener('click', () => goQuote((qIdx + 1) % QUOTES.length, true));
+  startQuoteAuto();
+  const shell = $('.quote-shell');
+  shell.addEventListener('mouseenter', stopQuoteAuto);
+  shell.addEventListener('mouseleave', startQuoteAuto);
+}
+function goQuote(i, manual) {
+  qIdx = i;
+  $('#qTrack').style.transform = 'translateX(-' + i * 100 + '%)';
+  $$('.q-dot').forEach((d, j) => d.classList.toggle('active', j === i));
+  if (manual) { stopQuoteAuto(); startQuoteAuto(); }
+}
+function startQuoteAuto() { stopQuoteAuto(); qTimer = setInterval(() => goQuote((qIdx + 1) % QUOTES.length), 6500); }
+function stopQuoteAuto() { if (qTimer) { clearInterval(qTimer); qTimer = null; } }
+
+/* ================= INIT ================= */
+document.addEventListener('DOMContentLoaded', () => {
+  setupCharacters();
+  setupTimeline();
+  setupQuotes();
+  setupFadeIn();
+  setupScrollspy();
+  $('#modalClose').addEventListener('click', closeModal);
+  $('#modalMask').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+});
 </script>
+
 </body>
 </html>
