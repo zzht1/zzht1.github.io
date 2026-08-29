@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="列夫·托尔斯泰《战争与和平》梳理：故事脉络、人物、核心主题、名句、译本与影响。">
+<title>战争与和平 · 列夫·托尔斯泰 — zzht</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f0ead8;            /* 战鼓羊皮纸 */
+  --paper: #faf6ea;
+  --paper-deep: #f2ecda;
+  --ink: #26200f;
+  --ink-soft: #5a5138;
+  --ink-faint: #948a6b;
+  --acc: #a83c1a;           /* 莫斯科火 */
+  --gold: #a3801f;          /* 硝烟金 */
+  --olive: #5c6b3c;         /* 军装绿 */
+  --steel: #4e6478;         /* 钢铁蓝 */
+  --line: #d8cba4;
+  --serif: 'Noto Serif SC', 'STSong', 'SimSun', serif;
+  --sans: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  color: var(--ink);
+  line-height: 1.75;
+  overflow-x: hidden;
+  /* 极淡的横向行军纹：细密横线像行军的队列 */
+  background-color: var(--bg);
+  background-image:
+    repeating-linear-gradient(0deg, transparent 0, transparent 6px, rgba(92,107,60,.05) 6px, rgba(92,107,60,.05) 7px),
+    linear-gradient(180deg, rgba(78,100,120,.10) 0%, rgba(240,234,216,0) 420px);
+}
+::selection { background: rgba(163, 128, 31, .2); }
+
+/* back home */
+.back-home {
+  position: fixed; top: 18px; left: 20px; z-index: 120;
+  font-size: .85rem; color: var(--ink-soft); text-decoration: none;
+  padding: 7px 14px; border-radius: 999px;
+  background: rgba(250, 246, 234, .9);
+  border: 1px solid var(--line);
+  transition: all .25s;
+}
+.back-home:hover { color: var(--acc); border-color: var(--acc); transform: translateX(-2px); }
+
+/* ===== HERO：行军与天空 ===== */
+.hero {
+  min-height: 94vh;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  text-align: center;
+  padding: 14vh 24px 8vh;
+  position: relative;
+  background:
+    radial-gradient(ellipse 80% 45% at 50% -8%, rgba(78,100,120,.16), transparent 62%),
+    linear-gradient(180deg, #ebe4ce 0%, var(--bg) 78%);
+}
+/* 俄文水印：像旧地图上的地名 */
+.hero-wm {
+  position: absolute; top: 12%; left: 50%; transform: translateX(-50%);
+  font-family: var(--serif); font-style: italic;
+  font-size: clamp(3rem, 9vw, 6.2rem);
+  letter-spacing: .06em; white-space: nowrap;
+  color: rgba(78, 100, 120, .10);
+  pointer-events: none; user-select: none;
+}
+.hero-eyebrow {
+  font-size: .82rem; letter-spacing: .32em; color: var(--ink-soft);
+  margin-bottom: 22px; font-weight: 400; position: relative;
+}
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(3.2rem, 10vw, 6.4rem);
+  font-weight: 900; letter-spacing: .16em; line-height: 1.12;
+  color: var(--ink); position: relative;
+}
+.hero-ru {
+  font-family: var(--serif);
+  font-size: clamp(1rem, 2.6vw, 1.3rem);
+  color: var(--acc); letter-spacing: .2em;
+  margin-top: 14px; font-style: italic; position: relative;
+}
+.hero-sub {
+  margin-top: 18px; color: var(--ink-soft); font-size: .97rem; font-weight: 300;
+  letter-spacing: .05em; position: relative;
+}
+/* 分隔：左端交叉双剑，右端一枝橡叶，中段由粗渐细 */
+.hero-divider { display: flex; justify-content: center; margin: 28px auto 8px; position: relative; }
+.hero-quote {
+  max-width: 560px; font-family: var(--serif);
+  font-size: 1.06rem; color: var(--ink-soft); line-height: 2; position: relative;
+}
+.hero-quote .src { display: block; margin-top: 10px; font-size: .85rem; color: var(--ink-faint); }
+.hero-meta {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 14px 46px;
+  margin-top: 46px; position: relative;
+}
+.hero-meta-item { text-align: center; min-width: 70px; }
+.hero-meta-item .value {
+  display: block; font-family: var(--serif); font-weight: 900;
+  font-size: 1.6rem; color: var(--acc); line-height: 1.2;
+}
+.hero-meta-item .label { font-size: .78rem; color: var(--ink-faint); letter-spacing: .12em; }
+.scroll-hint {
+  position: absolute; bottom: 26px; left: 50%; transform: translateX(-50%);
+  font-size: .78rem; color: var(--ink-faint); cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  letter-spacing: .2em; user-select: none;
+}
+.scroll-hint .arrow { animation: bob 1.8s ease-in-out infinite; }
+@keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+
+/* ===== NAV ===== */
+.nav-bar {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(240, 234, 216, .92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.nav-inner {
+  max-width: 1000px; margin: 0 auto;
+  display: flex; overflow-x: auto; scrollbar-width: none;
+  padding: 0 12px;
+}
+.nav-inner::-webkit-scrollbar { display: none; }
+.nav-tab {
+  flex: 0 0 auto; padding: 15px 18px; cursor: pointer;
+  font-size: .9rem; color: var(--ink-soft); letter-spacing: .06em;
+  position: relative; transition: color .25s; white-space: nowrap;
+  user-select: none;
+}
+.nav-tab::after {
+  content: ''; position: absolute; left: 18px; right: 18px; bottom: 0;
+  height: 2px; border-radius: 2px;
+  background: linear-gradient(90deg, var(--acc), var(--gold));
+  transform: scaleX(0); transition: transform .3s;
+}
+.nav-tab:hover { color: var(--ink); }
+.nav-tab.active { color: var(--acc); font-weight: 500; }
+.nav-tab.active::after { transform: scaleX(1); }
+
+/* ===== SECTIONS ===== */
+.section { max-width: 1000px; margin: 0 auto; padding: 90px 24px 10px; }
+.section.wide { max-width: 1060px; }
+.section-title {
+  font-family: var(--serif); font-size: clamp(1.7rem, 4vw, 2.3rem);
+  font-weight: 900; letter-spacing: .08em; color: var(--ink);
+}
+.section-title::after {
+  content: ''; display: block; width: 76px; height: 3px; margin-top: 14px;
+  background: linear-gradient(90deg, var(--acc), var(--gold), transparent);
+  border-radius: 2px;
+}
+.section-desc {
+  margin-top: 20px; color: var(--ink-soft); max-width: 720px;
+  font-size: .98rem; line-height: 2;
+}
+.fade-in { opacity: 0; transform: translateY(26px); transition: opacity .8s ease, transform .8s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* ===== OVERVIEW ===== */
+.ov-grid {
+  display: grid; grid-template-columns: 1.35fr 1fr; gap: 40px;
+  margin-top: 40px; align-items: start;
+}
+.ov-prose p { margin-bottom: 16px; color: var(--ink-soft); font-size: .97rem; line-height: 2.05; }
+.ov-prose p strong { color: var(--ink); font-weight: 600; }
+.ov-prose .lede {
+  font-family: var(--serif); font-size: 1.12rem; color: var(--ink); line-height: 2.1;
+}
+.ov-prose .lede::first-letter {
+  font-size: 2.6em; float: left; line-height: 1; padding-right: .12em;
+  color: var(--acc); font-weight: 900;
+}
+.ov-panel {
+  background: var(--paper); border: 1px solid var(--line);
+  border-radius: 22px; padding: 30px 28px;
+  box-shadow: 0 10px 24px rgba(90,80,30,.08);
+}
+.ov-panel h3 {
+  font-family: var(--serif); font-size: 1.05rem; font-weight: 700; letter-spacing: .08em;
+  color: var(--acc); margin-bottom: 16px;
+}
+.bg-list { list-style: none; }
+.bg-list li {
+  position: relative; padding: 10px 0 10px 22px;
+  font-size: .88rem; color: var(--ink-soft); line-height: 1.8;
+  border-bottom: 1px dashed var(--line);
+}
+.bg-list li:last-child { border-bottom: none; }
+.bg-list li::before {
+  content: ''; position: absolute; left: 2px; top: 19px;
+  width: 7px; height: 7px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--acc), var(--gold));
+}
+.bg-list li b { color: var(--ink); font-weight: 600; }
+.room-note {
+  margin-top: 16px; padding-top: 12px;
+  border-top: 1px dashed var(--line);
+  font-size: .8rem; color: var(--ink-faint); font-style: italic; line-height: 1.8;
+}
+.stat-strip {
+  display: flex; flex-wrap: wrap; gap: 0; margin-top: 44px;
+  border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+}
+.stat {
+  flex: 1 1 auto; min-width: 150px; text-align: center;
+  padding: 26px 16px;
+}
+.stat + .stat { border-left: 1px dashed var(--line); }
+.stat .num {
+  font-family: var(--serif); font-size: 1.9rem; font-weight: 900; color: var(--acc);
+  line-height: 1.2;
+}
+.stat .cap { font-size: .8rem; color: var(--ink-faint); letter-spacing: .08em; margin-top: 6px; }
+
+/* ===== STORY ===== */
+.phase { margin-top: 48px; }
+.phase-head {
+  display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap;
+  padding-top: 18px; border-top: 1px solid rgba(163,128,31,.28);
+}
+.phase-num {
+  font-family: var(--serif); font-size: 2rem; font-weight: 900;
+  background: linear-gradient(135deg, var(--acc), var(--gold));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  line-height: 1;
+}
+.phase-head h3 { font-family: var(--serif); font-size: 1.25rem; font-weight: 700; letter-spacing: .05em; }
+.phase-head .ref { font-size: .8rem; color: var(--ink-faint); letter-spacing: .05em; }
+.phase-items {
+  margin-top: 20px; margin-left: 13px;
+  border-left: 2px solid rgba(163, 128, 31, .5);
+  padding-left: 26px;
+}
+.t-item {
+  position: relative; border-radius: 18px; padding: 14px 18px;
+  margin-bottom: 10px; cursor: pointer;
+  transition: background .25s;
+}
+.t-item:hover { background: var(--paper-deep); }
+.t-item::before {
+  content: ''; position: absolute; left: -33px; top: 24px;
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--bg); border: 2.5px solid var(--acc);
+  transition: background .25s;
+}
+.t-item.open::before { background: var(--acc); }
+.t-item-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.t-item-head h4 { font-size: 1rem; font-weight: 600; font-family: var(--serif); letter-spacing: .03em; }
+.t-ref {
+  font-size: .72rem; color: var(--acc); background: rgba(168,60,26,.08);
+  padding: 2px 10px; border-radius: 999px; letter-spacing: .04em; white-space: nowrap;
+}
+.t-toggle { margin-left: auto; color: var(--ink-faint); font-size: .85rem; transition: transform .3s; }
+.t-item.open .t-toggle { transform: rotate(180deg); }
+.t-detail { max-height: 0; overflow: hidden; transition: max-height .45s ease; }
+.t-detail p {
+  padding-top: 10px; font-size: .9rem; color: var(--ink-soft); line-height: 1.95; max-width: 680px;
+}
+
+/* ===== CHARACTERS：家族铭牌 ===== */
+.filter-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px; }
+.filter-chip {
+  padding: 8px 18px; border-radius: 999px; cursor: pointer;
+  font-size: .85rem; color: var(--ink-soft);
+  background: var(--paper); border: 1px solid var(--line);
+  transition: all .25s; user-select: none;
+}
+.filter-chip:hover { transform: translateY(-2px); color: var(--ink); }
+.filter-chip.active {
+  background: var(--acc);
+  color: #faf6ea; border-color: transparent;
+}
+.char-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 20px; margin-top: 30px;
+}
+.char-card {
+  background: var(--paper); border: 1px solid var(--line); border-radius: 20px;
+  padding: 24px 22px 20px; cursor: pointer;
+  position: relative; overflow: hidden;
+  transition: transform .3s cubic-bezier(.34,1.4,.5,1), box-shadow .3s, border-color .3s;
+}
+/* 顶上双线绲边：军装式的肩章 */
+.char-card::before {
+  content: ''; position: absolute; top: 0; left: 22px; right: 22px; height: 2px;
+  background: linear-gradient(90deg, var(--gc, var(--acc)), transparent);
+  opacity: .85;
+}
+.char-card::after {
+  content: ''; position: absolute; top: 5px; left: 22px; right: 60px; height: 1px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+  opacity: .5;
+}
+.char-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 14px 30px rgba(90,80,30,.16);
+  border-color: var(--gc, var(--acc));
+}
+.char-card .c-name { font-family: var(--serif); font-size: 1.12rem; font-weight: 700; }
+.char-card .c-ru { font-size: .76rem; color: var(--ink-faint); margin-top: 3px; font-style: italic; letter-spacing: .02em; }
+.char-card .c-desc { font-size: .85rem; color: var(--ink-soft); margin-top: 12px; line-height: 1.8; }
+.char-card .c-tags { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 6px; }
+.c-tag {
+  font-size: .7rem; padding: 3px 10px; border-radius: 999px;
+  color: var(--gc, var(--acc)); background: color-mix(in srgb, var(--gc, var(--acc)) 10%, var(--paper));
+  border: 1px solid color-mix(in srgb, var(--gc, var(--acc)) 28%, var(--paper));
+}
+.char-card.hidden { display: none; }
+
+/* modal */
+.modal-mask {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(38, 32, 15, .5);
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px; opacity: 0; pointer-events: none; transition: opacity .3s;
+}
+.modal-mask.show { opacity: 1; pointer-events: auto; }
+.modal-box {
+  background: var(--paper); border-radius: 24px; max-width: 560px; width: 100%;
+  max-height: 82vh; overflow-y: auto;
+  padding: 36px 34px; position: relative;
+  transform: translateY(18px); transition: transform .3s;
+  border-top: 4px solid var(--acc);
+}
+.modal-mask.show .modal-box { transform: translateY(0); }
+.modal-close {
+  position: absolute; top: 16px; right: 20px; cursor: pointer;
+  font-size: 1.3rem; color: var(--ink-faint); background: none; border: none;
+  transition: color .2s; line-height: 1;
+}
+.modal-close:hover { color: var(--acc); }
+.modal-box h3 { font-family: var(--serif); font-size: 1.5rem; font-weight: 900; }
+.modal-box .m-ru { font-style: italic; color: var(--ink-faint); font-size: .88rem; margin-top: 4px; }
+.modal-box .m-role {
+  display: inline-block; margin-top: 12px; font-size: .76rem; letter-spacing: .06em;
+  color: var(--acc); background: rgba(168,60,26,.08); padding: 4px 14px; border-radius: 999px;
+}
+.modal-box .m-body { margin-top: 16px; font-size: .93rem; color: var(--ink-soft); line-height: 2.05; }
+
+/* ===== THEMES ===== */
+.theme-block {
+  display: grid; grid-template-columns: 220px 1fr; gap: 34px;
+  padding: 42px 0; align-items: start;
+}
+.theme-side { position: sticky; top: 84px; }
+.theme-no {
+  font-family: var(--serif); font-weight: 900; font-size: 1.05rem; letter-spacing: .2em;
+  color: var(--gold);
+}
+.theme-side h3 { font-family: var(--serif); font-size: 1.3rem; font-weight: 900; margin-top: 8px; line-height: 1.5; }
+.theme-side .t-en { font-size: .78rem; color: var(--ink-faint); font-style: italic; margin-top: 4px; letter-spacing: .03em; }
+.theme-body p { color: var(--ink-soft); font-size: .94rem; line-height: 2.05; margin-bottom: 14px; max-width: 640px; }
+.theme-body p b { color: var(--ink); font-weight: 600; }
+.theme-key {
+  display: inline-block; margin-top: 4px; margin-right: 8px; margin-bottom: 6px;
+  font-size: .74rem; color: var(--acc); letter-spacing: .05em;
+  padding: 3px 12px; border-radius: 999px; border: 1px solid rgba(168,60,26,.3);
+  background: rgba(168,60,26,.06);
+}
+.theme-sep {
+  height: 1px; border: none;
+  background: linear-gradient(90deg, transparent, var(--line) 25%, var(--line) 75%, transparent);
+}
+
+/* ===== QUOTES：奥斯特里茨的夜空 ===== */
+.quote-shell { margin-top: 38px; position: relative; }
+.quote-viewport { overflow: hidden; border-radius: 24px; }
+.quote-track { display: flex; transition: transform .6s cubic-bezier(.4,0,.2,1); }
+.q-slide {
+  flex: 0 0 100%; padding: 50px 8%;
+  background:
+    radial-gradient(ellipse 60% 55% at 50% 0%, rgba(78,100,120,.28), transparent 70%),
+    #1c242e;
+  border: 1px solid #34435a; border-radius: 24px;
+  text-align: center;
+}
+.q-mark { font-family: var(--serif); font-size: 2.6rem; color: #c9a94f; line-height: 1; }
+.q-text {
+  font-family: var(--serif); font-size: clamp(1.05rem, 2.6vw, 1.35rem);
+  line-height: 2.1; color: #d9e2ec; margin-top: 12px;
+}
+.q-src { margin-top: 18px; font-size: .85rem; color: #8fb0cc; letter-spacing: .06em; }
+.q-note { margin-top: 8px; font-size: .82rem; color: #7e8ea0; max-width: 520px; margin-left: auto; margin-right: auto; line-height: 1.8; }
+.quote-nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 42px; height: 42px; border-radius: 50%;
+  background: var(--paper); border: 1px solid var(--line);
+  color: var(--ink-soft); font-size: 1.1rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .25s; z-index: 5;
+}
+.quote-nav:hover { color: var(--acc); border-color: var(--acc); transform: translateY(-50%) scale(1.08); }
+.quote-nav.prev { left: -14px; }
+.quote-nav.next { right: -14px; }
+.quote-dots { display: flex; justify-content: center; gap: 9px; margin-top: 22px; }
+.q-dot {
+  width: 8px; height: 8px; border-radius: 50%; background: var(--line);
+  cursor: pointer; transition: all .3s;
+}
+.q-dot.active { background: var(--acc); transform: scale(1.25); }
+
+/* ===== VERSIONS & LEGACY ===== */
+.dual-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 38px; }
+.v-panel {
+  background: var(--paper); border: 1px solid var(--line); border-radius: 22px;
+  padding: 28px 26px; box-shadow: 0 10px 24px rgba(90,80,30,.08);
+}
+.v-panel h3 {
+  font-family: var(--serif); font-size: 1.1rem; font-weight: 700; letter-spacing: .06em;
+  margin-bottom: 6px;
+}
+.v-panel .v-sub { font-size: .8rem; color: var(--ink-faint); margin-bottom: 18px; }
+.v-row {
+  padding: 14px 0; border-bottom: 1px dashed var(--line);
+  font-size: .88rem; color: var(--ink-soft); line-height: 1.8;
+}
+.v-row:last-child { border-bottom: none; }
+.v-row b { color: var(--ink); font-weight: 600; }
+.v-row .v-year {
+  font-family: var(--serif); color: var(--acc); font-weight: 700; margin-right: 10px;
+}
+.v-rec {
+  margin-top: 14px; font-size: .82rem; color: var(--gold);
+  background: rgba(163,128,31,.1); border-radius: 12px; padding: 10px 14px; line-height: 1.7;
+}
+.legacy-list { margin-top: 34px; }
+.legacy-item {
+  display: grid; grid-template-columns: 150px 1fr; gap: 20px;
+  padding: 22px 0; border-bottom: 1px dashed var(--line);
+}
+.legacy-item:last-child { border-bottom: none; }
+.legacy-item .l-name { font-family: var(--serif); font-weight: 700; font-size: 1rem; color: var(--ink); }
+.legacy-item .l-name span { display: block; font-size: .75rem; color: var(--ink-faint); font-weight: 400; margin-top: 3px; font-style: italic; }
+.legacy-item .l-desc { font-size: .9rem; color: var(--ink-soft); line-height: 1.95; }
+
+/* ===== READING ===== */
+.read-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 22px; margin-top: 36px;
+}
+.read-card {
+  background: var(--paper); border: 1px solid var(--line); border-radius: 22px;
+  padding: 28px 26px; transition: transform .3s, box-shadow .3s;
+  box-shadow: 0 6px 16px rgba(90,80,30,.06);
+}
+.read-card:hover { transform: translateY(-4px); box-shadow: 0 12px 26px rgba(90,80,30,.14); }
+.read-card h3 { font-family: var(--serif); font-size: 1.02rem; font-weight: 700; margin-bottom: 12px; color: var(--acc); }
+.read-card p { font-size: .88rem; color: var(--ink-soft); line-height: 1.95; }
+.read-card p b { color: var(--ink); }
+.read-card ul { list-style: none; margin-top: 8px; }
+.read-card li {
+  font-size: .88rem; color: var(--ink-soft); line-height: 1.9;
+  padding-left: 18px; position: relative; margin-bottom: 6px;
+}
+.read-card li::before {
+  content: ''; position: absolute; left: 2px; top: 12px;
+  width: 6px; height: 6px; border-radius: 50%; background: var(--gold);
+}
+
+/* footer */
+.site-footer {
+  max-width: 1000px; margin: 90px auto 0; padding: 26px 24px 46px;
+  border-top: 1px solid var(--line);
+  font-size: .82rem; color: var(--ink-faint);
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+}
+.site-footer a { color: var(--ink-soft); text-decoration: none; transition: color .2s; }
+.site-footer a:hover { color: var(--acc); }
+.foot-mark { display: inline-flex; align-items: center; gap: 9px; }
+
+/* responsive */
+@media (max-width: 820px) {
+  .ov-grid { grid-template-columns: 1fr; }
+  .dual-grid { grid-template-columns: 1fr; }
+  .theme-block { grid-template-columns: 1fr; gap: 14px; }
+  .theme-side { position: static; }
+  .legacy-item { grid-template-columns: 1fr; gap: 6px; }
+  .quote-nav.prev { left: 6px; } .quote-nav.next { right: 6px; }
+  .q-slide { padding: 42px 7%; }
+}
+@media (max-width: 520px) {
+  .section { padding-top: 66px; }
+  .hero { min-height: 88vh; padding-top: 16vh; }
+  .hero-wm { font-size: 2.4rem; }
+  .hero-meta { gap: 12px 26px; }
+  .stat { min-width: 120px; padding: 18px 8px; }
+}
+
+</style>
+</head>
+<body>
+
+<a href="tolstoy.html" class="back-home">← 列夫·托尔斯泰</a>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="top">
+<span class="hero-wm" aria-hidden="true">Война и мир</span>
+  <div class="hero-eyebrow">列夫·托尔斯泰 · 1863–1869 · 宫廷、战场与炊烟之间</div>
+  <h1>战争与和平</h1>
+  <div class="hero-ru">Война и мир</div>
+  <div class="hero-sub">一座同时容纳宫廷、战场与炊烟的人类全景画</div>
+  <div class="hero-divider">
+    <svg viewBox="0 0 300 44" width="300" height="44" aria-hidden="true">
+      <g stroke="#a83c1a" stroke-width="2.4" stroke-linecap="round" fill="none">
+        <path d="M14 36 L44 10"/><path d="M44 36 L14 10"/>
+      </g>
+      <g stroke="#a3801f" stroke-width="1.8" stroke-linecap="round" fill="none">
+        <path d="M19.5 24.5 l7.5 6.5"/><path d="M38.5 24.5 l-7.5 6.5"/>
+      </g>
+      <circle cx="14" cy="38" r="1.7" fill="#a83c1a"/><circle cx="44" cy="38" r="1.7" fill="#a83c1a"/>
+      <path d="M56 20.9 L244 21.6 L244 22.4 L56 23.1 Z" fill="#a3801f" opacity=".75"/>
+      <g fill="#5c6b3c">
+        <ellipse cx="259" cy="25" rx="7.4" ry="3.4" transform="rotate(-42 259 25)"/>
+        <ellipse cx="259" cy="13.5" rx="7.4" ry="3.4" transform="rotate(34 259 13.5)"/>
+        <ellipse cx="276" cy="19" rx="7.6" ry="3.6" transform="rotate(84 276 19)"/>
+      </g>
+      <path d="M255 42 C261 34 266 27 273 9" stroke="#5c6b3c" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <blockquote class="hero-quote">
+    “多么寂静，多么安详，多么庄严——除了这天空，一切都是空虚和欺骗。”
+    <span class="src">— 安德烈 · 奥斯特里茨战场上（转述）</span>
+  </blockquote>
+  <div class="hero-meta">
+    <div class="hero-meta-item"><span class="value">4卷+2尾声</span><span class="label">部分结构</span></div>
+    <div class="hero-meta-item"><span class="value">1805–1820</span><span class="label">故事年代</span></div>
+    <div class="hero-meta-item"><span class="value">≈550</span><span class="label">登场人物</span></div>
+    <div class="hero-meta-item"><span class="value">2场</span><span class="label">会战 · 奥斯特里茨与博罗金诺</span></div>
+  </div>
+  <div class="scroll-hint" onclick="document.getElementById('content').scrollIntoView({behavior:'smooth'})">
+    <span>向下探索</span><span class="arrow">↓</span>
+  </div>
+</section>
+
+<!-- ===== NAV ===== -->
+<nav class="nav-bar" id="content">
+  <div class="nav-inner">
+    <div class="nav-tab active" data-section="overview">概览</div>
+    <div class="nav-tab" data-section="story">脉络</div>
+    <div class="nav-tab" data-section="characters">人物</div>
+    <div class="nav-tab" data-section="themes">主题</div>
+    <div class="nav-tab" data-section="quotes">名句</div>
+    <div class="nav-tab" data-section="versions">译本与影响</div>
+    <div class="nav-tab" data-section="reading">阅读指南</div>
+  </div>
+</nav>
+
+<!-- ===== OVERVIEW ===== -->
+<section class="section fade-in" id="overview">
+  <h2 class="section-title">关于这本书</h2>
+  <div class="ov-grid">
+    <div class="ov-prose">
+      <p class="lede">拿破仑的大军压境，莫斯科的钟楼起火；而在这一切之前与之后，人们照旧过命名日、赴舞会、求婚、种树。托尔斯泰把一个国家十五年的兴亡画成一幅全景——画里最动人的，从来不是沙皇与皇帝，而是举着旗帜倒下的安德烈、在炮台上分汤的皮埃尔，和举着蜡烛穿行整座宅邸的娜塔莎。</p>
+      <p>《战争与和平》是文学史上罕见的<b>全景式作品</b>：四卷正文加两重尾声，五百多个人物，从安娜·帕夫洛娜的客厅一路写到 1820 年的家庄。史书上的“伟人”在这里成了被观察的对象，而历史真正的动力，藏在千万普通人的日子里。托尔斯泰自己拒绝给它归类——不是小说，不是长诗，也不是史书，他说这只是他想说的“一切”。</p>
+      <p>出版即震动欧洲，罗曼·罗兰后来称它为“我们时代最广阔的史诗”（转述）。它改写了长篇小说的尺度：此后再也没有人能假装“写生活”和“写历史”是两件事。</p>
+    </div>
+    <div class="ov-panel">
+      <h3>创作背景</h3>
+      <ul class="bg-list">
+        <li><b>蜜月期的空白支票</b>：1862 年与索菲娅成婚，在亚斯纳亚·波良纳安顿下来；1863 年动笔，本想写 1812 年“十二月党人”的渊源，写着写着向前推到 1805 年，向后伸到 1820 年。</li>
+        <li><b>战争的底片</b>：他亲历克里米亚战争的塞瓦斯托波尔围城，知道炮声底下的战壕是什么样子；书中会战的细节来自老兵口述、档案与实地走访。</li>
+        <li><b>索尼娅的誊抄战役</b>：妻子一遍遍把丈夫潦草的手稿誊成可付印的稿子——光是誊写，就是一场旷日持久的战役。</li>
+        <li><b>“人民的思想”</b>：他在手记里自陈，写这部书时爱的是“人民的思想”（мысль народная）——不是英雄史，而是民族生活的整体。</li>
+        <li><b>拒绝文类</b>：他反复声明这既非小说亦非史诗，并为此在尾声里附上一篇历史哲学论文——小说家的理论，由小说自己背书。</li>
+      </ul>
+      <div class="room-note">注：前几部曾以《一八〇五年》为题连载。俄语 мир 一词兼有“和平”与“世界／村社”之义——书名在词源上就是一场双关，常被后人津津乐道。</div>
+    </div>
+  </div>
+  <div class="stat-strip">
+    <div class="stat"><div class="num">4个</div><div class="cap">贵族家庭 · 别祖霍夫 鲍尔康斯基 罗斯托夫 库拉金</div></div>
+    <div class="stat"><div class="num">≈550</div><div class="cap">有名有姓的登场人物</div></div>
+    <div class="stat"><div class="num">6年+</div><div class="cap">成书时间 · 1863–1869</div></div>
+    <div class="stat"><div class="num">2场</div><div class="cap">大会战详写 · 奥斯特里茨与博罗金诺</div></div>
+    <div class="stat"><div class="num">15年</div><div class="cap">故事时间跨度 · 1805–1820</div></div>
+  </div>
+</section>
+
+<!-- ===== STORY ===== -->
+<section class="section fade-in" id="story">
+  <h2 class="section-title">故事脉络</h2>
+  <p class="section-desc">全书按“战争”与“和平”两种心跳交替推进。以下按五个阶段梳理关键节点，标注为部级提示（各版本分卷略有出入），点击展开详情。放心读——这从来不是一本靠悬念取胜的小说，不怕“剧透”。</p>
+
+  <div class="phase">
+    <div class="phase-head"><span class="phase-num">Ⅰ</span><h3>1805 · 申格拉本与奥斯特里茨</h3><span class="ref">第一部 · 命名日、从军与天空</span></div>
+    <div class="phase-items">
+      <div class="t-item"><div class="t-item-head"><h4>客厅里的私生子</h4><span class="t-ref">第一部</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>全书以安娜·帕夫洛娜的沙龙开场：一句关于拿破仑的客套话，把半个欧洲的政治摆上茶桌。别祖霍夫伯爵的私生子皮埃尔闯入彼得堡上流社会——笨拙、直率、不合规矩，库拉金家的算计已经把他围在了中间。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>罗斯托夫家的命名日</h4><span class="t-ref">第一部</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>莫斯科的罗斯托夫家正为小女儿娜塔莎过命名日：她十三岁，会唱歌、敢闯进客厅吻客人。长子尼古拉决定从军，与表妹索尼娅互许终身——热腾腾的一家人，不知道战争已经等在路上。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>申格拉本：图申的炮台</h4><span class="t-ref">第一部</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>尼古拉的初阵在申格拉本：他吓得躲起来，又为这恐惧羞愧。而被所有人看扁的小个子图申带着炮连苦撑到最后一刻，立了大功，事后却无人为他请功——托尔斯泰第一次把镜头对准“没有勋章的人”。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>奥斯特里茨的旗帜与天空</h4><span class="t-ref">第一部 末</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>俄奥联军在奥斯特里茨惨败。安德烈举着旗帜冲上山冈，中弹倒下——躺着的第一眼，是高远无云的天空：“一切都是空虚和欺骗，除了这天空。”拿破仑从他身上走过，那位“伟人”忽然显得很小。</p></div></div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-head"><span class="phase-num">Ⅱ</span><h3>1807–1811 · 和平的气候</h3><span class="ref">第二部 · 错误的婚姻、初恋与共济会</span></div>
+    <div class="phase-items">
+      <div class="t-item"><div class="t-item-head"><h4>错误的婚姻</h4><span class="t-ref">第二部</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>老伯爵死后，皮埃尔继承巨额遗产，立刻成了全彼得堡最抢手的猎物——库拉金家的女儿海伦“俘获”了他。婚后流言四起，他与多洛霍夫决斗负伤、分居；财富没有给他生活，只给了他一群猎手。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>共济会与庄园实验</h4><span class="t-ref">第二部</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>失意中皮埃尔遇见共济会，相信“行善”可以同时改造自己与农奴制：解放农民、办学校、修医院。账房先生们把好意全部兑换成账面上的体面——庄园照旧贫困，皮埃尔照旧迷惘。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>老橡树与新叶</h4><span class="t-ref">第二部</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>安德烈途经奥特拉德诺耶，窗内是深夜笑语的娜塔莎，窗外是一棵满身伤痕、不肯发芽的老橡树。返程的春天，同一棵树换上新叶——他忽然相信：人生并没有在三十岁结束。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>娜塔莎的初恋</h4><span class="t-ref">第二部—第三部</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>命名日之后的圣诞夜，乔装的少男少女雪橇飞驰，安德烈与娜塔莎在歌声与月色里确认了彼此。老鲍尔康斯基不许这门婚事——婚期被推迟一年：一切后来的灾难，都埋在这一年的等待里。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>歌剧院之夜</h4><span class="t-ref">第二部 末</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>安德烈远行，娜塔莎在歌剧院遇见库拉金家的小儿子阿纳托尔。虚荣、谎言与社交界的规则合谋，私奔未遂，婚约破裂，她写下绝交信、服毒自尽未成——和平年代的“战争”，同样由上流社会发动。</p></div></div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-head"><span class="phase-num">Ⅲ</span><h3>1812 · 入侵</h3><span class="ref">第四部 · 炮台、大火与俘虏</span></div>
+    <div class="phase-items">
+      <div class="t-item"><div class="t-item-head"><h4>大军渡过涅曼河</h4><span class="t-ref">第三部—第四部</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>1812 年 6 月，拿破仑的六十万大军渡河而来。斯摩棱斯克焚毁，鲍尔康斯基家的老宅被弃——撤退的人流里，“人民”第一次作为整体显形：商人们烧掉自己的货栈，庄稼汉默默拆走自己的桥。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>博罗金诺炮台</h4><span class="t-ref">第四部</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>皮埃尔以平民身份来到拉耶夫斯基炮台。弹雨里，士兵们照常烤面包、熬汤、抬炮——他忽然明白：战争真正的完成者，是这些默默劳作的普通人，而不是参谋部地图上移动的小旗。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>库图佐夫的一天</h4><span class="t-ref">第四部</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>决战日，托尔斯泰让读者守在库图佐夫身边：这位独眼老帅打瞌睡、听汇报、克制着不下令。他不指挥历史——他只是比谁都清楚，个人意志改变不了千万人的合力，能做的只有等待与判断时机。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>莫斯科的大火</h4><span class="t-ref">第四部</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>罗斯托夫家撤离时，娜塔莎下令把行李车全部让给伤员；空城莫斯科在夜里烧成一片红光。皮埃尔留在城里，从救孩子的旁观者变成战俘——在他动手救火的那条街上，帝国的新主人正列队入城。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>普拉东·卡拉塔耶夫</h4><span class="t-ref">第四部</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>战俘营里，皮埃尔遇见普通士兵卡拉塔耶夫：他说话像鸟鸣，意思要在全部话音落下时才浮现；他不恨任何人，对狗、对法国兵一样温柔。皮埃尔在他身上第一次看见“生活本身的样子”。</p></div></div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-head"><span class="phase-num">Ⅳ</span><h3>1812–1813 · 转折</h3><span class="ref">第四部—尾声 · 死亡、悔悟与新婚</span></div>
+    <div class="phase-items">
+      <div class="t-item"><div class="t-item-head"><h4>安德烈之死</h4><span class="t-ref">第四部</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>博罗金诺重伤的安德烈随罗斯托夫家撤离，娜塔莎在病榻前守夜。他原谅了她，也原谅了所有人——“爱与死比逻辑更接近真理”。1813 年春，他安静地离开，带着一座已经被拆掉的所有防线的内心。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>娜塔莎的悔悟</h4><span class="t-ref">第四部</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>从深重的自责与病痛里重新站起来，她用看护报答安德烈，用沉默等待宽恕——成长在这里完成：从跳俄罗斯舞的女孩，长成能承担的人。托尔斯泰不赦免她的错误，只让她在其中长大。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>皮埃尔的获释</h4><span class="t-ref">第四部</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>法军溃退途中，卡拉塔耶夫死于枪下；皮埃尔大病一场，重获自由时内心带着一种“从前不可能有的平静与自信”——牢狱拆掉了他的理论，还给他生活。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>皮埃尔与娜塔莎</h4><span class="t-ref">尾声</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>1813 年，两个都从废墟里走出来的人结了婚。“和平”的一翼就此落进家庭——受苦之后的人，才配得上彼此；这是托尔斯泰版的婚礼颂歌。</p></div></div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-head"><span class="phase-num">Ⅴ</span><h3>两重尾声</h3><span class="ref">尾声一 · 尾声二</span></div>
+    <div class="phase-items">
+      <div class="t-item"><div class="t-item-head"><h4>1813–1820 的各家儿女</h4><span class="t-ref">尾声一</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>皮埃尔与娜塔莎有了四个孩子；尼古拉娶玛丽亚为妻，还清了罗斯托夫家的旧债；索尼娅留在他们的屋檐下。有人嫌尾声“平淡”，托尔斯泰偏要这样写幸福：柴米、争论、育儿——和平的全部样子。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>少年尼科连卡的梦</h4><span class="t-ref">尾声一</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>安德烈的儿子尼科连卡梦见父亲的荣光与皮埃尔的谈话，醒来向天发誓要做一番配得上他们的事业——全书最后一个动作不是结局，而是接力。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>历史哲学：谁在推动历史</h4><span class="t-ref">尾声二</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>尾声二干脆写成一篇文章：历史的动力不是帝王与将军的意志，而是“千万个微小意志的总和”；自由与必然的辩证在此摊牌。小说家用小说挣来的全部信任，最后签了一张哲学的支票。</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CHARACTERS ===== -->
+<section class="section wide fade-in" id="characters">
+  <h2 class="section-title">人物</h2>
+  <p class="section-desc">四大贵族家庭与历史的两个名字，再加上“人民”的一位代表——十二个人，撑起五百人的全景。点击卡片看小传。</p>
+  <div class="filter-row" id="charFilters"></div>
+  <div class="char-grid" id="charGrid"></div>
+</section>
+
+<!-- ===== THEMES ===== -->
+<section class="section fade-in" id="themes">
+  <h2 class="section-title">核心主题</h2>
+  <p class="section-desc">六个思想支点——它们从战壕一直铺到星空，构成托尔斯泰对“历史”与“生活”这两件事的总回答。</p>
+
+  <div class="theme-block">
+    <div class="theme-side"><div class="theme-no">壹</div><h3>历史的真实动力</h3><div class="t-en">The Sum of Small Wills</div></div>
+    <div class="theme-body">
+      <p>拿破仑自以为在指挥历史，托尔斯泰却把镜头摇向士兵、车夫、图申的炮台与磨坊旁的哥萨克：<b>历史是千万普通人意志的总和</b>，“伟人”只是历史贴给自己的标签，不是它的手。库图佐夫之所以打赢，恰因为他最少逞强——他懂得“耐心与时间”才是他的两位将军（转述）。</p>
+      <p>这个命题在尾声二被推成完整的哲学：史学家若把自由当作已知量去计算必然，就永远算不对账。全书五百多个人物，都是这篇论文的注脚。</p>
+      <span class="theme-key">千万人合力</span><span class="theme-key">图申的炮台</span><span class="theme-key">伟人的神话</span>
+    </div>
+  </div>
+  <hr class="theme-sep">
+  <div class="theme-block">
+    <div class="theme-side"><div class="theme-no">贰</div><h3>天空与大地</h3><div class="t-en">The Sky and the Oak</div></div>
+    <div class="theme-body">
+      <p>奥斯特里茨的高空让安德烈第一次看见“一切皆空”的真实；一年后奥特拉德诺耶的老橡树换上新叶，让他在三十岁上重新相信人生。<b>托尔斯泰的辩证法不在哲学书里，在天空与树里</b>：渺小处见永恒，枯木上有春天。</p>
+      <p>两个意象一头一尾夹住了他的一生：功业的天空否定了他，生活的橡树又肯定了他——而最终的和解，完成在娜塔莎的病榻前。</p>
+      <span class="theme-key">奥斯特里茨的天空</span><span class="theme-key">老橡树</span><span class="theme-key">视野的两次校正</span>
+    </div>
+  </div>
+  <hr class="theme-sep">
+  <div class="theme-block">
+    <div class="theme-side"><div class="theme-no">叁</div><h3>死亡的几种样子</h3><div class="t-en">Kinds of Dying</div></div>
+    <div class="theme-body">
+      <p>老伯爵的死是散场，安德烈的死是和解，卡拉塔耶夫的死是一声枪响后的沉默，海伦的死是一行电报。<b>托尔斯泰让每个死者带走一种活法</b>——死亡在书里不是终点，而是对“怎样活着”的最后一次判决。</p>
+      <p>他写临终从不渲染恐怖，只写意识如何一层层脱去恐惧：安德烈“醒了”的那个夜晚，是全书最安静也最锋利的一页。</p>
+      <span class="theme-key">安德烈的临终</span><span class="theme-key">卡拉塔耶夫</span><span class="theme-key">死亡作为审判</span>
+    </div>
+  </div>
+  <hr class="theme-sep">
+  <div class="theme-block">
+    <div class="theme-side"><div class="theme-no">肆</div><h3>家庭四重奏</h3><div class="t-en">Four Families</div></div>
+    <div class="theme-body">
+      <p>别祖霍夫家的遗产、库拉金家的算计、鲍尔康斯基家的严苛、罗斯托夫家的热腾腾——四家人，四种“和平”的样本。<b>文化的根基不在宫廷而在家庭</b>：国库与军团之外，饭桌才是俄国的心脏。</p>
+      <p>托尔斯泰把四条家风的优缺点全部如实入账：罗斯托夫家温暖却败家，鲍尔康斯基家清醒却寒冷——而新的家，要从两种血脉的联姻里长出来。</p>
+      <span class="theme-key">饭桌上的俄国</span><span class="theme-key">四种家风</span><span class="theme-key">婚姻作为道路</span>
+    </div>
+  </div>
+  <hr class="theme-sep">
+  <div class="theme-block">
+    <div class="theme-side"><div class="theme-no">伍</div><h3>人民的战争</h3><div class="t-en">The People's War</div></div>
+    <div class="theme-body">
+      <p>1812 年不是沙皇的战争。托尔斯泰写下那个著名的比喻：举起<b>“人民战争的棍子”</b>，不顾一切礼仪与战略，一棒接一棒，直到把侵略者赶出去（转述）。图申的炮连、烧掉自家货栈的斯摩棱斯克商人、让出全部大车的娜塔莎——主角名单上，其实站满了“无名者”。</p>
+      <p>卡拉塔耶夫是这条线的精神终点：他不恨法国人，不执着生死，像大地一样接受一切——皮埃尔从他身上学到的，比从任何战役学到的都多。</p>
+      <span class="theme-key">人民战争的棍子</span><span class="theme-key">图申</span><span class="theme-key">卡拉塔耶夫</span>
+    </div>
+  </div>
+  <hr class="theme-sep">
+  <div class="theme-block">
+    <div class="theme-side"><div class="theme-no">陆</div><h3>自由与必然</h3><div class="t-en">Freedom and Necessity</div></div>
+    <div class="theme-body">
+      <p>尾声二从小说跳进哲学：人既是<b>自由的生活体验者</b>，又是<b>被无限因果链决定的观察对象</b>——两种身份无法互相换算，史学的错误正在于硬换算。这一章被视为十九世纪历史哲学的文学异数。</p>
+      <p>对普通读者它也不玄：战争年代人人被裹挟，和平年代人人重新拥有选择——自由与必然，就是“战争”与“和平”在哲学里的名字。</p>
+      <span class="theme-key">尾声二</span><span class="theme-key">观察者与体验者</span><span class="theme-key">自由与必然</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== QUOTES ===== -->
+<section class="section fade-in" id="quotes">
+  <h2 class="section-title">名句</h2>
+  <p class="section-desc">八句话，从客厅的闲谈走到星空下的接力——基本就是这本书的行军路线。除开篇一句外均为转述，措辞以通行译本为准。</p>
+  <div class="quote-shell">
+    <button class="quote-nav prev" id="qPrev" aria-label="上一条">‹</button>
+    <div class="quote-viewport"><div class="quote-track" id="qTrack"></div></div>
+    <button class="quote-nav next" id="qNext" aria-label="下一条">›</button>
+    <div class="quote-dots" id="qDots"></div>
+  </div>
+</section>
+
+<!-- ===== VERSIONS & LEGACY ===== -->
+<section class="section wide fade-in" id="versions">
+  <h2 class="section-title">译本、改编与影响</h2>
+  <p class="section-desc">中文世界怎么读它，银幕怎么拍它，以及它在一百六十年里留下了什么。</p>
+  <div class="dual-grid">
+    <div class="v-panel">
+      <h3>中文译本</h3>
+      <div class="v-sub">均为俄文直译，可按口味选择</div>
+      <div class="v-row"><span class="v-year">1980s起</span><b>草婴 译</b>（上海文艺出版社，全六册）—— 当代最通行的完整译本，语言干净克制，按部成册，适合按计划读完。</div>
+      <div class="v-row"><span class="v-year">1950s</span><b>刘辽逸 译</b>（人民文学出版社）—— 经典老译，底子厚，军事语汇与时代气息尤其扎实。</div>
+      <div class="v-row"><span class="v-year">1950s</span><b>高植 译</b> —— 带托尔斯泰本人注释与大量史料注的老译本，适合边读边查。</div>
+      <div class="v-rec">初读选草婴；重读时以刘辽逸译本对照博罗金诺一章，军旅的“颗粒感”会完全不同。</div>
+    </div>
+    <div class="v-panel">
+      <h3>银幕与舞台</h3>
+      <div class="v-sub">全景画最难拍，以下是几部代表作</div>
+      <div class="v-row"><span class="v-year">1956</span><b>美国版</b> · 金·维多导演，奥黛丽·赫本饰娜塔莎，亨利·方达饰皮埃尔 —— 好莱坞式的抒情长卷。</div>
+      <div class="v-row"><span class="v-year">1965–67</span><b>苏联版</b> · 谢尔盖·邦达尔丘克编导演于一身，动用数以万计的群众演员重现博罗金诺，获奥斯卡最佳外语片。</div>
+      <div class="v-row"><span class="v-year">1940s–50s</span><b>歌剧</b> · 普罗科菲耶夫倾最后十年之力写就同名歌剧，娜塔莎的咏叹调与库图佐夫的军令在同一座剧院里轮转。</div>
+      <div class="v-rec">读毕原著再看邦达尔丘克版最为相宜——那是用电影重打一遍的博罗金诺。</div>
+    </div>
+  </div>
+  <div class="legacy-list">
+    <div class="legacy-item">
+      <div class="l-name">索尼娅·托尔斯塔娅<span>Софья Толстая</span></div>
+      <div class="l-desc">1863–1869 年，新婚的妻子把丈夫的天书一遍遍誊成可付印的稿子——有说法称全稿誊写多达七遍（转述）。这部书的完成，一半是书房里的战役。</div>
+    </div>
+    <div class="legacy-item">
+      <div class="l-name">罗曼·罗兰<span>Romain Rolland</span></div>
+      <div class="l-desc">《托尔斯泰传》（1911）把《战争与和平》推为“我们时代最广阔的史诗”，称其让读者参与了整个人类的生活（转述）——此后它成了长篇小说的“最大公约数”。</div>
+    </div>
+    <div class="legacy-item">
+      <div class="l-name">海明威<span>Ernest Hemingway</span></div>
+      <div class="l-desc">关于写战争，他感叹托尔斯泰无人能及（转述）。《永别了，武器》里那种对战争机器的冷静拆解，处处见得这部书的影响。</div>
+    </div>
+    <div class="legacy-item">
+      <div class="l-name">历史哲学<span>Philosophy of History</span></div>
+      <div class="l-desc">尾声二让小说家闯进了史学家的领地：对“伟人史观”的清算影响了此后的历史写作——从伯林《刺猬与狐狸》到当代的大历史叙事，都绕不开这道由文学竖起的路障。</div>
+    </div>
+    <div class="legacy-item">
+      <div class="l-name">全民书目<span>A Reading Rite</span></div>
+      <div class="l-desc">“读过《战争与和平》”在全世界成了文学耐力的度量衡——但它其实是一本写给普通日子的书：真正的门槛不是体量，而是肯不肯在客厅里多坐一百页。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== READING ===== -->
+<section class="section fade-in" id="reading">
+  <h2 class="section-title">阅读指南</h2>
+  <p class="section-desc">给正在读（或将要读）的你几条实用建议。</p>
+  <div class="read-grid">
+    <div class="read-card">
+      <h3>怎么进入</h3>
+      <p>别被体量吓住：全书按“部”推进，每部内部章节都很短。第一部是客厅与命名日，节奏舒缓——<b>忍耐到申格拉本</b>，小说的两种心跳（战争与和平）就会开始交替加速。每天固定几十页，一个多月即可走完全程。</p>
+    </div>
+    <div class="read-card">
+      <h3>值得盯住的场景</h3>
+      <ul>
+        <li><b>奥斯特里茨的天空</b>（第一部末）：全书的第一道裂缝</li>
+        <li><b>老橡树与娜塔莎的窗</b>（第二部）：一次复活由一棵树完成</li>
+        <li><b>博罗金诺炮台上的那碗汤</b>（第四部）：战争哲学的厨房版本</li>
+        <li><b>卡拉塔耶夫的每一句话</b>（第四部）：意思在话音尽头浮现</li>
+        <li><b>尼科连卡的梦</b>（尾声一）：全书以一次接力收束</li>
+      </ul>
+    </div>
+    <div class="read-card">
+      <h3>别被吓退的几件事</h3>
+      <ul>
+        <li>人名双重制：皮埃尔＝别祖霍夫，安德烈＝鲍尔康斯基公爵之子——<b>抓“姓”即可</b></li>
+        <li>沙龙里的法语对话是故意的：语言的外国腔本身就是讽刺</li>
+        <li>尾声二的大段历史哲学读不下去可以先跳过——回头再读，反而更懂</li>
+      </ul>
+    </div>
+    <div class="read-card">
+      <h3>读完之后</h3>
+      <ul>
+        <li><b>《塞瓦斯托波尔故事》</b>：他写战争的第一次尝试，与本书互为草图</li>
+        <li><b>以赛亚·伯林《刺猬与狐狸》</b>：论托尔斯泰与历史规律的著名专论</li>
+        <li>本站下一站：<b>《安娜·卡列尼娜》页</b>——看同一支笔收窄焦距的样子</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <span class="foot-mark"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><g stroke="#a3801f" stroke-width="1.8" stroke-linecap="round" fill="none"><path d="M12 13 v8"/><path d="M9.5 13 h5"/></g><g stroke="#5c6b3c" stroke-width="1.6" stroke-linecap="round" fill="none"><path d="M12 12.5 c-4 -1 -6 -4 -6 -8 c3 0 5.5 2.5 6 6"/><path d="M12 12.5 c4 -1 6 -4 6 -8 c-3 0 -5.5 2.5 -6 6"/></g><path d="M12 12.5 l0 -0.5" stroke="#a3801f" stroke-width="1.6" stroke-linecap="round"/></svg>战争与和平，原是同一片天空下的两种天气 · © zzht</span>
+  <span><a href="tolstoy.html">列夫·托尔斯泰</a> · <a href="tolstoy.html">上一部 · 作者综合页</a> · <a href="anna-karenina.html">下一部 · 安娜·卡列尼娜</a> · <a href="index.html">返回首页</a> · <a href="https://github.com/zzht1">GitHub ↗</a></span>
+</footer>
+
+<script>
+/* ================= DATA ================= */
+const GROUPS = {
+  rost:  { name: '罗斯托夫家', color: '#5c6b3c' },
+  bolk:  { name: '鲍尔康斯基家', color: '#4e6478' },
+  bezu:  { name: '别祖霍夫与库拉金家', color: '#a3801f' },
+  hist:  { name: '历史人物', color: '#7d7466' },
+  people:{ name: '人民', color: '#a83c1a' }
+};
+
+const CHARACTERS = [
+  { id:'pierre', name:'皮埃尔·别祖霍夫', ru:'Пьер Безухов', group:'bezu', role:'主人公 · 寻路者',
+    desc:'私生子出身的巨额遗产继承人。笨拙、善良、停不下来地追问：怎样活才算数。',
+    tags:['遗产','共济会','战俘','求索'],
+    detail:'从浪荡的贵客到共济会慈善家，从博罗金诺炮台上的旁观者到战俘营里的学生——他一路换来换去找答案，直到牢狱拆掉他的理论。最后在与娜塔莎的婚姻里安静下来：托尔斯泰借他说明，真理不是想出来的，是活出来的。' },
+  { id:'andrei', name:'安德烈·鲍尔康斯基', ru:'Андрей Болконский', group:'bolk', role:'主人公 · 觉醒者',
+    desc:'骄傲、冷峻的公爵之子。毕生追求功业，却在旗帜倒下的地方看见了天空。',
+    tags:['旗帜','天空','老橡树','饶恕'],
+    detail:'三次幻灭铸成他：宫廷的虚伪、奥斯特里茨的“伟人”、歌剧院之夜的爱情破产。1812 年他重新披挂，博罗金诺重伤，临终的饶恕是他一生最伟大的战役——不向世界证明什么，而与它和解。' },
+  { id:'natasha', name:'娜塔莎·罗斯托娃', ru:'Наташа Ростова', group:'rost', role:'生命力本身',
+    desc:'罗斯托夫家的小女儿。会唱歌、会跳舞、能把整座房子的生气都点着——也会犯错。',
+    tags:['命名日','舞蹈','悔悟','母亲'],
+    detail:'从十三岁的孩子到几乎毁掉一切的姑娘，再到病榻前的看护和皮埃尔的妻子——她是全书“生活本身”的化身。托尔斯泰不让她的错误比她的生命力更高：让错误与活力来自同一处，不做作地活着，再在承担里长大。' },
+  { id:'marya', name:'玛丽亚·鲍尔康斯卡娅', ru:'Мария Болконская', group:'bolk', role:'隐忍的信仰者',
+    desc:'安德烈的妹妹。相貌平凡，目光里有光；在父亲的严苛与自己的信仰之间长出惊人的坚定。',
+    tags:['老宅','信仰','宽厚'],
+    detail:'她对曾搅碎兄长婚约的娜塔莎的宽恕，是全书最温柔的一幕。嫁给尼古拉后，她把鲍尔康斯基家的严厉改造成罗斯托夫式的热腾腾——贵族之家在她手里重新长出人味。' },
+  { id:'nikolai', name:'尼古拉·罗斯托夫', ru:'Николай Ростов', group:'rost', role:'从骑兵到地主',
+    desc:'罗斯托夫家的长子。热血、直率、不会算账；从骑兵团的少尉成长为持家的男主人。',
+    tags:['从军','猎狼','还债'],
+    detail:'他在申格拉本吓破胆，又在博罗金诺前学会打仗；他砍过法国人，也扛着家族的债。娶了玛丽亚后还清祖辈欠账——托尔斯泰给“普通人”记下的功勋：不是英雄主义，而是把日子过正。' },
+  { id:'sonya', name:'索尼娅', ru:'Соня', group:'rost', role:'守在原地的爱',
+    desc:'罗斯托夫家收养的穷表亲。爱尼古拉，爱了整本书。',
+    tags:['表妹','守候','牺牲者'],
+    detail:'她拒绝多洛霍夫的求婚、为尼古拉守身，却在尾声被作者“轻轻放下”。托尔斯泰借她的结局说了一个残酷的道理：无私的爱未必有回响——人的幸福，有时需要一点点“自私”。' },
+  { id:'kutuzov', name:'库图佐夫', ru:'М. И. Кутузов', group:'hist', role:'顺应历史的人',
+    desc:'俄军统帅，独眼、迟缓、爱打瞌睡。他不逞英雄，却赢得了 1812。',
+    tags:['1812','等待','顺流'],
+    detail:'托尔斯泰把他写成历史哲学的化身：他知道个人意志改变不了千万人的合力，于是只做该做的——等待、判断时机、把官兵当人。博罗金诺之后没有庆功，只有对士兵的体恤：他最先懂得，这仗要靠“耐心与时间”打赢。' },
+  { id:'napoleon', name:'拿破仑', ru:'Napoléon Bonaparte', group:'hist', role:'被拆穿的“伟人”',
+    desc:'法兰西皇帝，半个欧洲的主人。在托尔斯泰笔下，他自信地扮演历史偶像，却什么也没能指挥。',
+    tags:['舞台感','反讽','演员'],
+    detail:'从奥斯特里茨的清晨到莫斯科的空城，托尔斯泰让他一次次自问自答、自我感动——“历史伟人”的神话被抽空：他不是历史的推动者，只是被推着走的台前演员。全书最大的反讽戏份，都分给了他。' },
+  { id:'helene', name:'海伦·库拉金娜', ru:'Элен Курагина', group:'bezu', role:'没有灵魂的优雅',
+    desc:'皮埃尔的妻子。全彼得堡公认的美人，也是全书最冷的房间。',
+    tags:['美貌','沙龙','空洞'],
+    detail:'她的婚姻是父亲布下的局，她的沙龙是浮华的尖顶。没有一封情书、一滴眼泪，她照样体面地活——托尔斯泰用她写尽上流社会的“大理石之美”。她的死只占一行的消息，像她这个人：华美，无人痛惜。' },
+  { id:'dolokhov', name:'多洛霍夫', ru:'Долохов', group:'bezu', role:'赌徒与军官',
+    desc:'军官兼赌徒，冷酷、精准、无所顾忌。搅动皮埃尔的婚姻，也输光过牌桌上的体面。',
+    tags:['决斗','赌牌','复仇'],
+    detail:'他向索尼娅求婚被拒，便在牌桌上从尼古拉手里赢走四万三千卢布；他挑起与皮埃尔的决斗，又中枪倒下。他把生活当牌局——库拉金式的“聪明人”里最危险的一个，却在 1812 年打得很勇敢：托尔斯泰连反派的账都算得诚实。' },
+  { id:'oldbolk', name:'老鲍尔康斯基公爵', ru:'Старый князь Болконский', group:'bolk', role:'退休的暴君',
+    desc:'退休的老公爵，严厉、刻薄、时钟一样精确，把全家管成营房。',
+    tags:['老宅','时钟','骄傲'],
+    detail:'他反对安德烈的婚事，以羞辱女儿为“爱”的方式；临终却抓着玛丽亚的手不放。这个叶卡捷琳娜时代最后的贵族是个丑角也是悲剧：他把骄傲活成了牢房，连钥匙都吞了下去。' },
+  { id:'karataev', name:'普拉东·卡拉塔耶夫', ru:'Платон Каратаев', group:'people', role:'皮埃尔的老师',
+    desc:'普通士兵，说话圆圆的像滚石子。战俘营里，他教皮埃尔“怎样活着”。',
+    tags:['士兵','大地','鸟鸣'],
+    detail:'他记不清自己的过去，不恨任何人，对狗、对法国兵一样温柔；说话永远绕圈子，意思要在全部话音落下时才出现。法军溃退时他被枪杀——皮埃尔失去的不是朋友，是一面照出生活本来的样子的镜子。他是“人民的思想”最纯粹的化身。' }
+];
+
+const QUOTES = [
+  { text:'嗯，公爵，热那亚和卢卡如今不过是波拿巴家的领地了。', src:'安娜·帕夫洛娜的沙龙 · 第一部 开篇（转述）', note:'以一句客厅闲话开场——整部史诗，始于上流社会的一杯茶。' },
+  { text:'多么寂静，多么安详，多么庄严。除了这片天空，一切都是空虚和欺骗。', src:'安德烈 · 奥斯特里茨战场上（转述）', note:'全书的第一道裂缝：当功业的天平倒下，天空第一次完整地显形。' },
+  { text:'不，生活在三十岁并没有结束……橡树都换了新叶，我也应该如此。', src:'安德烈 · 途经奥特拉德诺耶（转述）', note:'从“虚空”到“重新开始”——托尔斯泰用一棵树完成了一章哲学。' },
+  { text:'他们烤面包、熬汤、抬炮——战争的全部事业，是由这些人默默完成的。', src:'皮埃尔在拉耶夫斯基炮台（转述）', note:'炮台上的一碗糙米饭，胜过司令部的所有地图：历史的完成者是普通人。' },
+  { text:'人民战争的棍子带着全部的威力举了起来，直到把侵略者全部赶出去。', src:'第四部（转述）', note:'托尔斯泰给 1812 年的定义：不是两次会战的胜负，而是一个民族被逼到墙角后的反应。' },
+  { text:'他说话大多绕圈子，像鸟儿鸣叫——意思要在全部话音落下时才浮现。', src:'皮埃尔听卡拉塔耶夫说话（转述）', note:'生活的真理不取直线路径——这个士兵成了全书的精神坐标。' },
+  { text:'历史的动力不是英雄的意志，而是千万个微小意志的总和。', src:'尾声二（转述）', note:'整部小说的总结算：把“伟人史”换算成“合力史”，是这本书埋得最深的论点。' },
+  { text:'父亲……我也要做一番配得上他们的事业。', src:'尾声一 · 安德烈之子尼科连卡（转述）', note:'全书最后一个动作不是结局而是接力——新一代从旧的荣光里站起来。' }
+];
+
+/* ================= HELPERS ================= */
+const $ = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+
+/* ================= NAV ================= */
+$$('.nav-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const el = document.getElementById(tab.dataset.section);
+    if (el) {
+      const y = el.getBoundingClientRect().top + window.pageYOffset - 56;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  });
+});
+function setupScrollspy() {
+  const tabs = $$('.nav-tab');
+  const secs = tabs.map(t => document.getElementById(t.dataset.section)).filter(Boolean);
+  const onScroll = () => {
+    const pos = window.scrollY + 140;
+    let cur = secs[0];
+    for (const s of secs) { if (s.offsetTop <= pos) cur = s; }
+    tabs.forEach(t => t.classList.toggle('active', t.dataset.section === cur.id));
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+}
+
+/* ================= FADE IN ================= */
+function setupFadeIn() {
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: .06 });
+  $$('.fade-in').forEach(el => io.observe(el));
+}
+
+/* ================= TIMELINE ================= */
+function setupTimeline() {
+  $$('.t-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const open = item.classList.toggle('open');
+      const d = item.querySelector('.t-detail');
+      d.style.maxHeight = open ? d.scrollHeight + 'px' : '0px';
+    });
+  });
+}
+
+/* ================= CHARACTERS ================= */
+function setupCharacters() {
+  const grid = $('#charGrid');
+  const fRow = $('#charFilters');
+  const cats = [['all', '全部'], ...Object.entries(GROUPS).map(([k, g]) => [k, g.name])];
+  cats.forEach(([k, label], i) => {
+    const chip = document.createElement('div');
+    chip.className = 'filter-chip' + (i === 0 ? ' active' : '');
+    chip.textContent = label;
+    chip.dataset.k = k;
+    chip.addEventListener('click', () => {
+      $$('.filter-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      $$('.char-card').forEach(card => {
+        card.classList.toggle('hidden', k !== 'all' && card.dataset.group !== k);
+      });
+    });
+    fRow.appendChild(chip);
+  });
+
+  CHARACTERS.forEach(c => {
+    const g = GROUPS[c.group];
+    const card = document.createElement('div');
+    card.className = 'char-card';
+    card.dataset.group = c.group;
+    card.style.setProperty('--gc', g.color);
+    card.innerHTML =
+      '<div class="c-name">' + c.name + '</div>' +
+      '<div class="c-ru">' + c.ru + '</div>' +
+      '<div class="c-desc">' + c.desc + '</div>' +
+      '<div class="c-tags">' + c.tags.map(t => '<span class="c-tag">' + t + '</span>').join('') + '</div>';
+    card.addEventListener('click', () => openModal(c));
+    grid.appendChild(card);
+  });
+}
+function openModal(c) {
+  const g = GROUPS[c.group];
+  const mask = $('#modalMask');
+  $('#mName').textContent = c.name;
+  $('#mRu').textContent = c.ru;
+  const role = $('#mRole'); role.textContent = c.role + ' · ' + g.name; role.style.color = g.color; role.style.background = g.color + '14';
+  $('#mBody').textContent = c.detail;
+  $('#modalBox').style.borderTopColor = g.color;
+  mask.classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  $('#modalMask').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+/* ================= QUOTES ================= */
+let qIdx = 0, qTimer = null;
+function setupQuotes() {
+  const track = $('#qTrack');
+  QUOTES.forEach((q, i) => {
+    const s = document.createElement('div');
+    s.className = 'q-slide';
+    s.innerHTML = '<div class="q-mark">❝</div><div class="q-text">' + q.text + '</div>' +
+      '<div class="q-src">' + q.src + '</div><div class="q-note">' + q.note + '</div>';
+    track.appendChild(s);
+    const d = document.createElement('div');
+    d.className = 'q-dot' + (i === 0 ? ' active' : '');
+    d.addEventListener('click', () => goQuote(i, true));
+    $('#qDots').appendChild(d);
+  });
+  $('#qPrev').addEventListener('click', () => goQuote((qIdx - 1 + QUOTES.length) % QUOTES.length, true));
+  $('#qNext').addEventListener('click', () => goQuote((qIdx + 1) % QUOTES.length, true));
+  startQuoteAuto();
+  const shell = $('.quote-shell');
+  shell.addEventListener('mouseenter', stopQuoteAuto);
+  shell.addEventListener('mouseleave', startQuoteAuto);
+}
+function goQuote(i, manual) {
+  qIdx = i;
+  $('#qTrack').style.transform = 'translateX(-' + i * 100 + '%)';
+  $$('.q-dot').forEach((d, j) => d.classList.toggle('active', j === i));
+  if (manual) { stopQuoteAuto(); startQuoteAuto(); }
+}
+function startQuoteAuto() { stopQuoteAuto(); qTimer = setInterval(() => goQuote((qIdx + 1) % QUOTES.length), 6500); }
+function stopQuoteAuto() { if (qTimer) { clearInterval(qTimer); qTimer = null; } }
+
+/* ================= INIT ================= */
+document.addEventListener('DOMContentLoaded', () => {
+  setupCharacters();
+  setupTimeline();
+  setupQuotes();
+  setupFadeIn();
+  setupScrollspy();
+  $('#modalClose').addEventListener('click', closeModal);
+  $('#modalMask').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+});
+</script>
+
+<!-- modal -->
+<div class="modal-mask" id="modalMask">
+  <div class="modal-box" id="modalBox">
+    <button class="modal-close" id="modalClose" aria-label="关闭">×</button>
+    <h3 id="mName"></h3>
+    <div class="m-ru" id="mRu"></div>
+    <span class="m-role" id="mRole"></span>
+    <div class="m-body" id="mBody"></div>
+  </div>
+</div>
+
+</body>
+</html>
