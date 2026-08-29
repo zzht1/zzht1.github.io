@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="费兰特《失踪的孩子》（那不勒斯四部曲第四部·完结卷）深度导读：五幕脉络细讲、人物小传、核心主题、名句、译本与 HBO 剧集、阅读指南。">
+<title>失踪的孩子 · 那不勒斯四部曲之四 — zzht</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f0eee7; --paper:#f9f7f0; --paper-deep:#f1eee4;
+  --ink:#231f1a; --ink-soft:#554f47; --ink-faint:#908a7d;
+  --line:#dcd6c8;
+  --acc:#4d4a45;            /* 本卷主题色：火山灰 */
+  --acc2:#2f2b26;           /* 渐变搭档：炭灰 */
+  --acc-contrast:#f5f3ee;
+  --serif:'Noto Serif SC','STSong','SimSun',serif;
+  --sans:'Noto Sans SC',-apple-system,BlinkMacSystemFont,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);color:var(--ink);line-height:1.8;overflow-x:hidden;
+  background-color:var(--bg);
+  /* 落下来的火山灰细点：老年街区的空气（同一街区 · 第四卷的季节） */
+  background-image:
+    radial-gradient(color-mix(in srgb,#3a362f 13%,transparent) 1px,transparent 1.4px),
+    linear-gradient(180deg,color-mix(in srgb,var(--acc) 5%,transparent) 0,transparent 520px);
+  background-size:26px 26px,auto;
+  background-repeat:repeat,no-repeat;
+}
+/* 极淡的灰墙水渍 */
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:repeating-linear-gradient(0deg,transparent 0,transparent 4px,rgba(90,85,70,.013) 4px,rgba(90,85,70,.013) 5px);}
+::selection{background:color-mix(in srgb,var(--acc) 16%,transparent)}
+.back-home{position:fixed;top:18px;left:20px;z-index:120;font-size:.85rem;color:var(--ink-soft);text-decoration:none;
+  padding:7px 14px;border-radius:999px;background:rgba(249,247,240,.95);border:1px solid var(--line);transition:all .25s}
+.back-home:hover{color:var(--acc);border-color:var(--acc);transform:translateX(-2px)}
+
+/* ===== HERO ===== */
+.hero{min-height:94vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
+  padding:14vh 24px 8vh;position:relative;
+  background:radial-gradient(ellipse 75% 40% at 50% -5%,color-mix(in srgb,var(--acc) 17%,transparent),transparent 62%),
+    linear-gradient(180deg,var(--paper) 0%,var(--bg) 78%);}
+.hero-wm{position:absolute;top:12%;left:50%;transform:translateX(-50%);font-family:var(--serif);font-style:italic;
+  font-size:clamp(2rem,6.6vw,4.8rem);letter-spacing:.02em;white-space:nowrap;
+  color:color-mix(in srgb,var(--acc) 12%,transparent);pointer-events:none;user-select:none}
+.hero-eyebrow{font-size:.8rem;letter-spacing:.34em;color:var(--ink-soft);margin-bottom:22px;font-weight:400;position:relative}
+.hero h1{font-family:var(--serif);font-size:clamp(3.2rem,10vw,6.4rem);font-weight:900;letter-spacing:.12em;line-height:1.12;color:var(--ink);position:relative}
+.hero-it{font-family:var(--serif);font-size:clamp(1rem,2.6vw,1.28rem);color:var(--acc);letter-spacing:.18em;margin-top:14px;font-style:italic;position:relative}
+.hero-sub{margin-top:18px;color:var(--ink-soft);font-size:.97rem;font-weight:300;letter-spacing:.06em;position:relative}
+.hero-divider{display:flex;align-items:center;gap:18px;margin:30px auto;position:relative}
+.hero-divider::before,.hero-divider::after{content:'';width:78px;height:1px}
+.hero-divider::before{background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--acc) 60%,transparent))}
+.hero-divider::after{background:linear-gradient(270deg,transparent,color-mix(in srgb,var(--acc) 60%,transparent))}
+.hero-quote{max-width:560px;font-family:var(--serif);font-size:1.06rem;color:var(--ink-soft);line-height:2;position:relative}
+.hero-quote .src{display:block;margin-top:10px;font-size:.85rem;color:var(--ink-faint)}
+.hero-meta{display:flex;flex-wrap:wrap;justify-content:center;gap:14px 46px;margin-top:48px;position:relative}
+.hero-meta-item{text-align:center;min-width:70px}
+.hero-meta-item .value{display:block;font-family:var(--serif);font-weight:900;font-size:1.7rem;color:var(--acc);line-height:1.2}
+.hero-meta-item .label{font-size:.78rem;color:var(--ink-faint);letter-spacing:.12em}
+.scroll-hint{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);font-size:.78rem;color:var(--ink-faint);cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;gap:4px;letter-spacing:.2em;user-select:none}
+.scroll-hint .arrow{animation:bob 1.8s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+
+/* ===== NAV ===== */
+.nav-bar{position:sticky;top:0;z-index:100;background:rgba(240,238,231,.96);border-bottom:1px solid var(--line)}
+.nav-inner{max-width:1000px;margin:0 auto;display:flex;overflow-x:auto;scrollbar-width:none;padding:0 12px}
+.nav-inner::-webkit-scrollbar{display:none}
+.nav-tab{flex:0 0 auto;padding:15px 18px;cursor:pointer;font-size:.9rem;color:var(--ink-soft);letter-spacing:.06em;
+  position:relative;transition:color .25s;white-space:nowrap;user-select:none}
+.nav-tab::after{content:'';position:absolute;left:18px;right:18px;bottom:0;height:2px;border-radius:2px;
+  background:linear-gradient(90deg,var(--acc),var(--acc2));transform:scaleX(0);transition:transform .3s}
+.nav-tab:hover{color:var(--ink)}
+.nav-tab.active{color:var(--acc2);font-weight:500}
+.nav-tab.active::after{transform:scaleX(1)}
+
+/* ===== SECTIONS ===== */
+.section{max-width:1000px;margin:0 auto;padding:90px 24px 10px;position:relative;z-index:1}
+.section.wide{max-width:1060px}
+.section-title{font-family:var(--serif);font-size:clamp(1.7rem,4vw,2.3rem);font-weight:900;letter-spacing:.08em;color:var(--ink)}
+.section-title::after{content:'';display:block;width:76px;height:3px;margin-top:14px;border-radius:2px;
+  background:linear-gradient(90deg,var(--acc),var(--acc2),transparent)}
+.section-desc{margin-top:20px;color:var(--ink-soft);max-width:720px;font-size:.98rem;line-height:2}
+.fade-in{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+
+/* ===== OVERVIEW ===== */
+.ov-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:40px;margin-top:40px;align-items:start}
+.ov-prose p{margin-bottom:16px;color:var(--ink-soft);font-size:.97rem;line-height:2.05}
+.ov-prose p strong{color:var(--ink);font-weight:600}
+.ov-prose .lede{font-family:var(--serif);font-size:1.12rem;color:var(--ink);line-height:2.1}
+.ov-prose .lede::first-letter{font-size:2.6em;float:left;line-height:1;padding-right:.12em;color:var(--acc);font-weight:900}
+.ov-panel{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:30px 28px;box-shadow:0 10px 24px rgba(70,60,40,.07)}
+.ov-panel h3{font-family:var(--serif);font-size:1.05rem;font-weight:700;letter-spacing:.08em;color:var(--acc2);margin-bottom:16px}
+.bg-list{list-style:none}
+.bg-list li{position:relative;padding:10px 0 10px 22px;font-size:.88rem;color:var(--ink-soft);line-height:1.8;border-bottom:1px dashed var(--line)}
+.bg-list li:last-child{border-bottom:none}
+.bg-list li::before{content:'';position:absolute;left:2px;top:19px;width:7px;height:7px;border-radius:50%;
+  background:linear-gradient(135deg,var(--acc),var(--acc2))}
+.bg-list li b{color:var(--ink);font-weight:600}
+.room-note{margin-top:16px;padding-top:12px;border-top:1px dashed var(--line);font-size:.8rem;color:var(--ink-faint);font-style:italic;line-height:1.8}
+.stat-strip{display:flex;flex-wrap:wrap;gap:0;margin-top:44px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stat{flex:1 1 auto;min-width:150px;text-align:center;padding:26px 16px}
+.stat + .stat{border-left:1px dashed var(--line)}
+.stat .num{font-family:var(--serif);font-size:1.9rem;font-weight:900;color:var(--acc);line-height:1.2}
+.stat .cap{font-size:.8rem;color:var(--ink-faint);letter-spacing:.08em;margin-top:6px}
+
+/* ===== STORY：五幕手风琴 ===== */
+.phase{margin-top:52px;padding-top:24px;border-top:1px solid color-mix(in srgb,var(--ink) 16%,transparent)}
+.phase-head{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap}
+.phase-num{font-family:var(--serif);font-size:2rem;font-weight:900;
+  background:linear-gradient(135deg,var(--acc),var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1}
+.phase-head h3{font-family:var(--serif);font-size:1.25rem;font-weight:700;letter-spacing:.05em}
+.phase-head .ref{font-size:.8rem;color:var(--ink-faint);letter-spacing:.05em}
+.phase-items{margin-top:20px;margin-left:13px;border-left:2px solid color-mix(in srgb,var(--acc) 50%,transparent);padding-left:26px}
+.t-item{position:relative;border-radius:18px;padding:14px 18px;margin-bottom:10px;cursor:pointer;transition:background .25s}
+.t-item:hover{background:var(--paper-deep)}
+.t-item::before{content:'';position:absolute;left:-33px;top:24px;width:10px;height:10px;border-radius:50%;
+  background:var(--bg);border:2.5px solid var(--acc);transition:background .25s}
+.t-item.open::before{background:var(--acc)}
+.t-item-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.t-item-head h4{font-size:1rem;font-weight:600;font-family:var(--serif);letter-spacing:.03em}
+.t-ref{font-size:.72rem;color:var(--acc2);background:color-mix(in srgb,var(--acc) 10%,transparent);
+  padding:2px 10px;border-radius:999px;letter-spacing:.04em;white-space:nowrap}
+.t-toggle{margin-left:auto;color:var(--ink-faint);font-size:.85rem;transition:transform .3s}
+.t-item.open .t-toggle{transform:rotate(180deg)}
+.t-detail{max-height:0;overflow:hidden;transition:max-height .45s ease}
+.t-detail p{padding-top:10px;font-size:.9rem;color:var(--ink-soft);line-height:1.95;max-width:680px}
+
+/* ===== CHARACTERS ===== */
+.filter-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:32px}
+.filter-chip{padding:8px 18px;border-radius:999px;cursor:pointer;font-size:.85rem;color:var(--ink-soft);
+  background:var(--paper);border:1px solid var(--line);transition:all .25s;user-select:none}
+.filter-chip:hover{transform:translateY(-2px);color:var(--ink)}
+.filter-chip.active{background:linear-gradient(135deg,var(--acc),var(--acc2));color:var(--acc-contrast);border-color:transparent}
+.char-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:20px;margin-top:30px}
+.char-card{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:22px 22px 20px;cursor:pointer;
+  position:relative;overflow:hidden;transition:transform .3s cubic-bezier(.34,1.4,.5,1),box-shadow .3s,border-color .3s}
+.char-card::before{content:'';position:absolute;top:0;left:22px;right:22px;height:3px;border-radius:0 0 4px 4px;
+  background:linear-gradient(90deg,var(--gc,var(--acc)),transparent);opacity:.85}
+.char-card:hover{transform:translateY(-5px);box-shadow:0 14px 30px rgba(70,60,40,.14);border-color:var(--gc,var(--acc))}
+.char-card .c-name{font-family:var(--serif);font-size:1.12rem;font-weight:700}
+.char-card .c-ru{font-size:.76rem;color:var(--ink-faint);margin-top:3px;font-style:italic;letter-spacing:.02em}
+.char-card .c-desc{font-size:.85rem;color:var(--ink-soft);margin-top:12px;line-height:1.8}
+.char-card .c-tags{margin-top:14px;display:flex;flex-wrap:wrap;gap:6px}
+.c-tag{font-size:.7rem;padding:3px 10px;border-radius:999px;color:var(--gc,var(--acc));
+  background:color-mix(in srgb,var(--gc,var(--acc)) 10%,var(--paper));
+  border:1px solid color-mix(in srgb,var(--gc,var(--acc)) 28%,var(--paper))}
+.char-card.hidden{display:none}
+.modal-mask{position:fixed;inset:0;z-index:200;background:rgba(35,31,26,.5);display:flex;align-items:center;justify-content:center;
+  padding:24px;opacity:0;pointer-events:none;transition:opacity .3s}
+.modal-mask.show{opacity:1;pointer-events:auto}
+.modal-box{background:var(--paper);border-radius:24px;max-width:560px;width:100%;max-height:82vh;overflow-y:auto;
+  padding:36px 34px;position:relative;transform:translateY(18px);transition:transform .3s;border-top:4px solid var(--acc)}
+.modal-mask.show .modal-box{transform:translateY(0)}
+.modal-close{position:absolute;top:16px;right:20px;cursor:pointer;font-size:1.3rem;color:var(--ink-faint);background:none;border:none;transition:color .2s;line-height:1}
+.modal-close:hover{color:var(--acc2)}
+.modal-box h3{font-family:var(--serif);font-size:1.5rem;font-weight:900}
+.modal-box .m-ru{font-style:italic;color:var(--ink-faint);font-size:.88rem;margin-top:4px}
+.modal-box .m-role{display:inline-block;margin-top:12px;font-size:.76rem;letter-spacing:.06em;color:var(--acc2);
+  background:color-mix(in srgb,var(--acc) 10%,transparent);padding:4px 14px;border-radius:999px}
+.modal-box .m-body{margin-top:16px;font-size:.93rem;color:var(--ink-soft);line-height:2.05}
+
+/* ===== THEMES ===== */
+.theme-block{display:grid;grid-template-columns:220px 1fr;gap:34px;padding:42px 0;align-items:start}
+.theme-side{position:sticky;top:84px}
+.theme-no{font-family:var(--serif);font-weight:900;font-size:1.05rem;letter-spacing:.2em;color:var(--acc2)}
+.theme-side h3{font-family:var(--serif);font-size:1.3rem;font-weight:900;margin-top:8px;line-height:1.5}
+.theme-side .t-en{font-size:.78rem;color:var(--ink-faint);font-style:italic;margin-top:4px;letter-spacing:.03em}
+.theme-body p{color:var(--ink-soft);font-size:.94rem;line-height:2.05;margin-bottom:14px;max-width:640px}
+.theme-body p b{color:var(--ink);font-weight:600}
+.theme-key{display:inline-block;margin-top:4px;margin-right:8px;margin-bottom:6px;font-size:.74rem;color:var(--acc2);letter-spacing:.05em;
+  padding:3px 12px;border-radius:999px;border:1px solid color-mix(in srgb,var(--acc) 36%,transparent);
+  background:color-mix(in srgb,var(--acc) 8%,transparent)}
+.theme-sep{height:1px;border:none;background:linear-gradient(90deg,transparent,var(--line) 25%,var(--line) 75%,transparent)}
+
+/* ===== QUOTES：灰烬与退场 ===== */
+.quote-shell{margin-top:38px;position:relative}
+.quote-viewport{overflow:hidden;border-radius:24px}
+.quote-track{display:flex;transition:transform .6s cubic-bezier(.4,0,.2,1)}
+.q-slide{flex:0 0 100%;padding:50px 8%;text-align:center;
+  background:radial-gradient(ellipse 70% 60% at 50% 8%,rgba(163,156,142,.14),transparent 62%),#171513;
+  border:1px solid #34302a;border-radius:24px}
+.q-mark{font-family:var(--serif);font-size:2.6rem;color:#a39c8e;line-height:1}
+.q-text{font-family:var(--serif);font-size:clamp(1.05rem,2.6vw,1.35rem);line-height:2.1;color:#e4ded2;margin-top:12px}
+.q-src{margin-top:18px;font-size:.85rem;color:#a39c8e;letter-spacing:.06em}
+.q-note{margin-top:8px;font-size:.82rem;color:#8d867a;max-width:520px;margin-left:auto;margin-right:auto;line-height:1.8}
+.quote-nav{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;
+  background:var(--paper);border:1px solid var(--line);color:var(--ink-soft);font-size:1.1rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:all .25s;z-index:5}
+.quote-nav:hover{color:var(--acc2);border-color:var(--acc2);transform:translateY(-50%) scale(1.08)}
+.quote-nav.prev{left:-14px}
+.quote-nav.next{right:-14px}
+.quote-dots{display:flex;justify-content:center;gap:9px;margin-top:22px}
+.q-dot{width:8px;height:8px;border-radius:50%;background:var(--line);cursor:pointer;transition:all .3s}
+.q-dot.active{background:var(--acc);transform:scale(1.25)}
+
+/* ===== VERSIONS & LEGACY ===== */
+.dual-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:38px}
+.v-panel{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:28px 26px;box-shadow:0 10px 24px rgba(70,60,40,.07)}
+.v-panel h3{font-family:var(--serif);font-size:1.1rem;font-weight:700;letter-spacing:.06em;margin-bottom:6px}
+.v-panel .v-sub{font-size:.8rem;color:var(--ink-faint);margin-bottom:18px}
+.v-row{padding:14px 0;border-bottom:1px dashed var(--line);font-size:.88rem;color:var(--ink-soft);line-height:1.8}
+.v-row:last-child{border-bottom:none}
+.v-row b{color:var(--ink);font-weight:600}
+.v-row .v-year{font-family:var(--serif);color:var(--acc2);font-weight:700;margin-right:10px}
+.v-rec{margin-top:14px;font-size:.82rem;color:var(--acc2);background:color-mix(in srgb,var(--acc) 10%,transparent);
+  border-radius:12px;padding:10px 14px;line-height:1.7}
+.legacy-list{margin-top:34px}
+.legacy-item{display:grid;grid-template-columns:150px 1fr;gap:20px;padding:22px 0;border-bottom:1px dashed var(--line)}
+.legacy-item:last-child{border-bottom:none}
+.legacy-item .l-name{font-family:var(--serif);font-weight:700;font-size:1rem;color:var(--ink)}
+.legacy-item .l-name span{display:block;font-size:.75rem;color:var(--ink-faint);font-weight:400;margin-top:3px;font-style:italic}
+.legacy-item .l-desc{font-size:.9rem;color:var(--ink-soft);line-height:1.95}
+
+/* ===== READING ===== */
+.read-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;margin-top:36px}
+.read-card{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:28px 26px;
+  transition:transform .3s,box-shadow .3s;box-shadow:0 6px 16px rgba(70,60,40,.05)}
+.read-card:hover{transform:translateY(-4px);box-shadow:0 12px 26px rgba(70,60,40,.12)}
+.read-card h3{font-family:var(--serif);font-size:1.02rem;font-weight:700;margin-bottom:12px;color:var(--acc2)}
+.read-card p{font-size:.88rem;color:var(--ink-soft);line-height:1.95}
+.read-card p b{color:var(--ink)}
+.read-card ul{list-style:none;margin-top:8px}
+.read-card li{font-size:.88rem;color:var(--ink-soft);line-height:1.9;padding-left:18px;position:relative;margin-bottom:6px}
+.read-card li::before{content:'';position:absolute;left:2px;top:12px;width:6px;height:6px;border-radius:50%;background:var(--acc)}
+
+/* footer */
+.site-footer{max-width:1000px;margin:90px auto 0;padding:26px 24px 46px;border-top:1px solid var(--line);
+  font-size:.82rem;color:var(--ink-faint);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;position:relative;z-index:1}
+.site-footer a{color:var(--ink-soft);text-decoration:none;transition:color .2s}
+.site-footer a:hover{color:var(--acc2)}
+.foot-mark{display:inline-flex;align-items:center;gap:9px}
+
+/* responsive */
+@media (max-width:820px){
+  .ov-grid{grid-template-columns:1fr}
+  .dual-grid{grid-template-columns:1fr}
+  .theme-block{grid-template-columns:1fr;gap:14px}
+  .theme-side{position:static}
+  .legacy-item{grid-template-columns:1fr;gap:6px}
+  .quote-nav.prev{left:6px}.quote-nav.next{right:6px}
+  .q-slide{padding:42px 7%}
+}
+@media (max-width:520px){
+  .section{padding-top:66px}
+  .hero{min-height:88vh;padding-top:16vh}
+  .hero-wm{font-size:1.7rem}
+  .hero-meta{gap:12px 26px}
+  .stat{min-width:120px;padding:18px 8px}
+}
+</style>
+</head>
+<body>
+
+<a href="neapolitan.html" class="back-home">← 那不勒斯四部曲</a>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="top">
+  <span class="hero-wm" aria-hidden="true">Storia della bambina perduta</span>
+  <div class="hero-eyebrow">那不勒斯四部曲 · 第四部 · 2014 · 完结卷</div>
+  <h1>失踪的孩子</h1>
+  <div class="hero-it">Storia della bambina perduta · Elena Ferrante</div>
+  <div class="hero-sub">布娃娃寄回来了，她决定消失了</div>
+  <div class="hero-divider">
+    <svg viewBox="0 0 84 46" width="66" height="36" fill="none" aria-hidden="true">
+      <g stroke="#4d4a45" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 40 L38 12 L46 12 L66 40"/>
+        <path d="M42 10 C40 6 46 4 44 1"/>
+      </g>
+      <g fill="#6b655c" opacity=".55">
+        <circle cx="30" cy="8" r="1.2"/><circle cx="52" cy="6" r="1.4"/><circle cx="58" cy="12" r="1.1"/><circle cx="24" cy="14" r="1"/>
+      </g>
+    </svg>
+  </div>
+  <blockquote class="hero-quote">
+    「布娃娃寄回来了——我知道，她要从一切痕迹里退场了。」
+    <span class="src">— 结尾（转述）</span>
+  </blockquote>
+  <div class="hero-meta">
+    <div class="hero-meta-item"><span class="value">第四部</span><span class="label">部次 · 完结</span></div>
+    <div class="hero-meta-item"><span class="value">2014</span><span class="label">出版</span></div>
+    <div class="hero-meta-item"><span class="value">中年到老年</span><span class="label">写到哪里</span></div>
+    <div class="hero-meta-item"><span class="value">1次</span><span class="label">失踪</span></div>
+  </div>
+  <div class="scroll-hint" onclick="document.getElementById('content').scrollIntoView({behavior:'smooth'})">
+    <span>向下探索</span><span class="arrow">↓</span>
+  </div>
+</section>
+
+<!-- ===== NAV ===== -->
+<nav class="nav-bar" id="content">
+  <div class="nav-inner">
+    <div class="nav-tab active" data-section="overview">概览</div>
+    <div class="nav-tab" data-section="story">脉络</div>
+    <div class="nav-tab" data-section="characters">人物</div>
+    <div class="nav-tab" data-section="themes">主题</div>
+    <div class="nav-tab" data-section="quotes">名句</div>
+    <div class="nav-tab" data-section="versions">与前后卷</div>
+    <div class="nav-tab" data-section="reading">阅读指南</div>
+  </div>
+</nav>
+
+<!-- ===== OVERVIEW ===== -->
+<section class="section fade-in" id="overview">
+  <h2 class="section-title">关于这一卷</h2>
+  <div class="ov-grid">
+    <div class="ov-prose">
+      <p class="lede">莱农带着三个女儿回到街区，住进莉拉家所在的楼里，楼上楼下。五十年的友谊重新同城：白天互相拉扯，夜里互相托底。然后是那场所有人都无法挽回的失踪——三岁的蒂娜，在沙滩上，像当年那只布娃娃一样，掉进了世界的裂缝。</p>
+      <p>《失踪的孩子》是完结卷，时间跨度最大：回到街区的岁月、1980 年的大地震、母职与更年期的下半场、莉拉的编程公司、接二连三的死亡，直到结尾那只没有署名的包裹——<strong>两只布娃娃被寄了回来，莉拉从一切痕迹里退场</strong>。</p>
+      <p>费兰特在这里完成环形结构：寻找失踪的孩子，从第一卷第一章的电话就开始了；而「失踪」在本书里层层加深——布娃娃、蒂娜、恩佐的爱、名字，最后是莉拉本人。这不是悲剧的收场，是四部曲里唯一一卷「由她们自己」收场的故事。</p>
+    </div>
+    <div class="ov-panel">
+      <h3>本卷的位置</h3>
+      <ul class="bg-list">
+        <li><b>在四部曲中的位置</b>：第四部 · 完结卷（1970 年代末—2000 年代），四部曲在此合拢。</li>
+        <li><b>承接</b>：第三部卷末的同居决定与位置互换——本卷逐月兑付。</li>
+        <li><b>开启</b>：1980 地震、蒂娜、编程公司、布娃娃的归来——所有第一卷的种子在本卷结果。</li>
+        <li><b>终结</b>：莉拉退场，四部曲合成一个圈——回到 neapolitan.html 重读「底色」六条，会完全不同。</li>
+        <li><b>读法提示</b>：不要先翻结尾——布娃娃的包裹必须「等到」才成立。</li>
+      </ul>
+      <div class="room-note">「失踪的孩子」在书里有三层：布娃娃「蒂娜」、莉拉的女儿蒂娜，以及最后消失的莉拉自己。</div>
+    </div>
+  </div>
+  <div class="stat-strip">
+    <div class="stat"><div class="num">3个</div><div class="cap">女儿</div></div>
+    <div class="stat"><div class="num">1个</div><div class="cap">失踪的孩子</div></div>
+    <div class="stat"><div class="num">1980</div><div class="cap">那不勒斯的地震</div></div>
+    <div class="stat"><div class="num">2只</div><div class="cap">归来的布娃娃</div></div>
+    <div class="stat"><div class="num">1次</div><div class="cap">彻底的消失</div></div>
+  </div>
+</section>
+
+<!-- ===== STORY ===== -->
+<section class="section fade-in" id="story">
+  <h2 class="section-title">脉络</h2>
+  <p class="section-desc">五幕，一步步往下讲，点击每一条展开细节。放心读——这套书不怕「剧透」，它怕的是你读太快。</p>
+
+  <div class="phase">
+    <div class="phase-head"><span class="phase-num">Ⅰ</span><h3>回到街区</h3><span class="ref">带着三个女儿</span></div>
+    <div class="phase-items">
+      <div class="t-item"><div class="t-item-head"><h4>带着三个女儿回来</h4><span class="t-ref">回归</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>离开彼得罗、与尼诺的同居崩解之后，莱农搬回街区，住进莉拉家所在的楼里。作家的行李里最重的是三份人生：黛德、艾尔莎、伊玛——两个姓氏的孩子们，从此在同一片灰墙下长大。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>与莉拉同城</h4><span class="t-ref">回归</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>楼上楼下，两个女人重新进入对方的日常：互相借钱、互相拆台、互相托孤。友谊进入最亲密也最危险的形态——没有距离可躲，所有旧账都开始当面清算。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>尼诺的真相</h4><span class="t-ref">同居幻灭</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>同居日子把尼诺一层层剥开：演讲台下的他冷淡、算计、四处留情（细节模糊处理）。莱农终于看见：她爱了一辈子的人，是他父亲的翻版——当年伊斯基亚海边那道光，从头到尾都是滤镜。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>1980 年地震</h4><span class="t-ref">时代</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>大地摇动的那个夜晚，街区赤身站在街上。莉拉与莱农在废墟般的黎明里互相搀扶——维苏威只在远处看了一眼，所有人就都交出了体面。</p></div></div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-head"><span class="phase-num">Ⅱ</span><h3>母职的泥潭</h3><span class="ref">写作与身体</span></div>
+    <div class="phase-items">
+      <div class="t-item"><div class="t-item-head"><h4>写作的碎片</h4><span class="t-ref">母职</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>三个女儿、稿纸、厨房、截稿日。莱农在书桌与灶台之间往返，把一天切成无数个属于别人的小时——母职的簿记一行行记在身体上，第三部开的那本账，在这里结成总账。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>更年期</h4><span class="t-ref">身体</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>身体的下半场不声不响地接管一切：潮热、失眠、记忆的雾。费兰特用从未有过的坦白写这个阶段——它不是衰退的注脚，而是本卷的主战场之一。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>街区的审判</h4><span class="t-ref">写作</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>书出版了，街坊在自己身上认出了她的人物。愤怒、指认、断交——「你把我们写进了书里，问过我们吗」。记录的代价第一次当街结清，而她没有停笔。</p></div></div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-head"><span class="phase-num">Ⅲ</span><h3>蒂娜</h3><span class="ref">失踪的孩子</span></div>
+    <div class="phase-items">
+      <div class="t-item"><div class="t-item-head"><h4>莉拉的公司</h4><span class="t-ref">事业</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>莉拉与恩佐的计算机公司做大了，雇着街区一票年轻人。她成了老板——成了那个当年辍学的女孩的相反结局：只差一点，她本可以不是「裙子里最聪明的人」，而是「时代里最聪明的人」。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>海滩上的失踪</h4><span class="t-ref">转折点</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>三岁的蒂娜在沙滩上不见了。搜寻、报纸、年复一年的等待——没有尸体，没有答案。她叫蒂娜，与当年那只被扔进地下室的布娃娃同名：命运的账本上，这一页早就写好了。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>命运的旧账</h4><span class="t-ref">转折点</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>蒂娜消失后，莉拉的世界重新对齐到童年：界限消失、地下室、失去的东西从不回来。她开始一点一点退出生活——先退出公司，再退出关系，最后退出「莉拉」这个名字。</p></div></div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-head"><span class="phase-num">Ⅳ</span><h3>崩塌</h3><span class="ref">街区的总清算</span></div>
+    <div class="phase-items">
+      <div class="t-item"><div class="t-item-head"><h4>斯特凡诺之死</h4><span class="t-ref">旧权力</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>莉拉合法的丈夫死去，那段从未真正开始的婚姻终于注销。葬礼上的街区像一次旧权力的点验：卡拉奇的时代结束了。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>恩佐与莉拉的裂痕</h4><span class="t-ref">离散</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>恩佐守了她半生，却接不住一个失去孩子的莉拉。他离开了——不激烈、不背叛，只是走开。最忠诚的人也退场了，孤独第一次完全属于她。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>帕斯卡莱归案</h4><span class="t-ref">清算</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>亡命的帕斯卡莱落网入狱。石头战的少年、工厂的组织者、通缉令上的名字——街区政治的账，最后用铁窗结算。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>一场接一场的葬礼</h4><span class="t-ref">清算</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>旧街区接连退场：阿方索横死、吉耀拉自杀（街区的说法各有版本）——灰墙下的老相识一个一个消失，像退潮时露出的礁石。卡拉奇与索拉拉的时代，在葬礼之间散伙。</p></div></div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-head"><span class="phase-num">Ⅴ</span><h3>消失</h3><span class="ref">环形结构的完成</span></div>
+    <div class="phase-items">
+      <div class="t-item"><div class="t-item-head"><h4>布娃娃归来</h4><span class="t-ref">结尾</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>多年后，一个没有署名的包裹寄到莱农手里：蒂娜与诺——两只布娃娃从半个世纪的黑暗里回来，没有一个字。是谁找到的、谁寄的，小说不回答；莱农只读出了寄包裹的人是谁。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>莉拉退场</h4><span class="t-ref">结尾</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>莱农瞬间明白：莉拉要消失了。她抹照片、毁衣物、断联络，从一切记录里把自己删除——不是死亡，是主动的失踪，像把「蒂娜」这个名字重新执行一遍。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>文字的终局</h4><span class="t-ref">结尾</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>于是有了这套书：莱农写下五十年的友谊，作为对挚友最后的背叛与唯一的纪念。故事从布娃娃开始，在布娃娃回来处结束——寻找失踪的孩子，原来从第一页就开始了。</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CHARACTERS ===== -->
+<section class="section wide fade-in" id="characters">
+  <h2 class="section-title">人物</h2>
+  <p class="section-desc">八张卡片，四组人：两个女孩、失踪与留下、下一代、物件的记忆。点击卡片看小传——中文名下是意大利语原名。</p>
+  <div class="filter-row" id="charFilters"></div>
+  <div class="char-grid" id="charGrid"></div>
+</section>
+
+<!-- ===== THEMES ===== -->
+<section class="section fade-in" id="themes">
+  <h2 class="section-title">核心主题</h2>
+  <p class="section-desc">六个主题——完结卷把它们全部收拢成一个圈。</p>
+
+  <div class="theme-block">
+    <div class="theme-side"><div class="theme-no">壹</div><h3>失踪的辩证法</h3><div class="t-en">The Dialectic of Disappearance</div></div>
+    <div class="theme-body">
+      <p>本卷的失踪层层加深：布娃娃、蒂娜、恩佐的爱、莉拉的名字，最后是莉拉本人。费兰特让「消失」从意外一步步变成方法——<b>从被夺走，到主动交还</b>。</p>
+      <p>蒂娜与布娃娃同名，是全书的险棋：<b>失去在命名时已经写好</b>。失踪不是缺席，是四部曲真正的在场方式。</p>
+      <span class="theme-key">命名</span><span class="theme-key">方法</span><span class="theme-key">在场</span>
+    </div>
+  </div>
+  <hr class="theme-sep">
+  <div class="theme-block">
+    <div class="theme-side"><div class="theme-no">贰</div><h3>记录即背叛</h3><div class="t-en">To Record Is to Betray</div></div>
+    <div class="theme-body">
+      <p>街坊在书里认出自己，愤怒当街爆发；莉拉一生拒绝被写。莱农坚持写完——她比谁都清楚：<b>每一次落笔，都是一次没收</b>。</p>
+      <p>这是四部曲元问题走到前台：爱与记录能否两全？费兰特的答案藏在结构里——<b>她把这套书交给读者，让背叛成为唯一的纪念</b>。</p>
+      <span class="theme-key">认出</span><span class="theme-key">没收</span><span class="theme-key">纪念</span>
+    </div>
+  </div>
+  <hr class="theme-sep">
+  <div class="theme-block">
+    <div class="theme-side"><div class="theme-no">叁</div><h3>母职的下半场</h3><div class="t-en">Motherhood, Second Half</div></div>
+    <div class="theme-body">
+      <p>第三部的簿记在本卷结成总账：三个女儿、更年期、写作与灶台。费兰特写更年期的坦白，放在今天的中文语境里仍属罕见——<b>身体不再服务于任何叙事，只服务于自己</b>。</p>
+      <p>女儿们的反叛是母职的回声：她们拒绝母亲的书，正如母亲当年拒绝街区。<b>账本传下去了，利息也传下去了</b>。</p>
+      <span class="theme-key">总账</span><span class="theme-key">更年期</span><span class="theme-key">回声</span>
+    </div>
+  </div>
+  <hr class="theme-sep">
+  <div class="theme-block">
+    <div class="theme-side"><div class="theme-no">肆</div><h3>街区的总清算</h3><div class="t-en">The Neighborhood Settles Accounts</div></div>
+    <div class="theme-body">
+      <p>斯特凡诺死去，帕斯卡莱入狱，阿方索横死，吉耀拉自杀——灰墙下的老相识接连退场，<b>卡拉奇与索拉拉的时代在葬礼之间散伙</b>。</p>
+      <p>费兰特不给任何人翻案：暴力、资本、沉默的同谋，各领各的结局。街区没有被战胜，<b>它只是老了</b>。</p>
+      <span class="theme-key">葬礼</span><span class="theme-key">散伙</span><span class="theme-key">无人翻案</span>
+    </div>
+  </div>
+  <hr class="theme-sep">
+  <div class="theme-block">
+    <div class="theme-side"><div class="theme-no">伍</div><h3>离开世界的最后方式</h3><div class="t-en">A Last Way Out</div></div>
+    <div class="theme-body">
+      <p>莉拉的退场经过长期排练：退出公司、退出关系、退出遗物，最后退出名字。<b>这不是自杀，是一种主动的编辑</b>——把自己从所有文本里删去。</p>
+      <p>她留给莱农两只布娃娃和一项不可能的任务：寻找。<b>失踪者占据主动权的失踪，是四部曲给「消失」一词的全新定义</b>。</p>
+      <span class="theme-key">主动</span><span class="theme-key">编辑</span><span class="theme-key">寻找</span>
+    </div>
+  </div>
+  <hr class="theme-sep">
+  <div class="theme-block">
+    <div class="theme-side"><div class="theme-no">陆</div><h3>环形结构的完成</h3><div class="t-en">Closing the Circle</div></div>
+    <div class="theme-body">
+      <p>故事从布娃娃开始，在布娃娃寄回处结束；寻找失踪的孩子从第一章的电话开始，直到合卷才知一直在进行。<b>四部曲的结构本身是第五个主角</b>。</p>
+      <p>莱农的写作因此有了明确的位置：它是这个环上唯一的直线——从记忆伸向纸面。<b>直线做不到闭合，但足够诚实</b>。</p>
+      <span class="theme-key">结构</span><span class="theme-key">直线</span><span class="theme-key">诚实</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== QUOTES ===== -->
+<section class="section fade-in" id="quotes">
+  <h2 class="section-title">名句</h2>
+  <p class="section-desc">七句，从地震之夜走到无字的包裹。均按大意转述并标注——想背原文，请翻开书。</p>
+  <div class="quote-shell">
+    <button class="quote-nav prev" id="qPrev" aria-label="上一条">‹</button>
+    <div class="quote-viewport"><div class="quote-track" id="qTrack"></div></div>
+    <button class="quote-nav next" id="qNext" aria-label="下一条">›</button>
+    <div class="quote-dots" id="qDots"></div>
+  </div>
+</section>
+
+<!-- ===== VERSIONS & LEGACY ===== -->
+<section class="section wide fade-in" id="versions">
+  <h2 class="section-title">与前后卷 · 译本与影像</h2>
+  <p class="section-desc">这一卷接在哪里、通向哪里，以及怎么读、怎么看。</p>
+  <div class="dual-grid">
+    <div class="v-panel">
+      <h3>中文译本</h3>
+      <div class="v-sub">「那不勒斯四部曲」简体中文版 · 完结卷</div>
+      <div class="v-row"><span class="v-year">2017</span><b>陈英 译</b>（人民文学出版社 · 九久读书人）—— 与前三部同版连排；本卷时间跨度最大，译名前后一致性在此卷最受考验。</div>
+      <div class="v-row"><span class="v-year">译名</span><b>小词典</b> —— 蒂娜（Tina）与「诺」（Nu）：布娃娃与女孩共用的小名，是本卷的密码。</div>
+      <div class="v-rec">读毕本卷，四部曲方算读完——务必按顺序，不要从这一卷开始。</div>
+    </div>
+    <div class="v-panel">
+      <h3>HBO 剧集</h3>
+      <div class="v-sub">《我的天才女友》剧集版对应关系</div>
+      <div class="v-row"><span class="v-year">完结季</span><b>第四季</b> —— 对应本卷；阿尔芭·洛尔瓦凯尔、伊蕾妮·马约里诺续任成年组，剧集随四部曲一同收束。</div>
+      <div class="v-row"><span class="v-year">改编</span><b>与原著的差异</b> —— 剧集里的街区布景在本季终于「变老」：贴上新时期的海报与车流；地震与失踪两场大戏做了减法处理。</div>
+      <div class="v-rec">剧集完结即四部曲影像完结——读完原著再看，结尾的两只布娃娃才有全部重量。</div>
+    </div>
+  </div>
+  <div class="legacy-list">
+    <div class="legacy-item">
+      <div class="l-name">承接第三部<span>兑付</span></div>
+      <div class="l-desc">同居的幻灭、三个女儿、回到街区——第三部卷末的决定在这里逐月兑付。</div>
+    </div>
+    <div class="legacy-item">
+      <div class="l-name">回到第一部<span>收成果实</span></div>
+      <div class="l-desc">布娃娃、地下室、「蒂娜」的名字——本卷把第一部的每颗种子都收进了果实。</div>
+    </div>
+    <div class="legacy-item">
+      <div class="l-name">回到导读<span>重读「底色」</span></div>
+      <div class="l-desc">读完四卷，回到 neapolitan.html 重看「底色」六条——那时它们会显得完全不同。</div>
+    </div>
+    <div class="legacy-item">
+      <div class="l-name">作者的呼应<span>费兰特的匿名</span></div>
+      <div class="l-desc">莉拉从记录里退场，作者从公众里退场——虚构与作者的这层呼应，是四部曲最后一重结构。</div>
+    </div>
+    <div class="legacy-item">
+      <div class="l-name">合上书之后<span>终了即终了</span></div>
+      <div class="l-desc">友谊、街区、两个名字——都以「消失」收束，以「记录」复活。第四部终了，四部曲终了。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== READING ===== -->
+<section class="section fade-in" id="reading">
+  <h2 class="section-title">阅读指南</h2>
+  <p class="section-desc">给正在读（或将要读）的你四条实用建议。</p>
+  <div class="read-grid">
+    <div class="read-card">
+      <h3>怎么进入</h3>
+      <p>直接从第三部续读，<b>不要先翻结尾</b>——布娃娃的包裹必须「等到」才成立。本卷时间跨度最大（数十年），人名照旧靠「姓」识别；中途任何人退场，都先别惊讶，费兰特会给你时间。</p>
+    </div>
+    <div class="read-card">
+      <h3>值得盯住</h3>
+      <ul>
+        <li>蒂娜失踪的写法——克制到近乎空白</li>
+        <li><b>1980 地震</b>那一夜：全街区交出体面的时刻</li>
+        <li>母职与更年期的段落——中文文学里少见的坦白</li>
+        <li>结尾的环形结构——同时翻回第一部第一章对照</li>
+      </ul>
+    </div>
+    <div class="read-card">
+      <h3>容易误读的地方</h3>
+      <ul>
+        <li>莉拉的消失不是自杀——费兰特写的是一次主动的退场</li>
+        <li>莱农的记录不是背叛的豁免——她自己也这么说</li>
+        <li>下一代的剧本不是重复——女儿们有女儿们的街区</li>
+        <li>本卷不是悲剧收场——它是四部曲里唯一由她们自己收场的一卷</li>
+      </ul>
+    </div>
+    <div class="read-card">
+      <h3>读完之后</h3>
+      <ul>
+        <li>回到 <b>neapolitan.html</b> 重读「底色」与四张卡片——完结之后再看一遍会完全不同</li>
+        <li>重翻第一部第一章：布娃娃互掷的两个名字，现在才读得懂</li>
+        <li>对照剧集第四季的结尾处理</li>
+        <li>把四卷的年份线（2011—2014）与故事线（1950s—2000s）并排画一次——费兰特的工程图自然浮现</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <span class="foot-mark"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><g stroke="#55504a" stroke-width="1.5" stroke-linecap="round" fill="none"><circle cx="8" cy="8" r="2.6"/><circle cx="16" cy="8" r="2.6"/><path d="M6 13 h4 v7 h-4 z"/><path d="M14 13 h4 v7 h-4 z"/></g></svg>故事回到开头，开头失去了结尾 · © zzht</span>
+  <span><a href="those-who-leave.html">上一部 · 离开的，留下的</a> · <a href="neapolitan.html">四部曲导读</a> · <a href="index.html">返回首页</a> · <a href="https://github.com/zzht1">GitHub ↗</a></span>
+</footer>
+
+<script>
+/* ================= DATA ================= */
+const GROUPS = {
+  girls:  { name: '两个女孩', color: '#4d4a45' },
+  lost:   { name: '失踪与留下', color: '#3f6273' },
+  next:   { name: '下一代', color: '#9c3222' },
+  things: { name: '物件的记忆', color: '#a3731c' }
+};
+
+const CHARACTERS = [
+  { id:'elena', name:'埃莱娜（莱农）', ru:'Elena "Lenù" Greco', group:'girls', role:'记录者',
+    desc:'回到街区、写下全部的老太太。友谊的幸存者、记录者、背叛者。',
+    tags:['回归','写作','幸存'],
+    detail:'本卷的莱农把一生拆开检视：母亲、妻子、情人、作家——每个身份她都干得不彻底，唯有一件事做到底：记录莉拉。她比谁都清楚这是背叛，也比谁都清楚：除了背叛，爱无处存放。' },
+  { id:'lila', name:'莉拉', ru:'Raffaella "Lila" Cerullo', group:'girls', role:'退场者',
+    desc:'老板、母亲、失踪者。从街区最聪明的小姑娘，到把自己从世界上悄悄删除的老太太。',
+    tags:['公司','蒂娜','退场'],
+    detail:'蒂娜之后，莉拉开始有条不紊地撤退：退出公司、退出关系、退出名字。布娃娃寄出的那一刻，她完成了童年那场交易的最后一笔——这一次，是她把自己扔进了黑暗，不让任何人跟着下去。' },
+  { id:'tina', name:'蒂娜', ru:'Tina', group:'lost', role:'失踪的孩子',
+    desc:'莉拉的女儿，三岁，在海滩上消失——本卷书名的「失踪的孩子」。',
+    tags:['失踪','回声','旧账'],
+    detail:'她与那只布娃娃同名——费兰特在命名的一刻就写好了这场失踪。她的消失没有答案，只有回声：布娃娃、地下室、界限消失，全部回到原点。' },
+  { id:'nino', name:'尼诺', ru:'Nino Sarratore', group:'lost', role:'滤镜破碎的人',
+    desc:'被剥掉滤镜的尼诺：薄情、算计、永远在向上流社会攀爬。',
+    tags:['滤镜破碎','父与子'],
+    detail:'同居生活让莱农看清了他：他继承的不只是父亲的魅力，还有父亲的用法。他最终失去所有他的女人和孩子——四部曲对他最重的惩罚，是让他一直被爱过。' },
+  { id:'enzo', name:'恩佐·斯坎诺', ru:'Enzo Scanno', group:'lost', role:'离开的忠诚',
+    desc:'半生的忠诚，最后以离开收尾。',
+    tags:['离开','界限','深情'],
+    detail:'他能陪她从香肠厂走进机房，却无法陪她走进失去孩子的深渊。他的离开不热闹——这正是最疼的写法：连最坚固的东西，也被那场失踪震散了。' },
+  { id:'pasquale', name:'帕斯卡莱·佩卢索', ru:'Pasquale Peluso', group:'lost', role:'归案者',
+    desc:'从亡命到归案，街区的怒火最终收进铁窗。',
+    tags:['逃亡','审判','沉默'],
+    detail:'他在狱中依旧不吐露所知——那点执拗的义气，是街区给他的最后一块盾牌。他的一生是「庶民」主题最暴烈的脚注。' },
+  { id:'daughters', name:'伊玛与艾尔莎', ru:'Imma · Elsa', group:'next', role:'下一代',
+    desc:'莱农的女儿们：伊玛（尼诺所出）与艾尔莎（彼得罗所出），姐姐黛德在本卷长大离家。',
+    tags:['母女','出走','回声'],
+    detail:'女儿们不读母亲的书、嘲笑母亲的街区、重复母亲的错——费兰特写母女比写友谊更不留情。她们的争吵与和解，是友谊主题的下一辈回声。' },
+  { id:'dolls', name:'布娃娃：诺与蒂娜', ru:'Nu & Tina', group:'things', role:'封环之物',
+    desc:'两个女孩各一只的布娃娃：莉拉的「诺」、莱农的「蒂娜」。一切从它们被互掷开始，一切在它们被寄回时结束。',
+    tags:['起点','终点','信物'],
+    detail:'它们是四部曲真正的封环之物：童年的地下室、海边的失落、结尾的无名包裹。费兰特让两只破布娃娃比所有人物都活得更久——记忆的形状，原来是布做的。' }
+];
+
+const QUOTES = [
+  { text:'布娃娃寄回来了——我知道，她要从一切痕迹里退场了。', src:'结尾（转述）', note:'环形结构的最后一环：被扔进黑暗的东西回来了，寄回它的人准备进入更深的黑暗。' },
+  { text:'母亲的一天，是被切成无数个别人的小时。', src:'莱农（转述）', note:'母职的簿记写到下半场：不是控诉，是逐项结算。' },
+  { text:'蒂娜在沙滩上消失，像掉进了当年那个地下室。', src:'莱农（转述）', note:'与布娃娃同名——费兰特在命名的一刻，就把这场失踪写好了。' },
+  { text:'你们把我们写进书里，问过我们吗？', src:'街坊的话（转述）', note:'记录的代价当街结清：写作即背叛，本卷的主题句。' },
+  { text:'最忠诚的人也走开了，走得安安静静。', src:'莱农谈恩佐（转述）', note:'失去孩子之后，连深情也会被震散——本卷最疼的一段。' },
+  { text:'她没有死，她只是把自己从所有记录里删掉了。', src:'莱农（转述）', note:'消失成为一种方法：退出公司、退出关系、退出名字，最后退出世界。' },
+  { text:'故事从布娃娃开始，在布娃娃回来处结束。', src:'莱农（转述）', note:'寻找失踪的孩子，从第一章的电话就开始了——四部曲合拢成一个圈。' }
+];
+
+/* ================= HELPERS ================= */
+const $ = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+
+/* ================= NAV ================= */
+$$('.nav-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const el = document.getElementById(tab.dataset.section);
+    if (el) {
+      const y = el.getBoundingClientRect().top + window.pageYOffset - 56;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  });
+});
+function setupScrollspy() {
+  const tabs = $$('.nav-tab');
+  const secs = tabs.map(t => document.getElementById(t.dataset.section)).filter(Boolean);
+  const onScroll = () => {
+    const pos = window.scrollY + 140;
+    let cur = secs[0];
+    for (const s of secs) { if (s.offsetTop <= pos) cur = s; }
+    tabs.forEach(t => t.classList.toggle('active', t.dataset.section === cur.id));
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+}
+
+/* ================= FADE IN ================= */
+function setupFadeIn() {
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: .06 });
+  $$('.fade-in').forEach(el => io.observe(el));
+}
+
+/* ================= TIMELINE ================= */
+function setupTimeline() {
+  $$('.t-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const open = item.classList.toggle('open');
+      const d = item.querySelector('.t-detail');
+      d.style.maxHeight = open ? d.scrollHeight + 'px' : '0px';
+    });
+  });
+}
+
+/* ================= CHARACTERS ================= */
+function setupCharacters() {
+  const grid = $('#charGrid');
+  const fRow = $('#charFilters');
+  const cats = [['all', '全部'], ...Object.entries(GROUPS).map(([k, g]) => [k, g.name])];
+  cats.forEach(([k, label], i) => {
+    const chip = document.createElement('div');
+    chip.className = 'filter-chip' + (i === 0 ? ' active' : '');
+    chip.textContent = label;
+    chip.dataset.k = k;
+    chip.addEventListener('click', () => {
+      $$('.filter-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      $$('.char-card').forEach(card => {
+        card.classList.toggle('hidden', k !== 'all' && card.dataset.group !== k);
+      });
+    });
+    fRow.appendChild(chip);
+  });
+
+  CHARACTERS.forEach(c => {
+    const g = GROUPS[c.group];
+    const card = document.createElement('div');
+    card.className = 'char-card';
+    card.dataset.group = c.group;
+    card.style.setProperty('--gc', g.color);
+    card.innerHTML =
+      '<div class="c-name">' + c.name + '</div>' +
+      '<div class="c-ru">' + c.ru + '</div>' +
+      '<div class="c-desc">' + c.desc + '</div>' +
+      '<div class="c-tags">' + c.tags.map(t => '<span class="c-tag">' + t + '</span>').join('') + '</div>';
+    card.addEventListener('click', () => openModal(c));
+    grid.appendChild(card);
+  });
+}
+function openModal(c) {
+  const g = GROUPS[c.group];
+  const mask = $('#modalMask');
+  $('#mName').textContent = c.name;
+  $('#mRu').textContent = c.ru;
+  const role = $('#mRole'); role.textContent = c.role + ' · ' + g.name; role.style.color = g.color; role.style.background = g.color + '14';
+  $('#mBody').textContent = c.detail;
+  $('#modalBox').style.borderTopColor = g.color;
+  mask.classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  $('#modalMask').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+/* ================= QUOTES ================= */
+let qIdx = 0, qTimer = null;
+function setupQuotes() {
+  const track = $('#qTrack');
+  QUOTES.forEach((q, i) => {
+    const s = document.createElement('div');
+    s.className = 'q-slide';
+    s.innerHTML = '<div class="q-mark">❝</div><div class="q-text">' + q.text + '</div>' +
+      '<div class="q-src">' + q.src + '</div><div class="q-note">' + q.note + '</div>';
+    track.appendChild(s);
+    const d = document.createElement('div');
+    d.className = 'q-dot' + (i === 0 ? ' active' : '');
+    d.addEventListener('click', () => goQuote(i, true));
+    $('#qDots').appendChild(d);
+  });
+  $('#qPrev').addEventListener('click', () => goQuote((qIdx - 1 + QUOTES.length) % QUOTES.length, true));
+  $('#qNext').addEventListener('click', () => goQuote((qIdx + 1) % QUOTES.length, true));
+  startQuoteAuto();
+  const shell = $('.quote-shell');
+  shell.addEventListener('mouseenter', stopQuoteAuto);
+  shell.addEventListener('mouseleave', startQuoteAuto);
+}
+function goQuote(i, manual) {
+  qIdx = i;
+  $('#qTrack').style.transform = 'translateX(-' + i * 100 + '%)';
+  $$('.q-dot').forEach((d, j) => d.classList.toggle('active', j === i));
+  if (manual) { stopQuoteAuto(); startQuoteAuto(); }
+}
+function startQuoteAuto() { stopQuoteAuto(); qTimer = setInterval(() => goQuote((qIdx + 1) % QUOTES.length), 6500); }
+function stopQuoteAuto() { if (qTimer) { clearInterval(qTimer); qTimer = null; } }
+
+/* ================= INIT ================= */
+document.addEventListener('DOMContentLoaded', () => {
+  setupCharacters();
+  setupTimeline();
+  setupQuotes();
+  setupFadeIn();
+  setupScrollspy();
+  $('#modalClose').addEventListener('click', closeModal);
+  $('#modalMask').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+});
+</script>
+
+<!-- modal -->
+<div class="modal-mask" id="modalMask">
+  <div class="modal-box" id="modalBox">
+    <button class="modal-close" id="modalClose" aria-label="关闭">×</button>
+    <h3 id="mName"></h3>
+    <div class="m-ru" id="mRu"></div>
+    <span class="m-role" id="mRole"></span>
+    <div class="m-body" id="mBody"></div>
+  </div>
+</div>
+
+</body>
+</html>
