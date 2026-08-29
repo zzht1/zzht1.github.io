@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="费兰特《新名字的故事》（那不勒斯四部曲第二部）深度导读：五幕脉络细讲、人物小传、核心主题、名句、译本与 HBO 剧集、阅读指南。">
+<title>新名字的故事 · 那不勒斯四部曲之二 — zzht</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f0eee7; --paper:#f9f7f0; --paper-deep:#f1eee4;
+  --ink:#231f1a; --ink-soft:#554f47; --ink-faint:#908a7d;
+  --line:#dcd6c8;
+  --acc:#c79a2e;            /* 本卷主题色：那不勒斯黄 */
+  --acc2:#8f5e1c;           /* 渐变搭档：深铜 */
+  --acc-contrast:#241d0d;
+  --serif:'Noto Serif SC','STSong','SimSun',serif;
+  --sans:'Noto Sans SC',-apple-system,BlinkMacSystemFont,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);color:var(--ink);line-height:1.8;overflow-x:hidden;
+  background-color:var(--bg);
+  /* 百叶窗式的横向晒痕：婚礼阳光下的街区（同一街区 · 第二卷的季节） */
+  background-image:
+    repeating-linear-gradient(0deg,transparent 0px,transparent 44px,color-mix(in srgb,var(--acc) 6%,transparent) 44px,color-mix(in srgb,var(--acc) 6%,transparent) 45px),
+    linear-gradient(180deg,color-mix(in srgb,var(--acc) 4%,transparent) 0,transparent 520px);
+}
+/* 极淡的灰墙水渍 */
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:repeating-linear-gradient(0deg,transparent 0,transparent 4px,rgba(90,85,70,.013) 4px,rgba(90,85,70,.013) 5px);}
+::selection{background:color-mix(in srgb,var(--acc) 16%,transparent)}
+.back-home{position:fixed;top:18px;left:20px;z-index:120;font-size:.85rem;color:var(--ink-soft);text-decoration:none;
+  padding:7px 14px;border-radius:999px;background:rgba(249,247,240,.95);border:1px solid var(--line);transition:all .25s}
+.back-home:hover{color:var(--acc2);border-color:var(--acc2);transform:translateX(-2px)}
+
+/* ===== HERO ===== */
+.hero{min-height:94vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
+  padding:14vh 24px 8vh;position:relative;
+  background:radial-gradient(ellipse 75% 40% at 50% -5%,color-mix(in srgb,var(--acc) 15%,transparent),transparent 62%),
+    linear-gradient(180deg,var(--paper) 0%,var(--bg) 78%);}
+.hero-wm{position:absolute;top:12%;left:50%;transform:translateX(-50%);font-family:var(--serif);font-style:italic;
+  font-size:clamp(2.2rem,7.2vw,5rem);letter-spacing:.03em;white-space:nowrap;
+  color:color-mix(in srgb,var(--acc) 11%,transparent);pointer-events:none;user-select:none}
+.hero-eyebrow{font-size:.8rem;letter-spacing:.34em;color:var(--ink-soft);margin-bottom:22px;font-weight:400;position:relative}
+.hero h1{font-family:var(--serif);font-size:clamp(3.2rem,10vw,6.4rem);font-weight:900;letter-spacing:.12em;line-height:1.12;color:var(--ink);position:relative}
+.hero-it{font-family:var(--serif);font-size:clamp(1rem,2.6vw,1.28rem);color:var(--acc2);letter-spacing:.18em;margin-top:14px;font-style:italic;position:relative}
+.hero-sub{margin-top:18px;color:var(--ink-soft);font-size:.97rem;font-weight:300;letter-spacing:.06em;position:relative}
+.hero-divider{display:flex;align-items:center;gap:18px;margin:30px auto;position:relative}
+.hero-divider::before,.hero-divider::after{content:'';width:78px;height:1px}
+.hero-divider::before{background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--acc) 62%,transparent))}
+.hero-divider::after{background:linear-gradient(270deg,transparent,color-mix(in srgb,var(--acc) 62%,transparent))}
+.hero-quote{max-width:560px;font-family:var(--serif);font-size:1.06rem;color:var(--ink-soft);line-height:2;position:relative}
+.hero-quote .src{display:block;margin-top:10px;font-size:.85rem;color:var(--ink-faint)}
+.hero-meta{display:flex;flex-wrap:wrap;justify-content:center;gap:14px 46px;margin-top:48px;position:relative}
+.hero-meta-item{text-align:center;min-width:70px}
+.hero-meta-item .value{display:block;font-family:var(--serif);font-weight:900;font-size:1.7rem;color:var(--acc2);line-height:1.2}
+.hero-meta-item .label{font-size:.78rem;color:var(--ink-faint);letter-spacing:.12em}
+.scroll-hint{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);font-size:.78rem;color:var(--ink-faint);cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;gap:4px;letter-spacing:.2em;user-select:none}
+.scroll-hint .arrow{animation:bob 1.8s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+
+/* ===== NAV ===== */
+.nav-bar{position:sticky;top:0;z-index:100;background:rgba(240,238,231,.96);border-bottom:1px solid var(--line)}
+.nav-inner{max-width:1000px;margin:0 auto;display:flex;overflow-x:auto;scrollbar-width:none;padding:0 12px}
+.nav-inner::-webkit-scrollbar{display:none}
+.nav-tab{flex:0 0 auto;padding:15px 18px;cursor:pointer;font-size:.9rem;color:var(--ink-soft);letter-spacing:.06em;
+  position:relative;transition:color .25s;white-space:nowrap;user-select:none}
+.nav-tab::after{content:'';position:absolute;left:18px;right:18px;bottom:0;height:2px;border-radius:2px;
+  background:linear-gradient(90deg,var(--acc),var(--acc2));transform:scaleX(0);transition:transform .3s}
+.nav-tab:hover{color:var(--ink)}
+.nav-tab.active{color:var(--acc2);font-weight:500}
+.nav-tab.active::after{transform:scaleX(1)}
+
+/* ===== SECTIONS ===== */
+.section{max-width:1000px;margin:0 auto;padding:90px 24px 10px;position:relative;z-index:1}
+.section.wide{max-width:1060px}
+.section-title{font-family:var(--serif);font-size:clamp(1.7rem,4vw,2.3rem);font-weight:900;letter-spacing:.08em;color:var(--ink)}
+.section-title::after{content:'';display:block;width:76px;height:3px;margin-top:14px;border-radius:2px;
+  background:linear-gradient(90deg,var(--acc),var(--acc2),transparent)}
+.section-desc{margin-top:20px;color:var(--ink-soft);max-width:720px;font-size:.98rem;line-height:2}
+.fade-in{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+
+/* ===== OVERVIEW ===== */
+.ov-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:40px;margin-top:40px;align-items:start}
+.ov-prose p{margin-bottom:16px;color:var(--ink-soft);font-size:.97rem;line-height:2.05}
+.ov-prose p strong{color:var(--ink);font-weight:600}
+.ov-prose .lede{font-family:var(--serif);font-size:1.12rem;color:var(--ink);line-height:2.1}
+.ov-prose .lede::first-letter{font-size:2.6em;float:left;line-height:1;padding-right:.12em;color:var(--acc2);font-weight:900}
+.ov-panel{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:30px 28px;box-shadow:0 10px 24px rgba(70,60,40,.07)}
+.ov-panel h3{font-family:var(--serif);font-size:1.05rem;font-weight:700;letter-spacing:.08em;color:var(--acc2);margin-bottom:16px}
+.bg-list{list-style:none}
+.bg-list li{position:relative;padding:10px 0 10px 22px;font-size:.88rem;color:var(--ink-soft);line-height:1.8;border-bottom:1px dashed var(--line)}
+.bg-list li:last-child{border-bottom:none}
+.bg-list li::before{content:'';position:absolute;left:2px;top:19px;width:7px;height:7px;border-radius:50%;
+  background:linear-gradient(135deg,var(--acc),var(--acc2))}
+.bg-list li b{color:var(--ink);font-weight:600}
+.room-note{margin-top:16px;padding-top:12px;border-top:1px dashed var(--line);font-size:.8rem;color:var(--ink-faint);font-style:italic;line-height:1.8}
+.stat-strip{display:flex;flex-wrap:wrap;gap:0;margin-top:44px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stat{flex:1 1 auto;min-width:150px;text-align:center;padding:26px 16px}
+.stat + .stat{border-left:1px dashed var(--line)}
+.stat .num{font-family:var(--serif);font-size:1.9rem;font-weight:900;color:var(--acc2);line-height:1.2}
+.stat .cap{font-size:.8rem;color:var(--ink-faint);letter-spacing:.08em;margin-top:6px}
+
+/* ===== STORY：五幕手风琴 ===== */
+.phase{margin-top:52px;padding-top:24px;border-top:1px solid color-mix(in srgb,var(--ink) 16%,transparent)}
+.phase-head{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap}
+.phase-num{font-family:var(--serif);font-size:2rem;font-weight:900;
+  background:linear-gradient(135deg,var(--acc),var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1}
+.phase-head h3{font-family:var(--serif);font-size:1.25rem;font-weight:700;letter-spacing:.05em}
+.phase-head .ref{font-size:.8rem;color:var(--ink-faint);letter-spacing:.05em}
+.phase-items{margin-top:20px;margin-left:13px;border-left:2px solid color-mix(in srgb,var(--acc) 55%,transparent);padding-left:26px}
+.t-item{position:relative;border-radius:18px;padding:14px 18px;margin-bottom:10px;cursor:pointer;transition:background .25s}
+.t-item:hover{background:var(--paper-deep)}
+.t-item::before{content:'';position:absolute;left:-33px;top:24px;width:10px;height:10px;border-radius:50%;
+  background:var(--bg);border:2.5px solid var(--acc2);transition:background .25s}
+.t-item.open::before{background:var(--acc2)}
+.t-item-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.t-item-head h4{font-size:1rem;font-weight:600;font-family:var(--serif);letter-spacing:.03em}
+.t-ref{font-size:.72rem;color:var(--acc2);background:color-mix(in srgb,var(--acc) 12%,transparent);
+  padding:2px 10px;border-radius:999px;letter-spacing:.04em;white-space:nowrap}
+.t-toggle{margin-left:auto;color:var(--ink-faint);font-size:.85rem;transition:transform .3s}
+.t-item.open .t-toggle{transform:rotate(180deg)}
+.t-detail{max-height:0;overflow:hidden;transition:max-height .45s ease}
+.t-detail p{padding-top:10px;font-size:.9rem;color:var(--ink-soft);line-height:1.95;max-width:680px}
+
+/* ===== CHARACTERS ===== */
+.filter-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:32px}
+.filter-chip{padding:8px 18px;border-radius:999px;cursor:pointer;font-size:.85rem;color:var(--ink-soft);
+  background:var(--paper);border:1px solid var(--line);transition:all .25s;user-select:none}
+.filter-chip:hover{transform:translateY(-2px);color:var(--ink)}
+.filter-chip.active{background:linear-gradient(135deg,var(--acc),var(--acc2));color:var(--acc-contrast);border-color:transparent}
+.char-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:20px;margin-top:30px}
+.char-card{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:22px 22px 20px;cursor:pointer;
+  position:relative;overflow:hidden;transition:transform .3s cubic-bezier(.34,1.4,.5,1),box-shadow .3s,border-color .3s}
+.char-card::before{content:'';position:absolute;top:0;left:22px;right:22px;height:3px;border-radius:0 0 4px 4px;
+  background:linear-gradient(90deg,var(--gc,var(--acc2)),transparent);opacity:.85}
+.char-card:hover{transform:translateY(-5px);box-shadow:0 14px 30px rgba(70,60,40,.14);border-color:var(--gc,var(--acc2))}
+.char-card .c-name{font-family:var(--serif);font-size:1.12rem;font-weight:700}
+.char-card .c-ru{font-size:.76rem;color:var(--ink-faint);margin-top:3px;font-style:italic;letter-spacing:.02em}
+.char-card .c-desc{font-size:.85rem;color:var(--ink-soft);margin-top:12px;line-height:1.8}
+.char-card .c-tags{margin-top:14px;display:flex;flex-wrap:wrap;gap:6px}
+.c-tag{font-size:.7rem;padding:3px 10px;border-radius:999px;color:var(--gc,var(--acc2));
+  background:color-mix(in srgb,var(--gc,var(--acc2)) 10%,var(--paper));
+  border:1px solid color-mix(in srgb,var(--gc,var(--acc2)) 28%,var(--paper))}
+.char-card.hidden{display:none}
+.modal-mask{position:fixed;inset:0;z-index:200;background:rgba(35,31,26,.5);display:flex;align-items:center;justify-content:center;
+  padding:24px;opacity:0;pointer-events:none;transition:opacity .3s}
+.modal-mask.show{opacity:1;pointer-events:auto}
+.modal-box{background:var(--paper);border-radius:24px;max-width:560px;width:100%;max-height:82vh;overflow-y:auto;
+  padding:36px 34px;position:relative;transform:translateY(18px);transition:transform .3s;border-top:4px solid var(--acc)}
+.modal-mask.show .modal-box{transform:translateY(0)}
+.modal-close{position:absolute;top:16px;right:20px;cursor:pointer;font-size:1.3rem;color:var(--ink-faint);background:none;border:none;transition:color .2s;line-height:1}
+.modal-close:hover{color:var(--acc2)}
+.modal-box h3{font-family:var(--serif);font-size:1.5rem;font-weight:900}
+.modal-box .m-ru{font-style:italic;color:var(--ink-faint);font-size:.88rem;margin-top:4px}
+.modal-box .m-role{display:inline-block;margin-top:12px;font-size:.76rem;letter-spacing:.06em;color:var(--acc2);
+  background:color-mix(in srgb,var(--acc) 10%,transparent);padding:4px 14px;border-radius:999px}
+.modal-box .m-body{margin-top:16px;font-size:.93rem;color:var(--ink-soft);line-height:2.05}
+
+/* ===== THEMES ===== */
+.theme-block{display:grid;grid-template-columns:220px 1fr;gap:34px;padding:42px 0;align-items:start}
+.theme-side{position:sticky;top:84px}
+.theme-no{font-family:var(--serif);font-weight:900;font-size:1.05rem;letter-spacing:.2em;color:var(--acc)}
+.theme-side h3{font-family:var(--serif);font-size:1.3rem;font-weight:900;margin-top:8px;line-height:1.5}
+.theme-side .t-en{font-size:.78rem;color:var(--ink-faint);font-style:italic;margin-top:4px;letter-spacing:.03em}
+.theme-body p{color:var(--ink-soft);font-size:.94rem;line-height:2.05;margin-bottom:14px;max-width:640px}
+.theme-body p b{color:var(--ink);font-weight:600}
+.theme-key{display:inline-block;margin-top:4px;margin-right:8px;margin-bottom:6px;font-size:.74rem;color:var(--acc2);letter-spacing:.05em;
+  padding:3px 12px;border-radius:999px;border:1px solid color-mix(in srgb,var(--acc) 36%,transparent);
+  background:color-mix(in srgb,var(--acc) 8%,transparent)}
+.theme-sep{height:1px;border:none;background:linear-gradient(90deg,transparent,var(--line) 25%,var(--line) 75%,transparent)}
+
+/* ===== QUOTES：新婚夜的黑暗页 ===== */
+.quote-shell{margin-top:38px;position:relative}
+.quote-viewport{overflow:hidden;border-radius:24px}
+.quote-track{display:flex;transition:transform .6s cubic-bezier(.4,0,.2,1)}
+.q-slide{flex:0 0 100%;padding:50px 8%;text-align:center;
+  background:radial-gradient(ellipse 70% 60% at 50% 8%,rgba(199,154,46,.16),transparent 62%),#211a0d;
+  border:1px solid #453613;border-radius:24px}
+.q-mark{font-family:var(--serif);font-size:2.6rem;color:#d9ae4a;line-height:1}
+.q-text{font-family:var(--serif);font-size:clamp(1.05rem,2.6vw,1.35rem);line-height:2.1;color:#f0e4c4;margin-top:12px}
+.q-src{margin-top:18px;font-size:.85rem;color:#d9ae4a;letter-spacing:.06em}
+.q-note{margin-top:8px;font-size:.82rem;color:#a89468;max-width:520px;margin-left:auto;margin-right:auto;line-height:1.8}
+.quote-nav{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;
+  background:var(--paper);border:1px solid var(--line);color:var(--ink-soft);font-size:1.1rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:all .25s;z-index:5}
+.quote-nav:hover{color:var(--acc2);border-color:var(--acc2);transform:translateY(-50%) scale(1.08)}
+.quote-nav.prev{left:-14px}
+.quote-nav.next{right:-14px}
+.quote-dots{display:flex;justify-content:center;gap:9px;margin-top:22px}
+.q-dot{width:8px;height:8px;border-radius:50%;background:var(--line);cursor:pointer;transition:all .3s}
+.q-dot.active{background:var(--acc);transform:scale(1.25)}
+
+/* ===== VERSIONS & LEGACY ===== */
+.dual-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:38px}
+.v-panel{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:28px 26px;box-shadow:0 10px 24px rgba(70,60,40,.07)}
+.v-panel h3{font-family:var(--serif);font-size:1.1rem;font-weight:700;letter-spacing:.06em;margin-bottom:6px}
+.v-panel .v-sub{font-size:.8rem;color:var(--ink-faint);margin-bottom:18px}
+.v-row{padding:14px 0;border-bottom:1px dashed var(--line);font-size:.88rem;color:var(--ink-soft);line-height:1.8}
+.v-row:last-child{border-bottom:none}
+.v-row b{color:var(--ink);font-weight:600}
+.v-row .v-year{font-family:var(--serif);color:var(--acc2);font-weight:700;margin-right:10px}
+.v-rec{margin-top:14px;font-size:.82rem;color:var(--acc2);background:color-mix(in srgb,var(--acc) 10%,transparent);
+  border-radius:12px;padding:10px 14px;line-height:1.7}
+.legacy-list{margin-top:34px}
+.legacy-item{display:grid;grid-template-columns:150px 1fr;gap:20px;padding:22px 0;border-bottom:1px dashed var(--line)}
+.legacy-item:last-child{border-bottom:none}
+.legacy-item .l-name{font-family:var(--serif);font-weight:700;font-size:1rem;color:var(--ink)}
+.legacy-item .l-name span{display:block;font-size:.75rem;color:var(--ink-faint);font-weight:400;margin-top:3px;font-style:italic}
+.legacy-item .l-desc{font-size:.9rem;color:var(--ink-soft);line-height:1.95}
+
+/* ===== READING ===== */
+.read-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;margin-top:36px}
+.read-card{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:28px 26px;
+  transition:transform .3s,box-shadow .3s;box-shadow:0 6px 16px rgba(70,60,40,.05)}
+.read-card:hover{transform:translateY(-4px);box-shadow:0 12px 26px rgba(70,60,40,.12)}
+.read-card h3{font-family:var(--serif);font-size:1.02rem;font-weight:700;margin-bottom:12px;color:var(--acc2)}
+.read-card p{font-size:.88rem;color:var(--ink-soft);line-height:1.95}
+.read-card p b{color:var(--ink)}
+.read-card ul{list-style:none;margin-top:8px}
+.read-card li{font-size:.88rem;color:var(--ink-soft);line-height:1.9;padding-left:18px;position:relative;margin-bottom:6px}
+.read-card li::before{content:'';position:absolute;left:2px;top:12px;width:6px;height:6px;border-radius:50%;background:var(--acc)}
+
+/* footer */
+.site-footer{max-width:1000px;margin:90px auto 0;padding:26px 24px 46px;border-top:1px solid var(--line);
+  font-size:.82rem;color:var(--ink-faint);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;position:relative;z-index:1}
+.site-footer a{color:var(--ink-soft);text-decoration:none;transition:color .2s}
+.site-footer a:hover{color:var(--acc2)}
+.foot-mark{display:inline-flex;align-items:center;gap:9px}
+
+/* responsive */
+@media (max-width:820px){
+  .ov-grid{grid-template-columns:1fr}
+  .dual-grid{grid-template-columns:1fr}
+  .theme-block{grid-template-columns:1fr;gap:14px}
+  .theme-side{position:static}
+  .legacy-item{grid-template-columns:1fr;gap:6px}
+  .quote-nav.prev{left:6px}.quote-nav.next{right:6px}
+  .q-slide{padding:42px 7%}
+}
+@media (max-width:520px){
+  .section{padding-top:66px}
+  .hero{min-height:88vh;padding-top:16vh}
+  .hero-wm{font-size:1.9rem}
+  .hero-meta{gap:12px 26px}
+  .stat{min-width:120px;padding:18px 8px}
+}
+</style>
+</head>
+<body>
+
+<a href="neapolitan.html" class="back-home">← 那不勒斯四部曲</a>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="top">
+  <span class="hero-wm" aria-hidden="true">Storia del nuovo cognome</span>
+  <div class="hero-eyebrow">那不勒斯四部曲 · 第二部 · 2012</div>
+  <h1>新名字的故事</h1>
+  <div class="hero-it">Storia del nuovo cognome · Elena Ferrante</div>
+  <div class="hero-sub">婚姻把名字当作财产转移</div>
+  <div class="hero-divider">
+    <svg viewBox="0 0 84 46" width="66" height="36" fill="none" aria-hidden="true">
+      <g stroke="#a3731c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 36 L14 18 C24 12 34 12 42 18 C52 25 62 32 70 36"/>
+        <path d="M6 36 h70"/>
+        <path d="M14 36 l-3 7"/>
+      </g>
+      <circle cx="46" cy="20" r="1.8" fill="#a3731c"/>
+    </svg>
+  </div>
+  <blockquote class="hero-quote">
+    「现在我是卡拉奇太太了，可这个名字不属于我。」
+    <span class="src">— 莉拉（转述）</span>
+  </blockquote>
+  <div class="hero-meta">
+    <div class="hero-meta-item"><span class="value">第二部</span><span class="label">部次</span></div>
+    <div class="hero-meta-item"><span class="value">2012</span><span class="label">出版</span></div>
+    <div class="hero-meta-item"><span class="value">16–20岁</span><span class="label">写到哪里</span></div>
+    <div class="hero-meta-item"><span class="value">1次</span><span class="label">私奔</span></div>
+  </div>
+  <div class="scroll-hint" onclick="document.getElementById('content').scrollIntoView({behavior:'smooth'})">
+    <span>向下探索</span><span class="arrow">↓</span>
+  </div>
+</section>
+
+<!-- ===== NAV ===== -->
+<nav class="nav-bar" id="content">
+  <div class="nav-inner">
+    <div class="nav-tab active" data-section="overview">概览</div>
+    <div class="nav-tab" data-section="story">脉络</div>
+    <div class="nav-tab" data-section="characters">人物</div>
+    <div class="nav-tab" data-section="themes">主题</div>
+    <div class="nav-tab" data-section="quotes">名句</div>
+    <div class="nav-tab" data-section="versions">与前后卷</div>
+    <div class="nav-tab" data-section="reading">阅读指南</div>
+  </div>
+</nav>
+
+<!-- ===== OVERVIEW ===== -->
+<section class="section fade-in" id="overview">
+  <h2 class="section-title">关于这一卷</h2>
+  <div class="ov-grid">
+    <div class="ov-prose">
+      <p class="lede">婚礼的彩纸还没扫干净，新名字已经生效：赛鲁罗家的莉拉成了卡拉奇太太。姓氏像一件不合身的大衣，从此穿在她身上——而扣子，系在别人手里。</p>
+      <p>《新名字的故事》从新婚夜写起，写到二十岁出头：婚内的暴力、被索拉拉家吞掉的鞋厂生意、伊斯基亚的第二个夏天、与尼诺二十来天的私奔与被弃、香肠厂的流水线——莉拉在三种身份之间被来回撕扯；与此同时，莱农考进比萨、写下第一本书，<strong>而那本书的呼吸，来自她留下的日记</strong>。这是四部里最暴烈、也最「身体」的一部。</p>
+      <p>费兰特在本卷完成了四部曲最重要的一次换位实验：婚姻不是避难所，工厂不是出路，大学不是彼岸——每一条「出路」都先收一笔过路费。第二部结束时，两个女孩的位置已经悄悄对调了一半。</p>
+    </div>
+    <div class="ov-panel">
+      <h3>本卷的位置</h3>
+      <ul class="bg-list">
+        <li><b>在四部曲中的位置</b>：第二部 · 婚姻与出走（约 1958—1962），四部曲中最黑暗的一卷。</li>
+        <li><b>承接</b>：第一部卷末婚礼上那双鞋——背叛在洞房里兑现为暴力。</li>
+        <li><b>开启</b>：「界限消失」、日记、《蓝色仙女》的债、香肠厂——女性处境的全部战场在本卷铺开。</li>
+        <li><b>续接下一卷</b>：莱农去比萨、莉拉守着街区——两条路在本卷末完成交接。</li>
+        <li><b>读法提示</b>：本卷大量涉及婚内暴力与身体，读来沉重，节奏建议放缓。</li>
+      </ul>
+      <div class="room-note">书名即主题：「新名字」不是成长的加冕，是过户的手续——本卷里几乎所有女人都被改过名。</div>
+    </div>
+  </div>
+  <div class="stat-strip">
+    <div class="stat"><div class="num">1场</div><div class="cap">新婚夜的暴力开局</div></div>
+    <div class="stat"><div class="num">≈20天</div><div class="cap">与尼诺的出走</div></div>
+    <div class="stat"><div class="num">1间</div><div class="cap">香肠厂</div></div>
+    <div class="stat"><div class="num">1本</div><div class="cap">莱农的处女作</div></div>
+    <div class="stat"><div class="num">1摞</div><div class="cap">被留下的日记</div></div>
+  </div>
+</section>
+
+<!-- ===== STORY ===== -->
+<section class="section fade-in" id="story">
+  <h2 class="section-title">脉络</h2>
+  <p class="section-desc">五幕，一步步往下讲，点击每一条展开细节。放心读——这套书不怕「剧透」，它的悬念在选择的重量里。</p>
+
+  <div class="phase">
+    <div class="phase-head"><span class="phase-num">Ⅰ</span><h3>新婚</h3><span class="ref">十六岁 · 卡拉奇家</span></div>
+    <div class="phase-items">
+      <div class="t-item"><div class="t-item-head"><h4>卡拉奇家的大宅</h4><span class="t-ref">婚姻之初</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>电梯、浴缸、成套的新家具——莉拉住进了街区头一批拥有电梯的房子。她成了富人，也成了展示品：街坊来看的不是新娘，是钱本身。她把新家布置得像作战室，账本比婚礼更早开始。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>新婚夜的暴力</h4><span class="t-ref">婚姻之初</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>婚后第一夜，斯特凡诺用暴力「完成」了婚姻。此后是拳头、禁足，和「从楼梯上摔下来」的公开说法。婚礼上那双鞋的背叛，在这里兑现成身体上的账——费兰特写得像会计记录，拒绝一丝煽情。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>马尔切洛的阴影</h4><span class="t-ref">婚姻之初</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>索拉拉家的纠缠没有随婚礼结束：马尔切洛的汽车照旧停在楼下，米凯莱开始出入卡拉奇的生意。莉拉很快明白——她嫁的不是一个人，是一张网。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>鞋厂的空壳</h4><span class="t-ref">婚姻之初</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>许诺的鞋厂开了张，做出来的鞋却粗糙昂贵，与她的图纸毫无关系。手艺被套进生意，设计被折算成装饰——莉拉第一次看清：婚姻与工厂，是同一笔交易的两张发票。</p></div></div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-head"><span class="phase-num">Ⅱ</span><h3>米凯莱与索拉拉家</h3><span class="ref">生意与夏天</span></div>
+    <div class="phase-items">
+      <div class="t-item"><div class="t-item-head"><h4>生意被吞</h4><span class="t-ref">鞋厂</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>索拉拉兄弟的钱进了鞋厂：股份、订单、定价权一起进来。斯特凡诺的体面生意，底牌始终是街区的暴力资本——莉拉在账本上一栏一栏，看着自己的名字被稀释。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>米凯莱的注视</h4><span class="t-ref">索拉拉</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>米凯莱·索拉拉——比哥哥更冷、更聪明——对莉拉产生了一种半是占有、半是崇拜的迷恋。他懂她的聪明，这比调戏更让人毛骨悚然：一个承认你天才的狱卒，比一个否认你的更难对付。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>伊斯基亚的第二个夏天</h4><span class="t-ref">夏天</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>莱农又在岛上过暑假，莉拉也来了。海还是那片海，人已经变了：尼诺不再是暗恋里的远影，安东尼奥的醋意、萨拉托雷一家的旧账——几组关系在烈日下绷到极限。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>尼诺的出现</h4><span class="t-ref">夏天</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>尼诺与莉拉整夜整夜地谈话：政治、书、街区。莱农第一次看见有人与莉拉「接得上话」——而接话的人，恰恰是她自己暗恋多年的人。嫉妒在这里长出獠牙。</p></div></div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-head"><span class="phase-num">Ⅲ</span><h3>私奔与抛弃</h3><span class="ref">二十来天</span></div>
+    <div class="phase-items">
+      <div class="t-item"><div class="t-item-head"><h4>出走</h4><span class="t-ref">私奔</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>莉拉离开斯特凡诺，与尼诺躲进朋友家中，过了二十来天（转述大意）她以为终于被当作「人」而不是「资产」的日子。莱农守着她留下的日记，第一次逐字逐句住进朋友的头脑。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>被弃</h4><span class="t-ref">私奔</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>尼诺逃走了——像他父亲一样，把激情花光就走。莉拉只剩一间空屋和一本日记。天才第二次被「学校」抛弃：这一次的学校，是一个男人。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>回家的羞辱</h4><span class="t-ref">回到街区</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>恩佐把她接回街区。斯特凡诺当众收留了她——用一场羞辱代替离婚：街区人人围观，人人表态。她怀着尼诺的孩子，姓氏依旧写着卡拉奇；后来出生的儿子，也随了丈夫的姓。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>日记的下落</h4><span class="t-ref">暗线</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>莉拉把日记交给莱农处置，莱农偷偷留下（转述大意）。这两摞写着「真实」的纸，从此住在莱农的书桌里——既是写作的暗火，也是四部曲最大的伦理悬案。</p></div></div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-head"><span class="phase-num">Ⅳ</span><h3>香肠厂</h3><span class="ref">工人莉拉</span></div>
+    <div class="phase-items">
+      <div class="t-item"><div class="t-item-head"><h4>离开卡拉奇家</h4><span class="t-ref">出逃</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>风波稍平，莉拉最终离开斯特凡诺，与恩佐以朋友之名同住，进香肠厂做工。街区哗然：一个跑了的太太和一个不碰她的男人——这个组合本身就是丑闻，也是街区语法无法解析的句子。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>工人莉拉</h4><span class="t-ref">工厂</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>流水线、冷库、克扣与工头的眼睛。帕斯卡莱在这里，罢工与小组会也在这里。莉拉把算术天才全部用来算自己的处境——结论比任何小说都残酷：她换了个房间，还在同一个阶级里。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>身体的崩坏</h4><span class="t-ref">工厂</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>头痛、晕厥，「界限消失」的发作越来越频繁：人的轮廓在她眼里融化、彼此渗透。身体成了最后一张账单，为婚姻、工厂与街区所有欠她的部分结账。</p></div></div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-head"><span class="phase-num">Ⅴ</span><h3>第一本书</h3><span class="ref">莱农的大学与写作</span></div>
+    <div class="phase-items">
+      <div class="t-item"><div class="t-item-head"><h4>莱农的大学</h4><span class="t-ref">比萨</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>高中毕业，莱农考进比萨高等师范学院。行李箱里装着课本，也装着两摞日记的重量：她要去一个没人认识莉拉的地方，替她活着。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>处女作的出版</h4><span class="t-ref">写作</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>大学最初的那几年，她写出第一本小说——里面有街区的神怪、婚姻的账，以及一个无处不在的女友。书出版了，反响不大不小；但莱农清楚，每一页的呼吸来自谁。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>《蓝色仙女》的债</h4><span class="t-ref">写作</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>童年那篇被老师收走的手稿、莉拉日记里的句子、莱农书里的段落——三层文本互相借贷，账目永远对不清。写作的伦理问题从这一刻登场，要到第四部才算总账。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>位置的互换</h4><span class="t-ref">卷末</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>卷末的对照刺眼：莉拉在工厂里熬身体，莱农在大学里换名声。莱农第一次意识到——她可能正在变成莉拉，而莉拉正在变成当年的自己。第三部将把这个对调推到明处。</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CHARACTERS ===== -->
+<section class="section wide fade-in" id="characters">
+  <h2 class="section-title">人物</h2>
+  <p class="section-desc">十张卡片，四组人：两个女孩、爱（其实危险）、街区权力、工厂与同志。点击卡片看小传——中文名下是意大利语原名。</p>
+  <div class="filter-row" id="charFilters"></div>
+  <div class="char-grid" id="charGrid"></div>
+</section>
+
+<!-- ===== THEMES ===== -->
+<section class="section fade-in" id="themes">
+  <h2 class="section-title">核心主题</h2>
+  <p class="section-desc">六个主题——本卷是它们集体登场的一卷。</p>
+
+  <div class="theme-block">
+    <div class="theme-side"><div class="theme-no">壹</div><h3>名字作为财产</h3><div class="t-en">The Name as Property</div></div>
+    <div class="theme-body">
+      <p>婚礼是一桩过户：赛鲁罗的莉拉成为卡拉奇太太，姓氏、住址、身体连同未来的债务一并移交。书名「新名字的故事」说的不是成长，是<b>产权变更</b>。</p>
+      <p>而莱农的反向操作更刺眼：她靠写作给自己签上另一个名字——<b>署名权</b>，是本卷悄悄递给读者的第二主题。此后每一卷都要问一遍：这个名字，究竟是谁给的？</p>
+      <span class="theme-key">姓氏过户</span><span class="theme-key">署名权</span><span class="theme-key">卡拉奇太太</span>
+    </div>
+  </div>
+  <hr class="theme-sep">
+  <div class="theme-block">
+    <div class="theme-side"><div class="theme-no">贰</div><h3>暴力与「爱」的语法</h3><div class="t-en">The Grammar of Violence</div></div>
+    <div class="theme-body">
+      <p>新婚夜的暴力写得像一段冷冰冰的会计记录——费兰特拒绝煽情，只记账。街区的说法是「从楼梯上摔下来」：<b>语法替暴力办好了全部手续</b>。</p>
+      <p>尼诺的语言、米凯莱的注视、斯特凡诺的拳头，是同一种语法的三种时态：将来、进行与完成。本卷教读者识别它，后面两卷反复听写。</p>
+      <span class="theme-key">新婚夜</span><span class="theme-key">楼梯的说法</span><span class="theme-key">语言的拳头</span>
+    </div>
+  </div>
+  <hr class="theme-sep">
+  <div class="theme-block">
+    <div class="theme-side"><div class="theme-no">叁</div><h3>女人的两种出路</h3><div class="t-en">Two Exits</div></div>
+    <div class="theme-body">
+      <p>街区给女孩的路只有两条：嫁人，或者做工。莉拉两样都试了——<b>婚姻是抵押，工厂是分期</b>。吉耀拉的婚礼与自己的流水线，是同一张地图上的两个出口。</p>
+      <p>莱农偷偷修第三条路——教育——但本卷让她看见：第三条路的过路费，用友谊和自我怀疑支付。<b>出路从来不是风景，是谈判</b>。</p>
+      <span class="theme-key">婚姻</span><span class="theme-key">工厂</span><span class="theme-key">第三条路</span>
+    </div>
+  </div>
+  <hr class="theme-sep">
+  <div class="theme-block">
+    <div class="theme-side"><div class="theme-no">肆</div><h3>《蓝色仙女》：谁在写谁</h3><div class="t-en">The Blue Fairy</div></div>
+    <div class="theme-body">
+      <p>童年作文《蓝色仙女》被老师收进抽屉，莉拉的日记被莱农留下，莱农的处女作里游动着这一切的影子。<b>三层文本互相借贷，账目永远对不清</b>。</p>
+      <p>这是四部曲元主题的第一次完整现身：写作是从谁身上来的？灵感与盗窃的边界在哪里？费兰特把审判席留给读者，自己只出示证据。</p>
+      <span class="theme-key">手稿</span><span class="theme-key">日记</span><span class="theme-key">债</span>
+    </div>
+  </div>
+  <hr class="theme-sep">
+  <div class="theme-block">
+    <div class="theme-side"><div class="theme-no">伍</div><h3>阶层的玻璃墙</h3><div class="t-en">Glass Wall</div></div>
+    <div class="theme-body">
+      <p>莉拉住进了有电梯的房子，却从未进入另一个阶级——<b>电梯到不了的地方才是阶层</b>。斯特凡诺的钱、索拉拉的投资、银行的印章，都只是玻璃上的反光。</p>
+      <p>莱农用文凭敲出一道裂缝，钻过去，回头发现玻璃完好如初：<b>墙不在街区入口，在每个抬头看的瞬间</b>。</p>
+      <span class="theme-key">电梯</span><span class="theme-key">文凭</span><span class="theme-key">反光</span>
+    </div>
+  </div>
+  <hr class="theme-sep">
+  <div class="theme-block">
+    <div class="theme-side"><div class="theme-no">陆</div><h3>身体作为战场</h3><div class="t-en">The Body as Battleground</div></div>
+    <div class="theme-body">
+      <p>婚床、产床、流水线与头痛——本卷的女性身体被写成一寸寸被征用的土地。「界限消失」发作时，<b>连皮肤的边界也守不住</b>。</p>
+      <p>费兰特的坦白在此立起标高：她不写苦难的诗，<b>写苦难的账</b>——每一笔都记在具体的日子里。这份账单，要到第四部才算完。</p>
+      <span class="theme-key">征用</span><span class="theme-key">界限消失</span><span class="theme-key">账单</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== QUOTES ===== -->
+<section class="section fade-in" id="quotes">
+  <h2 class="section-title">名句</h2>
+  <p class="section-desc">七句，从洞房走到流水线。均按大意转述并标注——想背原文，请翻开书。</p>
+  <div class="quote-shell">
+    <button class="quote-nav prev" id="qPrev" aria-label="上一条">‹</button>
+    <div class="quote-viewport"><div class="quote-track" id="qTrack"></div></div>
+    <button class="quote-nav next" id="qNext" aria-label="下一条">›</button>
+    <div class="quote-dots" id="qDots"></div>
+  </div>
+</section>
+
+<!-- ===== VERSIONS & LEGACY ===== -->
+<section class="section wide fade-in" id="versions">
+  <h2 class="section-title">与前后卷 · 译本与影像</h2>
+  <p class="section-desc">这一卷接在哪里、通向哪里，以及怎么读、怎么看。</p>
+  <div class="dual-grid">
+    <div class="v-panel">
+      <h3>中文译本</h3>
+      <div class="v-sub">「那不勒斯四部曲」简体中文版</div>
+      <div class="v-row"><span class="v-year">2017</span><b>陈英 译</b>（人民文学出版社 · 九久读书人）—— 与第一部同版连排；婚内暴力与工厂场景的措辞分寸，是这一卷译笔最受讨论的地方。</div>
+      <div class="v-row"><span class="v-year">译名</span><b>小词典</b> —— 卡拉奇太太、赛鲁罗的莉拉、工厂里的莉拉：译名随场合切换，恰好演出了「名字的产权」。</div>
+      <div class="v-rec">紧接第一部连读，中间不要停太久——本卷承接的是婚礼当晚，不是十年之后。</div>
+    </div>
+    <div class="v-panel">
+      <h3>HBO 剧集</h3>
+      <div class="v-sub">《我的天才女友》剧集版对应关系</div>
+      <div class="v-row"><span class="v-year">2020</span><b>第二季</b> · 8 集 —— 对应本卷；婚礼、婚夜与海滩三场重头戏，是整部剧集公认的高峰段落。</div>
+      <div class="v-row"><span class="v-year">改编</span><b>与原著的差异</b> —— 剧集把莉拉日记的部分处理成画外音与影像互切；「界限消失」用视效外化，比文字更直给。</div>
+      <div class="v-rec">本卷沉重，剧集也一样：建议与第一部隔开一点时间再看。</div>
+    </div>
+  </div>
+  <div class="legacy-list">
+    <div class="legacy-item">
+      <div class="l-name">承接第一部<span>那双鞋</span></div>
+      <div class="l-desc">婚礼上那双鞋在本卷第一章就换成了拳头：两卷之间没有喘息——费兰特连顺序都排好了。</div>
+    </div>
+    <div class="legacy-item">
+      <div class="l-name">留给第三部<span>题面</span></div>
+      <div class="l-desc">莱农去比萨、莉拉守着街区——本卷末的分工，就是《离开的，留下的》这个书名的题面。</div>
+    </div>
+    <div class="legacy-item">
+      <div class="l-name">日记的暗线<span>写作伦理</span></div>
+      <div class="l-desc">莉拉的日记在本卷成为莱农的写作燃料——这条伦理暗线一直烧到第四部。</div>
+    </div>
+    <div class="legacy-item">
+      <div class="l-name">《蓝色仙女》<span>三层文本</span></div>
+      <div class="l-desc">童年手稿、日记、处女作在本卷完成第一次「合流」——记住这种对不上账的感觉。</div>
+    </div>
+    <div class="legacy-item">
+      <div class="l-name">前后卷各给一个答案<span>三件事</span></div>
+      <div class="l-desc">上一卷的卷末三件事（鞋、婚约、那句话），下一卷会各给一个答案——读完第三部回头看，清单正好打勾。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== READING ===== -->
+<section class="section fade-in" id="reading">
+  <h2 class="section-title">阅读指南</h2>
+  <p class="section-desc">给正在读（或将要读）的你四条实用建议。</p>
+  <div class="read-grid">
+    <div class="read-card">
+      <h3>怎么进入</h3>
+      <p>从第一部结尾直接续上，不要隔太久——本卷开场即暴力，<b>建议白天读</b>。日记部分是全卷最亮的区域，值得放慢速度逐段读：那是你离莉拉头脑最近的一次。</p>
+    </div>
+    <div class="read-card">
+      <h3>值得盯住</h3>
+      <ul>
+        <li>新婚夜的写法：不渲染，只记账</li>
+        <li><b>「界限消失」的完整发作</b>：四部曲最重要的心理事件</li>
+        <li>伊斯基亚的两场夜谈：四角关系的绷紧过程</li>
+        <li>莱农读日记的段落：写作伦理在这里埋线</li>
+      </ul>
+    </div>
+    <div class="read-card">
+      <h3>容易误读的地方</h3>
+      <ul>
+        <li>莉拉不是「恋爱脑」——出走是求生，不是浪漫</li>
+        <li>尼诺不值得辩护——四部曲会反复补刀</li>
+        <li>斯特凡诺的礼貌不是性格反转——权力才是性格</li>
+        <li>莱农的「成功」带着赃物——别急着替她高兴</li>
+      </ul>
+    </div>
+    <div class="read-card">
+      <h3>读完之后</h3>
+      <ul>
+        <li>立刻读<b>《离开的，留下的》</b>：位置互换的起点在本卷末尾已经写明</li>
+        <li>把《蓝色仙女》这条线记牢——第四部它会回来收账</li>
+        <li>对照剧集第二季的婚夜戏与海滩戏</li>
+        <li>想一想「新名字」：本卷里几乎所有女人都被改过名</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <span class="foot-mark"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><g stroke="#a3731c" stroke-width="1.5" stroke-linecap="round" fill="none"><circle cx="8" cy="8" r="2.6"/><circle cx="16" cy="8" r="2.6"/><path d="M6 13 h4 v7 h-4 z"/><path d="M14 13 h4 v7 h-4 z"/></g></svg>换了名字的人，还是原来那个人 · © zzht</span>
+  <span><a href="neapolitan.html">四部曲导读</a> · <a href="my-brilliant-friend.html">上一部 · 我的天才女友</a> · <a href="those-who-leave.html">下一部 · 离开的，留下的</a> · <a href="index.html">返回首页</a> · <a href="https://github.com/zzht1">GitHub ↗</a></span>
+</footer>
+
+<script>
+/* ================= DATA ================= */
+const GROUPS = {
+  girls: { name: '两个女孩', color: '#a3731c' },
+  love:  { name: '爱（其实危险）', color: '#9c3222' },
+  power: { name: '街区权力', color: '#4d4a45' },
+  labor: { name: '工厂与同志', color: '#5f7050' }
+};
+
+const CHARACTERS = [
+  { id:'lila', name:'莉拉（卡拉奇太太）', ru:'Raffaella "Lila" Cerullo', group:'girls', role:'天才',
+    desc:'十六岁的新娘，二十岁的工人。从大宅到香肠厂，姓氏换了两回，处境换了个方向。',
+    tags:['新名字','日记','界限消失'],
+    detail:'本卷的莉拉在三种身份里被来回撕扯：斯特凡诺的妻子、尼诺的情人、流水线上的女工。她始终是街区最聪明的人，聪明到没有一处可藏。与恩佐的友谊、与莱农的日记交易，是黑暗里的两根火柴。' },
+  { id:'elena', name:'埃莱娜（莱农）', ru:'Elena "Lenù" Greco', group:'girls', role:'升学者',
+    desc:'高中、高考、比萨——她沿着第一部铺好的楼梯继续往上走，每一步都踩在莉拉的影子旁边。',
+    tags:['暗恋','日记','处女作'],
+    detail:'她把对尼诺的暗恋咽下去，把莉拉的日记留下来，把朋友的人生写进自己的第一本书。本卷结束时她拿到两样东西：一纸录取通知，和一笔永远算不清的写作之债。' },
+  { id:'nino', name:'尼诺', ru:'Nino Sarratore', group:'love', role:'语言的男人',
+    desc:'萨拉托雷家的长子，谈吐像打开一扇扇窗。莉拉为他出走，莱农为他暗恋多年。',
+    tags:['语言','出走','抛弃'],
+    detail:'他真实地聪明，也真实地懦弱：能把街区的弊病讲成一篇檄文，却接不住一个具体女人的命运。二十来天后他离开莉拉，手法与其父如出一辙。四部曲将反复回到这个判断：他最像他的父亲。' },
+  { id:'stefano', name:'斯特凡诺·卡拉奇', ru:'Stefano Carracci', group:'power', role:'丈夫',
+    desc:'新婚的丈夫。礼貌的皮、算账的心、父亲的手。',
+    tags:['婚姻','暴力','生意'],
+    detail:'他对莉拉的暴力和对索拉拉的恭敬来自同一处：权力永远优先于感情。生意被索拉拉渗透时，他选择维持联盟而不是维护妻子——婚礼上那双鞋，早就写好了答案。' },
+  { id:'michele', name:'米凯莱·索拉拉', ru:'Michele Solara', group:'power', role:'危险的知音',
+    desc:'索拉拉兄弟中的弟弟，比哥哥更冷、更聪明。对莉拉的迷恋半是征服，半是敬意。',
+    tags:['注视','危险','懂她'],
+    detail:'四部曲里最毛骨悚然的「知音」：他认得莉拉的天才，并因此更想把她关进自己的势力。生意、汽车与枪，他全都有；莉拉唯一能做的，是永不低头。' },
+  { id:'pasquale', name:'帕斯卡莱·佩卢索', ru:'Pasquale Peluso', group:'labor', role:'工人组织者',
+    desc:'泥瓦匠的儿子，香肠厂里的激进分子。从小与两个女孩一起长大，对街区的不公早有一本账。',
+    tags:['罢工','组织','仇恨'],
+    detail:'他把街区的阶级账本背得滚瓜烂熟，也把恨索拉拉这件事做成了毕生事业。本卷他在工厂里串联、谈政治——这股怒火在第三、四部将烧到他自己身上。' },
+  { id:'enzo', name:'恩佐·斯坎诺', ru:'Enzo Scanno', group:'labor', role:'沉默的同伴',
+    desc:'寡言的恩佐。儿时与莉拉斗算术，成年后是她唯一不索取的同伴。',
+    tags:['忠诚','同住','自学'],
+    detail:'他跑去把被尼诺扔下的莉拉接回家，陪她进厂，与她同住却守身如玉——街区无法理解的组合。夜里他啃技术手册，后来把莉拉也带进了计算机的世界：那是第三部的伏笔。' },
+  { id:'alfonso', name:'阿方索·卡拉奇', ru:'Alfonso Carracci', group:'power', role:'银行的卡拉奇',
+    desc:'卡拉奇家的小儿子，银行职员。斯文、压抑，在兄长的生意与街区的规矩之间走钢丝。',
+    tags:['银行','体面','影子'],
+    detail:'他是「体面化」的卡拉奇：不打人，只盖章。本卷里他偶尔露出与街区格格不入的裂缝——那些裂缝，要到后面几卷才被看清。' },
+  { id:'gigliola', name:'吉耀拉', ru:'Gigliola Spagnuolo', group:'power', role:'索拉拉太太',
+    desc:'糕点师的女儿，最终嫁给了马尔切洛·索拉拉——把自己嫁成了街区权力的一部分。',
+    tags:['婚姻','攀附'],
+    detail:'她与索拉拉家的联姻，和莉拉的婚姻构成镜像：同样是嫁，她选择入伙。本卷的街区婚礼戏，两次婚礼对照着看最好——一个在逃，一个在进。' },
+  { id:'antonio', name:'安东尼奥', ru:'Antonio', group:'love', role:'修车行学徒',
+    desc:'莱农第一任男友，母亲是那位疯了的梅莉娜。真心，却接不住她的世界。',
+    tags:['吃醋','参军','底层'],
+    detail:'他真心爱莱农，却接不住她的世界：书、大学、向上的引力。嫉妒让他粗暴，参军让他退场——他是街区给莱农的「默认选项」，也是她逃离街区时必须穿过的一道门。' }
+];
+
+const QUOTES = [
+  { text:'现在我是卡拉奇太太了，可这个名字不属于我。', src:'莉拉（转述）', note:'书名的一切：婚礼是过户手续，姓氏是财产，新娘是其中最值钱的一项。' },
+  { text:'太阳底下，人的轮廓开始融化，彼此渗透。', src:'莉拉 · 「界限消失」（转述）', note:'本卷最重要的心理事件，也是莉拉一生病历的第一页。' },
+  { text:'我把真实都写给你了——怎么处理，是你的事。', src:'莉拉把日记交给莱农（转述）', note:'两摞日记从此住在莱农的书桌里：写作伦理的引信在此点燃。' },
+  { text:'他说话的时候，像把整个世界重新讲了一遍。', src:'莉拉谈尼诺（转述）', note:'危险正在于此：语言的魅力替暴力铺路——本卷教读者识别这种声音。' },
+  { text:'从楼梯上摔下来的——街区人人都信，人人都懂。', src:'街区的说法（转述）', note:'语法学：谁来叙述暴力，暴力就成了谁的样子。' },
+  { text:'我的第一本书，每一页都有她的呼吸。', src:'莱农（转述）', note:'处女作出版的同时，债也立起来了：《蓝色仙女》、日记、友谊——谁欠谁，说不清。' },
+  { text:'婚姻把姓氏给了她，又把她的名字没收了。', src:'莱农（转述）', note:'「新名字」的两面：一份嫁妆，一笔罚金。' }
+];
+
+/* ================= HELPERS ================= */
+const $ = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+
+/* ================= NAV ================= */
+$$('.nav-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const el = document.getElementById(tab.dataset.section);
+    if (el) {
+      const y = el.getBoundingClientRect().top + window.pageYOffset - 56;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  });
+});
+function setupScrollspy() {
+  const tabs = $$('.nav-tab');
+  const secs = tabs.map(t => document.getElementById(t.dataset.section)).filter(Boolean);
+  const onScroll = () => {
+    const pos = window.scrollY + 140;
+    let cur = secs[0];
+    for (const s of secs) { if (s.offsetTop <= pos) cur = s; }
+    tabs.forEach(t => t.classList.toggle('active', t.dataset.section === cur.id));
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+}
+
+/* ================= FADE IN ================= */
+function setupFadeIn() {
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: .06 });
+  $$('.fade-in').forEach(el => io.observe(el));
+}
+
+/* ================= TIMELINE ================= */
+function setupTimeline() {
+  $$('.t-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const open = item.classList.toggle('open');
+      const d = item.querySelector('.t-detail');
+      d.style.maxHeight = open ? d.scrollHeight + 'px' : '0px';
+    });
+  });
+}
+
+/* ================= CHARACTERS ================= */
+function setupCharacters() {
+  const grid = $('#charGrid');
+  const fRow = $('#charFilters');
+  const cats = [['all', '全部'], ...Object.entries(GROUPS).map(([k, g]) => [k, g.name])];
+  cats.forEach(([k, label], i) => {
+    const chip = document.createElement('div');
+    chip.className = 'filter-chip' + (i === 0 ? ' active' : '');
+    chip.textContent = label;
+    chip.dataset.k = k;
+    chip.addEventListener('click', () => {
+      $$('.filter-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      $$('.char-card').forEach(card => {
+        card.classList.toggle('hidden', k !== 'all' && card.dataset.group !== k);
+      });
+    });
+    fRow.appendChild(chip);
+  });
+
+  CHARACTERS.forEach(c => {
+    const g = GROUPS[c.group];
+    const card = document.createElement('div');
+    card.className = 'char-card';
+    card.dataset.group = c.group;
+    card.style.setProperty('--gc', g.color);
+    card.innerHTML =
+      '<div class="c-name">' + c.name + '</div>' +
+      '<div class="c-ru">' + c.ru + '</div>' +
+      '<div class="c-desc">' + c.desc + '</div>' +
+      '<div class="c-tags">' + c.tags.map(t => '<span class="c-tag">' + t + '</span>').join('') + '</div>';
+    card.addEventListener('click', () => openModal(c));
+    grid.appendChild(card);
+  });
+}
+function openModal(c) {
+  const g = GROUPS[c.group];
+  const mask = $('#modalMask');
+  $('#mName').textContent = c.name;
+  $('#mRu').textContent = c.ru;
+  const role = $('#mRole'); role.textContent = c.role + ' · ' + g.name; role.style.color = g.color; role.style.background = g.color + '14';
+  $('#mBody').textContent = c.detail;
+  $('#modalBox').style.borderTopColor = g.color;
+  mask.classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  $('#modalMask').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+/* ================= QUOTES ================= */
+let qIdx = 0, qTimer = null;
+function setupQuotes() {
+  const track = $('#qTrack');
+  QUOTES.forEach((q, i) => {
+    const s = document.createElement('div');
+    s.className = 'q-slide';
+    s.innerHTML = '<div class="q-mark">❝</div><div class="q-text">' + q.text + '</div>' +
+      '<div class="q-src">' + q.src + '</div><div class="q-note">' + q.note + '</div>';
+    track.appendChild(s);
+    const d = document.createElement('div');
+    d.className = 'q-dot' + (i === 0 ? ' active' : '');
+    d.addEventListener('click', () => goQuote(i, true));
+    $('#qDots').appendChild(d);
+  });
+  $('#qPrev').addEventListener('click', () => goQuote((qIdx - 1 + QUOTES.length) % QUOTES.length, true));
+  $('#qNext').addEventListener('click', () => goQuote((qIdx + 1) % QUOTES.length, true));
+  startQuoteAuto();
+  const shell = $('.quote-shell');
+  shell.addEventListener('mouseenter', stopQuoteAuto);
+  shell.addEventListener('mouseleave', startQuoteAuto);
+}
+function goQuote(i, manual) {
+  qIdx = i;
+  $('#qTrack').style.transform = 'translateX(-' + i * 100 + '%)';
+  $$('.q-dot').forEach((d, j) => d.classList.toggle('active', j === i));
+  if (manual) { stopQuoteAuto(); startQuoteAuto(); }
+}
+function startQuoteAuto() { stopQuoteAuto(); qTimer = setInterval(() => goQuote((qIdx + 1) % QUOTES.length), 6500); }
+function stopQuoteAuto() { if (qTimer) { clearInterval(qTimer); qTimer = null; } }
+
+/* ================= INIT ================= */
+document.addEventListener('DOMContentLoaded', () => {
+  setupCharacters();
+  setupTimeline();
+  setupQuotes();
+  setupFadeIn();
+  setupScrollspy();
+  $('#modalClose').addEventListener('click', closeModal);
+  $('#modalMask').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+});
+</script>
+
+<!-- modal -->
+<div class="modal-mask" id="modalMask">
+  <div class="modal-box" id="modalBox">
+    <button class="modal-close" id="modalClose" aria-label="关闭">×</button>
+    <h3 id="mName"></h3>
+    <div class="m-ru" id="mRu"></div>
+    <span class="m-role" id="mRole"></span>
+    <div class="m-body" id="mBody"></div>
+  </div>
+</div>
+
+</body>
+</html>
