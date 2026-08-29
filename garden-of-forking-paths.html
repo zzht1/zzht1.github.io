@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="博尔赫斯《小径分岔的花园》梳理：时间分岔、巴别图书馆、伪造与镜像——脉络、篇章、主题、名句与译本。">
+<title>小径分岔的花园 · 博尔赫斯 — zzht</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #e5e8ea;            /* 迷宫蓝灰 */
+  --bg-deep: #dbe1e5;
+  --paper: #f7f9fa;
+  --paper-deep: #eef2f4;
+  --ink: #1e262c;
+  --ink-soft: #4d5a63;
+  --ink-faint: #87949c;
+  --accent: #2e5a7d;        /* 迷宫蓝 */
+  --accent-2: #9a7b2f;      /* 塔罗金 */
+  --accent-3: #7c8b94;      /* 镜银 */
+  --accent-4: #a85a24;      /* 血点红 */
+  --line: #c6d0d6;
+  --serif: 'Noto Serif SC', 'STSong', 'SimSun', serif;
+  --sans: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans); color: var(--ink); line-height: 1.75; overflow-x: hidden;
+  background-color: var(--bg);
+  /* 极淡的迷宫细线网格：每条走廊都通向另一条 */
+  background-image:
+    linear-gradient(rgba(46,90,125,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(46,90,125,.05) 1px, transparent 1px),
+    linear-gradient(rgba(46,90,125,.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(46,90,125,.028) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(46,90,125,.07) 0%, rgba(229,232,234,0) 460px);
+  background-size: 52px 52px, 52px 52px, 208px 208px, 208px 208px, 100% 100%;
+}
+::selection { background: rgba(46, 90, 125, .18); }
+
+/* back home */
+.back-home {
+  position: fixed; top: 18px; left: 20px; z-index: 120;
+  font-size: .85rem; color: var(--ink-soft); text-decoration: none;
+  padding: 7px 14px; border-radius: 999px;
+  background: var(--paper); border: 1px solid var(--line);
+  transition: all .25s;
+}
+.back-home:hover { color: var(--accent); border-color: var(--accent); transform: translateX(-2px); }
+
+/* ===== HERO：郊区别墅的黄昏 ===== */
+.hero {
+  min-height: 94vh;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  text-align: center; padding: 14vh 24px 8vh; position: relative;
+  background:
+    radial-gradient(ellipse 75% 40% at 50% -5%, rgba(46,90,125,.16), transparent 62%),
+    linear-gradient(180deg, var(--bg-deep) 0%, var(--bg) 78%);
+}
+/* 西班牙语水印：迷宫上空的旧题名 */
+.hero-wm {
+  position: absolute; top: 12%; left: 50%; transform: translateX(-50%);
+  font-family: var(--serif); font-style: italic;
+  font-size: clamp(1.5rem, 4.2vw, 3rem);
+  letter-spacing: .05em; white-space: nowrap;
+  color: rgba(46, 90, 125, .09);
+  pointer-events: none; user-select: none;
+}
+.hero-eyebrow { font-size: .82rem; letter-spacing: .32em; color: var(--ink-soft); margin-bottom: 22px; font-weight: 400; position: relative; }
+.hero h1 {
+  font-family: var(--serif); font-size: clamp(3.2rem, 9.4vw, 6rem);
+  font-weight: 900; letter-spacing: .1em; line-height: 1.12;
+  color: var(--ink); position: relative;
+}
+.hero-es { font-family: var(--serif); font-size: clamp(.92rem, 2.4vw, 1.2rem); color: var(--accent); letter-spacing: .14em; margin-top: 14px; font-style: italic; position: relative; }
+.hero-sub { margin-top: 18px; color: var(--ink-soft); font-size: .97rem; font-weight: 300; letter-spacing: .05em; position: relative; }
+/* 树状分叉线：一条线分岔成多条，再合流 */
+.hero-divider { display: flex; align-items: center; gap: 18px; margin: 30px auto; position: relative; }
+.hero-divider::before, .hero-divider::after { content: ''; width: 78px; height: 1px; }
+.hero-divider::before { background: linear-gradient(90deg, transparent, rgba(46,90,125,.65)); }
+.hero-divider::after { background: linear-gradient(270deg, transparent, rgba(46,90,125,.65)); }
+.hero-quote { max-width: 560px; font-family: var(--serif); font-size: 1.06rem; color: var(--ink-soft); line-height: 2; position: relative; }
+.hero-quote .src { display: block; margin-top: 10px; font-size: .85rem; color: var(--ink-faint); }
+.hero-meta { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px 46px; margin-top: 48px; position: relative; }
+.hero-meta-item { text-align: center; min-width: 70px; }
+.hero-meta-item .value { display: block; font-family: var(--serif); font-weight: 900; font-size: 1.7rem; color: var(--accent); line-height: 1.2; }
+.hero-meta-item .label { font-size: .78rem; color: var(--ink-faint); letter-spacing: .12em; }
+.scroll-hint {
+  position: absolute; bottom: 26px; left: 50%; transform: translateX(-50%);
+  font-size: .78rem; color: var(--ink-faint); cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  letter-spacing: .2em; user-select: none;
+}
+.scroll-hint .arrow { animation: bob 1.8s ease-in-out infinite; }
+@keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+
+/* ===== NAV ===== */
+.nav-bar { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bottom: 1px solid var(--line); }
+.nav-inner { max-width: 1000px; margin: 0 auto; display: flex; overflow-x: auto; scrollbar-width: none; padding: 0 12px; }
+.nav-inner::-webkit-scrollbar { display: none; }
+.nav-tab {
+  flex: 0 0 auto; padding: 15px 18px; cursor: pointer;
+  font-size: .9rem; color: var(--ink-soft); letter-spacing: .06em;
+  position: relative; transition: color .25s; white-space: nowrap; user-select: none;
+}
+.nav-tab::after {
+  content: ''; position: absolute; left: 18px; right: 18px; bottom: 0;
+  height: 2px; border-radius: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  transform: scaleX(0); transition: transform .3s;
+}
+.nav-tab:hover { color: var(--ink); }
+.nav-tab.active { color: var(--accent); font-weight: 500; }
+.nav-tab.active::after { transform: scaleX(1); }
+
+/* ===== SECTIONS ===== */
+.section { max-width: 1000px; margin: 0 auto; padding: 90px 24px 10px; }
+.section.wide { max-width: 1060px; }
+.section-title { font-family: var(--serif); font-size: clamp(1.7rem, 4vw, 2.3rem); font-weight: 900; letter-spacing: .08em; color: var(--ink); }
+.section-title::after {
+  content: ''; display: block; width: 76px; height: 3px; margin-top: 14px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2), transparent); border-radius: 2px;
+}
+.section-desc { margin-top: 20px; color: var(--ink-soft); max-width: 720px; font-size: .98rem; line-height: 2; }
+.fade-in { opacity: 0; transform: translateY(26px); transition: opacity .8s ease, transform .8s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* ===== OVERVIEW ===== */
+.ov-grid { display: grid; grid-template-columns: 1.35fr 1fr; gap: 40px; margin-top: 40px; align-items: start; }
+.ov-prose p { margin-bottom: 16px; color: var(--ink-soft); font-size: .97rem; line-height: 2.05; }
+.ov-prose p strong { color: var(--ink); font-weight: 600; }
+.ov-prose .lede { font-family: var(--serif); font-size: 1.12rem; color: var(--ink); line-height: 2.1; }
+.ov-prose .lede::first-letter { font-size: 2.6em; float: left; line-height: 1; padding-right: .12em; color: var(--accent); font-weight: 900; }
+.ov-panel { background: var(--paper); border: 1px solid var(--line); border-radius: 22px; padding: 30px 28px; box-shadow: 0 10px 24px rgba(46,70,90,.08); }
+.ov-panel h3 { font-family: var(--serif); font-size: 1.05rem; font-weight: 700; letter-spacing: .08em; color: var(--accent); margin-bottom: 16px; }
+.bg-list { list-style: none; }
+.bg-list li {
+  position: relative; padding: 10px 0 10px 22px;
+  font-size: .88rem; color: var(--ink-soft); line-height: 1.8;
+  border-bottom: 1px dashed var(--line);
+}
+.bg-list li:last-child { border-bottom: none; }
+.bg-list li::before {
+  content: ''; position: absolute; left: 2px; top: 19px;
+  width: 7px; height: 7px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+}
+.bg-list li b { color: var(--ink); font-weight: 600; }
+.room-note { margin-top: 16px; padding-top: 12px; border-top: 1px dashed var(--line); font-size: .8rem; color: var(--ink-faint); font-style: italic; line-height: 1.8; }
+.stat-strip { display: flex; flex-wrap: wrap; gap: 0; margin-top: 44px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.stat { flex: 1 1 auto; min-width: 150px; text-align: center; padding: 26px 16px; }
+.stat + .stat { border-left: 1px dashed var(--line); }
+.stat .num { font-family: var(--serif); font-size: 1.9rem; font-weight: 900; color: var(--accent); line-height: 1.2; }
+.stat .cap { font-size: .8rem; color: var(--ink-faint); letter-spacing: .08em; margin-top: 6px; }
+
+/* ===== STORY ===== */
+.phase { margin-top: 48px; }
+.phase-head { display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap; }
+.phase-num {
+  font-family: var(--serif); font-size: 2rem; font-weight: 900;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text; background-clip: text; color: transparent; line-height: 1;
+}
+.phase-head h3 { font-family: var(--serif); font-size: 1.25rem; font-weight: 700; letter-spacing: .05em; }
+.phase-head .ref { font-size: .8rem; color: var(--ink-faint); letter-spacing: .05em; }
+.phase-items { margin-top: 20px; margin-left: 13px; border-left: 2px solid rgba(46, 90, 125, .5); padding-left: 26px; }
+.t-item { position: relative; border-radius: 18px; padding: 14px 18px; margin-bottom: 10px; cursor: pointer; transition: background .25s; }
+.t-item:hover { background: var(--paper-deep); }
+.t-item::before {
+  content: ''; position: absolute; left: -33px; top: 24px;
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--bg); border: 2.5px solid var(--accent); transition: background .25s;
+}
+.t-item.open::before { background: var(--accent); }
+.t-item-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.t-item-head h4 { font-size: 1rem; font-weight: 600; font-family: var(--serif); letter-spacing: .03em; }
+.t-ref { font-size: .72rem; color: var(--accent); background: rgba(46,90,125,.08); padding: 2px 10px; border-radius: 999px; letter-spacing: .04em; white-space: nowrap; }
+.t-toggle { margin-left: auto; color: var(--ink-faint); font-size: .85rem; transition: transform .3s; }
+.t-item.open .t-toggle { transform: rotate(180deg); }
+.t-detail { max-height: 0; overflow: hidden; transition: max-height .45s ease; }
+.t-detail p { padding-top: 10px; font-size: .9rem; color: var(--ink-soft); line-height: 1.95; max-width: 680px; }
+
+/* ===== 篇章卡：手稿档案 ===== */
+.filter-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px; }
+.filter-chip {
+  padding: 8px 18px; border-radius: 999px; cursor: pointer;
+  font-size: .85rem; color: var(--ink-soft);
+  background: var(--paper); border: 1px solid var(--line);
+  transition: all .25s; user-select: none;
+}
+.filter-chip:hover { transform: translateY(-2px); color: var(--ink); }
+.filter-chip.active { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #f7f9fa; border-color: transparent; }
+.char-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 20px; margin-top: 30px; counter-reset: dossier; }
+.char-card {
+  background: var(--paper); border: 1px solid var(--line); border-radius: 20px;
+  padding: 22px 22px 20px; cursor: pointer; position: relative; overflow: hidden;
+  counter-increment: dossier;
+  transition: transform .3s cubic-bezier(.34,1.4,.5,1), box-shadow .3s, border-color .3s;
+}
+.char-card::before {
+  content: ''; position: absolute; top: 0; left: 22px; right: 22px; height: 3px;
+  border-radius: 0 0 4px 4px;
+  background: linear-gradient(90deg, var(--gc, var(--accent)), transparent); opacity: .85;
+}
+.char-card::after {
+  content: '手稿 ' counter(dossier);
+  position: absolute; top: 14px; right: 18px;
+  font-family: var(--serif); font-size: .82rem; letter-spacing: .06em;
+  color: rgba(46, 90, 125, .4);
+}
+.char-card:hover { transform: translateY(-5px); box-shadow: 0 14px 30px rgba(46,70,90,.16); border-color: var(--gc, var(--accent)); }
+.char-card .c-name { font-family: var(--serif); font-size: 1.12rem; font-weight: 700; }
+.char-card .c-ru { font-size: .76rem; color: var(--ink-faint); margin-top: 3px; font-style: italic; letter-spacing: .02em; }
+.char-card .c-desc { font-size: .85rem; color: var(--ink-soft); margin-top: 12px; line-height: 1.8; }
+.char-card .c-tags { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 6px; }
+.c-tag {
+  font-size: .7rem; padding: 3px 10px; border-radius: 999px;
+  color: var(--gc, var(--accent)); background: color-mix(in srgb, var(--gc, var(--accent)) 10%, var(--paper));
+  border: 1px solid color-mix(in srgb, var(--gc, var(--accent)) 28%, var(--paper));
+}
+.char-card.hidden { display: none; }
+
+/* modal */
+.modal-mask {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(30, 38, 44, .5);
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px; opacity: 0; pointer-events: none; transition: opacity .3s;
+}
+.modal-mask.show { opacity: 1; pointer-events: auto; }
+.modal-box {
+  background: var(--paper); border-radius: 24px; max-width: 560px; width: 100%;
+  max-height: 82vh; overflow-y: auto; padding: 36px 34px; position: relative;
+  transform: translateY(18px); transition: transform .3s;
+  border-top: 4px solid var(--accent);
+}
+.modal-mask.show .modal-box { transform: translateY(0); }
+.modal-close { position: absolute; top: 16px; right: 20px; cursor: pointer; font-size: 1.3rem; color: var(--ink-faint); background: none; border: none; transition: color .2s; line-height: 1; }
+.modal-close:hover { color: var(--accent); }
+.modal-box h3 { font-family: var(--serif); font-size: 1.5rem; font-weight: 900; }
+.modal-box .m-ru { font-style: italic; color: var(--ink-faint); font-size: .88rem; margin-top: 4px; }
+.modal-box .m-role { display: inline-block; margin-top: 12px; font-size: .76rem; letter-spacing: .06em; color: var(--accent); background: rgba(46,90,125,.08); padding: 4px 14px; border-radius: 999px; }
+.modal-box .m-body { margin-top: 16px; font-size: .93rem; color: var(--ink-soft); line-height: 2.05; }
+
+/* ===== THEMES ===== */
+.theme-block { display: grid; grid-template-columns: 220px 1fr; gap: 34px; padding: 42px 0; align-items: start; }
+.theme-side { position: sticky; top: 84px; }
+.theme-no { font-family: var(--serif); font-weight: 900; font-size: 1.05rem; letter-spacing: .2em; color: var(--accent-2); }
+.theme-side h3 { font-family: var(--serif); font-size: 1.3rem; font-weight: 900; margin-top: 8px; line-height: 1.5; }
+.theme-side .t-en { font-size: .78rem; color: var(--ink-faint); font-style: italic; margin-top: 4px; letter-spacing: .03em; }
+.theme-body p { color: var(--ink-soft); font-size: .94rem; line-height: 2.05; margin-bottom: 14px; max-width: 640px; }
+.theme-body p b { color: var(--ink); font-weight: 600; }
+.theme-key {
+  display: inline-block; margin-top: 4px; margin-right: 8px; margin-bottom: 6px;
+  font-size: .74rem; color: var(--accent); letter-spacing: .05em;
+  padding: 3px 12px; border-radius: 999px; border: 1px solid rgba(46,90,125,.3);
+  background: rgba(46,90,125,.06);
+}
+.theme-sep { height: 1px; border: none; background: linear-gradient(90deg, transparent, var(--line) 25%, var(--line) 75%, transparent); }
+
+/* ===== QUOTES：花园的夜谈 ===== */
+.quote-shell { margin-top: 38px; position: relative; }
+.quote-viewport { overflow: hidden; border-radius: 24px; }
+.quote-track { display: flex; transition: transform .6s cubic-bezier(.4,0,.2,1); }
+.q-slide {
+  flex: 0 0 100%; padding: 50px 8%;
+  background:
+    radial-gradient(ellipse 55% 60% at 50% 0%, rgba(124,139,148,.1), transparent 70%),
+    #14222c;
+  border: 1px solid #243642; border-radius: 24px; text-align: center;
+}
+.q-mark { font-family: var(--serif); font-size: 2.6rem; color: #7c8b94; line-height: 1; }
+.q-text { font-family: var(--serif); font-size: clamp(1.05rem, 2.6vw, 1.35rem); line-height: 2.1; color: #d9e4ea; margin-top: 12px; }
+.q-src { margin-top: 18px; font-size: .85rem; color: #8fb0c2; letter-spacing: .06em; }
+.q-note { margin-top: 8px; font-size: .82rem; color: #7f93a0; max-width: 520px; margin-left: auto; margin-right: auto; line-height: 1.8; }
+.quote-nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 42px; height: 42px; border-radius: 50%;
+  background: var(--paper); border: 1px solid var(--line);
+  color: var(--ink-soft); font-size: 1.1rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .25s; z-index: 5;
+}
+.quote-nav:hover { color: var(--accent); border-color: var(--accent); transform: translateY(-50%) scale(1.08); }
+.quote-nav.prev { left: -14px; }
+.quote-nav.next { right: -14px; }
+.quote-dots { display: flex; justify-content: center; gap: 9px; margin-top: 22px; }
+.q-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--line); cursor: pointer; transition: all .3s; }
+.q-dot.active { background: var(--accent); transform: scale(1.25); }
+
+/* ===== VERSIONS & LEGACY ===== */
+.dual-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 38px; }
+.v-panel { background: var(--paper); border: 1px solid var(--line); border-radius: 22px; padding: 28px 26px; box-shadow: 0 10px 24px rgba(46,70,90,.08); }
+.v-panel h3 { font-family: var(--serif); font-size: 1.1rem; font-weight: 700; letter-spacing: .06em; margin-bottom: 6px; }
+.v-panel .v-sub { font-size: .8rem; color: var(--ink-faint); margin-bottom: 18px; }
+.v-row { padding: 14px 0; border-bottom: 1px dashed var(--line); font-size: .88rem; color: var(--ink-soft); line-height: 1.8; }
+.v-row:last-child { border-bottom: none; }
+.v-row b { color: var(--ink); font-weight: 600; }
+.v-row .v-year { font-family: var(--serif); color: var(--accent); font-weight: 700; margin-right: 10px; }
+.v-rec { margin-top: 14px; font-size: .82rem; color: var(--accent-2); background: rgba(154,123,47,.1); border-radius: 12px; padding: 10px 14px; line-height: 1.7; }
+.legacy-list { margin-top: 34px; }
+.legacy-item { display: grid; grid-template-columns: 150px 1fr; gap: 20px; padding: 22px 0; border-bottom: 1px dashed var(--line); }
+.legacy-item:last-child { border-bottom: none; }
+.legacy-item .l-name { font-family: var(--serif); font-weight: 700; font-size: 1rem; color: var(--ink); }
+.legacy-item .l-name span { display: block; font-size: .75rem; color: var(--ink-faint); font-weight: 400; margin-top: 3px; font-style: italic; }
+.legacy-item .l-desc { font-size: .9rem; color: var(--ink-soft); line-height: 1.95; }
+
+/* ===== READING ===== */
+.read-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 22px; margin-top: 36px; }
+.read-card { background: var(--paper); border: 1px solid var(--line); border-radius: 22px; padding: 28px 26px; transition: transform .3s, box-shadow .3s; box-shadow: 0 6px 16px rgba(46,70,90,.06); }
+.read-card:hover { transform: translateY(-4px); box-shadow: 0 12px 26px rgba(46,70,90,.14); }
+.read-card h3 { font-family: var(--serif); font-size: 1.02rem; font-weight: 700; margin-bottom: 12px; color: var(--accent); }
+.read-card p { font-size: .88rem; color: var(--ink-soft); line-height: 1.95; }
+.read-card p b { color: var(--ink); }
+.read-card ul { list-style: none; margin-top: 8px; }
+.read-card li { font-size: .88rem; color: var(--ink-soft); line-height: 1.9; padding-left: 18px; position: relative; margin-bottom: 6px; }
+.read-card li::before { content: ''; position: absolute; left: 2px; top: 12px; width: 6px; height: 6px; border-radius: 50%; background: var(--accent-2); }
+
+/* footer */
+.site-footer {
+  max-width: 1000px; margin: 90px auto 0; padding: 26px 24px 46px;
+  border-top: 1px solid var(--line); font-size: .82rem; color: var(--ink-faint);
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+}
+.site-footer a { color: var(--ink-soft); text-decoration: none; transition: color .2s; }
+.site-footer a:hover { color: var(--accent); }
+.foot-mark { display: inline-flex; align-items: center; gap: 9px; }
+
+/* responsive */
+@media (max-width: 820px) {
+  .ov-grid { grid-template-columns: 1fr; }
+  .dual-grid { grid-template-columns: 1fr; }
+  .theme-block { grid-template-columns: 1fr; gap: 14px; }
+  .theme-side { position: static; }
+  .legacy-item { grid-template-columns: 1fr; gap: 6px; }
+  .quote-nav.prev { left: 6px; } .quote-nav.next { right: 6px; }
+  .q-slide { padding: 42px 7%; }
+}
+@media (max-width: 520px) {
+  .section { padding-top: 66px; }
+  .hero { min-height: 88vh; padding-top: 16vh; }
+  .hero-wm { font-size: 1.4rem; }
+  .hero-meta { gap: 12px 26px; }
+  .stat { min-width: 120px; padding: 18px 8px; }
+}
+</style>
+</head>
+<body>
+
+<a href="borges.html" class="back-home">← 博尔赫斯</a>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="top">
+  <span class="hero-wm" aria-hidden="true">El jardín de senderos que se bifurcan</span>
+  <div class="hero-eyebrow">Borges · 1941 · 郊区花园的黄昏对谈</div>
+  <h1>小径分岔的花园</h1>
+  <div class="hero-es">El jardín de senderos que se bifurcan</div>
+  <div class="hero-sub">一桩间谍案，包裹着一部关于时间的哲学残稿</div>
+  <div class="hero-divider"><svg viewBox="0 0 150 40" width="112" height="30" aria-hidden="true"><path d="M0 20 H34" stroke="#2e5a7d" stroke-width="1.6" fill="none" stroke-linecap="round"/><path d="M34 20 C50 20 48 7 66 7 H84" stroke="#2e5a7d" stroke-width="1.3" fill="none" stroke-linecap="round"/><path d="M34 20 H84" stroke="#7c8b94" stroke-width="1.3" fill="none" stroke-linecap="round"/><path d="M34 20 C50 20 48 33 66 33 H84" stroke="#2e5a7d" stroke-width="1.3" fill="none" stroke-linecap="round"/><circle cx="34" cy="20" r="2.6" fill="#a85a24"/><path d="M84 7 C100 7 100 20 116 20 H150" stroke="#2e5a7d" stroke-width="1.3" fill="none" stroke-linecap="round"/><path d="M84 20 H150" stroke="#9a7b2f" stroke-width="1.3" fill="none" stroke-linecap="round"/><path d="M84 33 C100 33 100 20 116 20" stroke="#2e5a7d" stroke-width="1.3" fill="none" stroke-linecap="round"/></svg></div>
+  <blockquote class="hero-quote">
+    “时间不断地分岔，通向无数的将来。”
+    <span class="src">— 转述</span>
+  </blockquote>
+  <div class="hero-meta">
+    <div class="hero-meta-item"><span class="value">1941</span><span class="label">出版年份</span></div>
+    <div class="hero-meta-item"><span class="value">2种</span><span class="label">一个书名的两读</span></div>
+    <div class="hero-meta-item"><span class="value">∞</span><span class="label">分岔的时间</span></div>
+    <div class="hero-meta-item"><span class="value">1次</span><span class="label">车祸后的重生</span></div>
+  </div>
+  <div class="scroll-hint" onclick="document.getElementById('content').scrollIntoView({behavior:'smooth'})">
+    <span>向下探索</span><span class="arrow">↓</span>
+  </div>
+</section>
+
+<!-- ===== NAV ===== -->
+<nav class="nav-bar" id="content">
+  <div class="nav-inner">
+    <div class="nav-tab active" data-section="overview">概览</div>
+    <div class="nav-tab" data-section="story">脉络</div>
+    <div class="nav-tab" data-section="characters">篇章</div>
+    <div class="nav-tab" data-section="themes">主题</div>
+    <div class="nav-tab" data-section="quotes">名句</div>
+    <div class="nav-tab" data-section="versions">译本与影响</div>
+    <div class="nav-tab" data-section="reading">阅读指南</div>
+  </div>
+</nav>
+
+<!-- ===== OVERVIEW ===== -->
+<section class="section fade-in" id="overview">
+  <h2 class="section-title">关于这本书</h2>
+  <div class="ov-grid">
+    <div class="ov-prose">
+      <p class="lede">一九四一年，布宜诺斯艾利斯的一家小出版社印出一本薄薄的小说集：一桩间谍案，包裹着一部关于时间的哲学残稿。世界文学的分岔口，恰好也在这一年。</p>
+      <p>同名短篇里，追捕中的特工找到一位汉学家，后者揭破他曾祖的迷宫——<strong>「小径分岔」说的不是空间，是时间</strong>：每一次选择，所有的可能都在同时发生。同一本集子里还住着无限的图书馆、接管命运的彩票与记得一切的富内斯：他把「无限」第一次稳稳装进了小说的形式。</p>
+      <p>一九四四年，这本书与新增篇目合并为《杜撰集》，成为二十世纪被讨论最多的小说合集之一。<strong>平行宇宙、超文本、元小说</strong>——后来的一切叙事实验，都要先在这里碰面。</p>
+    </div>
+    <div class="ov-panel">
+      <h3>创作背景</h3>
+      <ul class="bg-list">
+        <li><b>车祸后的重生</b>：1938 年圣诞前夕他撞伤头部、濒死昏迷；康复后怀疑自己「还能不能写作」，于是先写了一篇给不存在的百科全书写的书评来自我测试——《特隆、乌克巴尔、奥比斯·特蒂乌斯》由此诞生。</li>
+        <li><b>图书馆职员的日常</b>：他当时在市立图书馆做助理馆员，白天整理编目，下班躲进地下室写作——「通天塔图书馆」的全部细节，来自这份让他自嘲了一辈子的差事。</li>
+        <li><b>评奖失利与朋友们的专号</b>：1941 年这本书角逐全国文学奖落败，文坛哗然，《南方》杂志的同仁专门出了一期为致敬他的专号——落选的书随后名满天下。</li>
+        <li><b>一个书名、两次出版</b>：1941 年同名集子独立成书；1944 年并入《杜撰集》，篇目几乎翻倍，从间谍案与无限，一路写到梦中造人。</li>
+        <li><b>侦探小说当外衣</b>：他嗜读推理小说，索性把形而上学写进侦探壳里——线索越严密，谜底越接近宇宙。</li>
+      </ul>
+      <div class="room-note">注：书名直译「分岔小径的花园」；一九四四年并入《杜撰集》后，这些故事才真正拥有全世界的读者。</div>
+    </div>
+  </div>
+  <div class="stat-strip">
+    <div class="stat"><div class="num">1941</div><div class="cap">初版 · 1944 并入《杜撰集》</div></div>
+    <div class="stat"><div class="num">2种</div><div class="cap">书名的两读：花园与小说</div></div>
+    <div class="stat"><div class="num">410页</div><div class="cap">巴别图书馆里每本书的页数</div></div>
+    <div class="stat"><div class="num">∞</div><div class="cap">图书馆藏书与彩票的期数</div></div>
+    <div class="stat"><div class="num">3年</div><div class="cap">从《特隆》到《花园》的跨度</div></div>
+  </div>
+</section>
+
+<!-- ===== STORY ===== -->
+<section class="section fade-in" id="story">
+  <h2 class="section-title">脉络</h2>
+  <p class="section-desc">一本薄书装下两种玩法：侦探小说的壳，形而上学的核。以下按四组推进——伪造、凶案、无限与镜像，点击展开详情。</p>
+
+  <div class="phase">
+    <div class="phase-head"><span class="phase-num">Ⅰ</span><h3>特隆：一次伪造的世界</h3><span class="ref">《特隆、乌克巴尔、奥比斯·特蒂乌斯》</span></div>
+    <div class="phase-items">
+      <div class="t-item"><div class="t-item-head"><h4>从车祸到「书评」</h4><span class="t-ref">1938–1939</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>车祸康复后，他担心自己已丧失写作能力，便决定用最保守的体裁自我测试：写一篇书评——评论一部不存在的百科全书。测试超额完成：这篇「书评」成了二十世纪最有名的小说之一。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>乌克巴尔的孤本词条</h4><span class="t-ref">虚构的第一次渗入</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>叙述者在某卷百科全书里读到「乌克巴尔」——词条写得有鼻子有眼，那卷书却查无实据。虚构从这里开始像病毒：先是一个词，然后是一卷书，然后是一个星球。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>一个被发明的星球</h4><span class="t-ref">特隆的规则</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>秘密会社造出「特隆」：一种没有名词的语言、一种没有上帝的贝克莱式唯心主义，还有那句著名谚语——镜子和交媾一样可憎，因为它们使人的数目增加。一位美国富翁后来资助这场伪造，条件是把虚构从一国扩大为一整个星球。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>特隆渗入现实</h4><span class="t-ref">「后记」的口吻</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>数年后，特隆的物件开始在地球上出现，世界竟然甘愿被同化。小说以「后记」的口吻收束：伪造赢了。虚构与真实的战争，在这里打响了第一枪——而枪声温柔得像学术新闻。</p></div></div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-head"><span class="phase-num">Ⅱ</span><h3>间谍案与迷宫</h3><span class="ref">《小径分岔的花园》· 同名短篇</span></div>
+    <div class="phase-items">
+      <div class="t-item"><div class="t-item-head"><h4>一切为了传递一个地名</h4><span class="t-ref">案件的开端</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>第一次世界大战中，一名效命德国的华人特工暴露了身份，追捕在即。他必须把一座英国城市的名字送到柏林——而唯一的办法，是制造一条足以登报的凶杀案。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>曾祖的小说与迷宫</h4><span class="t-ref">云南总督的遗产</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>逃亡途中他找到汉学家史蒂芬·艾伯特。艾伯特告诉他：特工的曾祖曾任云南总督，弃官后去写一部小说、造一座迷宫——世人以为小说没写完、迷宫已失传。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>谜底即谜面</h4><span class="t-ref">时间的揭示</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>艾伯特揭破了迷宫：小说与迷宫是同一件东西。「小径分岔」说的不是空间，是时间——一张不断分岔、彼此包含的网：每一次选择，所有的可能都在某处同时发生。全书的哲学心脏在此跳动。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>枪声与新闻</h4><span class="t-ref">凶案的荒诞逻辑</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>特工杀死恩人艾伯特——只因这个名字与德军将要轰炸的城市同名：一条新闻替他把情报送到了柏林。形而上学被一颗子弹钉进了侦探小说的骨架；战争赢了消息，迷宫赢得了时间。</p></div></div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-head"><span class="phase-num">Ⅲ</span><h3>无限的三件套</h3><span class="ref">图书馆 · 彩票 · 记忆</span></div>
+    <div class="phase-items">
+      <div class="t-item"><div class="t-item-head"><h4>巴别图书馆</h4><span class="t-ref">《通天塔图书馆》</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>由不计其数的六边形厅组成的宇宙图书馆：每本书 410 页、每页 40 行，符号只有二十几个，却排列出一切可能——无限的真理与无限的废话并存。管理员们烧书、寻书、等待传说中的「辩护者」。宇宙，别人管它叫图书馆。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>巴比伦彩票</h4><span class="t-ref">《巴比伦彩票》</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>一家公司从卖彩票开始：先是赌博，然后是罚款，再然后是无人敢查的「秘密判决」——无限的机会长成了无限的专制。巴比伦人在恐惧与虔诚里默默认账。这是他最冷的一则政治寓言。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>博闻强记的富内斯</h4><span class="t-ref">《博闻强记的富内斯》</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>坠马之后，富内斯记得一切、感知一切：他自创的记数法比语言更精确，可他不会概括、不会抽象——思考是忘记差异，在他的世界里没有这种事。无限的记忆不是天赋，是一座敞开的牢房。数年后他死于肺疾。</p></div></div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-head"><span class="phase-num">Ⅳ</span><h3>镜像人物</h3><span class="ref">重写 · 梦中造人 · 侦探的反面</span></div>
+    <div class="phase-items">
+      <div class="t-item"><div class="t-item-head"><h4>皮埃尔·梅纳尔的堂吉诃德</h4><span class="t-ref">《皮埃尔·梅纳尔〈吉诃德〉的作者》</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>二十世纪的法国作家逐字「重新创造」《堂吉诃德》——不抄写，而是独立写出十七世纪的句子。同一段落经他写来，意思无限增值：塞万提斯写来是修辞，梅纳尔写来全是怀疑。评论比原作更长，「书评」成了小说的巅峰形式。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>环形废墟的梦者</h4><span class="t-ref">《环形废墟》</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>魔法师在火神庙的废墟里一丝不苟地梦见一个青年，教他一切，把他送往另一座庙宇，唯独瞒住他的身世。多年后大火烧来，他忽然不怕火——原来「梦者」自己，也是别人梦里的人。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>叛徒和英雄的主题</h4><span class="t-ref">《叛徒和英雄的主题》</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>调查一桩百年前的刺杀案，发现叛徒之死被同谋们导演成戏剧的高潮：历史模仿舞台，舞台模仿历史，永恒轮回的暗号藏在人名与日期里。刺杀成了剧本，叙述者只是迟到的观众。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>死亡与指南针</h4><span class="t-ref">《死亡与指南针》</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>连环凶案按月发生，地点在地图上构成完美的四边形。侦探伦罗特相信几何，凶手夏拉赫就利用他的相信，把追捕一步步变成送上门的迷宫。最后的宣告温柔而残忍：下次我再杀你时，给你那座只有一条看不见、永不停止的直线的迷宫——时间。</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 篇章 ===== -->
+<section class="section wide fade-in" id="characters">
+  <h2 class="section-title">篇章</h2>
+  <p class="section-desc">八份手稿档案：无限的容器、伪造的工程、梦中造人者，与两桩凶案。点击卡片看详情。</p>
+  <div class="filter-row" id="charFilters"></div>
+  <div class="char-grid" id="charGrid"></div>
+</section>
+
+<!-- ===== THEMES ===== -->
+<section class="section fade-in" id="themes">
+  <h2 class="section-title">核心主题</h2>
+  <p class="section-desc">六个思想支点，彼此缠绕——这本薄书之所以成为现代小说的坐标。</p>
+
+  <div class="theme-block">
+    <div class="theme-side"><div class="theme-no">壹</div><h3>无限的三种容器</h3><div class="t-en">Three Containers of Infinity</div></div>
+    <div class="theme-body">
+      <p>图书馆是<b>空间</b>的无限：一切书都在其中，包括对图书馆本身的评论；彩票是<b>机会</b>的无限：一切命运都能被抽签安排；富内斯是<b>心智</b>的无限：一切细节都被记住，直到再也无法思考。</p>
+      <p>三种容器合起来是同一则寓言：<b>无限不是恩赐，是恐怖</b>——拥有无限藏书的人找不到真理，抽中一切机会的人失去了自由，记得一切的人忘记了「概括」这件事。有限，原来是人之为人的前提。</p>
+      <span class="theme-key">空间 · 机会 · 心智</span><span class="theme-key">无限即恐怖</span><span class="theme-key">有限的尊严</span>
+    </div>
+  </div>
+  <hr class="theme-sep">
+  <div class="theme-block">
+    <div class="theme-side"><div class="theme-no">贰</div><h3>伪造与真</h3><div class="t-en">Forgery and Truth</div></div>
+    <div class="theme-body">
+      <p>《特隆》里，一整套伪造的百科全书最终让现实甘拜下风；《皮埃尔·梅纳尔》里，逐字「复制」的《堂吉诃德》产生了全新的意义。博尔赫斯发现：<b>伪造不是真的对立面，而是真的放大器</b>——语境变了，同样的字句就成了另一个宇宙。</p>
+      <p>他把这个发现写成了一种体裁：以书评、注释、词条的面目出现的小说。真实感不再靠描写赢得，而靠<b>引用的姿势</b>——从此，「看起来像资料」成了现代小说最锋利的武器之一。</p>
+      <span class="theme-key">伪造的放大器</span><span class="theme-key">语境决定意义</span><span class="theme-key">书评即小说</span>
+    </div>
+  </div>
+  <hr class="theme-sep">
+  <div class="theme-block">
+    <div class="theme-side"><div class="theme-no">叁</div><h3>时间：最重要的谜面</h3><div class="t-en">Time as the Ultimate Riddle</div></div>
+    <div class="theme-body">
+      <p>曾祖的迷宫不在园林里，在书页里——它就是那部没写完的小说：<b>时间的小径分岔</b>。每一个「或者」都同时成立，每一种命运都在某处正在发生。这是对决定论与自由意志最漂亮的一次文学调停。</p>
+      <p>而《死亡与指南针》把谜底收回凶案现场：最深的迷宫不是四边形的空间，是<b>一条看不见、永不停止的直线</b>。从分岔的网到无限的直线，这本薄书把时间的两种恐怖各写了一遍。</p>
+      <span class="theme-key">小说即迷宫</span><span class="theme-key">所有可能同时发生</span><span class="theme-key">直线迷宫</span>
+    </div>
+  </div>
+  <hr class="theme-sep">
+  <div class="theme-block">
+    <div class="theme-side"><div class="theme-no">肆</div><h3>侦探小说的形式与反面</h3><div class="t-en">The Detective Form and Its Reverse</div></div>
+    <div class="theme-body">
+      <p>他嗜读推理小说，干脆借用其骨架：间谍案需要线索，连环案需要规律。但线索越严密，越指向<b>非理性的深渊</b>——特工杀人不为仇恨而为地名，侦探的几何学正是凶手设下的陷阱。</p>
+      <p>这是「反侦探小说」的诞生：<b>解谜的过程就是入局的过程</b>。后来无数推理与犯罪写作学会了这一手——让读者的聪明，成为凶器的一部分。</p>
+      <span class="theme-key">线索即陷阱</span><span class="theme-key">解谜即入局</span><span class="theme-key">反侦探小说</span>
+    </div>
+  </div>
+  <hr class="theme-sep">
+  <div class="theme-block">
+    <div class="theme-side"><div class="theme-no">伍</div><h3>自我之镜</h3><div class="t-en">Mirrors of the Self</div></div>
+    <div class="theme-body">
+      <p>环形废墟的梦者发现自己是被梦出来的；富内斯拥有世界却失去「我」——纯粹的记忆里没有概括，也就没有自我；梅纳尔则把自己磨成《堂吉诃德》的镜子，用消失自己来证明自己。</p>
+      <p>他还留着那句贯穿一生的暗号：<b>镜子和交媾一样可憎，因为它们使人的数目增加</b>。自我被复制，就不再唯一——这本集子是「镜子谱系」最冷的一站，恐惧与哲学在同一面玻璃里显影。</p>
+      <span class="theme-key">被梦出的梦者</span><span class="theme-key">记忆里的无我</span><span class="theme-key">镜子的可憎</span>
+    </div>
+  </div>
+  <hr class="theme-sep">
+  <div class="theme-block">
+    <div class="theme-side"><div class="theme-no">陆</div><h3>比战乱更持久的棋局</h3><div class="t-en">What Outlasts the War</div></div>
+    <div class="theme-body">
+      <p>间谍案背着第一次世界大战的背景，秘密的奇迹发生在布拉格——但真正的主角都不是战争：<b>枪炮有年限，迷宫无期</b>。一枚棋局般的谋杀、一部未完成的手稿、一个无限图书馆的传说，都比宣告它们诞生或毁灭的战报活得更久。</p>
+      <p>这也是他自己的注脚：1941 年文学奖的评委们投给了别人，同年的这本小书却成了二十世纪的坐标。<b>评审会解散了，分岔的花园还在生长。</b></p>
+      <span class="theme-key">战争作为背景音</span><span class="theme-key">棋局与手稿</span><span class="theme-key">落选的坐标</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== QUOTES ===== -->
+<section class="section fade-in" id="quotes">
+  <h2 class="section-title">名句</h2>
+  <p class="section-desc">八句话，从图书馆走到迷宫——基本是这本书的哲学心电图。</p>
+  <div class="quote-shell">
+    <button class="quote-nav prev" id="qPrev" aria-label="上一条">‹</button>
+    <div class="quote-viewport"><div class="quote-track" id="qTrack"></div></div>
+    <button class="quote-nav next" id="qNext" aria-label="下一条">›</button>
+    <div class="quote-dots" id="qDots"></div>
+  </div>
+</section>
+
+<!-- ===== VERSIONS & LEGACY ===== -->
+<section class="section wide fade-in" id="versions">
+  <h2 class="section-title">译本与影响</h2>
+  <p class="section-desc">中文世界怎么读它，西语版本如何长成，以及它在半个多世纪里留下了什么。</p>
+  <div class="dual-grid">
+    <div class="v-panel">
+      <h3>中文译本</h3>
+      <div class="v-sub">通行全集本，与可对照的旧译</div>
+      <div class="v-row"><span class="v-year">全集本</span><b>王永年 译</b> —— 上海译文出版社全集本；现今最通行的版本，冷峻与幽默都译得干净。</div>
+      <div class="v-row"><span class="v-year">旧译</span><b>早期选本可对照</b> —— 上世纪八十年代以来的多种博尔赫斯选本收录过其中多篇，单篇译名略有出入（如「巴别图书馆／通天塔图书馆」），对照读别有趣味。</div>
+      <div class="v-rec">篇名在不同选本里不一致很正常——博尔赫斯的篇名本身就是迷宫的一角。</div>
+    </div>
+    <div class="v-panel">
+      <h3>西语版本流变</h3>
+      <div class="v-sub">从独立小书到《杜撰集》</div>
+      <div class="v-row"><span class="v-year">1941</span><b>独立初版</b> —— 同名集子在布宜诺斯艾利斯印行，收文七篇上下；角逐全国文学奖落败。</div>
+      <div class="v-row"><span class="v-year">1944</span><b>并入《杜撰集》</b> —— 与新增篇目（《特隆》《皮埃尔·梅纳尔》《环形废墟》等）合为两辑，成为他最著名的小说合集。</div>
+      <div class="v-row"><span class="v-year">1956</span><b>增订再版</b> —— 再版时又添入数篇；今天的「小说卷」以这一谱系为底本。</div>
+      <div class="v-rec">初版与《杜撰集》的差别本身就是文学史的一课：一本获奖落选的小书，长成了二十世纪的坐标系。</div>
+    </div>
+  </div>
+  <div class="legacy-list">
+    <div class="legacy-item">
+      <div class="l-name">平行宇宙的文学源头<span>Parallel Worlds</span></div>
+      <div class="l-desc">「每一次选择都同时发生」比科幻的流行语早了二十年：后世小说影视谈平行世界、时间线分岔，绕不开这座花园的路标。</div>
+    </div>
+    <div class="legacy-item">
+      <div class="l-name">叙事学与超文本的理论富矿<span>Narratology &amp; Hypertext</span></div>
+      <div class="l-desc">「分岔」「网络」「可重组的文本」成为叙事学与超文本研究的教科书案例；互动叙事、超链接小说，都把他认作共同的祖先。</div>
+    </div>
+    <div class="legacy-item">
+      <div class="l-name">「分岔的时间」进入流行文化<span>Forking Paths in Pop Culture</span></div>
+      <div class="l-desc">从电影的叙事把戏到网络文学的平行时间线，「小径分岔」从谜题变成了通用语汇——他先造好了词，后人只管使用。</div>
+    </div>
+    <div class="legacy-item">
+      <div class="l-name">侦探形式的倒转影响推理写作<span>The Anti-Detective Story</span></div>
+      <div class="l-desc">《死亡与指南针》把「解谜」变成「入局」：侦探小说自此多出一条形而上的支流，推理写作学会了怀疑自己的地图。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== READING ===== -->
+<section class="section fade-in" id="reading">
+  <h2 class="section-title">阅读指南</h2>
+  <p class="section-desc">给正在读（或将要读）的你几条实用建议。</p>
+  <div class="read-grid">
+    <div class="read-card">
+      <h3>怎么进入</h3>
+      <p>不必按顺序，每篇独立。<b>先读同名短篇</b>（侦探外壳最好上手），再读《巴别图书馆》——两篇合起来，就是这本书的门与钥匙。一次一篇，读完想一下再翻页。</p>
+    </div>
+    <div class="read-card">
+      <h3>值得盯住的场景</h3>
+      <ul>
+        <li>艾伯特的「揭示」对白：全书的心脏，值得读两遍</li>
+        <li>《特隆》里越查越像真的一卷书</li>
+        <li>伦罗特与夏拉赫的最后一面：温柔的宣判</li>
+        <li>富内斯的自创记数法——无限的细节如何压垮一个人</li>
+      </ul>
+    </div>
+    <div class="read-card">
+      <h3>别被吓退的几件事</h3>
+      <ul>
+        <li>哲学名词（唯心主义、永恒轮回）不必查证，感受压力即可</li>
+        <li>「书评式小说」不是论文——跳过术语，剧情一点不丢</li>
+        <li>篇名在不同译本里不同，遇到不必惊讶</li>
+        <li>觉得冷？他本来就没打算让你温暖——但《环形废墟》藏着一个软心肠</li>
+      </ul>
+    </div>
+    <div class="read-card">
+      <h3>读完之后</h3>
+      <ul>
+        <li><b>《阿莱夫》</b>：继续「容器装无限」，从图书馆换成了地窖里的一个点</li>
+        <li>回头补《恶棍列传》：看这套方法在九年前如何出生</li>
+        <li>延伸阅读：卡尔维诺《看不见的城市》、艾柯《玫瑰之名》</li>
+        <li>他的谈话录：听他亲口把这些谜面再讲一遍，语气轻松得多</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <span class="foot-mark"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M3 19 h18" stroke="#2e5a7d" stroke-width="1.5" stroke-linecap="round" fill="none"/><path d="M6 19 C10 19 10 12 14 12" stroke="#2e5a7d" stroke-width="1.3" fill="none" stroke-linecap="round"/><path d="M9 19 h7" stroke="#9a7b2f" stroke-width="1.3" stroke-linecap="round" fill="none"/><path d="M12 19 C16 19 16 8 20 8" stroke="#7c8b94" stroke-width="1.3" fill="none" stroke-linecap="round"/><circle cx="6" cy="19" r="1.5" fill="#a85a24"/></svg>在所有分岔里，你都读到了这一页 · © zzht</span>
+  <span><a href="borges.html">博尔赫斯</a> · <a href="universal-history-of-infamy.html">上一部 · 恶棍列传</a> · <a href="the-aleph.html">下一部 · 阿莱夫</a> · <a href="index.html">返回首页</a> · <a href="https://github.com/zzht1">GitHub ↗</a></span>
+</footer>
+
+<script>
+/* ================= DATA ================= */
+const GROUPS = {
+  inf:    { name: '无限', color: '#2e5a7d' },
+  fake:   { name: '伪造', color: '#9a7b2f' },
+  mirror: { name: '镜像', color: '#7c8b94' },
+  crime:  { name: '凶案', color: '#a85a24' }
+};
+
+const CHARACTERS = [
+  { id:'tlon', name:'特隆·乌克巴尔', ru:'Tlön, Uqbar, Orbis Tertius', group:'fake', role:'虚构百科全书',
+    desc:'一卷查无实据的百科全书、一个被伪造出来的星球——虚构像病毒一样渗入现实。',
+    tags:['伪书','唯心主义','阴谋'],
+    detail:'叙述者在某套百科全书里发现「乌克巴尔」词条，随后整套伪造浮出水面：秘密会社得到一位美国富翁资助，把虚构从一国扩大为一整个星球。数年后，特隆的物件开始在地球上出现，世界甘愿被同化——「伪造」赢了，而且赢得彬彬有礼。' },
+  { id:'jardin', name:'时间分岔', ru:'El jardín de senderos que se bifurcan', group:'crime', role:'同名短篇 · 间谍案',
+    desc:'一桩为传递地名而杀人的间谍案，内核是一部关于时间的哲学残稿。',
+    tags:['间谍','谜题','时间的网'],
+    detail:'追捕中的华人特工找到汉学家艾伯特；艾伯特替他解开曾祖的迷宫——「小径分岔」不是空间，是时间：每一次选择，所有可能都在发生。特工开枪，只为让报纸把那座城市的名字送到柏林。凶案的荒诞逻辑，把形而上学钉进了侦探小说的骨架。' },
+  { id:'babel', name:'巴别图书馆', ru:'La biblioteca de Babel', group:'inf', role:'宇宙的形状',
+    desc:'由无穷六边形厅组成的宇宙图书馆：一切书都在其中，包括对它自己的评论。',
+    tags:['无限','藏书','神学'],
+    detail:'每本书 410 页、每页 40 行；符号只有二十几个，却排列出一切可能——无限的真理与无限的废话并存。管理员们烧书、寻书、等待传说中的「辩护者」。宇宙，别人管它叫图书馆。' },
+  { id:'loteria', name:'巴比伦彩票', ru:'La lotería en Babilonia', group:'inf', role:'命运的公司',
+    desc:'一家公司从卖彩票开始，最终接管了整座城市的命运。',
+    tags:['抽签','秘密','专制'],
+    detail:'起初是赌博，然后是罚款，再然后是无人敢查的「秘密判决」：无限的机会长成了无限的专制。巴比伦人在恐惧与虔诚里默认真账——抽签成了神学，公司成了教会。博尔赫斯最冷的一则政治寓言。' },
+  { id:'funes', name:'富内斯的记忆', ru:'Funes el memorioso', group:'inf', role:'绝对的记忆',
+    desc:'坠马之后记得一切的年轻人：感知无限，思考瘫痪。',
+    tags:['记忆','感知','牢房'],
+    detail:'富内斯记得每一片叶子的形状、每一次云的变形，还发明了比语言更精确的记数法。可他不会概括、不会抽象——思考是忘记差异，在他的世界里没有这种事。无限的记忆不是天赋，是一座敞开的牢房；数年后他死于肺疾。' },
+  { id:'menard', name:'皮埃尔·梅纳尔', ru:'Pierre Menard, autor del Quijote', group:'fake', role:'重写堂吉诃德的人',
+    desc:'法国作家逐字「重新创造」《堂吉诃德》：同一段文字，意思无限增值。',
+    tags:['书评体','重写','语境'],
+    detail:'他不抄写，而是在二十世纪独立写出十七世纪的句子——同样的词，经他写来全是怀疑。关于他的评论比《堂吉诃德》选段更长：博尔赫斯用一篇「书评」证明，书评可以成为小说的巅峰，语境就是意义的全部秘密。' },
+  { id:'ruinas', name:'环形废墟', ru:'Las ruinas circulares', group:'mirror', role:'梦中造人者',
+    desc:'魔法师在火神庙废墟里梦见一个青年；多年后他发现，自己也是别人梦里的人。',
+    tags:['梦','造物','循环'],
+    detail:'他一丝不苟地梦出一个人，教他、藏他、送走他，唯独不让任何人知道他是梦出来的。大火烧来，他忽然不怕——原来「梦者」自己也被梦着。自我之镜的第一次完整显影：造物者与造物，在同一座环形的火里。' },
+  { id:'brujula', name:'死亡与指南针', ru:'La muerte y la brújula', group:'crime', role:'侦探小说的反面',
+    desc:'侦探伦罗特沿「等距四点」追凶，一步步走进凶手布好的迷宫。',
+    tags:['迷宫','逆转','时间'],
+    detail:'连环凶案按月发生，地点在地图上构成完美的四边形——侦探相信几何，凶手就利用他的相信。最后的宣告温柔而残忍：下次我再杀你时，给你那座只有一条看不见、永不停止的直线的迷宫。空间的谜题，最终让位给时间的迷宫。' }
+];
+
+const QUOTES = [
+  { text:'宇宙（别人管它叫图书馆）。', src:'《通天塔图书馆》开篇', note:'六个字给宇宙换了一个书架——此后再谈「世界」，都得先问一句：这算不算藏书的一部分。' },
+  { text:'时间不断地分岔，通向无数的将来。', src:'《小径分岔的花园》（转述）', note:'全书的心脏：不是空间的岔路，是时间的网——每一个「或者」都同时成立。' },
+  { text:'思考是忘记差异，是概括，是把面孔抽象成符号。在富内斯的世界里，没有这种事。', src:'《博闻强记的富内斯》（转述）', note:'绝对的记忆是绝对的牢房：他拥有全部细节，却再也无法完成「想」这个动作。' },
+  { text:'公司起初卖机会，后来卖命运，最后卖秘密——连它的存在也成了禁区。', src:'《巴比伦彩票》（转述）', note:'无限的机会长成无限的专制：彩票公司最后的业务，是让你忘记自己在抽签。' },
+  { text:'同一段堂吉诃德，梅纳尔写来，字字都是二十世纪的怀疑；塞万提斯写来，却只是十七世纪的修辞。', src:'《皮埃尔·梅纳尔〈吉诃德〉的作者》（转述）', note:'语境决定意义：逐字相同的两段文字，隔着一个世纪互为镜子。' },
+  { text:'镜子和交媾一样可憎，因为它们使人的数目增加。', src:'《特隆、乌克巴尔、奥比斯·特蒂乌斯》（转述）', note:'乌克巴尔的谚语，也是他一生的暗号：自我一旦被复制，就不再唯一。' },
+  { text:'火没有烧死他。他这才明白：另一个人也在梦里，梦到了他。', src:'《环形废墟》（转述）', note:'造物者的最后一张底牌翻在自己身上——谁是梦者，谁是被梦出的，环形里没有起点。' },
+  { text:'下次我再杀你时，我给你的是那座由一条看不见、永不停止的直线构成的迷宫。', src:'《死亡与指南针》（转述）', note:'凶手最后一课：几何会走完，时间不会。最深的迷宫里没有墙，只有日期。' }
+];
+
+/* ================= HELPERS ================= */
+const $ = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+
+/* ================= NAV ================= */
+$$('.nav-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const el = document.getElementById(tab.dataset.section);
+    if (el) {
+      const y = el.getBoundingClientRect().top + window.pageYOffset - 56;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  });
+});
+function setupScrollspy() {
+  const tabs = $$('.nav-tab');
+  const secs = tabs.map(t => document.getElementById(t.dataset.section)).filter(Boolean);
+  const onScroll = () => {
+    const pos = window.scrollY + 140;
+    let cur = secs[0];
+    for (const s of secs) { if (s.offsetTop <= pos) cur = s; }
+    tabs.forEach(t => t.classList.toggle('active', t.dataset.section === cur.id));
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+}
+
+/* ================= FADE IN ================= */
+function setupFadeIn() {
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: .06 });
+  $$('.fade-in').forEach(el => io.observe(el));
+}
+
+/* ================= TIMELINE ================= */
+function setupTimeline() {
+  $$('.t-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const open = item.classList.toggle('open');
+      const d = item.querySelector('.t-detail');
+      d.style.maxHeight = open ? d.scrollHeight + 'px' : '0px';
+    });
+  });
+}
+
+/* ================= 篇章卡 ================= */
+function setupCharacters() {
+  const grid = $('#charGrid');
+  const fRow = $('#charFilters');
+  const cats = [['all', '全部'], ...Object.entries(GROUPS).map(([k, g]) => [k, g.name])];
+  cats.forEach(([k, label], i) => {
+    const chip = document.createElement('div');
+    chip.className = 'filter-chip' + (i === 0 ? ' active' : '');
+    chip.textContent = label;
+    chip.dataset.k = k;
+    chip.addEventListener('click', () => {
+      $$('.filter-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      $$('.char-card').forEach(card => {
+        card.classList.toggle('hidden', k !== 'all' && card.dataset.group !== k);
+      });
+    });
+    fRow.appendChild(chip);
+  });
+
+  CHARACTERS.forEach(c => {
+    const g = GROUPS[c.group];
+    const card = document.createElement('div');
+    card.className = 'char-card';
+    card.dataset.group = c.group;
+    card.style.setProperty('--gc', g.color);
+    card.innerHTML =
+      '<div class="c-name">' + c.name + '</div>' +
+      '<div class="c-ru">' + c.ru + '</div>' +
+      '<div class="c-desc">' + c.desc + '</div>' +
+      '<div class="c-tags">' + c.tags.map(t => '<span class="c-tag">' + t + '</span>').join('') + '</div>';
+    card.addEventListener('click', () => openModal(c));
+    grid.appendChild(card);
+  });
+}
+function openModal(c) {
+  const g = GROUPS[c.group];
+  const mask = $('#modalMask');
+  $('#mName').textContent = c.name;
+  $('#mRu').textContent = c.ru;
+  const role = $('#mRole'); role.textContent = c.role + ' · ' + g.name; role.style.color = g.color; role.style.background = g.color + '14';
+  $('#mBody').textContent = c.detail;
+  $('#modalBox').style.borderTopColor = g.color;
+  mask.classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  $('#modalMask').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+/* ================= QUOTES ================= */
+let qIdx = 0, qTimer = null;
+function setupQuotes() {
+  const track = $('#qTrack');
+  QUOTES.forEach((q, i) => {
+    const s = document.createElement('div');
+    s.className = 'q-slide';
+    s.innerHTML = '<div class="q-mark">❝</div><div class="q-text">' + q.text + '</div>' +
+      '<div class="q-src">' + q.src + '</div><div class="q-note">' + q.note + '</div>';
+    track.appendChild(s);
+    const d = document.createElement('div');
+    d.className = 'q-dot' + (i === 0 ? ' active' : '');
+    d.addEventListener('click', () => goQuote(i, true));
+    $('#qDots').appendChild(d);
+  });
+  $('#qPrev').addEventListener('click', () => goQuote((qIdx - 1 + QUOTES.length) % QUOTES.length, true));
+  $('#qNext').addEventListener('click', () => goQuote((qIdx + 1) % QUOTES.length, true));
+  startQuoteAuto();
+  const shell = $('.quote-shell');
+  shell.addEventListener('mouseenter', stopQuoteAuto);
+  shell.addEventListener('mouseleave', startQuoteAuto);
+}
+function goQuote(i, manual) {
+  qIdx = i;
+  $('#qTrack').style.transform = 'translateX(-' + i * 100 + '%)';
+  $$('.q-dot').forEach((d, j) => d.classList.toggle('active', j === i));
+  if (manual) { stopQuoteAuto(); startQuoteAuto(); }
+}
+function startQuoteAuto() { stopQuoteAuto(); qTimer = setInterval(() => goQuote((qIdx + 1) % QUOTES.length), 6500); }
+function stopQuoteAuto() { if (qTimer) { clearInterval(qTimer); qTimer = null; } }
+
+/* ================= INIT ================= */
+document.addEventListener('DOMContentLoaded', () => {
+  setupCharacters();
+  setupTimeline();
+  setupQuotes();
+  setupFadeIn();
+  setupScrollspy();
+  $('#modalClose').addEventListener('click', closeModal);
+  $('#modalMask').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+});
+</script>
+
+<!-- modal -->
+<div class="modal-mask" id="modalMask">
+  <div class="modal-box" id="modalBox">
+    <button class="modal-close" id="modalClose" aria-label="关闭">×</button>
+    <h3 id="mName"></h3>
+    <div class="m-ru" id="mRu"></div>
+    <span class="m-role" id="mRole"></span>
+    <div class="m-body" id="mBody"></div>
+  </div>
+</div>
+
+</body>
+</html>
