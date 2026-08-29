@@ -19,6 +19,7 @@
   /* 门类点缀色（克制） */
   --c-classic:#a8281c;     /* 古典·朱砂红 */
   --c-foreign:#3a4a5a;     /* 外国·墨蓝 */
+  --c-modern:#7a5c40;      /* 现代·茶褐 */
   --c-screen:#4a5568;      /* 影像·钢蓝灰 */
   --c-travel:#5a6b3e;      /* 旅行·松绿 */
   --c-science:#2d6a8a;     /* 科普·海蓝 */
@@ -102,6 +103,9 @@ body::before{
 .group.foreign .group-icon{border-color:rgba(58,74,90,.3)}
 .group.foreign .group-icon svg{color:var(--c-foreign)}
 .group.foreign .group-name .accent{color:var(--c-foreign)}
+.group.modern .group-icon{border-color:rgba(122,92,64,.3)}
+.group.modern .group-icon svg{color:var(--c-modern)}
+.group.modern .group-name .accent{color:var(--c-modern)}
 .group.screen .group-icon{border-color:rgba(74,85,104,.3)}
 .group.screen .group-icon svg{color:var(--c-screen)}
 .group.screen .group-name .accent{color:var(--c-screen)}
@@ -225,6 +229,33 @@ body::before{
       </ul>
     </section>
 
+    <!-- 现代文学 -->
+    <section class="group modern">
+      <div class="group-head">
+        <div class="group-icon" aria-hidden="true">
+          <!-- 茶壶 -->
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4">
+            <path d="M5 8 h8 a4 4 0 0 1 0 8 h-6 a2 2 0 0 1 -2 -2 z"/>
+            <path d="M13 9.5 q3 .5 3 2.5 t-3 2"/>
+            <path d="M7 8 q0 -2.5 2 -2.5"/>
+          </svg>
+        </div>
+        <div class="group-meta">
+          <div class="group-name">现代文学<span class="accent">伍</span></div>
+        </div>
+      </div>
+      <ul class="projects">
+        <li class="project">
+          <a class="project-link" href="laoshe.html">
+            <div class="project-name"><span class="marker"></span>老舍 · 作品合集</div>
+            <div class="project-meta"><span>中国</span><span>四部代表作</span><span>京味设计语言</span></div>
+            <div class="project-desc">骆驼祥子、四世同堂、茶馆、月牙儿——生平、思想与回响的综合肖像。灰砖墙的底色，一弯月牙儿挂在屋脊线上。</div>
+          </a>
+          <div class="project-arrow">→</div>
+        </li>
+      </ul>
+    </section>
+
     <!-- 外国文学 -->
     <section class="group foreign">
       <div class="group-head">
@@ -257,10 +288,56 @@ body::before{
           </a>
           <div class="project-arrow">→</div>
         </li>
+        <li class="project">
+          <a class="project-link" href="tolstoy.html">
+            <div class="project-name"><span class="marker"></span>列夫·托尔斯泰 · 作品合集</div>
+            <div class="project-meta"><span>俄国</span><span>四部作品</span><span>草原地平线</span></div>
+            <div class="project-desc">战争与和平、安娜·卡列尼娜、忏悔录、复活——生平、思想与回响的综合肖像。麦田金与草原绿的时间流，地平线尽头一点烛火。</div>
+          </a>
+          <div class="project-arrow">→</div>
+        </li>
+        <li class="project">
+          <a class="project-link" href="calvino.html">
+            <div class="project-name"><span class="marker"></span>伊塔洛·卡尔维诺 · 作品合集</div>
+            <div class="project-meta"><span>意大利</span><span>四部作品</span><span>轻逸与精确</span></div>
+            <div class="project-desc">树上的男爵、看不见的城市、如果在冬夜一个旅人、帕洛马尔——生平、思想与回响的综合肖像。点阵网格的底色，一串轻轻上行的几何图形。</div>
+          </a>
+          <div class="project-arrow">→</div>
+        </li>
+        <li class="project">
+          <a class="project-link" href="hesse.html">
+            <div class="project-name"><span class="marker"></span>赫尔曼·黑塞 · 作品合集</div>
+            <div class="project-meta"><span>德国 / 瑞士</span><span>五部作品</span><span>荒原与河流</span></div>
+            <div class="project-desc">车轮下、荒原狼、悉达多、精神与爱欲、玻璃球游戏——生平、思想与回响的综合肖像。夜色靛蓝与东方金的底色，一条河从夜色里流出。</div>
+          </a>
+          <div class="project-arrow">→</div>
+        </li>
+        <li class="project">
+          <a class="project-link" href="borges.html">
+            <div class="project-name"><span class="marker"></span>博尔赫斯 · 作品合集</div>
+            <div class="project-meta"><span>阿根廷</span><span>四部作品</span><span>镜子与迷宫</span></div>
+            <div class="project-desc">恶棍列传、小径分岔的花园、阿莱夫、沙之书——生平、思想与回响的综合肖像。图书馆的方格底纹，书架折成的迷宫与一面镜子。</div>
+          </a>
+          <div class="project-arrow">→</div>
+        </li>
+        <li class="project">
+          <a class="project-link" href="neapolitan.html">
+            <div class="project-name"><span class="marker"></span>那不勒斯四部曲 · 五十年的友谊与战争</div>
+            <div class="project-meta"><span>费兰特</span><span>意大利</span><span>四部曲</span></div>
+            <div class="project-desc">我的天才女友、新名字的故事、离开的留下的、失踪的孩子——灰墙街区、维苏威火山与两个布娃娃，埃莱娜与莉拉的完整导读。</div>
+          </a>
+          <div class="project-arrow">→</div>
+        </li>
+        <li class="project">
+          <a class="project-link" href="prophet-trilogy.html">
+            <div class="project-name"><span class="marker"></span>先知三部曲 · 一场革命的三幕悲剧</div>
+            <div class="project-meta"><span>多伊彻</span><span>托洛茨基传</span><span>三幕</span></div>
+            <div class="project-desc">武装的先知、被解除武装的先知、流亡的先知——档案纸横纹与三道幕布弧线，读完一场革命的全部荣光与代价。</div>
+          </a>
+          <div class="project-arrow">→</div>
+        </li>
       </ul>
     </section>
-
-    <!-- 影像解读 -->
     <section class="group screen">
       <div class="group-head">
         <div class="group-icon" aria-hidden="true">
