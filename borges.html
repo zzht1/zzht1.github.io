@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="豪尔赫·路易斯·博尔赫斯综合肖像：生平、思想内核与影响回响。恶棍列传、小径分岔的花园、杜撰集、阿莱夫、沙之书——镜子、迷宫、图书馆与老虎。">
+<title>豪尔赫·路易斯·博尔赫斯 · 生平 · 思想 · 回响 — zzht</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#efede6;
+  --paper:#f9f8f1;
+  --ink:#201d18;
+  --ink-soft:#54504a;
+  --ink-faint:#8b8880;
+  --line:#dcd9cf;
+  --lib:#3e4d63;          /* 图书馆的深蓝 */
+  --brass:#9a7b2f;        /* 图书馆的黄铜与旧金 */
+  --mirror:#7c8b94;       /* 镜子的银灰 */
+  --tiger:#a85a24;        /* 老虎的橙 */
+  --serif:'Noto Serif SC','Source Han Serif SC',serif;
+  --sans:'Noto Sans SC',-apple-system,BlinkMacSystemFont,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);color:var(--ink);background:var(--bg);
+  line-height:1.85;overflow-x:hidden;-webkit-font-smoothing:antialiased;
+}
+/* 极淡的方格网纹，像书架与迷宫的底图 */
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(80,80,70,.02) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(80,80,70,.02) 1px,transparent 1px);
+  background-size:34px 34px;
+}
+::selection{background:rgba(154,123,47,.15)}
+a{color:inherit}
+.back-home{
+  position:fixed;top:18px;left:20px;z-index:120;
+  font-size:.85rem;color:var(--ink-soft);text-decoration:none;
+  padding:7px 14px;border-radius:999px;
+  background:rgba(249,248,241,.92);border:1px solid var(--line);
+  transition:all .25s;
+}
+.back-home:hover{color:var(--brass);border-color:var(--brass);transform:translateX(-2px)}
+.page{position:relative;z-index:1;max-width:1020px;margin:0 auto;padding:0 26px 10vh}
+
+/* ===== HERO ===== */
+.hero{position:relative;padding:15vh 0 4vh;text-align:center}
+.hero-eyebrow{font-size:.78rem;letter-spacing:.42em;color:var(--ink-faint);margin-bottom:22px;font-weight:400}
+.hero h1{font-family:var(--serif);font-weight:900;font-size:clamp(2.2rem,7vw,4rem);letter-spacing:.06em;line-height:1.12}
+.hero-es{font-family:var(--serif);font-style:italic;color:var(--lib);font-size:clamp(.95rem,2.4vw,1.25rem);letter-spacing:.14em;margin-top:14px}
+.hero-years{display:inline-flex;align-items:center;gap:14px;margin-top:22px;color:var(--ink-soft);font-size:.92rem;letter-spacing:.18em}
+.hero-years .v{color:var(--tiger);font-family:var(--serif);font-weight:700}
+.hero-years .dash{width:42px;height:1px;background:linear-gradient(90deg,transparent,var(--ink-faint),transparent)}
+.hero-tag{max-width:660px;margin:30px auto 0;color:var(--ink-soft);font-family:var(--serif);font-size:1.06rem;line-height:2.05;letter-spacing:.02em}
+.hero-tag em{font-style:normal;color:var(--brass)}
+/* hero 装饰：一座由书架折成的迷宫，出口通向一面镜子 */
+.labyrinth{display:block;margin:5vh auto 0;max-width:680px;width:86%}
+
+/* ===== 区块通用标题 ===== */
+.sec-head{text-align:center;margin:11vh 0 5vh}
+.sec-head .k{font-size:.76rem;letter-spacing:.4em;color:var(--brass)}
+.sec-head h2{font-family:var(--serif);font-weight:700;font-size:clamp(1.5rem,4vw,2rem);letter-spacing:.1em;margin-top:8px}
+.sec-head p{color:var(--ink-soft);font-size:.92rem;margin-top:12px;letter-spacing:.02em;max-width:680px;margin-left:auto;margin-right:auto;line-height:1.95}
+
+/* ===== 生平概述 ===== */
+.bio{max-width:780px;margin:0 auto;font-size:1.02rem;color:var(--ink-soft);line-height:2.1}
+.bio p{margin-bottom:18px}
+.bio p:first-child::first-letter{
+  font-family:var(--serif);font-weight:900;color:var(--lib);
+  font-size:3.1rem;line-height:1;float:left;margin:6px 14px 0 0;
+}
+.bio b{color:var(--ink);font-weight:600}
+
+/* ===== 生平与作品 · 时间流 ===== */
+.flow{position:relative;max-width:840px;margin:0 auto;padding:8px 0 2vh}
+.flow::before{
+  content:'';position:absolute;left:19px;top:6px;bottom:0;width:2px;
+  background:linear-gradient(180deg,transparent,var(--lib) 6%,var(--lib) 94%,transparent);
+  opacity:.45;
+}
+.flow-item{position:relative;padding:20px 0 22px 58px}
+.flow-dot{position:absolute;left:19px;top:26px;transform:translateX(-50%);width:11px;height:11px;border-radius:50%;background:var(--ink-faint);box-shadow:0 0 0 4px rgba(139,136,128,.15);z-index:2}
+.flow-dot.work{background:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 14%,transparent)}
+.flow-title{font-family:var(--serif);font-size:1.28rem;color:var(--ink);line-height:1.3}
+.flow-sub{font-size:.94rem;color:var(--ink-faint);margin-top:6px;line-height:1.9;max-width:640px}
+.flow-year{font-family:var(--serif);font-weight:700;color:var(--tiger);font-size:1rem;letter-spacing:.14em;margin-top:14px;padding-top:10px;border-top:1px dashed var(--line);display:inline-block}
+.flow-year .lab{font-size:.72rem;letter-spacing:.3em;color:var(--ink-faint);margin-right:10px;font-weight:400;font-family:var(--sans)}
+
+/* 作品卡片 */
+.flow-work .flow-card{
+  position:relative;display:block;
+  border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:20px;
+  background:var(--paper);
+  padding:24px 30px 20px;overflow:hidden;margin-top:2px;
+  box-shadow:0 8px 22px rgba(50,60,80,.05);
+  transition:transform .4s cubic-bezier(.4,0,.2,1),border-color .4s,box-shadow .4s;
+}
+.flow-work .flow-card:hover{transform:translateX(8px);border-color:var(--accent);box-shadow:0 16px 36px -18px color-mix(in srgb,var(--accent) 45%,transparent)}
+.flow-card .order{font-family:var(--serif);font-size:.78rem;letter-spacing:.3em;color:var(--accent);opacity:.9}
+.flow-card .cn{font-family:var(--serif);font-weight:700;font-size:1.5rem;letter-spacing:.05em;margin-top:5px;color:var(--ink);line-height:1.2}
+.flow-card .es{font-family:var(--serif);font-style:italic;color:var(--accent);font-size:.86rem;letter-spacing:.07em;margin-top:3px}
+.flow-card .essence{font-size:.94rem;color:var(--ink-soft);margin-top:13px;line-height:1.95}
+.flow-card .trans{
+  margin-top:13px;font-size:.82rem;color:var(--ink-soft);letter-spacing:.02em;
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+}
+.flow-card .trans .seal{
+  flex-shrink:0;width:20px;height:20px;border-radius:50%;
+  border:1px solid var(--brass);color:var(--brass);
+  font-family:var(--serif);font-size:.68rem;line-height:18px;text-align:center;
+}
+.flow-card .trans b{color:var(--ink);font-weight:600}
+.flow-card .fromlife{font-size:.83rem;color:var(--ink-faint);margin-top:11px;line-height:1.8;border-top:1px dashed var(--line);padding-top:11px}
+.flow-card .fromlife b{color:var(--lib);font-weight:400;font-family:var(--serif)}
+.flow-card .flow-year{margin-top:14px;border-top:none;padding-top:0}
+
+.flow-work.gang{--accent:#a85a24}   /* 恶棍列传：南美的赭 */
+.flow-work.jardin{--accent:#3e4d63} /* 小径分岔的花园：迷宫蓝 */
+.flow-work.aleph{--accent:#9a7b2f}  /* 阿莱夫：一点黄铜金 */
+.flow-work.arena{--accent:#7c8b94}  /* 沙之书：沙与银 */
+
+/* ===== 思想内核 ===== */
+.themes{max-width:880px;margin:0 auto;columns:2;column-gap:56px}
+.theme{break-inside:avoid;margin-bottom:34px;padding-bottom:30px;border-bottom:1px solid transparent;border-image:linear-gradient(90deg,var(--line),transparent) 1}
+.theme .no{font-family:var(--serif);color:var(--brass);font-size:.8rem;letter-spacing:.3em}
+.theme h3{font-family:var(--serif);font-size:1.18rem;color:var(--ink);margin:8px 0 9px;letter-spacing:.04em}
+.theme p{font-size:.9rem;color:var(--ink-soft);line-height:1.95}
+
+/* ===== 影响与回响 ===== */
+.legacy{max-width:840px;margin:0 auto}
+.leg-block{margin-bottom:36px}
+.leg-block h3{font-family:var(--serif);font-size:1.22rem;color:var(--lib);letter-spacing:.06em;margin-bottom:14px;padding-left:14px;border-left:3px solid var(--brass)}
+.leg-block p{font-size:.97rem;color:var(--ink-soft);line-height:2;margin-bottom:12px}
+.leg-block b{color:var(--ink);font-weight:600}
+.leg-quote{
+  border:1px solid var(--line);border-left:3px solid var(--lib);border-radius:20px;
+  background:var(--paper);
+  padding:24px 28px;font-family:var(--serif);font-size:1.06rem;line-height:2.05;color:var(--ink);
+}
+.leg-quote .src{display:block;margin-top:12px;font-family:var(--sans);font-size:.82rem;color:var(--ink-faint);letter-spacing:.06em}
+
+/* ===== footer ===== */
+.foot{margin-top:9vh;padding-top:26px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:.82rem;color:var(--ink-faint);letter-spacing:.05em}
+.foot a{color:var(--ink-soft);text-decoration:none;transition:color .2s}
+.foot a:hover{color:var(--lib)}
+.foot-mark{display:inline-flex;align-items:center;gap:9px}
+
+@media(max-width:760px){
+  .themes{columns:1}
+  .flow::before{left:14px}
+  .flow-item{padding-left:46px}
+  .flow-dot{left:14px}
+}
+</style>
+</head>
+<body>
+<a href="index.html" class="back-home">← 返回首页</a>
+<div class="page">
+
+  <header class="hero">
+    <div class="hero-eyebrow">JORGE LUIS BORGES</div>
+    <h1>豪尔赫·路易斯·博尔赫斯</h1>
+    <div class="hero-es">Jorge Luis Borges</div>
+    <div class="hero-years"><span class="v">1899</span><span class="dash"></span><span class="v">1986</span></div>
+    <p class="hero-tag">在<em>镜子</em>与<em>迷宫</em>之间，把世界读成一座图书馆。<br>他写的不只是小说，而是关于无限、时间与一切书的那本书。</p>
+    <!-- 书架折成的迷宫，深处一面镜子 -->
+    <svg class="labyrinth" viewBox="0 0 680 34" fill="none" aria-hidden="true">
+      <g stroke="#3e4d63" stroke-width="1.4" stroke-linecap="round" opacity=".75" fill="none">
+        <path d="M30 26 h28 v-12 h-20 v8"/>
+        <path d="M120 26 v-12 h24 v12 h-12"/>
+        <path d="M250 26 h20 v-12 h-28"/>
+      </g>
+      <rect x="392" y="12" width="12" height="14" rx="1" stroke="#7c8b94" stroke-width="1.3" opacity=".85"/>
+      <line x1="404" y1="12" x2="416" y2="26" stroke="#7c8b94" stroke-width=".7" opacity=".5"/>
+      <line x1="392" y1="26" x2="404" y2="12" stroke="#7c8b94" stroke-width=".7" opacity=".5"/>
+      <path d="M0 28 C 160 26, 520 26, 680 28" stroke="#9a7b2f" stroke-width="1" stroke-linecap="round" opacity=".35"/>
+    </svg>
+  </header>
+
+  <!-- 生平概述 -->
+  <section class="sec-head">
+    <div class="k">VIDA</div>
+    <h2>他怎样活成了「博尔赫斯」</h2>
+  </section>
+  <div class="bio">
+    <p>豪尔赫·路易斯·博尔赫斯 <b>1899 年生于布宜诺斯艾利斯</b>。父亲藏书数千卷、兼通英语——他后来最著名的自我介绍是：「我是在<b>父亲的图书馆</b>里受教育的。」少年随家旅居日内瓦与马德里，泡进了当时欧洲的极端主义诗潮。1921 年回阿根廷，与友人办文学刊物，把布宜诺斯艾利斯的街角、暗巷与郊区写进诗歌。此后二十多年他主要是诗人、散文家与编辑，在市立图书馆当助理员——一份让他一生自嘲的差事：「命运赐给我八十万册书，同时交给我一柄盲人的手杖。」</p>
+    <p>1938 年圣诞前夕，他因撞伤头部<b>濒死昏迷</b>，康复后恐惧「自己还能不能写作」，于是发明了一种新的文类：把小说写成<b>假作真时的书评</b>——《特隆、乌克巴尔、奥比斯·特蒂乌斯》由此诞生，虚构书目的评论成了二十世纪最著名的小说之一。1944 年《杜撰集》、1949 年《阿莱夫》接连问世，短篇的「有限长度」被他锻造成思想的容器。1955 年<b>失明</b>（家族遗传，父与祖皆盲），同年他被任命为国家图书馆馆长——「上帝同时给我书本与黑夜，这真是一个绝妙的讽刺。」</p>
+    <p>此后三十年，他靠母亲与历代助手（最后一位是<b>玛丽亚·儿玉</b>，1986 年陪伴他病逝于日内瓦后成为遗孀）周游世界讲学，靠口述继续写作。他在独裁年代的军政府面前公开朗读《纪念胡宁的胜利者苏亚雷斯上校》，诺贝尔奖终生与他擦肩。1986 年逝于日内瓦——他少年求学之地，也是他指定的归宿：「我生在布宜诺斯艾利斯，但我属于日内瓦。」</p>
+  </div>
+
+  <!-- 生平与作品 时间流 -->
+  <section class="sec-head">
+    <div class="k">VIDA Y LIBROS</div>
+    <h2>生平与作品 · 同一座迷宫</h2>
+    <p>博尔赫斯的书几乎都是同一场事故的产物：一次头部重伤给了他新的文类，一柄图书馆的手杖给了他「万有图书馆」的想象，失明给了他记忆与镜子。下面把生平与作品编进同一座迷宫。</p>
+  </section>
+
+  <div class="flow">
+
+    <div class="flow-item flow-life">
+      <span class="flow-dot"></span>
+      <div class="flow-body">
+        <div class="flow-title">父亲的图书馆</div>
+        <div class="flow-sub">在数千卷英文书里长大，六岁前读《堂吉诃德》——他后来说，那图书馆「可能就是我命运的核心」。</div>
+        <div class="flow-year"><span class="lab">生平</span>1899–1914</div>
+      </div>
+    </div>
+
+    <div class="flow-item flow-life">
+      <span class="flow-dot"></span>
+      <div class="flow-body">
+        <div class="flow-title">日内瓦与欧洲诗潮</div>
+        <div class="flow-sub">少年旅居日内瓦，后赴马德里参与极端主义诗歌运动，第一次世界大战让欧洲的废墟成了他的第二课堂。</div>
+        <div class="flow-year"><span class="lab">生平</span>1914–21</div>
+      </div>
+    </div>
+
+    <div class="flow-item flow-work gang">
+      <span class="flow-dot work"></span>
+      <div class="flow-card">
+        <span class="order">壹 · 叙事的第一块试验田</span>
+        <div class="cn">恶棍列传</div>
+        <div class="es">Historia universal de la infamia</div>
+        <div class="essence">他第一本「小说」：七篇真假掺半的江湖史——纽约的屠夫、日本的怪盗、孟买的骗子——以假装有据可查的口吻写成，篇末还煞有介事地列出「参考书目」。这部「伪百科全书式」的开山之作，把他日后一切手艺——假档案、真幻想、开头即结尾——全部预演了一遍。</div>
+        <div class="trans"><span class="seal">荐</span>推荐译本：<b>王永年 译</b> · 上海译文出版社</div>
+        <div class="fromlife"><b>从生活里来：</b>当杂志编辑时读遍了各国黑幕故事与奇闻；他说这些篇目是「玩游戏玩出来的」，不曾想到开了新文类的先河。</div>
+        <div class="flow-year"><span class="lab">创作</span>1935</div>
+      </div>
+    </div>
+
+    <div class="flow-item flow-life">
+      <span class="flow-dot"></span>
+      <div class="flow-body">
+        <div class="flow-title">那场改变文学的车祸</div>
+        <div class="flow-sub">1938 年圣诞前夕撞伤头部，濒死昏迷。康复后自问「还能不能写作」，决定不再写长文，转而发明一种新的短篇。</div>
+        <div class="flow-year"><span class="lab">生平</span>1938</div>
+      </div>
+    </div>
+
+    <div class="flow-item flow-work jardin">
+      <span class="flow-dot work"></span>
+      <div class="flow-card">
+        <span class="order">贰 · 时间之网的宣言</span>
+        <div class="cn">小径分岔的花园</div>
+        <div class="es">El jardín de senderos que se bifurcan</div>
+        <div class="essence">一桩间谍案包裹着一部关于「时间」的哲学残稿：曾祖的迷宫不是空间而是时间——在每一分岔里，你同时做出所有选择。同名短篇与《特隆、乌克巴尔、奥比斯·特蒂乌斯》《巴比伦彩票》《通天塔图书馆》同源而生，是「无限」第一次被装进小说形式；博尔赫斯由此成为二十世纪叙事革命的中心。</div>
+        <div class="trans"><span class="seal">荐</span>推荐译本：<b>王永年 译</b> · 上海译文出版社（收于《博尔赫斯全集·第一辑》）</div>
+        <div class="fromlife"><b>从生活里来：</b>车祸后「重新学写作」的第一批成果；图书馆的职业给了他「通天塔图书馆」的全部细节。</div>
+        <div class="flow-year"><span class="lab">创作</span>1941</div>
+      </div>
+    </div>
+
+    <div class="flow-item flow-work aleph">
+      <span class="flow-dot work"></span>
+      <div class="flow-card">
+        <span class="order">叁 · 一个点里的全部宇宙</span>
+        <div class="cn">阿莱夫</div>
+        <div class="es">El Aleph</div>
+        <div class="essence">地窖里有一个直径两三厘米的光点——「阿莱夫」，从那里能同时看见宇宙中的所有点。围绕这个不可能之物，博尔赫斯写下了对亡妻的悖论式悼念、对情敌的挖苦，以及最动人的问题：有限的心灵如何承受无限。同名集子里的《永生》《德意志安魂曲》同为其短篇艺术之巅。</div>
+        <div class="trans"><span class="seal">荐</span>推荐译本：<b>王永年 译</b> · 上海译文出版社</div>
+        <div class="fromlife"><b>从生活里来：</b>写于母亲家中那间狭小的地窖客房——他自嘲道：把「阿莱夫」放在一个穷人家的地窖里，正合他的口味。</div>
+        <div class="flow-year"><span class="lab">创作</span>1945–49</div>
+      </div>
+    </div>
+
+    <div class="flow-item flow-life">
+      <span class="flow-dot"></span>
+      <div class="flow-body">
+        <div class="flow-title">失明，与国家图书馆</div>
+        <div class="flow-sub">1955 年全盲，同年被任命为国家图书馆馆长。「上帝同时给我书本与黑夜」——此后他只能凭记忆与别人的眼睛阅读。</div>
+        <div class="flow-year"><span class="lab">生平</span>1955</div>
+      </div>
+    </div>
+
+    <div class="flow-item flow-work arena">
+      <span class="flow-dot work"></span>
+      <div class="flow-card">
+        <span class="order">肆 · 晚年的时间之沙</span>
+        <div class="cn">沙之书</div>
+        <div class="es">El libro de arena</div>
+        <div class="essence">一个推销员带来一本「页码无限」的书：翻过的页永远不会再出现，买主最后把它藏进图书馆里——因为最可怕的不是无限的恶，而是无限本身。《圆盘》《另一本书》等篇皆写于全盲之后：他看不见纸了，于是所有的书都变成了「沙」——握不住，也数不清。</div>
+        <div class="trans"><span class="seal">荐</span>推荐译本：<b>王永年 译</b> · 上海译文出版社</div>
+        <div class="fromlife"><b>从生活里来：</b>全盲二十年后口述完成——「无限之书」的恐惧与平静，是他自己对失明的最终和解。</div>
+        <div class="flow-year"><span class="lab">创作</span>1975</div>
+      </div>
+    </div>
+
+    <div class="flow-item flow-life">
+      <span class="flow-dot"></span>
+      <div class="flow-body">
+        <div class="flow-title">逝于日内瓦</div>
+        <div class="flow-sub">1986 年在少年求学之地病逝，玛丽亚·儿玉陪伴在侧。墓碑上刻着古英语与挪威语的诗句——他要被埋进语言的源头里。</div>
+        <div class="flow-year"><span class="lab">生平</span>1986</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 思想内核 -->
+  <section class="sec-head">
+    <div class="k">IDEAS</div>
+    <h2>他反复在写的几件事</h2>
+    <p>博尔赫斯的全部短篇加起来不足两百页——却是现代文学密度最高的一块大陆。这几条是他作品的「基因」。</p>
+  </section>
+  <div class="themes">
+    <div class="theme"><div class="no">Ⅰ</div><h3>无限</h3><p>万有图书馆、无限之书、循环的彩票：他一生都在给「无限」找小说的形式，也一生都在警告——无限并非恩赐，而是恐怖。</p></div>
+    <div class="theme"><div class="no">Ⅱ</div><h3>镜子与复现</h3><p>镜子、副本、另一人、另一个我：世界被不断复制，自我只是其中一面。他自称怕镜子——「镜子和父亲使我又惊又怕」。</p></div>
+    <div class="theme"><div class="no">Ⅲ</div><h3>时间与分岔</h3><p>时间是一张不断分岔、彼此包含的网：每一个「可能」都在某处正在发生。这比平行宇宙的物理学流行早了半个世纪。</p></div>
+    <div class="theme"><div class="no">Ⅳ</div><h3>书的世界</h3><p>世界是一部书，或一切书的总和；评论虚构的书与写虚构没有区别。他把「阅读」本身变成了叙事的主语。</p></div>
+    <div class="theme"><div class="no">Ⅴ</div><h3>伪档案的谦逊</h3><p>他从不直接宣称真理，只假装引证：假注、假书目、假失传的残篇。怀疑精神与想象力的完美联姻。</p></div>
+    <div class="theme"><div class="no">Ⅵ</div><h3>老虎与刀</h3><p>在智力迷宫的正中央，总伏着一头猛虎、一柄老式匕首——他从未忘记：思辨之外，还有血与勇气这另一重真实。</p></div>
+  </div>
+
+  <!-- 影响与回响 -->
+  <section class="sec-head">
+    <div class="k">ECOS</div>
+    <h2>影响与回响 · 一种综合式的评价</h2>
+    <p>「博尔赫斯之后」成为世界文学的一个分水岭：在他之后，几乎所有谈「虚构」「元小说」「无限」的作家，都要先与他碰面。下面是谁读过他、谁被他改变。</p>
+  </section>
+  <div class="legacy">
+
+    <div class="leg-block">
+      <h3>拉美文学：魔幻现实主义的暗河</h3>
+      <p>他以拉美作家身份第一次夺得<b>国际笔会/福门托奖</b>等国际声誉，是拉美「文学爆炸」的精神前驱；<b>马尔克斯</b>承认「他是我们这一代人最尊敬的作家」——尽管两人的风格南辕北辙。科塔萨尔、卡彭铁尔都从他那里学到「幻想不必去远方寻找」。</p>
+    </div>
+
+    <div class="leg-block">
+      <h3>世界文学：把小说变成了思想实验</h3>
+      <p><b>卡尔维诺</b>奉他为「用最少的字达到最大可能性的大师」；<b>纳博科夫</b>、约翰·巴思、翁贝托·艾柯（《玫瑰之名》的图书馆即向《通天塔图书馆》致意）、丹尼洛·契斯乃至博尔赫斯研究者笔下「赛博朋克与超文本之父」——虚拟世界、递归结构与「无穷图书馆」的想象，一路通向了今天的数字文化。</p>
+    </div>
+
+    <div class="leg-block">
+      <h3>在中国：先锋小说的共同教父</h3>
+      <p>1980 年代初经<b>王永年、陈众燮</b>等人的翻译进入中文世界，深刻影响了<b>马原、博尔赫斯体叙事的先锋一代——格非、残雪、余华</b>：马原的「叙述圈套」、格非的时间迷宫，皆认博尔赫斯为师。「博尔赫斯书店」在广州开设至今，成为一个文化地标。</p>
+    </div>
+
+    <div class="leg-block">
+      <h3>一份综合式的评价</h3>
+      <div class="leg-quote">他是二十世纪最「薄」的大师：不写长篇、不写自传、不经营体系，只用几十个短篇、几百页文字，把无限、时间、自我与书这四个最重的问题全部重新问了一遍。他的局限与风格一体两面——几乎不写欲望的肉体与社会的重量，人物常是「没有血肉的符号」；但正是这种纯粹的抽象，让他成为无数学科的共同邻居：哲学、数学、图书馆学、计算机科学都从他那里借过比喻。他失明后在黑暗里说出那句最准确的自评：「我常常感觉自己活在文学之中，而文学也许并不需要我。」——事实上，文学恰恰因他而换了一副骨骼。<span class="src">—— 编者综合自卡尔维诺《新千年文学备忘录》、艾柯与历代读者的共识</span></div>
+    </div>
+
+  </div>
+
+  <footer class="foot">
+    <span class="foot-mark"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><g stroke="#3e4d63" stroke-width="1.5" stroke-linecap="round" fill="none"><path d="M4 20 h16"/><path d="M6 20 v-9 h12 v9"/><path d="M9 20 v-6 h6 v6"/><circle cx="12" cy="8" r="2.4" stroke="#9a7b2f"/></g></svg>© <em style="font-style:normal;color:var(--ink-soft)">zzht</em> · 豪尔赫·路易斯·博尔赫斯 · 生平 · 思想 · 回响</span>
+    <a href="index.html">返回站点首页 ↗</a>
+  </footer>
+
+</div>
+</body>
+</html>
