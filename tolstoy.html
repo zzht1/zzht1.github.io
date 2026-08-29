@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="列夫·托尔斯泰综合肖像：生平、思想内核与影响回响。战争与和平、安娜·卡列尼娜、忏悔录、复活——一个贵族如何把自己拆成千万人，又如何把自己活成一个提问。">
+<title>列夫·托尔斯泰 · 生平 · 思想 · 回响 — zzht</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f4f1e6;              /* 亚斯纳亚·波良纳的草色纸 */
+  --paper:#fbf8ef;
+  --ink:#242015;
+  --ink-soft:#5b5545;
+  --ink-faint:#968e7a;
+  --line:#e0d8c2;
+  --wheat:#b3902f;           /* 麦田金 */
+  --steppe:#6b7d4f;          /* 草原绿 */
+  --sky:#5c7186;             /* 俄国阴天的天空灰蓝 */
+  --candle:#9a3b22;          /* 长夜读书的烛火 */
+  --serif:'Noto Serif SC','Source Han Serif SC',serif;
+  --sans:'Noto Sans SC',-apple-system,BlinkMacSystemFont,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);color:var(--ink);background:var(--bg);
+  line-height:1.85;overflow-x:hidden;-webkit-font-smoothing:antialiased;
+}
+/* 极淡的横向风纹，像草原上被风梳过的麦浪 */
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:repeating-linear-gradient(0deg,transparent 0,transparent 5px,rgba(110,100,55,.013) 5px,rgba(110,100,55,.013) 6px);
+}
+::selection{background:rgba(179,144,47,.16)}
+a{color:inherit}
+.back-home{
+  position:fixed;top:18px;left:20px;z-index:120;
+  font-size:.85rem;color:var(--ink-soft);text-decoration:none;
+  padding:7px 14px;border-radius:999px;
+  background:rgba(251,248,239,.9);border:1px solid var(--line);
+  transition:all .25s;
+}
+.back-home:hover{color:var(--wheat);border-color:var(--wheat);transform:translateX(-2px)}
+.page{position:relative;z-index:1;max-width:1020px;margin:0 auto;padding:0 26px 10vh}
+
+/* ===== HERO ===== */
+.hero{position:relative;padding:15vh 0 4vh;text-align:center}
+.hero-eyebrow{font-size:.78rem;letter-spacing:.42em;color:var(--ink-faint);margin-bottom:22px;font-weight:400}
+.hero h1{font-family:var(--serif);font-weight:900;font-size:clamp(2.8rem,8vw,4.8rem);letter-spacing:.1em;line-height:1.08}
+.hero-ru{font-family:var(--serif);font-style:italic;color:var(--sky);font-size:clamp(1rem,2.4vw,1.3rem);letter-spacing:.16em;margin-top:14px}
+.hero-years{display:inline-flex;align-items:center;gap:14px;margin-top:22px;color:var(--ink-soft);font-size:.92rem;letter-spacing:.18em}
+.hero-years .v{color:var(--candle);font-family:var(--serif);font-weight:700}
+.hero-years .dash{width:42px;height:1px;background:linear-gradient(90deg,transparent,var(--ink-faint),transparent)}
+.hero-tag{max-width:660px;margin:30px auto 0;color:var(--ink-soft);font-family:var(--serif);font-size:1.06rem;line-height:2.05;letter-spacing:.02em}
+.hero-tag em{font-style:normal;color:var(--candle)}
+/* 地平线：hero 下的一道草原地平线，远处一点烛火 */
+.horizon{display:block;margin:5vh auto 0;max-width:680px;width:86%}
+
+/* ===== 区块通用标题 ===== */
+.sec-head{text-align:center;margin:11vh 0 5vh}
+.sec-head .k{font-size:.76rem;letter-spacing:.4em;color:var(--wheat)}
+.sec-head h2{font-family:var(--serif);font-weight:700;font-size:clamp(1.5rem,4vw,2rem);letter-spacing:.1em;margin-top:8px}
+.sec-head p{color:var(--ink-soft);font-size:.92rem;margin-top:12px;letter-spacing:.02em;max-width:680px;margin-left:auto;margin-right:auto;line-height:1.95}
+
+/* ===== 生平概述 ===== */
+.bio{max-width:780px;margin:0 auto;font-size:1.02rem;color:var(--ink-soft);line-height:2.1}
+.bio p{margin-bottom:18px}
+.bio p:first-child::first-letter{
+  font-family:var(--serif);font-weight:900;color:var(--steppe);
+  font-size:3.1rem;line-height:1;float:left;margin:6px 14px 0 0;
+}
+.bio b{color:var(--ink);font-weight:600}
+
+/* ===== 生平与作品 · 时间流 ===== */
+.flow{position:relative;max-width:840px;margin:0 auto;padding:8px 0 2vh}
+.flow::before{
+  content:'';position:absolute;left:19px;top:6px;bottom:0;width:2px;
+  background:linear-gradient(180deg,transparent,var(--steppe) 6%,var(--steppe) 94%,transparent);
+  opacity:.45;
+}
+.flow-item{position:relative;padding:20px 0 22px 58px}
+.flow-dot{position:absolute;left:19px;top:26px;transform:translateX(-50%);width:11px;height:11px;border-radius:50%;background:var(--ink-faint);box-shadow:0 0 0 4px rgba(150,142,122,.16);z-index:2}
+.flow-dot.work{background:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 14%,transparent)}
+.flow-title{font-family:var(--serif);font-size:1.28rem;color:var(--ink);line-height:1.3}
+.flow-sub{font-size:.94rem;color:var(--ink-faint);margin-top:6px;line-height:1.9;max-width:640px}
+.flow-year{font-family:var(--serif);font-weight:700;color:var(--candle);font-size:1rem;letter-spacing:.14em;margin-top:14px;padding-top:10px;border-top:1px dashed var(--line);display:inline-block}
+.flow-year .lab{font-size:.72rem;letter-spacing:.3em;color:var(--ink-faint);margin-right:10px;font-weight:400;font-family:var(--sans)}
+
+/* 作品卡片 */
+.flow-work .flow-card{
+  position:relative;display:block;
+  border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:20px;
+  background:var(--paper);
+  padding:24px 30px 20px;overflow:hidden;margin-top:2px;
+  box-shadow:0 8px 22px rgba(90,80,30,.05);
+  transition:transform .4s cubic-bezier(.4,0,.2,1),border-color .4s,box-shadow .4s;
+}
+.flow-work .flow-card:hover{transform:translateX(8px);border-color:var(--accent);box-shadow:0 16px 36px -18px color-mix(in srgb,var(--accent) 45%,transparent)}
+.flow-card .order{font-family:var(--serif);font-size:.78rem;letter-spacing:.3em;color:var(--accent);opacity:.9}
+.flow-card .cn{font-family:var(--serif);font-weight:700;font-size:1.5rem;letter-spacing:.05em;margin-top:5px;color:var(--ink);line-height:1.2}
+.flow-card .ru{font-family:var(--serif);font-style:italic;color:var(--accent);font-size:.86rem;letter-spacing:.07em;margin-top:3px}
+.flow-card .essence{font-size:.94rem;color:var(--ink-soft);margin-top:13px;line-height:1.95}
+.flow-card .trans{
+  margin-top:13px;font-size:.82rem;color:var(--ink-soft);letter-spacing:.02em;
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+}
+.flow-card .trans .seal{
+  flex-shrink:0;width:20px;height:20px;border-radius:50%;
+  border:1px solid var(--candle);color:var(--candle);
+  font-family:var(--serif);font-size:.68rem;line-height:18px;text-align:center;
+}
+.flow-card .trans b{color:var(--ink);font-weight:600}
+.flow-card .fromlife{font-size:.83rem;color:var(--ink-faint);margin-top:11px;line-height:1.8;border-top:1px dashed var(--line);padding-top:11px}
+.flow-card .fromlife b{color:var(--candle);font-weight:400;font-family:var(--serif)}
+.flow-card .flow-year{margin-top:14px;border-top:none;padding-top:0}
+
+.flow-work.wp{--accent:#7a6a2a}   /* 战争与和平：硝烟金 */
+.flow-work.ak{--accent:#8a2f23}   /* 安娜·卡列尼娜：火车灯的红 */
+.flow-work.cf{--accent:#4c5a44}   /* 忏悔录：林中灰绿 */
+.flow-work.rs{--accent:#5c7186}   /* 复活：春泥解冻的灰蓝 */
+
+/* ===== 思想内核 ===== */
+.themes{max-width:880px;margin:0 auto;columns:2;column-gap:56px}
+.theme{break-inside:avoid;margin-bottom:34px;padding-bottom:30px;border-bottom:1px solid transparent;border-image:linear-gradient(90deg,var(--line),transparent) 1}
+.theme .no{font-family:var(--serif);color:var(--wheat);font-size:.8rem;letter-spacing:.3em}
+.theme h3{font-family:var(--serif);font-size:1.18rem;color:var(--ink);margin:8px 0 9px;letter-spacing:.04em}
+.theme p{font-size:.9rem;color:var(--ink-soft);line-height:1.95}
+
+/* ===== 影响与回响 ===== */
+.legacy{max-width:840px;margin:0 auto}
+.leg-block{margin-bottom:36px}
+.leg-block h3{font-family:var(--serif);font-size:1.22rem;color:var(--candle);letter-spacing:.06em;margin-bottom:14px;padding-left:14px;border-left:3px solid var(--wheat)}
+.leg-block p{font-size:.97rem;color:var(--ink-soft);line-height:2;margin-bottom:12px}
+.leg-block b{color:var(--ink);font-weight:600}
+.leg-quote{
+  border:1px solid var(--line);border-left:3px solid var(--candle);border-radius:20px;
+  background:var(--paper);
+  padding:24px 28px;font-family:var(--serif);font-size:1.06rem;line-height:2.05;color:var(--ink);
+}
+.leg-quote .src{display:block;margin-top:12px;font-family:var(--sans);font-size:.82rem;color:var(--ink-faint);letter-spacing:.06em}
+
+/* ===== footer ===== */
+.foot{margin-top:9vh;padding-top:26px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:.82rem;color:var(--ink-faint);letter-spacing:.05em}
+.foot a{color:var(--ink-soft);text-decoration:none;transition:color .2s}
+.foot a:hover{color:var(--candle)}
+.foot-mark{display:inline-flex;align-items:center;gap:9px}
+
+@media(max-width:760px){
+  .themes{columns:1}
+  .flow::before{left:14px}
+  .flow-item{padding-left:46px}
+  .flow-dot{left:14px}
+}
+</style>
+</head>
+<body>
+<a href="index.html" class="back-home">← 返回首页</a>
+<div class="page">
+
+  <header class="hero">
+    <div class="hero-eyebrow">ЛЕВ НИКОЛАЕВИЧ ТОЛСТОЙ</div>
+    <h1>列夫·托尔斯泰</h1>
+    <div class="hero-ru">Лев Толстой</div>
+    <div class="hero-years"><span class="v">1828</span><span class="dash"></span><span class="v">1910</span></div>
+    <p class="hero-tag">在<em>历史</em>与<em>良心</em>之间，写出人类的全部生活。<br>他写的不只是小说，而是一个贵族对自身阶级的漫长审判，和一场以余生践行的出走。</p>
+    <!-- 草原地平线，地平线尽头一点烛火 -->
+    <svg class="horizon" viewBox="0 0 680 30" fill="none" aria-hidden="true">
+      <path d="M0 20 C 90 16, 180 22, 280 19 S 480 17, 680 20" stroke="#6b7d4f" stroke-width="1.4" stroke-linecap="round" opacity=".55"/>
+      <path d="M40 25 C 140 22, 260 26, 360 24 S 560 22, 640 24" stroke="#6b7d4f" stroke-width="1" stroke-linecap="round" opacity=".28"/>
+      <g stroke="#9a3b22" stroke-width="1.6" stroke-linecap="round" opacity=".85">
+        <path d="M654 12 v10"/><path d="M651 15 h6"/><path d="M650 19 h8"/>
+        <path d="M654 5 l2.4 3.4 -4.8 0 z" fill="#9a3b22" stroke="none"/>
+      </g>
+    </svg>
+  </header>
+
+  <!-- 生平概述 -->
+  <section class="sec-head">
+    <div class="k">БИОГРАФИЯ</div>
+    <h2>他怎样活成了「托尔斯泰」</h2>
+  </section>
+  <div class="bio">
+    <p>列夫·尼古拉耶维奇·托尔斯泰 <b>1828 年生于图拉省的亚斯纳亚·波良纳庄园</b>，两岁丧母、九岁丧父，由亲戚抚养长大。他上过喀山大学的东方语与法学系，却嫌课程空洞，退学回乡，一边做庄园主一边在日记里给自己开列「生活的规则」——又一边在赌博、宴饮与自责之间反复。1851 年随兄长从军去了高加索，克里米亚战争里亲历塞瓦斯托波尔围城，写下《塞瓦斯托波尔故事》，让全俄国第一次在文学里闻到战壕的味道。</p>
+    <p>此后三十年，他在庄园的书房里完成了<b>《战争与和平》《安娜·卡列尼娜》</b>——把整个俄国，从宫廷舞会到战地篝火，从莫斯科的车站到收割的麦田，装进了小说。但在五十岁前后，一场精神危机把他击倒：功成名就、儿孙满堂，他却半夜藏起绳子、不敢带猎枪出门，因为怕自己自杀。他后来把这写进《忏悔录》：是民间的信仰和农民的劳作，把他从深渊里拉了回来。</p>
+    <p>晚年他成了「<b>图拉的圣者</b>」：穿农家布衣、自己耕地做鞋，斥责地产、军备与教会，发展出一套「不以暴力抗恶」的学说，与妻子索尼娅为版权和财产长期冷战。1910 年 11 月，八十二岁的他在深夜出走，三天后病逝于阿斯塔波沃小火车站——为自己的信念，走完了最后一次「出走」；送葬的农民排成几俄里的长队。</p>
+  </div>
+
+  <!-- 生平与作品 时间流 -->
+  <section class="sec-head">
+    <div class="k">ЖИЗНЬ И КНИГИ</div>
+    <h2>生平与作品 · 同一片原野</h2>
+    <p>托尔斯泰的每一部长篇，都对应着他生命里的一次转向：军旅给了他战场，蜜月给了他安德烈与皮埃尔，精神危机给了他列文和聂赫留朵夫。下面把生平与作品编进同一片原野的时间流——每部作品标着它从哪段生命里长出来，以及今天读它该选哪个译本。</p>
+  </section>
+
+  <div class="flow">
+
+    <div class="flow-item flow-life">
+      <span class="flow-dot"></span>
+      <div class="flow-body">
+        <div class="flow-title">生于亚斯纳亚·波良纳</div>
+        <div class="flow-sub">伯爵之家，幼年失怙失恃。这座庄园将是他一生的圆心：写作、耕种、办学、出走，都从这里出发。</div>
+        <div class="flow-year"><span class="lab">生平</span>1828</div>
+      </div>
+    </div>
+
+    <div class="flow-item flow-life">
+      <span class="flow-dot"></span>
+      <div class="flow-body">
+        <div class="flow-title">高加索与塞瓦斯托波尔</div>
+        <div class="flow-sub">随兄从军，亲历克里米亚围城。他在战壕里看清了战争的日常与荒诞，也第一次以文学之名出名。</div>
+        <div class="flow-year"><span class="lab">生平</span>1851–55</div>
+      </div>
+    </div>
+
+    <div class="flow-item flow-work wp">
+      <span class="flow-dot work"></span>
+      <div class="flow-card">
+        <span class="order">壹 · 历史的全景画</span>
+        <div class="cn">战争与和平</div>
+        <div class="ru">Война и мир</div>
+        <div class="essence">他最早也最恢弘的一部。五个家族、五百余个人物，拿破仑入侵与 1812 年卫国战争被写成一幅同时容纳宫廷与战壕、哲学与炊烟的全景画。安德烈的天空、皮埃尔的求索、娜塔莎的成长——「历史不是英雄的意志，而是千万普通人意志的总和」，这个命题在此第一次立起。</div>
+        <div class="trans"><span class="seal">荐</span>推荐译本：<b>草婴 译</b> · 上海文艺出版社</div>
+        <div class="fromlife"><b>从生活里来：</b>蜜月期的安宁与克里米亚的记忆一同发酵；他拒绝称它为「小说」，说这是他想说的「一切」。</div>
+        <div class="flow-year"><span class="lab">创作</span>1865–69</div>
+      </div>
+    </div>
+
+    <div class="flow-item flow-work ak">
+      <span class="flow-dot work"></span>
+      <div class="flow-card">
+        <span class="order">贰 · 家庭史诗的裂口</span>
+        <div class="cn">安娜·卡列尼娜</div>
+        <div class="ru">Анна Каренина</div>
+        <div class="essence">两条平行线的故事：安娜为爱情冲撞上流社会的铁轨，列文在乡下为土地、婚姻与信仰寻找出路。开篇「幸福的家庭都是相似的」与结尾「生命的意义在于爱」，把一部婚外情悲剧写成了对整个俄国社会的切片。也是公认「最完美」的托尔斯泰。</div>
+        <div class="trans"><span class="seal">荐</span>推荐译本：<b>草婴 译</b> · 上海文艺出版社</div>
+        <div class="fromlife"><b>从生活里来：</b>写作途中他遭遇一次几乎丧命的猎熊与一次丧子之痛；列文就是他自己——连结尾对信仰的回答也是。</div>
+        <div class="flow-year"><span class="lab">创作</span>1873–77</div>
+      </div>
+    </div>
+
+    <div class="flow-item flow-life">
+      <span class="flow-dot"></span>
+      <div class="flow-body">
+        <div class="flow-title">精神危机与皈依</div>
+        <div class="flow-sub">五十岁上下，名满欧洲的他被「活着为了什么」逼到自毁边缘。后来他自述：是农民的信仰救了他。</div>
+        <div class="flow-year"><span class="lab">生平</span>1878–81</div>
+      </div>
+    </div>
+
+    <div class="flow-item flow-work cf">
+      <span class="flow-dot work"></span>
+      <div class="flow-card">
+        <span class="order">叁 · 灵魂的自供状</span>
+        <div class="cn">忏悔录</div>
+        <div class="ru">Исповедь</div>
+        <div class="essence">一部把文学声望、贵族特权、甚至「艺术」本身都放上审判台的自我审讯。他逐一检验科学的、哲学的、审美的答案，全都通不过；最终在民间信仰与「为他人而活」里找到立足点。这是理解他后半生一切行为的钥匙，也是俄国思想史上最赤裸的一份自白。</div>
+        <div class="trans"><span class="seal">荐</span>推荐译本：<b>冯增义 译</b> · 人民文学出版社（与《天国在你们心中》合刊）</div>
+        <div class="fromlife"><b>从生活里来：</b>写于他藏绳避枪的那几年；公开出版即遭教会查禁，他与东正教的决裂由此开始。</div>
+        <div class="flow-year"><span class="lab">创作</span>1879–82</div>
+      </div>
+    </div>
+
+    <div class="flow-item flow-work rs">
+      <span class="flow-dot work"></span>
+      <div class="flow-card">
+        <span class="order">肆 · 迟到的复活</span>
+        <div class="cn">复活</div>
+        <div class="ru">Воскресение</div>
+        <div class="essence">他的最后一部长篇。贵族聂赫留朵夫在法庭上认出被自己诱奸致堕的玛丝洛娃，从此走上一条替自己、也替整个阶级赎罪的路。监狱、法庭、西伯利亚——晚年的托尔斯泰用这部小说，对俄国的国家机器做了总清算，也把「不以暴力抗恶」写成了行动。</div>
+        <div class="trans"><span class="seal">荐</span>推荐译本：<b>草婴 译</b> · 上海文艺出版社</div>
+        <div class="fromlife"><b>从生活里来：</b>取材于真实的法庭陪审案件；为写监狱，他亲自到莫斯科监狱与押解队伍同走一程。</div>
+        <div class="flow-year"><span class="lab">创作</span>1889–99</div>
+      </div>
+    </div>
+
+    <div class="flow-item flow-life">
+      <span class="flow-dot"></span>
+      <div class="flow-body">
+        <div class="flow-title">深夜出走，逝于小火车站</div>
+        <div class="flow-sub">八十二岁那年冬天，他留下一封信托身而出，三日后病逝于阿斯塔波沃站的站长室。数百名农民随灵柩步行送葬。</div>
+        <div class="flow-year"><span class="lab">生平</span>1910</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 思想内核 -->
+  <section class="sec-head">
+    <div class="k">ИДЕИ</div>
+    <h2>他反复在写的几件事</h2>
+    <p>从战场到麦田，从舞会到法庭，托尔斯泰的小说其实围着同一个问题转：人应当怎样活。这几条是他思想的「基因」。</p>
+  </section>
+  <div class="themes">
+    <div class="theme"><div class="no">Ⅰ</div><h3>千万人的历史</h3><p>历史不是帝王将相的意志，而是千万普通人生活与选择的总和。库图佐夫之所以伟大，恰因他不逞英雄之强。</p></div>
+    <div class="theme"><div class="no">Ⅱ</div><h3>道德的自我完善</h3><p>拯救不靠革命也不靠教会，只靠每个人在每天的生活里向善一分。聂赫留朵夫的赎罪是原型：先改自己，再谈世界。</p></div>
+    <div class="theme"><div class="no">Ⅲ</div><h3>不以暴力抗恶</h3><p>以暴易暴只会再生出新的恶。这套学说经《天国在你们心中》传遍世界，成了甘地非暴力运动的直接源头。</p></div>
+    <div class="theme"><div class="no">Ⅳ</div><h3>向死而生的逼视</h3><p>《伊凡·伊里奇之死》问出：如果死亡是真的，我现在这种生活就是错的。他对死亡的凝视，逼出了全部的诚实。</p></div>
+    <div class="theme"><div class="no">Ⅴ</div><h3>贵族的忏悔</h3><p>他一生都在替自己的阶级认罪：放弃版权、穿粗布衣、与庄园决裂。这不是表演，是把小说里的审判搬进自己的日子。</p></div>
+    <div class="theme"><div class="no">Ⅵ</div><h3>劳动与土地</h3><p>割麦、耕地、做鞋——体力劳动在他那里不是素材，而是信仰：真理长在土地里，不在沙龙的对话中。</p></div>
+  </div>
+
+  <!-- 影响与回响 -->
+  <section class="sec-head">
+    <div class="k">ОТЗВУКИ</div>
+    <h2>影响与回响 · 一种综合式的评价</h2>
+    <p>他与陀思妥耶夫斯基并立为俄国文学的双峰：一个向内勘探深渊，一个向外铺展生活。下面是谁读过他、谁被他改变，以及他留下了一份怎样的遗产。</p>
+  </section>
+  <div class="legacy">
+
+    <div class="leg-block">
+      <h3>作家：史诗的标尺</h3>
+      <p><b>契诃夫</b>称他为「文学中的巨人」，说与托尔斯泰同世是「无上的光荣」；<b>罗曼·罗兰</b>为他写传，把他举为「我们的良心」；普鲁斯特、托马斯·曼、福克纳都把他当作长篇技艺的标尺。二十世纪最著名的评价来自<b>穆齐尔</b>与纳博科夫之间的一句流传：若论「讲故事的能力」，无人能出其右。</p>
+    </div>
+
+    <div class="leg-block">
+      <h3>行动者：非暴力的源头</h3>
+      <p>晚年的托尔斯泰与青年<b>甘地</b>通信，甘地在南非以「托尔斯泰农场」命名自己的营地，直言非暴力思想「直接来自他」；<b>马丁·路德·金</b>所承袭的同一脉思想里，也有托尔斯泰的签名。一位小说家，成了二十世纪两场公民不服从运动的远祖。</p>
+    </div>
+
+    <div class="leg-block">
+      <h3>在中国：从「俄国革命镜子」到几代读者的教科书</h3>
+      <p><b>鲁迅</b>称他为「俄国革命的镜子」（转引列宁语），并敬重他「写出了旧俄国全部的生活」；<b>草婴</b>以一己之力译完托尔斯泰全部小说，成为几代中国读者进入他的正门。巴金、冰心晚年都自认是他与契诃夫的学生。</p>
+    </div>
+
+    <div class="leg-block">
+      <h3>一份综合式的评价</h3>
+      <div class="leg-quote">他是一面镜子，照出的是一个阶级的黄昏。作为艺术家，他把长篇小说推到了再也无人超越的广度——生活本身在他书里按照原本的节奏流动；作为人，他把自己后半生活成了一部续篇：放弃了财产、名誉与教会的荫庇，用八十二岁的双脚出走，为自己的诚实付账。他不是完美的圣徒——对妻子近乎残忍的固执、晚年对艺术价值的偏激否定都留下争议——但他证明了：一个写「怎样活」的人，可以真的那样去活。<span class="src">—— 编者综合自罗曼·罗兰、以赛亚·伯林《刺猬与狐狸》与历代读者的共识</span></div>
+    </div>
+
+  </div>
+
+  <footer class="foot">
+    <span class="foot-mark"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><g stroke="#9a3b22" stroke-width="1.8" stroke-linecap="round" fill="none"><path d="M12 13 v8"/><path d="M9.5 13 h5"/><path d="M12 13 l0 -0.01" /></g><path d="M12 5.5 l2.2 3.2 -4.4 0 z" fill="#9a3b22" stroke="none"/></svg>© <em style="font-style:normal;color:var(--ink-soft)">zzht</em> · 列夫·托尔斯泰 · 生平 · 思想 · 回响</span>
+    <a href="index.html">返回站点首页 ↗</a>
+  </footer>
+
+</div>
+</body>
+</html>
