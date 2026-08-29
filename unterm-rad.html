@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="黑塞《车轮下》（Unterm Rad，又译《在轮下》，1906）深度梳理：故事脉络、人物、核心主题、名句、译本与影响、阅读指南。">
+<title>车轮下 · 黑塞 — zzht</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #e9e4d8;
+  --paper: #f8f5ec;
+  --paper-deep: #f1ece0;
+  --ink: #26201a;
+  --ink-soft: #5a5142;
+  --ink-faint: #948a74;
+  --brown: #7a5c40;      /* 修道院棕 */
+  --blue: #3e5a74;       /* 墨水蓝 */
+  --rust: #8a5a3a;       /* 车轮锈 */
+  --lead: #6e6a60;       /* 铅灰 */
+  --line: #d0c8b2;
+  --serif: 'Noto Serif SC', 'STSong', 'SimSun', serif;
+  --sans: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  color: var(--ink);
+  line-height: 1.75;
+  overflow-x: hidden;
+  /* 冬日纸灰的底子，铺一层极淡的练习本横线 */
+  background-color: var(--bg);
+  background-image:
+    repeating-linear-gradient(180deg, transparent 0 35px, rgba(90, 80, 60, .045) 35px 36px),
+    linear-gradient(180deg, rgba(122, 92, 64, .05) 0%, rgba(233, 228, 216, 0) 480px);
+}
+::selection { background: rgba(122, 92, 64, .18); }
+
+/* back home */
+.back-home {
+  position: fixed; top: 18px; left: 20px; z-index: 120;
+  font-size: .85rem; color: var(--ink-soft); text-decoration: none;
+  padding: 7px 14px; border-radius: 999px;
+  background: rgba(248, 245, 236, .95);
+  border: 1px solid var(--line);
+  transition: all .25s;
+}
+.back-home:hover { color: var(--rust); border-color: var(--rust); transform: translateX(-2px); }
+
+/* ===== HERO：冬日课业 ===== */
+.hero {
+  min-height: 94vh;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  text-align: center;
+  padding: 14vh 24px 8vh;
+  position: relative;
+  background:
+    radial-gradient(ellipse 75% 42% at 50% -6%, rgba(122, 92, 64, .14), transparent 62%),
+    linear-gradient(180deg, #e6ded0 0%, var(--bg) 78%);
+}
+/* 德文水印：像练习本页眉上褪色的旧字 */
+.hero-wm {
+  position: absolute; top: 12%; left: 50%; transform: translateX(-50%);
+  font-family: var(--serif); font-style: italic;
+  font-size: clamp(3rem, 9vw, 6.2rem);
+  letter-spacing: .06em; white-space: nowrap;
+  color: rgba(122, 92, 64, .09);
+  pointer-events: none; user-select: none;
+}
+.hero-eyebrow {
+  font-size: .82rem; letter-spacing: .32em; color: var(--ink-soft);
+  margin-bottom: 22px; font-weight: 400; position: relative;
+}
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(3.6rem, 11vw, 7rem);
+  font-weight: 900; letter-spacing: .14em; line-height: 1.12;
+  color: var(--ink); position: relative;
+}
+.hero-ru {
+  font-family: var(--serif);
+  font-size: clamp(1rem, 2.6vw, 1.3rem);
+  color: var(--rust); letter-spacing: .2em;
+  margin-top: 14px; font-style: italic; position: relative;
+}
+.hero-sub {
+  margin-top: 18px; color: var(--ink-soft); font-size: .97rem; font-weight: 300;
+  letter-spacing: .05em; position: relative;
+}
+/* 车轮分隔：六根辐条 */
+.hero-divider {
+  display: flex; align-items: center; gap: 18px;
+  margin: 30px auto; position: relative;
+}
+.hero-divider::before, .hero-divider::after {
+  content: ''; width: 78px; height: 1px;
+}
+.hero-divider::before { background: linear-gradient(90deg, transparent, rgba(138, 90, 58, .6)); }
+.hero-divider::after { background: linear-gradient(270deg, transparent, rgba(138, 90, 58, .6)); }
+.hero-quote {
+  max-width: 560px; font-family: var(--serif);
+  font-size: 1.06rem; color: var(--ink-soft); line-height: 2; position: relative;
+}
+.hero-quote .src { display: block; margin-top: 10px; font-size: .85rem; color: var(--ink-faint); }
+.hero-meta {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 14px 46px;
+  margin-top: 48px; position: relative;
+}
+.hero-meta-item { text-align: center; min-width: 70px; }
+.hero-meta-item .value {
+  display: block; font-family: var(--serif); font-weight: 900;
+  font-size: 1.7rem; color: var(--rust); line-height: 1.2;
+}
+.hero-meta-item .label { font-size: .78rem; color: var(--ink-faint); letter-spacing: .12em; }
+.scroll-hint {
+  position: absolute; bottom: 26px; left: 50%; transform: translateX(-50%);
+  font-size: .78rem; color: var(--ink-faint); cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  letter-spacing: .2em; user-select: none;
+}
+.scroll-hint .arrow { animation: bob 1.8s ease-in-out infinite; }
+@keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+
+/* ===== NAV ===== */
+.nav-bar {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(233, 228, 216, .96);
+  border-bottom: 1px solid var(--line);
+}
+.nav-inner {
+  max-width: 1000px; margin: 0 auto;
+  display: flex; overflow-x: auto; scrollbar-width: none;
+  padding: 0 12px;
+}
+.nav-inner::-webkit-scrollbar { display: none; }
+.nav-tab {
+  flex: 0 0 auto; padding: 15px 18px; cursor: pointer;
+  font-size: .9rem; color: var(--ink-soft); letter-spacing: .06em;
+  position: relative; transition: color .25s; white-space: nowrap;
+  user-select: none;
+}
+.nav-tab::after {
+  content: ''; position: absolute; left: 18px; right: 18px; bottom: 0;
+  height: 2px; border-radius: 2px;
+  background: linear-gradient(90deg, var(--brown), var(--rust));
+  transform: scaleX(0); transition: transform .3s;
+}
+.nav-tab:hover { color: var(--ink); }
+.nav-tab.active { color: var(--rust); font-weight: 500; }
+.nav-tab.active::after { transform: scaleX(1); }
+
+/* ===== SECTIONS ===== */
+.section { max-width: 1000px; margin: 0 auto; padding: 90px 24px 10px; }
+.section.wide { max-width: 1060px; }
+.section-title {
+  font-family: var(--serif); font-size: clamp(1.7rem, 4vw, 2.3rem);
+  font-weight: 900; letter-spacing: .08em; color: var(--ink);
+}
+.section-title::after {
+  content: ''; display: block; width: 76px; height: 3px; margin-top: 14px;
+  background: linear-gradient(90deg, var(--brown), var(--rust), transparent);
+  border-radius: 2px;
+}
+.section-desc {
+  margin-top: 20px; color: var(--ink-soft); max-width: 720px;
+  font-size: .98rem; line-height: 2;
+}
+.fade-in { opacity: 0; transform: translateY(26px); transition: opacity .8s ease, transform .8s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* ===== OVERVIEW ===== */
+.ov-grid {
+  display: grid; grid-template-columns: 1.35fr 1fr; gap: 40px;
+  margin-top: 40px; align-items: start;
+}
+.ov-prose p { margin-bottom: 16px; color: var(--ink-soft); font-size: .97rem; line-height: 2.05; }
+.ov-prose p strong { color: var(--ink); font-weight: 600; }
+.ov-prose .lede {
+  font-family: var(--serif); font-size: 1.12rem; color: var(--ink); line-height: 2.1;
+}
+.ov-prose .lede::first-letter {
+  font-size: 2.6em; float: left; line-height: 1; padding-right: .12em;
+  color: var(--rust); font-weight: 900;
+}
+.ov-panel {
+  background: var(--paper); border: 1px solid var(--line);
+  border-radius: 22px; padding: 30px 28px;
+  box-shadow: 0 10px 24px rgba(90, 70, 40, .08);
+}
+.ov-panel h3 {
+  font-family: var(--serif); font-size: 1.05rem; font-weight: 700; letter-spacing: .08em;
+  color: var(--brown); margin-bottom: 16px;
+}
+.bg-list { list-style: none; }
+.bg-list li {
+  position: relative; padding: 10px 0 10px 22px;
+  font-size: .88rem; color: var(--ink-soft); line-height: 1.8;
+  border-bottom: 1px dashed var(--line);
+}
+.bg-list li:last-child { border-bottom: none; }
+.bg-list li::before {
+  content: ''; position: absolute; left: 2px; top: 19px;
+  width: 7px; height: 7px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--brown), var(--rust));
+}
+.bg-list li b { color: var(--ink); font-weight: 600; }
+.room-note {
+  margin-top: 16px; padding-top: 12px;
+  border-top: 1px dashed var(--line);
+  font-size: .8rem; color: var(--ink-faint); font-style: italic; line-height: 1.8;
+}
+.stat-strip {
+  display: flex; flex-wrap: wrap; gap: 0; margin-top: 44px;
+  border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+}
+.stat {
+  flex: 1 1 auto; min-width: 150px; text-align: center;
+  padding: 26px 16px;
+}
+.stat + .stat { border-left: 1px dashed var(--line); }
+.stat .num {
+  font-family: var(--serif); font-size: 1.9rem; font-weight: 900; color: var(--rust);
+  line-height: 1.2;
+}
+.stat .cap { font-size: .8rem; color: var(--ink-faint); letter-spacing: .08em; margin-top: 6px; }
+
+/* ===== STORY：课业时间线 ===== */
+.phase { margin-top: 48px; padding-top: 20px; border-top: 1px dashed var(--line); }
+.phase:first-of-type { border-top: none; }
+.phase-head {
+  display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap;
+}
+.phase-num {
+  font-family: var(--serif); font-size: 2rem; font-weight: 900;
+  background: linear-gradient(135deg, var(--rust), var(--brown));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  line-height: 1;
+}
+.phase-head h3 { font-family: var(--serif); font-size: 1.25rem; font-weight: 700; letter-spacing: .05em; }
+.phase-head .ref { font-size: .8rem; color: var(--ink-faint); letter-spacing: .05em; }
+.phase-items {
+  margin-top: 20px; margin-left: 13px;
+  border-left: 2px solid rgba(138, 90, 58, .5);
+  padding-left: 26px;
+}
+.t-item {
+  position: relative; border-radius: 18px; padding: 14px 18px;
+  margin-bottom: 10px; cursor: pointer;
+  transition: background .25s;
+}
+.t-item:hover { background: var(--paper-deep); }
+.t-item::before {
+  content: ''; position: absolute; left: -33px; top: 24px;
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--bg); border: 2.5px solid var(--rust);
+  transition: background .25s;
+}
+.t-item.open::before { background: var(--rust); }
+.t-item-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.t-item-head h4 { font-size: 1rem; font-weight: 600; font-family: var(--serif); letter-spacing: .03em; }
+.t-ref {
+  font-size: .72rem; color: var(--rust); background: rgba(138, 90, 58, .09);
+  padding: 2px 10px; border-radius: 999px; letter-spacing: .04em; white-space: nowrap;
+}
+.t-toggle { margin-left: auto; color: var(--ink-faint); font-size: .85rem; transition: transform .3s; }
+.t-item.open .t-toggle { transform: rotate(180deg); }
+.t-detail { max-height: 0; overflow: hidden; transition: max-height .45s ease; }
+.t-detail p {
+  padding-top: 10px; font-size: .9rem; color: var(--ink-soft); line-height: 1.95; max-width: 680px;
+}
+
+/* ===== CHARACTERS ===== */
+.filter-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px; }
+.filter-chip {
+  padding: 8px 18px; border-radius: 999px; cursor: pointer;
+  font-size: .85rem; color: var(--ink-soft);
+  background: var(--paper); border: 1px solid var(--line);
+  transition: all .25s; user-select: none;
+}
+.filter-chip:hover { transform: translateY(-2px); color: var(--ink); }
+.filter-chip.active {
+  background: linear-gradient(135deg, var(--brown), var(--rust));
+  color: #f8f5ec; border-color: transparent;
+}
+.char-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 20px; margin-top: 30px;
+}
+.char-card {
+  background: var(--paper); border: 1px solid var(--line); border-radius: 20px;
+  padding: 22px 22px 20px; cursor: pointer;
+  position: relative; overflow: hidden;
+  transition: transform .3s cubic-bezier(.34,1.4,.5,1), box-shadow .3s, border-color .3s;
+}
+.char-card::before {
+  content: ''; position: absolute; top: 0; left: 22px; right: 22px; height: 3px;
+  border-radius: 0 0 4px 4px;
+  background: linear-gradient(90deg, var(--gc, var(--brown)), transparent);
+  opacity: .85;
+}
+.char-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 14px 30px rgba(90, 70, 40, .16);
+  border-color: var(--gc, var(--brown));
+}
+.char-card .c-name { font-family: var(--serif); font-size: 1.12rem; font-weight: 700; }
+.char-card .c-ru { font-size: .76rem; color: var(--ink-faint); margin-top: 3px; font-style: italic; letter-spacing: .02em; }
+.char-card .c-desc { font-size: .85rem; color: var(--ink-soft); margin-top: 12px; line-height: 1.8; }
+.char-card .c-tags { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 6px; }
+.c-tag {
+  font-size: .7rem; padding: 3px 10px; border-radius: 999px;
+  color: var(--gc, var(--brown)); background: color-mix(in srgb, var(--gc, var(--brown)) 10%, var(--paper));
+  border: 1px solid color-mix(in srgb, var(--gc, var(--brown)) 28%, var(--paper));
+}
+.char-card.hidden { display: none; }
+
+/* modal */
+.modal-mask {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(38, 32, 26, .5);
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px; opacity: 0; pointer-events: none; transition: opacity .3s;
+}
+.modal-mask.show { opacity: 1; pointer-events: auto; }
+.modal-box {
+  background: var(--paper); border-radius: 24px; max-width: 560px; width: 100%;
+  max-height: 82vh; overflow-y: auto;
+  padding: 36px 34px; position: relative;
+  transform: translateY(18px); transition: transform .3s;
+  border-top: 4px solid var(--brown);
+}
+.modal-mask.show .modal-box { transform: translateY(0); }
+.modal-close {
+  position: absolute; top: 16px; right: 20px; cursor: pointer;
+  font-size: 1.3rem; color: var(--ink-faint); background: none; border: none;
+  transition: color .2s; line-height: 1;
+}
+.modal-close:hover { color: var(--rust); }
+.modal-box h3 { font-family: var(--serif); font-size: 1.5rem; font-weight: 900; }
+.modal-box .m-ru { font-style: italic; color: var(--ink-faint); font-size: .88rem; margin-top: 4px; }
+.modal-box .m-role {
+  display: inline-block; margin-top: 12px; font-size: .76rem; letter-spacing: .06em;
+  color: var(--brown); background: rgba(122, 92, 64, .08); padding: 4px 14px; border-radius: 999px;
+}
+.modal-box .m-body { margin-top: 16px; font-size: .93rem; color: var(--ink-soft); line-height: 2.05; }
+
+/* ===== THEMES ===== */
+.theme-block {
+  display: grid; grid-template-columns: 220px 1fr; gap: 34px;
+  padding: 42px 0; align-items: start;
+}
+.theme-side { position: sticky; top: 84px; }
+.theme-no {
+  font-family: var(--serif); font-weight: 900; font-size: 1.05rem; letter-spacing: .2em;
+  color: var(--rust);
+}
+.theme-side h3 { font-family: var(--serif); font-size: 1.3rem; font-weight: 900; margin-top: 8px; line-height: 1.5; }
+.theme-side .t-en { font-size: .78rem; color: var(--ink-faint); font-style: italic; margin-top: 4px; letter-spacing: .03em; }
+.theme-body p { color: var(--ink-soft); font-size: .94rem; line-height: 2.05; margin-bottom: 14px; max-width: 640px; }
+.theme-body p b { color: var(--ink); font-weight: 600; }
+.theme-key {
+  display: inline-block; margin-top: 4px; margin-right: 8px; margin-bottom: 6px;
+  font-size: .74rem; color: var(--brown); letter-spacing: .05em;
+  padding: 3px 12px; border-radius: 999px; border: 1px solid rgba(122, 92, 64, .3);
+  background: rgba(122, 92, 64, .06);
+}
+.theme-sep {
+  height: 1px; border: none;
+  background: linear-gradient(90deg, transparent, var(--line) 25%, var(--line) 75%, transparent);
+}
+
+/* ===== QUOTES：冰河晨雾 ===== */
+.quote-shell { margin-top: 38px; position: relative; }
+.quote-viewport { overflow: hidden; border-radius: 24px; }
+.quote-track { display: flex; transition: transform .6s cubic-bezier(.4,0,.2,1); }
+.q-slide {
+  flex: 0 0 100%; padding: 50px 8%;
+  background:
+    radial-gradient(ellipse 62% 48% at 50% 100%, rgba(62, 90, 116, .1), transparent 70%),
+    linear-gradient(180deg, #f1f4f3, #e5eae8);
+  border: 1px solid #c5d2d7; border-radius: 24px;
+  text-align: center;
+}
+.q-mark { font-family: var(--serif); font-size: 2.6rem; color: var(--blue); line-height: 1; }
+.q-text {
+  font-family: var(--serif); font-size: clamp(1.05rem, 2.6vw, 1.35rem);
+  line-height: 2.1; color: var(--blue); margin-top: 12px;
+}
+.q-src { margin-top: 18px; font-size: .85rem; color: var(--blue); letter-spacing: .06em; }
+.q-note { margin-top: 8px; font-size: .82rem; color: #7d8b91; max-width: 520px; margin-left: auto; margin-right: auto; line-height: 1.8; }
+.quote-nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 42px; height: 42px; border-radius: 50%;
+  background: var(--paper); border: 1px solid var(--line);
+  color: var(--ink-soft); font-size: 1.1rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .25s; z-index: 5;
+}
+.quote-nav:hover { color: var(--rust); border-color: var(--rust); transform: translateY(-50%) scale(1.08); }
+.quote-nav.prev { left: -14px; }
+.quote-nav.next { right: -14px; }
+.quote-dots { display: flex; justify-content: center; gap: 9px; margin-top: 22px; }
+.q-dot {
+  width: 8px; height: 8px; border-radius: 50%; background: var(--line);
+  cursor: pointer; transition: all .3s;
+}
+.q-dot.active { background: var(--rust); transform: scale(1.25); }
+
+/* ===== VERSIONS & LEGACY ===== */
+.dual-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 38px; }
+.v-panel {
+  background: var(--paper); border: 1px solid var(--line); border-radius: 22px;
+  padding: 28px 26px; box-shadow: 0 10px 24px rgba(90, 70, 40, .08);
+}
+.v-panel h3 {
+  font-family: var(--serif); font-size: 1.1rem; font-weight: 700; letter-spacing: .06em;
+  margin-bottom: 6px;
+}
+.v-panel .v-sub { font-size: .8rem; color: var(--ink-faint); margin-bottom: 18px; }
+.v-row {
+  padding: 14px 0; border-bottom: 1px dashed var(--line);
+  font-size: .88rem; color: var(--ink-soft); line-height: 1.8;
+}
+.v-row:last-child { border-bottom: none; }
+.v-row b { color: var(--ink); font-weight: 600; }
+.v-row .v-year {
+  font-family: var(--serif); color: var(--rust); font-weight: 700; margin-right: 10px;
+}
+.v-rec {
+  margin-top: 14px; font-size: .82rem; color: var(--brown);
+  background: rgba(122, 92, 64, .09); border-radius: 18px; padding: 10px 14px; line-height: 1.7;
+}
+.legacy-list { margin-top: 34px; }
+.legacy-item {
+  display: grid; grid-template-columns: 150px 1fr; gap: 20px;
+  padding: 22px 0; border-bottom: 1px dashed var(--line);
+}
+.legacy-item:last-child { border-bottom: none; }
+.legacy-item .l-name { font-family: var(--serif); font-weight: 700; font-size: 1rem; color: var(--ink); }
+.legacy-item .l-name span { display: block; font-size: .75rem; color: var(--ink-faint); font-weight: 400; margin-top: 3px; font-style: italic; }
+.legacy-item .l-desc { font-size: .9rem; color: var(--ink-soft); line-height: 1.95; }
+
+/* ===== READING ===== */
+.read-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 22px; margin-top: 36px;
+}
+.read-card {
+  background: var(--paper); border: 1px solid var(--line); border-radius: 22px;
+  padding: 28px 26px; transition: transform .3s, box-shadow .3s;
+  box-shadow: 0 6px 16px rgba(90, 70, 40, .06);
+}
+.read-card:hover { transform: translateY(-4px); box-shadow: 0 12px 26px rgba(90, 70, 40, .14); }
+.read-card h3 { font-family: var(--serif); font-size: 1.02rem; font-weight: 700; margin-bottom: 12px; color: var(--brown); }
+.read-card p { font-size: .88rem; color: var(--ink-soft); line-height: 1.95; }
+.read-card p b { color: var(--ink); }
+.read-card ul { list-style: none; margin-top: 8px; }
+.read-card li {
+  font-size: .88rem; color: var(--ink-soft); line-height: 1.9;
+  padding-left: 18px; position: relative; margin-bottom: 6px;
+}
+.read-card li::before {
+  content: ''; position: absolute; left: 2px; top: 12px;
+  width: 6px; height: 6px; border-radius: 50%; background: var(--rust);
+}
+
+/* footer */
+.site-footer {
+  max-width: 1000px; margin: 90px auto 0; padding: 26px 24px 46px;
+  border-top: 1px solid var(--line);
+  font-size: .82rem; color: var(--ink-faint);
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+}
+.site-footer a { color: var(--ink-soft); text-decoration: none; transition: color .2s; }
+.site-footer a:hover { color: var(--rust); }
+.foot-mark { display: inline-flex; align-items: center; gap: 9px; }
+
+/* responsive */
+@media (max-width: 820px) {
+  .ov-grid { grid-template-columns: 1fr; }
+  .dual-grid { grid-template-columns: 1fr; }
+  .theme-block { grid-template-columns: 1fr; gap: 14px; }
+  .theme-side { position: static; }
+  .legacy-item { grid-template-columns: 1fr; gap: 6px; }
+  .quote-nav.prev { left: 6px; } .quote-nav.next { right: 6px; }
+  .q-slide { padding: 42px 7%; }
+}
+@media (max-width: 520px) {
+  .section { padding-top: 66px; }
+  .hero { min-height: 88vh; padding-top: 16vh; }
+  .hero-wm { font-size: 2.4rem; }
+  .hero-meta { gap: 12px 26px; }
+  .stat { min-width: 120px; padding: 18px 8px; }
+}
+</style>
+</head>
+<body>
+
+<a href="hesse.html" class="back-home">← 黑塞</a>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="top">
+  <span class="hero-wm" aria-hidden="true">Unterm Rad</span>
+  <div class="hero-eyebrow">Hermann Hesse · 1906 · 黑森林与神学院</div>
+  <h1>车轮下</h1>
+  <div class="hero-ru">Unterm Rad</div>
+  <div class="hero-sub">一颗好心灵，如何被功绩机器碾过</div>
+  <div class="hero-divider"><svg viewBox="0 0 48 48" width="40" height="40" aria-hidden="true"><g stroke="#8a5a3a" stroke-width="1.8" fill="none" stroke-linecap="round"><circle cx="24" cy="24" r="12.5"/><path d="M24 11.5 V36.5"/><path d="M34.82 17.75 L13.18 30.25"/><path d="M34.82 30.25 L13.18 17.75"/></g><circle cx="24" cy="24" r="2.6" fill="#8a5a3a"/></svg></div>
+  <blockquote class="hero-quote">
+    “他宁可让心中充满忧伤，也不愿脸上强装欢笑。”
+    <span class="src">— 全书题眼 · 转述</span>
+  </blockquote>
+  <div class="hero-meta">
+    <div class="hero-meta-item"><span class="value">1906</span><span class="label">出版年份</span></div>
+    <div class="hero-meta-item"><span class="value">3部</span><span class="label">三部结构</span></div>
+    <div class="hero-meta-item"><span class="value">1条</span><span class="label">冰河</span></div>
+    <div class="hero-meta-item"><span class="value">第2部</span><span class="label">黑塞长篇</span></div>
+  </div>
+  <div class="scroll-hint" onclick="document.getElementById('content').scrollIntoView({behavior:'smooth'})">
+    <span>向下探索</span><span class="arrow">↓</span>
+  </div>
+</section>
+
+<!-- ===== NAV ===== -->
+<nav class="nav-bar" id="content">
+  <div class="nav-inner">
+    <div class="nav-tab active" data-section="overview">概览</div>
+    <div class="nav-tab" data-section="story">脉络</div>
+    <div class="nav-tab" data-section="characters">人物</div>
+    <div class="nav-tab" data-section="themes">主题</div>
+    <div class="nav-tab" data-section="quotes">名句</div>
+    <div class="nav-tab" data-section="versions">译本与影响</div>
+    <div class="nav-tab" data-section="reading">阅读指南</div>
+  </div>
+</nav>
+
+<!-- ===== OVERVIEW ===== -->
+<section class="section fade-in" id="overview">
+  <h2 class="section-title">关于这本书</h2>
+  <div class="ov-grid">
+    <div class="ov-prose">
+      <p class="lede">州试放榜那天，汉斯·吉本拉特是全镇的骄傲。这个黑森林小镇几十年来第二个考上州试的男孩，被父亲、校长、牧师和所有邻居的期待推着，一路跑进神学院——然后，车轮转到了他身上。</p>
+      <p>《车轮下》是一部<strong>薄得惊人的教育小说</strong>：没有反派，没有阴谋，只有一套运转良好的功绩机器和一颗被它压垮的心灵。学校和父亲说的话几乎全是「为你好」——黑塞最狠的地方就在这里：碾过汉斯的车轮，每一根辐条都出于善意。</p>
+      <p>全书以汉斯的沉没为轴，却在他与「坏学生」海尔纳的友谊里留了一口新鲜的空气：那是整部小说唯一为「无用」而活的时光。一百年后再读，那辆轮子没有退休——排满的课表、提前的起跑线，汉斯只是换了个教室。</p>
+    </div>
+    <div class="ov-panel">
+      <h3>创作背景</h3>
+      <ul class="bg-list">
+        <li><b>神学院的七个月</b>：1891 年十四岁的黑塞考入毛尔布伦神学院，七个月后出逃。此后辗转疗养院与书店学徒，几度濒临崩溃——汉斯·吉本拉特的病历，一半是他自己的。</li>
+        <li><b>德意志的功绩机器</b>：书中的州试（Landesexamen）与教会学校体系是当时符腾堡的真实制度，天资被当作国家资源开采，这本书是它最早也最著名的一份控诉。</li>
+        <li><b>成名之后的第二击</b>：1904 年《彼得·卡门青》让黑塞一夜成名，1906 年他立刻交出这本薄书——二十九岁的他选择替那些没能出逃的孩子说话。</li>
+        <li><b>书名的来历</b>：出自德语习语「被车轮碾过」（unter die Räder kommen）。校长的那句临别赠言，就是全书主题的预演。</li>
+        <li><b>迟到的辩护</b>：此后一生，黑塞在散文与书信里反复为「学校里的孩子」辩护——这本书他写完了一辈子。</li>
+      </ul>
+      <div class="room-note">注：书中的神学院没有点名，但原型公认是毛尔布伦——黑塞自己十四岁进去、七个月后就出逃的那座修道院。</div>
+    </div>
+  </div>
+  <div class="stat-strip">
+    <div class="stat"><div class="num">3部</div><div class="cap">全书结构 · 曲式般干净</div></div>
+    <div class="stat"><div class="num">2个少年</div><div class="cap">汉斯与海尔纳 · 一正一反</div></div>
+    <div class="stat"><div class="num">1场州试</div><div class="cap">荣耀的顶点 · 下坠的起点</div></div>
+    <div class="stat"><div class="num">1间工厂</div><div class="cap">齿轮之间 · 换个车间继续转</div></div>
+    <div class="stat"><div class="num">0个坏人</div><div class="cap">没有反派 · 只有机器</div></div>
+  </div>
+</section>
+
+<!-- ===== STORY ===== -->
+<section class="section fade-in" id="story">
+  <h2 class="section-title">故事脉络</h2>
+  <p class="section-desc">三部结构像一份工整的病历：机器启动、绿洲出现、绿洲被拔掉、人沉没。以下按四个阶段梳理关键节点，点击展开详情。放心读——这本薄书的痛感不在悬念里，而在语气里。</p>
+
+  <div class="phase">
+    <div class="phase-head"><span class="phase-num">Ⅰ</span><h3>优等生的机器</h3><span class="ref">第一部 · 童年与州试</span></div>
+    <div class="phase-items">
+      <div class="t-item"><div class="t-item-head"><h4>小镇的独生子</h4><span class="t-ref">第一部</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>汉斯·吉本拉特是做点小买卖的鳏夫的独子：聪明、孱弱、敏感。母亲早逝，父亲把全部的爱兑换成课业表，全镇的教育雄心都投资在这一个男孩身上。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>州试：全镇的赌注</h4><span class="t-ref">第一部</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>备考的夏天取消了假期，牧师为他加课，连钓鱼都被没收。放榜那天，他是全镇几十年来第二个考上的男孩——酒馆请客、父亲的骄傲、邻里的道贺，荣耀在第一天全部到齐。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>「千万别松劲」</h4><span class="t-ref">第一部</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>校长的临别赠言（转述）：松了劲，就会掉到车轮底下去。书名与主题在这一句里同时完成预演——善意、正确、不容分说，机器的嗓音从来如此。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>进入神学院</h4><span class="t-ref">第一部</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>黑森林深处的修道院学校：清晨点名、默祷、拉丁文与希腊文，一日一日精确如钟表。车轮开始转动，少年还不知道自己已经坐了上去。</p></div></div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-head"><span class="phase-num">Ⅱ</span><h3>神学院的绿洲</h3><span class="ref">第二部 · 友谊与决裂</span></div>
+    <div class="phase-items">
+      <div class="t-item"><div class="t-item-head"><h4>诗人同学</h4><span class="t-ref">第二部</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>赫尔曼·海尔纳，商人之子，写诗，叛逆，功课常常垫底——在老师们眼里是标准的「坏学生」，在汉斯眼里却是第一口新鲜空气：原来人可以这样活。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>散步与诗歌</h4><span class="t-ref">第二部</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>两人在雨中、在山道上、在禁书里结成同盟。这是汉斯少年时代唯一一段为「无用」而活的时光——绿洲不在地理上，在这个人身上。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>出逃与决裂</h4><span class="t-ref">第二部</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>海尔纳在一次冲突后失踪，整夜搜山才被找回，随后被开除。离院前他来道别，汉斯在窗口目送——机器的判定下来了：友谊属于事故，必须清除。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>被孤立的汉斯</h4><span class="t-ref">第二部</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>与「坏学生」同过盟的人成了重点观察对象：老师加倍「关心」，同学敬而远之。海尓纳走了，绿洲被连根拔起，机器的负载却一点没减。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>汉斯的垮掉</h4><span class="t-ref">第二部</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>失眠、消瘦、走神、成绩滑坡，最后精神垮掉——校方与父亲达成一致：休学，回家。所有人都以为这只是「机器的一次小检修」。</p></div></div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-head"><span class="phase-num">Ⅲ</span><h3>齿轮之间</h3><span class="ref">第三部 · 前半 · 回家与工厂</span></div>
+    <div class="phase-items">
+      <div class="t-item"><div class="t-item-head"><h4>回家的休学</h4><span class="t-ref">第三部</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>家乡的日子松弛下来，鞋匠弗莱格师傅的铺子是唯一的绿洲。但复学之后，隔膜已成：课程跟不上，少年心气回不来——他终于退了学。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>螺栓厂的学徒</h4><span class="t-ref">第三部</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>他进工厂当学徒：工装、锉刀、汽笛。车轮换了个车间继续转——只是这一次，没有人再夸他跑得快，也没有人在意他累不累。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>短暂的工友情</h4><span class="t-ref">第三部</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>友善的工友带他喝酒、远足，他学会了说粗话，也第一次有了不被考核的日子——命运的回声：又一段短暂的温柔，照例不会太久。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>发胖与迟钝</h4><span class="t-ref">第三部</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>小说毫不留情地写他的钝化：身体发胖，眼神黯淡，那颗曾让全镇骄傲的头脑变得浑浊。机器没有碾死他——先磨钝了他。</p></div></div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-head"><span class="phase-num">Ⅳ</span><h3>车轮之下</h3><span class="ref">第三部 · 尾声 · 河水与葬礼</span></div>
+    <div class="phase-items">
+      <div class="t-item"><div class="t-item-head"><h4>那个夜晚</h4><span class="t-ref">第三部</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>一个喝多的夜晚，工友们散了，他独自沿着河走。水在整部小说里安静地流到最后一页——这一次，它收下了他。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>清晨的围观</h4><span class="t-ref">第三部</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>第二天清晨捞起他的人纳闷：这样体面人家的好孩子，怎么会掉进河里。没有人打算深究——追问是要付出成本的事。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>唯一的追问</h4><span class="t-ref">第三部</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>鞋匠弗莱格问出了全书少见的一句人话（转述）：这孩子不是被水淹死的。这是小镇上唯一一次，有人把目光从河面移向车轮。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>体面的葬礼</h4><span class="t-ref">第三部</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>父亲的悲痛是真的，葬礼是体面的，秩序一切如常。车轮照转，小镇照常生活——被碾过的人，连一句纪念碑都没有。</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CHARACTERS ===== -->
+<section class="section wide fade-in" id="characters">
+  <h2 class="section-title">人物</h2>
+  <p class="section-desc">一本薄书，人物寥寥：一个被碾的人，一台由善意组成的机器，和两段短暂的温柔。点击卡片看小传。</p>
+  <div class="filter-row" id="charFilters"></div>
+  <div class="char-grid" id="charGrid"></div>
+</section>
+
+<!-- ===== THEMES ===== -->
+<section class="section fade-in" id="themes">
+  <h2 class="section-title">核心主题</h2>
+  <p class="section-desc">《车轮下》的六个思想支点——它们彼此咬合，像车轮的辐条一样从同一根轴上伸出。</p>
+
+  <div class="theme-block">
+    <div class="theme-side"><div class="theme-no">壹</div><h3>功绩机器的童年</h3><div class="t-en">Die Maschine</div></div>
+    <div class="theme-body">
+      <p>小说最不安的地方，是它写不出一个坏人：父亲在尽责，校长在惜才，牧师在加课，每个人的出发点都站得住。黑塞批判的不是任何个人，而是<strong>把天资当作矿藏来开采的整套制度</strong>——它的每根辐条都善意，合起来却只认产量，不认人。</p>
+      <p>汉斯的悲剧因此是双重的：被压垮之前，他先被夺走了「无用」的权利——钓鱼、发呆、夏日午睡，一切不产生分数的时间都成了浪费。机器不憎恨他，机器只是没有为「累」这个字设计位置。</p>
+      <span class="theme-key">州试</span><span class="theme-key">千万别松劲</span><span class="theme-key">善意的碾压</span>
+    </div>
+  </div>
+  <hr class="theme-sep">
+  <div class="theme-block">
+    <div class="theme-side"><div class="theme-no">贰</div><h3>友谊：与「坏学生」的同盟</h3><div class="t-en">Hermann Heilner</div></div>
+    <div class="theme-body">
+      <p>海尔纳在制度眼里一无是处：功课差、不服管、写「没用的」诗。但黑塞把全书唯一的生命力给了他——<b>「坏」在这里是制度的评分，不是人的评分</b>。对汉斯来说，这个朋友是第一口属于「自己」的空气。</p>
+      <p>机器随即给出了判例：友谊被定义为事故，朋友被清除，残留的另一半则被孤立、观察、劝导。汉斯的垮掉不是从成绩下滑开始的，是从绿洲被拔掉开始的。</p>
+      <span class="theme-key">坏学生</span><span class="theme-key">诗歌</span><span class="theme-key">被清除的同盟</span>
+    </div>
+  </div>
+  <hr class="theme-sep">
+  <div class="theme-block">
+    <div class="theme-side"><div class="theme-no">叁</div><h3>自然与书本</h3><div class="t-en">Natur wider Latein</div></div>
+    <div class="theme-body">
+      <p>全书有一套沉默的对照：森林、河流、夏日、钓钩——和一个把这一切没收掉的课业表。黑塞笔下的大自然不是风景，是<b>机器管不到的自留地</b>：汉斯每一次真正的呼吸都发生在书本之外。</p>
+      <p>而水，是自然一侧最后的收容所：它先收下他偷来的假日，最后收下他本人。首尾之间，那条河始终在流，只是没人听。</p>
+      <span class="theme-key">钓鱼的假日</span><span class="theme-key">被没收的夏天</span><span class="theme-key">河流</span>
+    </div>
+  </div>
+  <hr class="theme-sep">
+  <div class="theme-block">
+    <div class="theme-side"><div class="theme-no">肆</div><h3>两次死亡：心的与身的</h3><div class="t-en">Zwei Tode</div></div>
+    <div class="theme-body">
+      <p>小说实际写了两次死亡。第一次发生在神学院：休学回家的少年已经是空壳——「那个汉斯」在那年冬天就死了，只是还能走路、还能答题。第二次发生在河里，那不过是<b>给早已完成的事补一个手续</b>。</p>
+      <p>这正是全书最冷的地方：小镇为第二次死亡举行了体面的葬礼，为第一次死亡什么也没做——因为没人看得见。弗莱格师傅那句追问之所以珍贵，是因为它同时看见了两次。</p>
+      <span class="theme-key">先熄灭</span><span class="theme-key">后沉没</span><span class="theme-key">看得见与看不见</span>
+    </div>
+  </div>
+  <hr class="theme-sep">
+  <div class="theme-block">
+    <div class="theme-side"><div class="theme-no">伍</div><h3>车轮的三层隐喻</h3><div class="t-en">Das Rad</div></div>
+    <div class="theme-body">
+      <p>「车轮」在书里至少有三层。第一层是<b>机器</b>：学校与家庭的功绩传动装置，人人是辐条，少年是轴心。第二层是<b>时间</b>：被排满的日程像轮子一样循环转动，把童年碾成匀速的年月。第三层是<b>命运</b>：希腊式的、不由分说的必然——跑得越快，越早撞上它。</p>
+      <p>三层又互相加强：机器造出时间表，时间表变成命运。黑塞迟到的辩护，就是要把这个三合一的轮子从「为你好」的手里掰出一点缝来。</p>
+      <span class="theme-key">机器</span><span class="theme-key">时间</span><span class="theme-key">命运</span>
+    </div>
+  </div>
+  <hr class="theme-sep">
+  <div class="theme-block">
+    <div class="theme-side"><div class="theme-no">陆</div><h3>黑塞迟到的辩护</h3><div class="t-en">Späte Verteidigung</div></div>
+    <div class="theme-body">
+      <p>黑塞自己逃出来了，汉斯没有。这本薄书因此带着<b>幸存者的愧疚</b>：他为所有没能出逃的孩子写下了这份病历，并且在此后的一生里不断续写——散文、书信、访谈，凡有少年因学校崩溃的新闻，都有他站出来作证的声音。</p>
+      <p>一百年后，这辩护仍不过时：车轮换上新的名字继续转。读这本书最好的方式，是把它当作一份跨越世纪的证词——证词的核心只有一句：先有人，后有成绩。</p>
+      <span class="theme-key">幸存者</span><span class="theme-key">一生的续写</span><span class="theme-key">先有人</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== QUOTES ===== -->
+<section class="section fade-in" id="quotes">
+  <h2 class="section-title">名句</h2>
+  <p class="section-desc">六句话，从荣耀的顶点走到清晨的河边——基本就是汉斯的病历摘要。均为转述，措辞以原书为准。</p>
+  <div class="quote-shell">
+    <button class="quote-nav prev" id="qPrev" aria-label="上一条">‹</button>
+    <div class="quote-viewport"><div class="quote-track" id="qTrack"></div></div>
+    <button class="quote-nav next" id="qNext" aria-label="下一条">›</button>
+    <div class="quote-dots" id="qDots"></div>
+  </div>
+</section>
+
+<!-- ===== VERSIONS & LEGACY ===== -->
+<section class="section wide fade-in" id="versions">
+  <h2 class="section-title">译本与影响</h2>
+  <p class="section-desc">中文世界怎么读它，以及这只车轮在一百多年里碾出了什么回声。</p>
+  <div class="dual-grid">
+    <div class="v-panel">
+      <h3>中文译本</h3>
+      <div class="v-sub">常见译名《在轮下》，认准译者即可</div>
+      <div class="v-row"><span class="v-year">通行</span><b>杨武能 译</b>（译林出版社）—— 黑塞中文谱系的主要搭建者之一，译笔温润可靠，流传最广的版本。</div>
+      <div class="v-row"><span class="v-year">近年</span><b>另有多家新译本</b> —— 近年多家出版社相继重译，书名多沿用《在轮下》，可按装帧与版式挑选。</div>
+      <div class="v-rec">篇幅短，一天可以读完；读完接一册《德米安》，正好是同一场青春的上下集。</div>
+    </div>
+    <div class="v-panel">
+      <h3>对读与延伸</h3>
+      <div class="v-sub">三册延伸，看见这本书的前因与后果</div>
+      <div class="v-row"><span class="v-year">1904</span><b>《彼得·卡门青》</b> —— 成名作：阿尔卑斯的少年与自然的救赎，本书的前奏。</div>
+      <div class="v-row"><span class="v-year">1919</span><b>《德米安》</b> —— 同一枚硬币的另一面：车轮下的少年，长成了寻找自己的青年。</div>
+      <div class="v-row"><span class="v-year">书信</span><b>黑塞的散文与书信</b> —— 他后来在多篇文章里为「学校里的孩子」辩护，可与本书互为注脚。</div>
+    </div>
+  </div>
+  <div class="legacy-list">
+    <div class="legacy-item">
+      <div class="l-name">教育讨论的经典文本<span>Klassiker der Schuldebatte</span></div>
+      <div class="l-desc">德语世界的学校讨论绕不开的一本书：从二十世纪初的改革派到今天，「被车轮碾过的孩子」始终是教育话题的通用隐喻。</div>
+    </div>
+    <div class="legacy-item">
+      <div class="l-name">黑塞声名的前奏<span>1906</span></div>
+      <div class="l-desc">继《彼得·卡门青》之后，这本书让二十九岁的黑塞坐稳了「青年一代代言人」的位置——尽管他自己一生都更心疼书中那个没能出逃的孩子。</div>
+    </div>
+    <div class="legacy-item">
+      <div class="l-name">与《德米安》对读<span>1906 → 1919</span></div>
+      <div class="l-desc">1906 年被碾碎的优等生，与 1919 年出走的德米安一代，是同一场青春的上下集：一本写机器，一本写逃出去之后。</div>
+    </div>
+    <div class="legacy-item">
+      <div class="l-name">「内卷」时代的远亲<span>车轮未老</span></div>
+      <div class="l-desc">一百年后再读，那辆功绩车轮没有退休：排满的课表、提前的起跑线、被没收的夏天——汉斯·吉本拉特只是换了个教室。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== READING ===== -->
+<section class="section fade-in" id="reading">
+  <h2 class="section-title">阅读指南</h2>
+  <p class="section-desc">给正在读（或将要读）的你几条实用建议。</p>
+  <div class="read-grid">
+    <div class="read-card">
+      <h3>怎么进入</h3>
+      <p>一本薄书，一个下午能读完，从头读起即可，节奏平顺。<b>把它当「黑塞的自伤记录」读，比当控诉文章读更能读到疼处</b>——控诉人人会写，把自己的伤口摊开成病历，只有亲历者写得出。</p>
+    </div>
+    <div class="read-card">
+      <h3>值得盯住的场景</h3>
+      <ul>
+        <li>校长那句<b>临别赠言</b>：书名的出处，全书的预演</li>
+        <li><b>海尔纳出逃前夜</b>：友谊被判为事故的那一刻</li>
+        <li>汉斯每次「回光返照」的<b>假平静</b></li>
+        <li>结尾渔夫的闲谈：全书的分量都压在那几句不痛不痒里</li>
+      </ul>
+    </div>
+    <div class="read-card">
+      <h3>别被吓退的几件事</h3>
+      <ul>
+        <li>它不曲折、不炫技，甚至有点「平」——那种平，就是机器的语气</li>
+        <li>人物不多，德语人名只有三四个，没有阅读门槛</li>
+        <li>结尾不给「教训」是刻意的：控诉若说得响亮，就成了机器的同类</li>
+      </ul>
+    </div>
+    <div class="read-card">
+      <h3>读完之后</h3>
+      <ul>
+        <li>接<b>《德米安》</b>：同一场青春的下半集，车轮下的少年长成了寻找自己的青年</li>
+        <li>翻回黑塞生平，看<b>神学院那七个月</b>——小说的每一个细节都有出处</li>
+        <li>再想想「车轮」这个词，如今在多少家长群里每天被使用</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <span class="foot-mark"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><g stroke="#7a5c40" stroke-width="1.8" stroke-linecap="round" fill="none"><path d="M4 14 q4 -7 8 0"/><path d="M13 11 q4 -7 8 0" opacity=".55"/></g></svg>车轮不认得它碾过的人 · © zzht</span>
+  <span><a href="hesse.html">赫尔曼·黑塞</a> · <a href="steppenwolf.html">下一部 · 荒原狼</a> · <a href="index.html">返回首页</a> · <a href="https://github.com/zzht1">GitHub ↗</a></span>
+</footer>
+
+<script>
+/* ================= DATA ================= */
+const GROUPS = {
+  victim: { name: '被碾的人', color: '#3e5a74' },
+  machine:{ name: '碾人的机器', color: '#6e6a60' },
+  warm:   { name: '短暂的温柔', color: '#8a5a3a' }
+};
+
+const CHARACTERS = [
+  { id:'hans', name:'汉斯·吉本拉特', ru:'Hans Giebenrath', group:'victim', role:'主人公',
+    desc:'灵秀而孱弱的优等生，全镇几十年来第二个考上州试的男孩，也是全镇教育雄心的集中投资对象。',
+    tags:['州试第二名','优等生','失眠','冰河'],
+    detail:'他先是荣誉：奖状、请客、父亲的骄傲。随后是负载：失眠、消瘦、成绩滑坡，在朋友被清除后彻底垮掉。休学、退学、进厂当学徒，眼神一天天变钝。一个喝多的夜晚，他沿着河走，没有再回家。他不是被谁害死的——他是被一整套「为你好」压垮的。' },
+  { id:'heilner', name:'赫尔曼·海尔纳', ru:'Hermann Heilner', group:'warm', role:'汉斯的朋友',
+    desc:'商人之子，写诗，叛逆，功课常垫底。在老师们眼里是标准的「坏学生」，在汉斯眼里是第一口新鲜的空气。',
+    tags:['诗歌','出走','坏学生'],
+    detail:'他与汉斯在雨中、山道与禁书里结成同盟，是全书中唯一一段为「无用」而活的时光。一次冲突后他失踪出逃，被找回即遭开除。离院前他来道别——此后汉斯的世界里再没有第二种活法出现过。黑塞把少年时代全部的反抗与诗意，都寄放在这个人身上。' },
+  { id:'father', name:'父亲', ru:'Joseph Giebenrath', group:'machine', role:'鳏夫 · 小镇商贩',
+    desc:'丧妻的小贩，克己而体面。儿子的州试是他后半生最大的荣耀，也是他把爱兑换成课业表的开始。',
+    tags:['为你好','骄傲','体面'],
+    detail:'他不是恶人：他省吃俭用、按时加课、在葬礼上真心恸哭。可怕之处恰恰在于此——他的一切行为都符合一个「好父亲」的模板，唯独没有人问过儿子累不累。全书结尾，他依旧体面地生活着，只是眼睛里少了一点东西。' },
+  { id:'masters', name:'校长与牧师们', ru:'Die Lehrer', group:'machine', role:'教育机器合卡',
+    desc:'校长、牧师、神学院的老师们：全书「善意机器」的传动装置，每根辐条都尽职尽责。',
+    tags:['千万别松劲','加课','重点观察'],
+    detail:'他们的话几乎可以互换：「千万别松劲」。他们对汉斯并非假意——惜才之情是真的，失望之情也是真的。这恰是机器最可怕之处：齿轮转动的声音听起来全是善意，而没有一个齿轮负责问一句：这孩子还转得动吗？' },
+  { id:'flaig', name:'弗莱格师傅', ru:'Meister Flaig', group:'warm', role:'鞋匠',
+    desc:'小镇上少有的「不看成绩单看人」的大人，汉斯少年时代少有的温情据点之一。',
+    tags:['清醒者','追问','铺子'],
+    detail:'他的鞋匠铺是休学在家的汉斯唯一愿意常去的地方。汉斯死后，是他问出了全书少见的一句人话：这孩子不是被水淹死的。在一个人人默诵「千万别松劲」的小镇上，这句追问是他能给出的全部辩护——也是黑塞留给小镇的唯一一点体面。' },
+  { id:'town', name:'小镇', ru:'Die Kleinstadt', group:'machine', role:'环境卡',
+    desc:'黑森林小城：教堂的钟、拉丁学校的白墙、酒馆与邻居的嘴。全书真正的群像主角。',
+    tags:['合唱团','目光','秩序'],
+    detail:'小镇在书里像个合唱团：放榜时齐声喝彩，落榜时齐声沉默。牧师、校长、邻居、亲戚，人人都会为「我们的小汉斯」骄傲，也人人都会在他沉没时平静地纳闷。环境即机器的一部分——车轮就安装在小镇的日常里。' },
+  { id:'wheel', name:'那只车轮', ru:'Das Rad', group:'machine', role:'母题卡',
+    desc:'书名里的那只轮子：德语习语「被车轮碾过」的核心意象，全书的总隐喻。',
+    tags:['机器','时间','命运'],
+    detail:'三层隐喻彼此咬合：机器——学校与家庭的功绩传动装置；时间——把童年碾成匀速年月的日程表；命运——跑得越快越早撞上的必然。黑塞在多年后的文章里仍在修补这个意象：车轮不认得它碾过的人，所以得有人替它记住。' }
+];
+
+const QUOTES = [
+  { text:'他宁可让心中充满忧伤，也不愿脸上强装欢笑。', src:'全书题眼 · 转述', note:'表情可以管理，忧伤不能——这句常被引作黑塞对「优等生」命运的判词。' },
+  { text:'他跑得那样快，人人喝彩；没有人想过，他也会累。', src:'「车轮」一节的议论 · 转述', note:'本该在他力竭时载他一程的人，只顾夸他跑得快。' },
+  { text:'松不得劲啊，一松劲，就会掉到车轮底下去。', src:'校长的临别赠言 · 转述', note:'书名的出处。善意、正确、不容分说——机器最日常的嗓音。' },
+  { text:'你从前不是这样的，汉斯。', src:'海尔纳 · 转述', note:'友谊开始时的话，也是它结束时的回声。' },
+  { text:'被学校毁掉的孩子，远比人们肯承认的多。', src:'弗莱格师傅 · 转述', note:'全书唯一替汉斯说话的大人，说出了小镇不肯说的一句话。' },
+  { text:'这样好人家的孩子，怎么会掉进河里呢。', src:'尾声 · 旁观者 · 转述', note:'全书最后一问。没有人打算深究——车轮不认得它碾过的人。' }
+];
+
+/* ================= HELPERS ================= */
+const $ = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+
+/* ================= NAV ================= */
+$$('.nav-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const el = document.getElementById(tab.dataset.section);
+    if (el) {
+      const y = el.getBoundingClientRect().top + window.pageYOffset - 56;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  });
+});
+function setupScrollspy() {
+  const tabs = $$('.nav-tab');
+  const secs = tabs.map(t => document.getElementById(t.dataset.section)).filter(Boolean);
+  const onScroll = () => {
+    const pos = window.scrollY + 140;
+    let cur = secs[0];
+    for (const s of secs) { if (s.offsetTop <= pos) cur = s; }
+    tabs.forEach(t => t.classList.toggle('active', t.dataset.section === cur.id));
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+}
+
+/* ================= FADE IN ================= */
+function setupFadeIn() {
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: .06 });
+  $$('.fade-in').forEach(el => io.observe(el));
+}
+
+/* ================= TIMELINE ================= */
+function setupTimeline() {
+  $$('.t-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const open = item.classList.toggle('open');
+      const d = item.querySelector('.t-detail');
+      d.style.maxHeight = open ? d.scrollHeight + 'px' : '0px';
+    });
+  });
+}
+
+/* ================= CHARACTERS ================= */
+function setupCharacters() {
+  const grid = $('#charGrid');
+  const fRow = $('#charFilters');
+  const cats = [['all', '全部'], ...Object.entries(GROUPS).map(([k, g]) => [k, g.name])];
+  cats.forEach(([k, label], i) => {
+    const chip = document.createElement('div');
+    chip.className = 'filter-chip' + (i === 0 ? ' active' : '');
+    chip.textContent = label;
+    chip.dataset.k = k;
+    chip.addEventListener('click', () => {
+      $$('.filter-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      $$('.char-card').forEach(card => {
+        card.classList.toggle('hidden', k !== 'all' && card.dataset.group !== k);
+      });
+    });
+    fRow.appendChild(chip);
+  });
+
+  CHARACTERS.forEach(c => {
+    const g = GROUPS[c.group];
+    const card = document.createElement('div');
+    card.className = 'char-card';
+    card.dataset.group = c.group;
+    card.style.setProperty('--gc', g.color);
+    card.innerHTML =
+      '<div class="c-name">' + c.name + '</div>' +
+      '<div class="c-ru">' + c.ru + '</div>' +
+      '<div class="c-desc">' + c.desc + '</div>' +
+      '<div class="c-tags">' + c.tags.map(t => '<span class="c-tag">' + t + '</span>').join('') + '</div>';
+    card.addEventListener('click', () => openModal(c));
+    grid.appendChild(card);
+  });
+}
+function openModal(c) {
+  const g = GROUPS[c.group];
+  const mask = $('#modalMask');
+  $('#mName').textContent = c.name;
+  $('#mRu').textContent = c.ru;
+  const role = $('#mRole'); role.textContent = c.role + ' · ' + g.name; role.style.color = g.color; role.style.background = g.color + '14';
+  $('#mBody').textContent = c.detail;
+  $('#modalBox').style.borderTopColor = g.color;
+  mask.classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  $('#modalMask').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+/* ================= QUOTES ================= */
+let qIdx = 0, qTimer = null;
+function setupQuotes() {
+  const track = $('#qTrack');
+  QUOTES.forEach((q, i) => {
+    const s = document.createElement('div');
+    s.className = 'q-slide';
+    s.innerHTML = '<div class="q-mark">❝</div><div class="q-text">' + q.text + '</div>' +
+      '<div class="q-src">' + q.src + '</div><div class="q-note">' + q.note + '</div>';
+    track.appendChild(s);
+    const d = document.createElement('div');
+    d.className = 'q-dot' + (i === 0 ? ' active' : '');
+    d.addEventListener('click', () => goQuote(i, true));
+    $('#qDots').appendChild(d);
+  });
+  $('#qPrev').addEventListener('click', () => goQuote((qIdx - 1 + QUOTES.length) % QUOTES.length, true));
+  $('#qNext').addEventListener('click', () => goQuote((qIdx + 1) % QUOTES.length, true));
+  startQuoteAuto();
+  const shell = $('.quote-shell');
+  shell.addEventListener('mouseenter', stopQuoteAuto);
+  shell.addEventListener('mouseleave', startQuoteAuto);
+}
+function goQuote(i, manual) {
+  qIdx = i;
+  $('#qTrack').style.transform = 'translateX(-' + i * 100 + '%)';
+  $$('.q-dot').forEach((d, j) => d.classList.toggle('active', j === i));
+  if (manual) { stopQuoteAuto(); startQuoteAuto(); }
+}
+function startQuoteAuto() { stopQuoteAuto(); qTimer = setInterval(() => goQuote((qIdx + 1) % QUOTES.length), 6500); }
+function stopQuoteAuto() { if (qTimer) { clearInterval(qTimer); qTimer = null; } }
+
+/* ================= INIT ================= */
+document.addEventListener('DOMContentLoaded', () => {
+  setupCharacters();
+  setupTimeline();
+  setupQuotes();
+  setupFadeIn();
+  setupScrollspy();
+  $('#modalClose').addEventListener('click', closeModal);
+  $('#modalMask').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+});
+</script>
+
+<!-- modal -->
+<div class="modal-mask" id="modalMask">
+  <div class="modal-box" id="modalBox">
+    <button class="modal-close" id="modalClose" aria-label="关闭">×</button>
+    <h3 id="mName"></h3>
+    <div class="m-ru" id="mRu"></div>
+    <span class="m-role" id="mRole"></span>
+    <div class="m-body" id="mBody"></div>
+  </div>
+</div>
+
+</body>
+</html>
