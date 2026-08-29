@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="先知三部曲导读：伊萨克·多伊彻的托洛茨基传——武装的先知、被解除武装的先知、流亡的先知。用三幕悲剧的体例，写完革命的全部荣光与代价。">
+<title>先知三部曲 · 一场革命的三幕悲剧 — zzht</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#efeeea;
+  --paper:#f9f8f4;
+  --ink:#211f1c;
+  --ink-soft:#53504b;
+  --ink-faint:#8c8a84;
+  --line:#dbd9d2;
+  --archive:#4c4a46;      /* 档案灰 */
+  --rev:#9e2b20;          /* 革命红 */
+  --star:#a8842e;         /* 先知的星，暗金 */
+  --ice:#5b6d7d;          /* 墨西哥与流亡的冷蓝 */
+  --serif:'Noto Serif SC','Source Han Serif SC',serif;
+  --sans:'Noto Sans SC',-apple-system,BlinkMacSystemFont,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);color:var(--ink);background:var(--bg);
+  line-height:1.85;overflow-x:hidden;-webkit-font-smoothing:antialiased;
+}
+/* 极淡的横线，像打字机档案纸 */
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:repeating-linear-gradient(0deg,transparent 0,transparent 27px,rgba(70,70,65,.022) 27px,rgba(70,70,65,.022) 28px);
+}
+::selection{background:rgba(158,43,32,.13)}
+a{color:inherit}
+.back-home{
+  position:fixed;top:18px;left:20px;z-index:120;
+  font-size:.85rem;color:var(--ink-soft);text-decoration:none;
+  padding:7px 14px;border-radius:999px;
+  background:rgba(249,248,244,.92);border:1px solid var(--line);
+  transition:all .25s;
+}
+.back-home:hover{color:var(--rev);border-color:var(--rev);transform:translateX(-2px)}
+.page{position:relative;z-index:1;max-width:1020px;margin:0 auto;padding:0 26px 10vh}
+
+/* ===== HERO ===== */
+.hero{position:relative;padding:15vh 0 4vh;text-align:center}
+.hero-eyebrow{font-size:.78rem;letter-spacing:.42em;color:var(--ink-faint);margin-bottom:22px;font-weight:400}
+.hero h1{font-family:var(--serif);font-weight:900;font-size:clamp(2.4rem,7.5vw,4.4rem);letter-spacing:.1em;line-height:1.1}
+.hero-en{font-family:var(--serif);font-style:italic;color:var(--ice);font-size:clamp(.95rem,2.4vw,1.25rem);letter-spacing:.14em;margin-top:14px}
+.hero-years{display:inline-flex;align-items:center;gap:14px;margin-top:22px;color:var(--ink-soft);font-size:.92rem;letter-spacing:.18em}
+.hero-years .v{color:var(--rev);font-family:var(--serif);font-weight:700}
+.hero-years .dash{width:42px;height:1px;background:linear-gradient(90deg,transparent,var(--ink-faint),transparent)}
+.hero-tag{max-width:680px;margin:30px auto 0;color:var(--ink-soft);font-family:var(--serif);font-size:1.06rem;line-height:2.05;letter-spacing:.02em}
+.hero-tag em{font-style:normal;color:var(--rev)}
+/* hero 装饰：三幕幕布的弧线，幕布上方一颗星 */
+.acts{display:block;margin:5vh auto 0;max-width:680px;width:86%}
+
+/* ===== 区块通用标题 ===== */
+.sec-head{text-align:center;margin:11vh 0 5vh}
+.sec-head .k{font-size:.76rem;letter-spacing:.4em;color:var(--star)}
+.sec-head h2{font-family:var(--serif);font-weight:700;font-size:clamp(1.5rem,4vw,2rem);letter-spacing:.1em;margin-top:8px}
+.sec-head p{color:var(--ink-soft);font-size:.92rem;margin-top:12px;letter-spacing:.02em;max-width:680px;margin-left:auto;margin-right:auto;line-height:1.95}
+
+/* ===== 导读概述 ===== */
+.bio{max-width:780px;margin:0 auto;font-size:1.02rem;color:var(--ink-soft);line-height:2.1}
+.bio p{margin-bottom:18px}
+.bio p:first-child::first-letter{
+  font-family:var(--serif);font-weight:900;color:var(--rev);
+  font-size:3.1rem;line-height:1;float:left;margin:6px 14px 0 0;
+}
+.bio b{color:var(--ink);font-weight:600}
+
+/* ===== 三幕 时间流 ===== */
+.flow{position:relative;max-width:840px;margin:0 auto;padding:8px 0 2vh}
+.flow::before{
+  content:'';position:absolute;left:19px;top:6px;bottom:0;width:2px;
+  background:linear-gradient(180deg,transparent,var(--archive) 6%,var(--archive) 94%,transparent);
+  opacity:.45;
+}
+.flow-item{position:relative;padding:20px 0 22px 58px}
+.flow-dot{position:absolute;left:19px;top:26px;transform:translateX(-50%);width:11px;height:11px;border-radius:50%;background:var(--ink-faint);box-shadow:0 0 0 4px rgba(140,138,132,.15);z-index:2}
+.flow-dot.work{background:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 14%,transparent)}
+.flow-title{font-family:var(--serif);font-size:1.28rem;color:var(--ink);line-height:1.3}
+.flow-sub{font-size:.94rem;color:var(--ink-faint);margin-top:6px;line-height:1.9;max-width:640px}
+.flow-year{font-family:var(--serif);font-weight:700;color:var(--rev);font-size:1rem;letter-spacing:.14em;margin-top:14px;padding-top:10px;border-top:1px dashed var(--line);display:inline-block}
+.flow-year .lab{font-size:.72rem;letter-spacing:.3em;color:var(--ink-faint);margin-right:10px;font-weight:400;font-family:var(--sans)}
+
+/* 幕卡片 */
+.flow-work .flow-card{
+  position:relative;display:block;
+  border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:20px;
+  background:var(--paper);
+  padding:24px 30px 20px;overflow:hidden;margin-top:2px;
+  box-shadow:0 8px 22px rgba(60,55,45,.05);
+  transition:transform .4s cubic-bezier(.4,0,.2,1),border-color .4s,box-shadow .4s;
+}
+.flow-work .flow-card:hover{transform:translateX(8px);border-color:var(--accent);box-shadow:0 16px 36px -18px color-mix(in srgb,var(--accent) 45%,transparent)}
+.flow-card .order{font-family:var(--serif);font-size:.78rem;letter-spacing:.3em;color:var(--accent);opacity:.9}
+.flow-card .cn{font-family:var(--serif);font-weight:700;font-size:1.5rem;letter-spacing:.05em;margin-top:5px;color:var(--ink);line-height:1.2}
+.flow-card .en{font-family:var(--serif);font-style:italic;color:var(--accent);font-size:.86rem;letter-spacing:.07em;margin-top:3px}
+.flow-card .essence{font-size:.94rem;color:var(--ink-soft);margin-top:13px;line-height:1.95}
+.flow-card .trans{
+  margin-top:13px;font-size:.82rem;color:var(--ink-soft);letter-spacing:.02em;
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+}
+.flow-card .trans .seal{
+  flex-shrink:0;width:20px;height:20px;border-radius:50%;
+  border:1px solid var(--star);color:var(--star);
+  font-family:var(--serif);font-size:.68rem;line-height:18px;text-align:center;
+}
+.flow-card .trans b{color:var(--ink);font-weight:600}
+.flow-card .fromlife{font-size:.83rem;color:var(--ink-faint);margin-top:11px;line-height:1.8;border-top:1px dashed var(--line);padding-top:11px}
+.flow-card .fromlife b{color:var(--rev);font-weight:400;font-family:var(--serif)}
+.flow-card .flow-year{margin-top:14px;border-top:none;padding-top:0}
+
+.flow-work.i{--accent:#9e2b20}   /* 武装的先知：革命红 */
+.flow-work.ii{--accent:#4c4a46}  /* 被解除武装的先知：档案灰 */
+.flow-work.iii{--accent:#5b6d7d} /* 流亡的先知：冷蓝 */
+
+/* ===== 主题 ===== */
+.themes{max-width:880px;margin:0 auto;columns:2;column-gap:56px}
+.theme{break-inside:avoid;margin-bottom:34px;padding-bottom:30px;border-bottom:1px solid transparent;border-image:linear-gradient(90deg,var(--line),transparent) 1}
+.theme .no{font-family:var(--serif);color:var(--star);font-size:.8rem;letter-spacing:.3em}
+.theme h3{font-family:var(--serif);font-size:1.18rem;color:var(--ink);margin:8px 0 9px;letter-spacing:.04em}
+.theme p{font-size:.9rem;color:var(--ink-soft);line-height:1.95}
+
+/* ===== 回响 ===== */
+.legacy{max-width:840px;margin:0 auto}
+.leg-block{margin-bottom:36px}
+.leg-block h3{font-family:var(--serif);font-size:1.22rem;color:var(--rev);letter-spacing:.06em;margin-bottom:14px;padding-left:14px;border-left:3px solid var(--star)}
+.leg-block p{font-size:.97rem;color:var(--ink-soft);line-height:2;margin-bottom:12px}
+.leg-block b{color:var(--ink);font-weight:600}
+.leg-quote{
+  border:1px solid var(--line);border-left:3px solid var(--rev);border-radius:20px;
+  background:var(--paper);
+  padding:24px 28px;font-family:var(--serif);font-size:1.06rem;line-height:2.05;color:var(--ink);
+}
+.leg-quote .src{display:block;margin-top:12px;font-family:var(--sans);font-size:.82rem;color:var(--ink-faint);letter-spacing:.06em}
+
+/* ===== footer ===== */
+.foot{margin-top:9vh;padding-top:26px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:.82rem;color:var(--ink-faint);letter-spacing:.05em}
+.foot a{color:var(--ink-soft);text-decoration:none;transition:color .2s}
+.foot a:hover{color:var(--rev)}
+.foot-mark{display:inline-flex;align-items:center;gap:9px}
+
+@media(max-width:760px){
+  .themes{columns:1}
+  .flow::before{left:14px}
+  .flow-item{padding-left:46px}
+  .flow-dot{left:14px}
+}
+</style>
+</head>
+<body>
+<a href="index.html" class="back-home">← 返回首页</a>
+<div class="page">
+
+  <header class="hero">
+    <div class="hero-eyebrow">ИСААК ДОЙЧЕР · THE PROPHET TRILOGY</div>
+    <h1>先知三部曲</h1>
+    <div class="hero-en">Isaac Deutscher · The Prophet Armed / Unarmed / Outcast</div>
+    <div class="hero-years"><span class="v">1954</span><span class="dash"></span><span class="v">1963</span></div>
+    <p class="hero-tag">在<em>革命</em>与<em>流亡</em>之间，为一个失败者写完三幕悲剧。<br>它写的不只是托洛茨基，而是一切「先知」的命运：看见未来的人，死在未来到来之前。</p>
+    <!-- 三道幕布弧线，幕布上方一颗星 -->
+    <svg class="acts" viewBox="0 0 680 34" fill="none" aria-hidden="true">
+      <path d="M40 30 C 60 14, 90 14, 110 30" stroke="#9e2b20" stroke-width="1.5" fill="none" opacity=".8"/>
+      <path d="M280 30 C 300 14, 330 14, 350 30" stroke="#4c4a46" stroke-width="1.5" fill="none" opacity=".8"/>
+      <path d="M520 30 C 540 14, 570 14, 590 30" stroke="#5b6d7d" stroke-width="1.5" fill="none" opacity=".8"/>
+      <path d="M334 3 l1.8 3.6 -3.6 0 z" fill="#a8842e" opacity=".9"/>
+      <path d="M0 31 C 160 29, 520 29, 680 31" stroke="#4c4a46" stroke-width="1" stroke-linecap="round" opacity=".35"/>
+    </svg>
+  </header>
+
+  <!-- 导读概述 -->
+  <section class="sec-head">
+    <div class="k">序 · 这是什么书</div>
+    <h2>一个波兰马克思主义者，为一头「狼」写传</h2>
+  </section>
+  <div class="bio">
+    <p>《先知三部曲》是波兰裔英国史学家<b>伊萨克·多伊彻</b>（Isaac Deutscher, 1907–1967）为<b>列夫·托洛茨基</b>所作的传记，三卷分別出版于 1954、1959、1963 年：<b>《武装的先知》《被解除武装的先知》《流亡的先知》</b>（旧译《失去武装的先知》）。多伊彻本人就是这段历史的当事人：年轻时加入波兰共产党、因托派罪名被开除，战前流亡伦敦，《经济学人》与《观察家报》的苏联问题专栏作家——他既在党内、又在党外，既是信徒、又是证人。这套传记动用了大量俄国革命史内部材料，是<b>第一部真正学术意义上的托洛茨基全传</b>，被公认是历史写作的典范。</p>
+    <p>书名取自旧约「先知」的母题：多伊彻把托洛茨基写成一位<b>真正的悲剧人物</b>——1917 年武装起义的实际组织者（「一切的胜利都归于他」，列宁语），却在斯大林体制崛起时被逐出权力的舞台；他预言了法西斯主义的危险、预言了斯大林体制的腐蚀，却无力阻止任何一件事；最终流亡墨西哥，1940 年被斯大林派出的刺客用冰镐杀死。多伊彻说：先知总是「武装」着人民的信任登上舞台，又总是被同一批武装解除、放逐——这是革命的全部悖论。</p>
+    <p>三部曲在西方成为畅销的「学术书奇迹」，也成了冷战两边都爱引用的经典：反共者读它读到了极权的病理，社会主义者读它读到了革命的良心。<b>历史学家霍布斯鲍姆称其为「他那个时代最优秀的人物传记之一」</b>；中文世界于 1990 年代由中央编译出版社推出全译本，至今仍是研究俄国革命与斯大林体制绕不开的一套书。</p>
+  </div>
+
+  <!-- 三幕 时间流 -->
+  <section class="sec-head">
+    <div class="k">三 幕</div>
+    <h2>一部悲剧的正确读法</h2>
+    <p>三部曲的内部结构是严格的三幕剧：第一幕是上升与胜利，第二幕是夺权与放逐，第三幕是流亡与死亡。以下按幕梳理每一卷的核心。</p>
+  </section>
+
+  <div class="flow">
+
+    <div class="flow-item flow-life">
+      <span class="flow-dot"></span>
+      <div class="flow-body">
+        <div class="flow-title">序幕：1905 年的少年革命家</div>
+        <div class="flow-sub">二十六岁的托洛茨基已在 1905 年圣彼得堡苏维埃当过主席，两度流亡西伯利亚。「先知」的名字，从地下印刷所的时代就开始积攒。</div>
+        <div class="flow-year"><span class="lab">前史</span>1879–1916</div>
+      </div>
+    </div>
+
+    <div class="flow-item flow-work i">
+      <span class="flow-dot work"></span>
+      <div class="flow-card">
+        <span class="order">第一幕 · 上升</span>
+        <div class="cn">武装的先知</div>
+        <div class="en">The Prophet Armed, 1879–1921</div>
+        <div class="essence">从敖德萨的犹太少年写到内战结束：1905 年的地下岁月、与列宁的争论与和解、1917 年十月起义的实际指挥、缔造红军与穿越内战的铁甲列车。这一卷的托洛茨基是「武装的」——他握着武器、握着群众的信任，也握着历史给一个革命者的全部可能。多伊彻在此立下全书的核心命题：1917 年曾真实存在过一个「另一种结局」的机会。</div>
+        <div class="trans"><span class="seal">荐</span>推荐译本：<b>周任辛 等译</b> · 中央编译出版社（《先知三部曲》合卷本）</div>
+        <div class="fromlife"><b>多伊彻的处境：</b>写于麦卡锡主义高峰的伦敦——为一个「赤色魔鬼」立传，需要的不只是学问，更是勇气。</div>
+        <div class="flow-year"><span class="lab">出版</span>1954</div>
+      </div>
+    </div>
+
+    <div class="flow-item flow-work ii">
+      <span class="flow-dot work"></span>
+      <div class="flow-card">
+        <span class="order">第二幕 · 放逐</span>
+        <div class="cn">被解除武装的先知</div>
+        <div class="en">The Prophet Unarmed, 1921–1929</div>
+        <div class="essence">革命胜利后的权力斗争：列宁病重与逝世、党内民主的窒息、斯大林机器的稳步合拢。托洛茨基拥有一切名望与理论优势，却一次次拒绝「诉诸街头」——他以为分歧可以在党内解决，直到被开除出党、流放阿拉木图、驱逐出国。这一卷是全书最沉重的一部：先知被解除的不是武器，而是「武装他的人民」。</div>
+        <div class="trans"><span class="seal">荐</span>推荐译本：<b>周任辛 等译</b> · 中央编译出版社（《先知三部曲》合卷本）</div>
+        <div class="fromlife"><b>多伊彻的处境：</b>1956 年匈牙利事件与苏共二十大之后写作——赫鲁晓夫的秘密报告，恰好印证了他对斯大林体制的诊断。</div>
+        <div class="flow-year"><span class="lab">出版</span>1959</div>
+      </div>
+    </div>
+
+    <div class="flow-item flow-work iii">
+      <span class="flow-dot work"></span>
+      <div class="flow-card">
+        <span class="order">第三幕 · 流亡</span>
+        <div class="cn">流亡的先知</div>
+        <div class="en">The Prophet Outcast, 1929–1940</div>
+        <div class="essence">十一年的流亡地图：土耳其、法国、挪威、墨西哥。他写下《俄国革命史》，预言了德国法西斯主义的胜利与「斯大林主义」的变质，组建第四国际——而大清洗的绞索穿过大洋找到了他：妻子娜塔利娅的整个圈子几乎死绝，四个儿子只剩一人在世，1940 年 8 月，斯大林的刺客在科约阿坎的书房里用冰镐结束了先知。多伊彻以近乎古希腊悲剧的节制收笔：他至死不悔，也至死不被听见。</div>
+        <div class="trans"><span class="seal">荐</span>推荐译本：<b>周任辛 等译</b> · 中央编译出版社（《先知三部曲》合卷本）</div>
+        <div class="fromlife"><b>多伊彻的处境：</b>与托洛茨基遗孀娜塔利娅及档案保管者有直接通信往来，大量第一手材料经他之手进入英语世界。</div>
+        <div class="flow-year"><span class="lab">出版</span>1963</div>
+      </div>
+    </div>
+
+    <div class="flow-item flow-life">
+      <span class="flow-dot"></span>
+      <div class="flow-body">
+        <div class="flow-title">尾声：预言的偿还</div>
+        <div class="flow-sub">多伊彻 1967 年辞世，没能看到 1991 年的落幕。但历史给了他最后的注脚：三部曲里被嘲笑的「先知的警告」，在半个世纪后一条条兑现。</div>
+        <div class="flow-year"><span class="lab">身后</span>1967–</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 主题 -->
+  <section class="sec-head">
+    <div class="k">底 色</div>
+    <h2>它反复在写的几件事</h2>
+    <p>表面是一部传记，内里是一份关于「革命如何背叛自己」的总报告。这几条是三部曲的「基因」。</p>
+  </section>
+  <div class="themes">
+    <div class="theme"><div class="no">Ⅰ</div><h3>先知的悲剧结构</h3><p>看见未来的人死于未来到来之前：他预言法西斯、预言大清洗、预言体制的僵化，却既无力说服、也无力自救。多伊彻用旧约的体例，写出了二十世纪的《俄狄浦斯》。</p></div>
+    <div class="theme"><div class="no">Ⅱ</div><h3>革命的两面</h3><p>1917 年既是人类史上罕见的解放时刻，也埋下了专政机器的种子。多伊彻拒绝站在任何一侧骂完事，他要解释两件事如何长在同一株树上。</p></div>
+    <div class="theme"><div class="no">Ⅲ</div><h3>斯大林主义的病理报告</h3><p>官僚层的兴起、党内民主的死亡、清洗的运转机制——三部曲是「斯大林主义」这个词第一次获得完整历史解剖的地方。</p></div>
+    <div class="theme"><div class="no">Ⅳ</div><h3>道德与权术</h3><p>托洛茨基的悲剧里有一半是他自己：内战的红色恐怖、喀琅施塔得的镇压都有他的签名。多伊彻不作辩护者，他让人物的账本自己开口。</p></div>
+    <div class="theme"><div class="no">Ⅴ</div><h3>历史的「另一种可能」</h3><p>布哈林路线、托季联盟、1936 年的西班牙——多伊彻反复回到那些岔路口，追问历史是否真的只有一种走法。这让传记带上了「反宿命论」的体温。</p></div>
+    <div class="theme"><div class="no">Ⅵ</div><h3>流亡者的世界主义</h3><p>从敖德萨到科约阿坎，先知的母语是欧洲革命本身。多伊彻用同样的气质写他：一个没有国籍的人，比所有拥有国籍的人更忠于人类。</p></div>
+  </div>
+
+  <!-- 回响 -->
+  <section class="sec-head">
+    <div class="k">回 声</div>
+    <h2>影响与回响 · 一种综合式的评价</h2>
+    <p>在传记史上，能同时被史学界、文学界与政治界共同供奉的书屈指可数。三部曲是其中之一。</p>
+  </section>
+  <div class="legacy">
+
+    <div class="leg-block">
+      <h3>史学界：传记写作的标尺</h3>
+      <p><b>霍布斯鲍姆</b>称其为二十世纪最杰出的人物传记之一；E. H. 卡尔、理查德·派普斯等立场迥异的苏联史家都把它当作绕不开的参照。它确立了「为革命者作传必须同时是解剖革命」的方法论，影响了此后一代俄国革命史写作。</p>
+    </div>
+
+    <div class="leg-block">
+      <h3>政治光谱两端的共同引用</h3>
+      <p>冷战期间，它是西方左翼「清算斯大林而不放弃社会主义」的思想凭据——<b>新左派</b>一代几乎人手一部；同时，极权研究的学者也从它那里获取了关于官僚体制的第一手病理。一部书同时出现在两种对立书单的顶端，本身就是一种历史奇观。</p>
+    </div>
+
+    <div class="leg-block">
+      <h3>在中国：从内部参考到公开出版</h3>
+      <p>三部曲的中译史本身就是一段思想史：先以内部参考读物形式流传，1998 年由<b>中央编译出版社</b>推出周任辛等人的全译本公开出版，成为中文世界了解托洛茨基与俄国革命内幕的第一扇正门，「先知三部曲」由此成为政治传记的中文通行词根。</p>
+    </div>
+
+    <div class="leg-block">
+      <h3>一份综合式的评价</h3>
+      <div class="leg-quote">它的伟大在于「不平衡」：多伊彻爱他的主人公，却从不替他圆账——红色恐怖的每一笔都如实入册；他了解斯大林体制的黑暗，却拒绝把它简化成一个人的邪恶。三部曲真正的主人公不是托洛茨基，而是「革命」这个理想本身：它如何诞生、如何胜利、如何在自己建造的机器里被绞死。半个多世纪过去，读者翻到第三卷的冰镐一节仍会屏息——不是因为死得惨烈，而是因为多伊彻早就让你明白：先知的死法，从来就写在先知的生法里。<span class="src">—— 编者综合自霍布斯鲍姆、E. H. 卡尔等评述与历代读者的共识</span></div>
+    </div>
+
+  </div>
+
+  <footer class="foot">
+    <span class="foot-mark"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><g stroke="#a8842e" stroke-width="1.5" fill="#a8842e" stroke-linejoin="round"><path d="M12 3.5 l2.2 4.8 5.2 .6 -3.9 3.5 1.1 5.1 -4.6 -2.7 -4.6 2.7 1.1 -5.1 -3.9 -3.5 5.2 -.6 z"/></g></svg>© <em style="font-style:normal;color:var(--ink-soft)">zzht</em> · 先知三部曲 · 一场革命的三幕悲剧</span>
+    <a href="index.html">返回站点首页 ↗</a>
+  </footer>
+
+</div>
+</body>
+</html>
