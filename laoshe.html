@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="老舍综合肖像：生平、思想内核与影响回响。骆驼祥子、四世同堂、茶馆、月牙儿、正红旗下——把北京城写成一个人的命运，把笑声写成眼泪的另一种写法。">
+<title>老舍 · 生平 · 思想 · 回响 — zzht</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f2efe8;           /* 灰砖墙的浅底 */
+  --paper:#faf7f0;
+  --ink:#25211b;
+  --ink-soft:#59534a;
+  --ink-faint:#948d80;
+  --line:#ded7c8;
+  --brick:#8a7f6d;        /* 胡同灰砖 */
+  --cinnabar:#a03428;     /* 门柱朱红、灯笼 */
+  --tea:#9a7a3a;          /* 茶汤色 */
+  --moon:#5d6b76;         /* 月牙儿的冷青 */
+  --serif:'Noto Serif SC','Source Han Serif SC',serif;
+  --sans:'Noto Sans SC',-apple-system,BlinkMacSystemFont,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);color:var(--ink);background:var(--bg);
+  line-height:1.85;overflow-x:hidden;-webkit-font-smoothing:antialiased;
+}
+/* 极淡的砖缝横纹，像灰砖墙 */
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:repeating-linear-gradient(0deg,transparent 0,transparent 22px,rgba(110,100,80,.02) 22px,rgba(110,100,80,.02) 23px);
+}
+::selection{background:rgba(160,52,40,.13)}
+a{color:inherit}
+.back-home{
+  position:fixed;top:18px;left:20px;z-index:120;
+  font-size:.85rem;color:var(--ink-soft);text-decoration:none;
+  padding:7px 14px;border-radius:999px;
+  background:rgba(250,247,240,.92);border:1px solid var(--line);
+  transition:all .25s;
+}
+.back-home:hover{color:var(--cinnabar);border-color:var(--cinnabar);transform:translateX(-2px)}
+.page{position:relative;z-index:1;max-width:1020px;margin:0 auto;padding:0 26px 10vh}
+
+/* ===== HERO ===== */
+.hero{position:relative;padding:15vh 0 4vh;text-align:center}
+.hero-eyebrow{font-size:.78rem;letter-spacing:.42em;color:var(--ink-faint);margin-bottom:22px;font-weight:400}
+.hero h1{font-family:var(--serif);font-weight:900;font-size:clamp(2.8rem,8vw,4.8rem);letter-spacing:.1em;line-height:1.08}
+.hero-sub{font-family:var(--serif);color:var(--moon);font-size:clamp(1rem,2.4vw,1.3rem);letter-spacing:.3em;margin-top:14px}
+.hero-years{display:inline-flex;align-items:center;gap:14px;margin-top:22px;color:var(--ink-soft);font-size:.92rem;letter-spacing:.18em}
+.hero-years .v{color:var(--cinnabar);font-family:var(--serif);font-weight:700}
+.hero-years .dash{width:42px;height:1px;background:linear-gradient(90deg,transparent,var(--ink-faint),transparent)}
+.hero-tag{max-width:660px;margin:30px auto 0;color:var(--ink-soft);font-family:var(--serif);font-size:1.06rem;line-height:2.05;letter-spacing:.02em}
+.hero-tag em{font-style:normal;color:var(--cinnabar)}
+/* hero 装饰：一弯月牙儿挂在北京城的屋脊线上 */
+.roofline{display:block;margin:5vh auto 0;max-width:680px;width:86%}
+
+/* ===== 区块通用标题 ===== */
+.sec-head{text-align:center;margin:11vh 0 5vh}
+.sec-head .k{font-size:.76rem;letter-spacing:.4em;color:var(--tea)}
+.sec-head h2{font-family:var(--serif);font-weight:700;font-size:clamp(1.5rem,4vw,2rem);letter-spacing:.1em;margin-top:8px}
+.sec-head p{color:var(--ink-soft);font-size:.92rem;margin-top:12px;letter-spacing:.02em;max-width:680px;margin-left:auto;margin-right:auto;line-height:1.95}
+
+/* ===== 生平概述 ===== */
+.bio{max-width:780px;margin:0 auto;font-size:1.02rem;color:var(--ink-soft);line-height:2.1}
+.bio p{margin-bottom:18px}
+.bio p:first-child::first-letter{
+  font-family:var(--serif);font-weight:900;color:var(--cinnabar);
+  font-size:3.1rem;line-height:1;float:left;margin:6px 14px 0 0;
+}
+.bio b{color:var(--ink);font-weight:600}
+
+/* ===== 生平与作品 · 时间流 ===== */
+.flow{position:relative;max-width:840px;margin:0 auto;padding:8px 0 2vh}
+.flow::before{
+  content:'';position:absolute;left:19px;top:6px;bottom:0;width:2px;
+  background:linear-gradient(180deg,transparent,var(--brick) 6%,var(--brick) 94%,transparent);
+  opacity:.5;
+}
+.flow-item{position:relative;padding:20px 0 22px 58px}
+.flow-dot{position:absolute;left:19px;top:26px;transform:translateX(-50%);width:11px;height:11px;border-radius:50%;background:var(--ink-faint);box-shadow:0 0 0 4px rgba(148,141,128,.16);z-index:2}
+.flow-dot.work{background:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 14%,transparent)}
+.flow-title{font-family:var(--serif);font-size:1.28rem;color:var(--ink);line-height:1.3}
+.flow-sub{font-size:.94rem;color:var(--ink-faint);margin-top:6px;line-height:1.9;max-width:640px}
+.flow-year{font-family:var(--serif);font-weight:700;color:var(--cinnabar);font-size:1rem;letter-spacing:.14em;margin-top:14px;padding-top:10px;border-top:1px dashed var(--line);display:inline-block}
+.flow-year .lab{font-size:.72rem;letter-spacing:.3em;color:var(--ink-faint);margin-right:10px;font-weight:400;font-family:var(--sans)}
+
+/* 作品卡片 */
+.flow-work .flow-card{
+  position:relative;display:block;
+  border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:20px;
+  background:var(--paper);
+  padding:24px 30px 20px;overflow:hidden;margin-top:2px;
+  box-shadow:0 8px 22px rgba(90,70,40,.05);
+  transition:transform .4s cubic-bezier(.4,0,.2,1),border-color .4s,box-shadow .4s;
+}
+.flow-work .flow-card:hover{transform:translateX(8px);border-color:var(--accent);box-shadow:0 16px 36px -18px color-mix(in srgb,var(--accent) 45%,transparent)}
+.flow-card .order{font-family:var(--serif);font-size:.78rem;letter-spacing:.3em;color:var(--accent);opacity:.9}
+.flow-card .cn{font-family:var(--serif);font-weight:700;font-size:1.5rem;letter-spacing:.05em;margin-top:5px;color:var(--ink);line-height:1.2}
+.flow-card .genre{font-family:var(--serif);color:var(--accent);font-size:.86rem;letter-spacing:.12em;margin-top:3px}
+.flow-card .essence{font-size:.94rem;color:var(--ink-soft);margin-top:13px;line-height:1.95}
+.flow-card .trans{
+  margin-top:13px;font-size:.82rem;color:var(--ink-soft);letter-spacing:.02em;
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+}
+.flow-card .trans .seal{
+  flex-shrink:0;width:20px;height:20px;border-radius:50%;
+  border:1px solid var(--cinnabar);color:var(--cinnabar);
+  font-family:var(--serif);font-size:.68rem;line-height:18px;text-align:center;
+}
+.flow-card .trans b{color:var(--ink);font-weight:600}
+.flow-card .fromlife{font-size:.83rem;color:var(--ink-faint);margin-top:11px;line-height:1.8;border-top:1px dashed var(--line);padding-top:11px}
+.flow-card .fromlife b{color:var(--cinnabar);font-weight:400;font-family:var(--serif)}
+.flow-card .flow-year{margin-top:14px;border-top:none;padding-top:0}
+
+.flow-work.camel{--accent:#8a6a3a}  /* 骆驼祥子：洋车与黄土 */
+.flow-work.moon{--accent:#5d6b76}   /* 月牙儿：冷青 */
+.flow-work.sishi{--accent:#7a5c40}  /* 四世同堂：四合院门褐 */
+.flow-work.chaguan{--accent:#a03428}/* 茶馆：朱红幌子 */
+
+/* ===== 思想内核 ===== */
+.themes{max-width:880px;margin:0 auto;columns:2;column-gap:56px}
+.theme{break-inside:avoid;margin-bottom:34px;padding-bottom:30px;border-bottom:1px solid transparent;border-image:linear-gradient(90deg,var(--line),transparent) 1}
+.theme .no{font-family:var(--serif);color:var(--tea);font-size:.8rem;letter-spacing:.3em}
+.theme h3{font-family:var(--serif);font-size:1.18rem;color:var(--ink);margin:8px 0 9px;letter-spacing:.04em}
+.theme p{font-size:.9rem;color:var(--ink-soft);line-height:1.95}
+
+/* ===== 影响与回响 ===== */
+.legacy{max-width:840px;margin:0 auto}
+.leg-block{margin-bottom:36px}
+.leg-block h3{font-family:var(--serif);font-size:1.22rem;color:var(--cinnabar);letter-spacing:.06em;margin-bottom:14px;padding-left:14px;border-left:3px solid var(--tea)}
+.leg-block p{font-size:.97rem;color:var(--ink-soft);line-height:2;margin-bottom:12px}
+.leg-block b{color:var(--ink);font-weight:600}
+.leg-quote{
+  border:1px solid var(--line);border-left:3px solid var(--cinnabar);border-radius:20px;
+  background:var(--paper);
+  padding:24px 28px;font-family:var(--serif);font-size:1.06rem;line-height:2.05;color:var(--ink);
+}
+.leg-quote .src{display:block;margin-top:12px;font-family:var(--sans);font-size:.82rem;color:var(--ink-faint);letter-spacing:.06em}
+
+/* ===== footer ===== */
+.foot{margin-top:9vh;padding-top:26px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:.82rem;color:var(--ink-faint);letter-spacing:.05em}
+.foot a{color:var(--ink-soft);text-decoration:none;transition:color .2s}
+.foot a:hover{color:var(--cinnabar)}
+.foot-mark{display:inline-flex;align-items:center;gap:9px}
+
+@media(max-width:760px){
+  .themes{columns:1}
+  .flow::before{left:14px}
+  .flow-item{padding-left:46px}
+  .flow-dot{left:14px}
+}
+</style>
+</head>
+<body>
+<a href="index.html" class="back-home">← 返回首页</a>
+<div class="page">
+
+  <header class="hero">
+    <div class="hero-eyebrow">老舍 · LAO SHE · 1899–1966</div>
+    <h1>老舍</h1>
+    <div class="hero-sub">人民艺术家 · 舒庆春</div>
+    <div class="hero-years"><span class="v">1899</span><span class="dash"></span><span class="v">1966</span></div>
+    <p class="hero-tag">在<em>笑声</em>与<em>眼泪</em>之间，写尽一座城与它的庶民。<br>他写的不只是小说，而是把北京话锻成文学的第一双手，和一个文人最后的体面。</p>
+    <!-- 一弯月牙儿挂在屋脊线上 -->
+    <svg class="roofline" viewBox="0 0 680 32" fill="none" aria-hidden="true">
+      <g stroke="#8a7f6d" stroke-width="1.4" stroke-linecap="round" opacity=".7">
+        <path d="M40 24 v-8"/><path d="M40 18 l8 -4 8 4"/>
+        <path d="M120 24 v-9"/><path d="M120 17 l9 -5 9 5"/>
+        <path d="M560 24 v-8"/><path d="M560 18 l8 -4 8 4"/>
+      </g>
+      <path d="M0 24 C 160 22, 520 22, 680 24" stroke="#8a7f6d" stroke-width="1.2" stroke-linecap="round" opacity=".4"/>
+      <path d="M330 6 a7 7 0 1 0 7 9 a5.6 5.6 0 1 1 -7 -9 z" fill="#5d6b76" opacity=".85" stroke="none"/>
+    </svg>
+  </header>
+
+  <!-- 生平概述 -->
+  <section class="sec-head">
+    <div class="k">生 平</div>
+    <h2>他怎样活成了「老舍」</h2>
+  </section>
+  <div class="bio">
+    <p>老舍，本名<b>舒庆春，字舍予</b>，满族正红旗人，<b>1899 年生于北京小羊圈胡同</b>——一个穷旗兵家庭。父亲是护军，八国联军进城时阵亡于巷战，全家靠母亲给人洗衣缝补度日。他自述童年「穷得叮当响」，这段在小胡同里看尽三教九流的岁月，成了他一生的文学矿脉：洋车夫、暗娼、茶房、小职员——后来全走进了他的书。北京师范学校毕业后做过小学校长，1924 年远赴<b>伦敦大学东方学院</b>教中文，在异国的孤寂里开始写小说，《老张的哲学》《赵子曰》一路用幽默出场。</p>
+    <p>回国后他曾在济南、青岛教书，1936 年辞掉教职专事写作，写下<b>《骆驼祥子》</b>——一个人力车夫被生活一寸寸磨碎的故事，公认他的巅峰。抗战爆发后他出任<b>中华全国文艺界抗敌协会</b>总务主任，为团结文人四处奔走，写下《四世同堂》的底稿；赴美讲学三年后于 1949 年底回国。此后他写《茶馆》《龙须沟》，写快板与相声，被称为「<b>人民艺术家</b>」——他把幽默让给了时代，把京味儿留给了舞台。</p>
+    <p>1966 年 8 月，「文革」风暴初起，他在孔庙遭批斗毒打，8 月 24 日独自走到<b>太平湖</b>，坐了一整天，投湖自尽，67 岁。他留下的最后公开的话是：「<b>我又不反动</b>。」十二年后的 1978 年获平反；他笔下那座茶馆，至今仍是中国话剧舞台上最亮的一盏灯。</p>
+  </div>
+
+  <!-- 生平与作品 时间流 -->
+  <section class="sec-head">
+    <div class="k">生平与作品</div>
+    <h2>生平与作品 · 同一座城</h2>
+    <p>老舍的书几乎都从同一条胡同里长出来：父亲阵亡的庚子年给了他《四世同堂》的第一页，拉洋车的邻居给了他祥子，母亲的洗盆边给了他月牙儿。下面把生平与作品编进同一座城的时间流。</p>
+  </section>
+
+  <div class="flow">
+
+    <div class="flow-item flow-life">
+      <span class="flow-dot"></span>
+      <div class="flow-body">
+        <div class="flow-title">小羊圈胡同：穷旗人家的孩子</div>
+        <div class="flow-sub">父亲阵亡于八国联军的巷战，母亲以洗衣缝补养家。他后来说：我最初的宇宙，就是那条小胡同。</div>
+        <div class="flow-year"><span class="lab">生平</span>1899–1918</div>
+      </div>
+    </div>
+
+    <div class="flow-item flow-life">
+      <span class="flow-dot"></span>
+      <div class="flow-body">
+        <div class="flow-title">伦敦教书，孤寂中开笔</div>
+        <div class="flow-sub">在伦敦大学东方学院教中文五年，异国的孤寂让他拿起笔，一路带着北京话与幽默出场。</div>
+        <div class="flow-year"><span class="lab">生平</span>1924–29</div>
+      </div>
+    </div>
+
+    <div class="flow-item flow-work moon">
+      <span class="flow-dot work"></span>
+      <div class="flow-card">
+        <span class="order">壹 · 眼泪的另一种写法</span>
+        <div class="cn">月牙儿</div>
+        <div class="genre">中篇小说</div>
+        <div class="essence">一对母女先后被生活推入暗娼的命运，全文以一弯「月牙儿」贯穿——它是女儿仅剩的一点光，也是她命运的注脚。文字冷得近乎透明，是老舍少见地收起幽默、直面女性苦难的杰作，常被称作中国现代文学最好的中篇之一。</div>
+        <div class="trans"><span class="seal">荐</span>推荐版本：<b>人民文学出版社</b> ·《月牙儿》单行本或《老舍全集》</div>
+        <div class="fromlife"><b>从生活里来：</b>素材取自他早年在京师贫儿院与街头见过的妇女命运，也带着对母亲一生操劳的记忆。</div>
+        <div class="flow-year"><span class="lab">创作</span>1935</div>
+      </div>
+    </div>
+
+    <div class="flow-item flow-work camel">
+      <span class="flow-dot work"></span>
+      <div class="flow-card">
+        <span class="order">贰 · 一辆车与一个人的塌陷</span>
+        <div class="cn">骆驼祥子</div>
+        <div class="genre">长篇小说</div>
+        <div class="essence">北平人力车夫祥子的一生：买车、丢车、再买、再失去，从「体面的、要强的」底层青年，一步步塌陷成堕落的行尸走肉。老舍用近乎记录片的笔法写「个人奋斗如何在那个社会里必败」——这是中国现代文学写底层最狠、也最扎实的一部。</div>
+        <div class="trans"><span class="seal">荐</span>推荐版本：<b>人民文学出版社</b> · 或《骆驼祥子》单行本（版本众多，以人文社校订本为佳）</div>
+        <div class="fromlife"><b>从生活里来：</b>朋友随口讲的一个车夫「三起三落」的真事，他辞去教职专事写作，一气呵成。</div>
+        <div class="flow-year"><span class="lab">创作</span>1936</div>
+      </div>
+    </div>
+
+    <div class="flow-item flow-work sishi">
+      <span class="flow-dot work"></span>
+      <div class="flow-card">
+        <span class="order">叁 · 沦陷区的家庭史诗</span>
+        <div class="cn">四世同堂</div>
+        <div class="genre">长篇小说（三部曲：《惶惑》《偷生》《饥荒》）</div>
+        <div class="essence">北平小羊圈胡同十几户人家在沦陷八年的全部生活：祁家四代人从隐忍到觉醒，胡同里汉奸、特务、顺民与烈女各色俱全。这是老舍规模最大的作品，也是「亡国奴的日常生活」第一次被写成百万字的史诗——没有正面战场，只有柴米油盐里的国破家亡。</div>
+        <div class="trans"><span class="seal">荐</span>推荐版本：<b>人民文学出版社</b> ·《四世同堂》足本（含赵武平译回的《饥荒》末十段）</div>
+        <div class="fromlife"><b>从生活里来：</b>写于重庆躲避空袭的岁月——他借记忆里那条小羊圈胡同，把沦陷的北平整个搬进了纸上。</div>
+        <div class="flow-year"><span class="lab">创作</span>1944–48</div>
+      </div>
+    </div>
+
+    <div class="flow-item flow-life">
+      <span class="flow-dot"></span>
+      <div class="flow-body">
+        <div class="flow-title">抗战文协与赴美讲学</div>
+        <div class="flow-sub">主持文艺界抗敌协会，团结全国文人；战后赴美三年，完成《鼓书艺人》并促成《四世同堂》英译。1949 年底应召回国。</div>
+        <div class="flow-year"><span class="lab">生平</span>1938–49</div>
+      </div>
+    </div>
+
+    <div class="flow-item flow-work chaguan">
+      <span class="flow-dot work"></span>
+      <div class="flow-card">
+        <span class="order">肆 · 一座茶馆，三个时代</span>
+        <div class="cn">茶馆</div>
+        <div class="genre">三幕话剧</div>
+        <div class="essence">裕泰茶馆三幕戏对应三个时代——戊戌变法失败后、军阀混战、抗战胜利后——掌柜王利发一辈子改良，一辈子顺从，最后与茶馆一起上了吊。「莫谈国事」的纸条越贴越大。全剧没有主角光环，只有七十多个小人物轮番登台，被公认为中国话剧史上最好的剧本，北京人艺的看家戏。</div>
+        <div class="trans"><span class="seal">荐</span>推荐版本：<b>人民文学出版社</b> ·《茶馆》单行本（演出本可选北京人艺脚本）</div>
+        <div class="fromlife"><b>从生活里来：</b>童年常去的茶馆给了他整个空间——他说过自己的人物大多是在茶馆里「存了半辈子」的。</div>
+        <div class="flow-year"><span class="lab">创作</span>1957</div>
+      </div>
+    </div>
+
+    <div class="flow-item flow-life">
+      <span class="flow-dot"></span>
+      <div class="flow-body">
+        <div class="flow-title">太平湖</div>
+        <div class="flow-sub">1966 年 8 月 24 日，批斗毒打后的第二天，他独自在太平湖边坐了一整天，投湖自尽。尸体火化未留骨灰；1978 年平反。</div>
+        <div class="flow-year"><span class="lab">生平</span>1966</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 思想内核 -->
+  <section class="sec-head">
+    <div class="k">底 色</div>
+    <h2>他反复在写的几件事</h2>
+    <p>从伦敦到重庆到太平湖，老舍的书围着同一群人转：想好好活着、却总被时代碾过的普通人。这几条是他作品的「基因」。</p>
+  </section>
+  <div class="themes">
+    <div class="theme"><div class="no">Ⅰ</div><h3>庶民的尊严</h3><p>车夫、暗娼、掌柜、艺人——他写穷人不俯视也不拔高，只求一样东西被看见：他们也有体面，也有要强。</p></div>
+    <div class="theme"><div class="no">Ⅱ</div><h3>个人奋斗的失败</h3><p>祥子三起三落证明的不是性格缺陷，而是结构性的绝望：在一个吃人的社会里，最要强的人塌得最快。</p></div>
+    <div class="theme"><div class="no">Ⅲ</div><h3>国民性的解剖</h3><p>与鲁迅不同，他的解剖刀带着体温：祁老人「把大门关上就好」的过日哲学，既是缺点，也是韧性。</p></div>
+    <div class="theme"><div class="no">Ⅳ</div><h3>幽默里的辛酸</h3><p>「我要笑骂，而又不赶尽杀绝。」他的幽默从不逗乐了事，笑到最后往往露出底下的泪——这是他自认的看家本领。</p></div>
+    <div class="theme"><div class="no">Ⅴ</div><h3>北京话成为文学</h3><p>他把北方官话的口语提纯成文体：句子短、韵律足、人物一开口就活。现代汉语文学的「白话能走多远」，他划了一道线。</p></div>
+    <div class="theme"><div class="no">Ⅵ</div><h3>家国同构</h3><p>四合院就是国：祁家四代人的忍让与崩塌，是沦陷中国全部伦理的缩影。他从不像口号作家那样写爱国，他写「过日子」如何被战争打断。</p></div>
+  </div>
+
+  <!-- 影响与回响 -->
+  <section class="sec-head">
+    <div class="k">回 声</div>
+    <h2>影响与回响 · 一种综合式的评价</h2>
+    <p>「人民艺术家」五个字远远装不下他。他是京味文学的源头，是话剧舞台的常青树，也是二十世纪中国文人命运最沉重的一个注脚。</p>
+  </section>
+  <div class="legacy">
+
+    <div class="leg-block">
+      <h3>京味文学的源头活水</h3>
+      <p>邓友梅、汪曾祺、王朔到刘一达，「京味儿」作为一条文学血脉直接源自老舍；<b>《茶馆》</b>自 1958 年由<b>北京人民艺术剧院</b>首演以来演出逾七百场，焦菊隐导演、于是之等几代表演艺术家的版本让它成为中国话剧的代名词，并巡演欧洲，被称为「东方舞台上的奇迹」。</p>
+    </div>
+
+    <div class="leg-block">
+      <h3>国际视野里的老舍</h3>
+      <p>《骆驼祥子》1945 年英译本在美国成为畅销书，他是最早「走出去」的现代中国小说家之一；<b>1968 年诺贝尔奖</b>的传闻（据多方追述，他在当年的终选名单上，因去世不授）至今仍是中文读者心里的一根刺。日本学者称《四世同堂》为「理解中国人的教科书」。</p>
+    </div>
+
+    <div class="leg-block">
+      <h3>文人命运的沉重注脚</h3>
+      <p>他与傅雷、储安平等一起，成为「文革」受难知识分子的象征；巴金晚年多次呼吁建「文革博物馆」，第一个想到的名字里就有老舍。太平湖如今已填平为地铁车辆段——人们只能在文字里，替那一天的沉默作证。</p>
+    </div>
+
+    <div class="leg-block">
+      <h3>一份综合式的评价</h3>
+      <div class="leg-quote">他是中国现代作家里「笑得最温柔、死得最沉默」的一位。论技艺，他把北京口语炼成了现代汉语文学的黄金标准；论心肠，他一辈子替拉车的、唱戏的、开茶馆的说话，从不居高临下。他的局限——对新时代的过高期待、晚年创作力的自我约束——也属于他那一代人的共同处境。而《茶馆》至今仍在舞台上散场：「我爱咱们的国呀，可是谁爱我呢？」——这句台词留了下来，像他这个人：把绝望说成叹息，把叹息留给我们。<span class="src">—— 编者综合自曹禺、汪曾祺、历代表演艺术家与读者的共识</span></div>
+    </div>
+
+  </div>
+
+  <footer class="foot">
+    <span class="foot-mark"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><g stroke="#a03428" stroke-width="1.6" stroke-linecap="round" fill="none"><path d="M5 21 v-6"/><path d="M19 21 v-6"/><path d="M3 15 h18"/><path d="M5 15 v-5 a7 7 0 0 1 14 0 v5"/></g></svg>© <em style="font-style:normal;color:var(--ink-soft)">zzht</em> · 老舍 · 生平 · 思想 · 回响</span>
+    <a href="index.html">返回站点首页 ↗</a>
+  </footer>
+
+</div>
+</body>
+</html>
