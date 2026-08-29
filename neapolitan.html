@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="那不勒斯四部曲综合导读：我的天才女友、新名字的故事、离开的，留下的、失踪的孩子。埃莱娜与莉拉五十年的友谊与战争，庶民街区、维苏威火山与两个布娃娃。">
+<title>那不勒斯四部曲 · 五十年的友谊与战争 — zzht</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f0eee7;
+  --paper:#f9f7f0;
+  --ink:#231f1a;
+  --ink-soft:#554f47;
+  --ink-faint:#908a7d;
+  --line:#dcd6c8;
+  --naples:#c79a2e;        /* 那不勒斯黄 */
+  --volcano:#4d4a45;       /* 维苏威的灰黑 */
+  --blood:#9c3222;         /* 血与朱红 */
+  --sea:#3f6273;           /* 第勒尼安海 */
+  --serif:'Noto Serif SC','Source Han Serif SC',serif;
+  --sans:'Noto Sans SC',-apple-system,BlinkMacSystemFont,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);color:var(--ink);background:var(--bg);
+  line-height:1.85;overflow-x:hidden;-webkit-font-smoothing:antialiased;
+}
+/* 极淡的灰墙水渍纹 */
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:repeating-linear-gradient(0deg,transparent 0,transparent 4px,rgba(90,85,70,.013) 4px,rgba(90,85,70,.013) 5px);
+}
+::selection{background:rgba(156,50,34,.13)}
+a{color:inherit}
+.back-home{
+  position:fixed;top:18px;left:20px;z-index:120;
+  font-size:.85rem;color:var(--ink-soft);text-decoration:none;
+  padding:7px 14px;border-radius:999px;
+  background:rgba(249,247,240,.92);border:1px solid var(--line);
+  transition:all .25s;
+}
+.back-home:hover{color:var(--blood);border-color:var(--blood);transform:translateX(-2px)}
+.page{position:relative;z-index:1;max-width:1020px;margin:0 auto;padding:0 26px 10vh}
+
+/* ===== HERO ===== */
+.hero{position:relative;padding:15vh 0 4vh;text-align:center}
+.hero-eyebrow{font-size:.78rem;letter-spacing:.42em;color:var(--ink-faint);margin-bottom:22px;font-weight:400}
+.hero h1{font-family:var(--serif);font-weight:900;font-size:clamp(2.4rem,7.5vw,4.4rem);letter-spacing:.08em;line-height:1.1}
+.hero-it{font-family:var(--serif);font-style:italic;color:var(--sea);font-size:clamp(.95rem,2.4vw,1.25rem);letter-spacing:.14em;margin-top:14px}
+.hero-years{display:inline-flex;align-items:center;gap:14px;margin-top:22px;color:var(--ink-soft);font-size:.92rem;letter-spacing:.18em}
+.hero-years .v{color:var(--blood);font-family:var(--serif);font-weight:700}
+.hero-years .dash{width:42px;height:1px;background:linear-gradient(90deg,transparent,var(--ink-faint),transparent)}
+.hero-tag{max-width:680px;margin:30px auto 0;color:var(--ink-soft);font-family:var(--serif);font-size:1.06rem;line-height:2.05;letter-spacing:.02em}
+.hero-tag em{font-style:normal;color:var(--blood)}
+/* hero 装饰：灰墙屋脊线，远处维苏威，近处两个小布娃娃 */
+.neighborhood{display:block;margin:5vh auto 0;max-width:680px;width:86%}
+
+/* ===== 区块通用标题 ===== */
+.sec-head{text-align:center;margin:11vh 0 5vh}
+.sec-head .k{font-size:.76rem;letter-spacing:.4em;color:var(--naples)}
+.sec-head h2{font-family:var(--serif);font-weight:700;font-size:clamp(1.5rem,4vw,2rem);letter-spacing:.1em;margin-top:8px}
+.sec-head p{color:var(--ink-soft);font-size:.92rem;margin-top:12px;letter-spacing:.02em;max-width:680px;margin-left:auto;margin-right:auto;line-height:1.95}
+
+/* ===== 导读概述 ===== */
+.bio{max-width:780px;margin:0 auto;font-size:1.02rem;color:var(--ink-soft);line-height:2.1}
+.bio p{margin-bottom:18px}
+.bio p:first-child::first-letter{
+  font-family:var(--serif);font-weight:900;color:var(--volcano);
+  font-size:3.1rem;line-height:1;float:left;margin:6px 14px 0 0;
+}
+.bio b{color:var(--ink);font-weight:600}
+
+/* ===== 四部曲 · 时间流 ===== */
+.flow{position:relative;max-width:840px;margin:0 auto;padding:8px 0 2vh}
+.flow::before{
+  content:'';position:absolute;left:19px;top:6px;bottom:0;width:2px;
+  background:linear-gradient(180deg,transparent,var(--volcano) 6%,var(--volcano) 94%,transparent);
+  opacity:.4;
+}
+.flow-item{position:relative;padding:20px 0 22px 58px}
+.flow-dot{position:absolute;left:19px;top:26px;transform:translateX(-50%);width:11px;height:11px;border-radius:50%;background:var(--ink-faint);box-shadow:0 0 0 4px rgba(144,138,125,.15);z-index:2}
+.flow-dot.work{background:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 14%,transparent)}
+.flow-title{font-family:var(--serif);font-size:1.28rem;color:var(--ink);line-height:1.3}
+.flow-sub{font-size:.94rem;color:var(--ink-faint);margin-top:6px;line-height:1.9;max-width:640px}
+.flow-year{font-family:var(--serif);font-weight:700;color:var(--blood);font-size:1rem;letter-spacing:.14em;margin-top:14px;padding-top:10px;border-top:1px dashed var(--line);display:inline-block}
+.flow-year .lab{font-size:.72rem;letter-spacing:.3em;color:var(--ink-faint);margin-right:10px;font-weight:400;font-family:var(--sans)}
+
+/* 作品卡片 */
+.flow-work .flow-card{
+  position:relative;display:block;
+  border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:20px;
+  background:var(--paper);
+  padding:24px 30px 20px;overflow:hidden;margin-top:2px;
+  box-shadow:0 8px 22px rgba(70,60,40,.05);
+  transition:transform .4s cubic-bezier(.4,0,.2,1),border-color .4s,box-shadow .4s;
+}
+.flow-work .flow-card:hover{transform:translateX(8px);border-color:var(--accent);box-shadow:0 16px 36px -18px color-mix(in srgb,var(--accent) 45%,transparent)}
+.flow-card .order{font-family:var(--serif);font-size:.78rem;letter-spacing:.3em;color:var(--accent);opacity:.9}
+.flow-card .cn{font-family:var(--serif);font-weight:700;font-size:1.5rem;letter-spacing:.05em;margin-top:5px;color:var(--ink);line-height:1.2}
+.flow-card .it{font-family:var(--serif);font-style:italic;color:var(--accent);font-size:.86rem;letter-spacing:.07em;margin-top:3px}
+.flow-card .essence{font-size:.94rem;color:var(--ink-soft);margin-top:13px;line-height:1.95}
+.flow-card .trans{
+  margin-top:13px;font-size:.82rem;color:var(--ink-soft);letter-spacing:.02em;
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+}
+.flow-card .trans .seal{
+  flex-shrink:0;width:20px;height:20px;border-radius:50%;
+  border:1px solid var(--blood);color:var(--blood);
+  font-family:var(--serif);font-size:.68rem;line-height:18px;text-align:center;
+}
+.flow-card .trans b{color:var(--ink);font-weight:600}
+.flow-card .fromlife{font-size:.83rem;color:var(--ink-faint);margin-top:11px;line-height:1.8;border-top:1px dashed var(--line);padding-top:11px}
+.flow-card .fromlife b{color:var(--blood);font-weight:400;font-family:var(--serif)}
+.flow-card .flow-year{margin-top:14px;border-top:none;padding-top:0}
+
+.flow-work.i{--accent:#9c3222}     /* 我的天才女友：血红 */
+.flow-work.ii{--accent:#c79a2e}    /* 新名字的故事：那不勒斯黄 */
+.flow-work.iii{--accent:#3f6273}   /* 离开的，留下的：海蓝 */
+.flow-work.iv{--accent:#4d4a45}    /* 失踪的孩子：火山灰 */
+
+/* ===== 主题 ===== */
+.themes{max-width:880px;margin:0 auto;columns:2;column-gap:56px}
+.theme{break-inside:avoid;margin-bottom:34px;padding-bottom:30px;border-bottom:1px solid transparent;border-image:linear-gradient(90deg,var(--line),transparent) 1}
+.theme .no{font-family:var(--serif);color:var(--naples);font-size:.8rem;letter-spacing:.3em}
+.theme h3{font-family:var(--serif);font-size:1.18rem;color:var(--ink);margin:8px 0 9px;letter-spacing:.04em}
+.theme p{font-size:.9rem;color:var(--ink-soft);line-height:1.95}
+
+/* ===== 回响 ===== */
+.legacy{max-width:840px;margin:0 auto}
+.leg-block{margin-bottom:36px}
+.leg-block h3{font-family:var(--serif);font-size:1.22rem;color:var(--blood);letter-spacing:.06em;margin-bottom:14px;padding-left:14px;border-left:3px solid var(--naples)}
+.leg-block p{font-size:.97rem;color:var(--ink-soft);line-height:2;margin-bottom:12px}
+.leg-block b{color:var(--ink);font-weight:600}
+.leg-quote{
+  border:1px solid var(--line);border-left:3px solid var(--blood);border-radius:20px;
+  background:var(--paper);
+  padding:24px 28px;font-family:var(--serif);font-size:1.06rem;line-height:2.05;color:var(--ink);
+}
+.leg-quote .src{display:block;margin-top:12px;font-family:var(--sans);font-size:.82rem;color:var(--ink-faint);letter-spacing:.06em}
+
+/* ===== footer ===== */
+.foot{margin-top:9vh;padding-top:26px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:.82rem;color:var(--ink-faint);letter-spacing:.05em}
+.foot a{color:var(--ink-soft);text-decoration:none;transition:color .2s}
+.foot a:hover{color:var(--blood)}
+.foot-mark{display:inline-flex;align-items:center;gap:9px}
+
+@media(max-width:760px){
+  .themes{columns:1}
+  .flow::before{left:14px}
+  .flow-item{padding-left:46px}
+  .flow-dot{left:14px}
+}
+</style>
+</head>
+<body>
+<a href="index.html" class="back-home">← 返回首页</a>
+<div class="page">
+
+  <header class="hero">
+    <div class="hero-eyebrow">TETRALOGIA NAPOLETANA · L'AMICA GENIALE</div>
+    <h1>那不勒斯四部曲</h1>
+    <div class="hero-it">L'amica geniale · Elena Ferrante</div>
+    <div class="hero-years"><span class="v">2011</span><span class="dash"></span><span class="v">2014</span></div>
+    <p class="hero-tag">在<em>友谊</em>与<em>战争</em>之间，两个女人写了五十年的信。<br>它写的不只是两位女友，而是一个街区、一个国家，和所有庶民女孩的一生。</p>
+    <!-- 屋脊线，远山是维苏威，屋檐下两个小布娃娃 -->
+    <svg class="neighborhood" viewBox="0 0 680 36" fill="none" aria-hidden="true">
+      <path d="M430 22 L480 6 L530 22 Z" stroke="#4d4a45" stroke-width="1.3" fill="none" opacity=".55"/>
+      <path d="M465 6 v-2 h30 v2" stroke="#4d4a45" stroke-width="1" opacity=".4"/>
+      <g stroke="#9c3222" stroke-width="1.3" stroke-linecap="round" opacity=".85" fill="none">
+        <path d="M60 30 v-7"/><circle cx="60" cy="20.5" r="2.6"/>
+        <path d="M88 30 v-7"/><circle cx="88" cy="20.5" r="2.6"/>
+      </g>
+      <g stroke="#4d4a45" stroke-width="1.4" stroke-linecap="round" opacity=".7" fill="none">
+        <path d="M140 30 v-12 h30 v12"/><path d="M136 18 h38"/>
+        <path d="M240 30 v-14 h26 v14"/><path d="M235 16 h36"/>
+        <path d="M340 30 v-12 h30 v12"/><path d="M336 18 h38"/>
+      </g>
+      <path d="M0 30 C 160 28, 520 28, 680 30" stroke="#4d4a45" stroke-width="1.1" stroke-linecap="round" opacity=".4"/>
+    </svg>
+  </header>
+
+  <!-- 导读概述 -->
+  <section class="sec-head">
+    <div class="k">序 · 这是什么书</div>
+    <h2>两个女人，五十年，一座城</h2>
+  </section>
+  <div class="bio">
+    <p>《那不勒斯四部曲》是意大利作家<b>埃莱娜·费兰特</b>在 2011 至 2014 年间连续出版的四部长篇：<b>《我的天才女友》《新名字的故事》《离开的，留下的》《失踪的孩子》</b>。故事从 1950 年代那不勒斯的穷街区开始：图书管理员的女儿<b>埃莱娜（莱农奇亚）</b>与鞋匠的女儿<b>莉拉</b>，两个聪明过人的女孩，在贫穷、暴力与男权的街区里互相成全、也互相较量，一路写到 2000 年代——莉拉在六十六岁那年彻底消失，埃莱娜写下这套书，作为对挚友的最终背叛与纪念。</p>
+    <p>费兰特本人是当代文坛最著名的<b>匿名者</b>：1991 年出版处女作以来拒绝一切公开露面，只以笔名和书信面对世界。她宣称「作品一旦完成，就不再需要作者」。这套四部曲被译成四十多种语言，全球销量以千万计，<b>HBO 改编剧集</b>在真实的那不勒斯取景拍摄。多数评论者认为这是二十一世纪最重要的小说之一——而它做到这件事的方式，竟是如此古老：只用一段友谊。</p>
+  </div>
+
+  <!-- 四部曲 时间流 -->
+  <section class="sec-head">
+    <div class="k">四部曲</div>
+    <h2>沿着街区往下走</h2>
+    <p>四部曲以「庶民」为主题句读：第一部挣脱街区，第二部被街区吞没，第三部看似逃出、实则带走了街区，第四部承认谁也没能真正离开。以下按出版顺序梳理每一部的骨架。</p>
+  </section>
+
+  <div class="flow">
+
+    <div class="flow-item flow-life">
+      <span class="flow-dot"></span>
+      <div class="flow-body">
+        <div class="flow-title">布娃娃掉进了地下室</div>
+        <div class="flow-sub">两个女孩把对方的布娃娃扔进布满死老鼠的地下室——一段以交换与冒犯开始的友谊。这套书的一切都从这里开始。</div>
+        <div class="flow-year"><span class="lab">记忆的起点</span>1950s</div>
+      </div>
+    </div>
+
+    <div class="flow-item flow-work i">
+      <span class="flow-dot work"></span>
+      <div class="flow-card">
+        <span class="order">第一部 · 「庶民」这个词</span>
+        <div class="cn">我的天才女友</div>
+        <div class="it">L'amica geniale · 2011</div>
+        <div class="essence">从童年写到十六岁：莉拉是天纵之才，自学希腊语、拉丁语，写出的故事让老师目瞪口呆；埃莱娜只能靠勤奋紧追。小学毕业后，家境较好的埃莱娜继续升学，莉拉被父亲从窗口扔出去，转而在家里的鞋店与堂·阿奇勒的财富之间周旋——十六岁嫁给了肉食店老板斯特凡诺。「我的天才女友」是莉拉对埃莱娜说的一句话，也是全书最大的反讽与真相。</div>
+        <div class="trans"><span class="seal">荐</span>推荐译本：<b>陈英 译</b> · 人民文学出版社 / 九久读书人</div>
+        <div class="fromlife"><b>核心意象：</b>「庶民」（plebs）——老师奥利维耶罗的一句话统治全书：穷人互戕，是庶民的本性；逃离它，比逃离街区难一万倍。</div>
+        <div class="flow-year"><span class="lab">出版</span>2011</div>
+      </div>
+    </div>
+
+    <div class="flow-item flow-work ii">
+      <span class="flow-dot work"></span>
+      <div class="flow-card">
+        <span class="order">第二部 · 「女人不像男人」</span>
+        <div class="cn">新名字的故事</div>
+        <div class="it">Storia del nuovo cognome · 2012</div>
+        <div class="essence">从十六岁写到二十出头：婚后的莉拉在婚礼上认出丈夫的背叛，在新婚夜的暴力与鞋厂的生意之间被彻底吞噬；她与尼诺私奔又被弃，去香肠厂做工，身体与精神一起垮掉。埃莱娜一边目睹莉拉的坠落，一边读高中、考大学、写出第一本书——而那本书的种子，恰是莉拉童年写的《蓝色仙女》。这是四部里最暴烈、也最「身体」的一部。</div>
+        <div class="trans"><span class="seal">荐</span>推荐译本：<b>陈英 译</b> · 人民文学出版社 / 九久读书人</div>
+        <div class="fromlife"><b>核心意象：</b>索拉拉兄弟的汽车与《蓝色仙女》——暴力与才华，是街区给两个女孩的同样两件遗产。</div>
+        <div class="flow-year"><span class="lab">出版</span>2012</div>
+      </div>
+    </div>
+
+    <div class="flow-item flow-work iii">
+      <span class="flow-dot work"></span>
+      <div class="flow-card">
+        <span class="order">第三部 · 带着街区逃亡</span>
+        <div class="cn">离开的，留下的</div>
+        <div class="it">Storia di chi fugge e di chi resta · 2013</div>
+        <div class="essence">埃莱娜嫁给学者彼得罗、出版小说、进入佛罗伦萨的知识阶层——却发现自己只是换了一间更大的牢房：婆家的傲慢与街区的男权，本质上是同一种东西。莉拉成了计算机工人，在底下悄悄组织抗争。1968 年的浪潮、工会、女性主义小组轮番上场；埃莱娜最终与尼诺旧情复燃，抛弃家庭——四部曲中最「社会」也最「内省」的一部。</div>
+        <div class="trans"><span class="seal">荐</span>推荐译本：<b>陈英 译</b> · 人民文学出版社 / 九久读书人</div>
+        <div class="fromlife"><b>核心意象：</b>「离开的，留下的」——逃离从来是幻觉：街区不在于街道，而在于长在身上的规则。</div>
+        <div class="flow-year"><span class="lab">出版</span>2013</div>
+      </div>
+    </div>
+
+    <div class="flow-item flow-work iv">
+      <span class="flow-dot work"></span>
+      <div class="flow-card">
+        <span class="order">第四部 · 失踪的女儿</span>
+        <div class="cn">失踪的孩子</div>
+        <div class="it">Storia della bambina perduta · 2014</div>
+        <div class="essence">埃莱娜带着三个女儿搬回那不勒斯，与尼诺的同居幻灭，在写作与照顾孩子之间被撕碎；莉拉开着编程公司老当益壮，唯一的女儿蒂娜在三岁时于海滩失踪——命运报了童年的旧账：当年被扔进地下室的两个布娃娃，多年后从下水道挖出，而「失踪的孩子」最终是莉拉自己。老年埃莱娜收到寄来的两个布娃娃，明白了莉拉已决定消失：不是死亡，是从一切痕迹中退场。</div>
+        <div class="trans"><span class="seal">荐</span>推荐译本：<b>陈英 译</b> · 人民文学出版社 / 九久读书人</div>
+        <div class="fromlife"><b>核心意象：</b>两个布娃娃的归来——整部四部曲，原来都是一次寻找：寻找莉拉，寻找童年，寻找被自己弄丢的那部分自我。</div>
+        <div class="flow-year"><span class="lab">出版</span>2014</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 主题 -->
+  <section class="sec-head">
+    <div class="k">底 色</div>
+    <h2>它反复在写的几件事</h2>
+    <p>四部曲的表面是友谊，内里是一整套关于阶级、身体与女性命运的清算。这几条是它的「基因」。</p>
+  </section>
+  <div class="themes">
+    <div class="theme"><div class="no">Ⅰ</div><h3>友谊即战争</h3><p>埃莱娜与莉拉互相照亮也互相吞噬：爱与嫉妒是一枚硬币。「我们是一对，谁也离不开谁」——这是全书最温柔也最恐怖的判词。</p></div>
+    <div class="theme"><div class="no">Ⅱ</div><h3>庶民的本性</h3><p>奥利维耶罗老师的警告贯穿始终：庶民性不在口袋里，在心里。教育看似救出了埃莱娜，四部曲却始终在追问：真的救出了吗？</p></div>
+    <div class="theme"><div class="no">Ⅲ</div><h3>女性的身体与暴力</h3><p>婚姻、生育、更年期、家庭暴力——女性身体的历史第一次被写得如此坦白。暴政不在远方，就在婚床与厨房里。</p></div>
+    <div class="theme"><div class="no">Ⅳ</div><h3>教育作为赎金</h3><p>书是埃莱娜唯一的船票，也是她终身的债务：她的每一次成功，都要先向莉拉「结账」——谁欠谁，永远算不清。</p></div>
+    <div class="theme"><div class="no">Ⅴ</div><h3>街区作为宇宙</h3><p>灰墙小街容纳了整个二十世纪的意大利：法西斯余孽、教会、共产党、建筑业黑手党化——大历史全部以「邻里关系」的面目出现。</p></div>
+    <div class="theme"><div class="no">Ⅵ</div><h3>失踪与消失</h3><p>布娃娃、蒂娜、莉拉——「消失」是女性对命运的最后一次夺权：你们记录我，我就退出记录。</p></div>
+  </div>
+
+  <!-- 回响 -->
+  <section class="sec-head">
+    <div class="k">回 声</div>
+    <h2>影响与回响 · 一种综合式的评价</h2>
+    <p>一套「匿名作者」的小说，成了二十一世纪第一个十年全球最重要的文学事件。下面是它改变的东西。</p>
+  </section>
+  <div class="legacy">
+
+    <div class="leg-block">
+      <h3>全球现象与 HBO 剧集</h3>
+      <p>四部曲被译成四十余种语言，登上《纽约时报》畅销榜，<b>希拉里·克林顿、乔纳森·弗兰岑、扎迪·史密斯</b>公开背书；HBO 与意大利制作的剧集《我的天才女友》在真实街区取景，让原书的「街区」成了文学圣地，那不勒斯甚至出现「费兰特旅游」线路。</p>
+    </div>
+
+    <div class="leg-block">
+      <h3>匿名者：一个文学事件</h3>
+      <p>费兰特坚持匿名二十余年，把「作者的消失」做成了一种文学立场：她说「作品一旦写出，就有了自己的生命，不需要作者在场」。历代读者与媒体对她真实身份的猎捕（包括一次失败的「起底」），反而让这套书关于「谁在说话」的追问更加锋利。</p>
+    </div>
+
+    <div class="leg-block">
+      <h3>在中国：一代女性读者的 «天才女友»</h3>
+      <p>2017 年起经<b>陈英</b>翻译由人民文学出版社引进，迅速成为现象级读物，「天才女友」「庶民」成为流行语；豆瓣读书长期的年度高分作品，剧集与书一同塑造了大量中国读者对那不勒斯乃至「女性友谊」的想象。</p>
+    </div>
+
+    <div class="leg-block">
+      <h3>一份综合式的评价</h3>
+      <div class="leg-quote">它用最古典的兵器——两位女性、一段友谊、一条街——打赢了后现代的战争。费兰特把「女人的嫉妒」从道德污名中解放出来，写成一种理解世界的能力；把「阶级」从社会学词汇变成切肤的疼痛。它的野心在结尾才完全显形：埃莱娜写作《友谊》这部书，恰恰背叛了莉拉的意愿——记录即背叛，而背叛又是唯一的爱。这套书留给每个读者的，是同一个问题：你记忆里那个「天才」，是被世界辜负了，还是被你自己辜负了？<span class="src">—— 编者综合自国际书评与中文读者的普遍共识</span></div>
+    </div>
+
+  </div>
+
+  <footer class="foot">
+    <span class="foot-mark"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><g stroke="#9c3222" stroke-width="1.5" stroke-linecap="round" fill="none"><circle cx="8" cy="8" r="2.6"/><circle cx="16" cy="8" r="2.6"/><path d="M6 13 h4 v7 h-4 z"/><path d="M14 13 h4 v7 h-4 z"/></g></svg>© <em style="font-style:normal;color:var(--ink-soft)">zzht</em> · 那不勒斯四部曲 · 五十年的友谊与战争</span>
+    <a href="index.html">返回站点首页 ↗</a>
+  </footer>
+
+</div>
+</body>
+</html>
