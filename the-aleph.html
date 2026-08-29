@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="博尔赫斯《阿莱夫》梳理：地窖里两三厘米的一点装下全部宇宙——悼亡的悖论、永生的恐怖、恶的辩术，脉络、篇章、主题、名句与译本。">
+<title>阿莱夫 · 博尔赫斯 — zzht</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #ece7d9;            /* 地窖暖沙 */
+  --bg-deep: #e4ddc9;
+  --paper: #faf6ec;
+  --paper-deep: #f2ecdb;
+  --ink: #2a2517;
+  --ink-soft: #5c5442;
+  --ink-faint: #978d74;
+  --accent: #9a7b2f;        /* 阿莱夫金 */
+  --accent-2: #2e5a7d;      /* 深蓝 */
+  --accent-3: #7c8b94;      /* 银灰 */
+  --accent-4: #8a7a4a;      /* 古铜 */
+  --line: #d5c9a8;
+  --serif: 'Noto Serif SC', 'STSong', 'SimSun', serif;
+  --sans: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans); color: var(--ink); line-height: 1.75; overflow-x: hidden;
+  background-color: var(--bg);
+  /* 极淡的同心圆光晕纹：一圈圈涟漪，中心是那一点 */
+  background-image:
+    repeating-radial-gradient(circle at 84% 10%, rgba(154,123,47,.055) 0px, rgba(154,123,47,.055) 1px, transparent 1px, transparent 76px),
+    linear-gradient(180deg, rgba(154,123,47,.08) 0%, rgba(236,231,217,0) 460px);
+}
+::selection { background: rgba(154, 123, 47, .18); }
+
+/* back home */
+.back-home {
+  position: fixed; top: 18px; left: 20px; z-index: 120;
+  font-size: .85rem; color: var(--ink-soft); text-decoration: none;
+  padding: 7px 14px; border-radius: 999px;
+  background: var(--paper); border: 1px solid var(--line);
+  transition: all .25s;
+}
+.back-home:hover { color: var(--accent); border-color: var(--accent); transform: translateX(-2px); }
+
+/* ===== HERO：地窖的黑暗 ===== */
+.hero {
+  min-height: 94vh;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  text-align: center; padding: 14vh 24px 8vh; position: relative;
+  background:
+    radial-gradient(ellipse 75% 40% at 50% -5%, rgba(154,123,47,.15), transparent 62%),
+    linear-gradient(180deg, var(--bg-deep) 0%, var(--bg) 78%);
+}
+/* 西班牙语水印：一点旁边的旧题名 */
+.hero-wm {
+  position: absolute; top: 12%; left: 50%; transform: translateX(-50%);
+  font-family: var(--serif); font-style: italic;
+  font-size: clamp(3.4rem, 10vw, 7rem);
+  letter-spacing: .08em; white-space: nowrap;
+  color: rgba(154, 123, 47, .1);
+  pointer-events: none; user-select: none;
+}
+.hero-eyebrow { font-size: .82rem; letter-spacing: .32em; color: var(--ink-soft); margin-bottom: 22px; font-weight: 400; position: relative; }
+.hero h1 {
+  font-family: var(--serif); font-size: clamp(3.4rem, 10vw, 6.4rem);
+  font-weight: 900; letter-spacing: .16em; line-height: 1.12;
+  color: var(--ink); position: relative;
+}
+.hero-es { font-family: var(--serif); font-size: clamp(1rem, 2.6vw, 1.3rem); color: var(--accent); letter-spacing: .16em; margin-top: 14px; font-style: italic; position: relative; }
+.hero-sub { margin-top: 18px; color: var(--ink-soft); font-size: .97rem; font-weight: 300; letter-spacing: .05em; position: relative; }
+/* 一点 + 同心圆分隔：光晕克制，不发光 */
+.hero-divider { display: flex; align-items: center; gap: 18px; margin: 30px auto; position: relative; }
+.hero-divider::before, .hero-divider::after { content: ''; width: 78px; height: 1px; }
+.hero-divider::before { background: linear-gradient(90deg, transparent, rgba(154,123,47,.65)); }
+.hero-divider::after { background: linear-gradient(270deg, transparent, rgba(154,123,47,.65)); }
+.hero-quote { max-width: 560px; font-family: var(--serif); font-size: 1.06rem; color: var(--ink-soft); line-height: 2; position: relative; }
+.hero-quote .src { display: block; margin-top: 10px; font-size: .85rem; color: var(--ink-faint); }
+.hero-meta { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px 46px; margin-top: 48px; position: relative; }
+.hero-meta-item { text-align: center; min-width: 70px; }
+.hero-meta-item .value { display: block; font-family: var(--serif); font-weight: 900; font-size: 1.7rem; color: var(--accent); line-height: 1.2; }
+.hero-meta-item .label { font-size: .78rem; color: var(--ink-faint); letter-spacing: .12em; }
+.scroll-hint {
+  position: absolute; bottom: 26px; left: 50%; transform: translateX(-50%);
+  font-size: .78rem; color: var(--ink-faint); cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  letter-spacing: .2em; user-select: none;
+}
+.scroll-hint .arrow { animation: bob 1.8s ease-in-out infinite; }
+@keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+
+/* ===== NAV ===== */
+.nav-bar { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bottom: 1px solid var(--line); }
+.nav-inner { max-width: 1000px; margin: 0 auto; display: flex; overflow-x: auto; scrollbar-width: none; padding: 0 12px; }
+.nav-inner::-webkit-scrollbar { display: none; }
+.nav-tab {
+  flex: 0 0 auto; padding: 15px 18px; cursor: pointer;
+  font-size: .9rem; color: var(--ink-soft); letter-spacing: .06em;
+  position: relative; transition: color .25s; white-space: nowrap; user-select: none;
+}
+.nav-tab::after {
+  content: ''; position: absolute; left: 18px; right: 18px; bottom: 0;
+  height: 2px; border-radius: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  transform: scaleX(0); transition: transform .3s;
+}
+.nav-tab:hover { color: var(--ink); }
+.nav-tab.active { color: var(--accent); font-weight: 500; }
+.nav-tab.active::after { transform: scaleX(1); }
+
+/* ===== SECTIONS ===== */
+.section { max-width: 1000px; margin: 0 auto; padding: 90px 24px 10px; }
+.section.wide { max-width: 1060px; }
+.section-title { font-family: var(--serif); font-size: clamp(1.7rem, 4vw, 2.3rem); font-weight: 900; letter-spacing: .08em; color: var(--ink); }
+.section-title::after {
+  content: ''; display: block; width: 76px; height: 3px; margin-top: 14px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2), transparent); border-radius: 2px;
+}
+.section-desc { margin-top: 20px; color: var(--ink-soft); max-width: 720px; font-size: .98rem; line-height: 2; }
+.fade-in { opacity: 0; transform: translateY(26px); transition: opacity .8s ease, transform .8s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* ===== OVERVIEW ===== */
+.ov-grid { display: grid; grid-template-columns: 1.35fr 1fr; gap: 40px; margin-top: 40px; align-items: start; }
+.ov-prose p { margin-bottom: 16px; color: var(--ink-soft); font-size: .97rem; line-height: 2.05; }
+.ov-prose p strong { color: var(--ink); font-weight: 600; }
+.ov-prose .lede { font-family: var(--serif); font-size: 1.12rem; color: var(--ink); line-height: 2.1; }
+.ov-prose .lede::first-letter { font-size: 2.6em; float: left; line-height: 1; padding-right: .12em; color: var(--accent); font-weight: 900; }
+.ov-panel { background: var(--paper); border: 1px solid var(--line); border-radius: 22px; padding: 30px 28px; box-shadow: 0 10px 24px rgba(120,100,50,.08); }
+.ov-panel h3 { font-family: var(--serif); font-size: 1.05rem; font-weight: 700; letter-spacing: .08em; color: var(--accent); margin-bottom: 16px; }
+.bg-list { list-style: none; }
+.bg-list li {
+  position: relative; padding: 10px 0 10px 22px;
+  font-size: .88rem; color: var(--ink-soft); line-height: 1.8;
+  border-bottom: 1px dashed var(--line);
+}
+.bg-list li:last-child { border-bottom: none; }
+.bg-list li::before {
+  content: ''; position: absolute; left: 2px; top: 19px;
+  width: 7px; height: 7px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+}
+.bg-list li b { color: var(--ink); font-weight: 600; }
+.room-note { margin-top: 16px; padding-top: 12px; border-top: 1px dashed var(--line); font-size: .8rem; color: var(--ink-faint); font-style: italic; line-height: 1.8; }
+.stat-strip { display: flex; flex-wrap: wrap; gap: 0; margin-top: 44px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.stat { flex: 1 1 auto; min-width: 150px; text-align: center; padding: 26px 16px; }
+.stat + .stat { border-left: 1px dashed var(--line); }
+.stat .num { font-family: var(--serif); font-size: 1.9rem; font-weight: 900; color: var(--accent); line-height: 1.2; }
+.stat .cap { font-size: .8rem; color: var(--ink-faint); letter-spacing: .08em; margin-top: 6px; }
+
+/* ===== STORY ===== */
+.phase { margin-top: 48px; }
+.phase-head { display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap; }
+.phase-num {
+  font-family: var(--serif); font-size: 2rem; font-weight: 900;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text; background-clip: text; color: transparent; line-height: 1;
+}
+.phase-head h3 { font-family: var(--serif); font-size: 1.25rem; font-weight: 700; letter-spacing: .05em; }
+.phase-head .ref { font-size: .8rem; color: var(--ink-faint); letter-spacing: .05em; }
+.phase-items { margin-top: 20px; margin-left: 13px; border-left: 2px solid rgba(154, 123, 47, .5); padding-left: 26px; }
+.t-item { position: relative; border-radius: 18px; padding: 14px 18px; margin-bottom: 10px; cursor: pointer; transition: background .25s; }
+.t-item:hover { background: var(--paper-deep); }
+.t-item::before {
+  content: ''; position: absolute; left: -33px; top: 24px;
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--bg); border: 2.5px solid var(--accent); transition: background .25s;
+}
+.t-item.open::before { background: var(--accent); }
+.t-item-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.t-item-head h4 { font-size: 1rem; font-weight: 600; font-family: var(--serif); letter-spacing: .03em; }
+.t-ref { font-size: .72rem; color: var(--accent); background: rgba(154,123,47,.08); padding: 2px 10px; border-radius: 999px; letter-spacing: .04em; white-space: nowrap; }
+.t-toggle { margin-left: auto; color: var(--ink-faint); font-size: .85rem; transition: transform .3s; }
+.t-item.open .t-toggle { transform: rotate(180deg); }
+.t-detail { max-height: 0; overflow: hidden; transition: max-height .45s ease; }
+.t-detail p { padding-top: 10px; font-size: .9rem; color: var(--ink-soft); line-height: 1.95; max-width: 680px; }
+
+/* ===== 篇章卡：枚举清单 ===== */
+.filter-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px; }
+.filter-chip {
+  padding: 8px 18px; border-radius: 999px; cursor: pointer;
+  font-size: .85rem; color: var(--ink-soft);
+  background: var(--paper); border: 1px solid var(--line);
+  transition: all .25s; user-select: none;
+}
+.filter-chip:hover { transform: translateY(-2px); color: var(--ink); }
+.filter-chip.active { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #faf6ec; border-color: transparent; }
+.char-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 20px; margin-top: 30px; counter-reset: dossier; }
+.char-card {
+  background: var(--paper); border: 1px solid var(--line); border-radius: 20px;
+  padding: 22px 22px 20px; cursor: pointer; position: relative; overflow: hidden;
+  counter-increment: dossier;
+  transition: transform .3s cubic-bezier(.34,1.4,.5,1), box-shadow .3s, border-color .3s;
+}
+.char-card::before {
+  content: ''; position: absolute; top: 0; left: 22px; right: 22px; height: 3px;
+  border-radius: 0 0 4px 4px;
+  background: linear-gradient(90deg, var(--gc, var(--accent)), transparent); opacity: .85;
+}
+.char-card::after {
+  content: '枚举 ' counter(dossier);
+  position: absolute; top: 14px; right: 18px;
+  font-family: var(--serif); font-size: .82rem; letter-spacing: .06em;
+  color: rgba(154, 123, 47, .42);
+}
+.char-card:hover { transform: translateY(-5px); box-shadow: 0 14px 30px rgba(120,100,50,.16); border-color: var(--gc, var(--accent)); }
+.char-card .c-name { font-family: var(--serif); font-size: 1.12rem; font-weight: 700; }
+.char-card .c-ru { font-size: .76rem; color: var(--ink-faint); margin-top: 3px; font-style: italic; letter-spacing: .02em; }
+.char-card .c-desc { font-size: .85rem; color: var(--ink-soft); margin-top: 12px; line-height: 1.8; }
+.char-card .c-tags { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 6px; }
+.c-tag {
+  font-size: .7rem; padding: 3px 10px; border-radius: 999px;
+  color: var(--gc, var(--accent)); background: color-mix(in srgb, var(--gc, var(--accent)) 10%, var(--paper));
+  border: 1px solid color-mix(in srgb, var(--gc, var(--accent)) 28%, var(--paper));
+}
+.char-card.hidden { display: none; }
+
+/* modal */
+.modal-mask {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(42, 37, 23, .5);
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px; opacity: 0; pointer-events: none; transition: opacity .3s;
+}
+.modal-mask.show { opacity: 1; pointer-events: auto; }
+.modal-box {
+  background: var(--paper); border-radius: 24px; max-width: 560px; width: 100%;
+  max-height: 82vh; overflow-y: auto; padding: 36px 34px; position: relative;
+  transform: translateY(18px); transition: transform .3s;
+  border-top: 4px solid var(--accent);
+}
+.modal-mask.show .modal-box { transform: translateY(0); }
+.modal-close { position: absolute; top: 16px; right: 20px; cursor: pointer; font-size: 1.3rem; color: var(--ink-faint); background: none; border: none; transition: color .2s; line-height: 1; }
+.modal-close:hover { color: var(--accent); }
+.modal-box h3 { font-family: var(--serif); font-size: 1.5rem; font-weight: 900; }
+.modal-box .m-ru { font-style: italic; color: var(--ink-faint); font-size: .88rem; margin-top: 4px; }
+.modal-box .m-role { display: inline-block; margin-top: 12px; font-size: .76rem; letter-spacing: .06em; color: var(--accent); background: rgba(154,123,47,.08); padding: 4px 14px; border-radius: 999px; }
+.modal-box .m-body { margin-top: 16px; font-size: .93rem; color: var(--ink-soft); line-height: 2.05; }
+
+/* ===== THEMES ===== */
+.theme-block { display: grid; grid-template-columns: 220px 1fr; gap: 34px; padding: 42px 0; align-items: start; }
+.theme-side { position: sticky; top: 84px; }
+.theme-no { font-family: var(--serif); font-weight: 900; font-size: 1.05rem; letter-spacing: .2em; color: var(--accent-2); }
+.theme-side h3 { font-family: var(--serif); font-size: 1.3rem; font-weight: 900; margin-top: 8px; line-height: 1.5; }
+.theme-side .t-en { font-size: .78rem; color: var(--ink-faint); font-style: italic; margin-top: 4px; letter-spacing: .03em; }
+.theme-body p { color: var(--ink-soft); font-size: .94rem; line-height: 2.05; margin-bottom: 14px; max-width: 640px; }
+.theme-body p b { color: var(--ink); font-weight: 600; }
+.theme-key {
+  display: inline-block; margin-top: 4px; margin-right: 8px; margin-bottom: 6px;
+  font-size: .74rem; color: var(--accent); letter-spacing: .05em;
+  padding: 3px 12px; border-radius: 999px; border: 1px solid rgba(154,123,47,.3);
+  background: rgba(154,123,47,.06);
+}
+.theme-sep { height: 1px; border: none; background: linear-gradient(90deg, transparent, var(--line) 25%, var(--line) 75%, transparent); }
+
+/* ===== QUOTES：地窖的黑暗 ===== */
+.quote-shell { margin-top: 38px; position: relative; }
+.quote-viewport { overflow: hidden; border-radius: 24px; }
+.quote-track { display: flex; transition: transform .6s cubic-bezier(.4,0,.2,1); }
+.q-slide {
+  flex: 0 0 100%; padding: 50px 8%;
+  background:
+    radial-gradient(ellipse 40% 34% at 50% 8%, rgba(154,123,47,.13), transparent 72%),
+    #17140e;
+  border: 1px solid #332a18; border-radius: 24px; text-align: center;
+}
+.q-mark { font-family: var(--serif); font-size: 2.6rem; color: #c9a55a; line-height: 1; }
+.q-text { font-family: var(--serif); font-size: clamp(1.05rem, 2.6vw, 1.35rem); line-height: 2.1; color: #ece2c2; margin-top: 12px; }
+.q-src { margin-top: 18px; font-size: .85rem; color: #c9a55a; letter-spacing: .06em; }
+.q-note { margin-top: 8px; font-size: .82rem; color: #9d9078; max-width: 520px; margin-left: auto; margin-right: auto; line-height: 1.8; }
+.quote-nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 42px; height: 42px; border-radius: 50%;
+  background: var(--paper); border: 1px solid var(--line);
+  color: var(--ink-soft); font-size: 1.1rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .25s; z-index: 5;
+}
+.quote-nav:hover { color: var(--accent); border-color: var(--accent); transform: translateY(-50%) scale(1.08); }
+.quote-nav.prev { left: -14px; }
+.quote-nav.next { right: -14px; }
+.quote-dots { display: flex; justify-content: center; gap: 9px; margin-top: 22px; }
+.q-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--line); cursor: pointer; transition: all .3s; }
+.q-dot.active { background: var(--accent); transform: scale(1.25); }
+
+/* ===== VERSIONS & LEGACY ===== */
+.dual-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 38px; }
+.v-panel { background: var(--paper); border: 1px solid var(--line); border-radius: 22px; padding: 28px 26px; box-shadow: 0 10px 24px rgba(120,100,50,.08); }
+.v-panel h3 { font-family: var(--serif); font-size: 1.1rem; font-weight: 700; letter-spacing: .06em; margin-bottom: 6px; }
+.v-panel .v-sub { font-size: .8rem; color: var(--ink-faint); margin-bottom: 18px; }
+.v-row { padding: 14px 0; border-bottom: 1px dashed var(--line); font-size: .88rem; color: var(--ink-soft); line-height: 1.8; }
+.v-row:last-child { border-bottom: none; }
+.v-row b { color: var(--ink); font-weight: 600; }
+.v-row .v-year { font-family: var(--serif); color: var(--accent); font-weight: 700; margin-right: 10px; }
+.v-rec { margin-top: 14px; font-size: .82rem; color: var(--accent); background: rgba(154,123,47,.1); border-radius: 12px; padding: 10px 14px; line-height: 1.7; }
+.legacy-list { margin-top: 34px; }
+.legacy-item { display: grid; grid-template-columns: 150px 1fr; gap: 20px; padding: 22px 0; border-bottom: 1px dashed var(--line); }
+.legacy-item:last-child { border-bottom: none; }
+.legacy-item .l-name { font-family: var(--serif); font-weight: 700; font-size: 1rem; color: var(--ink); }
+.legacy-item .l-name span { display: block; font-size: .75rem; color: var(--ink-faint); font-weight: 400; margin-top: 3px; font-style: italic; }
+.legacy-item .l-desc { font-size: .9rem; color: var(--ink-soft); line-height: 1.95; }
+
+/* ===== READING ===== */
+.read-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 22px; margin-top: 36px; }
+.read-card { background: var(--paper); border: 1px solid var(--line); border-radius: 22px; padding: 28px 26px; transition: transform .3s, box-shadow .3s; box-shadow: 0 6px 16px rgba(120,100,50,.06); }
+.read-card:hover { transform: translateY(-4px); box-shadow: 0 12px 26px rgba(120,100,50,.14); }
+.read-card h3 { font-family: var(--serif); font-size: 1.02rem; font-weight: 700; margin-bottom: 12px; color: var(--accent); }
+.read-card p { font-size: .88rem; color: var(--ink-soft); line-height: 1.95; }
+.read-card p b { color: var(--ink); }
+.read-card ul { list-style: none; margin-top: 8px; }
+.read-card li { font-size: .88rem; color: var(--ink-soft); line-height: 1.9; padding-left: 18px; position: relative; margin-bottom: 6px; }
+.read-card li::before { content: ''; position: absolute; left: 2px; top: 12px; width: 6px; height: 6px; border-radius: 50%; background: var(--accent-2); }
+
+/* footer */
+.site-footer {
+  max-width: 1000px; margin: 90px auto 0; padding: 26px 24px 46px;
+  border-top: 1px solid var(--line); font-size: .82rem; color: var(--ink-faint);
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+}
+.site-footer a { color: var(--ink-soft); text-decoration: none; transition: color .2s; }
+.site-footer a:hover { color: var(--accent); }
+.foot-mark { display: inline-flex; align-items: center; gap: 9px; }
+
+/* responsive */
+@media (max-width: 820px) {
+  .ov-grid { grid-template-columns: 1fr; }
+  .dual-grid { grid-template-columns: 1fr; }
+  .theme-block { grid-template-columns: 1fr; gap: 14px; }
+  .theme-side { position: static; }
+  .legacy-item { grid-template-columns: 1fr; gap: 6px; }
+  .quote-nav.prev { left: 6px; } .quote-nav.next { right: 6px; }
+  .q-slide { padding: 42px 7%; }
+}
+@media (max-width: 520px) {
+  .section { padding-top: 66px; }
+  .hero { min-height: 88vh; padding-top: 16vh; }
+  .hero-wm { font-size: 2.6rem; }
+  .hero-meta { gap: 12px 26px; }
+  .stat { min-width: 120px; padding: 18px 8px; }
+}
+</style>
+</head>
+<body>
+
+<a href="borges.html" class="back-home">← 博尔赫斯</a>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="top">
+  <span class="hero-wm" aria-hidden="true">El Aleph</span>
+  <div class="hero-eyebrow">Borges · 1949 · 地窖里的那一点黑暗</div>
+  <h1>阿莱夫</h1>
+  <div class="hero-es">El Aleph</div>
+  <div class="hero-sub">地窖里两三厘米的一点，装下全部宇宙</div>
+  <div class="hero-divider"><svg viewBox="0 0 120 44" width="94" height="34" aria-hidden="true"><circle cx="60" cy="22" r="2.6" fill="#9a7b2f"/><circle cx="60" cy="22" r="8" fill="none" stroke="#9a7b2f" stroke-width="1" opacity=".55"/><circle cx="60" cy="22" r="15" fill="none" stroke="#9a7b2f" stroke-width=".8" opacity=".35"/><circle cx="60" cy="22" r="21" fill="none" stroke="#7c8b94" stroke-width=".6" opacity=".28"/></svg></div>
+  <blockquote class="hero-quote">
+    “在那里，蚂蚁、球体、风暴、银器、人群……全部同时存在。”
+    <span class="src">— 目击清单（转述）</span>
+  </blockquote>
+  <div class="hero-meta">
+    <div class="hero-meta-item"><span class="value">1949</span><span class="label">出版年份</span></div>
+    <div class="hero-meta-item"><span class="value">约17篇</span><span class="label">篇目规模</span></div>
+    <div class="hero-meta-item"><span class="value">1个光点</span><span class="label">直径两三厘米的宇宙</span></div>
+    <div class="hero-meta-item"><span class="value">1行题献</span><span class="label">留给恋人</span></div>
+  </div>
+  <div class="scroll-hint" onclick="document.getElementById('content').scrollIntoView({behavior:'smooth'})">
+    <span>向下探索</span><span class="arrow">↓</span>
+  </div>
+</section>
+
+<!-- ===== NAV ===== -->
+<nav class="nav-bar" id="content">
+  <div class="nav-inner">
+    <div class="nav-tab active" data-section="overview">概览</div>
+    <div class="nav-tab" data-section="story">脉络</div>
+    <div class="nav-tab" data-section="characters">篇章</div>
+    <div class="nav-tab" data-section="themes">主题</div>
+    <div class="nav-tab" data-section="quotes">名句</div>
+    <div class="nav-tab" data-section="versions">译本与影响</div>
+    <div class="nav-tab" data-section="reading">阅读指南</div>
+  </div>
+</nav>
+
+<!-- ===== OVERVIEW ===== -->
+<section class="section fade-in" id="overview">
+  <h2 class="section-title">关于这本书</h2>
+  <div class="ov-grid">
+    <div class="ov-prose">
+      <p class="lede">一个直径两三厘米的光点，藏在地窖楼梯下的黑暗里。躺倒、闭眼、睁眼——海洋、黎明、人群、蚂蚁、风暴、银器，全部同时存在。博尔赫斯把宇宙塞进了一点，把悼词写成了反讽。</p>
+      <p>同名短篇是集子的心脏：叙述者为亡故的贝雅特丽齐写周年悼诗，却要在情敌的地窖里看见整个宇宙——<strong>包括她的一切时刻</strong>。围绕这个「万有之点」，集子收拢了《永生》《德意志安魂曲》《神学家》等一批他最沉重的作品：不死的诅咒、恶的辩术、异端的镜像。</p>
+      <p>这本书被公认为他短篇艺术的最高处。<strong>悼亡与讥讽、有限与无限、口才与罪</strong>——所有两难都在这里找到了最精致的小说形式。</p>
+    </div>
+    <div class="ov-panel">
+      <h3>创作背景</h3>
+      <ul class="bg-list">
+        <li><b>悼亡的起点</b>：同名短篇开场于 1941 年 4 月 30 日——贝雅特丽齐死去，「死得毫无排场」。这个人物在他早年生活里有真实的影子：叙述者年年为她写周年悼诗的习惯，也确有其事。</li>
+        <li><b>一行题献</b>：同名短篇的题献页，留给了当时的一位恋人。这段感情后来成了公开的文学往事——手稿本身，也成了收藏史里的名物。</li>
+        <li><b>地窖的倒置</b>：他把「万有之点」安放在一间寒酸的地窖里，而不是神殿或天文台——崇高装进日常，正是他一贯的幽默。据说写作的那几年，他常待在母亲家中那间狭小的地下室里。</li>
+        <li><b>长篇化的短篇</b>：集子里《永生》《德意志安魂曲》等篇，把短篇的密度推向长篇的重量——1949 年，他已经在用十几页写出别人一部长篇的题量。</li>
+        <li><b>文学奖的私怨</b>：讽刺的是，集子里的平庸诗人「赢得了国家文学奖」——而他本人前一年刚在评奖中落选。小说成了最轻盈的复仇。</li>
+      </ul>
+      <div class="room-note">注：阿莱夫（Aleph）是希伯来字母表的第一个字母——在犹太神秘主义传统里，它常被用来指称万物之始。题词里引的正是这类议论。</div>
+    </div>
+  </div>
+  <div class="stat-strip">
+    <div class="stat"><div class="num">1949</div><div class="cap">初版年份</div></div>
+    <div class="stat"><div class="num">约17篇</div><div class="cap">收文规模</div></div>
+    <div class="stat"><div class="num">2—3厘米</div><div class="cap">那个点的直径</div></div>
+    <div class="stat"><div class="num">1部</div><div class="cap">写尽地球的长诗《大地》</div></div>
+    <div class="stat"><div class="num">4月30日</div><div class="cap">贝雅特丽齐的忌日</div></div>
+  </div>
+</section>
+
+<!-- ===== STORY ===== -->
+<section class="section fade-in" id="story">
+  <h2 class="section-title">脉络</h2>
+  <p class="section-desc">这本集子一半是悼词，一半是重炮。以下四组按情绪与体量推进，点击展开详情。</p>
+
+  <div class="phase">
+    <div class="phase-head"><span class="phase-num">Ⅰ</span><h3>悼念与讥讽</h3><span class="ref">《阿莱夫》· 上半场</span></div>
+    <div class="phase-items">
+      <div class="t-item"><div class="t-item-head"><h4>四月的忌日</h4><span class="t-ref">开场</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>1941 年 4 月 30 日，贝雅特丽齐死去，「死得毫无排场」。此后每年忌日，叙述者回到她家，坐在同一把椅子上，写同一首周年悼诗——全书以一场持续多年的仪式开场。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>情敌的十四行</h4><span class="t-ref">卡洛斯·阿根廷诺登场</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>亡人的表兄、诗人卡洛斯·阿根廷诺缠上叙述者：寄诗、请客、喋喋不休。他的十四行诗费尽心机，让每个诗句都想方设法以「贝雅特丽齐」收尾——叙述者一边冷笑，一边不得不承认其中有几句不算太坏。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>万有长诗《大地》</h4><span class="t-ref">平庸的野心</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>卡洛斯宣布他的宏大工程：一首写尽整个地球的长诗——地理逐段推进，客厅先于山河，细节琐碎得庄严。博尔赫斯把「万有」这个主题先交给一个平庸者糟蹋，再交给一个光点成全：同一本书里的两次「装下宇宙」。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>文学奖的讽刺</h4><span class="t-ref">平庸戴上桂冠</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>卡洛斯竟以长诗的头几歌赢得国家文学奖——博尔赫斯最恶毒也最轻盈的玩笑：他自己刚在真实的评奖中落选。虚构替他报了仇，用一种不动声色的方式。</p></div></div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-head"><span class="phase-num">Ⅱ</span><h3>地窖的一点</h3><span class="ref">《阿莱夫》· 下半场</span></div>
+    <div class="phase-items">
+      <div class="t-item"><div class="t-item-head"><h4>楼梯下的黑暗</h4><span class="t-ref">地窖</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>老宅的地窖：一段陡窄的楼梯，尽头的黑暗里藏着那件东西。要看见它，得仰面躺倒在台阶下的地上，闭一会儿眼睛——观看的动作像一场倒立的祈祷。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>目击清单</h4><span class="t-ref">那一点</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>睁开眼：一个直径两三厘米的小小光点，塞着旋转的整个宇宙——海洋、黎明与黄昏、人群、蚂蚁、风暴、银器、书页、矿脉……枚举是无穷的，叙述者说，我再说一遍也数不清。这是文学史上最著名的一段「清单」。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>爱的悖论</h4><span class="t-ref">看见一切 ≠ 得到她</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>他在那个点里看见了千百个贝雅特丽齐的时刻——包括背叛与遗忘的时刻。看见一切，并没有让他得到她；宇宙塞进了一点，唯独装不下一次告别。悼亡的悖论在这里完成：无限的知识，治不了有限的失去。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>拆迁之后</h4><span class="t-ref">结尾</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>老宅拆除，光点随之消失。叙述者半开玩笑地暗示：另外的阿莱夫也许存在，也许地窖里根本不曾有过奇迹——也许他只是又一次为贝雅特丽齐编造了纪念。真假互相掩护，悼词收在讥讽里。</p></div></div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-head"><span class="phase-num">Ⅲ</span><h3>永生</h3><span class="ref">《永生》· 不死的诅咒</span></div>
+    <div class="phase-items">
+      <div class="t-item"><div class="t-item-head"><h4>寻找永生者之城</h4><span class="t-ref">罗马军人</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>一位罗马军人听闻非洲某处有座「永生者之城」，倾尽家财组织远征，穿过沙漠与战乱去寻找。同行者接连死去，他自己重伤濒死——醒来时，已在城外一处隐秘的水潭边。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>荒诞的建筑与穴居的众神</h4><span class="t-ref">城与穴居人</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>永生者之城是座不合逻辑的建筑：阶梯倒着修，屋顶没有意义，走廊通向虚无。而城外穴居的野蛮人，正是变得又瞎又笨的永生者——时间无限，于是什么都不再重要。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>荷马式的漂流</h4><span class="t-ref">那位会说希腊语的</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>叙述者后来发现，穴居人中那个会背希腊语句子的，竟像荷马——不死的诗人失去姓名、失去史诗，在时间里漂流成无名的流浪汉。身份原来不是灵魂，是作品；作品没了，人就散了。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>把城烧掉</h4><span class="t-ref">重新会死</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>他找到另一条河的水，喝下，重新成为会死的人；又让人烧毁永生者之城、抹掉证据。结尾是全书的题眼之一：有死之身，才配拥有行为与作品——死亡不是终点，是意义的发行人。</p></div></div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-head"><span class="phase-num">Ⅳ</span><h3>战争与镜子</h3><span class="ref">《德意志安魂曲》与《神学家》</span></div>
+    <div class="phase-items">
+      <div class="t-item"><div class="t-item-head"><h4>行刑前夜的自白</h4><span class="t-ref">《德意志安魂曲》</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>一位集中营军官在行刑前夜写出自白：他不忏悔，反而以毕生的阅读为暴力立论——纯洁、牺牲、形而上学。博尔赫斯把恶写得如此雄辩，正是要逼读者直面：口才本身，可以成为罪。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>智性的共谋</h4><span class="t-ref">恶的辩术</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>军官的每一步堕落都有书本背书：浪漫主义供给诗意，哲学供给体系，音乐与诗供给庄严。这篇是全书最冷的一课——文明的一切修辞，都可能成为屠刀的包装纸。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>火刑柱的两端</h4><span class="t-ref">《神学家》</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>神学家毕生驳斥一种异端，终于把它的首领送上火刑柱，功成名就。可在永恒的账本里他发现：上帝眼中，正统与异端竟被记在同一页上——他与被他烧死的人，原是同一个人。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>镜子的谱系</h4><span class="t-ref">贯穿的母题</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>从特隆「镜子可憎」的谚语，到神学家的镜像审判，再到「镜子与父亲使我又惊又怕」的私人暗号——这本集子让镜子完成了从怪谈到神学的升格：照你的东西，终将审判你。</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 篇章 ===== -->
+<section class="section wide fade-in" id="characters">
+  <h2 class="section-title">篇章</h2>
+  <p class="section-desc">七张卡片：一个点、一位亡者、一个平庸的万有诗人，三篇「小型长篇」，和一组贯穿母题。点击卡片看详情。</p>
+  <div class="filter-row" id="charFilters"></div>
+  <div class="char-grid" id="charGrid"></div>
+</section>
+
+<!-- ===== THEMES ===== -->
+<section class="section fade-in" id="themes">
+  <h2 class="section-title">核心主题</h2>
+  <p class="section-desc">六个支点：它们让这本集子既是情书，又是重炮。</p>
+
+  <div class="theme-block">
+    <div class="theme-side"><div class="theme-no">壹</div><h3>有限的容器装无限</h3><div class="t-en">The Universe in a Point</div></div>
+    <div class="theme-body">
+      <p>从《杜撰集》的无限图书馆到《阿莱夫》的两三厘米，他给「无限」换了个最小的容器。妙处在于降格：宇宙不在神殿、天文台或书房，而在一间<b>寒酸的地窖</b>——崇高被他故意放低到尘埃里，再从尘埃里发光。</p>
+      <p>而「目击清单」暴露了语言的困境：<b>枚举是无穷的，转述注定失败</b>。博尔赫斯用「数不清」保护了那个点——说尽，就是毁掉。</p>
+      <span class="theme-key">最小的容器</span><span class="theme-key">崇高的降格</span><span class="theme-key">枚举的失败</span>
+    </div>
+  </div>
+  <hr class="theme-sep">
+  <div class="theme-block">
+    <div class="theme-side"><div class="theme-no">贰</div><h3>悼亡的悖论</h3><div class="t-en">Elegy in Irony</div></div>
+    <div class="theme-body">
+      <p>全书最独特的文体：<b>用讥讽写爱情</b>。叙述者对情敌极尽挖苦，对亡者的感情却只敢藏在仪式里——年年忌日、同一把椅子、同一首诗。深情被讥讽包着，像伤疤被袖子包着。</p>
+      <p>贝雅特丽齐从未出场，只存在于照片、家具与别人的讲述里。等到地窖里看见她的一切时刻——包括背叛——<b>无限的知识也治不了有限的失去</b>。这是悼词的全部 anatomy：看得越多，失去得越完整。</p>
+      <span class="theme-key">讥讽作铠甲</span><span class="theme-key">缺席的中心</span><span class="theme-key">看得越多失去越全</span>
+    </div>
+  </div>
+  <hr class="theme-sep">
+  <div class="theme-block">
+    <div class="theme-side"><div class="theme-no">叁</div><h3>永生的恐怖</h3><div class="t-en">The Horror of Immortality</div></div>
+    <div class="theme-body">
+      <p>《永生》的推理冷得像账本：不死的人<b>什么都不会失去，正因此什么也不曾拥有</b>。行为不需要承担后果，作品不需要完成，情谊不需要珍惜——时间无限，一切重量归零。永生者最终退化成又瞎又笨的穴居人。</p>
+      <p>荷马的漂流是最痛的一笔：诗人不死于肉身，死于<b>作品的散失与姓名的遗忘</b>。所以他毁城、抹迹、喝下会死的水——把死亡赎回来，就是把手续的意义赎回来。</p>
+      <span class="theme-key">重量归零</span><span class="theme-key">身份即作品</span><span class="theme-key">赎回死亡</span>
+    </div>
+  </div>
+  <hr class="theme-sep">
+  <div class="theme-block">
+    <div class="theme-side"><div class="theme-no">肆</div><h3>恶的辩术</h3><div class="t-en">The Eloquence of Evil</div></div>
+    <div class="theme-body">
+      <p>《德意志安魂曲》是全书最冷的一篇：一个集中营军官在行刑前夜<b>不忏悔，只论证</b>。浪漫主义供给诗意，哲学供给体系，音乐供给庄严——恶最可怕的地方不是野蛮，而是它的口才。</p>
+      <p>博尔赫斯不让读者有easy的退路：军官引用的，正是我们敬爱的那些书。<b>文明与野蛮共用一个图书馆</b>——这篇写于战后不久，是对智性傲慢最不留情的传讯。</p>
+      <span class="theme-key">不忏悔只论证</span><span class="theme-key">修辞即共谋</span><span class="theme-key">共用一个图书馆</span>
+    </div>
+  </div>
+  <hr class="theme-sep">
+  <div class="theme-block">
+    <div class="theme-side"><div class="theme-no">伍</div><h3>异端与正统互为镜像</h3><div class="t-en">Heresy as Mirror</div></div>
+    <div class="theme-body">
+      <p>《神学家》的机关在结尾：毕生驳斥异端的人，在永恒里与被烧死的异端被记作同一人。审判者与受审者共用一张底片——<b>你用来定义敌人的那些理由，恰好也定义了你</b>。</p>
+      <p>这是他对一切「正统」的终极怀疑，也是镜子母题的神学版本：照你的东西，终将审判你。放在战后写作的年代，这一页几乎是一份写给所有时代的檄文。</p>
+      <span class="theme-key">同一页账本</span><span class="theme-key">审判者的倒影</span><span class="theme-key">写给所有时代</span>
+    </div>
+  </div>
+  <hr class="theme-sep">
+  <div class="theme-block">
+    <div class="theme-side"><div class="theme-no">陆</div><h3>日常细节里的宇宙</h3><div class="t-en">The Cosmos in Trivia</div></div>
+    <div class="theme-body">
+      <p>注意「目击清单」里装的是什么：蚂蚁、银器、船货、书页——不是天使与星云，而是<b>地上的、琐碎的、数不清的小东西</b>。他的宇宙论最终落在细节上：神性不隐身于宏大，而隐身于具体。</p>
+      <p>这也是他散文的秘诀：一句茶具的样式、一段台阶的陡窄，承担着形而上学的重量。<b>把无限交给细节，把永恒交给此刻</b>——这册集子把这条美学执行到了极限。</p>
+      <span class="theme-key">神性在琐碎里</span><span class="theme-key">细节的重量</span><span class="theme-key">此刻即永恒</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== QUOTES ===== -->
+<section class="section fade-in" id="quotes">
+  <h2 class="section-title">名句</h2>
+  <p class="section-desc">七句话：一点宇宙、两副悼词、三份辩词。</p>
+  <div class="quote-shell">
+    <button class="quote-nav prev" id="qPrev" aria-label="上一条">‹</button>
+    <div class="quote-viewport"><div class="quote-track" id="qTrack"></div></div>
+    <button class="quote-nav next" id="qNext" aria-label="下一条">›</button>
+    <div class="quote-dots" id="qDots"></div>
+  </div>
+</section>
+
+<!-- ===== VERSIONS & LEGACY ===== -->
+<section class="section wide fade-in" id="versions">
+  <h2 class="section-title">译本与影响</h2>
+  <p class="section-desc">两个中译者、两个西语版本，以及它抵达的高处。</p>
+  <div class="dual-grid">
+    <div class="v-panel">
+      <h3>中文译本</h3>
+      <div class="v-sub">一条最早的译脉，一个通行本</div>
+      <div class="v-row"><span class="v-year">1980s</span><b>王央乐 译</b> —— 最早把博尔赫斯系统带进中文的译者之一；上海译文《博尔赫斯短篇小说选》收录集中多篇小说，是一代中文读者的入口。</div>
+      <div class="v-row"><span class="v-year">全集本</span><b>王永年 译</b> —— 上海译文出版社全集通行本，今天书店里能买到的版本。</div>
+      <div class="v-rec">想感受「枚举」那一段的密度，两个译本对照读最过瘾——清单的节奏，各有各的呼吸。</div>
+    </div>
+    <div class="v-panel">
+      <h3>西语版本流变</h3>
+      <div class="v-sub">从初版到定本</div>
+      <div class="v-row"><span class="v-year">1949</span><b>初版</b> —— 收文十七篇上下，首版印数不大；同名短篇此前已在刊物发表。</div>
+      <div class="v-row"><span class="v-year">1952</span><b>第二版</b> —— 篇目微调，此后渐趋固定。</div>
+      <div class="v-row"><span class="v-year">全集时代</span><b>收入全集小说卷</b> —— 与《杜撰集》《沙之书》并立，构成他小说创作的三座主峰。</div>
+      <div class="v-rec">同名短篇单独拿出来就是一枚标杆；但别跳过《永生》——没有它，你只见过博尔赫斯的一半。</div>
+    </div>
+  </div>
+  <div class="legacy-list">
+    <div class="legacy-item">
+      <div class="l-name">公认的短篇艺术之巅<span>The Peak</span></div>
+      <div class="l-desc">《永生》《德意志安魂曲》与同名短篇，被普遍视为他小说艺术的最高处：密度、克制与胆量都是极限——十几页写出别人一部长篇的题量。</div>
+    </div>
+    <div class="legacy-item">
+      <div class="l-name">卡尔维诺与艾柯的致敬<span>Calvino &amp; Eco</span></div>
+      <div class="l-desc">卡尔维诺谈「精确」与「繁复」时反复以他为师；艾柯《玫瑰之名》的图书馆与伪书传统，都刻着他的名字——两个人都承认：路是从这里修过去的。</div>
+    </div>
+    <div class="legacy-item">
+      <div class="l-name">中文先锋写作的共同教父<span>The Chinese Avant-garde</span></div>
+      <div class="l-desc">1980 年代进入中文世界后，马原的叙述圈套、格非的时间迷宫、残雪一代的梦境编织，都认他为源头；「博尔赫斯体」一度成为先锋小说的代名词。</div>
+    </div>
+    <div class="legacy-item">
+      <div class="l-name">「万有之点」进入中文语汇<span>The Aleph in Chinese</span></div>
+      <div class="l-desc">「阿莱夫」从此不只是小说标题：诗歌、评论与日常比喻里，「把宇宙装进一点」成了现成的修辞——一个虚构地名，成了汉语的一部分。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== READING ===== -->
+<section class="section fade-in" id="reading">
+  <h2 class="section-title">阅读指南</h2>
+  <p class="section-desc">给正在读（或将要读）的你几条实用建议。</p>
+  <div class="read-grid">
+    <div class="read-card">
+      <h3>怎么进入</h3>
+      <p>先读同名短篇，再读《永生》——悼亡与讥讽的双面，第一篇就是钥匙；《永生》则是集子的重量所在。<b>读同名短篇时慢一点</b>，那口地窖的气，需要屏住才能跟上。</p>
+    </div>
+    <div class="read-card">
+      <h3>值得盯住的场景</h3>
+      <ul>
+        <li>「枚举」那一段：全书著名的清单，逐项读别跳行</li>
+        <li>卡洛斯·阿根廷诺领奖的时刻——全书最轻盈的恶意</li>
+        <li>《德意志安魂曲》的辩词结构：看恶如何被修辞层层包装</li>
+        <li>《神学家》结尾的翻转：两行字推翻一生</li>
+      </ul>
+    </div>
+    <div class="read-card">
+      <h3>别被吓退的几件事</h3>
+      <ul>
+        <li>《永生》信息密度大，允许读得慢——它本来就不打算「好读」</li>
+        <li>人名地名密集的议论段可以扫读，骨架不散</li>
+        <li>讥讽的段落别当成刻薄——那是深情换来的口气</li>
+        <li>找不到明确「结局」很正常：他常把答案留在一句闲话里</li>
+      </ul>
+    </div>
+    <div class="read-card">
+      <h3>读完之后</h3>
+      <ul>
+        <li>往回读《杜撰集》：《叛徒和英雄的主题》《死亡与指南针》与这本互为镜像</li>
+        <li>往前读《沙之书》：同一批母题在失明之后的返场</li>
+        <li>对照卡尔维诺谈博尔赫斯的文论：看同行如何拆解这座钟表</li>
+        <li>重读同名短篇开头与结尾——悼词的腔调，前后换了一个人</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <span class="foot-mark"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><circle cx="12" cy="12" r="2" fill="#9a7b2f"/><circle cx="12" cy="12" r="6.5" fill="none" stroke="#9a7b2f" stroke-width="1" opacity=".6"/><circle cx="12" cy="12" r="10" fill="none" stroke="#7c8b94" stroke-width=".7" opacity=".4"/></svg>宇宙装进一点，悼词写成了反讽 · © zzht</span>
+  <span><a href="borges.html">博尔赫斯</a> · <a href="garden-of-forking-paths.html">上一部 · 小径分岔的花园</a> · <a href="the-book-of-sand.html">下一部 · 沙之书</a> · <a href="index.html">返回首页</a> · <a href="https://github.com/zzht1">GitHub ↗</a></span>
+</footer>
+
+<script>
+/* ================= DATA ================= */
+const GROUPS = {
+  point:  { name: '一点', color: '#9a7b2f' },
+  satire: { name: '讽刺的对象', color: '#2e5a7d' },
+  long:   { name: '长篇化的短篇', color: '#8a7a4a' },
+  motif:  { name: '母题', color: '#7c8b94' }
+};
+
+const CHARACTERS = [
+  { id:'aleph', name:'阿莱夫（万有之点）', ru:'El Aleph', group:'point', role:'光点 · 全部的点',
+    desc:'地窖楼梯下两三厘米的光点，从那里能同时看见宇宙中的所有点。',
+    tags:['一点','枚举','宇宙'],
+    detail:'要看见它，得仰面躺在地窖的黑暗里：海洋、黎明、人群、蚂蚁、风暴、银器……枚举是无穷的。拆迁之后光点消失，叙述者半开玩笑地暗示：另外的阿莱夫也许存在，也许根本不曾有过奇迹——真假互相掩护，是全书最后一次眨眼。' },
+  { id:'carlos', name:'卡洛斯·阿根廷诺', ru:'Carlos Argentino Daneri', group:'satire', role:'万有诗人',
+    desc:'亡人的表兄，正写一首写尽地球的长诗《大地》，后来竟获国家文学奖。',
+    tags:['平庸','大地','讽刺'],
+    detail:'他的十四行诗努力让每个诗句以「贝雅特丽齐」收尾；他的长诗按地理逐段推进，客厅先于山河。博尔赫斯把自己落选的那次文学奖反过来发给了他——全书最轻盈的恶意，也是最深的一次自我调侃。' },
+  { id:'beatriz', name:'贝雅特丽齐（亡者）', ru:'Beatriz Viterbo', group:'point', role:'悼亡的中心',
+    desc:'一九四一年四月死去、死得「毫无排场」的女人；全书一切讥讽，都围着她的缺席旋转。',
+    tags:['忌日','悼诗','缺席'],
+    detail:'叙述者年年回到她家的院子、坐在同一张椅子上、写同一首周年诗。她本人从未出场，只在照片、家具与别人的讲述里存在——用讥讽写爱情，是这本书最独特的悼词体：袖子包着伤疤。' },
+  { id:'inmortal', name:'《永生》的城', ru:'El inmortal', group:'long', role:'荒诞建筑 · 不死者',
+    desc:'阶梯倒着修的永生者之城，和城外又瞎又笨的穴居永生者。',
+    tags:['罗马','荷马','永生'],
+    detail:'罗马军人寻访永生之城，找到的却是一座不合逻辑的建筑与一群失去语言的野蛮人——他们正是变得不在乎一切的永生者。其中那个会说希腊语的，竟像荷马。结尾他毁城抹迹、喝下会死的水，把「有限」赎了回来。' },
+  { id:'requiem', name:'《德意志安魂曲》的军官', ru:'Deutsches Requiem', group:'long', role:'集中营军官',
+    desc:'行刑前夜的自白：他不为暴行忏悔，只把哲学借给屠刀。',
+    tags:['辩词','恶','浪漫主义'],
+    detail:'纳粹军官以毕生的阅读为暴力立论：纯洁、牺牲、形而上学。恶在博尔赫斯笔下第一次如此雄辩——「恶的辩术」是全书最冷的一课：口才本身可以成为罪，文明与野蛮共用一个图书馆。' },
+  { id:'teologos', name:'《神学家》的异端们', ru:'Los teólogos', group:'long', role:'火刑柱的两端',
+    desc:'神学家毕生驳斥异端，在永恒里却与被烧死的异端被当作同一个人。',
+    tags:['正统','镜像','审判'],
+    detail:'他终于把异端首领送上火刑柱，功成名就；在永恒的账本里，正统与异端却记在同一页上。异端与正统互为镜像——你用来定义敌人的理由，恰好也定义了你。这是博尔赫斯对一切审判的终极怀疑。' },
+  { id:'espejo', name:'镜子与父亲（母题卡）', ru:'（贯穿一生的暗号）', group:'motif', role:'暗号与恐惧',
+    desc:'镜子与父亲使他又惊又怕——这句暗号贯穿他一生的写作。',
+    tags:['复现','血统','母题'],
+    detail:'镜子复制世界，父亲复制自我，两者都让「我」不再唯一。从特隆「镜子和交媾一样可憎」的谚语，到神学家的镜像审判，再到晚年反复擦拭的「另一个我」：这本集子是镜子谱系最浓的一卷——照你的东西，终将审判你。' }
+];
+
+const QUOTES = [
+  { text:'在那里，蚂蚁、球体、风暴、银器、人群……全部同时存在。', src:'《阿莱夫》目击清单（转述）', note:'文学史上最著名的一段清单：枚举是无穷的，说尽就是毁掉——他只好停在省略号上。' },
+  { text:'阿莱夫：所有点中的一个，却装得下全部的点。', src:'《阿莱夫》（转述）', note:'最小与最大的合题：宇宙的尺寸从这一刻起，按「能装进什么」重新计算。' },
+  { text:'他要一首诗写尽整个地球——先从他自己那间客厅写起。', src:'《阿莱夫》· 卡洛斯·阿根廷诺（转述）', note:'平庸者的万有野心：客厅先于山河，地理逐段推进。同一个「万有」，博尔赫斯让它先出丑、再发光。' },
+  { text:'地窖里那个点，让我同时看见了她爱我的时刻与背叛我的时刻。', src:'《阿莱夫》（转述意旨）', note:'爱的悖论：看见一切，并没有让他得到她。无限的知识，治不了有限的失去。' },
+  { text:'永生使一切行为失去重量：反正来得及后悔一万次。', src:'《永生》（转述意旨）', note:'不死者什么都不会失去，正因此什么也不曾拥有——永生的恐怖，是一本算术账。' },
+  { text:'我把屠杀写成了哲学的附录：恶最可怕的地方，是它的口才。', src:'《德意志安魂曲》（转述意旨）', note:'行刑前夜的自白不忏悔、只论证。文明与野蛮共用一个图书馆——这是全书最冷的一页。' },
+  { text:'在永恒的账本里，正统与异端原来记在同一页上。', src:'《神学家》（转述）', note:'审判者与受审者共用一张底片。照你的东西，终将审判你。' }
+];
+
+/* ================= HELPERS ================= */
+const $ = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+
+/* ================= NAV ================= */
+$$('.nav-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const el = document.getElementById(tab.dataset.section);
+    if (el) {
+      const y = el.getBoundingClientRect().top + window.pageYOffset - 56;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  });
+});
+function setupScrollspy() {
+  const tabs = $$('.nav-tab');
+  const secs = tabs.map(t => document.getElementById(t.dataset.section)).filter(Boolean);
+  const onScroll = () => {
+    const pos = window.scrollY + 140;
+    let cur = secs[0];
+    for (const s of secs) { if (s.offsetTop <= pos) cur = s; }
+    tabs.forEach(t => t.classList.toggle('active', t.dataset.section === cur.id));
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+}
+
+/* ================= FADE IN ================= */
+function setupFadeIn() {
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: .06 });
+  $$('.fade-in').forEach(el => io.observe(el));
+}
+
+/* ================= TIMELINE ================= */
+function setupTimeline() {
+  $$('.t-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const open = item.classList.toggle('open');
+      const d = item.querySelector('.t-detail');
+      d.style.maxHeight = open ? d.scrollHeight + 'px' : '0px';
+    });
+  });
+}
+
+/* ================= 篇章卡 ================= */
+function setupCharacters() {
+  const grid = $('#charGrid');
+  const fRow = $('#charFilters');
+  const cats = [['all', '全部'], ...Object.entries(GROUPS).map(([k, g]) => [k, g.name])];
+  cats.forEach(([k, label], i) => {
+    const chip = document.createElement('div');
+    chip.className = 'filter-chip' + (i === 0 ? ' active' : '');
+    chip.textContent = label;
+    chip.dataset.k = k;
+    chip.addEventListener('click', () => {
+      $$('.filter-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      $$('.char-card').forEach(card => {
+        card.classList.toggle('hidden', k !== 'all' && card.dataset.group !== k);
+      });
+    });
+    fRow.appendChild(chip);
+  });
+
+  CHARACTERS.forEach(c => {
+    const g = GROUPS[c.group];
+    const card = document.createElement('div');
+    card.className = 'char-card';
+    card.dataset.group = c.group;
+    card.style.setProperty('--gc', g.color);
+    card.innerHTML =
+      '<div class="c-name">' + c.name + '</div>' +
+      '<div class="c-ru">' + c.ru + '</div>' +
+      '<div class="c-desc">' + c.desc + '</div>' +
+      '<div class="c-tags">' + c.tags.map(t => '<span class="c-tag">' + t + '</span>').join('') + '</div>';
+    card.addEventListener('click', () => openModal(c));
+    grid.appendChild(card);
+  });
+}
+function openModal(c) {
+  const g = GROUPS[c.group];
+  const mask = $('#modalMask');
+  $('#mName').textContent = c.name;
+  $('#mRu').textContent = c.ru;
+  const role = $('#mRole'); role.textContent = c.role + ' · ' + g.name; role.style.color = g.color; role.style.background = g.color + '14';
+  $('#mBody').textContent = c.detail;
+  $('#modalBox').style.borderTopColor = g.color;
+  mask.classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  $('#modalMask').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+/* ================= QUOTES ================= */
+let qIdx = 0, qTimer = null;
+function setupQuotes() {
+  const track = $('#qTrack');
+  QUOTES.forEach((q, i) => {
+    const s = document.createElement('div');
+    s.className = 'q-slide';
+    s.innerHTML = '<div class="q-mark">❝</div><div class="q-text">' + q.text + '</div>' +
+      '<div class="q-src">' + q.src + '</div><div class="q-note">' + q.note + '</div>';
+    track.appendChild(s);
+    const d = document.createElement('div');
+    d.className = 'q-dot' + (i === 0 ? ' active' : '');
+    d.addEventListener('click', () => goQuote(i, true));
+    $('#qDots').appendChild(d);
+  });
+  $('#qPrev').addEventListener('click', () => goQuote((qIdx - 1 + QUOTES.length) % QUOTES.length, true));
+  $('#qNext').addEventListener('click', () => goQuote((qIdx + 1) % QUOTES.length, true));
+  startQuoteAuto();
+  const shell = $('.quote-shell');
+  shell.addEventListener('mouseenter', stopQuoteAuto);
+  shell.addEventListener('mouseleave', startQuoteAuto);
+}
+function goQuote(i, manual) {
+  qIdx = i;
+  $('#qTrack').style.transform = 'translateX(-' + i * 100 + '%)';
+  $$('.q-dot').forEach((d, j) => d.classList.toggle('active', j === i));
+  if (manual) { stopQuoteAuto(); startQuoteAuto(); }
+}
+function startQuoteAuto() { stopQuoteAuto(); qTimer = setInterval(() => goQuote((qIdx + 1) % QUOTES.length), 6500); }
+function stopQuoteAuto() { if (qTimer) { clearInterval(qTimer); qTimer = null; } }
+
+/* ================= INIT ================= */
+document.addEventListener('DOMContentLoaded', () => {
+  setupCharacters();
+  setupTimeline();
+  setupQuotes();
+  setupFadeIn();
+  setupScrollspy();
+  $('#modalClose').addEventListener('click', closeModal);
+  $('#modalMask').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+});
+</script>
+
+<!-- modal -->
+<div class="modal-mask" id="modalMask">
+  <div class="modal-box" id="modalBox">
+    <button class="modal-close" id="modalClose" aria-label="关闭">×</button>
+    <h3 id="mName"></h3>
+    <div class="m-ru" id="mRu"></div>
+    <span class="m-role" id="mRole"></span>
+    <div class="m-body" id="mBody"></div>
+  </div>
+</div>
+
+</body>
+</html>
