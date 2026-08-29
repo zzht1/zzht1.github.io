@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="列夫·托尔斯泰《忏悔录》梳理：问题阶梯、思想对手、核心主题、名句、译本与影响。">
+<title>忏悔录 · 列夫·托尔斯泰 — zzht</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #e8e6da;            /* 灰绿夜纸 */
+  --paper: #f7f5ec;
+  --paper-deep: #efeddf;
+  --ink: #242217;
+  --ink-soft: #565344;
+  --ink-faint: #8f8a74;
+  --acc: #4c5a44;           /* 深林绿 */
+  --gold: #b3902f;          /* 烛金 */
+  --rope: #6e6a60;          /* 绳灰 */
+  --warn: #9a3b22;          /* 警红 */
+  --line: #cfc9b4;
+  --serif: 'Noto Serif SC', 'STSong', 'SimSun', serif;
+  --sans: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  color: var(--ink);
+  line-height: 1.75;
+  overflow-x: hidden;
+  /* 极淡的竖向墨线：自白书页 */
+  background-color: var(--bg);
+  background-image:
+    repeating-linear-gradient(90deg, transparent 0, transparent 34px, rgba(76,90,68,.05) 34px, rgba(76,90,68,.05) 35px),
+    linear-gradient(180deg, rgba(76,90,68,.10) 0%, rgba(232,230,218,0) 420px);
+}
+::selection { background: rgba(179, 144, 47, .2); }
+
+/* back home */
+.back-home {
+  position: fixed; top: 18px; left: 20px; z-index: 120;
+  font-size: .85rem; color: var(--ink-soft); text-decoration: none;
+  padding: 7px 14px; border-radius: 999px;
+  background: rgba(247, 245, 236, .9);
+  border: 1px solid var(--line);
+  transition: all .25s;
+}
+.back-home:hover { color: var(--acc); border-color: var(--acc); transform: translateX(-2px); }
+
+/* ===== HERO：深夜与烛 ===== */
+.hero {
+  min-height: 94vh;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  text-align: center;
+  padding: 14vh 24px 8vh;
+  position: relative;
+  background:
+    radial-gradient(ellipse 65% 40% at 50% -6%, rgba(179,144,47,.12), transparent 60%),
+    linear-gradient(180deg, #e0dfd0 0%, var(--bg) 76%);
+}
+.hero-wm {
+  position: absolute; top: 12%; left: 50%; transform: translateX(-50%);
+  font-family: var(--serif); font-style: italic;
+  font-size: clamp(3rem, 9vw, 6.2rem);
+  letter-spacing: .08em; white-space: nowrap;
+  color: rgba(76, 90, 68, .11);
+  pointer-events: none; user-select: none;
+}
+.hero-eyebrow {
+  font-size: .82rem; letter-spacing: .32em; color: var(--ink-soft);
+  margin-bottom: 22px; font-weight: 400; position: relative;
+}
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(3.4rem, 10vw, 6.6rem);
+  font-weight: 900; letter-spacing: .2em; line-height: 1.12;
+  color: var(--ink); position: relative;
+}
+.hero-ru {
+  font-family: var(--serif);
+  font-size: clamp(1rem, 2.6vw, 1.3rem);
+  color: var(--acc); letter-spacing: .2em;
+  margin-top: 14px; font-style: italic; position: relative;
+}
+.hero-sub {
+  margin-top: 18px; color: var(--ink-soft); font-size: .97rem; font-weight: 300;
+  letter-spacing: .05em; position: relative;
+}
+/* 分隔：一条被剪断又重新打结的绳 */
+.hero-divider { display: flex; justify-content: center; margin: 26px auto 8px; position: relative; }
+.hero-quote {
+  max-width: 560px; font-family: var(--serif);
+  font-size: 1.06rem; color: var(--ink-soft); line-height: 2; position: relative;
+}
+.hero-quote .src { display: block; margin-top: 10px; font-size: .85rem; color: var(--ink-faint); }
+.hero-meta {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 14px 46px;
+  margin-top: 46px; position: relative;
+}
+.hero-meta-item { text-align: center; min-width: 70px; }
+.hero-meta-item .value {
+  display: block; font-family: var(--serif); font-weight: 900;
+  font-size: 1.7rem; color: var(--acc); line-height: 1.2;
+}
+.hero-meta-item .label { font-size: .78rem; color: var(--ink-faint); letter-spacing: .12em; }
+.scroll-hint {
+  position: absolute; bottom: 26px; left: 50%; transform: translateX(-50%);
+  font-size: .78rem; color: var(--ink-faint); cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  letter-spacing: .2em; user-select: none;
+}
+.scroll-hint .arrow { animation: bob 1.8s ease-in-out infinite; }
+@keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+
+/* ===== NAV ===== */
+.nav-bar {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(232, 230, 218, .92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.nav-inner {
+  max-width: 1000px; margin: 0 auto;
+  display: flex; overflow-x: auto; scrollbar-width: none;
+  padding: 0 12px;
+}
+.nav-inner::-webkit-scrollbar { display: none; }
+.nav-tab {
+  flex: 0 0 auto; padding: 15px 18px; cursor: pointer;
+  font-size: .9rem; color: var(--ink-soft); letter-spacing: .06em;
+  position: relative; transition: color .25s; white-space: nowrap;
+  user-select: none;
+}
+.nav-tab::after {
+  content: ''; position: absolute; left: 18px; right: 18px; bottom: 0;
+  height: 2px; border-radius: 2px;
+  background: linear-gradient(90deg, var(--acc), var(--gold));
+  transform: scaleX(0); transition: transform .3s;
+}
+.nav-tab:hover { color: var(--ink); }
+.nav-tab.active { color: var(--acc); font-weight: 500; }
+.nav-tab.active::after { transform: scaleX(1); }
+
+/* ===== SECTIONS ===== */
+.section { max-width: 1000px; margin: 0 auto; padding: 90px 24px 10px; }
+.section.wide { max-width: 1060px; }
+.section-title {
+  font-family: var(--serif); font-size: clamp(1.7rem, 4vw, 2.3rem);
+  font-weight: 900; letter-spacing: .08em; color: var(--ink);
+}
+.section-title::after {
+  content: ''; display: block; width: 76px; height: 3px; margin-top: 14px;
+  background: linear-gradient(90deg, var(--acc), var(--gold), transparent);
+  border-radius: 2px;
+}
+.section-desc {
+  margin-top: 20px; color: var(--ink-soft); max-width: 720px;
+  font-size: .98rem; line-height: 2;
+}
+.fade-in { opacity: 0; transform: translateY(26px); transition: opacity .8s ease, transform .8s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* ===== OVERVIEW ===== */
+.ov-grid {
+  display: grid; grid-template-columns: 1.35fr 1fr; gap: 40px;
+  margin-top: 40px; align-items: start;
+}
+.ov-prose p { margin-bottom: 16px; color: var(--ink-soft); font-size: .97rem; line-height: 2.05; }
+.ov-prose p strong { color: var(--ink); font-weight: 600; }
+.ov-prose .lede {
+  font-family: var(--serif); font-size: 1.12rem; color: var(--ink); line-height: 2.1;
+}
+.ov-prose .lede::first-letter {
+  font-size: 2.6em; float: left; line-height: 1; padding-right: .12em;
+  color: var(--acc); font-weight: 900;
+}
+.ov-panel {
+  background: var(--paper); border: 1px solid var(--line);
+  border-radius: 22px; padding: 30px 28px;
+  box-shadow: 0 10px 24px rgba(70,70,40,.08);
+}
+.ov-panel h3 {
+  font-family: var(--serif); font-size: 1.05rem; font-weight: 700; letter-spacing: .08em;
+  color: var(--acc); margin-bottom: 16px;
+}
+.bg-list { list-style: none; }
+.bg-list li {
+  position: relative; padding: 10px 0 10px 22px;
+  font-size: .88rem; color: var(--ink-soft); line-height: 1.8;
+  border-bottom: 1px dashed var(--line);
+}
+.bg-list li:last-child { border-bottom: none; }
+.bg-list li::before {
+  content: ''; position: absolute; left: 2px; top: 19px;
+  width: 7px; height: 7px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--acc), var(--gold));
+}
+.bg-list li b { color: var(--ink); font-weight: 600; }
+.room-note {
+  margin-top: 16px; padding-top: 12px;
+  border-top: 1px dashed var(--line);
+  font-size: .8rem; color: var(--ink-faint); font-style: italic; line-height: 1.8;
+}
+.stat-strip {
+  display: flex; flex-wrap: wrap; gap: 0; margin-top: 44px;
+  border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+}
+.stat {
+  flex: 1 1 auto; min-width: 150px; text-align: center;
+  padding: 26px 16px;
+}
+.stat + .stat { border-left: 1px dashed var(--line); }
+.stat .num {
+  font-family: var(--serif); font-size: 1.9rem; font-weight: 900; color: var(--acc);
+  line-height: 1.2;
+}
+.stat .cap { font-size: .8rem; color: var(--ink-faint); letter-spacing: .08em; margin-top: 6px; }
+
+/* ===== STORY：问题阶梯 ===== */
+.phase { margin-top: 48px; }
+.phase-head {
+  display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap;
+  padding-top: 18px; border-top: 1px solid rgba(76,90,68,.3);
+}
+.phase-num {
+  font-family: var(--serif); font-size: 2rem; font-weight: 900;
+  background: linear-gradient(135deg, var(--acc), var(--gold));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  line-height: 1;
+}
+.phase-head h3 { font-family: var(--serif); font-size: 1.25rem; font-weight: 700; letter-spacing: .05em; }
+.phase-head .ref { font-size: .8rem; color: var(--ink-faint); letter-spacing: .05em; }
+.phase-items {
+  margin-top: 20px; margin-left: 13px;
+  border-left: 2px solid rgba(76, 90, 68, .5);
+  padding-left: 26px;
+}
+.t-item {
+  position: relative; border-radius: 18px; padding: 14px 18px;
+  margin-bottom: 10px; cursor: pointer;
+  transition: background .25s;
+}
+.t-item:hover { background: var(--paper-deep); }
+.t-item::before {
+  content: ''; position: absolute; left: -33px; top: 24px;
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--bg); border: 2.5px solid var(--acc);
+  transition: background .25s;
+}
+.t-item.open::before { background: var(--acc); }
+.t-item-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.t-item-head h4 { font-size: 1rem; font-weight: 600; font-family: var(--serif); letter-spacing: .03em; }
+.t-ref {
+  font-size: .72rem; color: var(--acc); background: rgba(76,90,68,.09);
+  padding: 2px 10px; border-radius: 999px; letter-spacing: .04em; white-space: nowrap;
+}
+.t-toggle { margin-left: auto; color: var(--ink-faint); font-size: .85rem; transition: transform .3s; }
+.t-item.open .t-toggle { transform: rotate(180deg); }
+.t-detail { max-height: 0; overflow: hidden; transition: max-height .45s ease; }
+.t-detail p {
+  padding-top: 10px; font-size: .9rem; color: var(--ink-soft); line-height: 1.95; max-width: 680px;
+}
+
+/* ===== 思想对手：七位证人 ===== */
+.filter-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px; }
+.filter-chip {
+  padding: 8px 18px; border-radius: 999px; cursor: pointer;
+  font-size: .85rem; color: var(--ink-soft);
+  background: var(--paper); border: 1px solid var(--line);
+  transition: all .25s; user-select: none;
+}
+.filter-chip:hover { transform: translateY(-2px); color: var(--ink); }
+.filter-chip.active {
+  background: var(--acc);
+  color: #f7f5ec; border-color: transparent;
+}
+.char-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 20px; margin-top: 30px;
+}
+.char-card {
+  background: var(--paper); border: 1px solid var(--line); border-radius: 20px;
+  border-top: 3px solid var(--gc, var(--acc));
+  padding: 22px 22px 20px; cursor: pointer;
+  position: relative; overflow: hidden;
+  transition: transform .3s cubic-bezier(.34,1.4,.5,1), box-shadow .3s, border-color .3s;
+}
+.char-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 14px 30px rgba(70,70,40,.16);
+  border-color: var(--gc, var(--acc));
+  border-top-width: 3px;
+}
+.char-card .c-name { font-family: var(--serif); font-size: 1.12rem; font-weight: 700; }
+.char-card .c-ru { font-size: .76rem; color: var(--ink-faint); margin-top: 3px; font-style: italic; letter-spacing: .02em; }
+.char-card .c-desc { font-size: .85rem; color: var(--ink-soft); margin-top: 12px; line-height: 1.8; }
+.char-card .c-tags { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 6px; }
+.c-tag {
+  font-size: .7rem; padding: 3px 10px; border-radius: 999px;
+  color: var(--gc, var(--acc)); background: color-mix(in srgb, var(--gc, var(--acc)) 10%, var(--paper));
+  border: 1px solid color-mix(in srgb, var(--gc, var(--acc)) 28%, var(--paper));
+}
+.char-card.hidden { display: none; }
+
+/* modal */
+.modal-mask {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(36, 34, 23, .5);
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px; opacity: 0; pointer-events: none; transition: opacity .3s;
+}
+.modal-mask.show { opacity: 1; pointer-events: auto; }
+.modal-box {
+  background: var(--paper); border-radius: 24px; max-width: 560px; width: 100%;
+  max-height: 82vh; overflow-y: auto;
+  padding: 36px 34px; position: relative;
+  transform: translateY(18px); transition: transform .3s;
+  border-top: 4px solid var(--acc);
+}
+.modal-mask.show .modal-box { transform: translateY(0); }
+.modal-close {
+  position: absolute; top: 16px; right: 20px; cursor: pointer;
+  font-size: 1.3rem; color: var(--ink-faint); background: none; border: none;
+  transition: color .2s; line-height: 1;
+}
+.modal-close:hover { color: var(--acc); }
+.modal-box h3 { font-family: var(--serif); font-size: 1.5rem; font-weight: 900; }
+.modal-box .m-ru { font-style: italic; color: var(--ink-faint); font-size: .88rem; margin-top: 4px; }
+.modal-box .m-role {
+  display: inline-block; margin-top: 12px; font-size: .76rem; letter-spacing: .06em;
+  color: var(--acc); background: rgba(76,90,68,.09); padding: 4px 14px; border-radius: 999px;
+}
+.modal-box .m-body { margin-top: 16px; font-size: .93rem; color: var(--ink-soft); line-height: 2.05; }
+
+/* ===== THEMES ===== */
+.theme-block {
+  display: grid; grid-template-columns: 220px 1fr; gap: 34px;
+  padding: 42px 0; align-items: start;
+}
+.theme-side { position: sticky; top: 84px; }
+.theme-no {
+  font-family: var(--serif); font-weight: 900; font-size: 1.05rem; letter-spacing: .2em;
+  color: var(--gold);
+}
+.theme-side h3 { font-family: var(--serif); font-size: 1.3rem; font-weight: 900; margin-top: 8px; line-height: 1.5; }
+.theme-side .t-en { font-size: .78rem; color: var(--ink-faint); font-style: italic; margin-top: 4px; letter-spacing: .03em; }
+.theme-body p { color: var(--ink-soft); font-size: .94rem; line-height: 2.05; margin-bottom: 14px; max-width: 640px; }
+.theme-body p b { color: var(--ink); font-weight: 600; }
+.theme-key {
+  display: inline-block; margin-top: 4px; margin-right: 8px; margin-bottom: 6px;
+  font-size: .74rem; color: var(--acc); letter-spacing: .05em;
+  padding: 3px 12px; border-radius: 999px; border: 1px solid rgba(76,90,68,.32);
+  background: rgba(76,90,68,.07);
+}
+.theme-sep {
+  height: 1px; border: none;
+  background: linear-gradient(90deg, transparent, var(--line) 25%, var(--line) 75%, transparent);
+}
+
+/* ===== QUOTES：藏绳之夜 ===== */
+.quote-shell { margin-top: 38px; position: relative; }
+.quote-viewport { overflow: hidden; border-radius: 24px; }
+.quote-track { display: flex; transition: transform .6s cubic-bezier(.4,0,.2,1); }
+.q-slide {
+  flex: 0 0 100%; padding: 50px 8%;
+  background:
+    radial-gradient(ellipse 60% 55% at 50% 0%, rgba(179,144,47,.14), transparent 70%),
+    #21261c;
+  border: 1px solid #353a2c; border-radius: 24px;
+  text-align: center;
+}
+.q-mark { font-family: var(--serif); font-size: 2.6rem; color: #c9a94f; line-height: 1; }
+.q-text {
+  font-family: var(--serif); font-size: clamp(1.05rem, 2.6vw, 1.35rem);
+  line-height: 2.1; color: #e6ddc2; margin-top: 12px;
+}
+.q-src { margin-top: 18px; font-size: .85rem; color: var(--gold); letter-spacing: .06em; }
+.q-note { margin-top: 8px; font-size: .82rem; color: #8e927c; max-width: 520px; margin-left: auto; margin-right: auto; line-height: 1.8; }
+.quote-nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 42px; height: 42px; border-radius: 50%;
+  background: var(--paper); border: 1px solid var(--line);
+  color: var(--ink-soft); font-size: 1.1rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .25s; z-index: 5;
+}
+.quote-nav:hover { color: var(--acc); border-color: var(--acc); transform: translateY(-50%) scale(1.08); }
+.quote-nav.prev { left: -14px; }
+.quote-nav.next { right: -14px; }
+.quote-dots { display: flex; justify-content: center; gap: 9px; margin-top: 22px; }
+.q-dot {
+  width: 8px; height: 8px; border-radius: 50%; background: var(--line);
+  cursor: pointer; transition: all .3s;
+}
+.q-dot.active { background: var(--acc); transform: scale(1.25); }
+
+/* ===== VERSIONS & LEGACY ===== */
+.dual-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 38px; }
+.v-panel {
+  background: var(--paper); border: 1px solid var(--line); border-radius: 22px;
+  padding: 28px 26px; box-shadow: 0 10px 24px rgba(70,70,40,.08);
+}
+.v-panel h3 {
+  font-family: var(--serif); font-size: 1.1rem; font-weight: 700; letter-spacing: .06em;
+  margin-bottom: 6px;
+}
+.v-panel .v-sub { font-size: .8rem; color: var(--ink-faint); margin-bottom: 18px; }
+.v-row {
+  padding: 14px 0; border-bottom: 1px dashed var(--line);
+  font-size: .88rem; color: var(--ink-soft); line-height: 1.8;
+}
+.v-row:last-child { border-bottom: none; }
+.v-row b { color: var(--ink); font-weight: 600; }
+.v-row .v-year {
+  font-family: var(--serif); color: var(--acc); font-weight: 700; margin-right: 10px;
+}
+.v-rec {
+  margin-top: 14px; font-size: .82rem; color: var(--gold);
+  background: rgba(179,144,47,.1); border-radius: 12px; padding: 10px 14px; line-height: 1.7;
+}
+.legacy-list { margin-top: 34px; }
+.legacy-item {
+  display: grid; grid-template-columns: 150px 1fr; gap: 20px;
+  padding: 22px 0; border-bottom: 1px dashed var(--line);
+}
+.legacy-item:last-child { border-bottom: none; }
+.legacy-item .l-name { font-family: var(--serif); font-weight: 700; font-size: 1rem; color: var(--ink); }
+.legacy-item .l-name span { display: block; font-size: .75rem; color: var(--ink-faint); font-weight: 400; margin-top: 3px; font-style: italic; }
+.legacy-item .l-desc { font-size: .9rem; color: var(--ink-soft); line-height: 1.95; }
+
+/* ===== READING ===== */
+.read-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 22px; margin-top: 36px;
+}
+.read-card {
+  background: var(--paper); border: 1px solid var(--line); border-radius: 22px;
+  padding: 28px 26px; transition: transform .3s, box-shadow .3s;
+  box-shadow: 0 6px 16px rgba(70,70,40,.06);
+}
+.read-card:hover { transform: translateY(-4px); box-shadow: 0 12px 26px rgba(70,70,40,.14); }
+.read-card h3 { font-family: var(--serif); font-size: 1.02rem; font-weight: 700; margin-bottom: 12px; color: var(--acc); }
+.read-card p { font-size: .88rem; color: var(--ink-soft); line-height: 1.95; }
+.read-card p b { color: var(--ink); }
+.read-card ul { list-style: none; margin-top: 8px; }
+.read-card li {
+  font-size: .88rem; color: var(--ink-soft); line-height: 1.9;
+  padding-left: 18px; position: relative; margin-bottom: 6px;
+}
+.read-card li::before {
+  content: ''; position: absolute; left: 2px; top: 12px;
+  width: 6px; height: 6px; border-radius: 50%; background: var(--gold);
+}
+
+/* footer */
+.site-footer {
+  max-width: 1000px; margin: 90px auto 0; padding: 26px 24px 46px;
+  border-top: 1px solid var(--line);
+  font-size: .82rem; color: var(--ink-faint);
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+}
+.site-footer a { color: var(--ink-soft); text-decoration: none; transition: color .2s; }
+.site-footer a:hover { color: var(--acc); }
+.foot-mark { display: inline-flex; align-items: center; gap: 9px; }
+
+/* responsive */
+@media (max-width: 820px) {
+  .ov-grid { grid-template-columns: 1fr; }
+  .dual-grid { grid-template-columns: 1fr; }
+  .theme-block { grid-template-columns: 1fr; gap: 14px; }
+  .theme-side { position: static; }
+  .legacy-item { grid-template-columns: 1fr; gap: 6px; }
+  .quote-nav.prev { left: 6px; } .quote-nav.next { right: 6px; }
+  .q-slide { padding: 42px 7%; }
+}
+@media (max-width: 520px) {
+  .section { padding-top: 66px; }
+  .hero { min-height: 88vh; padding-top: 16vh; }
+  .hero-wm { font-size: 2.4rem; }
+  .hero-meta { gap: 12px 26px; }
+  .stat { min-width: 120px; padding: 18px 8px; }
+}
+
+</style>
+</head>
+<body>
+
+<a href="tolstoy.html" class="back-home">← 列夫·托尔斯泰</a>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="top">
+<span class="hero-wm" aria-hidden="true">Исповедь</span>
+  <div class="hero-eyebrow">列夫·托尔斯泰 · 1879–1882 · 亚斯纳亚·波良纳的深夜</div>
+  <h1>忏悔录</h1>
+  <div class="hero-ru">Исповедь</div>
+  <div class="hero-sub">一份五十岁灵魂的审讯记录</div>
+  <div class="hero-divider">
+    <svg viewBox="0 0 300 44" width="300" height="44" aria-hidden="true">
+      <path d="M10 24 C50 17, 95 31, 126 24" stroke="#6e6a60" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+      <path d="M174 24 C205 17, 250 31, 290 24" stroke="#6e6a60" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+      <circle cx="144" cy="24" r="6.4" stroke="#9a3b22" stroke-width="2.4" fill="none"/>
+      <circle cx="156" cy="24" r="6.4" stroke="#9a3b22" stroke-width="2.4" fill="none"/>
+    </svg>
+  </div>
+  <blockquote class="hero-quote">
+    “我藏起了绳子，不敢带猎枪出门，怕的是我自己。”
+    <span class="src">— 转述</span>
+  </blockquote>
+  <div class="hero-meta">
+    <div class="hero-meta-item"><span class="value">1879</span><span class="label">动笔之年</span></div>
+    <div class="hero-meta-item"><span class="value">五十岁</span><span class="label">开庭的年纪</span></div>
+    <div class="hero-meta-item"><span class="value">1条</span><span class="label">藏起来的绳子</span></div>
+    <div class="hero-meta-item"><span class="value">0个</span><span class="label">过关的现成答案</span></div>
+  </div>
+  <div class="scroll-hint" onclick="document.getElementById('content').scrollIntoView({behavior:'smooth'})">
+    <span>向下探索</span><span class="arrow">↓</span>
+  </div>
+</section>
+
+<!-- ===== NAV ===== -->
+<nav class="nav-bar" id="content">
+  <div class="nav-inner">
+    <div class="nav-tab active" data-section="overview">概览</div>
+    <div class="nav-tab" data-section="story">脉络</div>
+    <div class="nav-tab" data-section="characters">思想对手</div>
+    <div class="nav-tab" data-section="themes">主题</div>
+    <div class="nav-tab" data-section="quotes">名句</div>
+    <div class="nav-tab" data-section="versions">译本与影响</div>
+    <div class="nav-tab" data-section="reading">阅读指南</div>
+  </div>
+</nav>
+
+<!-- ===== OVERVIEW ===== -->
+<section class="section fade-in" id="overview">
+  <h2 class="section-title">关于这本书</h2>
+  <div class="ov-grid">
+    <div class="ov-prose">
+      <p class="lede">1870 年代的尾声，托尔斯泰拥有一个作家能拥有的全部：名望、庄园、家庭、一部正在被全世界阅读的小说。可他半夜醒来，感到生活的每一日、每一步，都在把他逼向深渊——于是他做了一件最像他做的事：开庭。被告是“我”。</p>
+      <p>《忏悔录》不是回忆录，是一场审讯。他逐条检举自己半生的“谎言”——沙龙的体面、进步的幻觉、为艺术而艺术——然后传唤科学、哲学与教会，追问同一个问题：<b>活着到底为了什么？</b>所有证人无一过关。真正的转机出现在庄园的农民身上：他们一无所有，却活得笃定。</p>
+      <p>这部书是理解托尔斯泰后半生的钥匙：与教会的决裂、放弃版权、穿农民的布衣、晚年的出走——全部由此处一个深夜的姿势开始。它与《安娜·卡列尼娜》里列文的星空直接相连，也通向《复活》里聂赫留朵夫的减法。</p>
+    </div>
+    <div class="ov-panel">
+      <h3>创作背景</h3>
+      <ul class="bg-list">
+        <li><b>危机的时间</b>：五十岁前后，绝望逼到顶点——他在书里写下那个著名姿势：藏起绳子、不敢带猎枪出门（转述）。《忏悔录》正是对这场危机的“开庭”。</li>
+        <li><b>列文的续篇</b>：《安娜·卡列尼娜》结尾“为灵魂而活”的答案是它的开题——虚构先演了一遍，散文再证一遍。</li>
+        <li><b>先成禁书</b>：书稿在国内无法全文出版，1884 年才在日内瓦全文问世；教会后来对他施以绝罚——一份自白，先成了禁书。</li>
+        <li><b>索菲娅最难誊的手稿</b>：丈夫要清算的“上流生活”，一半也是她的一生——誊写这一份，手会抖。</li>
+        <li><b>审讯体的武器</b>：他没有向玄学求救，而是把问题写成层层逼近的短章——一句一句问下去，让读者亲自陪审。</li>
+      </ul>
+      <div class="room-note">注：书名 «Исповедь» 直译“自白、忏悔”——与奥古斯丁、卢梭同名而暗暗较劲：三份《忏悔录》都从“我”开庭，只有这一份的开庭地点，是一个五十岁的乡下庄园。</div>
+    </div>
+  </div>
+  <div class="stat-strip">
+    <div class="stat"><div class="num">百余页</div><div class="cap">一次可读完的篇幅</div></div>
+    <div class="stat"><div class="num">1884</div><div class="cap">全文在日内瓦出版</div></div>
+    <div class="stat"><div class="num">1901</div><div class="cap">东正教会绝罚之年</div></div>
+    <div class="stat"><div class="num">4类</div><div class="cap">他给“麻醉”分出的类</div></div>
+    <div class="stat"><div class="num">2位</div><div class="cap">同名先例 · 奥古斯丁与卢梭</div></div>
+  </div>
+</section>
+
+<!-- ===== STORY ===== -->
+<section class="section fade-in" id="story">
+  <h2 class="section-title">脉络 · 问题阶梯</h2>
+  <p class="section-desc">《忏悔录》没有故事，只有一个问题如何被逼问出来的过程——五级阶梯，一级比一级深。以下“定位”为行文段落级提示，点击展开详情。</p>
+
+  <div class="phase">
+    <div class="phase-head"><span class="phase-num">Ⅰ</span><h3>训练与骄傲</h3><span class="ref">自白 · 前段 · 童年到成名的“谎言”清单</span></div>
+    <div class="phase-items">
+      <div class="t-item"><div class="t-item-head"><h4>被教的课程</h4><span class="t-ref">自白 · 前段</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>孩提时代被教导“要善良、要诚实”；可他环顾四周——包括教他的人——一旦吃饱穿暖，就再不提这些字眼。课程与生活的脱节，是他记下的第一笔假账。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>野心的清单</h4><span class="t-ref">自白 · 前段</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>军功、猎熊、赌牌、上流社会的成功——他把每一样都拿到手：每一样到手就贬值。这份清单是全书最早的“证物”：欲望的奖赏，从不兑现。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>文学的神坛</h4><span class="t-ref">自白 · 前段</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>《战争与和平》《安娜·卡列尼娜》带来名望与崇拜；可他问自己：写这些，救了谁？——艺术的光环开始剥落，“为艺术而艺术”成了审讯中的第一被告。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>生活的轨道</h4><span class="t-ref">自白 · 前段</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>成家、置产、扩张庄园——“我过得像多数体面人：挣钱，被夸，尽量忘掉死”（转述）。轨道越铺越顺，深渊也越来越近。</p></div></div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-head"><span class="phase-num">Ⅱ</span><h3>危机</h3><span class="ref">自白 · 中段 · 藏绳避枪的那一年</span></div>
+    <div class="phase-items">
+      <div class="t-item"><div class="t-item-head"><h4>停顿</h4><span class="t-ref">自白 · 中段</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>生命在他身上“停了下来”：同样的早晨、同样的谈话、同样的烦忧，重复到失去重量。他开始害怕黑夜——不是怕黑，是怕清醒。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>藏绳避枪</h4><span class="t-ref">自白 · 中段</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>他把绳子藏进更衣室，不敢带猎枪进林子——不是怕死，是怕自己在清醒的一瞬用它（转述）。一个名满天下的作家，与自己的求死意志拉锯：审讯由此开庭。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>四面被“死”注视</h4><span class="t-ref">自白 · 中段</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>他考察自己的环境：家人、朋友、学者——无一不在“活得不想死”却又“不问为何活”。他从四面八方被死亡注视，而周围的人假装那是礼貌的沉默。</p></div></div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-head"><span class="phase-num">Ⅲ</span><h3>错误答案们</h3><span class="ref">自白 · 中后段 · 科学、哲学为何全都答不上</span></div>
+    <div class="phase-items">
+      <div class="t-item"><div class="t-item-head"><h4>科学的账本</h4><span class="t-ref">自白 · 中后段</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>实验科学精密而诚实，却只回答“生活是什么”，从不回答“该怎样活”——它告诉你心脏如何泵血，不告诉你为何值得泵血。账本上没有“意义”这一栏。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>所罗门与《传道书》</h4><span class="t-ref">自白 · 中后段</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>他翻开最古老的智慧：“虚空的虚空”——四千年前的君王早已把同样的账算过一遍，结论是死路。他的每一步绝望，书里都预先走完。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>叔本华式的结论</h4><span class="t-ref">自白 · 中后段</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>当代哲学的顶尖智慧，与所罗门、佛陀殊途同归：生命即无意义（转述）。理性自己宣判了理性的无能——这不是败给某个论敌，是败给了问题的重量。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>蜜与狮子</h4><span class="t-ref">自白 · 中后段</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>那则东方寓言：旅人抱着树枝舔蜜，树下盘着黑龙，枝干正被两只老鼠啃断——“我一生的蜜，滴在这样的树枝上”（转述）。全书最著名的意象：甜是真的甜，死也是真的近。</p></div></div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-head"><span class="phase-num">Ⅳ</span><h3>群众中的答案</h3><span class="ref">自白 · 后段 · 农民为何活得下去</span></div>
+    <div class="phase-items">
+      <div class="t-item"><div class="t-item-head"><h4>四种活法</h4><span class="t-ref">自白 · 后段</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>他数出身边人对“死”的四种态度：无知、纵乐、刚强（自决）、软弱——没有一种经得起追问，包括他自己的。这份冷静的分类学，是全书最著名的段落之一。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>劳动者的笃定</h4><span class="t-ref">自白 · 后段</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>可千百万普通劳动者活着、劳作着，笃定而不疯——他们身上有一种他没有的“理性之外的理性”。这不对劲的地方，恰恰是线索。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>农民的世界</h4><span class="t-ref">自白 · 后段</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>他重新学习：农民嘴里的“上帝”不是神学，是庄稼、邻人与死亡之间那种不用论证的秩序（转述）。他发现自己梦寐以求的世界观，早就在劳动者的日常里活着。</p></div></div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-head"><span class="phase-num">Ⅴ</span><h3>理性的边界与信仰的立足点</h3><span class="ref">自白 · 末段 · 为他人而活</span></div>
+    <div class="phase-items">
+      <div class="t-item"><div class="t-item-head"><h4>理性与信仰的分工</h4><span class="t-ref">自白 · 末段</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>理性能算清“有限”，算不出“无限”；信仰不是知识的对立面，是“生命的力”——人活着，就一定相信着某种东西（转述）。他没有把理性扔出船外，只把它放回该站的甲板。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>上层与底层的倒置</h4><span class="t-ref">自白 · 末段</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>他承认：知识阶层的信仰常常是给利益穿衣服；底层劳动者却把“恶”与“善”过成了日常——真理在最累的手上。这个倒置决定了他后半生的全部姿态。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>为他人而活</h4><span class="t-ref">自白 · 末段</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>结论朴素到残酷：只为自己活，是把生命交给死亡；为他人、为共同的东西而活，才在有限里碰到无限。全书落在这里，不再往前一步。</p></div></div>
+      <div class="t-item"><div class="t-item-head"><h4>开庭之后</h4><span class="t-ref">自白 · 末段</span><span class="t-toggle">▾</span></div>
+        <div class="t-detail"><p>这份“判决书”不是终点而是路线图：此后他的每一步——办学、拒版权、批评教会——都是这场审讯的执行。《忏悔录》的最后一页，是晚年那个冬夜出走的最早伏笔。</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 思想对手 ===== -->
+<section class="section wide fade-in" id="characters">
+  <h2 class="section-title">思想对手</h2>
+  <p class="section-desc">《忏悔录》没有人物表，只有一排“证人”：先提问的、给错答案的，和真正把答案活出来的。七张卡，同样的筛选与点击，看的是观念的交锋。点击卡片看详情。</p>
+  <div class="filter-row" id="charFilters"></div>
+  <div class="char-grid" id="charGrid"></div>
+</section>
+
+<!-- ===== THEMES ===== -->
+<section class="section fade-in" id="themes">
+  <h2 class="section-title">核心主题</h2>
+  <p class="section-desc">六个思想支点——一份自白如何长成一份纲领，通向托尔斯泰的后半生。</p>
+
+  <div class="theme-block">
+    <div class="theme-side"><div class="theme-no">壹</div><h3>「活着为了什么」</h3><div class="t-en">The Only Question</div></div>
+    <div class="theme-body">
+      <p>全书的问题只有一条，被反复逼问：生命有限、总有一死，那此刻的意义是什么？<b>托尔斯泰拒绝一切“转折性安慰”</b>——进步、后代、艺术不朽——因为它们都躲在“死后”的安全区里，替人垫付了回答。</p>
+      <p>这份拒绝是全书的伦理：不许用未来涂改现在。问题因此赤裸，也因此锋利。</p>
+      <span class="theme-key">有限与无限</span><span class="theme-key">拒绝安慰</span><span class="theme-key">唯一的问题</span>
+    </div>
+  </div>
+  <hr class="theme-sep">
+  <div class="theme-block">
+    <div class="theme-side"><div class="theme-no">贰</div><h3>死亡与麻醉</h3><div class="t-en">Death and Anesthesia</div></div>
+    <div class="theme-body">
+      <p>他给“不思考”的人做了分类学：无知、纵乐、刚强、软弱——<b>四种麻醉配方</b>。包括他自己在内的“清醒者”最危险：看见了深渊，又没有桥。</p>
+      <p>这份冷静的病历让全书免于悲情：绝望被写成病例而非控诉——审讯录的第一美德是精确。</p>
+      <span class="theme-key">四种麻醉</span><span class="theme-key">假寐的沙龙</span><span class="theme-key">清醒的危险</span>
+    </div>
+  </div>
+  <hr class="theme-sep">
+  <div class="theme-block">
+    <div class="theme-side"><div class="theme-no">叁</div><h3>上流谎言的解剖</h3><div class="t-en">An Anatomy of Decency</div></div>
+    <div class="theme-body">
+      <p>童年的课程、青年的野心、成年的体面——他逐条检举自己的“谎言”。解剖刀最后指向自己：<b>不是“他们骗了我”，而是“我与他们合谋”</b>。</p>
+      <p>这份诚实让《忏悔录》高出一般自白：被告席上没有第二个人。审讯的对象越近，可信度越高——这是它至今仍扎人的原因。</p>
+      <span class="theme-key">检举自己</span><span class="theme-key">合谋</span><span class="theme-key">诚实的刻度</span>
+    </div>
+  </div>
+  <hr class="theme-sep">
+  <div class="theme-block">
+    <div class="theme-side"><div class="theme-no">肆</div><h3>与教会的决裂</h3><div class="t-en">The Break with the Church</div></div>
+    <div class="theme-body">
+      <p>他从“体面的宗教”里走脱——斋戒、礼拜、圣像前的鞠躬，与生活两不相干——却没有走向无神论：他重读福音书，剥掉仪式与教条，只留下伦理的核心。</p>
+      <p>这份解剖在书里埋下伏笔，1901 年长成教会的一纸绝罚。官方宣布他“脱离教会”，他回敬以平静的答辩文——从此“托尔斯泰主义”与官方教会正式分道。</p>
+      <span class="theme-key">体面的宗教</span><span class="theme-key">福音书重读</span><span class="theme-key">1901 绝罚</span>
+    </div>
+  </div>
+  <hr class="theme-sep">
+  <div class="theme-block">
+    <div class="theme-side"><div class="theme-no">伍</div><h3>理性与信仰的分工</h3><div class="t-en">Division of Labor</div></div>
+    <div class="theme-body">
+      <p>理性负责可证明之事，信仰负责“生命的力”——<b>两者不是敌人，是分工</b>。这个提法让全书免于蒙昧主义的嫌疑：他没有取消思考，只是给思考划了边界。</p>
+      <p>对今天的读者它依然成立：在“科学能回答什么”这件事上，《忏悔录》的答案比多数科普更清醒。</p>
+      <span class="theme-key">理性的边界</span><span class="theme-key">信仰作为力</span><span class="theme-key">分工</span>
+    </div>
+  </div>
+  <hr class="theme-sep">
+  <div class="theme-block">
+    <div class="theme-side"><div class="theme-no">陆</div><h3>为他人而活</h3><div class="t-en">Living for Others</div></div>
+    <div class="theme-body">
+      <p>全书的落点：只为自己活的生命，被死亡全额没收；<b>为他人、为共同之物而活，才在有限里摸到无限</b>。这不是修辞——此后他把版权、名声与体面一件件捐了出去。</p>
+      <p>《忏悔录》的每一页，都在为晚年那个冬夜出走的人做准备：它回答问题的方式，是用余生。</p>
+      <span class="theme-key">落点</span><span class="theme-key">捐出去的一生</span><span class="theme-key">出走的伏笔</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== QUOTES ===== -->
+<section class="section fade-in" id="quotes">
+  <h2 class="section-title">名句</h2>
+  <p class="section-desc">七句话，从深夜的绳子走到最后的生活。均为转述或转引，措辞以通行译本为准。</p>
+  <div class="quote-shell">
+    <button class="quote-nav prev" id="qPrev" aria-label="上一条">‹</button>
+    <div class="quote-viewport"><div class="quote-track" id="qTrack"></div></div>
+    <button class="quote-nav next" id="qNext" aria-label="下一条">›</button>
+    <div class="quote-dots" id="qDots"></div>
+  </div>
+</section>
+
+<!-- ===== VERSIONS & LEGACY ===== -->
+<section class="section wide fade-in" id="versions">
+  <h2 class="section-title">译本与影响</h2>
+  <p class="section-desc">中文世界怎么读它，它在一百多年里激起了什么。</p>
+  <div class="dual-grid">
+    <div class="v-panel">
+      <h3>中文译本</h3>
+      <div class="v-sub">篇幅不大，版本却各有讲究</div>
+      <div class="v-row"><span class="v-year">1980s起</span><b>冯增义 译</b>（人民文学出版社，与《天国在你们心中》合刊）—— 目前最通行的中译，文风克制近原文。</div>
+      <div class="v-row"><span class="v-year">多卷本</span><b>《托尔斯泰文集》所收</b>（人民文学出版社）—— 注释与年表齐全，适合研究性阅读。</div>
+      <div class="v-row"><span class="v-year">1900s</span><b>英译 Aylmer Maude</b>（译名参考行）—— 毛德夫妇的标准英译以 "A Confession" 行世，英语世界的通行本；各语种书名多从其例。</div>
+      <div class="v-rec">入门选冯增义合刊本——一份《忏悔录》，半部《天国在你们心中》，正好接上“与教会决裂”的后半段。</div>
+    </div>
+    <div class="v-panel">
+      <h3>出版小史</h3>
+      <div class="v-sub">一份自白的颠沛</div>
+      <div class="v-row"><span class="v-year">1879–82</span><b>成书</b> —— 写作断续数年，基本定稿后即遭国内审查，只能以删节状态流传。</div>
+      <div class="v-row"><span class="v-year">1884</span><b>日内瓦全文</b> —— 全文本首次在境外完整问世，随后译成欧洲各语言。</div>
+      <div class="v-row"><span class="v-year">20世纪</span><b>三大《忏悔录》</b> —— 与奥古斯丁、卢梭的同名著作并称，被视为自白文学的三座峰。</div>
+      <div class="v-rec">对读建议：与卢梭《忏悔录》互照——一个展示伤口，一个审讯伤口的来历。</div>
+    </div>
+  </div>
+  <div class="legacy-list">
+    <div class="legacy-item">
+      <div class="l-name">列宁<span>Лев Толстой как зеркало</span></div>
+      <div class="l-desc">1908 年，列宁发表《列夫·托尔斯泰是俄国革命的一面镜子》：既痛批他的“不抵抗”，也承认他的作品映出俄国革命的力量与弱点——《忏悔录》正是这面镜子的打磨车间。</div>
+    </div>
+    <div class="legacy-item">
+      <div class="l-name">高尔基<span>Максим Горький</span></div>
+      <div class="l-desc">1900 年代初登门拜访，留下大量回忆文字：他笔下那位同时最骄傲又最绝望的老人（转述），正是《忏悔录》里每一个深夜的肉身版本。</div>
+    </div>
+    <div class="legacy-item">
+      <div class="l-name">1901年绝罚<span>Определение Синода</span></div>
+      <div class="l-desc">圣主教公会发布判决书，宣称托尔斯泰“脱离教会”；全俄与欧洲舆论哗然——绝罚没有压住这本书，反倒把更多读者推向了它。</div>
+    </div>
+    <div class="legacy-item">
+      <div class="l-name">罗曼·罗兰<span>Romain Rolland</span></div>
+      <div class="l-desc">《托尔斯泰传》（1911）为这场审讯做了最持久的辩护：他把精神危机的岁月写成一生的顶点——一个以生命实践思想的法庭（转述）。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== READING ===== -->
+<section class="section fade-in" id="reading">
+  <h2 class="section-title">阅读指南</h2>
+  <p class="section-desc">给正在读（或将要读）的你几条实用建议。</p>
+  <div class="read-grid">
+    <div class="read-card">
+      <h3>怎么进入</h3>
+      <p>篇幅不大，结构像一场连续开庭：先检举自己，再传唤科学、哲学，最后从劳动者身上取证——<b>一气读完最好</b>，别拆开当“人生金句”合集用，它的力量在追问的顺序里。</p>
+    </div>
+    <div class="read-card">
+      <h3>值得盯住的段落</h3>
+      <ul>
+        <li><b>藏绳避枪</b>的那几页：审讯开庭的姿势</li>
+        <li><b>蜜与狮子</b>的寓言：全书最著名的意象</li>
+        <li><b>四种麻醉</b>的分类：冷静得吓人的病历</li>
+        <li><b>“信仰是生命的力”</b>：全书的转轴</li>
+        <li>末段<b>“为他人而活”</b>：落点，也是纲领</li>
+      </ul>
+    </div>
+    <div class="read-card">
+      <h3>别被吓退的几件事</h3>
+      <ul>
+        <li>前几章的自省密不透风，像被审讯者盯着眼睛——<b>那是设计</b>：让读者也上被告席</li>
+        <li>宗教段落术语不多，抓“理性—信仰分工”一条主线即可</li>
+        <li>合刊的《天国在你们心中》不必连读——先把《忏悔录》读薄，再决定要不要读厚</li>
+      </ul>
+    </div>
+    <div class="read-card">
+      <h3>读完之后</h3>
+      <ul>
+        <li><b>《安娜·卡列尼娜》第八部</b>：列文的星空是它的小说版</li>
+        <li><b>《复活》页</b>：它的行动版——答案如何被过成日子</li>
+        <li>回看<b>作者综合页</b>：把这次审讯放回托尔斯泰的一生里</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <span class="foot-mark"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><g stroke="#4c5a44" stroke-width="1.8" stroke-linecap="round" fill="none"><path d="M9.5 11.5 h5 v9.5 h-5 z"/><path d="M8 21.5 h8"/></g><path d="M12 3.5 c2 2.6 2 4.6 0 6.2 c-2 -1.6 -2 -3.6 0 -6.2 z" fill="#b3902f" stroke="none"/></svg>他把绳子藏起来了，把答案写了下来 · © zzht</span>
+  <span><a href="tolstoy.html">列夫·托尔斯泰</a> · <a href="anna-karenina.html">上一部 · 安娜·卡列尼娜</a> · <a href="resurrection.html">下一部 · 复活</a> · <a href="index.html">返回首页</a> · <a href="https://github.com/zzht1">GitHub ↗</a></span>
+</footer>
+
+<script>
+/* ================= DATA ================= */
+const GROUPS = {
+  ask:    { name: '提问者', color: '#6e6a60' },
+  wrong:  { name: '错误答案', color: '#9a3b22' },
+  living: { name: '活的答案', color: '#b3902f' }
+};
+
+const CHARACTERS = [
+  { id:'science', name:'科学理性', ru:'Наука и логика', group:'wrong', role:'错误答案 · 其一',
+    desc:'他半生的信仰：实验、进步、逻辑。精密，却在“意义”面前沉默。',
+    tags:['进步','缄默','有限'],
+    detail:'托尔斯泰不反科学，反的是“科学冒充答案”：它回答“生活是什么”，拒绝回答“该怎样活”。他把理性请下神坛，但保留它在下一站的职位——见主题“理性的边界”。' },
+  { id:'solomon', name:'所罗门与《传道书》', ru:'Екклесиаст', group:'ask', role:'提问者 · 古老的回声',
+    desc:'四千年前的君王智慧：虚空的虚空，凡事都是虚空。他的每一步绝望，书里早已走完。',
+    tags:['虚空','太阳底下','无新事'],
+    detail:'他在书里郑重开列这份“先辈名单”：所罗门、佛陀、叔本华——不同文明的顶尖智者，把“生命即无意义”推到了理性尽头。他不反驳他们，只承认：这不是错答案，是理性本身的答案——所以需要另一个立足点。' },
+  { id:'schopenhauer', name:'叔本华式的虚无', ru:'Schopenhauer', group:'ask', role:'提问者 · 现代的回声',
+    desc:'十九世纪哲学的绝望尖端：意志盲目，人生在钟摆之间。',
+    tags:['哲学','钟摆','无意义'],
+    detail:'托尔斯泰把叔本华与所罗门并排放着：一个用格言，一个用形而上学，得出同一张病历。他们证明的不是“该绝望”，而是“仅靠思考走不出这个房间”——这正是他转身向生活求救的理由。' },
+  { id:'salon', name:'上流社会的自我欺骗', ru:'Светское общество', group:'wrong', role:'错误答案 · 其二',
+    desc:'不问，是多数人的答案。沙龙把死亡谈成失礼，把信仰谈成教养。',
+    tags:['沙龙','失礼','麻醉'],
+    detail:'他解剖自己的圈子：大家不是没有想过“活着为什么”，而是默契地绕开——绕开的方式是交际、荣誉、科学新词与艺术趣味。他给这份麻醉取了名：一种集体的假寐。' },
+  { id:'church', name:'教会仪式', ru:'Церковный обряд', group:'wrong', role:'错误答案 · 其三',
+    desc:'官方信仰的样子：斋戒、礼拜、圣像前的鞠躬——与生活两不相干。',
+    tags:['仪式','空转','决裂前奏'],
+    detail:'他并不嘲讽虔诚本身——他嘲讽“体面的宗教”：教堂里跪着，出门后照旧走老路。这份解剖在书里埋下伏笔，四年后长成对福音书的重译重述，再长成 1901 年教会对他的一纸绝罚。' },
+  { id:'folk', name:'民间信仰', ru:'Народная вера', group:'living', role:'活的答案 · 其一',
+    desc:'农民的信仰不靠论证：他们生、劳作、受苦、赴死，脚步里带着秩序。',
+    tags:['庄稼','不论证','立足点'],
+    detail:'托尔斯泰发现自己梦寐以求的“合理的世界观”，早就在劳动者的日常里活着——不在哲学讲义里。他给出的不是浪漫化的农民崇拜，而是一个方法论转向：向活着的人学习怎样活。' },
+  { id:'labor', name:'普通的劳动者', ru:'Труд', group:'living', role:'活的答案 · 其二',
+    desc:'全书最终的“证人”。他们的手替他们回答了那个问题。',
+    tags:['劳作','脚步','为他人'],
+    detail:'他观察他们怎样对待孩子、邻人与死亡：不把生命当作私产来经营，于是死亡奈何不了那种笃定。“为他人而活”不是道德口号，是从这里看见的事实——这也是《忏悔录》留给他后半生的全部纲领。' }
+];
+
+const QUOTES = [
+  { text:'我藏起了绳子，不敢带猎枪出门，怕的是我自己。', src:'自白 · 中段（转述）', note:'全书最著名的一个姿势：一位名满天下的作家，与自己的求死意志拉锯——审讯由此开庭。' },
+  { text:'信仰就是生命的力。人活着，就一定相信着某种东西。', src:'自白 · 末段（转述）', note:'全书的转轴：把“信仰”从教义里解放出来，重新定义为活着本身的前提。' },
+  { text:'虚空的虚空，一切都是虚空。', src:'所罗门 · 《传道书》（转引）', note:'他请来四千年前最重的证人——智慧自己的结论，反而成了需要越过的墙。' },
+  { text:'旅人舔着枝头的蜜，不知道树下有黑龙，枝干正被两只老鼠啃断。', src:'东方寓言 · 自白（转述）', note:'他把人的处境压缩成一幅寓言画：蜜是真的甜，死也是真的近——两不欺瞒。' },
+  { text:'无知、纵乐、刚强、软弱——人们用这四种方式躲开那个问题。', src:'论身边的四种人（转述）', note:'麻醉与笃定只有一线之隔：他给两种“不问”画出精确的分界。' },
+  { text:'千百万劳动者活着，并且知道生与死——这知识不曾写进任何一本书。', src:'自白 · 后段（转述）', note:'他梦寐以求的世界观不在讲义里，在劳动者的日常里——方法论由此转向。' },
+  { text:'只为自己活的人，把生命交给了死亡；为别人活着，才第一次算活着。', src:'自白 · 末段（转述）', note:'全书的判决：意义不在“被记住”，而在“为谁而活”。' }
+];
+
+/* ================= HELPERS ================= */
+const $ = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+
+/* ================= NAV ================= */
+$$('.nav-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const el = document.getElementById(tab.dataset.section);
+    if (el) {
+      const y = el.getBoundingClientRect().top + window.pageYOffset - 56;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  });
+});
+function setupScrollspy() {
+  const tabs = $$('.nav-tab');
+  const secs = tabs.map(t => document.getElementById(t.dataset.section)).filter(Boolean);
+  const onScroll = () => {
+    const pos = window.scrollY + 140;
+    let cur = secs[0];
+    for (const s of secs) { if (s.offsetTop <= pos) cur = s; }
+    tabs.forEach(t => t.classList.toggle('active', t.dataset.section === cur.id));
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+}
+
+/* ================= FADE IN ================= */
+function setupFadeIn() {
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: .06 });
+  $$('.fade-in').forEach(el => io.observe(el));
+}
+
+/* ================= TIMELINE ================= */
+function setupTimeline() {
+  $$('.t-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const open = item.classList.toggle('open');
+      const d = item.querySelector('.t-detail');
+      d.style.maxHeight = open ? d.scrollHeight + 'px' : '0px';
+    });
+  });
+}
+
+/* ================= 思想对手 CARDS ================= */
+function setupCharacters() {
+  const grid = $('#charGrid');
+  const fRow = $('#charFilters');
+  const cats = [['all', '全部'], ...Object.entries(GROUPS).map(([k, g]) => [k, g.name])];
+  cats.forEach(([k, label], i) => {
+    const chip = document.createElement('div');
+    chip.className = 'filter-chip' + (i === 0 ? ' active' : '');
+    chip.textContent = label;
+    chip.dataset.k = k;
+    chip.addEventListener('click', () => {
+      $$('.filter-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      $$('.char-card').forEach(card => {
+        card.classList.toggle('hidden', k !== 'all' && card.dataset.group !== k);
+      });
+    });
+    fRow.appendChild(chip);
+  });
+
+  CHARACTERS.forEach(c => {
+    const g = GROUPS[c.group];
+    const card = document.createElement('div');
+    card.className = 'char-card';
+    card.dataset.group = c.group;
+    card.style.setProperty('--gc', g.color);
+    card.innerHTML =
+      '<div class="c-name">' + c.name + '</div>' +
+      '<div class="c-ru">' + c.ru + '</div>' +
+      '<div class="c-desc">' + c.desc + '</div>' +
+      '<div class="c-tags">' + c.tags.map(t => '<span class="c-tag">' + t + '</span>').join('') + '</div>';
+    card.addEventListener('click', () => openModal(c));
+    grid.appendChild(card);
+  });
+}
+function openModal(c) {
+  const g = GROUPS[c.group];
+  const mask = $('#modalMask');
+  $('#mName').textContent = c.name;
+  $('#mRu').textContent = c.ru;
+  const role = $('#mRole'); role.textContent = c.role + ' · ' + g.name; role.style.color = g.color; role.style.background = g.color + '14';
+  $('#mBody').textContent = c.detail;
+  $('#modalBox').style.borderTopColor = g.color;
+  mask.classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  $('#modalMask').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+/* ================= QUOTES ================= */
+let qIdx = 0, qTimer = null;
+function setupQuotes() {
+  const track = $('#qTrack');
+  QUOTES.forEach((q, i) => {
+    const s = document.createElement('div');
+    s.className = 'q-slide';
+    s.innerHTML = '<div class="q-mark">❝</div><div class="q-text">' + q.text + '</div>' +
+      '<div class="q-src">' + q.src + '</div><div class="q-note">' + q.note + '</div>';
+    track.appendChild(s);
+    const d = document.createElement('div');
+    d.className = 'q-dot' + (i === 0 ? ' active' : '');
+    d.addEventListener('click', () => goQuote(i, true));
+    $('#qDots').appendChild(d);
+  });
+  $('#qPrev').addEventListener('click', () => goQuote((qIdx - 1 + QUOTES.length) % QUOTES.length, true));
+  $('#qNext').addEventListener('click', () => goQuote((qIdx + 1) % QUOTES.length, true));
+  startQuoteAuto();
+  const shell = $('.quote-shell');
+  shell.addEventListener('mouseenter', stopQuoteAuto);
+  shell.addEventListener('mouseleave', startQuoteAuto);
+}
+function goQuote(i, manual) {
+  qIdx = i;
+  $('#qTrack').style.transform = 'translateX(-' + i * 100 + '%)';
+  $$('.q-dot').forEach((d, j) => d.classList.toggle('active', j === i));
+  if (manual) { stopQuoteAuto(); startQuoteAuto(); }
+}
+function startQuoteAuto() { stopQuoteAuto(); qTimer = setInterval(() => goQuote((qIdx + 1) % QUOTES.length), 6500); }
+function stopQuoteAuto() { if (qTimer) { clearInterval(qTimer); qTimer = null; } }
+
+/* ================= INIT ================= */
+document.addEventListener('DOMContentLoaded', () => {
+  setupCharacters();
+  setupTimeline();
+  setupQuotes();
+  setupFadeIn();
+  setupScrollspy();
+  $('#modalClose').addEventListener('click', closeModal);
+  $('#modalMask').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+});
+</script>
+
+<!-- modal -->
+<div class="modal-mask" id="modalMask">
+  <div class="modal-box" id="modalBox">
+    <button class="modal-close" id="modalClose" aria-label="关闭">×</button>
+    <h3 id="mName"></h3>
+    <div class="m-ru" id="mRu"></div>
+    <span class="m-role" id="mRole"></span>
+    <div class="m-body" id="mBody"></div>
+  </div>
+</div>
+
+</body>
+</html>
