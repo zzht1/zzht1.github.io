@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="伊塔洛·卡尔维诺综合肖像：生平、思想内核与影响回响。我们的祖先三部曲、看不见的城市、如果在冬夜一个旅人、帕洛马尔——轻盈是一座金字塔对称的头脑献给存在的轻盈。">
+<title>伊塔洛·卡尔维诺 · 生平 · 思想 · 回响 — zzht</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f3f2ec;
+  --paper:#fbfaf4;
+  --ink:#22201a;
+  --ink-soft:#57544a;
+  --ink-faint:#8f8c7f;
+  --line:#dedbd0;
+  --sea:#2e5a7d;         /* 地中海军蓝 */
+  --lemon:#c2911f;       /* 利古里亚柠檬与杏子 */
+  --stone:#7a7466;       /* 广场石色 */
+  --grove:#5c7a4d;       /* 柠檬树与树冠绿 */
+  --serif:'Noto Serif SC','Source Han Serif SC',serif;
+  --sans:'Noto Sans SC',-apple-system,BlinkMacSystemFont,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);color:var(--ink);background:var(--bg);
+  line-height:1.85;overflow-x:hidden;-webkit-font-smoothing:antialiased;
+}
+/* 极淡的点阵，像看不见的城市里的几何网格 */
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:radial-gradient(rgba(90,90,70,.035) 1px,transparent 1px);
+  background-size:26px 26px;
+}
+::selection{background:rgba(46,90,125,.14)}
+a{color:inherit}
+.back-home{
+  position:fixed;top:18px;left:20px;z-index:120;
+  font-size:.85rem;color:var(--ink-soft);text-decoration:none;
+  padding:7px 14px;border-radius:999px;
+  background:rgba(251,250,244,.92);border:1px solid var(--line);
+  transition:all .25s;
+}
+.back-home:hover{color:var(--sea);border-color:var(--sea);transform:translateX(-2px)}
+.page{position:relative;z-index:1;max-width:1020px;margin:0 auto;padding:0 26px 10vh}
+
+/* ===== HERO ===== */
+.hero{position:relative;padding:15vh 0 4vh;text-align:center}
+.hero-eyebrow{font-size:.78rem;letter-spacing:.42em;color:var(--ink-faint);margin-bottom:22px;font-weight:400}
+.hero h1{font-family:var(--serif);font-weight:900;font-size:clamp(2.8rem,8vw,4.8rem);letter-spacing:.1em;line-height:1.08}
+.hero-it{font-family:var(--serif);font-style:italic;color:var(--sea);font-size:clamp(1rem,2.4vw,1.3rem);letter-spacing:.16em;margin-top:14px}
+.hero-years{display:inline-flex;align-items:center;gap:14px;margin-top:22px;color:var(--ink-soft);font-size:.92rem;letter-spacing:.18em}
+.hero-years .v{color:var(--lemon);font-family:var(--serif);font-weight:700}
+.hero-years .dash{width:42px;height:1px;background:linear-gradient(90deg,transparent,var(--ink-faint),transparent)}
+.hero-tag{max-width:660px;margin:30px auto 0;color:var(--ink-soft);font-family:var(--serif);font-size:1.06rem;line-height:2.05;letter-spacing:.02em}
+.hero-tag em{font-style:normal;color:var(--sea)}
+/* hero 装饰：一串轻轻上行的几何小图形——轻盈、精确、组合 */
+.motif{display:block;margin:5vh auto 0;max-width:680px;width:86%}
+
+/* ===== 区块通用标题 ===== */
+.sec-head{text-align:center;margin:11vh 0 5vh}
+.sec-head .k{font-size:.76rem;letter-spacing:.4em;color:var(--lemon)}
+.sec-head h2{font-family:var(--serif);font-weight:700;font-size:clamp(1.5rem,4vw,2rem);letter-spacing:.1em;margin-top:8px}
+.sec-head p{color:var(--ink-soft);font-size:.92rem;margin-top:12px;letter-spacing:.02em;max-width:680px;margin-left:auto;margin-right:auto;line-height:1.95}
+
+/* ===== 生平概述 ===== */
+.bio{max-width:780px;margin:0 auto;font-size:1.02rem;color:var(--ink-soft);line-height:2.1}
+.bio p{margin-bottom:18px}
+.bio p:first-child::first-letter{
+  font-family:var(--serif);font-weight:900;color:var(--grove);
+  font-size:3.1rem;line-height:1;float:left;margin:6px 14px 0 0;
+}
+.bio b{color:var(--ink);font-weight:600}
+
+/* ===== 生平与作品 · 时间流 ===== */
+.flow{position:relative;max-width:840px;margin:0 auto;padding:8px 0 2vh}
+.flow::before{
+  content:'';position:absolute;left:19px;top:6px;bottom:0;width:2px;
+  background:linear-gradient(180deg,transparent,var(--sea) 6%,var(--sea) 94%,transparent);
+  opacity:.4;
+}
+.flow-item{position:relative;padding:20px 0 22px 58px}
+.flow-dot{position:absolute;left:19px;top:26px;transform:translateX(-50%);width:11px;height:11px;border-radius:50%;background:var(--ink-faint);box-shadow:0 0 0 4px rgba(143,140,127,.15);z-index:2}
+.flow-dot.work{background:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 14%,transparent)}
+.flow-title{font-family:var(--serif);font-size:1.28rem;color:var(--ink);line-height:1.3}
+.flow-sub{font-size:.94rem;color:var(--ink-faint);margin-top:6px;line-height:1.9;max-width:640px}
+.flow-year{font-family:var(--serif);font-weight:700;color:var(--sea);font-size:1rem;letter-spacing:.14em;margin-top:14px;padding-top:10px;border-top:1px dashed var(--line);display:inline-block}
+.flow-year .lab{font-size:.72rem;letter-spacing:.3em;color:var(--ink-faint);margin-right:10px;font-weight:400;font-family:var(--sans)}
+
+/* 作品卡片 */
+.flow-work .flow-card{
+  position:relative;display:block;
+  border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:20px;
+  background:var(--paper);
+  padding:24px 30px 20px;overflow:hidden;margin-top:2px;
+  box-shadow:0 8px 22px rgba(50,70,90,.05);
+  transition:transform .4s cubic-bezier(.4,0,.2,1),border-color .4s,box-shadow .4s;
+}
+.flow-work .flow-card:hover{transform:translateX(8px);border-color:var(--accent);box-shadow:0 16px 36px -18px color-mix(in srgb,var(--accent) 45%,transparent)}
+.flow-card .order{font-family:var(--serif);font-size:.78rem;letter-spacing:.3em;color:var(--accent);opacity:.9}
+.flow-card .cn{font-family:var(--serif);font-weight:700;font-size:1.5rem;letter-spacing:.05em;margin-top:5px;color:var(--ink);line-height:1.2}
+.flow-card .it{font-family:var(--serif);font-style:italic;color:var(--accent);font-size:.86rem;letter-spacing:.07em;margin-top:3px}
+.flow-card .essence{font-size:.94rem;color:var(--ink-soft);margin-top:13px;line-height:1.95}
+.flow-card .trans{
+  margin-top:13px;font-size:.82rem;color:var(--ink-soft);letter-spacing:.02em;
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+}
+.flow-card .trans .seal{
+  flex-shrink:0;width:20px;height:20px;border-radius:50%;
+  border:1px solid var(--lemon);color:var(--lemon);
+  font-family:var(--serif);font-size:.68rem;line-height:18px;text-align:center;
+}
+.flow-card .trans b{color:var(--ink);font-weight:600}
+.flow-card .fromlife{font-size:.83rem;color:var(--ink-faint);margin-top:11px;line-height:1.8;border-top:1px dashed var(--line);padding-top:11px}
+.flow-card .fromlife b{color:var(--sea);font-weight:400;font-family:var(--serif)}
+.flow-card .flow-year{margin-top:14px;border-top:none;padding-top:0}
+
+.flow-work.bar{--accent:#5c7a4d}   /* 树上的男爵：树冠绿 */
+.flow-work.cit{--accent:#2e5a7d}   /* 看不见的城市：军蓝 */
+.flow-work.win{--accent:#a3512c}   /* 冬夜旅人：印刷坊赭 */
+.flow-work.pal{--accent:#8a7a2c}   /* 帕洛马尔：日光沙金 */
+
+/* ===== 思想内核 ===== */
+.themes{max-width:880px;margin:0 auto;columns:2;column-gap:56px}
+.theme{break-inside:avoid;margin-bottom:34px;padding-bottom:30px;border-bottom:1px solid transparent;border-image:linear-gradient(90deg,var(--line),transparent) 1}
+.theme .no{font-family:var(--serif);color:var(--lemon);font-size:.8rem;letter-spacing:.3em}
+.theme h3{font-family:var(--serif);font-size:1.18rem;color:var(--ink);margin:8px 0 9px;letter-spacing:.04em}
+.theme p{font-size:.9rem;color:var(--ink-soft);line-height:1.95}
+
+/* ===== 影响与回响 ===== */
+.legacy{max-width:840px;margin:0 auto}
+.leg-block{margin-bottom:36px}
+.leg-block h3{font-family:var(--serif);font-size:1.22rem;color:var(--sea);letter-spacing:.06em;margin-bottom:14px;padding-left:14px;border-left:3px solid var(--lemon)}
+.leg-block p{font-size:.97rem;color:var(--ink-soft);line-height:2;margin-bottom:12px}
+.leg-block b{color:var(--ink);font-weight:600}
+.leg-quote{
+  border:1px solid var(--line);border-left:3px solid var(--sea);border-radius:20px;
+  background:var(--paper);
+  padding:24px 28px;font-family:var(--serif);font-size:1.06rem;line-height:2.05;color:var(--ink);
+}
+.leg-quote .src{display:block;margin-top:12px;font-family:var(--sans);font-size:.82rem;color:var(--ink-faint);letter-spacing:.06em}
+
+/* ===== footer ===== */
+.foot{margin-top:9vh;padding-top:26px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:.82rem;color:var(--ink-faint);letter-spacing:.05em}
+.foot a{color:var(--ink-soft);text-decoration:none;transition:color .2s}
+.foot a:hover{color:var(--sea)}
+.foot-mark{display:inline-flex;align-items:center;gap:9px}
+
+@media(max-width:760px){
+  .themes{columns:1}
+  .flow::before{left:14px}
+  .flow-item{padding-left:46px}
+  .flow-dot{left:14px}
+}
+</style>
+</head>
+<body>
+<a href="index.html" class="back-home">← 返回首页</a>
+<div class="page">
+
+  <header class="hero">
+    <div class="hero-eyebrow">ITALO CALVINO</div>
+    <h1>伊塔洛·卡尔维诺</h1>
+    <div class="hero-it">Italo Calvino</div>
+    <div class="hero-years"><span class="v">1923</span><span class="dash"></span><span class="v">1985</span></div>
+    <p class="hero-tag">在<em>轻盈</em>与<em>精确</em>之间，抵抗世界的沉重。<br>他写的不只是小说，而是一部用几何、城市与组合游戏写成的人类思维地图。</p>
+    <!-- 一串轻轻上行的几何图形：树冠、城市轮廓、牌、星 -->
+    <svg class="motif" viewBox="0 0 680 34" fill="none" aria-hidden="true">
+      <g stroke="#5c7a4d" stroke-width="1.4" stroke-linecap="round" opacity=".8">
+        <path d="M30 28 v-9"/><path d="M22 19 h16"/><path d="M25 15 h10"/><path d="M27.5 11 h5"/>
+      </g>
+      <g stroke="#2e5a7d" stroke-width="1.4" stroke-linecap="round" opacity=".7">
+        <path d="M150 28 v-11"/><path d="M150 20 l7 -5"/><path d="M150 23 l-6 -4"/>
+      </g>
+      <rect x="290" y="14" width="12" height="14" rx="1" stroke="#a3512c" stroke-width="1.3" opacity=".75"/>
+      <circle cx="470" cy="21" r="7" stroke="#c2911f" stroke-width="1.3" opacity=".8"/>
+      <g stroke="#2e5a7d" stroke-width="1.5" stroke-linecap="round" opacity=".85">
+        <path d="M640 26 l2.6 -5.4 2.6 5.4 -5.2 -3.4 5.2 0 z" fill="#2e5a7d" stroke="none" transform="translate(-6,0)"/>
+      </g>
+      <path d="M0 30 C 120 28, 300 31, 680 30" stroke="#7a7466" stroke-width="1" stroke-linecap="round" opacity=".3"/>
+    </svg>
+  </header>
+
+  <!-- 生平概述 -->
+  <section class="sec-head">
+    <div class="k">VITA</div>
+    <h2>他怎样活成了「卡尔维诺」</h2>
+  </section>
+  <div class="bio">
+    <p>伊塔洛·卡尔维诺 <b>1923 年生于古巴圣地亚哥</b>——父母是旅居拉美的意大利科学家，两年后举家回到利古里亚的圣雷莫，在花圃与实验室之间长大（父亲是农学家，母亲是植物学家，「我父母只认得植物学名，却想不起我的名字」是他常讲的自嘲）。第二次世界大战里，他拒绝为萨罗傀儡政权服役，与弟弟一起进了利古里亚<b>游击队</b>，在山地里打了两年仗。这段经历催生了处女作《通向蜘蛛巢的小路》：第一部写游击战争的意大利小说，却把视线放在一个孩子和一条秘密小路上。</p>
+    <p>战后他加入共产党、在都灵埃伊纳乌迪出版社做编辑，1956 年<b>匈牙利事件</b>让他退出共产党——从此他告别一切「宏大叙事」，转向寓言：柯希莫男爵爬上树再也不下来，被劈成两半的子爵、不存在的骑士，一个个「不存在的人」反而说清了「人是什么」。1959 年他随埃伊纳乌迪访美五个月，写下日记；此后长居巴黎，与结构主义圈子过从，把<b>组合、对称与迷宫</b>变成小说的方法论。</p>
+    <p>1972 年《看不见的城市》出版，马可·波罗向忽必烈汗讲述五十五座想象之城；1985 年，他刚做完在哈佛的诺顿讲稿（后成《新千年文学备忘录》，以「轻、快、精确、繁复」论文学），在佩萨罗的花园里准备演讲幻灯时<b>突发脑溢血去世</b>，享年六十一岁——离获得当年诺贝尔奖的呼声只有一步。他留下的最后建议仍是那个词：<b>轻</b>。</p>
+  </div>
+
+  <!-- 生平与作品 时间流 -->
+  <section class="sec-head">
+    <div class="k">VITA E LIBRI</div>
+    <h2>生平与作品 · 同一张地图</h2>
+    <p>卡尔维诺的书是一张不断重绘的地图：游击队给了他第一本书，退党给了他寓言，结构主义给了他城市与迷宫。下面把生平与作品编进同一条时间线，每部作品标着它从哪段生命里长出来、以及今天读它该选哪个译本。</p>
+  </section>
+
+  <div class="flow">
+
+    <div class="flow-item flow-life">
+      <span class="flow-dot"></span>
+      <div class="flow-body">
+        <div class="flow-title">圣雷莫的植物学家之子</div>
+        <div class="flow-sub">在花圃与实验室之间长大。对自然分类法的迷恋，日后变成他对文学「精确性」的终身执念。</div>
+        <div class="flow-year"><span class="lab">生平</span>1923–40</div>
+      </div>
+    </div>
+
+    <div class="flow-item flow-life">
+      <span class="flow-dot"></span>
+      <div class="flow-body">
+        <div class="flow-title">利古里亚的游击队员</div>
+        <div class="flow-sub">拒绝为萨罗政权服役，进山打游击两年。处女作即从山地与孩子写起，一鸣惊人。</div>
+        <div class="flow-year"><span class="lab">生平</span>1944–45</div>
+      </div>
+    </div>
+
+    <div class="flow-item flow-work bar">
+      <span class="flow-dot work"></span>
+      <div class="flow-card">
+        <span class="order">壹 · 我们的祖先</span>
+        <div class="cn">树上的男爵</div>
+        <div class="it">Il barone rampante</div>
+        <div class="essence">「我们的祖先」三部曲的压卷之作。柯希莫十二岁那年为拒绝一碗蜗牛爬上树，此后一生再未落地——读书、恋爱、指挥革命、直至乘热气球消失。这是一则关于「如何保持完整自我」的寓言：与人群保持距离，不是为了逃离世界，而是为了更长久地爱它。</div>
+        <div class="trans"><span class="seal">荐</span>推荐译本：<b>吴正仪 译</b> · 译林出版社（三部曲合刊《我们的祖先》）</div>
+        <div class="fromlife"><b>从生活里来：</b>写于他退党前后——柯希莫的「上树」，正是他自己对一切建制温柔而彻底的告别。</div>
+        <div class="flow-year"><span class="lab">创作</span>1957</div>
+      </div>
+    </div>
+
+    <div class="flow-item flow-life">
+      <span class="flow-dot"></span>
+      <div class="flow-body">
+        <div class="flow-title">退党，转向寓言</div>
+        <div class="flow-sub">匈牙利事件后登报声明退党。政治信仰落幕，文学信仰登场：此后他只写「不存在的人」与「不可能的事」。</div>
+        <div class="flow-year"><span class="lab">生平</span>1956–58</div>
+      </div>
+    </div>
+
+    <div class="flow-item flow-work cit">
+      <span class="flow-dot work"></span>
+      <div class="flow-card">
+        <span class="order">贰 · 五十五座城市</span>
+        <div class="cn">看不见的城市</div>
+        <div class="it">Le città invisibili</div>
+        <div class="essence">框架是一段对话：马可·波罗向忽必烈汗报告帝国里的五十五座城市——每座都以某个概念为骨架（记忆、欲望、符号、眼睛、名字……）。它其实是七十余种「可能的城市」的目录，也是一部用小说形式写成的城市人类学。所有城市都是威尼斯，也都是你住过的任何地方。</div>
+        <div class="trans"><span class="seal">荐</span>推荐译本：<b>张密 译</b> · 译林出版社</div>
+        <div class="fromlife"><b>从生活里来：</b>定居巴黎、浸在结构主义中的产物；他自述每一座城都从一个「回答过的出发，问出一个新的问题」。</div>
+        <div class="flow-year"><span class="lab">创作</span>1972</div>
+      </div>
+    </div>
+
+    <div class="flow-item flow-work win">
+      <span class="flow-dot work"></span>
+      <div class="flow-card">
+        <span class="order">叁 · 十个开头</span>
+        <div class="cn">如果在冬夜，一个旅人</div>
+        <div class="it">Se una notte d'inverno un viaggiatore</div>
+        <div class="essence">一部关于阅读本身的小说：读者「你」买回一本《如果在冬夜，一个旅人》，读到第 32 页发现装订错乱，换书、再读、再断——如此连环嵌套十个互不相干的小说开头，外加一个「读者」与「另一位读者」的恋爱。开头的艺术被推向极限：每个中断都是一次邀请。</div>
+        <div class="trans"><span class="seal">荐</span>推荐译本：<b>萧天佑 译</b> · 译林出版社</div>
+        <div class="fromlife"><b>从生活里来：</b>他把做出版编辑二十年的手稿经验——退稿信、伪作、译者与抄袭者——直接写成了小说的角色表。</div>
+        <div class="flow-year"><span class="lab">创作</span>1979</div>
+      </div>
+    </div>
+
+    <div class="flow-item flow-work pal">
+      <span class="flow-dot work"></span>
+      <div class="flow-card">
+        <span class="order">肆 · 凝视的传记</span>
+        <div class="cn">帕洛马尔</div>
+        <div class="it">Palomar</div>
+        <div class="essence">他最后一部完整的小说。退休的帕洛马尔先生决定只做一件事：观察——海浪、乌龟交配、椋鸟群飞、草坪、乳酪柜台……十五条「观察记录」分成视觉经验、文化思辨与冥想三组，越看越深，直到最后一章他在西班牙墓园学习「如何做到不看」。一部用眼睛完成的精神自传。</div>
+        <div class="trans"><span class="seal">荐</span>推荐译本：<b>萧天佑 译</b> · 译林出版社</div>
+        <div class="fromlife"><b>从生活里来：</b>名字取自加州的帕洛马山天文台——那位望远镜里的观察者，正是他自己晚年的自画像。</div>
+        <div class="flow-year"><span class="lab">创作</span>1983</div>
+      </div>
+    </div>
+
+    <div class="flow-item flow-life">
+      <span class="flow-dot"></span>
+      <div class="flow-body">
+        <div class="flow-title">花园里的猝逝</div>
+        <div class="flow-sub">在哈佛诺顿讲座的讲稿即将成书之际，突发脑溢血离世，享年六十一岁。遗稿《新千年文学备忘录》以「轻」开篇。</div>
+        <div class="flow-year"><span class="lab">生平</span>1985</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 思想内核 -->
+  <section class="sec-head">
+    <div class="k">IDEE</div>
+    <h2>他反复在写的几件事</h2>
+    <p>从寓言到城市再到观察手册，卡尔维诺的小说其实围着同一组关键词转。这几条是他作品的「基因」。</p>
+  </section>
+  <div class="themes">
+    <div class="theme"><div class="no">Ⅰ</div><h3>轻逸</h3><p>「轻不是轻浮，而是像鸟一样思考沉重的问题。」他相信摆脱重量不是逃避世界，而是另一种凝视世界的方式。</p></div>
+    <div class="theme"><div class="no">Ⅱ</div><h3>精确</h3><p>对定义、分类与几何的迷恋：城市按概念命名，观察按目录编排。他说过自己最大的激情，是给「没有形状的东西」以形状。</p></div>
+    <div class="theme"><div class="no">Ⅲ</div><h3>组合与无穷</h3><p>塔罗牌、书目、城市目录、十个开头——意义不在单个元素，而在元素被组合的方式。文学是一台无限重排的机器。</p></div>
+    <div class="theme"><div class="no">Ⅳ</div><h3>城市作为人类心智</h3><p>城市既是欲望的投影，也是记忆的容器。他比「城市研究」早二十年写出了城市的心理学与符号学。</p></div>
+    <div class="theme"><div class="no">Ⅴ</div><h3>与人群保持恰当距离</h3><p>柯希莫在树上爱着人间——介入而不占有，疏离而不弃绝。这是他给自己、也给知识分子的位置。</p></div>
+    <div class="theme"><div class="no">Ⅵ</div><h3>读者在中心</h3><p>从《冬夜旅人》到《备忘录》，他把「读者」请进小说：阅读不是消费，而是一场作者与读者共同完成的组合游戏。</p></div>
+  </div>
+
+  <!-- 影响与回响 -->
+  <section class="sec-head">
+    <div class="k">ECHI</div>
+    <h2>影响与回响 · 一种综合式的评价</h2>
+    <p>在意大利，他与但丁、曼佐尼并列进高中必读书单；在世界，他是后现代小说最优雅的一个名字。下面是谁读过他、谁被他改变。</p>
+  </section>
+  <div class="legacy">
+
+    <div class="leg-block">
+      <h3>同代与后辈：轻的谱系</h3>
+      <p>他与<b>博尔赫斯</b>、纳博科夫同被尊为「为二十世纪小说换算法的人」，而他自认博尔赫斯是重要参照；<b>约翰·巴思</b>称《看不见的城市》为「后现代主义的最后一块拼图」；<b>奥罕·帕慕克</b>、<b>安伯托·艾柯</b>、奥尔罕一代的城市书写者都绕不开他。中国的<b>王小波</b>把《我们的祖先》列为心爱的书，称自己学到的正是「小说的趣味」。</p>
+    </div>
+
+    <div class="leg-block">
+      <h3>建筑师与城市：一部小说成了学科教材</h3>
+      <p><b>《看不见的城市》</b>超出文学，成了建筑学、城市规划与艺术理论的经典文本——库哈斯一代的建筑师公开承认欠他债；几乎所有关于「想象城市」的展览与论文集，都会引那句话：「你所讲述的每一座城市都是威尼斯。」</p>
+    </div>
+
+    <div class="leg-block">
+      <h3>《备忘录》：留给写作的最后方案</h3>
+      <p>未完成的诺顿讲稿<b>《新千年文学备忘录》</b>（轻、快、精确、繁复、连贯）成了二十一世纪初被引用最多的写作纲领——「轻逸」一讲，被无数写作者当作抵抗沉重与空话的通行证。</p>
+    </div>
+
+    <div class="leg-block">
+      <h3>一份综合式的评价</h3>
+      <div class="leg-quote">他是二十世纪小说家中「头脑最对称」的一位：政治出身的小说家却在寓言里安家，科学的家庭教养与游击队员的青春在他身上并不冲突——精确与轻盈，本就是同一枚硬币。他证明了严肃的文学可以不沉重：不靠规模、不靠嘶喊，靠一座座按概念搭起的城、一个个在树上过了终生的人。他没来得及拿诺奖，但他给文学留下的配方——轻、快、精确、繁复——比任何奖项都持久。<span class="src">—— 编者综合自《新千年文学备忘录》、艾柯与历代读者的共识</span></div>
+    </div>
+
+  </div>
+
+  <footer class="foot">
+    <span class="foot-mark"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><g stroke="#2e5a7d" stroke-width="1.6" stroke-linecap="round" fill="none"><path d="M12 4 v16"/><path d="M6 8 l12 0"/><path d="M6 16 l12 0"/><circle cx="12" cy="12" r="2.2"/></g></svg>© <em style="font-style:normal;color:var(--ink-soft)">zzht</em> · 伊塔洛·卡尔维诺 · 生平 · 思想 · 回响</span>
+    <a href="index.html">返回站点首页 ↗</a>
+  </footer>
+
+</div>
+</body>
+</html>
