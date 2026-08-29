@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="赫尔曼·黑塞综合肖像：生平、思想内核与影响回响。车轮下、荒原狼、悉达多、精神与爱欲、玻璃球游戏——每个人心里都住着荒原狼，每条河都通向自我。">
+<title>赫尔曼·黑塞 · 生平 · 思想 · 回响 — zzht</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f1f0ea;
+  --paper:#faf9f3;
+  --ink:#211f1c;
+  --ink-soft:#545149;
+  --ink-faint:#8c8a82;
+  --line:#dcd9cf;
+  --night:#2f3f63;       /* 荒原的夜，深靛蓝 */
+  --gold:#a8842e;        /* 东方的金，悉达多的启明 */
+  --moor:#6e5f6b;        /* 荒原灰紫 */
+  --river:#4a7a80;       /* 河水的青 */
+  --cloister:#7a5c40;    /* 修道院暖棕 */
+  --serif:'Noto Serif SC','Source Han Serif SC',serif;
+  --sans:'Noto Sans SC',-apple-system,BlinkMacSystemFont,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);color:var(--ink);background:var(--bg);
+  line-height:1.85;overflow-x:hidden;-webkit-font-smoothing:antialiased;
+}
+/* 极淡的纵向纹，像雨夜窗棂 */
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:repeating-linear-gradient(90deg,transparent 0,transparent 7px,rgba(70,70,90,.012) 7px,rgba(70,70,90,.012) 8px);
+}
+::selection{background:rgba(74,122,128,.15)}
+a{color:inherit}
+.back-home{
+  position:fixed;top:18px;left:20px;z-index:120;
+  font-size:.85rem;color:var(--ink-soft);text-decoration:none;
+  padding:7px 14px;border-radius:999px;
+  background:rgba(250,249,243,.92);border:1px solid var(--line);
+  transition:all .25s;
+}
+.back-home:hover{color:var(--river);border-color:var(--river);transform:translateX(-2px)}
+.page{position:relative;z-index:1;max-width:1020px;margin:0 auto;padding:0 26px 10vh}
+
+/* ===== HERO ===== */
+.hero{position:relative;padding:15vh 0 4vh;text-align:center}
+.hero-eyebrow{font-size:.78rem;letter-spacing:.42em;color:var(--ink-faint);margin-bottom:22px;font-weight:400}
+.hero h1{font-family:var(--serif);font-weight:900;font-size:clamp(2.8rem,8vw,4.8rem);letter-spacing:.1em;line-height:1.08}
+.hero-de{font-family:var(--serif);font-style:italic;color:var(--night);font-size:clamp(1rem,2.4vw,1.3rem);letter-spacing:.16em;margin-top:14px}
+.hero-years{display:inline-flex;align-items:center;gap:14px;margin-top:22px;color:var(--ink-soft);font-size:.92rem;letter-spacing:.18em}
+.hero-years .v{color:var(--gold);font-family:var(--serif);font-weight:700}
+.hero-years .dash{width:42px;height:1px;background:linear-gradient(90deg,transparent,var(--ink-faint),transparent)}
+.hero-tag{max-width:660px;margin:30px auto 0;color:var(--ink-soft);font-family:var(--serif);font-size:1.06rem;line-height:2.05;letter-spacing:.02em}
+.hero-tag em{font-style:normal;color:var(--night)}
+/* hero 装饰：一条河，从夜色里流出，河上一弯金色的启明 */
+.river{display:block;margin:5vh auto 0;max-width:680px;width:86%}
+
+/* ===== 区块通用标题 ===== */
+.sec-head{text-align:center;margin:11vh 0 5vh}
+.sec-head .k{font-size:.76rem;letter-spacing:.4em;color:var(--gold)}
+.sec-head h2{font-family:var(--serif);font-weight:700;font-size:clamp(1.5rem,4vw,2rem);letter-spacing:.1em;margin-top:8px}
+.sec-head p{color:var(--ink-soft);font-size:.92rem;margin-top:12px;letter-spacing:.02em;max-width:680px;margin-left:auto;margin-right:auto;line-height:1.95}
+
+/* ===== 生平概述 ===== */
+.bio{max-width:780px;margin:0 auto;font-size:1.02rem;color:var(--ink-soft);line-height:2.1}
+.bio p{margin-bottom:18px}
+.bio p:first-child::first-letter{
+  font-family:var(--serif);font-weight:900;color:var(--night);
+  font-size:3.1rem;line-height:1;float:left;margin:6px 14px 0 0;
+}
+.bio b{color:var(--ink);font-weight:600}
+
+/* ===== 生平与作品 · 时间流 ===== */
+.flow{position:relative;max-width:840px;margin:0 auto;padding:8px 0 2vh}
+.flow::before{
+  content:'';position:absolute;left:19px;top:6px;bottom:0;width:2px;
+  background:linear-gradient(180deg,transparent,var(--river) 6%,var(--river) 94%,transparent);
+  opacity:.45;
+}
+.flow-item{position:relative;padding:20px 0 22px 58px}
+.flow-dot{position:absolute;left:19px;top:26px;transform:translateX(-50%);width:11px;height:11px;border-radius:50%;background:var(--ink-faint);box-shadow:0 0 0 4px rgba(140,138,130,.15);z-index:2}
+.flow-dot.work{background:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 14%,transparent)}
+.flow-title{font-family:var(--serif);font-size:1.28rem;color:var(--ink);line-height:1.3}
+.flow-sub{font-size:.94rem;color:var(--ink-faint);margin-top:6px;line-height:1.9;max-width:640px}
+.flow-year{font-family:var(--serif);font-weight:700;color:var(--gold);font-size:1rem;letter-spacing:.14em;margin-top:14px;padding-top:10px;border-top:1px dashed var(--line);display:inline-block}
+.flow-year .lab{font-size:.72rem;letter-spacing:.3em;color:var(--ink-faint);margin-right:10px;font-weight:400;font-family:var(--sans)}
+
+/* 作品卡片 */
+.flow-work .flow-card{
+  position:relative;display:block;
+  border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:20px;
+  background:var(--paper);
+  padding:24px 30px 20px;overflow:hidden;margin-top:2px;
+  box-shadow:0 8px 22px rgba(60,60,80,.05);
+  transition:transform .4s cubic-bezier(.4,0,.2,1),border-color .4s,box-shadow .4s;
+}
+.flow-work .flow-card:hover{transform:translateX(8px);border-color:var(--accent);box-shadow:0 16px 36px -18px color-mix(in srgb,var(--accent) 45%,transparent)}
+.flow-card .order{font-family:var(--serif);font-size:.78rem;letter-spacing:.3em;color:var(--accent);opacity:.9}
+.flow-card .cn{font-family:var(--serif);font-weight:700;font-size:1.5rem;letter-spacing:.05em;margin-top:5px;color:var(--ink);line-height:1.2}
+.flow-card .de{font-family:var(--serif);font-style:italic;color:var(--accent);font-size:.86rem;letter-spacing:.07em;margin-top:3px}
+.flow-card .essence{font-size:.94rem;color:var(--ink-soft);margin-top:13px;line-height:1.95}
+.flow-card .trans{
+  margin-top:13px;font-size:.82rem;color:var(--ink-soft);letter-spacing:.02em;
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+}
+.flow-card .trans .seal{
+  flex-shrink:0;width:20px;height:20px;border-radius:50%;
+  border:1px solid var(--gold);color:var(--gold);
+  font-family:var(--serif);font-size:.68rem;line-height:18px;text-align:center;
+}
+.flow-card .trans b{color:var(--ink);font-weight:600}
+.flow-card .fromlife{font-size:.83rem;color:var(--ink-faint);margin-top:11px;line-height:1.8;border-top:1px dashed var(--line);padding-top:11px}
+.flow-card .fromlife b{color:var(--night);font-weight:400;font-family:var(--serif)}
+.flow-card .flow-year{margin-top:14px;border-top:none;padding-top:0}
+
+.flow-work.wheel{--accent:#7a5c40}  /* 车轮下：修道院与车轮的棕 */
+.flow-work.wolf{--accent:#2f3f63}   /* 荒原狼：夜色靛蓝 */
+.flow-work.sid{--accent:#a8842e}    /* 悉达多：东方金 */
+.flow-work.nar{--accent:#6e5f6b}    /* 精神与爱欲：灰紫 */
+.flow-work.glass{--accent:#4a7a80}  /* 玻璃球游戏：卡斯塔里青 */
+
+/* ===== 思想内核 ===== */
+.themes{max-width:880px;margin:0 auto;columns:2;column-gap:56px}
+.theme{break-inside:avoid;margin-bottom:34px;padding-bottom:30px;border-bottom:1px solid transparent;border-image:linear-gradient(90deg,var(--line),transparent) 1}
+.theme .no{font-family:var(--serif);color:var(--gold);font-size:.8rem;letter-spacing:.3em}
+.theme h3{font-family:var(--serif);font-size:1.18rem;color:var(--ink);margin:8px 0 9px;letter-spacing:.04em}
+.theme p{font-size:.9rem;color:var(--ink-soft);line-height:1.95}
+
+/* ===== 影响与回响 ===== */
+.legacy{max-width:840px;margin:0 auto}
+.leg-block{margin-bottom:36px}
+.leg-block h3{font-family:var(--serif);font-size:1.22rem;color:var(--night);letter-spacing:.06em;margin-bottom:14px;padding-left:14px;border-left:3px solid var(--gold)}
+.leg-block p{font-size:.97rem;color:var(--ink-soft);line-height:2;margin-bottom:12px}
+.leg-block b{color:var(--ink);font-weight:600}
+.leg-quote{
+  border:1px solid var(--line);border-left:3px solid var(--night);border-radius:20px;
+  background:var(--paper);
+  padding:24px 28px;font-family:var(--serif);font-size:1.06rem;line-height:2.05;color:var(--ink);
+}
+.leg-quote .src{display:block;margin-top:12px;font-family:var(--sans);font-size:.82rem;color:var(--ink-faint);letter-spacing:.06em}
+
+/* ===== footer ===== */
+.foot{margin-top:9vh;padding-top:26px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:.82rem;color:var(--ink-faint);letter-spacing:.05em}
+.foot a{color:var(--ink-soft);text-decoration:none;transition:color .2s}
+.foot a:hover{color:var(--night)}
+.foot-mark{display:inline-flex;align-items:center;gap:9px}
+
+@media(max-width:760px){
+  .themes{columns:1}
+  .flow::before{left:14px}
+  .flow-item{padding-left:46px}
+  .flow-dot{left:14px}
+}
+</style>
+</head>
+<body>
+<a href="index.html" class="back-home">← 返回首页</a>
+<div class="page">
+
+  <header class="hero">
+    <div class="hero-eyebrow">HERMANN HESSE</div>
+    <h1>赫尔曼·黑塞</h1>
+    <div class="hero-de">Hermann Hesse</div>
+    <div class="hero-years"><span class="v">1877</span><span class="dash"></span><span class="v">1962</span></div>
+    <p class="hero-tag">在<em>荒原</em>与<em>河流</em>之间，为每一个「迷途者」写信。<br>他写的不只是小说，而是一代代人灵魂里那头狼与那个人、那条终将入海的河。</p>
+    <!-- 一条河从夜色中流出，河上一点金色的启明 -->
+    <svg class="river" viewBox="0 0 680 32" fill="none" aria-hidden="true">
+      <path d="M0 24 C 60 18, 120 28, 190 22 S 320 15, 390 22 S 520 29, 680 21" stroke="#4a7a80" stroke-width="1.5" stroke-linecap="round" opacity=".55"/>
+      <path d="M60 28 C 140 24, 240 30, 340 26 S 520 23, 620 26" stroke="#4a7a80" stroke-width="1" stroke-linecap="round" opacity=".28"/>
+      <circle cx="612" cy="10" r="4.5" stroke="#a8842e" stroke-width="1.4" opacity=".9"/>
+      <g stroke="#2f3f63" stroke-width="1.3" stroke-linecap="round" opacity=".6">
+        <path d="M40 12 q6 -6 12 0"/><path d="M58 9 q5 -5 10 0"/>
+      </g>
+    </svg>
+  </header>
+
+  <!-- 生平概述 -->
+  <section class="sec-head">
+    <div class="k">LEBEN</div>
+    <h2>他怎样活成了「黑塞」</h2>
+  </section>
+  <div class="bio">
+    <p>赫尔曼·黑塞 <b>1877 年生于德国卡尔夫</b>，父亲是波罗的海德裔传教士，母亲生于印度——一个「两种文化之间的孩子」，他自认生来就站在欧洲与东方、理性与信仰的交界上。十四岁被送进毛尔布伦<b>神学院</b>，半年后出逃，此后在精神病疗养院、书店学徒与自由写作之间辗转谋生，几度试图自杀。这段「问题少年」的经历，日后变成了《车轮下》：被体制碾过的少年汉斯，是德国中学制度最著名的一份控诉。</p>
+    <p>第一次世界大战爆发，他因反战文章被祖国报纸围剿为「叛徒」，妻子精神分裂，幼子夭折，他本人开始接受<b>心理分析</b>——他的医生是荣格的学生，荣格本人也亲自为他做过咨询。这场自我分析的成果是《德米安》与《荒原狼》：前者让一代战壕归来的青年称他为「懂我们的人」；后者把中产市民哈勒尔拆成「狼与人」，写尽精神危机的整个地形。1923 年他入籍<b>瑞士</b>，从此隐居提契诺州的山村蒙塔尼奥拉。</p>
+    <p>他在那里写出《悉达多》——一个婆罗门青年用一生去「成为自己」——和晚年的集大成之作《玻璃球游戏》。纳粹时期，他留在瑞士庇护流亡者、写信声援被禁的作家。1946 年获<b>诺贝尔文学奖</b>。1962 年逝于蒙塔尼奥拉。他生前在德语文学界一度被冷落，却在 1960 年代的<b>美国嬉皮士运动</b>中被重新发现，成为整整一代「迷途青年」的精神向导。</p>
+  </div>
+
+  <!-- 生平与作品 时间流 -->
+  <section class="sec-head">
+    <div class="k">LEBEN UND WERKE</div>
+    <h2>生平与作品 · 同一条河流</h2>
+    <p>黑塞的每一本书，都是他自己一次精神危机的化验单：神学院的出逃给了他《车轮下》，战争与心理分析给了他《荒原狼》，东方之旅给了他《悉达多》。下面把生平与作品编进同一条时间河流。</p>
+  </section>
+
+  <div class="flow">
+
+    <div class="flow-item flow-life">
+      <span class="flow-dot"></span>
+      <div class="flow-body">
+        <div class="flow-title">卡尔夫：两种文化之间的孩子</div>
+        <div class="flow-sub">传教士家庭，外祖父母曾在印度传教。东西方、虔诚与怀疑，从童年起就在他心里对峙。</div>
+        <div class="flow-year"><span class="lab">生平</span>1877</div>
+      </div>
+    </div>
+
+    <div class="flow-item flow-life">
+      <span class="flow-dot"></span>
+      <div class="flow-body">
+        <div class="flow-title">逃离神学院</div>
+        <div class="flow-sub">十四岁进入毛尔布伦神学院，七个月后出逃。此后被疗养院收留过、在书店当过学徒，最终被文学收留。</div>
+        <div class="flow-year"><span class="lab">生平</span>1891–95</div>
+      </div>
+    </div>
+
+    <div class="flow-item flow-work wheel">
+      <span class="flow-dot work"></span>
+      <div class="flow-card">
+        <span class="order">壹 · 碾碎一颗心灵的车轮</span>
+        <div class="cn">车轮下</div>
+        <div class="de">Unterm Rad</div>
+        <div class="essence">少年汉斯·吉本拉特是天资聪颖的「优等生」，被父亲、学校与整个功绩机器推着狂奔，最终在神学院的同学于友情中短暂复活、又再次沉没，直至被碾进冰冷的河水。这是德语文学对教育异化最著名的控诉——「宁可心中尽是忧伤，也不愿脸上强作欢颜」。</div>
+        <div class="trans"><span class="seal">荐</span>推荐译本：<b>杨武能 译</b> · 译林出版社</div>
+        <div class="fromlife"><b>从生活里来：</b>神学院出逃与表弟之死的双重回声；出版后他随即声名鹊起，却终身心疼「被车轮碾过」的少年们。</div>
+        <div class="flow-year"><span class="lab">创作</span>1906</div>
+      </div>
+    </div>
+
+    <div class="flow-item flow-life">
+      <span class="flow-dot"></span>
+      <div class="flow-body">
+        <div class="flow-title">一战、围剿与心理分析</div>
+        <div class="flow-sub">反战文幸遭祖国围剿，家庭破碎，精神几近崩溃。他在荣格学派的心理分析里解剖自己，也找到了新的写作方法。</div>
+        <div class="flow-year"><span class="lab">生平</span>1914–19</div>
+      </div>
+    </div>
+
+    <div class="flow-item flow-work wolf">
+      <span class="flow-dot work"></span>
+      <div class="flow-card">
+        <span class="order">贰 · 狼与人的双重灵魂</span>
+        <div class="cn">荒原狼</div>
+        <div class="de">Der Steppenwolf</div>
+        <div class="essence">哈里·哈勒尔自称体内一半是人、一半是荒原狼，在市民社会的体面与灵魂的荒野之间无处安放。魔术剧院的门上写着「并非人人都能进去」——全书是一场用爵士乐、莫扎特与地狱喜剧完成的自我治疗。它最终要说的是：人不是二元的，人有千百个灵魂；学会自嘲，才能活下去。</div>
+        <div class="trans"><span class="seal">荐</span>推荐译本：<b>涂媛媛 译</b> · 上海三联书店（另有姜乙译本）</div>
+        <div class="fromlife"><b>从生活里来：</b>写于他接受心理分析之后——哈勒尔的病历，就是他自己那几年灵魂的化验单。</div>
+        <div class="flow-year"><span class="lab">创作</span>1927</div>
+      </div>
+    </div>
+
+    <div class="flow-item flow-work sid">
+      <span class="flow-dot work"></span>
+      <div class="flow-card">
+        <span class="order">叁 · 向东方问路</span>
+        <div class="cn">悉达多</div>
+        <div class="de">Siddhartha</div>
+        <div class="essence">婆罗门之子悉达多拒绝一切现成的真理：苦行、佛陀的教义、爱欲、财富，他一一亲历又一一离开，最终在一条河边，向一个摆渡人学会了「听」。这是黑塞写给西方的东方之书——但它不是讲佛教，而是讲一个人如何不借任何权威、亲自抵达自我。篇幅不足两百页，却是他最常被重读的书。</div>
+        <div class="trans"><span class="seal">荐</span>推荐译本：<b>姜乙 译</b> · 天津人民出版社</div>
+        <div class="fromlife"><b>从生活里来：</b>父亲曾是印度传教士，1911 年他又亲身游历锡兰与南洋——东方是他一生的乡愁与药方。</div>
+        <div class="flow-year"><span class="lab">创作</span>1922</div>
+      </div>
+    </div>
+
+    <div class="flow-item flow-work nar">
+      <span class="flow-dot work"></span>
+      <div class="flow-card">
+        <span class="order">肆 · 精神与生命的一对镜像</span>
+        <div class="cn">精神与爱欲</div>
+        <div class="de">Narziß und Goldmund</div>
+        <div class="essence">又译《纳尔齐斯与歌尔德蒙》。修道院里的一对挚友：纳尔齐斯走向纯粹的精神，歌尔德蒙出走于尘世的情爱与死亡之间、最终成为雕刻家。两条道路彼此羡慕又彼此成全——黑塞把「理性与感性」「父性与母性」的百年之争，写成了一场持续一生的对话。他自己承认：这是他「最满意的小说」。</div>
+        <div class="trans"><span class="seal">荐</span>推荐译本：<b>李双志 译</b> · 果麦文化（旧译本题《纳尔齐斯与歌尔德蒙》）</div>
+        <div class="fromlife"><b>从生活里来：</b>写于两次世界大战之间——他当时最深的信念是：感性的、母性的生命之流，或许比一切精神体系更能救人。</div>
+        <div class="flow-year"><span class="lab">创作</span>1930</div>
+      </div>
+    </div>
+
+    <div class="flow-item flow-work glass">
+      <span class="flow-dot work"></span>
+      <div class="flow-card">
+        <span class="order">伍 · 精神王国的总决算</span>
+        <div class="cn">玻璃球游戏</div>
+        <div class="de">Das Glasperlenspiel</div>
+        <div class="essence">虚构了一个把数学、音乐与哲学熔于一炉的「玻璃球游戏」的精神国度卡斯塔里亚。主人公克乃西特从僧侣般的学者生涯走向俗世——最终为教育一个孩子溺亡于山中湖水里。这是黑塞对「精神是否应当对世界负责」的终极回答：象牙塔里的完美，必须走出去才会活。</div>
+        <div class="trans"><span class="seal">荐</span>推荐译本：<b>张佩芬 译</b> · 上海译文出版社</div>
+        <div class="fromlife"><b>从生活里来：</b>动笔于纳粹上台前夕，写作十二年——这部书也是他在法西斯黑暗中对「精神存续」的孤岛式建构。</div>
+        <div class="flow-year"><span class="lab">创作</span>1931–42</div>
+      </div>
+    </div>
+
+    <div class="flow-item flow-life">
+      <span class="flow-dot"></span>
+      <div class="flow-body">
+        <div class="flow-title">诺奖与迟来的「青年教皇」</div>
+        <div class="flow-sub">1946 年获诺贝尔文学奖。1960 年代，《荒原狼》与《悉达多》在美国大学生中成为现象级读物，逝后被一代代「迷途者」重新发现。</div>
+        <div class="flow-year"><span class="lab">生平</span>1946–62</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 思想内核 -->
+  <section class="sec-head">
+    <div class="k">GEDANKEN</div>
+    <h2>他反复在写的几件事</h2>
+    <p>从神学院的逃亡者到玻璃球游戏的大师，黑塞的书其实只有同一个主题：一个人如何成为自己。这几条是他作品的「基因」。</p>
+  </section>
+  <div class="themes">
+    <div class="theme"><div class="no">Ⅰ</div><h3>通往内在的路</h3><p>「人只有一条路可走：成为自己。」他的主人公全都拒绝现成的人生方案，宁可迷路也要亲自走一遍。</p></div>
+    <div class="theme"><div class="no">Ⅱ</div><h3>双重灵魂</h3><p>狼与人、精神与生命、圣徒与浪子——黑塞相信人性从来不是一元的，承认分裂、而不是消灭分裂，才是成熟的开始。</p></div>
+    <div class="theme"><div class="no">Ⅲ</div><h3>对功绩机器的拒斥</h3><p>从《车轮下》到《荒原狼》，他一直警惕把人变成制度的燃料——优等生、模范市民，都是被磨平的别名。</p></div>
+    <div class="theme"><div class="no">Ⅳ</div><h3>东方与河流</h3><p>河流在他笔下是最高导师：它同时是源头与入海，教人听见千万种声音合而为一。东方智慧是他给欧洲开的药方。</p></div>
+    <div class="theme"><div class="no">Ⅴ</div><h3>幽默与自嘲</h3><p>《荒原狼》的药方之一：对自身的痛苦保留一个微笑。魔术剧院教给哈勒尔的，正是「永远笑那生而为人这件事」。</p></div>
+    <div class="theme"><div class="no">Ⅵ</div><h3>精神对世界的责任</h3><p>玻璃球游戏的结局是出走：完美的精神王国若不肯下山教育孩子，就只是精致的死亡。晚年黑塞把艺术让位给了行动。</p></div>
+  </div>
+
+  <!-- 影响与回响 -->
+  <section class="sec-head">
+    <div class="k">NACHKLÄNGE</div>
+    <h2>影响与回响 · 一种综合式的评价</h2>
+    <p>他是被两代青年先后「认领」的作家：一战后的德国青年与六十年代的美国青年。下面是谁读过他、谁被他改变。</p>
+  </section>
+  <div class="legacy">
+
+    <div class="leg-block">
+      <h3>一代代「迷途青年」的向导</h3>
+      <p>《德米安》扉页题词「每个人都从自身寻找自己」，让一战后战壕归来的青年奉他为知音；六十年代，《荒原狼》《悉达多》成为<b>美国嬉皮士运动</b>的「圣经」，「要做荒原狼，不要做市民」成了口号。他大概是最被青年反复重新发现的经典作家。</p>
+    </div>
+
+    <div class="leg-block">
+      <h3>文学与心理学的双重血统</h3>
+      <p>他与<b>荣格</b>的交情是文学史上少见的例子：荣格本人为他做过咨询，心理分析直接重塑了他的叙事——于是有了魔术剧院与《悉达多》的深层结构。<b>托马斯·曼</b>称《荒原狼》「大胆而深刻，堪与乔伊斯比肩」；博尔赫斯、纪德与三岛由纪夫都对他另有褒词。</p>
+    </div>
+
+    <div class="leg-block">
+      <h3>在中国：从「浪漫骑士」到当代青年书单</h3>
+      <p>黑塞是最早被完整译介到中国的德语作家之一，<b>杨武能、张佩芬</b>等翻译家为他建立了完整的中文谱系；近十年<b>姜乙</b>译《悉达多》再度引爆，让「成为自己」这句话在又一代读者里流通。他的书名几乎成了心理成长书单的通用词根。</p>
+    </div>
+
+    <div class="leg-block">
+      <h3>一份综合式的评价</h3>
+      <div class="leg-quote">他一生的写作只有一件事：替那些不肯照章活着的人，把迷路的感受写清楚。他没有构建过思想体系，却把心理学、东方宗教与德语抒情传统熔进小说，做成了一面照见「分裂自我」的镜子。他的局限也在同一处——晚年他被奉为「灵魂导师」，青年们只取走了甜的部分，却常常漏掉《荒原狼》的自嘲与《玻璃球游戏》的下山：黑塞从来不是让人逃避世界的，他是让人先认领了自己，再回到世界里去。<span class="src">—— 编者综合自托马斯·曼、荣格学派评述与历代读者的共识</span></div>
+    </div>
+
+  </div>
+
+  <footer class="foot">
+    <span class="foot-mark"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><g stroke="#4a7a80" stroke-width="1.6" stroke-linecap="round" fill="none"><path d="M4 16 C 8 10, 16 22, 20 14"/><path d="M4 20 C 8 14, 16 26, 20 18" opacity=".5"/><circle cx="18" cy="6" r="2.6" stroke="#a8842e"/></g></svg>© <em style="font-style:normal;color:var(--ink-soft)">zzht</em> · 赫尔曼·黑塞 · 生平 · 思想 · 回响</span>
+    <a href="index.html">返回站点首页 ↗</a>
+  </footer>
+
+</div>
+</body>
+</html>
