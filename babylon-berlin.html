@@ -325,7 +325,7 @@ body {
   border-right: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
 }
-.season-block.open .season-detail { max-height: 4200px; padding: 26px; }
+.season-block.open .season-detail { max-height: 12000px; padding: 26px; }
 .season-detail-grid {
   display: grid; grid-template-columns: 1.35fr 1fr;
   gap: 18px;
@@ -384,6 +384,73 @@ body {
   color: var(--sc, var(--s1)); font-size: .8rem;
 }
 .hook-card li strong { color: var(--ink); font-weight: 600; }
+
+/* ========================================================
+   三线收敛 · 剧情导读新结构（DESIGN.md 第五节）
+   ======================================================== */
+.season-position {
+  font-family: var(--serif); font-weight: 900; font-size: 1.05rem;
+  line-height: 1.7; color: var(--ink); margin: 4px 0 18px;
+  padding: 15px 20px; background: var(--paper);
+  border: 1px solid var(--border-soft); border-left: 4px solid var(--sc, var(--s1));
+  border-radius: 12px;
+}
+.season-position b { color: var(--sc, var(--s1)); }
+.three-lines {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 14px;
+}
+.line-card {
+  background: var(--paper); border: 1px solid var(--border-soft);
+  border-radius: 16px; padding: 18px 18px 16px; position: relative; overflow: hidden;
+  transition: transform .2s, border-color .2s;
+}
+.line-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: var(--lc, var(--sc, var(--s1)));
+}
+.line-card:hover { transform: translateY(-2px); border-color: var(--lc); }
+.line-card h4 {
+  font-family: var(--mono); font-size: .74rem; font-weight: 600;
+  letter-spacing: .12em; color: var(--lc, var(--sc, var(--s1)));
+  margin-bottom: 10px; display: flex; align-items: center; gap: 8px; text-transform: uppercase;
+}
+.line-card h4 .lc-de {
+  font-family: var(--fraktur); font-size: 1.15rem; font-weight: 400;
+  color: var(--lc, var(--sc, var(--s1)));
+}
+.line-card p { font-size: .87rem; color: var(--ink-soft); line-height: 1.95; }
+.line-card.line-case { --lc: var(--red); }
+.line-card.line-political { --lc: #2f5a78; }
+.line-card.line-character { --lc: var(--gold); }
+.converge-block {
+  background: linear-gradient(180deg, rgba(160,37,28,.06), rgba(160,37,28,0));
+  border: 1px solid var(--border-soft); border-radius: 14px;
+  padding: 16px 20px; margin-bottom: 14px;
+}
+.converge-block h4 {
+  font-family: var(--serif); font-weight: 900; font-size: 1.02rem;
+  letter-spacing: .08em; color: var(--red); margin-bottom: 8px;
+}
+.converge-block p { font-size: .9rem; color: var(--ink-soft); line-height: 1.9; }
+.history-note {
+  background: var(--paper); border: 1px dashed var(--border);
+  border-radius: 14px; padding: 14px 20px; margin-bottom: 16px;
+}
+.history-note h4 {
+  font-family: var(--mono); font-size: .72rem; font-weight: 600;
+  letter-spacing: .16em; color: var(--ink-faint); margin-bottom: 8px; text-transform: uppercase;
+}
+.history-note ul { list-style: none; padding: 0; margin: 0; }
+.history-note li {
+  font-size: .85rem; color: var(--ink-soft); line-height: 1.8;
+  padding: 5px 0 5px 18px; position: relative;
+}
+.history-note li::before {
+  content: ''; position: absolute; left: 0; top: 13px;
+  width: 7px; height: 7px; border-radius: 50%; background: var(--gold); opacity: .85;
+}
+.history-note li b { color: var(--ink); font-weight: 600; }
+@media (max-width: 720px) { .three-lines { grid-template-columns: 1fr; } }
 
 /* ========================================================
    主线全景图
@@ -771,40 +838,40 @@ body {
         <span class="season-toggle">▾</span>
       </div>
       <div class="season-detail">
-        <div class="season-detail-grid">
-          <div class="detail-card">
-            <h4><span class="icon">▶</span> 剧情梗概</h4>
-            <p>科隆警探 Gereon Rath 以借调名义来到柏林风化组，身负科隆市长——日后的西德首任总理——<strong>阿登纳</strong>的秘密委托：找回一盘用于勒索的色情胶片，那上面有足以终结阿登纳政治生命的东西。Rath 是一战西线老兵，战争创伤让他必须靠吗啡压住颤抖的双手；搭档 Bruno Wolter 老练热络，暗地里却与“黑色国防军”——一支正在非法重整军备的地下军队——过从甚密。</p>
-            <p style="margin-top:10px;">另一条线上，贫民区的姑娘 Charlotte Ritter 白天在警局凶杀组做临时速记员，夜里在夜总会 Moka Efti 伴舞、兼职卖淫养活全家。她被卷进一桩更大的事：一列从苏联开来的列车，挂着一节装满黄金的车厢——托派流亡者、苏联特工、黑国防军、柏林黑帮，全都盯上了它。5 月 1 日，警察向被禁的工人示威开枪（史实“血五月”），Rath 亲眼看着这座城市撕下体面。</p>
+        <p class="season-position">1929 年春，科隆警探 Gereon Rath 带着一桩秘密使命来到柏林——他卷进的，是一盘色情勒索胶片、一列苏联黄金列车、和一个被战争撕裂的年轻人；三条线在季末的保险箱前撞了个正着。</p>
+        <div class="three-lines">
+          <div class="line-card line-case">
+            <h4><span class="lc-de">A</span> 案件线</h4>
+            <p><b>起点</b>：Rath 表面借调进柏林风化组扫黄，真实任务来自科隆市长阿登纳——大选前必须找回一盘勒索他的色情胶片并销毁。<b>发展</b>：胶片流进了“亚美尼亚人”Edgar Kasabian 的夜总会保险箱，里面远不止一盘胶片；Rath 与搭档 Bruno 顺线追到地下色情片拍摄窝点，眼看黑帮、政客、警察彼此缠绕。<b>结局</b>：季末 Rath 终于撬开那只保险箱，取回胶片（里面除阿登纳，还有他父亲等一众权贵），当众销毁，把柄就此湮灭。</p>
           </div>
-          <div class="detail-card">
-            <h4><span class="icon">●</span> 本季三案</h4>
-            <ul>
-              <li><strong>勒索胶片案</strong> — 色情片拍摄窝点、政客丑态、“亚美尼亚人”的保险箱</li>
-              <li><strong>苏联黄金列车</strong> — 托派小组被苏联使馆枪手清洗，司机灭口，毒气车厢</li>
-              <li><strong>血五月（Blutmai）</strong> — 5 月 1 日警察开枪，警局竭力洗白</li>
-            </ul>
-            <h4 style="margin-top:16px"><span class="icon">◇</span> 关键人物</h4>
-            <div>
-              <span class="char-tag" title="科隆来的警探，吗啡、创伤与秘密使命">Gereon Rath</span>
-              <span class="char-tag" title="速记员、舞女、全剧女主">Charlotte Ritter</span>
-              <span class="char-tag" title="表面是老大哥，实则黑国防军同谋">Bruno Wolter</span>
-              <span class="char-tag" title="政治警察首领，共和的守夜人">August Benda</span>
-              <span class="char-tag" title="双面歌姬，黄金案核心">Svetlana Sorokina</span>
-              <span class="char-tag" title="托派小组领袖">Alexei Kardakov</span>
-              <span class="char-tag" title="“亚美尼亚人”，夜柏林教父">Edgar Kasabian</span>
-              <span class="char-tag" title="Rath 的房东太太">Elisabeth Behnke</span>
-            </div>
+          <div class="line-card line-political">
+            <h4><span class="lc-de">B</span> 政治线</h4>
+            <p><b>起点</b>：一列苏联列车开进柏林，末节车厢满载索罗金黄金，托派流亡者 Kardakov、苏联特工与双面“歌女”Svetlana 各怀鬼胎。<b>发展</b>：黑色国防军（一支非法重整军备的地下军队）盯上了列车上的毒气；Rath 的搭档 Bruno 正是这条线上的人。<b>结局</b>：黄金与毒气在季末成了悬案——谁也没能独占，只留下黑国防军第一次清晰的轮廓。</p>
           </div>
-          <div class="hook-card">
-            <h4>看完这一季，请记住</h4>
-            <ul>
-              <li><strong>胶片到手并被销毁</strong>——里面除了阿登纳，还有 Rath 的父亲等一众权贵；但 Rath 庆功时被下药，遭神秘神父追逐，命悬一线。</li>
-              <li><strong>黄金列车疑云未解</strong>：托派被清洗、毒气车厢曝光，黑国防军的轮廓第一次显形。</li>
-              <li><strong>Bruno 不可信</strong>；<strong>Benda 在查黑国防军</strong>；<strong>Charlotte 懂速记、懂街头、正在挨穷</strong>。</li>
-              <li>Greta（Charlotte 的好友）出场——记住她，她是第二、三季最重的悲剧。</li>
-            </ul>
+          <div class="line-card line-character">
+            <h4><span class="lc-de">C</span> 人物线</h4>
+            <p><b>起点</b>：贫民区姑娘 Charlotte 白天在警局凶杀组做临时速记员，夜里在 Moka Efti 伴舞、兼职卖淫养活全家，被 Bruno 逼作眼线。<b>发展</b>：5 月 1 日“血五月”，警察向被禁的工人示威开枪，Rath 的战争创伤当场发作。<b>结局</b>：两个主角都被柏林咬了一口——Charlotte 看清了城市的底，Rath 的手还在抖；而他庆功那夜被下药，遭一名神秘神父雨夜追杀。</p>
           </div>
+        </div>
+        <div class="converge-block">
+          <h4>季终交汇</h4>
+          <p>三条线在 Edgar 的保险箱前收束：Rath 抢回并销毁了勒索胶片，黄金列车与毒气就此成谜；庆功夜他却被下药，神秘神父在雨夜里追他不放。</p>
+        </div>
+        <div class="history-note">
+          <h4>史实对照</h4>
+          <ul>
+            <li><b>血五月（Blutmai）</b>：1929 年 5 月 1 日，柏林警察向被禁的五一示威者开枪，死者数十人。史实。</li>
+            <li><b>黑色国防军（Schwarze Reichswehr）</b>：规避《凡尔赛条约》的秘密武装，真实存在；剧中政变与毒气线以此为本。</li>
+          </ul>
+        </div>
+        <div class="hook-card">
+          <h4>看完这一季，请记住</h4>
+          <ul>
+            <li>勒索胶片已销毁，但 Rath 被神父追杀——这个悬念直接带进第二季。</li>
+            <li>黄金列车和毒气去向成谜；Bruno 不可信，Benda 正在查黑国防军。</li>
+            <li>Charlotte 懂速记、懂街头、正挨穷——她是后面真正的女主。</li>
+            <li>Greta（Charlotte 好友）已出场，记住她：她是第二、三季最重的悲剧。</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -821,40 +888,40 @@ body {
         <span class="season-toggle">▾</span>
       </div>
       <div class="season-detail">
-        <div class="season-detail-grid">
-          <div class="detail-card">
-            <h4><span class="icon">▶</span> 剧情梗概</h4>
-            <p>红堡托派印刷厂的乱葬岗挖出十五具尸体，Rath 借机调入 Gennat 的凶杀组，与 Charlotte 正式并肩。调查顺藤摸瓜：苏联使馆的清洗、黑色国防军的非法军火、以及苏联境内 Lipetsk 秘密德军空军基地的证据。政治警察首领 Benda 拿到足以起诉 Seegers 等将军的罪证，却被兴登堡总统一纸命令放了人。</p>
-            <p style="margin-top:10px;">与此同时，Bruno 倒向“<strong>普兰格塔格</strong>”行动：黑国防军要在庆典日发动政变，拥立鲁登道夫为总理、迎回威廉二世。而一个更阴毒的计划在底层运转——女佣 Greta 被伪装成共产党人的纳粹特工“Fritz”欺骗操纵，最终在 Benda 的书房放下了炸弹。</p>
+        <p class="season-position">1929 年夏，红堡印刷厂挖出十五具尸体，Rath 正式调入凶杀组；与此同时一场拥戴旧皇帝的政变正在地下酝酿，而女佣 Greta 手里那枚炸弹，将亲手炸碎共和国最坚固的盾。</p>
+        <div class="three-lines">
+          <div class="line-card line-case">
+            <h4><span class="lc-de">A</span> 案件线</h4>
+            <p><b>起点</b>：托派印刷厂“红堡”的乱葬岗挖出十五具尸体，Rath 借机调入 Gennat 的凶杀组，与 Charlotte 正式并肩。<b>发展</b>：调查顺藤摸瓜，牵出苏联使馆的清洗、黑国防军的非法军火，以及苏联境内 Lipetsk 秘密德军空军基地的证据；政治警察首领 Benda 终于拿到足以起诉 Seegers 等将军的罪证。<b>结局</b>：但兴登堡总统一纸特赦令放了人——案件赢了推理，却输给了权力。</p>
           </div>
-          <div class="detail-card">
-            <h4><span class="icon">●</span> 本季四案</h4>
-            <ul>
-              <li><strong>红堡乱葬岗</strong> — 十五具尸体，弹道指向苏联使馆人员</li>
-              <li><strong>Benda 对黑国防军</strong> — Lipetsk 取证、法院逮捕令、总统特赦令</li>
-              <li><strong>普兰格塔格政变</strong> — 刺杀外长未遂、劫持黄金列车</li>
-              <li><strong>Greta 与炸弹</strong> — 纳粹设局，共和折盾</li>
-            </ul>
-            <h4 style="margin-top:16px"><span class="icon">◇</span> 关键人物</h4>
-            <div>
-              <span class="char-tag" title="凶杀组组长“佛陀”">Ernst Gennat</span>
-              <span class="char-tag" title="Benda 身死后上位者">Gottfried Wendt</span>
-              <span class="char-tag" title="被利用的女佣">Greta Overbeck</span>
-              <span class="char-tag" title="被认定阵亡的兄长">Anno Rath</span>
-              <span class="char-tag" title="Helga 携子来到柏林">Helga Rath</span>
-              <span class="char-tag" title="军火世家继承人">Alfred Nyssen</span>
-            </div>
+          <div class="line-card line-political">
+            <h4><span class="lc-de">B</span> 政治线</h4>
+            <p><b>起点</b>：Bruno 倒向黑国防军的政变计划——要在庆典日发难，拥立鲁登道夫为总理、迎回德皇。<b>发展</b>：与此同时，一个更阴毒的局在底层运转：纳粹特工伪装成共产党人，诱使女佣 Greta 在 Benda 书房放下炸弹。<b>结局</b>：政变流产，Benda 与女儿却被炸死；共和最坚固的盾就此碎裂，Greta 顶罪入狱。</p>
           </div>
-          <div class="hook-card">
-            <h4>看完这一季，请记住</h4>
-            <ul>
-              <li><strong>Benda 与女儿被炸死</strong>——共和国失去最坚固的盾牌；Greta 被捕顶罪。</li>
-              <li><strong>Bruno 死了</strong>：在黄金列车上与 Rath 摊牌，死于毒气爆炸。</li>
-              <li><strong>黄金之谜揭底</strong>：Svetlana 是冒名的双面间谍，假金条是障眼法，真金藏在罐车夹层；Kardakov 流亡巴黎。</li>
-              <li><strong>Wendt 上位</strong>接管政治警察，邀请 Rath 执掌秘密单位——记住这个人，他是贯穿到第五季的权力玩家。</li>
-              <li>季末重磅：催眠中 Rath 直面战争记忆——他抛弃的哥哥 <strong>Anno 没死</strong>，毁容归来、化名心理医生 Schmidt 的正是他。</li>
-            </ul>
+          <div class="line-card line-character">
+            <h4><span class="lc-de">C</span> 人物线</h4>
+            <p><b>起点</b>：季末催眠中，Rath 被迫直面西线记忆，发现他以为阵亡的兄长 Anno 没死——毁容归来、化名心理医生 Schmidt 的正是他。<b>发展</b>：妻子 Helga 携子 Moritz 来到柏林，家庭的裂缝在战争阴影下越撕越大。<b>结局</b>：Bruno 在黄金列车上与 Rath 摊牌，死于毒气爆炸；黄金之谜揭底——Svetlana 是冒名双面间谍、假金条是障眼法、真金藏在罐车夹层，Kardakov 流亡巴黎。</p>
           </div>
+        </div>
+        <div class="converge-block">
+          <h4>季终交汇</h4>
+          <p>政变、炸案、黄金列车三线在季末汇成一声闷响：Benda 殒命、Bruno 身死、Wendt 接管政治警察。Rath 偷录下的认罪唱片，成了钉死 Wendt 的唯一把柄。</p>
+        </div>
+        <div class="history-note">
+          <h4>史实对照</h4>
+          <ul>
+            <li><b>鲁登道夫（Ludendorff）</b>：一战德军名将，真实人物；战后参与多起右翼政变，剧中拥立对象。</li>
+            <li><b>兴登堡特赦</b>：总统以行政权为将领脱罪，映射魏玛“军权凌驾共和”的真实困局。</li>
+          </ul>
+        </div>
+        <div class="hook-card">
+          <h4>看完这一季，请记住</h4>
+          <ul>
+            <li>Benda 之死＝共和国失去最坚固的盾；Wendt 上位，记住他——他贯穿到第五季。</li>
+            <li>Anno 活着，是心理医生 Schmidt；他与 Rath 的兄弟恩怨是后面的大线。</li>
+            <li>Greta 顶罪，她的死刑是第三季最痛的一笔。</li>
+            <li>Rath 录下了 Wendt 的认罪唱片——证据还在。</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -871,39 +938,40 @@ body {
         <span class="season-toggle">▾</span>
       </div>
       <div class="season-detail">
-        <div class="season-detail-grid">
-          <div class="detail-card">
-            <h4><span class="icon">▶</span> 剧情梗概</h4>
-            <p>本季从结局讲起：柏林交易所崩盘、人潮与自杀者——然后倒回五周前。有声电影时代来临，女星 <strong>Betty Winter</strong> 在片场被做了手脚的聚光灯砸死，投资了二百万马克的黑帮教父“亚美尼亚人”Edgar 施压破案。Rath 的调查搅进片场阴谋、接替者 Vera Lohmann 之死、Edgar 的搭档 Weintraub 被诬陷——而真凶出在警局内部：鉴识科技术员 <strong>Ullrich</strong> 为证明“鉴识科学碾压传统刑侦”，炮制连环杀手假象、伪造证据、直至劫持 Gennat。</p>
-            <p style="margin-top:10px;">同时，Wendt 为掩盖 Benda 案真相步步灭口：枪杀特工“Fritz”本尊、放任外长斯特雷泽曼中风死去（史实：1929 年 10 月 3 日）、把知情人 Greta 的死刑提前执行——Charlotte 和律师 Litten 带着缓刑令赶到时，断头台已经落下。季末股灾全面爆发，探长 Böhm 血本无归挟持交易所，Rath 把老上司从自杀边缘劝了回来；Helga 怀着 Rath 的孩子离开他，走向 Nyssen。</p>
+        <p class="season-position">1929 年秋，有声电影时代降临，女星在片场被一盏聚光灯砸死；而警局内部的真凶、一桩被加速的死刑、和十月末那场吞没柏林的股灾，把魏玛的体面一层层剥下。</p>
+        <div class="three-lines">
+          <div class="line-card line-case">
+            <h4><span class="lc-de">A</span> 案件线</h4>
+            <p><b>起点</b>：有声电影来临，女星 Betty Winter 在片场被做了手脚的聚光灯砸死，投资二百万马克的黑帮教父 Edgar 施压破案。<b>发展</b>：Rath 的调查搅进片场阴谋、接替者 Lohmann 之死，真凶却出在警局内部——鉴识科技术员 Ullrich 为证明“鉴识科学碾压传统刑侦”，炮制连环杀手假象、伪造证据、直至劫持上司 Gennat。<b>结局</b>：Ullrich 终落网，但警徽之下的裂缝再藏不住。</p>
           </div>
-          <div class="detail-card">
-            <h4><span class="icon">●</span> 本季四案</h4>
-            <ul>
-              <li><strong>Betty Winter 片场之死</strong> — 聚光灯、保险金、电影《恶魔激情》</li>
-              <li><strong>Ullrich 的连环杀手骗局</strong> — 警局内部的完美犯罪</li>
-              <li><strong>Greta 死刑救援战</strong> — Litten、缓刑令与被买通的看守</li>
-              <li><strong>股灾与做空</strong> — Nyssen 预见崩盘，借母亲的钱反向做空翻身</li>
-            </ul>
-            <h4 style="margin-top:16px"><span class="icon">◇</span> 关键人物</h4>
-            <div>
-              <span class="char-tag" title="遇害的电影明星">Betty Winter</span>
-              <span class="char-tag" title="鉴识科技术员，本季真凶">Leopold Ullrich</span>
-              <span class="char-tag" title="为 Greta 辩护的人权律师">Hans Litten</span>
-              <span class="char-tag" title="Edgar 之妻，后来成为导演">Esther Kasabian</span>
-              <span class="char-tag" title="Edgar 的搭档，出狱后被诬陷">Walter Weintraub</span>
-              <span class="char-tag" title="Anno 之子，加入希特勒青年团">Moritz Rath</span>
-            </div>
+          <div class="line-card line-political">
+            <h4><span class="lc-de">B</span> 政治线</h4>
+            <p><b>起点</b>：Wendt 为掩盖 Benda 案真相步步灭口——枪杀特工“Fritz”本尊、把知情人 Greta 的死刑提前执行。<b>发展</b>：他甚至放任外长斯特雷泽曼（史实 1929.10.3 病逝）在权力真空里死去。<b>结局</b>：季末 1929.10.29 华尔街股灾引爆柏林交易所挤兑，探长 Böhm 血本无归、举枪挟持交易所，被 Rath 从自杀边缘劝回。</p>
           </div>
-          <div class="hook-card">
-            <h4>看完这一季，请记住</h4>
-            <ul>
-              <li><strong>Greta 之死</strong>＝魏玛司法亲手执行的谋杀；Wendt 全身而退，但 Rath 偷录下他的认罪唱片——证据还在。</li>
-              <li><strong>Ullrich 落网</strong>；Edgar 的 Moka Efti 帝国继续运转，妻子 Esther 成长为导演。</li>
-              <li><strong>Nyssen 靠崩盘翻身</strong>，重新被保守派圈子接纳——他下一步要找的新靠山，叫希特勒。</li>
-              <li><strong>Moritz 加入希特勒青年团</strong>；Helga 离开；Rath 在兄长的“治疗”中戒断吗啡——治疗本身是另一种控制。</li>
-            </ul>
+          <div class="line-card line-character">
+            <h4><span class="lc-de">C</span> 人物线</h4>
+            <p><b>起点</b>：Charlotte 为救 Greta 四处奔走，律师 Litten 带着缓刑令赶到时，断头台已经落下。<b>发展</b>：Helga 怀着 Rath 的孩子离开他、走向军火商 Nyssen；Moritz 加入希特勒青年团。<b>结局</b>：Rath 在兄长 Schmidt 的“治疗”中戒断吗啡——可这治疗本身，是另一种控制。</p>
           </div>
+        </div>
+        <div class="converge-block">
+          <h4>季终交汇</h4>
+          <p>Greta 之死＝魏玛司法亲手执行的谋杀；Wendt 全身而退，但 Rath 偷录的认罪唱片仍在。股灾全面爆发，Helga 离开，Nyssen 靠崩盘翻身——所有人都嗅到了长夜的味道。</p>
+        </div>
+        <div class="history-note">
+          <h4>史实对照</h4>
+          <ul>
+            <li><b>古斯塔夫·斯特雷泽曼（Gustav Stresemann）</b>：魏玛外长、诺贝尔和平奖得主，1929.10.3 病逝，史实。</li>
+            <li><b>1929 年华尔街股灾</b>：10 月 29 日“黑色星期二”，引爆全球大萧条；剧中柏林交易所崩盘即此。</li>
+          </ul>
+        </div>
+        <div class="hook-card">
+          <h4>看完这一季，请记住</h4>
+          <ul>
+            <li>Greta 之死是魏玛司法的谋杀；Wendt 脱罪，但认罪唱片在 Rath 手里。</li>
+            <li>Nyssen 靠崩盘翻身，下一步要找的靠山叫希特勒。</li>
+            <li>Moritz 入希特勒青年团；Helga 离开；Rath 戒断吗啡却落入兄长控制。</li>
+            <li>Edgar 的 Moka Efti 帝国照转，妻子 Esther 长成导演。</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -920,45 +988,45 @@ body {
         <span class="season-toggle">▾</span>
       </div>
       <div class="season-detail">
-        <div class="season-detail-grid">
-          <div class="detail-card">
-            <h4><span class="icon">▶</span> 剧情梗概</h4>
-            <p>大萧条中的柏林，失业与街头暴力成为日常。Nyssen 在新年夜宴上公开与 Helga 的关系并展示家族新项目——他已在为纳粹的战争机器筹备火箭。纽约犹太黑帮 <strong>Abraham Goldstein</strong> 同步抵达：他要追回 Nyssen 家发迹时侵吞的传家蓝钻“蓝色罗柴尔德”，为此不惜绑架 Helga 与 Nyssen 老夫人。</p>
-            <p style="margin-top:10px;">Rath 接下全剧最危险的任务——<strong>卧底冲锋队</strong>，接近柏林 SA 头目 Stennes：警方的算盘是挑动 SA 内讧，从内部撕裂纳粹党。他必须穿着褐衫行进在游行队伍里，被同事和 Charlotte 唾弃。Charlotte 这边：妹妹 Toni 卷入盗窃与一桩警察被杀案，她为保护妹妹丢掉警徽，靠舞蹈马拉松糊口；停职期间她盯上一连串被草草结案为“意外”的流浪儿死亡案，挖出由法官、检察官、警察组成的私刑组织“<strong>白手</strong>”，最终将其扳倒、复职归队。</p>
-            <p style="margin-top:10px;">1931 年 4 月 1 日（史实），Stennes 的 SA 占领纳粹党部与印刷厂公开造反。警方本可坐视纳粹分裂，<strong>Wendt 却调来警察武装的 SS 镇压暴动</strong>，亲手把纳粹党从内战边缘拉了回来——向元首递上了投名状。</p>
+        <p class="season-position">1930 岁末至 1931 年春，大萧条把柏林拖进街头暴力；Rath 穿上褐衫卧底冲锋队，Charlotte 扳倒一个私刑组织，而 1931 年 4 月 1 日那场 SA 暴动，被 Wendt 亲手按了回去。</p>
+        <div class="three-lines">
+          <div class="line-card line-case">
+            <h4><span class="lc-de">A</span> 案件线</h4>
+            <p><b>起点</b>：Charlotte 盯上一连串被草草结案为“意外”的流浪儿死亡，挖出由法官 Voss、检察官与警察组成的私刑组织“白手”。<b>发展</b>：其间妹妹 Toni 卷入盗窃与一桩警察被杀案，Charlotte 为护妹丢掉警徽，靠舞蹈马拉松糊口。<b>结局</b>：她终究扳倒“白手”、复职归队——这是四季里她最硬的一次翻身。</p>
           </div>
-          <div class="detail-card">
-            <h4><span class="icon">●</span> 本季四案</h4>
-            <ul>
-              <li><strong>“白手”私刑组织</strong> — 流浪儿连环死亡案、法官 Voss、Sonnenborn 拘留所</li>
-              <li><strong>蓝钻“蓝色罗柴尔德”</strong> — Goldstein 的追讨与绑架</li>
-              <li><strong>卧底 SA</strong> — Stennes 与 Helldorff 两派的帮派战争</li>
-              <li><strong>Toni 与警察被杀案</strong> — Charlotte 丢警徽的导火索</li>
-            </ul>
-            <h4 style="margin-top:16px"><span class="icon">◇</span> 关键人物</h4>
-            <div>
-              <span class="char-tag" title="纽约犹太黑帮，为家族蓝钻而来">Abraham Goldstein</span>
-              <span class="char-tag" title="柏林 SA 头目，史实人物">Walter Stennes</span>
-              <span class="char-tag" title="“白手”头目，腐败法官">Dr. Ferdinand Voss</span>
-              <span class="char-tag" title="Charlotte 的妹妹">Toni Ritter</span>
-              <span class="char-tag" title="神枪手，与 Völcker 密谋刺杀 Wendt">Malu Seegers</span>
-              <span class="char-tag" title="将军之女，为莫斯科当间谍">Marie-Luise Seegers</span>
-            </div>
+          <div class="line-card line-political">
+            <h4><span class="lc-de">B</span> 政治线</h4>
+            <p><b>起点</b>：Rath 接下全剧最险的任务——卧底冲锋队（SA），接近柏林 SA 头目 Stennes，警方的算盘是挑动 SA 内讧、从内部撕裂纳粹。<b>发展</b>：1931 年 4 月 1 日（史实），Stennes 的 SA 占领纳粹党部与印刷厂公开造反，警方本可坐视纳粹分裂。<b>结局</b>：Wendt 却调来警察武装的 SS 镇压暴动，亲手把纳粹党从内战边缘拉回，向希特勒递上了投名状。</p>
           </div>
-          <div class="hook-card">
-            <h4>大结局 · 距离长夜还有 670 天</h4>
-            <ul>
-              <li><strong>Stennes 暴动失败</strong>：Rath 卧底身份暴露，九死一生；Wendt 用 SS 镇压 SA，纳粹党逃过分裂，Wendt 完成向纳粹的转身。</li>
-              <li><strong>Goldstein 查明真相</strong>：律师 Wegener 才是当年窃钻之人；他把钻石留给欧洲亲人，乘齐柏林飞艇返美，Helga 获释；老夫人之死让 Nyssen 颗粒无收——他转身向希特勒献上火箭，与元首的晚餐已在日程上。</li>
-              <li><strong>Edgar 屠场</strong>：在警察总局的帮派“和谈会”上把柏林各路头目尽数枪杀，一战洗牌地下世界。</li>
-              <li><strong>Gereon 与 Charlotte 第一次真正走到一起</strong>，在拳赛与舞池里短暂地幸福；Gereon 对哥哥说“我不再需要你了”。而在 Dr. Schmidt 的院子里，一支由战争伤员组成的灰色“破碎者军团”正在列队。</li>
-            </ul>
+          <div class="line-card line-character">
+            <h4><span class="lc-de">C</span> 人物线</h4>
+            <p><b>起点</b>：纽约犹太黑帮 Goldstein 为追回家族蓝钻“蓝色罗柴尔德”来到柏林，绑架了 Helga 与 Nyssen 老夫人。<b>发展</b>：真相揭开——当年窃钻的是律师 Wegener；Goldstein 把钻石留给欧洲亲人，乘齐柏林飞艇返美，Helga 获释。<b>结局</b>：地下世界同样洗牌——Edgar 在警察总局的“和谈会”上把各路头目尽数枪杀；Gereon 与 Charlotte 第一次真正走到一起，而 Dr. Schmidt 的院子里，一支由战争伤员组成的灰色“破碎者军团”正在列队。</p>
           </div>
+        </div>
+        <div class="converge-block">
+          <h4>季终交汇</h4>
+          <p>Stennes 暴动失败，Rath 卧底暴露、九死一生；Wendt 用 SS 按住 SA，完成向纳粹的转身。Goldstein 查明真相返美，Nyssen 颗粒无收、转身向希特勒献上火箭。Edgar 屠场洗牌——所有人都在为 1933 排位。</p>
+        </div>
+        <div class="history-note">
+          <h4>史实对照</h4>
+          <ul>
+            <li><b>Stennes 暴动（Stennes-Revolte）</b>：1931.4.1，柏林 SA 头目 Stennes 公开反叛希特勒，史实；剧中警方镇压使其失败。</li>
+            <li><b>冲锋队（SA）与党卫军（SS）</b>：史实准军事组织；SS 当时尚是 SA 内小单位，剧中已为警察所用。</li>
+          </ul>
+        </div>
+        <div class="hook-card">
+          <h4>大结局 · 距离长夜还有 670 天</h4>
+          <ul>
+            <li>Wendt 用 SS 镇压 SA＝他正式投靠纳粹；这是通向 1933 的关键一步。</li>
+            <li>Nyssen 向希特勒献火箭——军火巨头与纳粹的结合。</li>
+            <li>Gereon 与 Charlotte 第一次真正在一起；Gereon 对兄长说“我不再需要你了”。</li>
+            <li>“破碎者军团”在 Schmidt 院中列队——第五季的关键伏笔。</li>
+          </ul>
         </div>
       </div>
     </div>
-  </div>
-</section>
+
+  </div></section>
 
 <!-- ========================================================
      贯穿主线
