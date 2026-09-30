@@ -575,6 +575,15 @@ body {
   .graph-wrap { padding: 14px; }
   #rel-graph .node text { font-size: 12px; }
 }
+/* ── HERO-AXIS v1 ── */
+.hero{display:grid!important;grid-template-columns:minmax(24px,1fr) minmax(0,952px) minmax(24px,1fr)!important;
+  align-content:center!important;justify-items:stretch!important;align-items:stretch!important;
+  text-align:left!important;padding-left:0!important;padding-right:0!important;}
+.hero>*{grid-column:2!important;margin-left:0!important;margin-right:0!important;
+  justify-content:flex-start!important;text-align:left!important;}
+.hero .hero-divider,.hero .hero-scroll,.hero .scroll-hint,.hero .hero-meta,.hero-meta-item{margin-left:0!important;margin-right:0!important;}
+.hero h1::after,.hero h2::after{margin-left:0!important;margin-right:0!important;}
+/* ── /HERO-AXIS v1 ── */
 </style>
 </head>
 <body>
@@ -587,7 +596,7 @@ body {
   <div class="hero-eyebrow">ФЁДОР ДОСТОЕВСКИЙ · 1871—1872 · 一座省城的雾</div>
   <h1>群魔</h1>
   <div class="hero-ru">Бесы</div>
-  <div class="hero-sub">当虚无主义化作恶魔附身——<br>一座俄国省城里，革命、阴谋与人神哲学撕碎了所有人。</div>
+  
   <div class="hero-divider">
     <svg viewBox="0 0 48 48" width="44" height="44" aria-hidden="true">
       <g stroke="#5c5650" stroke-width="1.1" fill="none">
