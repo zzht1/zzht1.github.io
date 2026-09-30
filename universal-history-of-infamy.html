@@ -157,10 +157,7 @@ body {
 .phase { margin-top: 48px; }
 .phase-head { display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap; }
 .phase-num {
-  font-family: var(--serif); font-size: 2rem; font-weight: 900;
-  background: linear-gradient(135deg, var(--accent), var(--accent-2));
-  -webkit-background-clip: text; background-clip: text; color: transparent; line-height: 1;
-}
+  font-family: var(--serif); font-size: 2rem; font-weight: 900; line-height: 1; color: #a85a24;}
 .phase-head h3 { font-family: var(--serif); font-size: 1.25rem; font-weight: 700; letter-spacing: .05em; }
 .phase-head .ref { font-size: .8rem; color: var(--ink-faint); letter-spacing: .05em; }
 .phase-items { margin-top: 20px; margin-left: 13px; border-left: 2px solid rgba(168, 90, 36, .5); padding-left: 26px; }
@@ -343,6 +340,15 @@ body {
   .hero-meta { gap: 12px 26px; }
   .stat { min-width: 120px; padding: 18px 8px; }
 }
+/* ── HERO-AXIS v1 ── */
+.hero{display:grid!important;grid-template-columns:minmax(24px,1fr) minmax(0,952px) minmax(24px,1fr)!important;
+  align-content:center!important;justify-items:stretch!important;align-items:stretch!important;
+  text-align:left!important;padding-left:0!important;padding-right:0!important;}
+.hero>*{grid-column:2!important;margin-left:0!important;margin-right:0!important;
+  justify-content:flex-start!important;text-align:left!important;}
+.hero .hero-divider,.hero .hero-scroll,.hero .scroll-hint,.hero .hero-meta,.hero-meta-item{margin-left:0!important;margin-right:0!important;}
+.hero h1::after,.hero h2::after{margin-left:0!important;margin-right:0!important;}
+/* ── /HERO-AXIS v1 ── */
 </style>
 </head>
 <body>
@@ -355,7 +361,7 @@ body {
   <div class="hero-eyebrow">Borges · 1935 · 剪贴簿与黑幕专栏的作坊</div>
   <h1>恶棍列传</h1>
   <div class="hero-es">Historia universal de la infamia</div>
-  <div class="hero-sub">七个真名实姓的恶棍，一场假装有据可查的游戏</div>
+  
   <div class="hero-divider"><svg viewBox="0 0 84 56" width="62" height="42" aria-hidden="true"><path d="M2 24 H20" stroke="#6e6a60" stroke-width="1.5" stroke-linecap="round" fill="none"/><path d="M64 24 H82" stroke="#6e6a60" stroke-width="1.5" stroke-linecap="round" fill="none"/><circle cx="42" cy="24" r="14" fill="#a85a24"/><circle cx="42" cy="24" r="10" fill="none" stroke="#e9e2d2" stroke-width="1.1" opacity=".65"/><path d="M37 24 H47 M42 19 V29 M38.5 20.5 L45.5 27.5 M45.5 20.5 L38.5 27.5" stroke="#e9e2d2" stroke-width="1.2" stroke-linecap="round" opacity=".85"/><path d="M42 39 C36 43 36 49 42 51 C48 49 48 43 42 39 Z" fill="none" stroke="#6e6a60" stroke-width="1.5"/><circle cx="42" cy="53" r="1.6" fill="#6e6a60"/></svg></div>
   <blockquote class="hero-quote">
     “这是他的一次『恶作剧』。”
