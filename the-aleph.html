@@ -156,10 +156,7 @@ body {
 .phase { margin-top: 48px; }
 .phase-head { display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap; }
 .phase-num {
-  font-family: var(--serif); font-size: 2rem; font-weight: 900;
-  background: linear-gradient(135deg, var(--accent), var(--accent-2));
-  -webkit-background-clip: text; background-clip: text; color: transparent; line-height: 1;
-}
+  font-family: var(--serif); font-size: 2rem; font-weight: 900; line-height: 1; color: #9a7b2f;}
 .phase-head h3 { font-family: var(--serif); font-size: 1.25rem; font-weight: 700; letter-spacing: .05em; }
 .phase-head .ref { font-size: .8rem; color: var(--ink-faint); letter-spacing: .05em; }
 .phase-items { margin-top: 20px; margin-left: 13px; border-left: 2px solid rgba(154, 123, 47, .5); padding-left: 26px; }
@@ -342,6 +339,15 @@ body {
   .hero-meta { gap: 12px 26px; }
   .stat { min-width: 120px; padding: 18px 8px; }
 }
+/* ── HERO-AXIS v1 ── */
+.hero{display:grid!important;grid-template-columns:minmax(24px,1fr) minmax(0,952px) minmax(24px,1fr)!important;
+  align-content:center!important;justify-items:stretch!important;align-items:stretch!important;
+  text-align:left!important;padding-left:0!important;padding-right:0!important;}
+.hero>*{grid-column:2!important;margin-left:0!important;margin-right:0!important;
+  justify-content:flex-start!important;text-align:left!important;}
+.hero .hero-divider,.hero .hero-scroll,.hero .scroll-hint,.hero .hero-meta,.hero-meta-item{margin-left:0!important;margin-right:0!important;}
+.hero h1::after,.hero h2::after{margin-left:0!important;margin-right:0!important;}
+/* ── /HERO-AXIS v1 ── */
 </style>
 </head>
 <body>
@@ -354,7 +360,7 @@ body {
   <div class="hero-eyebrow">Borges · 1949 · 地窖里的那一点黑暗</div>
   <h1>阿莱夫</h1>
   <div class="hero-es">El Aleph</div>
-  <div class="hero-sub">地窖里两三厘米的一点，装下全部宇宙</div>
+  
   <div class="hero-divider"><svg viewBox="0 0 120 44" width="94" height="34" aria-hidden="true"><circle cx="60" cy="22" r="2.6" fill="#9a7b2f"/><circle cx="60" cy="22" r="8" fill="none" stroke="#9a7b2f" stroke-width="1" opacity=".55"/><circle cx="60" cy="22" r="15" fill="none" stroke="#9a7b2f" stroke-width=".8" opacity=".35"/><circle cx="60" cy="22" r="21" fill="none" stroke="#7c8b94" stroke-width=".6" opacity=".28"/></svg></div>
   <blockquote class="hero-quote">
     “在那里，蚂蚁、球体、风暴、银器、人群……全部同时存在。”
