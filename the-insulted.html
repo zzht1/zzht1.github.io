@@ -254,10 +254,7 @@ body {
 .phase-head { display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap; }
 .phase-num {
   font-family: var(--serif); font-size: 1.9rem; font-weight: 900;
-  background: linear-gradient(135deg, var(--blue), var(--lamp));
-  -webkit-background-clip: text; background-clip: text; color: transparent;
-  line-height: 1;
-}
+  line-height: 1; color: #56718a;}
 .phase-head h3 { font-family: var(--serif); font-size: 1.25rem; font-weight: 700; letter-spacing: .05em; }
 .phase-head .ref { font-size: .8rem; color: var(--ink-faint); letter-spacing: .05em; }
 .phase-items {
@@ -533,6 +530,15 @@ body {
   .stat { min-width: 120px; padding: 18px 8px; }
   .v-row { grid-template-columns: 1fr; gap: 2px; }
 }
+/* ── HERO-AXIS v1 ── */
+.hero{display:grid!important;grid-template-columns:minmax(24px,1fr) minmax(0,952px) minmax(24px,1fr)!important;
+  align-content:center!important;justify-items:stretch!important;align-items:stretch!important;
+  text-align:left!important;padding-left:0!important;padding-right:0!important;}
+.hero>*{grid-column:2!important;margin-left:0!important;margin-right:0!important;
+  justify-content:flex-start!important;text-align:left!important;}
+.hero .hero-divider,.hero .hero-scroll,.hero .scroll-hint,.hero .hero-meta,.hero-meta-item{margin-left:0!important;margin-right:0!important;}
+.hero h1::after,.hero h2::after{margin-left:0!important;margin-right:0!important;}
+/* ── /HERO-AXIS v1 ── */
 </style>
 </head>
 <body>
@@ -547,7 +553,7 @@ body {
     <h1>被侮辱与<br>被损害的</h1>
     <div class="hero-ru">Униженные и оскорблённые</div>
   </div>
-  <p class="hero-sub">作家伊万写下的回忆录手稿——<br>两对被碾碎的爱情，一个流落街头的孤女，与一封写给所有受苦者的长信。</p>
+  
   <div class="hero-divider">
     <svg viewBox="0 0 64 52" width="58" height="48" aria-hidden="true">
       <path d="M8 12 C14 4 26 4 30 10 C26 12 20 12 17 18 C15 23 17 29 23 31 C16 34 10 30 8 24 Z" fill="#7a6a4f"/>
