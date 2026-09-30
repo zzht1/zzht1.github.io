@@ -157,10 +157,7 @@ body {
 .phase { margin-top: 48px; }
 .phase-head { display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap; }
 .phase-num {
-  font-family: var(--serif); font-size: 2rem; font-weight: 900;
-  background: linear-gradient(135deg, var(--accent), var(--accent-2));
-  -webkit-background-clip: text; background-clip: text; color: transparent; line-height: 1;
-}
+  font-family: var(--serif); font-size: 2rem; font-weight: 900; line-height: 1; color: #b3902f;}
 .phase-head h3 { font-family: var(--serif); font-size: 1.25rem; font-weight: 700; letter-spacing: .05em; }
 .phase-head .ref { font-size: .8rem; color: var(--ink-faint); letter-spacing: .05em; }
 .phase-items { margin-top: 20px; margin-left: 13px; border-left: 2px solid rgba(179, 144, 47, .55); padding-left: 26px; }
@@ -343,6 +340,15 @@ body {
   .hero-meta { gap: 12px 26px; }
   .stat { min-width: 120px; padding: 18px 8px; }
 }
+/* ── HERO-AXIS v1 ── */
+.hero{display:grid!important;grid-template-columns:minmax(24px,1fr) minmax(0,952px) minmax(24px,1fr)!important;
+  align-content:center!important;justify-items:stretch!important;align-items:stretch!important;
+  text-align:left!important;padding-left:0!important;padding-right:0!important;}
+.hero>*{grid-column:2!important;margin-left:0!important;margin-right:0!important;
+  justify-content:flex-start!important;text-align:left!important;}
+.hero .hero-divider,.hero .hero-scroll,.hero .scroll-hint,.hero .hero-meta,.hero-meta-item{margin-left:0!important;margin-right:0!important;}
+.hero h1::after,.hero h2::after{margin-left:0!important;margin-right:0!important;}
+/* ── /HERO-AXIS v1 ── */
 </style>
 </head>
 <body>
@@ -355,7 +361,7 @@ body {
   <div class="hero-eyebrow">Borges · 1975 · 失明之后的口述岁月</div>
   <h1>沙之书</h1>
   <div class="hero-es">El libro de arena</div>
-  <div class="hero-sub">一本页码无限的书，与握不住它的老人</div>
+  
   <div class="hero-divider"><svg viewBox="0 0 120 34" width="94" height="27" aria-hidden="true"><path d="M2 24 C 26 12, 44 28, 62 20 C 80 13, 100 22, 118 16" stroke="#b3902f" stroke-width="1.6" fill="none" stroke-linecap="round"/><circle cx="60" cy="7" r="2.2" fill="#a85a24"/></svg></div>
   <blockquote class="hero-quote">
     “他说，书叫『沙之书』——因为沙没有开始，也没有结束。”
