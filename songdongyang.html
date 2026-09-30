@@ -1,681 +1,769 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>送东阳马生序 · 宋濂</title>
-    <style>
-        :root {
-            --bg: #fdfaf5;
-            --text: #2c2416;
-            --text-secondary: #5c5347;
-            --accent: #b8860b;
-            --accent-light: #f0e6d3;
-            --border: #e0d8c8;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="明代宋濂《送东阳马生序》精读：原文、逐段人生阶段、划词批注。劝学名篇的沉浸式阅读。">
+<title>送东阳马生序 · 宋濂 — zzht</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;900&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f6eed8;        /* 宣纸米黄 */
+  --paper-warm:#f1e6c8;
+  --paper-deep:#e9dcb6;
+  --ink:#2b2316;          /* 墨黑 */
+  --ink-soft:#5c4f3a;
+  --ink-faint:#9a8a68;
+  --vermilion:#a8281c;    /* 朱砂红 */
+  --vermilion-deep:#8a1f15;
+  --seal:#b8302a;         /* 印泥红 */
+  --yanqing:#5a6b6a;      /* 砚青灰 */
+  --old-brown:#8c7a5e;
+  --border:#d8c89e;
+  --serif:'Noto Serif SC','Source Han Serif SC','STSong','SimSun',serif;
+  --seal-font:'Ma Shan Zheng',var(--serif);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--serif);
+  color:var(--ink);
+  background:var(--paper);
+  line-height:1.85;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+/* 宣纸纹理：横向极淡纤维线 + 顶部一点墨晕 */
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    repeating-linear-gradient(2deg,transparent 0,transparent 3px,rgba(139,119,90,.022) 3px,rgba(139,119,90,.022) 4px),
+    repeating-linear-gradient(-88deg,transparent 0,transparent 5px,rgba(139,119,90,.018) 5px,rgba(139,119,90,.018) 6px);
+}
+body::after{
+  content:'';position:fixed;left:50%;top:0;transform:translateX(-50%);
+  width:120%;height:340px;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse 50% 100% at 50% 0,rgba(60,45,25,.07),transparent 70%);
+}
+::selection{background:rgba(168,40,28,.16)}
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+/* 返回 */
+.back-home{
+  position:fixed;top:20px;left:22px;z-index:120;
+  font-size:.85rem;color:var(--ink-soft);text-decoration:none;
+  padding:8px 16px;border-radius:999px;
+  background:rgba(246,238,216,.9);border:1px solid var(--border);
+  transition:all .25s;
+}
+.back-home:hover{color:var(--vermilion);border-color:var(--vermilion);transform:translateX(-2px)}
 
-        body {
-            font-family: "Noto Serif SC", "Source Han Serif SC", "STSong", "SimSun", "Songti SC", serif;
-            background: var(--bg);
-            color: var(--text);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            animation: fadeIn 0.8s ease-out;
-        }
+.article{
+  position:relative;z-index:1;
+  max-width:720px;width:100%;
+  margin:0 auto;padding:11vh 2rem 6rem;
+}
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(12px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
+/* ===== 标题区 ===== */
+.header{text-align:center;margin-bottom:3rem;position:relative}
+/* 朱砂方印 */
+.seal{
+  position:relative;width:62px;height:62px;margin:0 auto 1.6rem;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--seal);color:#f7eed8;
+  border-radius:6px;
+  font-family:var(--seal-font);
+  font-size:2.1rem;font-weight:400;line-height:1;
+  box-shadow:0 2px 0 rgba(138,31,21,.4) inset, 0 6px 16px rgba(138,31,21,.18);
+  transform:rotate(-3deg);
+}
+.seal::before{
+  content:'';position:absolute;inset:4px;border:1.5px solid rgba(247,238,216,.55);border-radius:3px;
+}
+.eyebrow{
+  font-size:.78rem;letter-spacing:.42em;color:var(--old-brown);
+  margin-bottom:1rem;font-weight:400;
+}
+.title{
+  font-size:clamp(2.4rem,6vw,3.4rem);font-weight:900;
+  letter-spacing:.14em;line-height:1.3;color:#1a1006;
+  margin-bottom:.6rem;
+}
+.title-sep{
+  display:flex;align-items:center;justify-content:center;gap:14px;
+  margin:1.2rem 0 .9rem;
+}
+.title-sep::before,.title-sep::after{
+  content:'';width:60px;height:1px;
+  background:linear-gradient(90deg,transparent,var(--vermilion) 60%);
+}
+.title-sep::after{background:linear-gradient(270deg,transparent,var(--vermilion) 60%)}
+.title-sep .glyph{color:var(--vermilion);font-size:.7rem;letter-spacing:0}
+.author{font-size:1.05rem;color:var(--ink-soft);letter-spacing:.18em;font-weight:400}
+.author .dynasty{color:var(--old-brown);font-size:.92rem;margin-right:.4em}
+.author .name{color:var(--ink)}
+.header-sub{
+  margin-top:1.1rem;font-size:.9rem;color:var(--ink-faint);
+  letter-spacing:.06em;font-style:italic;max-width:420px;margin-left:auto;margin-right:auto;line-height:1.9;
+}
 
-        /* 纸张纹理 */
-        body::before {
-            content: '';
-            position: fixed;
-            inset: 0;
-            background:
-                repeating-linear-gradient(
-                    0deg,
-                    transparent,
-                    transparent 2px,
-                    rgba(139, 119, 90, 0.015) 2px,
-                    rgba(139, 119, 90, 0.015) 4px
-                );
-            pointer-events: none;
-            z-index: 0;
-        }
+/* ===== 人生阶段轴（负笈行旅） ===== */
+.journey{
+  margin:3rem 0 4rem;padding:1.6rem 1rem 1.3rem;
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  position:relative;
+}
+.journey-title{
+  text-align:center;font-size:.76rem;letter-spacing:.4em;
+  color:var(--old-brown);margin-bottom:1.4rem;font-weight:400;
+}
+.journey-track{
+  display:flex;justify-content:space-between;align-items:flex-start;
+  position:relative;gap:.4rem;
+}
+.journey-track::before{
+  content:'';position:absolute;top:6px;left:5%;right:5%;height:1px;
+  background:repeating-linear-gradient(90deg,var(--ink-faint) 0 4px,transparent 4px 8px);
+  z-index:0;
+}
+.journey-node{
+  flex:1;text-align:center;position:relative;z-index:1;text-decoration:none;
+  display:flex;flex-direction:column;align-items:center;gap:.5rem;
+}
+.journey-node .dot{
+  width:13px;height:13px;border-radius:50%;background:var(--paper);
+  border:2.5px solid var(--vermilion);transition:all .25s;
+}
+.journey-node:hover .dot{background:var(--vermilion);transform:scale(1.15)}
+.journey-node .stage{
+  font-size:.82rem;color:var(--ink-soft);font-weight:500;letter-spacing:.04em;
+  transition:color .25s;
+}
+.journey-node .stage-sub{font-size:.68rem;color:var(--ink-faint);letter-spacing:.02em}
+.journey-node:hover .stage{color:var(--vermilion)}
 
-        .article {
-            position: relative;
-            z-index: 1;
-            max-width: 680px;
-            width: 100%;
-            padding: 5rem 2rem 4rem;
-        }
+/* ===== 正文 ===== */
+.content{position:relative}
+.stage-head{
+  display:flex;align-items:center;gap:.8rem;
+  margin:2.6rem 0 1.4rem;
+}
+.stage-head .ord{
+  font-family:var(--seal-font);color:var(--vermilion);font-size:1.1rem;
+  width:1.6rem;text-align:center;
+}
+.stage-head .name{
+  font-size:.92rem;color:var(--vermilion-deep);font-weight:600;letter-spacing:.16em;
+}
+.stage-head .line{
+  flex:1;height:1px;max-width:120px;
+  background:linear-gradient(90deg,rgba(168,40,28,.4),transparent);
+}
+.stage-head .gist{font-size:.8rem;color:var(--ink-faint);letter-spacing:.04em}
 
-        /* ===== 标题区 ===== */
-        .header {
-            text-align: center;
-            margin-bottom: 3.5rem;
-            padding-bottom: 2.5rem;
-            border-bottom: 1px solid var(--border);
-            position: relative;
-        }
+.content p{
+  font-size:1.14rem;line-height:2.12;text-indent:2em;
+  margin-bottom:1.6rem;letter-spacing:.02em;text-align:justify;color:var(--ink);
+}
+.content p:first-of-type::first-letter{
+  float:left;font-size:3.4rem;line-height:.86;
+  margin:.06em .14em 0 0;color:var(--vermilion);font-weight:900;
+}
+/* 段落间墨迹分隔 */
+.section-break{
+  text-align:center;margin:2.4rem 0 2.6rem;color:var(--ink-faint);
+  display:flex;align-items:center;justify-content:center;gap:10px;
+}
+.section-break svg{display:block;opacity:.5}
 
-        .header::after {
-            content: '◆';
-            position: absolute;
-            bottom: -0.55em;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--bg);
-            padding: 0 0.8em;
-            color: var(--accent);
-            font-size: 0.6rem;
-            letter-spacing: 0;
-        }
+/* ===== 文末落款 ===== */
+.colophon{
+  margin-top:4rem;padding-top:2.4rem;border-top:1px solid var(--border);
+  text-align:center;
+}
+.colophon .signoff{
+  display:inline-flex;align-items:center;gap:1rem;
+}
+.colophon .signoff .txt{
+  text-align:right;font-size:.92rem;color:var(--ink-soft);line-height:1.9;
+}
+.colophon .signoff .txt .big{font-size:1.1rem;color:var(--ink);letter-spacing:.1em}
+.colophon .signoff .seal-sm{
+  width:46px;height:46px;background:var(--seal);color:#f7eed8;
+  border-radius:4px;display:flex;align-items:center;justify-content:center;
+  font-family:var(--seal-font);font-size:1.5rem;line-height:1;
+  transform:rotate(4deg);position:relative;
+  box-shadow:0 2px 0 rgba(138,31,21,.4) inset,0 4px 10px rgba(138,31,21,.15);
+}
+.colophon .signoff .seal-sm::before{
+  content:'';position:absolute;inset:3px;border:1px solid rgba(247,238,216,.55);border-radius:2px;
+}
+.colophon .quote{
+  margin:2rem auto 0;max-width:480px;font-style:italic;
+  color:var(--ink-faint);font-size:.9rem;line-height:2;letter-spacing:.04em;
+}
 
-        .title {
-            font-size: 2.6rem;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            line-height: 1.4;
-            margin-bottom: 0.6rem;
-            color: #1a1006;
-        }
+/* ===== 返回链接 ===== */
+.footer{
+  margin-top:3rem;padding-top:1.6rem;border-top:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;
+}
+.footer a{color:var(--ink-soft);text-decoration:none;font-size:.86rem;letter-spacing:.06em;transition:color .2s}
+.footer a:hover{color:var(--vermilion)}
+.footer .note{font-size:.78rem;color:var(--ink-faint);letter-spacing:.08em}
 
-        .author {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            letter-spacing: 0.06em;
-            font-weight: 400;
-        }
+/* ===== 划词标注（保留功能，样式适配宣纸朱砂风） ===== */
+mark.hl{padding:1px 0;border-radius:2px;cursor:pointer;transition:filter .15s}
+mark.hl:hover{filter:brightness(.93)}
+mark.hl.has-note{border-bottom:1.5px dashed rgba(120,30,20,.4)}
+.anno-toolbar{
+  position:absolute;display:none;align-items:center;gap:5px;
+  padding:6px 12px;background:rgba(251,244,224,.97);border-radius:999px;
+  box-shadow:0 4px 16px rgba(90,70,30,.18);z-index:100;
+  font-family:var(--serif);border:1px solid var(--border);
+}
+.anno-toolbar.visible{display:flex}
+.anno-toolbar .sep{width:1px;height:18px;background:var(--border);margin:0 2px}
+.anno-toolbar .color-dot{
+  width:20px;height:20px;border-radius:50%;border:2px solid transparent;
+  cursor:pointer;transition:transform .15s;flex-shrink:0;
+}
+.anno-toolbar .color-dot:hover{transform:scale(1.2)}
+.anno-toolbar .act-btn{
+  background:none;border:none;cursor:pointer;padding:2px 4px;
+  font-size:15px;line-height:1;color:var(--ink-soft);transition:color .15s;
+}
+.anno-toolbar .act-btn:hover{color:var(--vermilion)}
+.anno-note-panel{
+  position:absolute;display:none;flex-direction:column;gap:6px;padding:10px;
+  background:rgba(251,244,224,.98);border-radius:10px;
+  box-shadow:0 4px 16px rgba(90,70,30,.2);z-index:101;width:260px;
+  font-family:var(--serif);border:1px solid var(--border);
+}
+.anno-note-panel.visible{display:flex}
+.anno-note-panel textarea{
+  width:100%;height:64px;border:1px solid var(--border);border-radius:6px;
+  padding:7px 9px;font-size:13px;font-family:inherit;resize:vertical;outline:none;
+  background:rgba(255,253,245,.7);
+}
+.anno-note-panel textarea:focus{border-color:var(--vermilion)}
+.anno-note-panel .note-actions{display:flex;justify-content:flex-end;gap:6px}
+.anno-note-panel .note-actions button{
+  padding:4px 13px;border-radius:6px;border:1px solid var(--border);
+  background:rgba(255,253,245,.6);cursor:pointer;font-size:12px;color:var(--ink-soft);
+  font-family:inherit;
+}
+.anno-note-panel .note-actions .save-btn{
+  background:var(--vermilion);color:#f7eed8;border-color:var(--vermilion);
+}
+.anno-panel{
+  position:absolute;display:none;background:rgba(251,244,224,.98);
+  border-radius:10px;box-shadow:0 4px 18px rgba(90,70,30,.22);
+  padding:11px 15px;max-width:280px;min-width:120px;z-index:100;
+  font-family:var(--serif);font-size:14px;border:1px solid var(--border);
+}
+.anno-panel.visible{display:block}
+.anno-panel .note-text{color:var(--ink-soft);line-height:1.7;margin-bottom:8px;white-space:pre-wrap}
+.anno-panel .no-note{color:var(--ink-faint);font-style:italic}
+.anno-panel .panel-btns{display:flex;gap:6px;border-top:1px solid var(--border);padding-top:8px}
+.anno-panel .panel-btns button{
+  background:none;border:1px solid var(--border);border-radius:6px;
+  padding:3px 11px;cursor:pointer;font-size:12px;color:var(--ink-soft);font-family:inherit;
+}
+.anno-panel .panel-btns button:hover{background:rgba(168,40,28,.06)}
+.anno-panel .panel-btns .del-btn:hover{color:var(--vermilion);border-color:var(--vermilion)}
 
-        .author .dynasty {
-            color: #8c7a5e;
-            font-size: 0.95rem;
-        }
+/* 提示条 */
+.hint-bar{
+  position:fixed;bottom:18px;left:50%;transform:translateX(-50%);
+  z-index:90;background:rgba(246,238,216,.92);border:1px solid var(--border);
+  border-radius:999px;padding:7px 18px;font-size:.76rem;color:var(--ink-faint);
+  letter-spacing:.04em;box-shadow:0 4px 14px rgba(90,70,30,.12);
+  transition:opacity .4s;
+}
+.hint-bar .key{color:var(--vermilion);font-weight:500}
 
-        /* ===== 正文 ===== */
-        .content p {
-            font-size: 1.15rem;
-            line-height: 2.1;
-            text-indent: 2em;
-            margin-bottom: 1.8rem;
-            letter-spacing: 0.02em;
-            text-align: justify;
-        }
-
-        /* 首段首字放大 */
-        .content p:first-child::first-letter {
-            float: left;
-            font-size: 3.4rem;
-            line-height: 0.85;
-            margin-right: 0.12em;
-            margin-top: 0.04em;
-            color: var(--accent);
-            font-weight: 700;
-        }
-
-        /* 段落间装饰 */
-        .section-break {
-            text-align: center;
-            margin: 2.2rem 0;
-            color: var(--border);
-            font-size: 0.7rem;
-            letter-spacing: 0.6em;
-            user-select: none;
-        }
-
-        /* ===== 底部 ===== */
-        .footer {
-            margin-top: 3.5rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border);
-            text-align: center;
-        }
-
-        .footer a {
-            color: var(--accent);
-            text-decoration: none;
-            font-size: 0.95rem;
-            letter-spacing: 0.04em;
-            transition: color 0.2s;
-        }
-
-        .footer a:hover {
-            color: #9a6f0a;
-        }
-
-        .footer .note {
-            display: block;
-            margin-top: 1rem;
-            font-size: 0.8rem;
-            color: #b0a392;
-        }
-
-        /* ===== 响应式 ===== */
-        @media (max-width: 600px) {
-            .article {
-                padding: 3rem 1.2rem 2.5rem;
-            }
-            .title {
-                font-size: 1.8rem;
-                letter-spacing: 0.04em;
-            }
-            .content p {
-                font-size: 1.05rem;
-                line-height: 2;
-                text-indent: 1.6em;
-                margin-bottom: 1.3rem;
-            }
-            .content p:first-child::first-letter {
-                font-size: 2.8rem;
-            }
-        }
-
-        /* 打印样式 */
-        @media print {
-            body { background: white; }
-            .article { max-width: 100%; padding: 2rem; }
-            .footer a { color: var(--text); }
-            .anno-toolbar, .anno-note-panel { display: none !important; }
-        }
-
-        /* ===== 划词标注功能 ===== */
-        mark.hl {
-            padding: 1px 0;
-            border-radius: 2px;
-            cursor: pointer;
-            transition: filter 0.15s;
-        }
-        mark.hl:hover { filter: brightness(0.92); }
-        mark.hl.has-note {
-            border-bottom: 1.5px dashed rgba(0,0,0,0.3);
-        }
-
-        /* 浮动工具栏 */
-        .anno-toolbar {
-            position: absolute;
-            display: none;
-            align-items: center;
-            gap: 5px;
-            padding: 5px 10px;
-            background: #fff;
-            border-radius: 20px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.15);
-            z-index: 100;
-            font-family: sans-serif;
-            border: 1px solid #eee;
-        }
-        .anno-toolbar.visible { display: flex; }
-        .anno-toolbar .sep {
-            width: 1px; height: 18px;
-            background: #e0e0e0; margin: 0 2px;
-        }
-        .anno-toolbar .color-dot {
-            width: 20px; height: 20px;
-            border-radius: 50%; border: 2px solid transparent;
-            cursor: pointer; transition: transform 0.15s;
-            flex-shrink: 0;
-        }
-        .anno-toolbar .color-dot:hover { transform: scale(1.2); }
-        .anno-toolbar .act-btn {
-            background: none; border: none;
-            cursor: pointer; padding: 2px 4px;
-            font-size: 15px; line-height: 1;
-            color: #666; transition: color 0.15s;
-        }
-        .anno-toolbar .act-btn:hover { color: #333; }
-
-        /* 批注输入面板 */
-        .anno-note-panel {
-            position: absolute;
-            display: none;
-            flex-direction: column;
-            gap: 6px;
-            padding: 8px;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.15);
-            z-index: 101;
-            width: 260px;
-            font-family: sans-serif;
-            border: 1px solid #eee;
-        }
-        .anno-note-panel.visible { display: flex; }
-        .anno-note-panel textarea {
-            width: 100%; height: 60px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            padding: 6px 8px;
-            font-size: 13px;
-            font-family: inherit;
-            resize: vertical;
-            outline: none;
-        }
-        .anno-note-panel textarea:focus { border-color: var(--accent); }
-        .anno-note-panel .note-actions {
-            display: flex; justify-content: flex-end; gap: 6px;
-        }
-        .anno-note-panel .note-actions button {
-            padding: 3px 12px; border-radius: 4px;
-            border: 1px solid #ddd; background: #fff;
-            cursor: pointer; font-size: 12px;
-        }
-        .anno-note-panel .note-actions .save-btn {
-            background: var(--accent); color: #fff; border-color: var(--accent);
-        }
-
-        /* 批注弹出框 */
-        .anno-panel {
-            position: absolute;
-            display: none;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 16px rgba(0,0,0,0.18);
-            padding: 10px 14px;
-            max-width: 280px; min-width: 120px;
-            z-index: 100;
-            font-family: sans-serif;
-            font-size: 14px;
-            border: 1px solid #eee;
-        }
-        .anno-panel.visible { display: block; }
-        .anno-panel .note-text {
-            color: #444; line-height: 1.6; margin-bottom: 8px;
-            white-space: pre-wrap;
-        }
-        .anno-panel .no-note { color: #aaa; font-style: italic; }
-        .anno-panel .panel-btns {
-            display: flex; gap: 6px;
-            border-top: 1px solid #eee; padding-top: 8px;
-        }
-        .anno-panel .panel-btns button {
-            background: none; border: 1px solid #ddd;
-            border-radius: 4px; padding: 3px 10px;
-            cursor: pointer; font-size: 12px; color: #666;
-        }
-        .anno-panel .panel-btns button:hover { background: #f5f5f5; }
-        .anno-panel .panel-btns .del-btn:hover { color: #c00; border-color: #c00; }
-        .back-home {
-            position: fixed; top: 20px; left: 20px; z-index: 999;
-            display: inline-flex; align-items: center; gap: 6px;
-            padding: 8px 16px; border-radius: 20px;
-            background: rgba(253,250,245,0.92); color: #5c5347;
-            font-size: 0.85rem; text-decoration: none;
-            border: 1px solid rgba(0,0,0,0.08);
-            backdrop-filter: blur(8px);
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-        }
-        .back-home:hover { background: #fff; color: #b8860b; border-color: #b8860b; }
-    </style>
+@media(max-width:600px){
+  .article{padding:8vh 1.2rem 4rem}
+  .title{font-size:1.9rem;letter-spacing:.06em}
+  .content p{font-size:1.04rem;line-height:2;text-indent:1.6em;margin-bottom:1.3rem}
+  .content p:first-of-type::first-letter{font-size:2.7rem}
+  .journey-track::before{left:4%;right:4%}
+  .journey-node .stage{font-size:.74rem}
+  .journey-node .stage-sub{display:none}
+  .stage-head .gist{display:none}
+  .hint-bar{font-size:.7rem;padding:6px 13px}
+}
+@media print{
+  body{background:#fff}
+  .article{max-width:100%;padding:2rem}
+  .back-home,.anno-toolbar,.anno-note-panel,.anno-panel,.hint-bar{display:none!important}
+  .footer a{color:var(--ink)}
+}
+</style>
 </head>
 <body>
-    <a href="/" class="back-home">← 返回</a>
-    <article class="article">
+<a href="/" class="back-home">← 返回</a>
 
-        <header class="header">
-            <h1 class="title">送东阳马生序</h1>
-            <p class="author">
-                <span class="dynasty">〔明〕</span>&ensp;宋&ensp;濂
-            </p>
-        </header>
+<article class="article">
 
-        <div class="content">
+  <header class="header">
+    <div class="seal" aria-hidden="true">濂</div>
+    <div class="eyebrow">劝 学 名 篇</div>
+    <h1 class="title">送东阳马生序</h1>
+    <div class="title-sep"><span class="glyph">◆</span></div>
+    <p class="author"><span class="dynasty">〔明〕</span><span class="name">宋 濂</span></p>
+    <p class="header-sub">余故道为学之难以告之 —— 一位老臣写给同乡晚辈的求学自述</p>
+  </header>
 
-            <p>余幼时即嗜学。家贫，无从致书以观，每假借于藏书之家，手自笔录，计日以还。天大寒，砚冰坚，手指不可屈伸，弗之怠。录毕，走送之，不敢稍逾约。以是人多以书假余，余因得遍观群书。既加冠，益慕圣贤之道，又患无硕师名人与游，尝趋百里外，从乡之先达执经叩问。先达德隆望尊，门人弟子填其室，未尝稍降辞色。余立侍左右，援疑质理，俯身倾耳以请；或遇其叱咄，色愈恭，礼愈至，不敢出一言以复；俟其欣悦，则又请焉。故余虽愚，卒获有所闻。</p>
+  <nav class="journey" aria-label="人生阶段">
+    <div class="journey-title">负 笠 行 旅</div>
+    <div class="journey-track">
+      <a class="journey-node" href="#sec1">
+        <span class="dot"></span>
+        <span class="stage">幼时</span>
+        <span class="stage-sub">嗜学借书</span>
+      </a>
+      <a class="journey-node" href="#sec2">
+        <span class="dot"></span>
+        <span class="stage">从师</span>
+        <span class="stage-sub">负笈叩问</span>
+      </a>
+      <a class="journey-node" href="#sec3">
+        <span class="dot"></span>
+        <span class="stage">耄老</span>
+        <span class="stage-sub">承宠侍顾问</span>
+      </a>
+      <a class="journey-node" href="#sec4">
+        <span class="dot"></span>
+        <span class="stage">劝学</span>
+        <span class="stage-sub">今之太学</span>
+      </a>
+      <a class="journey-node" href="#sec5">
+        <span class="dot"></span>
+        <span class="stage">赠序</span>
+        <span class="stage-sub">马生君则</span>
+      </a>
+    </div>
+  </nav>
 
-            <div class="section-break">· · ·</div>
+  <div class="content">
 
-            <p>当余之从师也，负箧曳屣，行深山巨谷中，穷冬烈风，大雪深数尺，足肤皲裂而不知。至舍，四支僵劲不能动，媵人持汤沃灌，以衾拥覆，久而乃和。寓逆旅，主人日再食，无鲜肥滋味之享。同舍生皆被绮绣，戴朱缨宝饰之帽，腰白玉之环，左佩刀，右备容臭，烨然若神人；余则缊袍敝衣处其间，略无慕艳意。以中有足乐者，不知口体之奉不若人也。盖余之勤且艰若此。</p>
-
-            <div class="section-break">· · ·</div>
-
-            <p>今虽耄老，未有所成，犹幸预君子之列，而承天子之宠光，缀公卿之后，日侍坐备顾问，四海亦谬称其氏名，况才之过于余者乎？</p>
-
-            <div class="section-break">· · ·</div>
-
-            <p>今诸生学于太学，县官日有廪稍之供，父母岁有裘葛之遗，无冻馁之患矣；坐大厦之下而诵诗书，无奔走之劳矣；有司业、博士为之师，未有问而不告、求而不得者也；凡所宜有之书，皆集于此，不必若余之手录，假诸人而后见也。其业有不精、德有不成者，非天质之卑，则心不若余之专耳，岂他人之过哉！</p>
-
-            <div class="section-break">· · ·</div>
-
-            <p>东阳马生君则，在太学已二年，流辈甚称其贤。余朝京师，生以乡人子谒余，撰长书以为贽，辞甚畅达，与之论辨，言和而色夷。自谓少时用心于学甚劳，是可谓善学者矣！其将归见其亲也，余故道为学之难以告之。谓余勉乡人以学者，余之志也；诋我夸际遇之盛而骄乡人者，岂知余者哉！</p>
-
-        </div>
-
-        <footer class="footer">
-            <a href="/">← 返回首页</a>
-            <span class="note">zzht.me · 丙午年</span>
-        </footer>
-
-    </article>
-    <!-- 划词标注：浮动工具栏 -->
-    <div class="anno-toolbar" id="annoToolbar">
-        <span class="color-dot" data-color="yellow" style="background:#fff3b0"></span>
-        <span class="color-dot" data-color="green" style="background:#c6f6c9"></span>
-        <span class="color-dot" data-color="blue" style="background:#bbdefb"></span>
-        <span class="color-dot" data-color="pink" style="background:#f8bbd0"></span>
-        <span class="color-dot" data-color="orange" style="background:#ffe0b2"></span>
-        <span class="sep"></span>
-        <button class="act-btn" id="btnNote" title="添加批注">✎</button>
+    <div class="stage-head" id="sec1">
+      <span class="ord">壹</span>
+      <span class="name">幼时 · 嗜学</span>
+      <span class="line"></span>
+      <span class="gist">手自笔录，计日以还</span>
     </div>
 
-    <!-- 批注输入面板 -->
-    <div class="anno-note-panel" id="notePanel">
-        <textarea id="noteInput" placeholder="输入你的批注…"></textarea>
-        <div class="note-actions">
-            <button id="noteCancel">取消</button>
-            <button id="noteSave" class="save-btn">保存</button>
-        </div>
+    <p>余幼时即嗜学。家贫，无从致书以观，每假借于藏书之家，手自笔录，计日以还。天大寒，砚冰坚，手指不可屈伸，弗之怠。录毕，走送之，不敢稍逾约。以是人多以书假余，余因得遍观群书。既加冠，益慕圣贤之道，又患无硕师名人与游，尝趋百里外，从乡之先达执经叩问。先达德隆望尊，门人弟子填其室，未尝稍降辞色。余立侍左右，援疑质理，俯身倾耳以请；或遇其叱咄，色愈恭，礼愈至，不敢出一言以复；俟其欣悦，则又请焉。故余虽愚，卒获有所闻。</p>
+
+    <div class="section-break">
+      <svg width="14" height="20" viewBox="0 0 14 20" fill="none"><path d="M7 2c-2 3-3 6-3 8 0 2 1 3 3 3s3-1 3-3c0-2-1-5-3-8z" fill="#5c4f3a" opacity=".5"/><ellipse cx="7" cy="16" rx="5" ry="2" fill="none" stroke="#5c4f3a" stroke-width=".8" opacity=".4"/><ellipse cx="7" cy="16" rx="2.5" ry="1" fill="none" stroke="#5c4f3a" stroke-width=".6" opacity=".3"/></svg>
     </div>
 
-    <!-- 批注弹出框 -->
-    <div class="anno-panel" id="annoPanel">
-        <div class="note-text" id="panelNote"></div>
-        <div class="panel-btns">
-            <button id="panelEdit">编辑</button>
-            <button id="panelDel" class="del-btn">删除</button>
-        </div>
+    <div class="stage-head" id="sec2">
+      <span class="ord">贰</span>
+      <span class="name">从师 · 负笈</span>
+      <span class="line"></span>
+      <span class="gist">行深山巨谷，穷冬烈风</span>
     </div>
 
-    <script>
-    (function () {
-        /* ===== 配置 ===== */
-        var COLORS = {
-            yellow: '#fff3b0', green: '#c6f6c9', blue: '#bbdefb',
-            pink:   '#f8bbd0', orange: '#ffe0b2'
-        };
-        var STORAGE_KEY = 'anno_songdongyang';
+    <p>当余之从师也，负箧曳屣，行深山巨谷中，穷冬烈风，大雪深数尺，足肤皲裂而不知。至舍，四支僵劲不能动，媵人持汤沃灌，以衾拥覆，久而乃和。寓逆旅，主人日再食，无鲜肥滋味之享。同舍生皆被绮绣，戴朱缨宝饰之帽，腰白玉之环，左佩刀，右备容臭，烨然若神人；余则缊袍敝衣处其间，略无慕艳意。以中有足乐者，不知口体之奉不若人也。盖余之勤且艰若此。</p>
 
-        /* ===== 状态 ===== */
-        var marks = [];      // { id, pIdx, start, end, color, note }
-        var uid = 0;
-        var pendingNoteMarkId = null;
+    <div class="section-break">
+      <svg width="14" height="20" viewBox="0 0 14 20" fill="none"><path d="M7 2c-2 3-3 6-3 8 0 2 1 3 3 3s3-1 3-3c0-2-1-5-3-8z" fill="#5c4f3a" opacity=".5"/><ellipse cx="7" cy="16" rx="5" ry="2" fill="none" stroke="#5c4f3a" stroke-width=".8" opacity=".4"/><ellipse cx="7" cy="16" rx="2.5" ry="1" fill="none" stroke="#5c4f3a" stroke-width=".6" opacity=".3"/></svg>
+    </div>
 
-        /* ===== DOM ===== */
-        var toolbar    = document.getElementById('annoToolbar');
-        var notePanel  = document.getElementById('notePanel');
-        var noteInput  = document.getElementById('noteInput');
-        var panel      = document.getElementById('annoPanel');
-        var panelNote  = document.getElementById('panelNote');
-        var paragraphs = document.querySelectorAll('.content > p');
-        var savedSel   = null;  // 保存的选区（用于批注面板关闭后恢复）
+    <div class="stage-head" id="sec3">
+      <span class="ord">叁</span>
+      <span class="name">耄老 · 承宠</span>
+      <span class="line"></span>
+      <span class="gist">缀公卿之后，日侍坐备顾问</span>
+    </div>
 
-        /* ===== 工具函数 ===== */
-        function escHtml(s) {
-            var d = document.createElement('div');
-            d.textContent = s;
-            return d.innerHTML;
+    <p>今虽耄老，未有所成，犹幸预君子之列，而承天子之宠光，缀公卿之后，日侍坐备顾问，四海亦谬称其氏名，况才之过于余者乎？</p>
+
+    <div class="section-break">
+      <svg width="14" height="20" viewBox="0 0 14 20" fill="none"><path d="M7 2c-2 3-3 6-3 8 0 2 1 3 3 3s3-1 3-3c0-2-1-5-3-8z" fill="#5c4f3a" opacity=".5"/><ellipse cx="7" cy="16" rx="5" ry="2" fill="none" stroke="#5c4f3a" stroke-width=".8" opacity=".4"/><ellipse cx="7" cy="16" rx="2.5" ry="1" fill="none" stroke="#5c4f3a" stroke-width=".6" opacity=".3"/></svg>
+    </div>
+
+    <div class="stage-head" id="sec4">
+      <span class="ord">肆</span>
+      <span class="name">劝 · 太学</span>
+      <span class="line"></span>
+      <span class="gist">今诸生之奉，非天质之卑</span>
+    </div>
+
+    <p>今诸生学于太学，县官日有廪稍之供，父母岁有裘葛之遗，无冻馁之患矣；坐大厦之下而诵诗书，无奔走之劳矣；有司业、博士为之师，未有问而不告、求而不得者也；凡所宜有之书，皆集于此，不必若余之手录，假诸人而后见也。其业有不精、德有不成者，非天质之卑，则心不若余之专耳，岂他人之过哉！</p>
+
+    <div class="section-break">
+      <svg width="14" height="20" viewBox="0 0 14 20" fill="none"><path d="M7 2c-2 3-3 6-3 8 0 2 1 3 3 3s3-1 3-3c0-2-1-5-3-8z" fill="#5c4f3a" opacity=".5"/><ellipse cx="7" cy="16" rx="5" ry="2" fill="none" stroke="#5c4f3a" stroke-width=".8" opacity=".4"/><ellipse cx="7" cy="16" rx="2.5" ry="1" fill="none" stroke="#5c4f3a" stroke-width=".6" opacity=".3"/></svg>
+    </div>
+
+    <div class="stage-head" id="sec5">
+      <span class="ord">伍</span>
+      <span class="name">赠 · 马生</span>
+      <span class="line"></span>
+      <span class="gist">道为学之难以告之</span>
+    </div>
+
+    <p>东阳马生君则，在太学已二年，流辈甚称其贤。余朝京师，生以乡人子谒余，撰长书以为贽，辞甚畅达，与之论辨，言和而色夷。自谓少时用心于学甚劳，是可谓善学者矣！其将归见其亲也，余故道为学之难以告之。谓余勉乡人以学者，余之志也；诋我夸际遇之盛而骄乡人者，岂知余者哉！</p>
+
+  </div>
+
+  <div class="colophon">
+    <div class="signoff">
+      <div class="txt">
+        <span class="big">宋 濂 · 赠 马 生 君 则</span><br>
+        明 · 洪武年间
+      </div>
+      <div class="seal-sm" aria-hidden="true">宋</div>
+    </div>
+    <p class="quote">"以中有足乐者，不知口体之奉不若人也。"</p>
+  </div>
+
+  <footer class="footer">
+    <a href="/">← 返回首页</a>
+    <span class="note">zzht.me · 划词可批注</span>
+  </footer>
+
+</article>
+
+<div class="hint-bar" id="hintBar"><span class="key">选中文字</span> 可高亮 · 批注</div>
+
+<!-- 划词标注：浮动工具栏 -->
+<div class="anno-toolbar" id="annoToolbar">
+  <span class="color-dot" data-color="yellow" style="background:#fff3b0"></span>
+  <span class="color-dot" data-color="green" style="background:#c6f6c9"></span>
+  <span class="color-dot" data-color="blue" style="background:#bbdefb"></span>
+  <span class="color-dot" data-color="pink" style="background:#f8bbd0"></span>
+  <span class="color-dot" data-color="orange" style="background:#ffe0b2"></span>
+  <span class="sep"></span>
+  <button class="act-btn" id="btnNote" title="添加批注">✎</button>
+</div>
+
+<!-- 批注输入面板 -->
+<div class="anno-note-panel" id="notePanel">
+  <textarea id="noteInput" placeholder="输入你的批注…"></textarea>
+  <div class="note-actions">
+    <button id="noteCancel">取消</button>
+    <button id="noteSave" class="save-btn">保存</button>
+  </div>
+</div>
+
+<!-- 批注弹出框 -->
+<div class="anno-panel" id="annoPanel">
+  <div class="note-text" id="panelNote"></div>
+  <div class="panel-btns">
+    <button id="panelEdit">编辑</button>
+    <button id="panelDel" class="del-btn">删除</button>
+  </div>
+</div>
+
+<script>
+(function () {
+    /* ===== 配置 ===== */
+    var COLORS = {
+        yellow: '#fff3b0', green: '#c6f6c9', blue: '#bbdefb',
+        pink:   '#f8bbd0', orange: '#ffe0b2'
+    };
+    var STORAGE_KEY = 'anno_songdongyang';
+
+    /* ===== 状态 ===== */
+    var marks = [];      // { id, pIdx, start, end, color, note }
+    var uid = 0;
+    var pendingNoteMarkId = null;
+
+    /* ===== DOM ===== */
+    var toolbar    = document.getElementById('annoToolbar');
+    var notePanel  = document.getElementById('notePanel');
+    var noteInput  = document.getElementById('noteInput');
+    var panel      = document.getElementById('annoPanel');
+    var panelNote  = document.getElementById('panelNote');
+    var paragraphs = document.querySelectorAll('.content > p');
+    var savedSel   = null;  // 保存的选区（用于批注面板关闭后恢复）
+
+    /* ===== 工具函数 ===== */
+    function escHtml(s) {
+        var d = document.createElement('div');
+        d.textContent = s;
+        return d.innerHTML;
+    }
+
+    // 获取选区在某个 p 元素内的文字偏移
+    function getOffsets(range, p) {
+        var s = 0, e = 0, node;
+        for (node = range.startContainer; node && node !== p; node = node.parentNode) {
+            var prev = node.previousSibling;
+            while (prev) { s += (prev.textContent || '').length; prev = prev.previousSibling; }
         }
+        for (node = range.endContainer; node && node !== p; node = node.parentNode) {
+            var prev2 = node.previousSibling;
+            while (prev2) { e += (prev2.textContent || '').length; prev2 = prev2.previousSibling; }
+        }
+        return { start: s + range.startOffset, end: e + range.endOffset };
+    }
 
-        // 获取选区在某个 p 元素内的文字偏移
-        function getOffsets(range, p) {
-            var s = 0, e = 0, node;
-            for (node = range.startContainer; node && node !== p; node = node.parentNode) {
-                var prev = node.previousSibling;
-                while (prev) { s += (prev.textContent || '').length; prev = prev.previousSibling; }
+    /* ===== 持久化 ===== */
+    function save() {
+        try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(marks));
+        } catch (e) { /* 忽略存储错误 */ }
+    }
+
+    function loadAll() {
+        try {
+            var raw = localStorage.getItem(STORAGE_KEY);
+            if (raw) {
+                marks = JSON.parse(raw);
+                uid = marks.reduce(function (m, a) { return Math.max(m, a.id); }, 0) + 1;
+                // 对每个段落重新渲染标注
+                var touched = {};
+                marks.forEach(function (a) { touched[a.pIdx] = true; });
+                Object.keys(touched).forEach(function (idx) {
+                    rerenderP(parseInt(idx));
+                });
             }
-            for (node = range.endContainer; node && node !== p; node = node.parentNode) {
-                var prev2 = node.previousSibling;
-                while (prev2) { e += (prev2.textContent || '').length; prev2 = prev2.previousSibling; }
-            }
-            return { start: s + range.startOffset, end: e + range.endOffset };
-        }
+        } catch (e) { marks = []; }
+    }
 
-        /* ===== 持久化 ===== */
-        function save() {
-            try {
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(marks));
-            } catch (e) { /* 忽略存储错误 */ }
-        }
+    /* ===== 选区处理 ===== */
+    function showToolbar(range) {
+        var rect = range.getBoundingClientRect();
+        toolbar.style.left = (rect.left + window.scrollX + rect.width / 2 - 100) + 'px';
+        toolbar.style.top  = (rect.top  + window.scrollY - 44) + 'px';
+        toolbar.classList.add('visible');
+    }
 
-        function loadAll() {
-            try {
-                var raw = localStorage.getItem(STORAGE_KEY);
-                if (raw) {
-                    marks = JSON.parse(raw);
-                    uid = marks.reduce(function (m, a) { return Math.max(m, a.id); }, 0) + 1;
-                    // 对每个段落重新渲染标注
-                    var touched = {};
-                    marks.forEach(function (a) { touched[a.pIdx] = true; });
-                    Object.keys(touched).forEach(function (idx) {
-                        rerenderP(parseInt(idx));
-                    });
-                }
-            } catch (e) { marks = []; }
-        }
+    function hideAll() {
+        toolbar.classList.remove('visible');
+        notePanel.classList.remove('visible');
+        panel.classList.remove('visible');
+        pendingNoteMarkId = null;
+    }
 
-        /* ===== 选区处理 ===== */
-        function showToolbar(range) {
-            var rect = range.getBoundingClientRect();
-            toolbar.style.left = (rect.left + window.scrollX + rect.width / 2 - 100) + 'px';
-            toolbar.style.top  = (rect.top  + window.scrollY - 44) + 'px';
-            toolbar.classList.add('visible');
-        }
-
-        function hideAll() {
-            toolbar.classList.remove('visible');
-            notePanel.classList.remove('visible');
-            panel.classList.remove('visible');
-            pendingNoteMarkId = null;
-        }
-
-        function onSelection() {
-            hideAll();
-            var sel = window.getSelection();
-            if (!sel.rangeCount) return;
-            var range = sel.getRangeAt(0);
-            if (range.collapsed) return;
-            var text = range.toString().trim();
-            if (!text) return;
-            for (var i = 0; i < paragraphs.length; i++) {
-                if (paragraphs[i].contains(range.startContainer) && paragraphs[i].contains(range.endContainer)) {
-                    savedSel = { pIdx: i, range: range.cloneRange() };
-                    showToolbar(range);
-                    return;
-                }
-            }
-        }
-
-        /* ===== 高亮操作 ===== */
-        function doHighlight(color) {
-            if (!savedSel) return;
-            var p = paragraphs[savedSel.pIdx];
-            var range = savedSel.range;
-            var off = getOffsets(range, p);
-            if (off.start === off.end) return;
-
-            // 移除该范围内已有的 mark
-            removeInRange(savedSel.pIdx, off.start, off.end);
-
-            var id = uid++;
-            var markData = { id: id, pIdx: savedSel.pIdx, start: off.start, end: off.end, color: color, note: '' };
-            marks.push(markData);
-
-            // 重新渲染该段落
-            rerenderP(savedSel.pIdx);
-            save();
-            window.getSelection().removeAllRanges();
-            hideAll();
-        }
-
-        // 移除与 [start, end] 有重叠的标注
-        function removeInRange(pIdx, start, end) {
-            marks = marks.filter(function (a) {
-                if (a.pIdx !== pIdx) return true;
-                return !(a.start < end && a.end > start);
-            });
-        }
-
-        // 重新渲染某个段落的所有标注
-        function rerenderP(pIdx) {
-            var p = paragraphs[pIdx];
-            if (!p) return;
-            var text = p.textContent;
-            var pMarks = marks.filter(function (a) { return a.pIdx === pIdx; });
-            if (pMarks.length === 0) {
-                p.textContent = text;
+    function onSelection() {
+        hideAll();
+        var sel = window.getSelection();
+        if (!sel.rangeCount) return;
+        var range = sel.getRangeAt(0);
+        if (range.collapsed) return;
+        var text = range.toString().trim();
+        if (!text) return;
+        for (var i = 0; i < paragraphs.length; i++) {
+            if (paragraphs[i].contains(range.startContainer) && paragraphs[i].contains(range.endContainer)) {
+                savedSel = { pIdx: i, range: range.cloneRange() };
+                showToolbar(range);
                 return;
             }
-            pMarks.sort(function (a, b) { return a.start - b.start; });
-
-            var html = '';
-            var cursor = 0;
-            pMarks.forEach(function (a) {
-                if (a.start > cursor) html += escHtml(text.substring(cursor, a.start));
-                var cls = 'hl' + (a.note ? ' has-note' : '');
-                var title = a.note ? ' title="' + escHtml(a.note) + '"' : '';
-                html += '<mark class="' + cls + '" data-id="' + a.id + '" style="background:' + a.color + '"' + title + '>'
-                    + escHtml(text.substring(a.start, a.end)) + '</mark>';
-                cursor = a.end;
-            });
-            if (cursor < text.length) html += escHtml(text.substring(cursor));
-            p.innerHTML = html;
         }
+    }
 
-        /* ===== 批注操作 ===== */
-        function openNotePanel(markId, anchorRect) {
-            var m = marks.find(function (a) { return a.id === markId; });
-            if (!m) return;
-            pendingNoteMarkId = markId;
-            noteInput.value = m.note || '';
-            notePanel.style.left = anchorRect.left + window.scrollX + 'px';
-            notePanel.style.top  = anchorRect.bottom + window.scrollY + 8 + 'px';
-            notePanel.classList.add('visible');
-            setTimeout(function () { noteInput.focus(); }, 50);
-        }
+    /* ===== 高亮操作 ===== */
+    function doHighlight(color) {
+        if (!savedSel) return;
+        var p = paragraphs[savedSel.pIdx];
+        var range = savedSel.range;
+        var off = getOffsets(range, p);
+        if (off.start === off.end) return;
 
-        function saveNote() {
-            if (pendingNoteMarkId === null) return;
-            var m = marks.find(function (a) { return a.id === pendingNoteMarkId; });
-            if (m) {
-                m.note = noteInput.value.trim();
-                rerenderP(m.pIdx);
-                save();
-            }
-            notePanel.classList.remove('visible');
-            pendingNoteMarkId = null;
-        }
+        // 移除该范围内已有的 mark
+        removeInRange(savedSel.pIdx, off.start, off.end);
 
-        function openPanelForMark(markEl) {
-            var id = parseInt(markEl.getAttribute('data-id'));
-            var m = marks.find(function (a) { return a.id === id; });
-            if (!m) return;
-            panelNote.textContent = m.note || '';
-            panelNote.className = m.note ? 'note-text' : 'note-text no-note';
-            if (!m.note) panelNote.textContent = '暂无批注';
+        var id = uid++;
+        var markData = { id: id, pIdx: savedSel.pIdx, start: off.start, end: off.end, color: color, note: '' };
+        marks.push(markData);
 
-            var rect = markEl.getBoundingClientRect();
-            panel.style.left = rect.left + window.scrollX + 'px';
-            panel.style.top  = rect.bottom + window.scrollY + 8 + 'px';
-            panel.classList.add('visible');
-            panel.setAttribute('data-mark-id', id);
-        }
+        // 重新渲染该段落
+        rerenderP(savedSel.pIdx);
+        save();
+        window.getSelection().removeAllRanges();
+        hideAll();
+    }
 
-        function deleteMark() {
-            var id = parseInt(panel.getAttribute('data-mark-id'));
-            var m = marks.find(function (a) { return a.id === id; });
-            if (m) {
-                marks = marks.filter(function (a) { return a.id !== id; });
-                rerenderP(m.pIdx);
-                save();
-            }
-            panel.classList.remove('visible');
-        }
-
-        function editMarkNote() {
-            var id = parseInt(panel.getAttribute('data-mark-id'));
-            var m = marks.find(function (a) { return a.id === id; });
-            if (!m) return;
-            panel.classList.remove('visible');
-            var markEl = document.querySelector('mark[data-id="' + id + '"]');
-            if (markEl) {
-                openNotePanel(id, markEl.getBoundingClientRect());
-            }
-        }
-
-        /* ===== 事件绑定 ===== */
-
-        // 颜色点击 → 高亮
-        toolbar.querySelectorAll('.color-dot').forEach(function (dot) {
-            dot.addEventListener('click', function (e) {
-                e.stopPropagation();
-                doHighlight(dot.getAttribute('data-color'));
-            });
+    // 移除与 [start, end] 有重叠的标注
+    function removeInRange(pIdx, start, end) {
+        marks = marks.filter(function (a) {
+            if (a.pIdx !== pIdx) return true;
+            return !(a.start < end && a.end > start);
         });
+    }
 
-        // 批注按钮
-        document.getElementById('btnNote').addEventListener('click', function (e) {
+    // 重新渲染某个段落的所有标注
+    function rerenderP(pIdx) {
+        var p = paragraphs[pIdx];
+        if (!p) return;
+        var text = p.textContent;
+        var pMarks = marks.filter(function (a) { return a.pIdx === pIdx; });
+        if (pMarks.length === 0) {
+            p.textContent = text;
+            return;
+        }
+        pMarks.sort(function (a, b) { return a.start - b.start; });
+
+        var html = '';
+        var cursor = 0;
+        pMarks.forEach(function (a) {
+            if (a.start > cursor) html += escHtml(text.substring(cursor, a.start));
+            var cls = 'hl' + (a.note ? ' has-note' : '');
+            var title = a.note ? ' title="' + escHtml(a.note) + '"' : '';
+            html += '<mark class="' + cls + '" data-id="' + a.id + '" style="background:' + a.color + '"' + title + '>'
+                + escHtml(text.substring(a.start, a.end)) + '</mark>';
+            cursor = a.end;
+        });
+        if (cursor < text.length) html += escHtml(text.substring(cursor));
+        p.innerHTML = html;
+    }
+
+    /* ===== 批注操作 ===== */
+    function openNotePanel(markId, anchorRect) {
+        var m = marks.find(function (a) { return a.id === markId; });
+        if (!m) return;
+        pendingNoteMarkId = markId;
+        noteInput.value = m.note || '';
+        notePanel.style.left = anchorRect.left + window.scrollX + 'px';
+        notePanel.style.top  = anchorRect.bottom + window.scrollY + 8 + 'px';
+        notePanel.classList.add('visible');
+        setTimeout(function () { noteInput.focus(); }, 50);
+    }
+
+    function saveNote() {
+        if (pendingNoteMarkId === null) return;
+        var m = marks.find(function (a) { return a.id === pendingNoteMarkId; });
+        if (m) {
+            m.note = noteInput.value.trim();
+            rerenderP(m.pIdx);
+            save();
+        }
+        notePanel.classList.remove('visible');
+        pendingNoteMarkId = null;
+    }
+
+    function openPanelForMark(markEl) {
+        var id = parseInt(markEl.getAttribute('data-id'));
+        var m = marks.find(function (a) { return a.id === id; });
+        if (!m) return;
+        panelNote.textContent = m.note || '';
+        panelNote.className = m.note ? 'note-text' : 'note-text no-note';
+        if (!m.note) panelNote.textContent = '暂无批注';
+
+        var rect = markEl.getBoundingClientRect();
+        panel.style.left = rect.left + window.scrollX + 'px';
+        panel.style.top  = rect.bottom + window.scrollY + 8 + 'px';
+        panel.classList.add('visible');
+        panel.setAttribute('data-mark-id', id);
+    }
+
+    function deleteMark() {
+        var id = parseInt(panel.getAttribute('data-mark-id'));
+        var m = marks.find(function (a) { return a.id === id; });
+        if (m) {
+            marks = marks.filter(function (a) { return a.id !== id; });
+            rerenderP(m.pIdx);
+            save();
+        }
+        panel.classList.remove('visible');
+    }
+
+    function editMarkNote() {
+        var id = parseInt(panel.getAttribute('data-mark-id'));
+        var m = marks.find(function (a) { return a.id === id; });
+        if (!m) return;
+        panel.classList.remove('visible');
+        var markEl = document.querySelector('mark[data-id="' + id + '"]');
+        if (markEl) {
+            openNotePanel(id, markEl.getBoundingClientRect());
+        }
+    }
+
+    /* ===== 事件绑定 ===== */
+
+    // 颜色点击 → 高亮
+    toolbar.querySelectorAll('.color-dot').forEach(function (dot) {
+        dot.addEventListener('click', function (e) {
             e.stopPropagation();
-            if (!savedSel) return;
-            // 先检查选区内是否已有 mark
-            var markEl = savedSel.range.startContainer.nodeType === 1
-                ? savedSel.range.startContainer.closest && savedSel.range.startContainer.closest('mark.hl')
-                : savedSel.range.startContainer.parentElement.closest && savedSel.range.startContainer.parentElement.closest('mark.hl');
-            if (markEl && document.querySelector('.content').contains(markEl)) {
-                openNotePanel(parseInt(markEl.getAttribute('data-id')), savedSel.range.getBoundingClientRect());
-            } else {
-                doHighlight('#fff3b0');
-                // doHighlight 会清除选区，需要找到刚创建的 mark
-                var lastMark = marks[marks.length - 1];
-                if (lastMark) {
-                    var el = document.querySelector('mark[data-id="' + lastMark.id + '"]');
-                    if (el) openNotePanel(lastMark.id, el.getBoundingClientRect());
-                }
+            doHighlight(dot.getAttribute('data-color'));
+        });
+    });
+
+    // 批注按钮
+    document.getElementById('btnNote').addEventListener('click', function (e) {
+        e.stopPropagation();
+        if (!savedSel) return;
+        // 先检查选区内是否已有 mark
+        var markEl = savedSel.range.startContainer.nodeType === 1
+            ? savedSel.range.startContainer.closest && savedSel.range.startContainer.closest('mark.hl')
+            : savedSel.range.startContainer.parentElement.closest && savedSel.range.startContainer.parentElement.closest('mark.hl');
+        if (markEl && document.querySelector('.content').contains(markEl)) {
+            openNotePanel(parseInt(markEl.getAttribute('data-id')), savedSel.range.getBoundingClientRect());
+        } else {
+            doHighlight('#fff3b0');
+            // doHighlight 会清除选区，需要找到刚创建的 mark
+            var lastMark = marks[marks.length - 1];
+            if (lastMark) {
+                var el = document.querySelector('mark[data-id="' + lastMark.id + '"]');
+                if (el) openNotePanel(lastMark.id, el.getBoundingClientRect());
             }
-        });
+        }
+    });
 
-        // 批注面板保存/取消
-        document.getElementById('noteSave').addEventListener('click', saveNote);
-        document.getElementById('noteCancel').addEventListener('click', function () {
-            notePanel.classList.remove('visible');
-            pendingNoteMarkId = null;
-        });
-        noteInput.addEventListener('keydown', function (e) {
-            if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) saveNote();
-        });
+    // 批注面板保存/取消
+    document.getElementById('noteSave').addEventListener('click', saveNote);
+    document.getElementById('noteCancel').addEventListener('click', function () {
+        notePanel.classList.remove('visible');
+        pendingNoteMarkId = null;
+    });
+    noteInput.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) saveNote();
+    });
 
-        // 点击 mark → 显示批注面板
-        document.querySelector('.content').addEventListener('click', function (e) {
-            var markEl = e.target.closest && e.target.closest('mark.hl');
-            if (markEl) {
-                e.stopPropagation();
-                openPanelForMark(markEl);
-            }
-        });
+    // 点击 mark → 显示批注面板
+    document.querySelector('.content').addEventListener('click', function (e) {
+        var markEl = e.target.closest && e.target.closest('mark.hl');
+        if (markEl) {
+            e.stopPropagation();
+            openPanelForMark(markEl);
+        }
+    });
 
-        // 面板按钮
-        document.getElementById('panelEdit').addEventListener('click', editMarkNote);
-        document.getElementById('panelDel').addEventListener('click', deleteMark);
+    // 面板按钮
+    document.getElementById('panelEdit').addEventListener('click', editMarkNote);
+    document.getElementById('panelDel').addEventListener('click', deleteMark);
 
-        // 点击空白处关闭弹出
-        document.addEventListener('click', function (e) {
-            if (!toolbar.contains(e.target)) toolbar.classList.remove('visible');
-            if (!notePanel.contains(e.target)) notePanel.classList.remove('visible');
-            if (!panel.contains(e.target) && !e.target.closest('mark.hl')) {
-                panel.classList.remove('visible');
-            }
-        });
+    // 点击空白处关闭弹出
+    document.addEventListener('click', function (e) {
+        if (!toolbar.contains(e.target)) toolbar.classList.remove('visible');
+        if (!notePanel.contains(e.target)) notePanel.classList.remove('visible');
+        if (!panel.contains(e.target) && !e.target.closest('mark.hl')) {
+            panel.classList.remove('visible');
+        }
+    });
 
-        // Escape 关闭
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape') hideAll();
-        });
+    // Escape 关闭
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') hideAll();
+    });
 
-        // 选区变化监听
-        document.addEventListener('mouseup', function () { setTimeout(onSelection, 10); });
-        document.addEventListener('keyup', function (e) {
-            if (e.shiftKey || e.ctrlKey || e.metaKey) setTimeout(onSelection, 10);
-        });
+    // 选区变化监听
+    document.addEventListener('mouseup', function () { setTimeout(onSelection, 10); });
+    document.addEventListener('keyup', function (e) {
+        if (e.shiftKey || e.ctrlKey || e.metaKey) setTimeout(onSelection, 10);
+    });
 
-        /* ===== 初始化 ===== */
-        loadAll();
-    })();
-    </script>
+    /* ===== 提示条：5秒后淡出 ===== */
+    var hintBar = document.getElementById('hintBar');
+    if (hintBar) {
+        var faded = false;
+        function fadeHint() { if (!faded) { faded = true; hintBar.style.opacity = '0'; setTimeout(function(){hintBar.style.display='none';},500);} }
+        setTimeout(fadeHint, 5000);
+        document.addEventListener('scroll', fadeHint, { once: true, passive: true });
+    }
+
+    /* ===== 初始化 ===== */
+    loadAll();
+})();
+</script>
 </body>
 </html>
