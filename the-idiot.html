@@ -609,6 +609,15 @@ body {
   .graph-wrap { padding: 14px; }
   #rel-graph .node text { font-size: 12px; }
 }
+/* ── HERO-AXIS v1 ── */
+.hero{display:grid!important;grid-template-columns:minmax(24px,1fr) minmax(0,952px) minmax(24px,1fr)!important;
+  align-content:center!important;justify-items:stretch!important;align-items:stretch!important;
+  text-align:left!important;padding-left:0!important;padding-right:0!important;}
+.hero>*{grid-column:2!important;margin-left:0!important;margin-right:0!important;
+  justify-content:flex-start!important;text-align:left!important;}
+.hero .hero-divider,.hero .hero-scroll,.hero .scroll-hint,.hero .hero-meta,.hero-meta-item{margin-left:0!important;margin-right:0!important;}
+.hero h1::after,.hero h2::after{margin-left:0!important;margin-right:0!important;}
+/* ── /HERO-AXIS v1 ── */
 </style>
 </head>
 <body>
@@ -624,7 +633,7 @@ body {
       <div class="hero-eyebrow">Fyodor Dostoevsky · 1868—1869 · 彼得堡</div>
       <h1>白痴</h1>
       <div class="hero-ru">Идиот</div>
-      <p class="hero-sub">一个「绝对善良」的人回到污浊的人间，<br>像一道过于明亮、让人睁不开眼的光。</p>
+      
       <div class="hero-divider" aria-hidden="true">
         <svg viewBox="0 0 46 20" width="44" height="19"><path d="M3 14 L34 5" stroke="#9c2a15" stroke-width="1.8" stroke-linecap="round" fill="none"/><path d="M33 6 L43 3 L40 9 Z" fill="#9c2a15"/><circle cx="3" cy="14" r="1.5" fill="#9c2a15"/></svg>
       </div>
