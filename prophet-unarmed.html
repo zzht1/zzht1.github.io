@@ -139,10 +139,7 @@ body {
 .phase { margin-top: 48px; }
 .phase-head { display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap; }
 .phase-num {
-  font-family: var(--serif); font-size: 2rem; font-weight: 900; line-height: 1;
-  background: linear-gradient(135deg, var(--grey), var(--star));
-  -webkit-background-clip: text; background-clip: text; color: transparent;
-}
+  font-family: var(--serif); font-size: 2rem; font-weight: 900; line-height: 1; color: #4c4a46;}
 .phase-head h3 { font-family: var(--serif); font-size: 1.25rem; font-weight: 700; letter-spacing: .05em; }
 .phase-head .ref { font-size: .8rem; color: var(--ink-faint); letter-spacing: .05em; }
 .phase-items { margin-top: 20px; margin-left: 13px; border-left: 2px solid rgba(76,74,70,.45); padding-left: 26px; }
@@ -292,6 +289,15 @@ body {
   .hero-meta { gap: 12px 26px; }
   .stat { min-width: 120px; padding: 18px 8px; }
 }
+/* ── HERO-AXIS v1 ── */
+.hero{display:grid!important;grid-template-columns:minmax(24px,1fr) minmax(0,952px) minmax(24px,1fr)!important;
+  align-content:center!important;justify-items:stretch!important;align-items:stretch!important;
+  text-align:left!important;padding-left:0!important;padding-right:0!important;}
+.hero>*{grid-column:2!important;margin-left:0!important;margin-right:0!important;
+  justify-content:flex-start!important;text-align:left!important;}
+.hero .hero-divider,.hero .hero-scroll,.hero .scroll-hint,.hero .hero-meta,.hero-meta-item{margin-left:0!important;margin-right:0!important;}
+.hero h1::after,.hero h2::after{margin-left:0!important;margin-right:0!important;}
+/* ── /HERO-AXIS v1 ── */
 </style>
 </head>
 <body>
@@ -304,7 +310,7 @@ body {
   <div class="hero-eyebrow">Isaac Deutscher · 1959 · 三幕剧的第二幕</div>
   <h1>被解除武装的先知</h1>
   <div class="hero-en">The Prophet Unarmed · 1921–1929</div>
-  <div class="hero-sub">一场没有街垒的党内战争：他赢得了辩论，输掉了名单</div>
+  
   <div class="hero-divider"><svg viewBox="0 0 48 48" width="40" height="40" aria-hidden="true"><g stroke="#4c4a46" stroke-width="2" stroke-linecap="round" fill="none"><path d="M24 6 v22"/><path d="M14 18 c3 4 6 6 10 6 c4 0 7 -2 10 -6" /><path d="M24 28 l-5 6 M24 28 l5 6"/></g><path d="M24 2 l1.8 3.8 -3.6 0 z" fill="#a8842e"/></svg></div>
   <blockquote class="hero-quote">
     「斯大林不是一个魔鬼，而是一部机器的化身。」
