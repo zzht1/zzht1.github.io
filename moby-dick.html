@@ -356,6 +356,15 @@ body {
   .sl-threads { grid-template-columns: 1fr; }
   .quote-card { padding: 1.6rem 1.4rem; }
 }
+/* ── HERO-AXIS v1 ── */
+.hero{display:grid!important;grid-template-columns:minmax(24px,1fr) minmax(0,1072px) minmax(24px,1fr)!important;
+  align-content:center!important;justify-items:stretch!important;align-items:stretch!important;
+  text-align:left!important;padding-left:0!important;padding-right:0!important;}
+.hero>*{grid-column:2!important;margin-left:0!important;margin-right:0!important;
+  justify-content:flex-start!important;text-align:left!important;}
+.hero .hero-divider,.hero .hero-scroll,.hero .scroll-hint,.hero .hero-meta,.hero-meta-item{margin-left:0!important;margin-right:0!important;}
+.hero h1::after,.hero h2::after{margin-left:0!important;margin-right:0!important;}
+/* ── /HERO-AXIS v1 ── */
 </style>
 </head>
 <body>
@@ -381,7 +390,7 @@ body {
 <header class="hero">
   <div class="hero-badge">Herman Melville · 1851</div>
   <h1>MOBY-DICK</h1>
-  <div class="hero-sub">or, The Whale</div>
+  
   <h2>白鲸 · 捕鲸船上的宇宙</h2>
 
   <!-- 抹香鲸雕版剪影 -->
