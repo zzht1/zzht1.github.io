@@ -127,7 +127,7 @@ body {
 /* ===== STORY ===== */
 .phase { margin-top: 44px; }
 .phase-head { display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap; }
-.phase-num { font-family: var(--serif); font-size: 2rem; font-weight: 900; background: linear-gradient(135deg, var(--acc), var(--acc2)); -webkit-background-clip: text; background-clip: text; color: transparent; line-height: 1; }
+.phase-num { font-family: var(--serif); font-size: 2rem; font-weight: 900; line-height: 1; color: #7a5c40;}
 .phase-head h3 { font-family: var(--serif); font-size: 1.25rem; font-weight: 700; letter-spacing: .05em; }
 .phase-head .ref { font-size: .8rem; color: var(--ink-faint); letter-spacing: .05em; }
 .phase-items { margin-top: 20px; margin-left: 13px; border-left: 2px solid rgba(122,92,64,.55); padding-left: 26px; }
@@ -265,6 +265,15 @@ body {
   .hero-meta { gap: 12px 24px; }
   .stat { min-width: 120px; padding: 18px 8px; }
 }
+/* ── HERO-AXIS v1 ── */
+.hero{display:grid!important;grid-template-columns:minmax(24px,1fr) minmax(0,952px) minmax(24px,1fr)!important;
+  align-content:center!important;justify-items:stretch!important;align-items:stretch!important;
+  text-align:left!important;padding-left:0!important;padding-right:0!important;}
+.hero>*{grid-column:2!important;margin-left:0!important;margin-right:0!important;
+  justify-content:flex-start!important;text-align:left!important;}
+.hero .hero-divider,.hero .hero-scroll,.hero .scroll-hint,.hero .hero-meta,.hero-meta-item{margin-left:0!important;margin-right:0!important;}
+.hero h1::after,.hero h2::after{margin-left:0!important;margin-right:0!important;}
+/* ── /HERO-AXIS v1 ── */
 </style>
 </head>
 <body>
@@ -277,7 +286,7 @@ body {
   <div class="hero-eyebrow">老舍 · 1944–1948 · 小羊圈胡同的八年</div>
   <h1>四世同堂</h1>
   <div class="hero-genre">长篇小说三部曲 · 惶惑 偷生 饥荒</div>
-  <div class="hero-sub">一条小羊圈胡同，八年亡国岁月</div>
+  
   <div class="hero-divider">
     <svg viewBox="0 0 64 48" width="52" height="40" aria-hidden="true">
       <g stroke="#7a5c40" fill="none" stroke-linecap="round" stroke-linejoin="round">
