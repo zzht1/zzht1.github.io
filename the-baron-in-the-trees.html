@@ -239,10 +239,7 @@ body {
 }
 .phase-num {
   font-family: var(--serif); font-size: 2rem; font-weight: 900;
-  background: linear-gradient(135deg, var(--grove), var(--sky));
-  -webkit-background-clip: text; background-clip: text; color: transparent;
-  line-height: 1;
-}
+  line-height: 1; color: #5c7a4d;}
 .phase-head h3 { font-family: var(--serif); font-size: 1.25rem; font-weight: 700; letter-spacing: .05em; }
 .phase-head .ref { font-size: .8rem; color: var(--ink-faint); letter-spacing: .05em; }
 .phase-items {
@@ -528,6 +525,15 @@ body {
   .stat { min-width: 120px; padding: 18px 8px; }
 }
 
+/* ── HERO-AXIS v1 ── */
+.hero{display:grid!important;grid-template-columns:minmax(24px,1fr) minmax(0,952px) minmax(24px,1fr)!important;
+  align-content:center!important;justify-items:stretch!important;align-items:stretch!important;
+  text-align:left!important;padding-left:0!important;padding-right:0!important;}
+.hero>*{grid-column:2!important;margin-left:0!important;margin-right:0!important;
+  justify-content:flex-start!important;text-align:left!important;}
+.hero .hero-divider,.hero .hero-scroll,.hero .scroll-hint,.hero .hero-meta,.hero-meta-item{margin-left:0!important;margin-right:0!important;}
+.hero h1::after,.hero h2::after{margin-left:0!important;margin-right:0!important;}
+/* ── /HERO-AXIS v1 ── */
 </style>
 </head>
 <body>
@@ -540,7 +546,7 @@ body {
   <div class="hero-eyebrow">Italo Calvino · 1957 · 翁布罗萨的树冠</div>
   <h1>树上的男爵</h1>
   <div class="hero-ru">Il barone rampante</div>
-  <div class="hero-sub">一次持续一生的拒绝，一场持续一生的热爱</div>
+  
   <div class="hero-divider">
     <svg viewBox="0 0 240 60" width="220" height="55" aria-hidden="true">
       <g fill="none" stroke="#5c7a4d" stroke-width="1.6" stroke-linecap="round">
