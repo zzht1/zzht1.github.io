@@ -227,10 +227,7 @@ body {
 }
 .phase-num {
   font-family: var(--serif); font-size: 2rem; font-weight: 900;
-  background: linear-gradient(135deg, var(--acc), var(--gold));
-  -webkit-background-clip: text; background-clip: text; color: transparent;
-  line-height: 1;
-}
+  line-height: 1; color: #8a2f23;}
 .phase-head h3 { font-family: var(--serif); font-size: 1.25rem; font-weight: 700; letter-spacing: .05em; }
 .phase-head .ref { font-size: .8rem; color: var(--ink-faint); letter-spacing: .05em; }
 .phase-items {
@@ -484,6 +481,15 @@ body {
   .stat { min-width: 120px; padding: 18px 8px; }
 }
 
+/* ── HERO-AXIS v1 ── */
+.hero{display:grid!important;grid-template-columns:minmax(24px,1fr) minmax(0,952px) minmax(24px,1fr)!important;
+  align-content:center!important;justify-items:stretch!important;align-items:stretch!important;
+  text-align:left!important;padding-left:0!important;padding-right:0!important;}
+.hero>*{grid-column:2!important;margin-left:0!important;margin-right:0!important;
+  justify-content:flex-start!important;text-align:left!important;}
+.hero .hero-divider,.hero .hero-scroll,.hero .scroll-hint,.hero .hero-meta,.hero-meta-item{margin-left:0!important;margin-right:0!important;}
+.hero h1::after,.hero h2::after{margin-left:0!important;margin-right:0!important;}
+/* ── /HERO-AXIS v1 ── */
 </style>
 </head>
 <body>
@@ -496,7 +502,7 @@ body {
   <div class="hero-eyebrow">列夫·托尔斯泰 · 1873–1877 · 舞会、麦田与月台</div>
   <h1>安娜·卡列尼娜</h1>
   <div class="hero-ru">Анна Каренина</div>
-  <div class="hero-sub">开篇那句话，用一整本书来偿还</div>
+  
   <div class="hero-divider">
     <svg viewBox="0 0 300 44" width="300" height="44" aria-hidden="true">
       <g stroke="#5b5b57" stroke-width="2" stroke-linecap="round" fill="none">
