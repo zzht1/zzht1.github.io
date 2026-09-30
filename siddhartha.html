@@ -235,10 +235,7 @@ body {
 }
 .phase-num {
   font-family: var(--serif); font-size: 2rem; font-weight: 900;
-  background: linear-gradient(135deg, var(--river), var(--gold));
-  -webkit-background-clip: text; background-clip: text; color: transparent;
-  line-height: 1;
-}
+  line-height: 1; color: #a8842e;}
 .phase-head h3 { font-family: var(--serif); font-size: 1.25rem; font-weight: 700; letter-spacing: .05em; }
 .phase-head .ref { font-size: .8rem; color: var(--ink-faint); letter-spacing: .05em; }
 .phase-items {
@@ -495,6 +492,15 @@ body {
   .hero-meta { gap: 12px 26px; }
   .stat { min-width: 120px; padding: 18px 8px; }
 }
+/* ── HERO-AXIS v1 ── */
+.hero{display:grid!important;grid-template-columns:minmax(24px,1fr) minmax(0,952px) minmax(24px,1fr)!important;
+  align-content:center!important;justify-items:stretch!important;align-items:stretch!important;
+  text-align:left!important;padding-left:0!important;padding-right:0!important;}
+.hero>*{grid-column:2!important;margin-left:0!important;margin-right:0!important;
+  justify-content:flex-start!important;text-align:left!important;}
+.hero .hero-divider,.hero .hero-scroll,.hero .scroll-hint,.hero .hero-meta,.hero-meta-item{margin-left:0!important;margin-right:0!important;}
+.hero h1::after,.hero h2::after{margin-left:0!important;margin-right:0!important;}
+/* ── /HERO-AXIS v1 ── */
 </style>
 </head>
 <body>
@@ -507,7 +513,7 @@ body {
   <div class="hero-eyebrow">Hermann Hesse · 1922 · 古印度的河岸</div>
   <h1>悉达多</h1>
   <div class="hero-ru">Siddhartha</div>
-  <div class="hero-sub">一个人不借任何权威，亲自抵达自己</div>
+  
   <div class="hero-divider"><svg viewBox="0 0 160 48" width="120" height="36" aria-hidden="true"><path d="M0 30 C 30 22, 55 38, 80 30 S 130 22, 160 30" stroke="#4a7a80" stroke-width="1.6" fill="none" stroke-linecap="round" opacity=".75"/><g stroke="#7a5c40" stroke-width="1.6" fill="none" stroke-linecap="round"><path d="M66 20 q14 5 28 0 q-6 7 -14 7 q-8 0 -14 -7 Z" fill="#7a5c40" fill-opacity=".85" stroke="none"/><path d="M80 20 V8"/><path d="M80 8 q8 3 0 12" opacity=".8"/></g></svg></div>
   <blockquote class="hero-quote">
     “知识可以传授，智慧却不能。”
