@@ -236,10 +236,7 @@ body {
 }
 .phase-num {
   font-family: var(--serif); font-size: 2rem; font-weight: 900;
-  background: linear-gradient(135deg, var(--night), var(--gold));
-  -webkit-background-clip: text; background-clip: text; color: transparent;
-  line-height: 1;
-}
+  line-height: 1; color: #2f3f63;}
 .phase-head h3 { font-family: var(--serif); font-size: 1.25rem; font-weight: 700; letter-spacing: .05em; }
 .phase-head .ref { font-size: .8rem; color: var(--ink-faint); letter-spacing: .05em; }
 .phase-items {
@@ -496,6 +493,15 @@ body {
   .hero-meta { gap: 12px 26px; }
   .stat { min-width: 120px; padding: 18px 8px; }
 }
+/* ── HERO-AXIS v1 ── */
+.hero{display:grid!important;grid-template-columns:minmax(24px,1fr) minmax(0,952px) minmax(24px,1fr)!important;
+  align-content:center!important;justify-items:stretch!important;align-items:stretch!important;
+  text-align:left!important;padding-left:0!important;padding-right:0!important;}
+.hero>*{grid-column:2!important;margin-left:0!important;margin-right:0!important;
+  justify-content:flex-start!important;text-align:left!important;}
+.hero .hero-divider,.hero .hero-scroll,.hero .scroll-hint,.hero .hero-meta,.hero-meta-item{margin-left:0!important;margin-right:0!important;}
+.hero h1::after,.hero h2::after{margin-left:0!important;margin-right:0!important;}
+/* ── /HERO-AXIS v1 ── */
 </style>
 </head>
 <body>
@@ -508,7 +514,7 @@ body {
   <div class="hero-eyebrow">Hermann Hesse · 1927 · 深夜的城市</div>
   <h1>荒原狼</h1>
   <div class="hero-ru">Der Steppenwolf</div>
-  <div class="hero-sub">在市民的体面与灵魂的荒野之间</div>
+  
   <div class="hero-divider"><svg viewBox="0 0 160 48" width="120" height="36" aria-hidden="true"><defs><linearGradient id="dwL" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#a8842e" stop-opacity="0"/><stop offset="1" stop-color="#a8842e" stop-opacity=".8"/></linearGradient><linearGradient id="dwR" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#a8842e" stop-opacity=".8"/><stop offset="1" stop-color="#a8842e" stop-opacity="0"/></linearGradient></defs><line x1="0" y1="24" x2="62" y2="24" stroke="url(#dwL)" stroke-width="1.4" stroke-dasharray="5 5"/><line x1="98" y1="24" x2="160" y2="24" stroke="url(#dwR)" stroke-width="1.4" stroke-dasharray="5 5"/><rect x="66" y="7" width="28" height="34" rx="2.5" fill="none" stroke="#a8842e" stroke-width="1.8"/><circle cx="88" cy="25" r="1.8" fill="#a8842e"/></svg></div>
   <blockquote class="hero-quote">
     “魔术剧院——只供疯子入内——门票：你的心灵。”
