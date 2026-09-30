@@ -236,10 +236,7 @@ body {
 }
 .phase-num {
   font-family: var(--serif); font-size: 2rem; font-weight: 900;
-  background: linear-gradient(135deg, var(--mauve), var(--gold));
-  -webkit-background-clip: text; background-clip: text; color: transparent;
-  line-height: 1;
-}
+  line-height: 1; color: #6e5f6b;}
 .phase-head h3 { font-family: var(--serif); font-size: 1.25rem; font-weight: 700; letter-spacing: .05em; }
 .phase-head .ref { font-size: .8rem; color: var(--ink-faint); letter-spacing: .05em; }
 .phase-items {
@@ -496,6 +493,15 @@ body {
   .hero-meta { gap: 12px 26px; }
   .stat { min-width: 120px; padding: 18px 8px; }
 }
+/* ── HERO-AXIS v1 ── */
+.hero{display:grid!important;grid-template-columns:minmax(24px,1fr) minmax(0,952px) minmax(24px,1fr)!important;
+  align-content:center!important;justify-items:stretch!important;align-items:stretch!important;
+  text-align:left!important;padding-left:0!important;padding-right:0!important;}
+.hero>*{grid-column:2!important;margin-left:0!important;margin-right:0!important;
+  justify-content:flex-start!important;text-align:left!important;}
+.hero .hero-divider,.hero .hero-scroll,.hero .scroll-hint,.hero .hero-meta,.hero-meta-item{margin-left:0!important;margin-right:0!important;}
+.hero h1::after,.hero h2::after{margin-left:0!important;margin-right:0!important;}
+/* ── /HERO-AXIS v1 ── */
 </style>
 </head>
 <body>
@@ -508,7 +514,7 @@ body {
   <div class="hero-eyebrow">Hermann Hesse · 1930 · 十四世纪的修道院与大道</div>
   <h1>精神与爱欲</h1>
   <div class="hero-ru">Narziß und Goldmund</div>
-  <div class="hero-sub">黑塞把一个人的两半，写成了两个人</div>
+  
   <div class="hero-divider"><svg viewBox="0 0 48 48" width="40" height="40" aria-hidden="true"><rect x="14" y="6" width="7" height="36" rx="2.5" fill="#6e5f6b"/><rect x="15.8" y="6" width="3.4" height="36" rx="1.5" fill="#7d6c79"/><rect x="27.5" y="6" width="7" height="36" rx="2.5" fill="none" stroke="#a8842e" stroke-width="1.6" stroke-dasharray="4 3.5"/></svg></div>
   <blockquote class="hero-quote">
     “你身上醒着的，是母性的力量。”
