@@ -789,13 +789,13 @@ body {
   .hero-stat .val { font-size: 1.3rem; }
 }
 /* ── HERO-AXIS v1 ── */
-.hero{display:flex!important;flex-direction:column!important;
-  justify-content:center!important;align-items:center!important;
-  text-align:center!important;padding-left:60px!important;padding-right:60px!important;}
-.hero>*{margin-left:auto!important;margin-right:auto!important;
-  justify-content:center!important;text-align:center!important;}
-.hero .hero-divider,.hero .hero-scroll,.hero .scroll-hint,.hero .hero-meta,.hero-meta-item{margin-left:auto!important;margin-right:auto!important;}
-.hero h1::after,.hero h2::after{margin-left:auto!important;margin-right:auto!important;}
+.hero{display:grid!important;grid-template-columns:minmax(60px,1fr) minmax(0,1052px) minmax(60px,1fr)!important;
+  align-content:center!important;justify-items:stretch!important;align-items:stretch!important;
+  text-align:left!important;padding-left:0!important;padding-right:0!important;}
+.hero>*{grid-column:2!important;margin-left:0!important;margin-right:0!important;
+  justify-content:flex-start!important;text-align:left!important;}
+.hero .hero-divider,.hero .hero-scroll,.hero .scroll-hint,.hero .hero-meta,.hero-meta-item{margin-left:0!important;margin-right:0!important;}
+.hero h1::after,.hero h2::after{margin-left:0!important;margin-right:0!important;}
 /* ── /HERO-AXIS v1 ── */
 </style>
 </head>
