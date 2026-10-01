@@ -186,6 +186,18 @@ footer p{max-width:860px;margin-bottom:6px;line-height:1.9}
   background:var(--paper);border:1px solid var(--line);box-shadow:0 8px 26px rgba(80,66,40,.14);
   font-size:.8rem;color:var(--ink-soft);display:none;pointer-events:none;line-height:1.7}
 #tip b{color:var(--ink);font-size:.85rem;display:block;margin-bottom:3px}
+/* ── HERO-AXIS v1 ── */
+.hero{display:flex!important;flex-direction:column!important;
+  justify-content:center!important;align-items:center!important;
+  text-align:center!important;padding-left:28px!important;padding-right:28px!important;}
+.hero>*{margin-left:auto!important;margin-right:auto!important;
+  justify-content:center!important;text-align:center!important;}
+/* 绝对定位的装饰层/水印保持原位，不被中列裁切或位移 */
+.hero>.hero-grid{grid-column:auto!important;}
+
+.hero .hero-divider,.hero .hero-scroll,.hero .scroll-hint,.hero .hero-meta,.hero-meta-item{margin-left:auto!important;margin-right:auto!important;}
+.hero h1::after,.hero h2::after{margin-left:auto!important;margin-right:auto!important;}
+/* ── /HERO-AXIS v1 ── */
 </style>
 </head>
 <body>
