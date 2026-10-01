@@ -212,13 +212,16 @@ em.q{font-style:normal;color:var(--red);font-weight:500}
 .detail-hint{font-size:.95rem;color:var(--ink-faint);text-align:center;padding:2.2rem 1rem;border:1px dashed var(--line);border-radius:18px;background:var(--paper-2)}
 
 /* ── HERO-AXIS v1 ── */
-.hero{display:grid!important;grid-template-columns:minmax(24px,1fr) minmax(0,872px) minmax(24px,1fr)!important;
-  align-content:center!important;justify-items:stretch!important;align-items:stretch!important;
-  text-align:left!important;padding-left:0!important;padding-right:0!important;}
-.hero>*{grid-column:2!important;margin-left:0!important;margin-right:0!important;
-  justify-content:flex-start!important;text-align:left!important;}
-.hero .hero-divider,.hero .hero-scroll,.hero .scroll-hint,.hero .hero-meta,.hero-meta-item{margin-left:0!important;margin-right:0!important;}
-.hero h1::after,.hero h2::after{margin-left:0!important;margin-right:0!important;}
+.hero{display:flex!important;flex-direction:column!important;
+  justify-content:center!important;align-items:center!important;
+  text-align:center!important;padding-left:24px!important;padding-right:24px!important;}
+.hero>*{margin-left:auto!important;margin-right:auto!important;
+  justify-content:center!important;text-align:center!important;}
+/* 绝对定位的装饰层/水印保持原位，不被中列裁切或位移 */
+.hero>.hero-frag{grid-column:auto!important;}
+
+.hero .hero-divider,.hero .hero-scroll,.hero .scroll-hint,.hero .hero-meta,.hero-meta-item{margin-left:auto!important;margin-right:auto!important;}
+.hero h1::after,.hero h2::after{margin-left:auto!important;margin-right:auto!important;}
 /* ── /HERO-AXIS v1 ── */
 </style>
 <style id="__dm_no_drag_style__">* { -webkit-user-drag: none !important; }</style><style id="__dm_bindable_badge_style__">[data-sp-bindable="database"]{outline:1px dashed #0088ff;outline-offset:2px;border-radius:4px;}[data-sp-bindable="database"] *{pointer-events:none !important;transition:none !important;animation:none !important;}[data-sp-bindable="database"]{transition:none !important;animation:none !important;}</style></head>
