@@ -3,14 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="《机智的医生生活》人物关系图谱：五位1999年同窗的医生，三对恋爱加一对暗恋，每周四的乐队。申源浩导演、李祐汀编剧，tvN 2020—2021。">
-<title>机智的医生生活 · 人物关系图谱</title>
+<meta name="description" content="《机智的医生生活》第一季总结：12 集合订本、五人帮季末坐标、四条感情线的进展，以及第二季开看前的回顾清单与未解问题。">
+<title>机智的医生生活 · 第一季总结与开看前清单</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  /* 暖米白底 + 愈合感的青绿与暖珊瑚 */
   --bg: #f3f1ea;
   --bg-deep: #eae6dc;
   --paper: #fbf9f3;
@@ -20,10 +19,10 @@
   --ink-faint: #9a9180;
   --line: #e3dcca;
   --line-soft: #ece7d8;
-  /* 关系类型色（全哑光） */
-  --c-friend: #3a7d6e;   /* 青绿 · 二十年友情 */
+  --c-friend: #3a7d6e;   /* 青绿 · 五人友情 */
   --c-love: #c25b4a;     /* 暖珊瑚 · 恋情 */
-  --c-secret: #b8893a;   /* 琥珀 · 暗恋未说破 */
+  --c-secret: #b8893a;   /* 琥珀 · 暗恋 / 伏笔 */
+  --c-open: #7a6bb0;     /*  muted 紫 · 未解问题 */
   --c-sister: #8a8e9a;   /* 灰蓝 · 亲属 */
   --mono: 'JetBrains Mono', 'Courier New', monospace;
   --sans: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -47,7 +46,6 @@ body {
 ::-webkit-scrollbar-track { background: var(--bg-deep); }
 ::-webkit-scrollbar-thumb { background: #c8c1ad; border-radius: 4px; }
 
-/* back home */
 .back-home {
   position: fixed; top: 16px; left: 18px; z-index: 200;
   font-family: var(--mono); font-size: .76rem;
@@ -59,16 +57,15 @@ body {
 .back-home:hover { color: var(--c-friend); border-color: var(--c-friend); transform: translateX(-2px); }
 
 /* ========================================================
-   HERO · 心律监护 + 五线谱意象
+   HERO
    ======================================================== */
 .hero {
-  min-height: 94vh;
+  min-height: 92vh;
   display: flex; flex-direction: column; justify-content: center; align-items: center;
   text-align: center; padding: 14vh 24px 9vh;
   position: relative; overflow: hidden;
   background: linear-gradient(180deg, var(--bg-deep) 0%, var(--bg) 62%);
 }
-/* 装饰层：心律线 + 五线谱，全幅通栏，不发光 */
 .hero-deco { position: absolute; inset: 0; z-index: 1; pointer-events: none; opacity: .14; }
 .hero-deco .ekg { position: absolute; top: 50%; left: 0; right: 0; transform: translateY(-50%); }
 .hero-deco .staff {
@@ -84,8 +81,8 @@ body {
 }
 .hero h1 {
   font-family: var(--serif); font-weight: 900;
-  font-size: clamp(3rem, 11vw, 6.2rem);
-  letter-spacing: .04em; line-height: 1.04;
+  font-size: clamp(2.6rem, 8.4vw, 5.4rem);
+  letter-spacing: .04em; line-height: 1.06;
   color: var(--ink); margin-bottom: 14px;
 }
 .hero-subtitle {
@@ -94,7 +91,7 @@ body {
   margin-bottom: 2.2rem;
 }
 .hero-quote {
-  max-width: 620px; margin: 0 auto 2.2rem;
+  max-width: 640px; margin: 0 auto 2.2rem;
   font-family: var(--serif); color: var(--ink-soft);
   font-size: 1.02rem; line-height: 2;
   padding: 18px 26px; border-left: 3px solid var(--c-friend);
@@ -108,7 +105,7 @@ body {
 .hero-meta { display: flex; gap: 2.4rem; justify-content: center; flex-wrap: wrap; margin-top: 1rem; }
 .hero-meta-item { display: flex; flex-direction: column; align-items: center; gap: .35rem; }
 .hero-meta-item .value {
-  font-family: var(--serif); font-size: 2.1rem; font-weight: 700;
+  font-family: var(--serif); font-size: 2rem; font-weight: 700;
   color: var(--c-friend); line-height: 1;
 }
 .hero-meta-item .label {
@@ -125,7 +122,7 @@ body {
 @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
 
 /* ========================================================
-   NAV · 等宽字体 tab
+   NAV
    ======================================================== */
 .nav-bar {
   position: sticky; top: 0; z-index: 150;
@@ -137,13 +134,14 @@ body {
 }
 .nav-inner::-webkit-scrollbar { display: none; }
 .nav-tab {
-  flex: 0 0 auto; padding: 15px 20px; cursor: pointer;
+  flex: 0 0 auto; padding: 15px 18px; cursor: pointer;
   font-family: var(--mono); font-size: .8rem; font-weight: 500;
   color: var(--ink-soft); letter-spacing: .06em;
   position: relative; transition: color .25s; white-space: nowrap; user-select: none;
+  text-decoration: none;
 }
 .nav-tab::after {
-  content: ''; position: absolute; left: 20px; right: 20px; bottom: 0;
+  content: ''; position: absolute; left: 18px; right: 18px; bottom: 0;
   height: 2px; border-radius: 2px;
   background: var(--c-friend);
   transform: scaleX(0); transition: transform .3s;
@@ -151,14 +149,17 @@ body {
 .nav-tab:hover { color: var(--ink); }
 .nav-tab.active { color: var(--c-friend); }
 .nav-tab.active::after { transform: scaleX(1); }
+.nav-ext { margin-left: auto; color: var(--c-secret); }
+.nav-ext::after { background: var(--c-secret); }
+.nav-ext:hover { color: var(--c-secret); }
 
 /* ========================================================
    SECTIONS
    ======================================================== */
 .section { max-width: 960px; margin: 0 auto; padding: 84px 24px 16px; }
-.section-lead { max-width: 720px; }
+.section-lead { max-width: 760px; }
 .section-title {
-  font-family: var(--serif); font-size: clamp(1.6rem, 4vw, 2.2rem);
+  font-family: var(--serif); font-size: clamp(1.5rem, 3.6vw, 2.05rem);
   font-weight: 700; letter-spacing: .06em; color: var(--ink);
 }
 .section-title::after {
@@ -166,17 +167,45 @@ body {
   background: var(--c-friend); border-radius: 2px;
 }
 .section-desc {
-  margin-top: 18px; color: var(--ink-soft); max-width: 720px;
+  margin-top: 18px; color: var(--ink-soft); max-width: 760px;
   font-size: .97rem; line-height: 2;
 }
 .fade-in { opacity: 0; transform: translateY(22px); transition: opacity .8s ease, transform .8s ease; }
 .fade-in.visible { opacity: 1; transform: translateY(0); }
 
+/* callout */
+.callout {
+  margin-top: 26px; background: var(--paper-deep); border: 1px solid var(--line);
+  border-left: 3px solid var(--c-secret);
+  border-radius: 14px; padding: 18px 22px;
+}
+.callout .t { font-family: var(--mono); font-size: .72rem; letter-spacing: .12em; color: var(--c-secret); text-transform: uppercase; }
+.callout p { margin-top: 8px; font-size: .9rem; color: var(--ink-soft); line-height: 1.9; }
+.callout .swap { font-family: var(--mono); font-size: .85rem; color: var(--ink); }
+
 /* ========================================================
-   CORE FIVE · 人物卡
+   EPISODE TIMELINE
+   ======================================================== */
+.tl { margin-top: 34px; display: flex; flex-direction: column; }
+.tl-row {
+  display: grid; grid-template-columns: 78px 1fr; gap: 18px;
+  padding: 14px 0; border-top: 1px dashed var(--line);
+}
+.tl-row:last-child { border-bottom: 1px dashed var(--line); }
+.tl-no {
+  font-family: var(--mono); font-size: .8rem; font-weight: 600;
+  color: var(--c-friend); letter-spacing: .06em; padding-top: .15em;
+}
+.tl-row.final .tl-no { color: var(--c-love); }
+.tl-title { font-family: var(--serif); font-size: 1.02rem; font-weight: 700; color: var(--ink); }
+.tl-body { margin-top: 4px; font-size: .88rem; color: var(--ink-soft); line-height: 1.85; }
+.tl-body b { color: var(--ink); font-weight: 600; }
+
+/* ========================================================
+   FIVE · 人物卡
    ======================================================== */
 .core-grid {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(258px, 1fr));
   gap: 18px; margin-top: 34px;
 }
 .core-card {
@@ -187,103 +216,188 @@ body {
 }
 .core-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px -16px rgba(43,39,34,.4); border-color: var(--c-friend); }
 .core-card .name {
-  font-family: var(--serif); font-size: 1.5rem; font-weight: 700;
+  font-family: var(--serif); font-size: 1.42rem; font-weight: 700;
   color: var(--ink); letter-spacing: .04em;
 }
-.core-card .roman { font-family: var(--mono); font-size: .72rem; color: var(--ink-faint); margin-left: 8px; letter-spacing: .05em; }
+.core-card .roman { font-family: var(--mono); font-size: .68rem; color: var(--ink-faint); margin-left: 7px; letter-spacing: .05em; }
 .core-card .dept {
   display: inline-block; margin-top: 10px; padding: 4px 12px;
-  font-family: var(--mono); font-size: .72rem; letter-spacing: .08em;
+  font-family: var(--mono); font-size: .72rem; letter-spacing: .06em;
   color: var(--c-friend); background: rgba(58,125,110,.1);
   border-radius: 999px;
 }
-.core-card .actor { margin-top: 14px; font-size: .82rem; color: var(--ink-faint); letter-spacing: .04em; }
-.core-card .tag {
-  margin-top: 10px; font-family: var(--serif); font-size: .92rem; font-weight: 600;
-  color: var(--ink-soft);
-}
+.core-card .actor { margin-top: 12px; font-size: .8rem; color: var(--ink-faint); letter-spacing: .04em; }
 .core-card .blurb { margin-top: 8px; font-size: .9rem; color: var(--ink-soft); line-height: 1.85; }
+.core-card .where {
+  margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--line);
+  font-size: .86rem; color: var(--ink-soft); line-height: 1.8;
+}
+.core-card .where .k {
+  display: block; font-family: var(--mono); font-size: .68rem;
+  letter-spacing: .1em; color: var(--c-love); text-transform: uppercase; margin-bottom: 3px;
+}
 
 /* ========================================================
-   RELATIONSHIP LINES
+   RELATION LINES
    ======================================================== */
 .line-list { margin-top: 34px; display: flex; flex-direction: column; gap: 16px; }
 .line-card {
   display: grid; grid-template-columns: auto 1fr; gap: 22px; align-items: center;
   background: var(--paper); border: 1px solid var(--line);
   border-left: 4px solid var(--c-love);
-  border-radius: 16px; padding: 22px 24px;
+  border-radius: 16px; padding: 20px 24px;
   transition: transform .3s, box-shadow .3s;
 }
 .line-card.secret { border-left-color: var(--c-secret); }
 .line-card:hover { transform: translateX(4px); box-shadow: 0 12px 30px -18px rgba(43,39,34,.4); }
 .line-pair { display: flex; align-items: center; gap: 12px; }
 .line-avatar {
-  width: 50px; height: 50px; border-radius: 50%; flex-shrink: 0;
+  width: 48px; height: 48px; border-radius: 50%; flex-shrink: 0;
   display: flex; align-items: center; justify-content: center;
-  font-family: var(--serif); font-size: 1.15rem; font-weight: 700; color: #fff;
+  font-family: var(--serif); font-size: 1.1rem; font-weight: 700; color: #fff;
 }
 .line-avatar.a { background: var(--c-friend); }
 .line-avatar.b { background: var(--c-love); }
 .line-card.secret .line-avatar.b { background: var(--c-secret); }
-.line-x { font-family: var(--mono); font-size: 1.1rem; color: var(--ink-faint); }
+.line-x { font-family: var(--mono); font-size: 1.05rem; color: var(--ink-faint); }
 .line-body h3 {
-  font-family: var(--serif); font-size: 1.18rem; font-weight: 700; color: var(--ink);
-  letter-spacing: .03em;
+  font-family: var(--serif); font-size: 1.16rem; font-weight: 700; color: var(--ink);
+  letter-spacing: .03em; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;
 }
-.line-body .sub { font-family: var(--mono); font-size: .74rem; color: var(--ink-faint); margin-top: 2px; letter-spacing: .04em; }
-.line-body p { margin-top: 10px; font-size: .92rem; color: var(--ink-soft); line-height: 1.9; }
-.line-flag {
-  display: inline-block; margin-top: 10px; font-family: var(--mono); font-size: .68rem;
-  letter-spacing: .1em; text-transform: uppercase; padding: 3px 10px; border-radius: 999px;
+.line-body .sub { font-family: var(--mono); font-size: .72rem; color: var(--ink-faint); margin-top: 2px; letter-spacing: .04em; }
+.line-body p { margin-top: 9px; font-size: .9rem; color: var(--ink-soft); line-height: 1.9; }
+.status {
+  font-family: var(--mono); font-size: .66rem; letter-spacing: .1em;
+  padding: 3px 10px; border-radius: 999px; text-transform: uppercase; white-space: nowrap;
 }
-.flag-love { color: var(--c-love); background: rgba(194,91,74,.1); }
-.flag-secret { color: var(--c-secret); background: rgba(184,137,58,.12); }
+.st-done { color: #2f6b5c; background: rgba(58,125,110,.13); }
+.st-wait { color: #9a6a2c; background: rgba(184,137,58,.15); }
+.st-risk { color: #a04335; background: rgba(194,91,74,.13); }
+.st-open { color: #5a4d8c; background: rgba(122,107,176,.14); }
 
 /* ========================================================
-   SIDE CHARACTERS
-   ======================================================== */
-.side-grid {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 18px; margin-top: 34px;
-}
-.side-card {
-  background: var(--paper); border: 1px solid var(--line);
-  border-radius: 16px; padding: 20px 18px;
-}
-.side-card .name { font-family: var(--serif); font-size: 1.25rem; font-weight: 700; color: var(--ink); }
-.side-card .role { font-family: var(--mono); font-size: .72rem; color: var(--c-love); margin-top: 6px; letter-spacing: .05em; }
-.side-card .actor { font-size: .8rem; color: var(--ink-faint); margin-top: 4px; }
-.side-card p { margin-top: 10px; font-size: .88rem; color: var(--ink-soft); line-height: 1.8; }
-
-/* ========================================================
-   RELATIONSHIP MAP
+   MAP
    ======================================================== */
 .map-wrap {
   margin-top: 34px; background: var(--paper); border: 1px solid var(--line);
   border-radius: 20px; padding: 26px 18px 18px;
 }
 .relmap { width: 100%; height: auto; display: block; }
-.relmap .node circle { transition: stroke-width .2s, filter .2s; }
+.relmap .node circle { transition: stroke-width .2s; }
 .relmap .node:hover circle { stroke-width: 3.5; }
 .relmap text { font-family: var(--sans); }
 .map-legend {
-  display: flex; flex-wrap: wrap; gap: 18px 26px; justify-content: center;
+  display: flex; flex-wrap: wrap; gap: 14px 24px; justify-content: center;
   margin-top: 18px; padding-top: 16px; border-top: 1px dashed var(--line);
 }
-.map-legend .item { display: flex; align-items: center; gap: 9px; font-size: .82rem; color: var(--ink-soft); }
+.map-legend .item { display: flex; align-items: center; gap: 9px; font-size: .8rem; color: var(--ink-soft); }
 .map-legend .swatch { width: 26px; height: 0; border-top-width: 2.5px; border-top-style: solid; }
 .map-note { margin-top: 14px; font-size: .84rem; color: var(--ink-faint); line-height: 1.8; text-align: center; }
 
 /* ========================================================
-   MEMO
+   OPEN QUESTIONS
    ======================================================== */
+.q-list { margin-top: 34px; display: flex; flex-direction: column; gap: 16px; }
+.q-card {
+  display: grid; grid-template-columns: 46px 1fr; gap: 18px;
+  background: var(--paper); border: 1px solid var(--line);
+  border-left: 3px solid var(--c-open);
+  border-radius: 16px; padding: 20px 22px;
+}
+.q-no {
+  font-family: var(--serif); font-size: 1.5rem; font-weight: 700;
+  color: var(--c-open); line-height: 1;
+}
+.q-card h3 { font-family: var(--serif); font-size: 1.1rem; font-weight: 700; color: var(--ink); letter-spacing: .02em; }
+.q-card .clue { margin-top: 8px; font-size: .88rem; color: var(--ink-soft); line-height: 1.9; }
+.q-card .watch {
+  margin-top: 10px; font-size: .82rem; color: var(--ink-faint);
+  font-family: var(--mono); letter-spacing: .02em; line-height: 1.7;
+}
+.q-card .watch::before { content: '第二季盯：'; color: var(--c-open); }
+
+/* ========================================================
+   CHECKLIST
+   ======================================================== */
+.check-head {
+  margin-top: 34px; display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; flex-wrap: wrap;
+  background: var(--paper-deep); border: 1px solid var(--line);
+  border-radius: 14px; padding: 16px 22px;
+}
+.check-head .prog { font-family: var(--mono); font-size: .8rem; color: var(--ink-soft); letter-spacing: .06em; }
+.check-head .prog b { color: var(--c-friend); font-size: 1.05rem; }
+.btn-reset {
+  font-family: var(--mono); font-size: .72rem; letter-spacing: .08em;
+  color: var(--ink-faint); background: var(--paper); border: 1px solid var(--line);
+  border-radius: 999px; padding: 6px 14px; cursor: pointer; transition: all .25s;
+}
+.btn-reset:hover { color: var(--c-love); border-color: var(--c-love); }
+
+.check-group { margin-top: 26px; }
+.check-group > .gt {
+  font-family: var(--mono); font-size: .74rem; letter-spacing: .14em;
+  color: var(--c-friend); text-transform: uppercase; margin-bottom: 10px;
+}
+.check-list { display: flex; flex-direction: column; }
+.check-item {
+  display: grid; grid-template-columns: 26px 1fr; gap: 12px; align-items: start;
+  padding: 11px 2px; border-top: 1px dashed var(--line); cursor: pointer;
+  transition: background .2s;
+}
+.check-item:last-child { border-bottom: 1px dashed var(--line); }
+.check-item:hover { background: rgba(58,125,110,.05); }
+.check-box {
+  width: 19px; height: 19px; margin-top: .28em;
+  border: 1.6px solid #c8c1ad; border-radius: 5px;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .22s; background: var(--paper);
+}
+.check-box::after {
+  content: ''; width: 9px; height: 5px;
+  border-left: 2px solid #fff; border-bottom: 2px solid #fff;
+  transform: rotate(-45deg) scale(0); transition: transform .22s;
+  margin-top: -2px;
+}
+.check-item.done .check-box { background: var(--c-friend); border-color: var(--c-friend); }
+.check-item.done .check-box::after { transform: rotate(-45deg) scale(1); }
+.check-text { font-size: .92rem; color: var(--ink-soft); line-height: 1.85; }
+.check-text b { color: var(--ink); font-weight: 600; }
+.check-item.done .check-text { color: var(--ink-faint); text-decoration: line-through; text-decoration-color: rgba(154,145,128,.6); }
+
+/* ========================================================
+   GLOSSARY
+   ======================================================== */
+.glossary {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px; margin-top: 34px;
+}
+.term {
+  background: var(--paper); border: 1px solid var(--line);
+  border-radius: 16px; padding: 18px 20px;
+  border-left: 3px solid var(--c-secret);
+  transition: transform .3s, box-shadow .3s;
+}
+.term:hover { transform: translateY(-3px); box-shadow: 0 10px 26px -16px rgba(43,39,34,.38); }
+.term dt {
+  font-family: var(--serif); font-size: 1.08rem; font-weight: 700; color: var(--ink);
+  display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;
+}
+.term dt .en { font-family: var(--mono); font-size: .68rem; font-weight: 400; color: var(--ink-faint); letter-spacing: .04em; }
+.term dd { margin-top: 8px; font-size: .86rem; color: var(--ink-soft); line-height: 1.8; }
+.term dd .who {
+  display: inline-block; margin-top: 8px; font-size: .75rem; color: var(--c-friend);
+  font-family: var(--mono); letter-spacing: .02em;
+}
+.term dd .who::before { content: '剧中：'; color: var(--ink-faint); }
+
+/* memory card */
 .memo {
   margin-top: 34px; background: var(--paper-deep); border: 1px solid var(--line);
   border-radius: 18px; padding: 26px 28px;
 }
 .memo .big {
-  font-family: var(--serif); font-size: 1.3rem; font-weight: 700; color: var(--ink);
+  font-family: var(--serif); font-size: 1.28rem; font-weight: 700; color: var(--ink);
   line-height: 1.9; letter-spacing: .02em;
 }
 .memo p { margin-top: 14px; font-size: .94rem; color: var(--ink-soft); line-height: 2; }
@@ -297,7 +411,6 @@ body {
 }
 .memo-cta a:hover { color: var(--c-love); border-color: rgba(194,91,74,.5); }
 
-/* footer */
 .site-footer {
   max-width: 960px; margin: 9vh auto 0; padding: 26px 24px 40px;
   border-top: 1px solid var(--line);
@@ -311,22 +424,9 @@ body {
   .section { padding: 60px 18px 12px; }
   .hero-meta { gap: 1.4rem; }
   .line-card { grid-template-columns: 1fr; gap: 14px; }
-  .line-pair { justify-content: flex-start; }
+  .tl-row { grid-template-columns: 62px 1fr; gap: 12px; }
+  .q-card { grid-template-columns: 34px 1fr; gap: 12px; }
 }
-
-/* ── HERO-AXIS v1 ── */
-.hero{display:flex!important;flex-direction:column!important;
-  justify-content:center!important;align-items:center!important;
-  text-align:center!important;padding-left:24px!important;padding-right:24px!important;}
-.hero>*{margin-left:auto!important;margin-right:auto!important;
-  justify-content:center!important;text-align:center!important;}
-/* 绝对定位的装饰层/水印保持原位，不被裁切或位移 */
-.hero>.hero-deco{grid-column:auto!important;}
-.hero>.scroll-hint{grid-column:auto!important;}
-
-.hero .hero-divider,.hero .hero-scroll,.hero .scroll-hint,.hero .hero-meta,.hero-meta-item{margin-left:auto!important;margin-right:auto!important;}
-.hero h1::after,.hero h2::after{margin-left:auto!important;margin-right:auto!important;}
-/* ── /HERO-AXIS v1 ── */
 </style>
 </head>
 <body>
@@ -343,18 +443,18 @@ body {
     </svg>
   </div>
   <div class="hero-content">
-    <div class="hero-eyebrow">Hospital Playlist · 2020—2021</div>
-    <h1>机智的医生生活</h1>
-    <p class="hero-subtitle">五位医生，二十年同窗，每周四晚上的一支乐队</p>
+    <div class="hero-eyebrow">Hospital Playlist · Season 1</div>
+    <h1>第一季，先停在这里</h1>
+    <p class="hero-subtitle">12 集合订本 · 季末坐标 · 第二季开看前的回顾清单</p>
     <blockquote class="hero-quote">
-      同一届进医学院，同一家医院共事，同一支乐队排练。二十年后，他们仍是彼此最稳的那根支柱。
-      <span class="author">—— 《机智的医生生活》</span>
+      有人刚把话说出口，有人还没来得及回答；有人抱在了一起，有人的包裹被原路退回。第一季的结尾是把几扇门同时推开一条缝——这页就是把缝里的东西记下来。
+      <span class="author">—— 机智的医生生活 · 2020.03.12 — 05.28</span>
     </blockquote>
     <div class="hero-meta">
-      <div class="hero-meta-item"><span class="value">5</span><span class="label">同窗好友</span></div>
-      <div class="hero-meta-item"><span class="value">20</span><span class="label">年相识</span></div>
-      <div class="hero-meta-item"><span class="value">99届</span><span class="label">医学院班级</span></div>
-      <div class="hero-meta-item"><span class="value">周四</span><span class="label">乐队排练夜</span></div>
+      <div class="hero-meta-item"><span class="value">12</span><span class="label">集 · 第一季</span></div>
+      <div class="hero-meta-item"><span class="value">5</span><span class="label">人帮</span></div>
+      <div class="hero-meta-item"><span class="value">5</span><span class="label">条感情线</span></div>
+      <div class="hero-meta-item"><span class="value">8</span><span class="label">个未解问号</span></div>
     </div>
   </div>
   <div class="scroll-hint"><span>scroll</span><span class="arrow">↓</span></div>
@@ -363,55 +463,149 @@ body {
 <!-- ===================== NAV ===================== -->
 <nav class="nav-bar">
   <div class="nav-inner">
-    <a class="nav-tab" href="#group">五人团</a>
+    <a class="nav-tab" href="#recap">12 集合订本</a>
+    <a class="nav-tab" href="#five">五人帮</a>
     <a class="nav-tab" href="#lines">关系线</a>
-    <a class="nav-tab" href="#side">配角与恋人</a>
     <a class="nav-tab" href="#map">关系图谱</a>
-    <a class="nav-tab" href="#memo">记忆法</a>
+    <a class="nav-tab" href="#open">留下的问号</a>
+    <a class="nav-tab" href="#check">开看前清单</a>
+    <a class="nav-tab" href="#terms">名词</a>
+    <a class="nav-tab nav-ext" href="hospital-playlist-episodes.html">逐集剧情 ↗</a>
   </div>
 </nav>
 
-<!-- ===================== 五人团 ===================== -->
-<section class="section fade-in" id="group">
+<!-- ===================== 12 集合订本 ===================== -->
+<section class="section fade-in" id="recap">
   <div class="section-lead">
-    <h2 class="section-title">五人铁杆团</h2>
-    <p class="section-desc">由《请回答》系列的申源浩导演、李祐汀编剧打造。故事围绕五位一九九九年进入同一所医学院、做了二十年朋友的外科医生展开。他们如今在同一家医院的不同科室任职，每周四晚上聚在一起排练乐队——这是整部剧最温柔的锚点，也是所有感情戏生长的土地。</p>
+    <h2 class="section-title">第一季讲了什么</h2>
+    <p class="section-desc">2020 年 3 月 12 日开播，5 月 28 日收官，共 12 集（另有一集特辑）。申源浩导演、李祐汀编剧，Netflix 同步上线。核心设定很朴素：五位四十岁上下的医学院同窗，在同一家医院的不同科室当医生，每周四晚上凑在一起排练乐队。第一季真正做的，是把五个人的性格立住、把四条感情线铺开，然后在最后一集同时按下几个开关。</p>
+  </div>
+
+  <div class="tl">
+    <div class="tl-row">
+      <div class="tl-no">EP01</div>
+      <div><div class="tl-title">五人重聚，乐队重启</div>
+      <div class="tl-body">一通电话把二十年的老友重新连起来。翊晙带着儿子<b>羽朱</b>亮相；<b>涏援</b>身上埋下两个秘密——他是医院财团的小儿子，也是匿名资助贫困患者的「长腿叔叔」。</div></div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-no">EP02</div>
+      <div><div class="tl-title">同一屋檐下的第一年</div>
+      <div class="tl-body">五人第一次在同一家医院共事。颂和接诊的老病人埋下伏笔，周四排练成为一周里最稳的坐标。</div></div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-no">EP03</div>
+      <div><div class="tl-title">访客与旧事</div>
+      <div class="tl-body">翊晙的前妻出现，旧家庭关系被轻轻搅动；<b>冬天</b>看涏援的眼神开始不对劲。</div></div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-no">EP04</div>
+      <div><div class="tl-title">医院之外的颂和</div>
+      <div class="tl-body">硕亨的冷淡式带教让后辈受挫；实习生<b>润福、弘道</b>撞见颂和私下的一面。</div></div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-no">EP05</div>
+      <div><div class="tl-title">肿块，与格外的冷淡</div>
+      <div class="tl-body">颂和摸到胸部肿块去做活检；涏援对冬天格外不假辞色——那是他自己还没处理干净的动摇。</div></div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-no">EP06</div>
+      <div><div class="tl-title">虚惊一场</div>
+      <div class="tl-body">肿块结果是良性。隽婠等着<b>翊纯</b>的答复，她说需要时间。</div></div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-no">EP07</div>
+      <div><div class="tl-title">手术台前的抉择</div>
+      <div class="tl-body">涏援与隽婠各自在手术台上被推到极限——两个「冷静派」同时露出真性情。</div></div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-no">EP08</div>
+      <div><div class="tl-title">医生也是普通人</div>
+      <div class="tl-body">材学被家事分神，艰难熬过一天；敏荷在妇产科连轴转，也悄悄把心意投向上司。</div></div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-no">EP09</div>
+      <div><div class="tl-title">深夜召回</div>
+      <div class="tl-body">颂和被紧急召回抢救年轻患者；翊晙面对一位父亲绝望的恳求。</div></div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-no">EP10</div>
+      <div><div class="tl-title">长腿叔叔是谁</div>
+      <div class="tl-body">匿名资助者「长腿叔叔」的身份揭晓——就是<b>涏援</b>。翊晙觉察后当起军师，暗中撮合冬天与涏援。</div></div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-no">EP11</div>
+      <div><div class="tl-title">越来越藏不住</div>
+      <div class="tl-body">翊晙对颂和的暗示愈发明显；隽婠与翊纯热恋，但这段关系一直对翊晙保密——「妹夫」的梗悬着。</div></div>
+    </div>
+    <div class="tl-row final">
+      <div class="tl-no">EP12</div>
+      <div><div class="tl-title">季终：几扇门同时推开一条缝</div>
+      <div class="tl-body">
+        · <b>冬天向涏援告白</b>：「别去上帝身边，请留在我身边。」涏援放弃当神父，回以一个吻。<br>
+        · <b>翊晙赶赴束草向颂和告白</b>：「这次再不说，会后悔一辈子。」颂和当场没有回答。<br>
+        · <b>翊纯赴英国留学</b>，隽婠因手术错过送机，寄出的戒指包裹被原路退回。<br>
+        · <b>敏荷邀硕亨过圣诞被拒</b>（「你值得更好的」），同一晚硕亨接到前妻来电。<br>
+        · <b>安治弘向颂和告白被拒</b>，仍决定追随她调往束草分院。<br>
+        · 润福、弘道认出颂和就是当年救下母亲的医生，相认。<br>
+        · 硕亨把继承的公司交给职业经理人，自己留在医院、留在乐队。
+      </div></div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="t">译名对照</div>
+    <p>不同字幕组译法不一，对不上人时查这里：
+      <span class="swap">安涏援＝安政源／安正源</span> ·
+      <span class="swap">李翊纯＝李翊镜／益善／翊顺</span> ·
+      <span class="swap">蔡颂和＝蔡颂华</span> ·
+      <span class="swap">秋敏荷＝秋敏夏</span> ·
+      <span class="swap">李羽朱＝李宇宙</span> ·
+      <span class="swap">金隽婠＝金俊完</span>
+    </p>
+  </div>
+</section>
+
+<!-- ===================== 五人帮 ===================== -->
+<section class="section fade-in" id="five">
+  <div class="section-lead">
+    <h2 class="section-title">五人帮 · 季末各自站在哪</h2>
+    <p class="section-desc">同为医学院 99 届，同为四十岁上下，同在律帝医院。第一季结束时，五个人都刚做完一个不算小的选择。</p>
   </div>
   <div class="core-grid">
     <div class="core-card">
       <div class="name">李翊晙<span class="roman">Lee Ik-joon</span></div>
-      <span class="dept">普通外科 · 副教授（肝移植）</span>
+      <span class="dept">肝胆胰外科 · 助理教授</span>
       <div class="actor">曹政奭 饰</div>
-      <div class="tag">气氛担当 · 全组黏合剂</div>
-      <p class="blurb">话痨、乐观，对朋友掏心掏肺。表面没心没肺，其实最重情——暗恋颂和整整二十年。</p>
+      <p class="blurb">天才型，爱玩又会念书，医院的交際花。离异，独自带着儿子羽朱。二十年里一直喜欢颂和。</p>
+      <div class="where"><span class="k">季末坐标</span>终于把藏了二十年的话说出口，赶去束草当面告白，然后体面地留给她时间——答案交给了第二季。</div>
     </div>
     <div class="core-card">
       <div class="name">安涏援<span class="roman">Ahn Jeong-won</span></div>
-      <span class="dept">儿科 · 副教授</span>
+      <span class="dept">小儿外科 · 助理教授</span>
       <div class="actor">柳演锡 饰</div>
-      <div class="tag">虔诚 · 老幺</div>
-      <p class="blurb">温润善良，一心想当神父，却在感情里最被动。是全组被宠着的那一个。</p>
+      <p class="blurb">病患家属最爱的天使医生，朋友里最敏感的爱哭鬼。财团小儿子（隐藏富二代），母亲郑罗莎，两个哥哥是神父、姐姐是修女。匿名「长腿叔叔」就是他。</p>
+      <div class="where"><span class="k">季末坐标</span>本已准备赴意大利读神学院，被冬天的告白拦下。选择留在医院、留在她身边。</div>
     </div>
     <div class="core-card">
       <div class="name">蔡颂和<span class="roman">Chae Song-hwa</span></div>
-      <span class="dept">神经外科 · 教授</span>
-      <div class="actor">田慧振 饰</div>
-      <div class="tag">大姐 · 理智</div>
-      <p class="blurb">五人里唯一的女生，沉稳温柔，是全组的情绪支柱。也是翊晙二十年没说出口的那个人。</p>
+      <span class="dept">神经外科 · 副教授</span>
+      <div class="actor">田美都 饰</div>
+      <p class="blurb">五人里唯一的女生，「最大的缺点是没有缺点」。后辈的偶像，全组的精神支柱，热爱读书、雨天和独自上山露营，还是个音痴。</p>
+      <div class="where"><span class="k">季末坐标</span>主动申请调往束草分院，刚在搬家前接到翊晙的告白，当场没有给出答案。</div>
     </div>
     <div class="core-card">
       <div class="name">金隽婠<span class="roman">Kim Jun-wan</span></div>
       <span class="dept">胸外科 · 副教授</span>
       <div class="actor">郑敬淏 饰</div>
-      <div class="tag">冰山 · 毒舌</div>
-      <p class="blurb">外冷内热，嘴硬心软，遇事最靠谱。一脸生人勿近，偏偏栽在轻盈的画家手里。</p>
+      <p class="blurb">技术顶尖，嘴上不饶人，刀子口豆腐心，其实特别怕寂寞。私下在和翊晙的妹妹交往，两人一致对翊晙保密。</p>
+      <div class="where"><span class="k">季末坐标</span>异地恋开局：翊纯飞英国，他因手术错过送机，寄出的戒指包裹被退回。</div>
     </div>
     <div class="core-card">
       <div class="name">杨硕亨<span class="roman">Yang Seok-hyeong</span></div>
-      <span class="dept">妇产科 · 副教授</span>
+      <span class="dept">妇产科 · 助理教授</span>
       <div class="actor">金大明 饰</div>
-      <div class="tag">冷静 · 离异</div>
-      <p class="blurb">话少、清醒，离异带娃、与母亲同住。是全组的定海神针，感情线也最淡。</p>
+      <p class="blurb">话最少的一个，心思极细，什么事都把妈妈挂在嘴边。离异，家里是财阀（父亲有情妇的丑闻曾闹得全国皆知）。</p>
+      <div class="where"><span class="k">季末坐标</span>父亲去世、继承家业，却把公司交给职业经理人，自己留在医院；拒绝了敏荷，随即接到前妻来电。</div>
     </div>
   </div>
 </section>
@@ -419,214 +613,411 @@ body {
 <!-- ===================== 关系线 ===================== -->
 <section class="section fade-in" id="lines">
   <div class="section-lead">
-    <h2 class="section-title">四条关系线</h2>
-    <p class="section-desc">三对明面上的恋爱，加一条埋了二十年的暗线。看懂这条暗线，才看懂整部剧的后劲。</p>
+    <h2 class="section-title">五条关系线 · 季末坐标</h2>
+    <p class="section-desc">第一季结束时每条线的状态不一样：有的已经落地，有的刚被抛出，有的明显亮了黄灯。看第二季前先把这五个坐标记住。</p>
   </div>
   <div class="line-list">
-    <div class="line-card">
-      <div class="line-pair">
-        <div class="line-avatar a">晙</div>
-        <span class="line-x">×</span>
-        <div class="line-avatar b">冬</div>
-      </div>
-      <div class="line-body">
-        <h3>李翊晙 × 张冬天</h3>
-        <div class="sub">普通外科副教授 × 普通外科住院医师（申铉彬 饰）</div>
-        <p>上下级变恋人。冬天是翊晙手下的住院医，被他的热忱一点点打动。第一季两人在一起，第二季因冬天赴美访学而分手——一段温柔又带着距离感的感情。</p>
-        <span class="line-flag flag-love">恋情 · 第一季在一起</span>
-      </div>
-    </div>
-
-    <div class="line-card">
-      <div class="line-pair">
-        <div class="line-avatar a">援</div>
-        <span class="line-x">×</span>
-        <div class="line-avatar b">荷</div>
-      </div>
-      <div class="line-body">
-        <h3>安涏援 × 秋敏荷</h3>
-        <div class="sub">儿科副教授 × 儿科住院医师（安恩真 饰）</div>
-        <p>神父与追求者。敏荷主动、直球，涏援一心向神，却在她一次次的靠近里动摇。这段「信仰与爱情」的拉扯，是第二季最绵长的线。</p>
-        <span class="line-flag flag-love">恋情 · 信仰的拉扯</span>
-      </div>
-    </div>
-
-    <div class="line-card">
-      <div class="line-pair">
-        <div class="line-avatar a">婠</div>
-        <span class="line-x">×</span>
-        <div class="line-avatar b">镜</div>
-      </div>
-      <div class="line-body">
-        <h3>金隽婠 × 李翊镜</h3>
-        <div class="sub">胸外科副教授 × 画家（郭善英 饰）</div>
-        <p>冰山遇上看似轻盈的画家，偏偏翊镜是翊晙的亲妹妹。年龄差、异地、还有兄长那道注视，让这段关系分分合合、欲拒还迎。</p>
-        <span class="line-flag flag-love">恋情 · 分分合合</span>
-      </div>
-    </div>
 
     <div class="line-card secret">
       <div class="line-pair">
-        <div class="line-avatar a">晙</div>
-        <span class="line-x">×</span>
-        <div class="line-avatar b">和</div>
+        <div class="line-avatar a">晙</div><span class="line-x">→</span><div class="line-avatar b">和</div>
       </div>
       <div class="line-body">
-        <h3>李翊晙 × 蔡颂和</h3>
-        <div class="sub">神经外科副教授 × 神经外科教授</div>
-        <p>二十年的友情里藏着双向暗恋。翊晙迟钝，颂和隐忍，谁都不肯先说破。直到第二季结局，这条埋得最深的线才终于亮起来——这是整部剧后劲最大的地方。</p>
-        <span class="line-flag flag-secret">暗线 · 全剧真正的糖</span>
+        <h3>李翊晙 → 蔡颂和 <span class="status st-wait">已告白 · 待答复</span></h3>
+        <div class="sub">藏了二十年的暗线 · 全剧主线</div>
+        <p>告白用的是「我有个认识很久的朋友」这种笨拙说法，颂和立刻听懂，也立刻慌了。翊晙把空间留给她：「答案可以慢慢来。」第一季在此停住。</p>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- ===================== 配角与恋人 ===================== -->
-<section class="section fade-in" id="side">
-  <div class="section-lead">
-    <h2 class="section-title">关键配角与恋人</h2>
-    <p class="section-desc">三条恋情线里的另一半，都是从「下属」或「妹妹」的身份长出来的。她们让五人团的故事有了向外延伸的枝丫。</p>
+    <div class="line-card">
+      <div class="line-pair">
+        <div class="line-avatar a">冬</div><span class="line-x">→</span><div class="line-avatar b">援</div>
+      </div>
+      <div class="line-body">
+        <h3>张冬天 → 安涏援 <span class="status st-done">互通心意</span></h3>
+        <div class="sub">外科住院医师 × 小儿外科助理教授（申铉彬 / 柳演锡）</div>
+        <p>冬天从上班第一天就对他一见钟情，涏援其实早就心动而不自知。她一句「请留在我身边」，把他从神父之路上拉了回来。第一季唯一落地的那对。</p>
+      </div>
+    </div>
+
+    <div class="line-card">
+      <div class="line-pair">
+        <div class="line-avatar a">婠</div><span class="line-x">×</span><div class="line-avatar b">纯</div>
+      </div>
+      <div class="line-body">
+        <h3>金隽婠 × 李翊纯 <span class="status st-risk">异地 · 亮黄灯</span></h3>
+        <div class="sub">胸外科副教授 × 翊晙的妹妹、职业军人（郭善英 饰）</div>
+        <p>两人热恋，但翊纯赴英留学、隽婠错过送机，寄出的戒指包裹被退回。更微妙的是：这段关系一直瞒着翊晙——而他表现得像早就知道。</p>
+      </div>
+    </div>
+
+    <div class="line-card">
+      <div class="line-pair">
+        <div class="line-avatar a">荷</div><span class="line-x">→</span><div class="line-avatar b">亨</div>
+      </div>
+      <div class="line-body">
+        <h3>秋敏荷 → 杨硕亨 <span class="status st-open">被拒 · 前妻将至</span></h3>
+        <div class="sub">妇产科住院医师 × 妇产科助理教授（安恩真 / 金大明）</div>
+        <p>敏荷直球追求，被一句「你值得更好的」挡回来；圣诞晚餐的邀约也遭拒。同一晚，硕亨接到前妻的电话——下一季最大的变量。</p>
+      </div>
+    </div>
+
+    <div class="line-card">
+      <div class="line-pair">
+        <div class="line-avatar a">弘</div><span class="line-x">→</span><div class="line-avatar b">和</div>
+      </div>
+      <div class="line-body">
+        <h3>安治弘 → 蔡颂和 <span class="status st-wait">被拒 · 仍追随</span></h3>
+        <div class="sub">神经外科住院医师，原陆军大尉因病退伍（金准韩 饰）</div>
+        <p>告白被颂和一句「别说了」截断，他却回了一句「我的情感不能照你的意思收放自如」，随后决定跟着她调去束草。三角关系尚无答案。</p>
+      </div>
+    </div>
+
   </div>
-  <div class="side-grid">
-    <div class="side-card">
-      <div class="name">张冬天</div>
-      <div class="role">普通外科 住院医师</div>
-      <div class="actor">申铉彬 饰</div>
-      <p>翊晙的下属与恋人。冷静专业，被翊晙的热忱打动，却也因赴美访学而与这段感情暂别。</p>
-    </div>
-    <div class="side-card">
-      <div class="name">秋敏荷</div>
-      <div class="role">儿科 住院医师</div>
-      <div class="actor">安恩真 饰</div>
-      <p>涏援的下属，主动直球地追了很久。是全剧把「喜欢」说得最坦荡的那个人。</p>
-    </div>
-    <div class="side-card">
-      <div class="name">李翊镜</div>
-      <div class="role">画家 · 翊晙的妹妹</div>
-      <div class="actor">郭善英 饰</div>
-      <p>自由、轻盈，是隽婠对面的那团火。身为翊晙亲妹，她的恋情总绕不开兄长的目光。</p>
-    </div>
-  </div>
-  <p class="section-desc" style="margin-top:22px">另有：杨硕亨离异，前妻为罗恩书；五人之外还有精神科金泰怡、神经外科都在学等老友点缀，共同织成这家医院的人情网。</p>
 </section>
 
 <!-- ===================== 关系图谱 ===================== -->
 <section class="section fade-in" id="map">
   <div class="section-lead">
     <h2 class="section-title">关系图谱</h2>
-    <p class="section-desc">蓝色是二十年的铁杆友情，珊瑚色是明面上的恋情，琥珀色虚线是藏了二十年的暗恋。把这张图记在心里，追剧就不乱了。</p>
+    <p class="section-desc">青绿是二十年友情，珊瑚是恋情（实线已在一起、虚线单向未成），琥珀是藏了二十年的暗恋，灰蓝是亲属。这张图是第二季开看前最该先扫一眼的东西。</p>
   </div>
   <div class="map-wrap">
-    <svg class="relmap" viewBox="0 0 680 440" role="img" aria-label="机智的医生生活人物关系图">
-      <title>人物关系图</title>
-      <desc>五位1999年同窗的医生之间的友情与三条恋情线、一条暗恋线</desc>
+    <svg class="relmap" viewBox="0 0 680 470" role="img" aria-label="机智的医生生活第一季末人物关系图">
+      <title>第一季末人物关系图</title>
+      <desc>五人帮的友情、四条感情线与亲属关系</desc>
 
-      <!-- 友情线 -->
-      <line x1="80" y1="120" x2="600" y2="120" stroke="#3a7d6e" stroke-width="1.8" stroke-dasharray="7 5" opacity="0.7"/>
-      <text x="340" y="107" text-anchor="middle" font-size="12" fill="#3a7d6e">99届铁杆团</text>
+      <!-- 友情主轴 -->
+      <line x1="70" y1="115" x2="610" y2="115" stroke="#3a7d6e" stroke-width="1.8" stroke-dasharray="7 5" opacity="0.55"/>
+      <text x="340" y="100" text-anchor="middle" font-size="11" fill="#3a7d6e">99 届 · 二十年</text>
 
-      <!-- 暗恋虚线 翊晙 ↔ 颂和 -->
-      <path d="M80 87 Q210 56 340 87" fill="none" stroke="#b8893a" stroke-width="1.8" stroke-dasharray="5 4"/>
-      <text x="210" y="50" text-anchor="middle" font-size="11" fill="#b8893a">20年暗恋</text>
+      <!-- 暗恋 翊晙 → 颂和 -->
+      <path d="M70 82 Q205 52 340 82" fill="none" stroke="#b8893a" stroke-width="2" stroke-dasharray="5 4"/>
+      <text x="205" y="44" text-anchor="middle" font-size="11" fill="#b8893a">20 年暗恋 · 已告白待答</text>
 
-      <!-- 兄妹细线 翊晙 → 翊镜 -->
-      <line x1="100" y1="148" x2="450" y2="266" stroke="#8a8e9a" stroke-width="1.4" stroke-dasharray="3 3" opacity="0.55"/>
-      <text x="250" y="216" text-anchor="middle" font-size="10" fill="#8a8e9a">兄妹</text>
+      <!-- 兄妹 翊晙 - 翊纯 -->
+      <line x1="92" y1="140" x2="540" y2="258" stroke="#8a8e9a" stroke-width="1.4" stroke-dasharray="3 3" opacity="0.5"/>
+      <text x="330" y="212" text-anchor="middle" font-size="10" fill="#8a8e9a">兄妹（对翊晙保密）</text>
 
-      <!-- 恋情线 -->
-      <line x1="80" y1="153" x2="80" y2="262" stroke="#c25b4a" stroke-width="2.4"/>
-      <line x1="210" y1="153" x2="210" y2="262" stroke="#c25b4a" stroke-width="2.4"/>
-      <line x1="470" y1="153" x2="470" y2="262" stroke="#c25b4a" stroke-width="2.4"/>
+      <!-- 恋情 -->
+      <line x1="205" y1="140" x2="205" y2="256" stroke="#c25b4a" stroke-width="2.4"/>
+      <text x="216" y="205" font-size="10" fill="#c25b4a">已互通</text>
+      <line x1="540" y1="140" x2="540" y2="256" stroke="#c25b4a" stroke-width="2.4" stroke-dasharray="6 4"/>
+      <text x="551" y="205" font-size="10" fill="#c25b4a">异地·包裹退回</text>
+      <line x1="475" y1="140" x2="475" y2="256" stroke="#c25b4a" stroke-width="2.2" stroke-dasharray="6 4"/>
+      <text x="486" y="205" font-size="10" fill="#c25b4a">被拒</text>
+      <path d="M340 148 Q250 200 262 256" fill="none" stroke="#c25b4a" stroke-width="2" stroke-dasharray="6 4"/>
+      <text x="248" y="196" text-anchor="end" font-size="10" fill="#c25b4a">被拒·仍追随</text>
 
       <!-- 五人核心 -->
-      <g class="node">
-        <circle cx="80" cy="120" r="33" fill="#3a7d6e"/>
-        <text x="80" y="120" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#fff">李翊晙</text>
-      </g>
-      <g class="node">
-        <circle cx="210" cy="120" r="33" fill="#3a7d6e"/>
-        <text x="210" y="120" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#fff">安涏援</text>
-      </g>
-      <g class="node">
-        <circle cx="340" cy="120" r="33" fill="#3a7d6e"/>
-        <text x="340" y="120" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#fff">蔡颂和</text>
-      </g>
-      <g class="node">
-        <circle cx="470" cy="120" r="33" fill="#3a7d6e"/>
-        <text x="470" y="120" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#fff">金隽婠</text>
-      </g>
-      <g class="node">
-        <circle cx="600" cy="120" r="33" fill="#3a7d6e"/>
-        <text x="600" y="120" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#fff">杨硕亨</text>
-      </g>
+      <g class="node"><circle cx="70" cy="115" r="33" fill="#3a7d6e"/><text x="70" y="115" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="600" fill="#fff">李翊晙</text></g>
+      <g class="node"><circle cx="205" cy="115" r="33" fill="#3a7d6e"/><text x="205" y="115" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="600" fill="#fff">安涏援</text></g>
+      <g class="node"><circle cx="340" cy="115" r="33" fill="#3a7d6e"/><text x="340" y="115" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="600" fill="#fff">蔡颂和</text></g>
+      <g class="node"><circle cx="475" cy="115" r="33" fill="#3a7d6e"/><text x="475" y="115" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="600" fill="#fff">杨硕亨</text></g>
+      <g class="node"><circle cx="610" cy="115" r="33" fill="#3a7d6e"/><text x="610" y="115" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="600" fill="#fff">金隽婠</text></g>
 
-      <!-- 恋人 -->
+      <!-- 对方 -->
       <g class="node">
-        <circle cx="80" cy="290" r="30" fill="#fbf9f3" stroke="#c25b4a" stroke-width="2"/>
-        <text x="80" y="290" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#2b2722">张冬天</text>
-        <text x="80" y="336" text-anchor="middle" font-size="11" fill="#5c564a">神外住院医</text>
-        <text x="80" y="351" text-anchor="middle" font-size="11" fill="#9a9180">申铉彬</text>
+        <circle cx="205" cy="288" r="30" fill="#fbf9f3" stroke="#c25b4a" stroke-width="2"/>
+        <text x="205" y="288" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="600" fill="#2b2722">张冬天</text>
+        <text x="205" y="334" text-anchor="middle" font-size="10.5" fill="#5c564a">外科住院医</text>
+        <text x="205" y="349" text-anchor="middle" font-size="10.5" fill="#9a9180">申铉彬</text>
       </g>
       <g class="node">
-        <circle cx="210" cy="290" r="30" fill="#fbf9f3" stroke="#c25b4a" stroke-width="2"/>
-        <text x="210" y="290" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#2b2722">秋敏荷</text>
-        <text x="210" y="336" text-anchor="middle" font-size="11" fill="#5c564a">儿科住院医</text>
-        <text x="210" y="351" text-anchor="middle" font-size="11" fill="#9a9180">安恩真</text>
+        <circle cx="262" cy="288" r="30" fill="#fbf9f3" stroke="#c25b4a" stroke-width="2" stroke-dasharray="4 3"/>
+        <text x="262" y="288" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="600" fill="#2b2722">安治弘</text>
+        <text x="262" y="334" text-anchor="middle" font-size="10.5" fill="#5c564a">神外住院医</text>
+        <text x="262" y="349" text-anchor="middle" font-size="10.5" fill="#9a9180">金准韩</text>
       </g>
       <g class="node">
-        <circle cx="470" cy="290" r="30" fill="#fbf9f3" stroke="#c25b4a" stroke-width="2"/>
-        <text x="470" y="290" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#2b2722">李翊镜</text>
-        <text x="470" y="336" text-anchor="middle" font-size="11" fill="#5c564a">画家·翊晙妹</text>
-        <text x="470" y="351" text-anchor="middle" font-size="11" fill="#9a9180">郭善英</text>
+        <circle cx="475" cy="288" r="30" fill="#fbf9f3" stroke="#c25b4a" stroke-width="2" stroke-dasharray="4 3"/>
+        <text x="475" y="288" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="600" fill="#2b2722">秋敏荷</text>
+        <text x="475" y="334" text-anchor="middle" font-size="10.5" fill="#5c564a">妇产科住院医</text>
+        <text x="475" y="349" text-anchor="middle" font-size="10.5" fill="#9a9180">安恩真</text>
+      </g>
+      <g class="node">
+        <circle cx="540" cy="288" r="30" fill="#fbf9f3" stroke="#c25b4a" stroke-width="2" stroke-dasharray="4 3"/>
+        <text x="540" y="288" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="600" fill="#2b2722">李翊纯</text>
+        <text x="540" y="334" text-anchor="middle" font-size="10.5" fill="#5c564a">军人·翊晙妹</text>
+        <text x="540" y="349" text-anchor="middle" font-size="10.5" fill="#9a9180">郭善英</text>
       </g>
 
       <!-- 图例 -->
-      <line x1="70" y1="396" x2="104" y2="396" stroke="#3a7d6e" stroke-width="1.8" stroke-dasharray="7 5"/>
-      <text x="112" y="400" font-size="11" fill="#5c564a">友情·20年同窗</text>
-      <line x1="270" y1="396" x2="304" y2="396" stroke="#c25b4a" stroke-width="2.4"/>
-      <text x="312" y="400" font-size="11" fill="#5c564a">恋情</text>
-      <line x1="430" y1="396" x2="464" y2="396" stroke="#b8893a" stroke-width="1.8" stroke-dasharray="5 4"/>
-      <text x="472" y="400" font-size="11" fill="#5c564a">暗恋·未说破</text>
+      <line x1="60" y1="404" x2="94" y2="404" stroke="#3a7d6e" stroke-width="1.8" stroke-dasharray="7 5"/>
+      <text x="102" y="408" font-size="11" fill="#5c564a">友情·99 届</text>
+      <line x1="222" y1="404" x2="256" y2="404" stroke="#c25b4a" stroke-width="2.4"/>
+      <text x="264" y="408" font-size="11" fill="#5c564a">恋情·已在一起</text>
+      <line x1="404" y1="404" x2="438" y2="404" stroke="#c25b4a" stroke-width="2.2" stroke-dasharray="6 4"/>
+      <text x="446" y="408" font-size="11" fill="#5c564a">恋情·未成 / 生变</text>
+      <line x1="60" y1="432" x2="94" y2="432" stroke="#b8893a" stroke-width="2" stroke-dasharray="5 4"/>
+      <text x="102" y="436" font-size="11" fill="#5c564a">20 年暗恋</text>
+      <line x1="222" y1="432" x2="256" y2="432" stroke="#8a8e9a" stroke-width="1.4" stroke-dasharray="3 3"/>
+      <text x="264" y="436" font-size="11" fill="#5c564a">亲属</text>
     </svg>
     <div class="map-legend">
-      <div class="item"><span class="swatch" style="border-top-color:#3a7d6e;border-top-style:dashed"></span>友情 · 99届</div>
-      <div class="item"><span class="swatch" style="border-top-color:#c25b4a"></span>恋情</div>
-      <div class="item"><span class="swatch" style="border-top-color:#b8893a;border-top-style:dashed"></span>暗恋 · 未说破</div>
+      <div class="item"><span class="swatch" style="border-top-color:#3a7d6e;border-top-style:dashed"></span>友情 · 99 届</div>
+      <div class="item"><span class="swatch" style="border-top-color:#c25b4a"></span>恋情 · 已在一起</div>
+      <div class="item"><span class="swatch" style="border-top-color:#c25b4a;border-top-style:dashed"></span>恋情 · 未成 / 生变</div>
+      <div class="item"><span class="swatch" style="border-top-color:#b8893a;border-top-style:dashed"></span>20 年暗恋</div>
       <div class="item"><span class="swatch" style="border-top-color:#8a8e9a;border-top-style:dashed"></span>亲属</div>
     </div>
-    <p class="map-note">注：李翊镜既是金隽婠的恋人，也是李翊晙的亲妹妹——灰色虚线标出这条亲属关系。</p>
+    <p class="map-note">最容易搞混的一点：张冬天配的是<b>安涏援</b>，秋敏荷配的是<b>杨硕亨</b>——两个「住院医师」各自追的是不同的上司，不要串线。</p>
   </div>
 </section>
 
-<!-- ===================== 记忆法 ===================== -->
-<section class="section fade-in" id="memo">
-  <div class="memo">
-    <div class="big">四男一女同窗二十年，<br>三对恋爱加一对暗恋，<br>周四晚上一起玩乐队。</div>
-    <p>看的时候抓牢<span class="hl">「翊晙 ↔ 颂和」</span>这条暗线——它从第一集就埋着，却要等到第二季结局才说破。整部剧的甜和后劲，几乎都系在这二十年没说出口的一句话上。</p>
-    <p class="memo-cta"><a href="hospital-playlist-episodes.html">想逐集复习剧情？→ 两季 24 集逐集剧情全解</a></p>
+<!-- ===================== 留下的问号 ===================== -->
+<section class="section fade-in" id="open">
+  <div class="section-lead">
+    <h2 class="section-title">第一季留下的八个问号</h2>
+    <p class="section-desc">第一季把问题提出来就收了。以下是开第二季前最好记住的悬念，每条附「已知的线索」和「该盯什么」——不含第二季的答案。</p>
   </div>
+  <div class="q-list">
+
+    <div class="q-card">
+      <div class="q-no">01</div>
+      <div>
+        <h3>颂和会怎么回答翊晙？</h3>
+        <p class="clue">告白当场她没有回答，表情里有一丝犹豫；而她刚刚主动申请调去束草分院。两人之间还隔着一个刚告白、并决定追随她去束草的安治弘。</p>
+        <p class="watch">她何时给出答案、用什么方式给；束草的距离是障碍还是缓冲。</p>
+      </div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-no">02</div>
+      <div>
+        <h3>隽婠寄出的戒指包裹为什么被退回？</h3>
+        <p class="clue">翊纯赴英留学当天，隽婠因手术错过送机；之后补寄的包裹原封退回。这条线在第一季里是唯一一个明显亮红灯的结尾。</p>
+        <p class="watch">退回的真实原因（地址问题还是人的问题）；异地如何处理。</p>
+      </div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-no">03</div>
+      <div>
+        <h3>翊晙到底知不知道「妹夫」是谁？</h3>
+        <p class="clue">隽婠和翊纯的恋情一直对翊晙保密，但翊晙的种种表现像早就知情而刻意不点破——他是全剧最会「装不知道」的人。</p>
+        <p class="watch">何时揭穿、以什么方式揭穿；隽婠这个「妹夫」要怎么过关。</p>
+      </div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-no">04</div>
+      <div>
+        <h3>硕亨为什么推开敏荷？前妻是谁？</h3>
+        <p class="clue">拒绝的理由是「你值得更好的」，像是自贬而非不喜欢。他离过婚，家里那桩父亲与情妇的全国性丑闻、与母亲的关系，都压在这个最沉默的人身上。季末他接到前妻来电。</p>
+        <p class="watch">离婚的真实原因；前妻登场后敏荷的位置。</p>
+      </div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-no">05</div>
+      <div>
+        <h3>涏援留下当医生，接下来怎么办？</h3>
+        <p class="clue">他本已准备赴意大利读神学院，还打算把「长腿叔叔基金」交给颂和打理。留下意味着要重新面对母亲、面对从小的志愿。</p>
+        <p class="watch">他如何向家人交代；与冬天的办公室恋情怎么自处（第一季末才开始）。</p>
+      </div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-no">06</div>
+      <div>
+        <h3>安治弘追随颂和去束草，会走到哪一步？</h3>
+        <p class="clue">告白被拒，却回答「我的情感不能照你的意思收放自如」，随即申请调往束草。颂和那边还有一个未答复的翊晙。</p>
+        <p class="watch">这条支线是被收束成朋友，还是继续加压。</p>
+      </div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-no">07</div>
+      <div>
+        <h3>隽婠为什么那么痛恨酒驾？</h3>
+        <p class="clue">剧中他对酒驾的反应激烈到不合比例——知道相关人员酒驾后立刻分手。这个反应背后显然有一段没讲的过去。</p>
+        <p class="watch">他的过往被哪件事勾出来；这也是理解他「毒舌」的钥匙。</p>
+      </div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-no">08</div>
+      <div>
+        <h3>颂和去了束草，周四的乐队怎么办？</h3>
+        <p class="clue">乐队是整部剧的锚点，每周四排练、每集一首歌。精神支柱调到分院，五人第一次要在空间上分开。</p>
+        <p class="watch">乐队以什么形式存续；她多久回一次本院。</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================== 开看前清单 ===================== -->
+<section class="section fade-in" id="check">
+  <div class="section-lead">
+    <h2 class="section-title">第二季开看前 · 回顾清单</h2>
+    <p class="section-desc">隔几个月再开第二季，最容易忘的不是剧情，而是「谁跟谁」「谁是什么级别」。下面这份清单可以逐条打勾，勾选状态会存在本机浏览器里，下次打开还在。</p>
+  </div>
+
+  <div class="check-head">
+    <span class="prog">已完成 <b id="doneCount">0</b> / <span id="totalCount">0</span></span>
+    <button class="btn-reset" id="resetBtn" type="button">全部重置</button>
+  </div>
+
+  <div class="check-group">
+    <div class="gt">一 · 最容易记混的四件事</div>
+    <div class="check-list">
+      <div class="check-item"><span class="check-box"></span><span class="check-text"><b>张冬天喜欢的是安涏援</b>（不是翊晙）。翊晙在其中扮演的是恋爱军师。</span></div>
+      <div class="check-item"><span class="check-box"></span><span class="check-text"><b>秋敏荷喜欢的是杨硕亨</b>（不是涏援）。她是妇产科住院医，硕亨是她的上司。</span></div>
+      <div class="check-item"><span class="check-box"></span><span class="check-text"><b>李翊纯是翊晙的妹妹、隽婠的女友</b>，职业军人，第一季末去英国留学。</span></div>
+      <div class="check-item"><span class="check-box"></span><span class="check-text"><b>涏援＝长腿叔叔＝医院财团的小儿子</b>，母亲是郑罗莎，哥哥们是神父。</span></div>
+    </div>
+  </div>
+
+  <div class="check-group">
+    <div class="gt">二 · 季末坐标（五条线的状态）</div>
+    <div class="check-list">
+      <div class="check-item"><span class="check-box"></span><span class="check-text">翊晙告白已出口，<b>颂和没有回答</b>——第二季开头就要面对这件事。</span></div>
+      <div class="check-item"><span class="check-box"></span><span class="check-text">冬天告白成功，<b>涏援放弃神父之路留下</b>；两人刚刚开始，还处在半地下状态。</span></div>
+      <div class="check-item"><span class="check-box"></span><span class="check-text">隽婠 × 翊纯转入<b>异地</b>，戒指包裹被退回。</span></div>
+      <div class="check-item"><span class="check-box"></span><span class="check-text">敏荷被拒，<b>硕亨的前妻即将登场</b>。</span></div>
+      <div class="check-item"><span class="check-box"></span><span class="check-text">颂和已<b>调往束草分院</b>（但仍是五人之一，常回本院）。</span></div>
+    </div>
+  </div>
+
+  <div class="check-group">
+    <div class="gt">三 · 别丢掉的伏笔与设定</div>
+    <div class="check-list">
+      <div class="check-item"><span class="check-box"></span><span class="check-text">「<b>长腿叔叔</b>」基金：用 VIP 病房收入救助贫困患者，涏援发起，本打算交给颂和打理。</span></div>
+      <div class="check-item"><span class="check-box"></span><span class="check-text">润福、弘道这对双胞胎实习生，已认出<b>颂和是当年救下他们母亲的医生</b>。</span></div>
+      <div class="check-item"><span class="check-box"></span><span class="check-text">隽婠对<b>酒驾</b>的激烈反应——背后有未讲的过去。</span></div>
+      <div class="check-item"><span class="check-box"></span><span class="check-text">硕亨<b>继承了父亲的公司但交给职业经理人</b>，自己选择留在医院。</span></div>
+      <div class="check-item"><span class="check-box"></span><span class="check-text">翊晙离异，儿子<b>羽朱</b>（约 5—7 岁）是他最重要的软肋；前妻偶尔出场。</span></div>
+    </div>
+  </div>
+
+  <div class="check-group">
+    <div class="gt">四 · 开看提示</div>
+    <div class="check-list">
+      <div class="check-item"><span class="check-box"></span><span class="check-text">第二季是<b>软重启、不跳时间线</b>：紧接着第一季之后，人物不换血，可以直接接着看。</span></div>
+      <div class="check-item"><span class="check-box"></span><span class="check-text">第二季共 <b>12 集</b>，2021.06.17 开播、09.16 收官；另有《机智的露营生活》花絮可当缓冲。</span></div>
+      <div class="check-item"><span class="check-box"></span><span class="check-text">这部剧的节奏是<b>生活流</b>：每集一首乐队曲目收尾，别急着找爆点，看人就行。</span></div>
+    </div>
+  </div>
+
+  <div class="memo">
+    <div class="big">一句话记住第一季：<br>五个人把日子过成了彼此的支柱，<br>然后有人终于说了实话，有人还没来得及回答。</div>
+    <p>开第二季前只要抓牢<span class="hl">「翊晙 ↔ 颂和」</span>这一条——它是全剧真正的糖，也是唯一在第一季结束时还没落地的主线。其余四条，一条落地、一条生变、两条待定。</p>
+    <p class="memo-cta"><a href="hospital-playlist-episodes.html">想逐集复习？→ 两季 24 集逐集剧情全解</a></p>
+  </div>
+</section>
+
+<!-- ===================== 名词 ===================== -->
+<section class="section fade-in" id="terms">
+  <div class="section-lead">
+    <h2 class="section-title">医学名词小词典</h2>
+    <p class="section-desc">剧里动不动蹦出住院医、助理教授、肝胆胰、小儿外科……这些词到底什么意思？挑出第一季里最常出现的讲清，看第二季不卡壳。</p>
+  </div>
+  <dl class="glossary">
+
+    <div class="term">
+      <dt>住院医师 <span class="en">Resident</span></dt>
+      <dd>医学院毕业、取得执照后在医院各科室轮转受训的医生。管床、写病历、在上级指导下诊疗，资历最浅却冲在最前。
+        <span class="who">张冬天（外科第三年）、秋敏荷（妇产科第二年）</span></dd>
+    </div>
+
+    <div class="term">
+      <dt>住院总医师 <span class="en">Chief Resident</span></dt>
+      <dd>住院医师里的最后一年 / 最高一级，负责统筹排班与带教，是介于受训者与主治之间的角色。
+        <span class="who">凃材学（胸外科）、龙硕民（神经外科）</span></dd>
+    </div>
+
+    <div class="term">
+      <dt>研究医师 <span class="en">Fellow / 임상강사</span></dt>
+      <dd>完成住院医师训练后，在某个亚专科继续深造的高年资医生，已能独当一面并参与带教。
+        <span class="who">第二季里冬天升任 fellow</span></dd>
+    </div>
+
+    <div class="term">
+      <dt>助理教授 / 副教授 <span class="en">Assistant / Associate Professor</span></dt>
+      <dd>韩国医院里可独立负责病人、带组的资深医生。副教授高于助理教授；「教授」是对科主任级的称呼。
+        <span class="who">翊晙、涏援、硕亨是助理教授；颂和、隽婠是副教授</span></dd>
+    </div>
+
+    <div class="term">
+      <dt>肝胆胰外科 <span class="en">HPB Surgery</span></dt>
+      <dd>普通外科下专注肝、胆、胰的亚专科，肝移植是其中难度最高的一类手术。
+        <span class="who">李翊晙所在科，主攻肝移植</span></dd>
+    </div>
+
+    <div class="term">
+      <dt>小儿外科 <span class="en">Pediatric Surgery</span></dt>
+      <dd>专门给婴幼儿到青少年开刀的外科——做的是「手术」，和只看病不开刀的儿科不同。
+        <span class="who">安涏援所在科</span></dd>
+    </div>
+
+    <div class="term">
+      <dt>胸外科 <span class="en">Thoracic Surgery</span></dt>
+      <dd>处理胸腔内器官（肺、食管、心脏及大血管）手术的外科，精细、风险高。
+        <span class="who">金隽婠所在科（剧中亦作心脏外科）</span></dd>
+    </div>
+
+    <div class="term">
+      <dt>神经外科 <span class="en">Neurosurgery</span></dt>
+      <dd>诊治脑、脊髓与周围神经疾病并施行手术的科室，最考验手稳的分支之一。
+        <span class="who">蔡颂和所在科</span></dd>
+    </div>
+
+    <div class="term">
+      <dt>妇产科 <span class="en">OB/GYN</span></dt>
+      <dd>妇科（女性生殖系统疾病）与产科（妊娠、分娩）的合称。
+        <span class="who">杨硕亨所在科</span></dd>
+    </div>
+
+    <div class="term">
+      <dt>活体肝移植 <span class="en">Living-donor Liver Transplant</span></dt>
+      <dd>取健康活人的一部分肝脏移植给患者。肝脏能再生，捐出部分后仍可长回，所以亲属间常以此救命。
+        <span class="who">翊晙主攻；剧中多次出现父子间移植</span></dd>
+    </div>
+
+    <div class="term">
+      <dt>活检 <span class="en">Biopsy</span></dt>
+      <dd>取少量可疑组织送病理科在显微镜下检查，是判断良恶性的「金标准」。
+        <span class="who">第一季颂和摸到肿块后做的检查</span></dd>
+    </div>
+
+    <div class="term">
+      <dt>脑死 <span class="en">Brain Death</span></dt>
+      <dd>全脑（含脑干）功能不可逆丧失，多数国家视为法律意义上的死亡，也是器官捐献判定的前提。
+        <span class="who">剧中多次出现的器官捐献情节背景</span></dd>
+    </div>
+
+    <div class="term">
+      <dt>VIP 病房</dt>
+      <dd>收费更高的特需病房。剧中它的收入被涏援悄悄拿去做了救助贫困患者的「长腿叔叔」基金。
+        <span class="who">安涏援的秘密</span></dd>
+    </div>
+
+  </dl>
+  <p class="section-desc" style="margin-top:22px">更完整的医学名词（含剖宫产、高风险妊娠、术后监护、急诊分诊等）见<a href="hospital-playlist-episodes.html#terms" style="color:var(--c-friend);text-decoration:none;border-bottom:1px solid rgba(58,125,110,.4)">逐集剧情页 · 名词小词典</a>。</p>
 </section>
 
 <footer class="site-footer">
-  <span class="copy">© zzht · 机智的医生生活 人物关系图谱</span>
+  <span class="copy">© zzht · 机智的医生生活 第一季总结</span>
   <a href="index.html">返回首页 ↗</a>
 </footer>
 
 <script>
 (function () {
-  // fade-in on scroll
+  // fade-in
   var fades = document.querySelectorAll('.fade-in');
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
-    }, { threshold: 0.12 });
+    }, { threshold: 0.1 });
     fades.forEach(function (el) { io.observe(el); });
   } else {
     fades.forEach(function (el) { el.classList.add('visible'); });
   }
 
   // nav scroll-spy
-  var tabs = Array.prototype.slice.call(document.querySelectorAll('.nav-tab'));
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.nav-tab:not(.nav-ext)'));
   var sections = tabs.map(function (t) { return document.querySelector(t.getAttribute('href')); });
   if ('IntersectionObserver' in window) {
     var spy = new IntersectionObserver(function (entries) {
@@ -639,6 +1030,44 @@ body {
     }, { rootMargin: '-45% 0px -50% 0px' });
     sections.forEach(function (s) { if (s) spy.observe(s); });
   }
+
+  // checklist with localStorage
+  var KEY = 'hp-s1-checklist-v1';
+  var items = Array.prototype.slice.call(document.querySelectorAll('.check-item'));
+  var doneCount = document.getElementById('doneCount');
+  document.getElementById('totalCount').textContent = items.length;
+
+  var saved = [];
+  try { saved = JSON.parse(localStorage.getItem(KEY) || '[]'); } catch (err) { saved = []; }
+
+  function render() {
+    var n = 0;
+    items.forEach(function (el, i) {
+      var on = !!saved[i];
+      el.classList.toggle('done', on);
+      el.setAttribute('aria-checked', on ? 'true' : 'false');
+      if (on) n++;
+    });
+    doneCount.textContent = n;
+  }
+  function save() {
+    try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (err) {}
+  }
+
+  items.forEach(function (el, i) {
+    el.setAttribute('role', 'checkbox');
+    el.setAttribute('tabindex', '0');
+    el.addEventListener('click', function () { saved[i] = !saved[i]; render(); save(); });
+    el.addEventListener('keydown', function (e) {
+      if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); saved[i] = !saved[i]; render(); save(); }
+    });
+  });
+
+  document.getElementById('resetBtn').addEventListener('click', function () {
+    saved = []; save(); render();
+  });
+
+  render();
 })();
 </script>
 
