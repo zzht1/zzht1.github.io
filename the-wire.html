@@ -10,9 +10,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap"></noscript>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="https://d3js.org/d3.v7.min.js"></script>
+<link rel="stylesheet" href="assets/vendor/leaflet.css" />
+<script src="assets/vendor/leaflet.js"></script>
+<script src="assets/vendor/d3.v7.min.js"></script>
 <style>
 :root {
   /* 水泥灰哑光底 + 胶片颗粒 */
@@ -1731,7 +1731,7 @@ document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
   };
 
   const nodes = [
-    { id:'mcnulty', name:'McNulty', actor:'Dominic West', group:'police', r:28, img:'http://mediad.publicbroadcasting.net/p/shared/npr/styles/x_large/nprshared/201501/375165494.jpg', desc:'西区重案组探员，才华横溢却桀骜不驯，用谎言推动调查，是全剧的核心驱动力' },
+    { id:'mcnulty', name:'McNulty', actor:'Dominic West', group:'police', r:28, img:'assets/the-wire/the-wire-02.jpg', desc:'西区重案组探员，才华横溢却桀骜不驯，用谎言推动调查，是全剧的核心驱动力' },
     { id:'omar', name:'Omar Little', actor:'Michael K. Williams', group:'other', r:26, img:'http://gd-hbimg.huaban.com/4ba5cbef6f6626bd263d94ece98781c035693447a7dba-0VYZrS_fw658webp', desc:'持散弹枪的街头劫匪，专抢毒贩，有自己的荣誉准则，全剧最具魅力的角色' },
     { id:'avon', name:'Avon Barksdale', actor:'Wood Harris', group:'barksdale', r:24, img:'', desc:'西区毒品帝国创建者，信奉地盘和暴力法则的纯粹街头人物' },
     { id:'stringer', name:'Stringer Bell', actor:'Idris Elba', group:'barksdale', r:26, img:'', desc:'Barksdale二把手，白天读经济学，试图将毒品帝国企业化' },
@@ -1747,7 +1747,7 @@ document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
     { id:'vondas', name:'Vondas', actor:'Paul Ben-Victor', group:'dock', r:16, img:'', desc:'希腊走私集团二把手' },
     { id:'colvin', name:'Bunny Colvin', actor:'Robert Wisdom', group:'police', r:22, img:'', desc:'西区警长，Hamsterdam计划设计者，全剧最具远见的体制内人物' },
     { id:'carcetti', name:'Carcetti', actor:'Aidan Gillen', group:'politics', r:24, img:'', desc:'从市议员到市长，改革理想在政治现实中被逐渐吞噬' },
-    { id:'marlo', name:'Marlo Stanfield', actor:'Jamie Hector', group:'marlo', r:24, img:'http://cdn.vox-cdn.com/thumbor/GFNxcHOk_xFgbCpbgwh4Ndq5nZc=/0x0:3504x2336/1200x0/filters:focal(0x0:3504x2336):no_upscale()/cdn.vox-cdn.com/uploads/chorus_asset/file/19556933/merlin_4473374.jpg', desc:'新一代冷酷毒枭，纯粹以暴力和恐惧统治' },
+    { id:'marlo', name:'Marlo Stanfield', actor:'Jamie Hector', group:'marlo', r:24, img:'assets/the-wire/the-wire-03.jpg', desc:'新一代冷酷毒枭，纯粹以暴力和恐惧统治' },
     { id:'chris', name:'Chris Partlow', actor:'Gbenga Akinnagbe', group:'marlo', r:20, img:'', desc:'Marlo的左膀右臂，冷血杀手' },
     { id:'snoop', name:'Snoop', actor:'Felicia Pearson', group:'marlo', r:18, img:'', desc:'面无表情的女杀手，将尸体封在废弃排屋的墙中' },
     { id:'cutty', name:'Cutty', actor:'Chad Coleman', group:'barksdale', r:18, img:'', desc:'前Barksdale打手，出狱后开设拳击馆，努力脱离街头' },
