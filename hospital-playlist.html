@@ -4,10 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="《机智的医生生活》第一季总结：12 集合订本、五人帮季末坐标、四条感情线的进展，以及第二季开看前的回顾清单与未解问题。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23f6f4ee'/%3E%3Ctext x='16' y='22' font-family='serif' font-size='18' font-weight='700' text-anchor='middle' fill='%23232019'%3Ez%3C/text%3E%3Ccircle cx='25' cy='22' r='3' fill='%23a8281c'/%3E%3C/svg%3E">
 <title>机智的医生生活 · 第一季总结与开看前清单</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap"></noscript>
 <style>
 :root {
   --bg: #f3f1ea;
@@ -427,6 +428,19 @@ body {
   .tl-row { grid-template-columns: 62px 1fr; gap: 12px; }
   .q-card { grid-template-columns: 34px 1fr; gap: 12px; }
 }
+/* ── HERO-AXIS v1 ── */
+.hero{display:flex!important;flex-direction:column!important;
+  justify-content:center!important;align-items:center!important;
+  text-align:center!important;padding-left:24px!important;padding-right:24px!important;}
+.hero>*{margin-left:auto!important;margin-right:auto!important;
+  justify-content:center!important;text-align:center!important;}
+/* 绝对定位的装饰层/水印保持原位，不被裁切或位移 */
+.hero>.hero-deco{grid-column:auto!important;}
+.hero>.scroll-hint{grid-column:auto!important;}
+
+.hero .hero-divider,.hero .hero-scroll,.hero .scroll-hint,.hero .hero-meta,.hero-meta-item{margin-left:auto!important;margin-right:auto!important;}
+.hero h1::after,.hero h2::after{margin-left:auto!important;margin-right:auto!important;}
+/* ── /HERO-AXIS v1 ── */
 </style>
 </head>
 <body>

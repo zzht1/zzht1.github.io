@@ -4,10 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="五座城市的生长史：运城、运城中心城区、象山、攀枝花、上海。从地图上看一座城因何而兴、朝哪个方向长，结合产业结构与人口因素的城市地理读法。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23f6f4ee'/%3E%3Ctext x='16' y='22' font-family='serif' font-size='18' font-weight='700' text-anchor='middle' fill='%23232019'%3Ez%3C/text%3E%3Ccircle cx='25' cy='22' r='3' fill='%23a8281c'/%3E%3C/svg%3E">
 <title>五座城市的生长史</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap"></noscript>
 <style>
 :root{
   --paper:#f7f4ec;
@@ -215,6 +216,18 @@ footer.site-foot{
   .cards{grid-template-columns:1fr}
   .struct tbody th{width:auto;white-space:normal}
 }
+/* ── HERO-AXIS v1 ── */
+.hero{display:flex!important;flex-direction:column!important;
+  justify-content:center!important;align-items:center!important;
+  text-align:center!important;padding-left:24px!important;padding-right:24px!important;}
+.hero>*{margin-left:auto!important;margin-right:auto!important;
+  justify-content:center!important;text-align:center!important;}
+/* 绝对定位的装饰层/水印保持原位，不被裁切或位移 */
+.hero>.hero-rings{grid-column:auto!important;}
+
+.hero .hero-divider,.hero .hero-scroll,.hero .scroll-hint,.hero .hero-meta,.hero-meta-item{margin-left:auto!important;margin-right:auto!important;}
+.hero h1::after,.hero h2::after{margin-left:auto!important;margin-right:auto!important;}
+/* ── /HERO-AXIS v1 ── */
 </style>
 </head>
 <body class="c-yuncheng">
