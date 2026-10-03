@@ -1,0 +1,1894 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>运城出发·云台山两日自驾攻略</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F5F1E8;
+  --bg-card: #FFFFFF;
+  --bg-soft: #EDE7DA;
+  --primary: #3A6B4E;
+  --primary-light: #5B9476;
+  --primary-dark: #2A4D38;
+  --terracotta: #C25B3F;
+  --terracotta-light: #D67A5F;
+  --gold: #C9A23C;
+  --text: #2A2520;
+  --text-light: #7A6F65;
+  --text-muted: #A89F95;
+  --border: #DDD4C4;
+  --shadow: 0 4px 20px rgba(58, 107, 78, 0.08);
+  --shadow-hover: 0 8px 30px rgba(58, 107, 78, 0.15);
+  --radius: 24px;
+  --radius-sm: 14px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: "Noto Sans SC", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.8;
+  overflow-x: hidden;
+}
+h1, h2, h3, h4 {
+  font-family: "Noto Serif SC", serif;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+/* ========== HERO ========== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background: linear-gradient(170deg, #E8F0E5 0%, #F5F1E8 50%, #F0E8DA 100%);
+  overflow: hidden;
+  text-align: center;
+  padding: 2rem;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 35%;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 300' preserveAspectRatio='none'%3E%3Cpath d='M0,300 L0,180 Q100,120 200,150 T400,140 Q500,90 600,130 T800,110 Q900,70 1000,120 T1200,100 L1200,300 Z' fill='%233A6B4E' opacity='0.08'/%3E%3Cpath d='M0,300 L0,220 Q150,170 300,200 T600,190 Q750,150 900,180 T1200,160 L1200,300 Z' fill='%233A6B4E' opacity='0.12'/%3E%3Cpath d='M0,300 L0,260 Q200,230 400,250 T800,240 Q1000,210 1200,230 L1200,300 Z' fill='%233A6B4E' opacity='0.15'/%3E%3C/svg%3E") no-repeat bottom center;
+  background-size: cover;
+}
+.hero-content { position: relative; z-index: 2; max-width: 800px; }
+.hero-tag {
+  display: inline-block;
+  padding: 6px 18px;
+  border-radius: 30px;
+  background: rgba(58, 107, 78, 0.1);
+  color: var(--primary);
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.05em;
+}
+.hero h1 {
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: 900;
+  color: var(--primary-dark);
+  margin-bottom: 0.8rem;
+  letter-spacing: 0.02em;
+}
+.hero h1 .accent { color: var(--terracotta); }
+.hero-subtitle {
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  color: var(--text-light);
+  margin-bottom: 2.5rem;
+  font-weight: 300;
+}
+.hero-stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.hero-stat {
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(8px);
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.8rem;
+  min-width: 130px;
+}
+.hero-stat .num {
+  font-family: "Noto Serif SC", serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary);
+  display: block;
+}
+.hero-stat .label { font-size: 0.8rem; color: var(--text-light); }
+.hero-weather {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.5rem;
+  background: rgba(255,255,255,0.6);
+  border-radius: 30px;
+  padding: 0.6rem 1.5rem;
+  font-size: 0.85rem;
+  color: var(--text-light);
+}
+.hero-weather .day { display: flex; align-items: center; gap: 0.4rem; }
+.hero-weather .temp { font-weight: 700; color: var(--terracotta); }
+.scroll-hint {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  animation: bounce 2s infinite;
+}
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(8px); }
+}
+
+/* ========== STICKY NAV ========== */
+.sticky-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(245, 241, 232, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0.5rem 0;
+}
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1.5rem;
+  gap: 1rem;
+}
+.nav-brand {
+  font-family: "Noto Serif SC", serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--primary-dark);
+  white-space: nowrap;
+}
+.nav-brand .dot { color: var(--terracotta); }
+.nav-links {
+  display: flex;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+}
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-light);
+  font-size: 0.85rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.nav-links a:hover {
+  color: var(--primary);
+  background: rgba(58, 107, 78, 0.08);
+}
+.nav-links a.active {
+  color: var(--primary);
+  background: rgba(58, 107, 78, 0.12);
+}
+
+/* ========== SECTIONS ========== */
+section { padding: 4rem 1.5rem; }
+.container { max-width: 1100px; margin: 0 auto; }
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.section-header h2 {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  color: var(--primary-dark);
+  margin-bottom: 0.5rem;
+}
+.section-header p {
+  color: var(--text-light);
+  font-size: 0.95rem;
+}
+.gradient-divider {
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary), var(--terracotta));
+  border-radius: 3px;
+  margin: 1rem auto 0;
+}
+
+/* ========== ROUTE MAP ========== */
+.route-section { background: var(--bg-soft); }
+.route-map-wrap {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.route-svg { width: 100%; height: auto; display: block; }
+.route-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+.route-detail-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 1rem;
+  background: var(--bg-soft);
+  border-radius: var(--radius-sm);
+}
+.route-detail-item .icon {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+}
+.route-detail-item .icon.road { background: rgba(58,107,78,0.12); color: var(--primary); }
+.route-detail-item .icon.cost { background: rgba(194,91,63,0.12); color: var(--terracotta); }
+.route-detail-item .icon.time { background: rgba(201,162,60,0.15); color: var(--gold); }
+.route-detail-item .text { font-size: 0.85rem; }
+.route-detail-item .text strong { display: block; color: var(--text); font-size: 1.1rem; margin-bottom: 0.1rem; }
+.route-detail-item .text span { color: var(--text-light); }
+
+/* ========== ITINERARY ========== */
+.itinerary-section { background: var(--bg); }
+.day-block {
+  margin-bottom: 2rem;
+}
+.day-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+.day-badge {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.day-badge.d1 { background: linear-gradient(135deg, var(--primary), var(--primary-light)); color: #fff; }
+.day-badge.d2 { background: linear-gradient(135deg, var(--terracotta), var(--terracotta-light)); color: #fff; }
+.day-badge .num { font-size: 1.5rem; font-weight: 700; font-family: "Noto Serif SC", serif; line-height: 1; }
+.day-badge .lbl { font-size: 0.6rem; opacity: 0.85; }
+.day-title h3 { font-size: 1.4rem; color: var(--primary-dark); margin-bottom: 0.1rem; }
+.day-title .date { font-size: 0.85rem; color: var(--text-light); }
+.timeline {
+  position: relative;
+  padding-left: 2rem;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 10px;
+  bottom: 10px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--primary), var(--terracotta), transparent);
+  border-radius: 2px;
+}
+.tl-item {
+  position: relative;
+  margin-bottom: 1.5rem;
+  cursor: pointer;
+}
+.tl-item::before {
+  content: '';
+  position: absolute;
+  left: -2rem;
+  top: 6px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 3px solid var(--primary);
+  z-index: 2;
+  transition: all 0.3s;
+}
+.tl-item.d2::before { border-color: var(--terracotta); }
+.tl-item.open::before { background: var(--primary); }
+.tl-item.d2.open::before { background: var(--terracotta); }
+.tl-time {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 0.2rem;
+}
+.tl-item.d2 .tl-time { color: var(--terracotta); }
+.tl-title {
+  font-weight: 500;
+  color: var(--text);
+  font-size: 0.95rem;
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.tl-title .arrow {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  transition: transform 0.3s;
+}
+.tl-item.open .tl-title .arrow { transform: rotate(90deg); }
+.tl-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.4s ease;
+}
+.tl-item.open .tl-content {
+  max-height: 500px;
+  padding-top: 0.6rem;
+}
+.tl-content p {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  line-height: 1.7;
+}
+.tl-content .tip {
+  display: inline-block;
+  margin-top: 0.4rem;
+  padding: 0.3rem 0.7rem;
+  background: rgba(201,162,60,0.12);
+  border-radius: 8px;
+  font-size: 0.75rem;
+  color: #8a6d20;
+}
+.tl-content .tip.terra { background: rgba(194,91,63,0.1); color: var(--terracotta); }
+
+/* ========== ATTRACTIONS ========== */
+.attractions-section { background: var(--bg-soft); }
+.attractions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+.attraction-card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.attraction-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+.ac-image {
+  width: 100%;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.ac-image .svg-bg { width: 100%; height: 100%; }
+.ac-body { padding: 1.3rem 1.5rem 1.5rem; }
+.ac-body h4 { font-size: 1.15rem; color: var(--primary-dark); margin-bottom: 0.3rem; }
+.ac-tags { display: flex; gap: 0.4rem; margin-bottom: 0.5rem; flex-wrap: wrap; }
+.ac-tag {
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: var(--bg-soft);
+  color: var(--text-light);
+}
+.ac-tag.must { background: rgba(194,91,63,0.1); color: var(--terracotta); }
+.ac-tag.time { background: rgba(201,162,60,0.12); color: #8a6d20; }
+.ac-desc { font-size: 0.82rem; color: var(--text-light); line-height: 1.65; }
+.ac-meta {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.8rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+.ac-meta span { display: flex; align-items: center; gap: 0.3rem; }
+
+/* ========== FOOD ========== */
+.food-section { background: var(--bg); }
+.food-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.2rem;
+}
+.food-card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.food-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+.food-emoji {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  line-height: 1;
+}
+.food-card h4 { font-size: 1rem; color: var(--primary-dark); margin-bottom: 0.3rem; }
+.food-card p { font-size: 0.8rem; color: var(--text-light); }
+.food-price {
+  display: inline-block;
+  margin-top: 0.6rem;
+  padding: 0.2rem 0.7rem;
+  background: rgba(194,91,63,0.1);
+  border-radius: 10px;
+  font-size: 0.75rem;
+  color: var(--terracotta);
+  font-weight: 600;
+}
+
+/* ========== KNOWLEDGE ========== */
+.knowledge-section { background: var(--bg); }
+.knowledge-block { margin-bottom: 2.5rem; }
+.knowledge-block h3 {
+  font-size: 1.3rem;
+  color: var(--primary-dark);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.knowledge-block h3::before {
+  content: '';
+  width: 4px;
+  height: 1.3rem;
+  background: linear-gradient(to bottom, var(--primary), var(--gold));
+  border-radius: 2px;
+}
+.knowledge-block p {
+  font-size: 0.88rem;
+  color: var(--text-light);
+  line-height: 1.85;
+  margin-bottom: 0.8rem;
+}
+.knowledge-block .geo-img {
+  width: 100%;
+  max-height: 280px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  margin: 1rem 0;
+  box-shadow: var(--shadow);
+}
+.book-list, .doc-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
+.book-card, .doc-card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 1.2rem 1.5rem;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+  border-left: 3px solid var(--primary);
+}
+.doc-card { border-left-color: var(--terracotta); }
+.book-card:hover, .doc-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
+}
+.book-card h4, .doc-card h4 {
+  font-size: 0.95rem;
+  color: var(--primary-dark);
+  margin-bottom: 0.2rem;
+}
+.book-card .author, .doc-card .platform {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-bottom: 0.4rem;
+}
+.book-card p, .doc-card p {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+/* ========== REAL PHOTOS ========== */
+.ac-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.attraction-card:hover .ac-image img { transform: scale(1.05); }
+.food-photo {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: var(--radius) var(--radius) 0 0;
+  margin: -1.5rem -1.5rem 0.8rem 0;
+  width: calc(100% + 3rem);
+}
+.food-card { padding-top: 0; overflow: hidden; }
+.hotel-photo {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: var(--radius) var(--radius) 0 0;
+  margin: -1.5rem -1.5rem 0.8rem 0;
+  width: calc(100% + 3rem);
+}
+.hotel-card { padding-top: 0; overflow: hidden; }
+
+/* ========== INTERACTIVE BUDGET ========== */
+.budget-calc {
+  max-width: 680px;
+  margin: 0 auto;
+}
+.budget-group {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  box-shadow: var(--shadow);
+}
+.budget-group h4 {
+  font-size: 1rem;
+  color: var(--primary-dark);
+  margin-bottom: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.budget-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.budget-option {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background 0.2s ease;
+  font-size: 0.85rem;
+  color: var(--text);
+}
+.budget-option:hover { background: var(--bg-soft); }
+.budget-option.selected { background: rgba(58,107,78,0.08); }
+.budget-option input[type="checkbox"],
+.budget-option input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.budget-option .opt-label { flex: 1; }
+.budget-option .opt-price {
+  font-weight: 700;
+  color: var(--terracotta);
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+.budget-option .opt-price.muted { color: var(--text-muted); font-weight: 500; }
+.budget-option:has(input:checked) { background: rgba(58,107,78,0.08); }
+.budget-summary {
+  background: var(--primary);
+  border-radius: var(--radius);
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--shadow-hover);
+}
+.budget-summary .summary-label {
+  color: rgba(255,255,255,0.85);
+  font-size: 0.9rem;
+}
+.budget-summary .summary-amount {
+  font-family: "Noto Serif SC", serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #fff;
+}
+.budget-detail {
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.6;
+}
+.budget-breakdown {
+  margin-top: 1rem;
+  padding: 1rem 1.5rem;
+  background: var(--bg-card);
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  color: var(--text-light);
+  line-height: 1.8;
+}
+.budget-breakdown .bd-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.15rem 0;
+}
+.budget-breakdown .bd-row .bd-val { font-weight: 600; color: var(--text); }
+
+/* ========== BUDGET (original) ========== */
+.hotel-section { background: var(--bg-soft); }
+.hotel-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+.hotel-card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+.hotel-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+.hotel-rank {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 10px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.hotel-rank.top { background: rgba(194,91,63,0.1); color: var(--terracotta); }
+.hotel-rank.budget { background: rgba(58,107,78,0.1); color: var(--primary); }
+.hotel-rank.luxury { background: rgba(201,162,60,0.12); color: #8a6d20; }
+.hotel-card h4 { font-size: 1.05rem; color: var(--primary-dark); margin-bottom: 0.2rem; }
+.hotel-score {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--terracotta);
+  margin-bottom: 0.5rem;
+}
+.hotel-score .stars { color: var(--gold); font-size: 0.8rem; }
+.hotel-desc { font-size: 0.82rem; color: var(--text-light); line-height: 1.65; margin-bottom: 0.6rem; }
+.hotel-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.6rem; }
+.hotel-tag {
+  font-size: 0.72rem;
+  padding: 2px 8px;
+  border-radius: 8px;
+  background: var(--bg-soft);
+  color: var(--text-light);
+}
+.hotel-price {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--border);
+}
+.hotel-price .label { font-size: 0.75rem; color: var(--text-muted); }
+.hotel-price .amount { font-family: "Noto Serif SC", serif; font-size: 1.2rem; font-weight: 700; color: var(--primary-dark); }
+
+.budget-section { background: var(--bg-soft); }
+.budget-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 0.5rem;
+  background: transparent;
+}
+.budget-table tr {
+  background: var(--bg-card);
+  box-shadow: var(--shadow);
+}
+.budget-table td {
+  padding: 1rem 1.5rem;
+  font-size: 0.9rem;
+}
+.budget-table td:first-child {
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+  font-weight: 500;
+  color: var(--text);
+  width: 35%;
+}
+.budget-table td:last-child {
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  text-align: right;
+  font-weight: 700;
+  color: var(--primary-dark);
+}
+.budget-table tr.total td {
+  background: var(--primary);
+  color: #fff;
+  font-size: 1rem;
+}
+.budget-table tr.total td:first-child { border-radius: var(--radius-sm) 0 0 var(--radius-sm); }
+.budget-table tr.total td:last-child { border-radius: 0 var(--radius-sm) var(--radius-sm) 0; color: #fff; }
+.budget-note {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+/* ========== CHECKLIST ========== */
+.checklist-section { background: var(--bg); }
+.checklist-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+.checklist-group {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+}
+.checklist-group h4 {
+  font-size: 1rem;
+  color: var(--primary-dark);
+  margin-bottom: 1rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 2px solid var(--bg-soft);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.checklist-group ul { list-style: none; }
+.checklist-group li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.45rem 0;
+  font-size: 0.85rem;
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.checklist-group li:hover { color: var(--primary); }
+.check-box {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--border);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+.check-box.checked {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+.check-box.checked::after {
+  content: '✓';
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+.checklist-group li.checked .check-box { background: var(--primary); border-color: var(--primary); }
+.checklist-group li.checked .check-box::after { content: '✓'; color: #fff; font-size: 0.75rem; }
+.checklist-group li.checked { text-decoration: line-through; color: var(--text-muted); }
+
+/* ========== TIPS ========== */
+.tips-section { background: var(--bg-soft); }
+.tips-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
+.tip-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-sm);
+  padding: 1.3rem 1.5rem;
+  box-shadow: var(--shadow);
+  border-left: 4px solid var(--primary);
+  transition: all 0.3s;
+}
+.tip-card.terra { border-left-color: var(--terracotta); }
+.tip-card.gold { border-left-color: var(--gold); }
+.tip-card h4 { font-size: 0.95rem; margin-bottom: 0.3rem; color: var(--primary-dark); }
+.tip-card p { font-size: 0.82rem; color: var(--text-light); }
+
+/* ========== FOOTER ========== */
+footer {
+  background: var(--primary-dark);
+  color: rgba(255,255,255,0.7);
+  text-align: center;
+  padding: 3rem 1.5rem;
+}
+footer p { font-size: 0.85rem; }
+footer .heart { color: var(--terracotta-light); }
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+  .nav-brand { font-size: 0.85rem; }
+  .nav-links { display: none; }
+  section { padding: 3rem 1rem; }
+  .hero-stats { gap: 0.8rem; }
+  .hero-stat { padding: 0.7rem 1.2rem; min-width: 100px; }
+  .hero-stat .num { font-size: 1.5rem; }
+  .route-details { grid-template-columns: 1fr 1fr; }
+  .timeline { padding-left: 1.5rem; }
+  .tl-item::before { left: -1.5rem; width: 14px; height: 14px; }
+  .budget-table td { padding: 0.7rem 1rem; font-size: 0.82rem; }
+}
+@media (max-width: 480px) {
+  .route-details { grid-template-columns: 1fr; }
+  .attractions-grid { grid-template-columns: 1fr; }
+  .food-grid { grid-template-columns: 1fr 1fr; }
+  .checklist-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ========== HERO ========== -->
+<section class="hero" id="hero">
+  <div class="hero-content">
+    <div class="hero-tag">两天一夜 · 自驾攻略</div>
+    <h1>运城 <span class="accent">→</span> 云台山</h1>
+    <p class="hero-subtitle">晋南启程，三门峡接同伴，跨越黄河探秘中原第一峡谷群</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="num">335<span style="font-size:0.9rem">km</span></span>
+        <span class="label">单程距离</span>
+      </div>
+      <div class="hero-stat">
+        <span class="num">5.5<span style="font-size:0.9rem">h</span></span>
+        <span class="label">含接人车程</span>
+      </div>
+      <div class="hero-stat">
+        <span class="num">4</span>
+        <span class="label">同行人数</span>
+      </div>
+      <div class="hero-stat">
+        <span class="num">¥180</span>
+        <span class="label">门票/人</span>
+      </div>
+    </div>
+    <div class="hero-weather">
+      <span class="day">☀️ 7.11 周六 <span class="temp">27~36°C</span> 晴</span>
+      <span style="color:var(--border)">|</span>
+      <span class="day">🌤️ 7.12 周日 <span class="temp">27~36°C</span> 晴转少云</span>
+    </div>
+  </div>
+  <div class="scroll-hint">向下滚动查看攻略 ↓</div>
+</section>
+
+<!-- ========== STICKY NAV ========== -->
+<nav class="sticky-nav">
+  <div class="nav-inner">
+    <div class="nav-brand">运城<span class="dot">·</span>云台山自驾攻略</div>
+    <div class="nav-links">
+      <a href="#route">路线</a>
+      <a href="#day1">Day 1</a>
+      <a href="#day2">Day 2</a>
+      <a href="#attractions">景点</a>
+      <a href="#food">美食</a>
+      <a href="#hotel">住宿</a>
+      <a href="#budget">预算</a>
+      <a href="#checklist">清单</a>
+      <a href="#tips">贴士</a>
+      <a href="#knowledge">充电</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ========== ROUTE MAP ========== -->
+<section class="route-section" id="route">
+  <div class="container">
+    <div class="section-header">
+      <h2>自驾路线</h2>
+      <p>运城 → 三门峡（接同伴）→ 洛阳 → 焦作 → 云台山</p>
+      <div class="gradient-divider"></div>
+    </div>
+    <div class="route-map-wrap">
+      <svg class="route-svg" viewBox="0 0 700 380" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="routeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#3A6B4E"/>
+            <stop offset="40%" stop-color="#C9A23C"/>
+            <stop offset="70%" stop-color="#D67A5F"/>
+            <stop offset="100%" stop-color="#C25B3F"/>
+          </linearGradient>
+          <filter id="softShadow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+            <feOffset dx="0" dy="2"/>
+            <feComponentTransfer><feFuncA type="linear" slope="0.15"/></feComponentTransfer>
+            <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <!-- Terrain background -->
+        <path d="M0,380 L0,260 Q80,220 160,245 T320,230 Q400,195 480,225 T700,200 L700,380 Z" fill="#3A6B4E" opacity="0.05"/>
+        <path d="M0,380 L0,300 Q100,270 200,290 T400,280 Q500,250 600,275 T700,265 L700,380 Z" fill="#3A6B4E" opacity="0.07"/>
+        <path d="M0,380 L0,330 Q150,310 300,320 T600,315 L700,310 L700,380 Z" fill="#3A6B4E" opacity="0.06"/>
+        <!-- Yellow River -->
+        <path d="M60,240 Q100,260 140,250 Q200,240 280,255 Q350,270 400,250 Q470,220 530,200 Q600,175 660,160" stroke="#5B9476" stroke-width="3" fill="none" opacity="0.12" stroke-dasharray="6,4"/>
+        <text x="250" y="235" font-family="Noto Sans SC" font-size="8" fill="#5B9476" opacity="0.4">黄河</text>
+        <!-- Route path: 运城→三门峡→洛阳→焦作→云台山 -->
+        <path d="M80,180 Q100,220 120,260 Q150,275 220,270 Q280,260 340,255 Q400,230 460,180 Q510,140 560,100 Q600,80 620,55" 
+              stroke="url(#routeGrad)" stroke-width="4" fill="none" stroke-linecap="round" filter="url(#softShadow)"/>
+        <path d="M80,180 Q100,220 120,260 Q150,275 220,270 Q280,260 340,255 Q400,230 460,180 Q510,140 560,100 Q600,80 620,55" 
+              stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="8,12" opacity="0.5"/>
+        <!-- City: Yuncheng -->
+        <circle cx="80" cy="180" r="8" fill="#3A6B4E"/>
+        <circle cx="80" cy="180" r="14" fill="none" stroke="#3A6B4E" stroke-width="2" opacity="0.3"/>
+        <text x="80" y="155" text-anchor="middle" font-family="Noto Serif SC" font-size="14" font-weight="700" fill="#2A4D38">运城</text>
+        <text x="80" y="142" text-anchor="middle" font-family="Noto Sans SC" font-size="9" fill="#7A6F65">出发点 12:00</text>
+        <!-- City: Sanmenxia (pickup point) -->
+        <circle cx="140" cy="265" r="9" fill="#C9A23C"/>
+        <circle cx="140" cy="265" r="16" fill="none" stroke="#C9A23C" stroke-width="2" opacity="0.35"/>
+        <text x="140" y="295" text-anchor="middle" font-family="Noto Serif SC" font-size="13" font-weight="700" fill="#8a6d20">三门峡</text>
+        <text x="140" y="308" text-anchor="middle" font-family="Noto Sans SC" font-size="9" fill="#7A6F65">接同伴 · 约13:30</text>
+        <text x="100" y="240" font-family="Noto Sans SC" font-size="9" fill="#7A6F65">~55km</text>
+        <!-- City: Luoyang -->
+        <circle cx="340" cy="255" r="6" fill="#D67A5F"/>
+        <text x="340" y="285" text-anchor="middle" font-family="Noto Sans SC" font-size="11" fill="#2A2520">洛阳方向</text>
+        <text x="340" y="298" text-anchor="middle" font-family="Noto Sans SC" font-size="8" fill="#A89F95">连霍高速</text>
+        <text x="235" y="250" font-family="Noto Sans SC" font-size="9" fill="#7A6F65">~130km</text>
+        <!-- City: Jiaozuo -->
+        <circle cx="490" cy="160" r="6" fill="#D67A5F"/>
+        <text x="490" y="145" text-anchor="middle" font-family="Noto Sans SC" font-size="11" fill="#2A2520">焦作</text>
+        <text x="490" y="132" text-anchor="middle" font-family="Noto Sans SC" font-size="8" fill="#A89F95">二广→郑云</text>
+        <text x="430" y="205" font-family="Noto Sans SC" font-size="9" fill="#7A6F65">~120km</text>
+        <!-- City: Yuntaishan -->
+        <circle cx="620" cy="55" r="9" fill="#C25B3F"/>
+        <circle cx="620" cy="55" r="16" fill="none" stroke="#C25B3F" stroke-width="2" opacity="0.3"/>
+        <text x="620" y="35" text-anchor="middle" font-family="Noto Serif SC" font-size="15" font-weight="700" fill="#C25B3F">云台山</text>
+        <text x="620" y="20" text-anchor="middle" font-family="Noto Sans SC" font-size="9" fill="#7A6F65">目的地 ~17:30</text>
+        <!-- Mountain icons near Yuntaishan -->
+        <path d="M575,80 L585,60 L595,80 Z" fill="#3A6B4E" opacity="0.2"/>
+        <path d="M595,85 L610,55 L625,85 Z" fill="#3A6B4E" opacity="0.25"/>
+        <path d="M625,80 L640,65 L655,80 Z" fill="#3A6B4E" opacity="0.2"/>
+        <text x="565" y="120" font-family="Noto Sans SC" font-size="9" fill="#7A6F65">~30km</text>
+      </svg>
+      <div class="route-details">
+        <div class="route-detail-item">
+          <div class="icon road">🛣️</div>
+          <div class="text"><strong>335 km</strong><span>运城→三门峡→洛阳→焦作→云台山</span></div>
+        </div>
+        <div class="route-detail-item">
+          <div class="icon time">⏱️</div>
+          <div class="text"><strong>约 5.5 小时</strong><span>含三门峡接人停留约30分钟</span></div>
+        </div>
+        <div class="route-detail-item">
+          <div class="icon cost">⛽</div>
+          <div class="text"><strong>油费约 400 元</strong><span>往返约670km</span></div>
+        </div>
+        <div class="route-detail-item">
+          <div class="icon cost">🚧</div>
+          <div class="text"><strong>过路费约 280 元</strong><span>往返高速通行费</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== DAY 1 ITINERARY ========== -->
+<section class="itinerary-section" id="day1">
+  <div class="container">
+    <div class="section-header">
+      <h2>行程安排</h2>
+      <p>7月11日出发 · 7月12日全天游览</p>
+      <div class="gradient-divider"></div>
+    </div>
+
+    <div class="day-block">
+      <div class="day-header">
+        <div class="day-badge d1"><span class="num">1</span><span class="lbl">DAY</span></div>
+        <div class="day-title">
+          <h3>运城出发 · 三门峡接同伴 · 抵达云台山</h3>
+          <span class="date">7月11日 周六 · 晴 27~36°C</span>
+        </div>
+      </div>
+      <div class="timeline">
+        <div class="tl-item" onclick="toggleItem(this)">
+          <div class="tl-time">12:00</div>
+          <div class="tl-title">运城出发，驶入运城绕城高速<span class="arrow">▶</span></div>
+          <div class="tl-content">
+            <p>四人从运城市区出发，上运城绕城高速转侯平高速向南行驶，跨黄河大桥进入河南境内。出发前加满油，备好饮用水和零食。导航先设第一段目的地为"三门峡市区"。</p>
+            <span class="tip">提示：出发前检查胎压、机油。四人行李较多，注意合理摆放不挡后视镜视线。</span>
+          </div>
+        </div>
+        <div class="tl-item" onclick="toggleItem(this)">
+          <div class="tl-time">13:15</div>
+          <div class="tl-title">抵达三门峡，接上同伴<span class="arrow">▶</span></div>
+          <div class="tl-content">
+            <p>运城到三门峡约55公里，车程1小时15分左右。在三门峡市区接上同伴，可顺便加油、上洗手间、买些零食水果。三门峡过路费约20元。</p>
+            <span class="tip">提示：三门峡服务区或市区加油站补给，确认油量充足再继续出发。</span>
+          </div>
+        </div>
+        <div class="tl-item" onclick="toggleItem(this)">
+          <div class="tl-time">14:00 - 17:30</div>
+          <div class="tl-title">三门峡出发，经洛阳→焦作→云台山<span class="arrow">▶</span></div>
+          <div class="tl-content">
+            <p>高速路线：连霍高速向东过渑池、义马，到洛阳方向转二广高速向北，经长济高速→晋新高速→郑云高速，在云台山站下高速，转S233到岸上服务区。全程约280公里，约3.5小时。沿途有服务区可休息轮换驾驶。</p>
+            <span class="tip">提示：四人可轮换驾驶减轻疲劳。连霍高速车辆较多注意保持车距。</span>
+          </div>
+        </div>
+        <div class="tl-item" onclick="toggleItem(this)">
+          <div class="tl-time">17:30</div>
+          <div class="tl-title">抵达岸上服务区，办理入住<span class="arrow">▶</span></div>
+          <div class="tl-content">
+            <p>岸上服务区位于景区内部，自驾车可直接驶入，无需在山门换乘。四人可开两间房或一个大床房家庭房。经济型农家宾馆约150-200元/晚，中档酒店200-300元/晚。建议提前在线预订，旺季房源紧张。</p>
+            <span class="tip">提示：门票180元/人（含60元观光车票），连续3天有效。四人共720元，可先购票再入住。</span>
+          </div>
+        </div>
+        <div class="tl-item" onclick="toggleItem(this)">
+          <div class="tl-time">18:30</div>
+          <div class="tl-title">游览万善寺（约40分钟）<span class="arrow">▶</span></div>
+          <div class="tl-content">
+            <p>万善寺始建于明代，坐落在茱萸峰脚下，是云台山的人文地标。古寺清幽，傍晚游客稀少，适合静心漫步。寺内有古银杏树和碑刻，可感受"深山藏古寺"的意境。游览约40分钟即可。</p>
+            <span class="tip">提示：傍晚光线柔和，适合在寺前拍照。寺庙内请保持安静。</span>
+          </div>
+        </div>
+        <div class="tl-item" onclick="toggleItem(this)">
+          <div class="tl-time">19:30</div>
+          <div class="tl-title">岸上服务区美食街晚餐<span class="arrow">▶</span></div>
+          <div class="tl-content">
+            <p>服务区入夜后变身热闹的美食街，烧烤摊、大排档林立，烟火气十足。必尝美食：羊蹄（满街可见，软糯入味）、干炸红石峡小野鱼（外酥里嫩）、云台山野菜饺子（山野清香）、各式烧烤。价格亲民，人均50-80元，四人约200-320元。</p>
+            <span class="tip terra">推荐：先逛一圈比价再点单，部分摊位可议价。越南大西瓜也是当地特色。</span>
+          </div>
+        </div>
+        <div class="tl-item" onclick="toggleItem(this)">
+          <div class="tl-time">21:00</div>
+          <div class="tl-title">服务区夜逛，感受山间夜风<span class="arrow">▶</span></div>
+          <div class="tl-content">
+            <p>山间夜晚比城市凉爽5-8度，微风拂面非常舒适。服务区有各类特产店和小超市，可逛逛买买伴手礼。早些休息，为明天全天游览养精蓄锐。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== DAY 2 ========== -->
+    <div class="day-block" id="day2">
+      <div class="day-header">
+        <div class="day-badge d2"><span class="num">2</span><span class="lbl">DAY</span></div>
+        <div class="day-title">
+          <h3>峡谷瀑布 · 登高望远</h3>
+          <span class="date">7月12日 周日 · 晴转少云 27~36°C</span>
+        </div>
+      </div>
+      <div class="timeline">
+        <div class="tl-item d2" onclick="toggleItem(this)">
+          <div class="tl-time">07:00</div>
+          <div class="tl-title">早餐，准备全天游览<span class="arrow">▶</span></div>
+          <div class="tl-content">
+            <p>在服务区吃早餐，多数宾馆含早。准备好防晒霜、太阳帽、雨伞（7月是雨季，可能突发阵雨）、充足的饮用水和能量小食。穿舒适的运动鞋，带一双防滑凉鞋用于玩水。山区溶洞内光线暗，备好手电筒。</p>
+            <span class="tip terra">提示：7月是云台山雨季，即使预报晴天也请随身带伞。峡谷内石头湿滑，务必穿防滑鞋。</span>
+          </div>
+        </div>
+        <div class="tl-item d2" onclick="toggleItem(this)">
+          <div class="tl-time">08:00</div>
+          <div class="tl-title">红石峡 — "中原第一景"（1.5-2小时）<span class="arrow">▶</span></div>
+          <div class="tl-content">
+            <p>红石峡是云台山最精华的景点，以丹霞地貌著称，红色岩壁与碧绿潭水交相辉映。峡谷全长约2000米，沿途有黑龙潭、一线天、黄龙瀑等景观。栈道沿峡谷蜿蜒，一步一景。建议第一批入园，避开人流高峰，光线也最适合拍照。峡谷内比外面凉爽5-8度，非常舒适。</p>
+            <span class="tip terra">必游：云台山标志性景点，不走回头路的环形栈道，全程约1.5小时。</span>
+          </div>
+        </div>
+        <div class="tl-item d2" onclick="toggleItem(this)">
+          <div class="tl-time">10:00</div>
+          <div class="tl-title">猕猴谷 — 观赏太行猕猴（约1小时）<span class="arrow">▶</span></div>
+          <div class="tl-content">
+            <p>猕猴谷位于小寨沟片区，生活着数百只野生太行猕猴。可以近距离观察猕猴群的生活，有时还能看到猕猴表演。趣味性强，适合亲子游览。注意不要携带塑料袋和食物外露，猴子可能会来抢。保管好随身物品。</p>
+            <span class="tip">提示：不要主动喂食猕猴，保持安全距离。背包背在胸前更安全。</span>
+          </div>
+        </div>
+        <div class="tl-item d2" onclick="toggleItem(this)">
+          <div class="tl-time">11:00</div>
+          <div class="tl-title">潭瀑峡 — 三步一潭五步一瀑（约1.5小时）<span class="arrow">▶</span></div>
+          <div class="tl-content">
+            <p>潭瀑峡又名小寨沟，全长1270米。谷内三步一潭、五步一瀑，水清见底。沿途有情人瀑、水帘洞、不老泉等景观。夏季可在浅水区踩水嬉戏，非常解暑。峡谷尽头有"Y"字形瀑布，非常壮观。</p>
+            <span class="tip">提示：带防滑凉鞋，可踩水。谷内有餐餐饮区，可在此附近吃午餐。</span>
+          </div>
+        </div>
+        <div class="tl-item d2" onclick="toggleItem(this)">
+          <div class="tl-time">12:30</div>
+          <div class="tl-title">小寨沟午餐休整<span class="arrow">▶</span></div>
+          <div class="tl-content">
+            <p>小寨沟片区有餐饮服务区，提供面条、炒饭、凉皮等简餐，价格比山上合理（人均30-50元）。也可以自备干粮在此野餐休息。中午气温较高（36°C左右），建议在阴凉处多休息1小时再继续下午行程。</p>
+          </div>
+        </div>
+        <div class="tl-item d2" onclick="toggleItem(this)">
+          <div class="tl-time">14:00</div>
+          <div class="tl-title">泉瀑峡 — 云台天瀑314米（约2小时）<span class="arrow">▶</span></div>
+          <div class="tl-content">
+            <p>泉瀑峡又名老潭沟，全长1100米。峡谷尽头是云台天瀑，落差314米，是中国大陆落差最大的瀑布。丰水期（7-8月）瀑布水量充沛，水雾弥漫，非常震撼。沿途有蝴蝶石、试剑石等地质奇观。枯水期瀑布可能较小，但7月正是丰水期，运气好的话能看到最壮观的天瀑。</p>
+            <span class="tip terra">亮点：314米落差，亚洲第一高瀑。7月丰水期正是最佳观赏期。</span>
+          </div>
+        </div>
+        <div class="tl-item d2" onclick="toggleItem(this)">
+          <div class="tl-time">16:00</div>
+          <div class="tl-title">凤凰岭索道 → 茱萸峰登顶（约2.5小时）<span class="arrow">▶</span></div>
+          <div class="tl-content">
+            <p>乘坐景区观光车前往凤凰岭，换乘索道上行（往返120元/人）至茱萸峰区域。茱萸峰海拔1308米，是云台山主峰。唐代诗人王维在此写下"独在异乡为异客，每逢佳节倍思亲。遥知兄弟登高处，遍插茱萸少一人"。登顶可俯瞰整个云台山全貌，视野极其开阔。峰顶有玄帝庙，沿途有药王洞等景观。</p>
+            <span class="tip terra">提示：索道往返120元/人，也可徒步登山但耗时较长（约3小时上行）。下午4点后索道排队人少，建议此时上山。</span>
+          </div>
+        </div>
+        <div class="tl-item d2" onclick="toggleItem(this)">
+          <div class="tl-time">19:00</div>
+          <div class="tl-title">返回服务区，晚餐<span class="arrow">▶</span></div>
+          <div class="tl-content">
+            <p>乘索道下山，换观光车返回岸上服务区。在服务区吃晚餐，尝尝昨天没来得及吃的美食。全天步行约15-20公里，体力消耗较大，好好犒劳自己。人均50-80元，四人约200-320元。</p>
+          </div>
+        </div>
+        <div class="tl-item d2" onclick="toggleItem(this)">
+          <div class="tl-time">20:30</div>
+          <div class="tl-title">返程 or 留宿一晚<span class="arrow">▶</span></div>
+          <div class="tl-content">
+            <p>方案A（推荐）：留宿一晚，第三天早上返程。经三门峡送同伴回家再到运城，全程约5.5小时，不赶夜路更安全。</p>
+            <p>方案B：如果体力尚可且不想多住一晚，20:30出发夜间返程，经三门峡送人后约凌晨2点到达运城。夜间高速需注意安全，建议四人轮换驾驶。</p>
+            <span class="tip">推荐方案A：多住一晚费用增加约400元（两间房），但避免疲劳驾驶，安全第一。</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== ATTRACTIONS ========== -->
+<section class="attractions-section" id="attractions">
+  <div class="container">
+    <div class="section-header">
+      <h2>核心景点</h2>
+      <p>六大景区，各有千秋</p>
+      <div class="gradient-divider"></div>
+    </div>
+    <div class="attractions-grid">
+
+      <div class="attraction-card">
+        <div class="ac-image">
+          <img src="http://www.butiao.com/static/images/2022/12/02/11a60f34430d484397c2e972c1614579~noop_fckghbpmahp.jpg" alt="红石峡" onerror="this.style.display='none'">
+        </div>
+        <div class="ac-body">
+          <h4>红石峡</h4>
+          <div class="ac-tags">
+            <span class="ac-tag must">必游</span>
+            <span class="ac-tag time">1.5-2h</span>
+            <span class="ac-tag">丹霞地貌</span>
+          </div>
+          <p class="ac-desc">云台山标志性景点，红色丹霞峡谷与碧绿潭水交映。温盘峪内冬暖夏凉，被誉"中原第一景"。环形栈道不走回头路。</p>
+          <div class="ac-meta">
+            <span>📍 小寨沟片区</span>
+            <span>🚶 2km栈道</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="attraction-card">
+        <div class="ac-image">
+          <img src="http://pic.rmb.bdstatic.com/bjh/240731/cbd622c407e82cb63892868ee7dc01a7517.jpeg" alt="泉瀑峡·云台天瀑" onerror="this.style.display='none'">
+        </div>
+        <div class="ac-body">
+          <h4>泉瀑峡</h4>
+          <div class="ac-tags">
+            <span class="ac-tag must">必游</span>
+            <span class="ac-tag time">约2h</span>
+            <span class="ac-tag">314米天瀑</span>
+          </div>
+          <p class="ac-desc">云台天瀑落差314米，亚洲第一高瀑。7月丰水期水雾弥漫，气势磅礴。谷内有蝴蝶石、试剑石等地质奇观。</p>
+          <div class="ac-meta">
+            <span>📍 老潭沟</span>
+            <span>🚶 1.1km</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="attraction-card">
+        <div class="ac-image">
+          <img src="http://pic.rmb.bdstatic.com/bjh/3f1a4615e87/240607/da422efb8f3ef92d6094a66312e7ea97.jpeg" alt="茱萸峰" onerror="this.style.display='none'">
+        </div>
+        <div class="ac-body">
+          <h4>茱萸峰</h4>
+          <div class="ac-tags">
+            <span class="ac-tag must">必游</span>
+            <span class="ac-tag time">2.5-3h</span>
+            <span class="ac-tag">索道上行</span>
+          </div>
+          <p class="ac-desc">海拔1308米，云台山主峰。王维"遍插茱萸少一人"即在此。登顶俯瞰全山，云海翻涌时尤美。凤凰岭索道往返120元。</p>
+          <div class="ac-meta">
+            <span>📍 主峰区</span>
+            <span>🚡 索道120元</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="attraction-card">
+        <div class="ac-image">
+          <img src="http://pic.rmb.bdstatic.com/bjh/bb8624ffd1e/241104/d58b1a07e93141a7ca4b1197b3afb8cb.jpeg" alt="潭瀑峡" onerror="this.style.display='none'">
+        </div>
+        <div class="ac-body">
+          <h4>潭瀑峡</h4>
+          <div class="ac-tags">
+            <span class="ac-tag time">约1.5h</span>
+            <span class="ac-tag">踩水嬉戏</span>
+          </div>
+          <p class="ac-desc">三步一潭、五步一瀑，水清见底。情人瀑、水帘洞、不老泉点缀其间。夏季可在浅水区踩水，清凉解暑。</p>
+          <div class="ac-meta">
+            <span>📍 小寨沟片区</span>
+            <span>🚶 1.27km</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="attraction-card">
+        <div class="ac-image">
+          <img src="http://bkimg.cdn.bcebos.com/pic/2cf5e0fe9925bc315c60fcede7869ab1cb134954da36" alt="万善寺·云台山" onerror="this.style.display='none'">
+        </div>
+        <div class="ac-body">
+          <h4>万善寺</h4>
+          <div class="ac-tags">
+            <span class="ac-tag time">约1h</span>
+            <span class="ac-tag">人文古迹</span>
+          </div>
+          <p class="ac-desc">明代古刹，坐落于茱萸峰脚下。寺内有古银杏与碑刻，清幽雅致。傍晚游客少，适合静心漫步。</p>
+          <div class="ac-meta">
+            <span>📍 茱萸峰脚</span>
+            <span>🕐 1小时</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="attraction-card">
+        <div class="ac-image">
+          <img src="http://upload-images.jianshu.io/upload_images/15724811-2b48df3385b4978c.jpg" alt="猕猴谷·太行猕猴" onerror="this.style.display='none'">
+        </div>
+        <div class="ac-body">
+          <h4>猕猴谷</h4>
+          <div class="ac-tags">
+            <span class="ac-tag time">约1h</span>
+            <span class="ac-tag">太行猕猴</span>
+          </div>
+          <p class="ac-desc">数百只野生太行猕猴栖息于此，可近距离观察猴群生活。趣味性强，适合亲子互动。注意保管好随身物品。</p>
+          <div class="ac-meta">
+            <span>📍 小寨沟片区</span>
+            <span>🐒 野生猴群</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOD ========== -->
+<section class="food-section" id="food">
+  <div class="container">
+    <div class="section-header">
+      <h2>美食推荐</h2>
+      <p>岸上服务区美食街 · 人均50-80元</p>
+      <div class="gradient-divider"></div>
+    </div>
+    <div class="food-grid">
+      <div class="food-card">
+        <img class="food-photo" src="http://se-feed-bucket.bj.bcebos.com/produce-record518805/b008042bd760798286f9f6c37809c877-s0_2.jpg" alt="艺隆砂锅" onerror="this.style.display='none'">
+        <h4>艺隆砂锅</h4>
+        <p>武陟本地老店，岸上服务区小吃街。砂锅配小青菜+热油辣子，青菜无限续。门口还有小烧烤。团购48元。</p>
+        <span class="food-price">团购¥48 · 青菜管够</span>
+      </div>
+      <div class="food-card">
+        <img class="food-photo" src="http://miaobi-lite.cdn.bcebos.com/miaobi/5mao/b%275YmB5qSS54mb6IKJ6Z2iXzE3MzQ4MjMzNDIuMjM0NzczMg%3D%3D%27/0.png" alt="重庆婆婆小面馆·剁椒牛肉面" onerror="this.style.display='none'">
+        <h4>重庆婆婆小面馆</h4>
+        <p>岸上服务区面馆口碑天花板。招牌剁椒牛肉面，面条劲道、剁椒香辣，搅拌均匀欲罢不能。</p>
+        <span class="food-price">人均¥15-25</span>
+      </div>
+      <div class="food-card">
+        <img class="food-photo" src="http://se-feed-bucket.bj.bcebos.com/produce-record97148665_0/first_1763125174" alt="和记烩面" onerror="this.style.display='none'">
+        <h4>和记烩面</h4>
+        <p>云台山必打卡烩面馆。地道豫北风味，汤鲜面筋，分量扎实，来云台山不吃一碗等于白来。</p>
+        <span class="food-price">人均¥20-30</span>
+      </div>
+      <div class="food-card">
+        <img class="food-photo" src="http://miaobi-lite.bj.bcebos.com/miaobi/5mao/b%275rCR5p2D576O6aOfXzE3MjkyMDUwMDIuNjYzOTQz%27/0.png" alt="刘婉婉炸鸡" onerror="this.style.display='none'">
+        <h4>刘婉婉炸鸡</h4>
+        <p>焦作连锁品牌，岸上服务区有店。生肉现炸，口味多样，外酥里嫩。逛街随手来一份。</p>
+        <span class="food-price">人均¥15-30</span>
+      </div>
+      <div class="food-card">
+        <img class="food-photo" src="http://qcloud.dpfile.com/pc/gSorHdUK2qgeKiAyN1L5h8nDHjg6VI5h6ZS4G_t2CnXcvjrv7Nxet9PhlIxb0nZg.jpg" alt="云上餐厅" onerror="this.style.display='none'">
+        <h4>云上餐厅</h4>
+        <p>岸上服务区性价比之选。茶树菇炒腊肉、香辣鱿鱼、凉拌皮蛋，分量足价格实在。</p>
+        <span class="food-price">人均¥40-60</span>
+      </div>
+      <div class="food-card">
+        <img class="food-photo" src="http://t14.baidu.com/it/u=75481706,3403991176&fm=225&app=113&f=PNG?w=1728&h=1079&s=9F3C7E8754060743482BB52D03007048" alt="小崔烧烤·山药炒鸡" onerror="this.style.display='none'">
+        <h4>小崔烧烤</h4>
+        <p>古洞窑服务区，招牌山药炒鸡是一绝——山药入口即化，团购量大实惠还带凉菜。</p>
+        <span class="food-price">团购人均¥30-50</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== HOTEL ========== -->
+<section class="hotel-section" id="hotel">
+  <div class="container">
+    <div class="section-header">
+      <h2>住宿推荐</h2>
+      <p>岸上服务区 · 四人建议订两间房</p>
+      <div class="gradient-divider"></div>
+    </div>
+    <div class="hotel-list">
+
+      <div class="hotel-card">
+        <img class="hotel-photo" src="http://gips1.baidu.com/it/u=4068488979,4140638700&fm=3074&app=3074&f=JPEG" alt="云台山时光民宿" onerror="this.style.display='none'">
+        <span class="hotel-rank top">携程4.9分 · 岸上No.1</span>
+        <h4>云台山时光民宿</h4>
+        <div class="hotel-score"><span class="stars">★★★★★</span> 4.9分 · 智能客控</div>
+        <p class="hotel-desc">岸上服务区口碑最高分。智能设施先进，房间大非常干净，山景房+亲子主题房。设施新、性价比高。</p>
+        <div class="hotel-tags">
+          <span class="hotel-tag">智能客控</span>
+          <span class="hotel-tag">山景房</span>
+          <span class="hotel-tag">亲子房</span>
+          <span class="hotel-tag">免费停车</span>
+        </div>
+        <div class="hotel-price">
+          <span class="label">约¥/晚</span>
+          <span class="amount">200-280</span>
+        </div>
+      </div>
+
+      <div class="hotel-card">
+        <img class="hotel-photo" src="http://dimg04.c-ctrip.com/images/0200w120004ugvbmiBFCD_R_600_400_R5_D.jpg" alt="璞澜民宿" onerror="this.style.display='none'">
+        <span class="hotel-rank top">携程4.8分 · 修武No.1</span>
+        <h4>璞澜民宿</h4>
+        <div class="hotel-score"><span class="stars">★★★★★</span> 4.8分 · 1215条点评</div>
+        <p class="hotel-desc">修武舒适型热卖第一。青山环绕，推窗看茱萸峰索道。楼下即美食街，距接驳车200米，老板免费接送。宠物友好。</p>
+        <div class="hotel-tags">
+          <span class="hotel-tag">环境优雅</span>
+          <span class="hotel-tag">停车方便</span>
+          <span class="hotel-tag">宠物友好</span>
+          <span class="hotel-tag">影音投影</span>
+          <span class="hotel-tag">充电桩</span>
+        </div>
+        <div class="hotel-price">
+          <span class="label">约¥/晚</span>
+          <span class="amount">220-300</span>
+        </div>
+      </div>
+
+      <div class="hotel-card">
+        <img class="hotel-photo" src="http://dimg04.c-ctrip.com/images/200u0u000000j309c7174_R_600_600_R5_D.jpg" alt="云台山宜安客栈" onerror="this.style.display='none'">
+        <span class="hotel-rank budget">携程4.8分 · 经济型No.1</span>
+        <h4>云台山宜安客栈</h4>
+        <div class="hotel-score"><span class="stars">★★★★★</span> 4.8分 · 售票处旁</div>
+        <p class="hotel-desc">经济型热卖第一。有独立阳台，入住感受宾至如归。含洗衣房、露台，性价比极高。四人出行的实惠之选。</p>
+        <div class="hotel-tags">
+          <span class="hotel-tag">独立阳台</span>
+          <span class="hotel-tag">洗衣房</span>
+          <span class="hotel-tag">免费停车</span>
+          <span class="hotel-tag">近售票处</span>
+        </div>
+        <div class="hotel-price">
+          <span class="label">约¥/晚</span>
+          <span class="amount">150-200</span>
+        </div>
+      </div>
+
+      <div class="hotel-card">
+        <img class="hotel-photo" src="http://dimg04.c-ctrip.com/images/1mc1m12000eiahi788081_W_1280_853_R5_Q70.jpg" alt="云台山逸美轻奢酒店" onerror="this.style.display='none'">
+        <span class="hotel-rank top">携程4.8分</span>
+        <h4>云台山逸美轻奢酒店</h4>
+        <div class="hotel-score"><span class="stars">★★★★★</span> 4.8分 · 现代时尚</div>
+        <p class="hotel-desc">设计风格现代时尚，干净整洁。智能客控+免费停车+充电桩+宠物友好。适合追求品质的四人组。</p>
+        <div class="hotel-tags">
+          <span class="hotel-tag">智能客控</span>
+          <span class="hotel-tag">宠物友好</span>
+          <span class="hotel-tag">充电桩</span>
+          <span class="hotel-tag">设计感</span>
+        </div>
+        <div class="hotel-price">
+          <span class="label">约¥/晚</span>
+          <span class="amount">200-280</span>
+        </div>
+      </div>
+
+      <div class="hotel-card">
+        <img class="hotel-photo" src="http://dimg04.c-ctrip.com/images/0203i12000di68qod0101_W_1280_853_R5_Q70.jpg" alt="云台山翰风酒店" onerror="this.style.display='none'">
+        <span class="hotel-rank luxury">携程4.7分 · 高档之选</span>
+        <h4>云台山翰风酒店</h4>
+        <div class="hotel-score"><span class="stars">★★★★★</span> 4.7分 · 巨幕投影+泳池</div>
+        <p class="hotel-desc">装修风格不错，非常干净。亮点是巨幕投影和室内恒温泳池——逛完景区回来游个泳，解乏神器。</p>
+        <div class="hotel-tags">
+          <span class="hotel-tag">恒温泳池</span>
+          <span class="hotel-tag">巨幕投影</span>
+          <span class="hotel-tag">花园景</span>
+          <span class="hotel-tag">免费停车</span>
+        </div>
+        <div class="hotel-price">
+          <span class="label">约¥/晚</span>
+          <span class="amount">280-400</span>
+        </div>
+      </div>
+
+      <div class="hotel-card">
+        <img class="hotel-photo" src="http://miaobi-lite.bj.bcebos.com/miaobi/5mao/b%275LqR5Y%2Bw5bGx5pyA5aW955qE6YWS5bqX5piv5ZOq5LiqXzE3MzUwODc0NDMuNTUyMzE3MQ%3D%3D%27/0.png" alt="云台天阶酒店" onerror="this.style.display='none'">
+        <span class="hotel-rank luxury">老牌高档</span>
+        <h4>云台天阶酒店</h4>
+        <div class="hotel-score"><span class="stars">★★★★☆</span> 评价好 · 价格稍贵</div>
+        <p class="hotel-desc">服务区老牌高档酒店，网上评价很好。适合对住宿品质要求较高、预算充裕的旅客。</p>
+        <div class="hotel-tags">
+          <span class="hotel-tag">高档</span>
+          <span class="hotel-tag">评价好</span>
+          <span class="hotel-tag">老牌</span>
+        </div>
+        <div class="hotel-price">
+          <span class="label">约¥/晚</span>
+          <span class="amount">300-500</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========== BUDGET ========== -->
+<section class="budget-section" id="budget">
+  <div class="container">
+    <div class="section-header">
+      <h2>费用预算</h2>
+      <p>四人同行 · 含往返全程</p>
+      <div class="gradient-divider"></div>
+    </div>
+    <div class="budget-calc">
+
+      <div class="budget-group">
+        <h4>🎫 景点选择</h4>
+        <div class="budget-options">
+          <label class="budget-option">
+            <input type="checkbox" id="bk-ticket" checked onchange="calcBudget()">
+            <span class="opt-label">门票（含红石峡+泉瀑峡+潭瀑峡+猕猴谷+观光车）</span>
+            <span class="opt-price">¥180/人</span>
+          </label>
+          <label class="budget-option">
+            <input type="checkbox" id="bk-student" onchange="calcBudget()">
+            <span class="opt-label">使用学生证（门票半价 90元/人）</span>
+            <span class="opt-price muted">省¥90/人</span>
+          </label>
+          <label class="budget-option">
+            <input type="checkbox" id="bk-cable" checked onchange="calcBudget()">
+            <span class="opt-label">茱萸峰索道往返</span>
+            <span class="opt-price">¥120/人</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="budget-group">
+        <h4>🏠 住宿标准（2间房）</h4>
+        <div class="budget-options">
+          <label class="budget-option">
+            <input type="radio" name="bk-hotel" value="175" onchange="calcBudget()">
+            <span class="opt-label">经济型（宜安客栈 ¥150-200/间）</span>
+            <span class="opt-price">¥175/间</span>
+          </label>
+          <label class="budget-option">
+            <input type="radio" name="bk-hotel" value="240" checked onchange="calcBudget()">
+            <span class="opt-label">中档（时光民宿/逸美 ¥200-280/间）</span>
+            <span class="opt-price">¥240/间</span>
+          </label>
+          <label class="budget-option">
+            <input type="radio" name="bk-hotel" value="340" onchange="calcBudget()">
+            <span class="opt-label">高档（翰风酒店 ¥280-400/间）</span>
+            <span class="opt-price">¥340/间</span>
+          </label>
+          <label class="budget-option">
+            <input type="radio" name="bk-hotel" value="450" onchange="calcBudget()">
+            <span class="opt-label">豪华（云台天阶 ¥300-500/间）</span>
+            <span class="opt-price">¥450/间</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="budget-group">
+        <h4>🛏️ 住宿天数</h4>
+        <div class="budget-options">
+          <label class="budget-option">
+            <input type="radio" name="bk-nights" value="1" checked onchange="calcBudget()">
+            <span class="opt-label">1晚（第二天夜间返程）</span>
+            <span class="opt-price muted">省一晚住宿</span>
+          </label>
+          <label class="budget-option">
+            <input type="radio" name="bk-nights" value="2" onchange="calcBudget()">
+            <span class="opt-label">2晚（多住一晚，第三天返程）</span>
+            <span class="opt-price muted">推荐·不赶夜路</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="budget-group">
+        <h4>🍽️ 餐饮标准（4人 × 2天）</h4>
+        <div class="budget-options">
+          <label class="budget-option">
+            <input type="radio" name="bk-food" value="50" onchange="calcBudget()">
+            <span class="opt-label">节俭（小吃为主，砂锅/小面团购）</span>
+            <span class="opt-price">¥50/人/天</span>
+          </label>
+          <label class="budget-option">
+            <input type="radio" name="bk-food" value="80" checked onchange="calcBudget()">
+            <span class="opt-label">标准（混搭正餐+小吃）</span>
+            <span class="opt-price">¥80/人/天</span>
+          </label>
+          <label class="budget-option">
+            <input type="radio" name="bk-food" value="120" onchange="calcBudget()">
+            <span class="opt-label">丰盛（正餐为主+烧烤）</span>
+            <span class="opt-price">¥120/人/天</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="budget-group">
+        <h4>🚗 交通（固定）</h4>
+        <div class="budget-options">
+          <div class="budget-option" style="cursor:default">
+            <span class="opt-label">油费（往返670km）</span>
+            <span class="opt-price">¥400</span>
+          </div>
+          <div class="budget-option" style="cursor:default">
+            <span class="opt-label">高速过路费（往返）</span>
+            <span class="opt-price">¥280</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="budget-summary">
+        <span class="summary-label">四人合计</span>
+        <span class="summary-amount" id="bk-total">¥ 0</span>
+      </div>
+
+      <div class="budget-breakdown" id="bk-breakdown"></div>
+
+      <p class="budget-detail">门票3天有效 · 学生证半价90元/人 · 2晚方案避免疲劳驾驶更安全</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CHECKLIST ========== -->
+<section class="checklist-section" id="checklist">
+  <div class="container">
+    <div class="section-header">
+      <h2>行前清单</h2>
+      <p>点击勾选 · 逐项确认</p>
+      <div class="gradient-divider"></div>
+    </div>
+    <div class="checklist-grid">
+
+      <div class="checklist-group">
+        <h4>📋 证件与财务</h4>
+        <ul>
+          <li onclick="toggleCheck(this)"><div class="check-box"></div>身份证（必备，住宿登记）</li>
+          <li onclick="toggleCheck(this)"><div class="check-box"></div>学生证（门票半价优惠）</li>
+          <li onclick="toggleCheck(this)"><div class="check-box"></div>驾驶证 + 行驶证</li>
+          <li onclick="toggleCheck(this)"><div class="check-box"></div>现金 + 手机支付</li>
+        </ul>
+      </div>
+
+      <div class="checklist-group">
+        <h4>👟 衣物鞋履</h4>
+        <ul>
+          <li onclick="toggleCheck(this)"><div class="check-box"></div>舒适运动鞋（爬山必备）</li>
+          <li onclick="toggleCheck(this)"><div class="check-box"></div>防滑凉鞋（峡谷玩水用）</li>
+          <li onclick="toggleCheck(this)"><div class="check-box"></div>薄外套（山区比山下凉5-8°C）</li>
+          <li onclick="toggleCheck(this)"><div class="check-box"></div>速干衣裤（夏季出汗多）</li>
+          <li onclick="toggleCheck(this)"><div class="check-box"></div>换洗衣物 + 泳衣（可选）</li>
+        </ul>
+      </div>
+
+      <div class="checklist-group">
+        <h4>☀️ 防护用品</h4>
+        <ul>
+          <li onclick="toggleCheck(this)"><div class="check-box"></div>防晒霜（SPF50+）</li>
+          <li onclick="toggleCheck(this)"><div class="check-box"></div>太阳帽 + 太阳镜</li>
+          <li onclick="toggleCheck(this)"><div class="check-box"></div>雨伞/雨衣（7月雨季必备）</li>
+          <li onclick="toggleCheck(this)"><div class="check-box"></div>手电筒（溶洞内光线暗）</li>
+          <li onclick="toggleCheck(this)"><div class="check-box"></div>防虫喷雾（山间小虫多）</li>
+        </ul>
+      </div>
+
+      <div class="checklist-group">
+        <h4>🎒 其他装备</h4>
+        <ul>
+          <li onclick="toggleCheck(this)"><div class="check-box"></div>充足饮用水</li>
+          <li onclick="toggleCheck(this)"><div class="check-box"></div>能量小食（巧克力/能量棒）</li>
+          <li onclick="toggleCheck(this)"><div class="check-box"></div>充电宝 + 数据线</li>
+          <li onclick="toggleCheck(this)"><div class="check-box"></div>晕车药 + 创可贴 + 止痛药</li>
+          <li onclick="toggleCheck(this)"><div class="check-box"></div>垃圾袋（无痕出游）</li>
+          <li onclick="toggleCheck(this)"><div class="check-box"></div>车载手机支架</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========== TIPS ========== -->
+<section class="tips-section" id="tips">
+  <div class="container">
+    <div class="section-header">
+      <h2>实用贴士</h2>
+      <p>出行前务必了解</p>
+      <div class="gradient-divider"></div>
+    </div>
+    <div class="tips-list">
+      <div class="tip-card">
+        <h4>🎫 门票三天有效</h4>
+        <p>门票180元/人（含60元观光车），连续3天有效，各景点不限次游览。建议第一天到达后先购票，第二天全天使用。</p>
+      </div>
+      <div class="tip-card terra">
+        <h4>🚗 自驾可直接入服务区</h4>
+        <p>自驾车可不经山门直接驶入岸上服务区办理住宿，省去换乘。导航设置为"云台山岸上服务区"即可。</p>
+      </div>
+      <div class="tip-card gold">
+        <h4>🕐 红石峡要早去</h4>
+        <p>红石峡是人流最密集景点，建议早上8:00第一批入园。不仅避开拥挤，清晨光线在峡谷中最美，拍照效果最佳。</p>
+      </div>
+      <div class="tip-card">
+        <h4>🌧️ 7月是雨季</h4>
+        <p>7-8月是云台山雨季，可能突发阵雨。峡谷内石头湿滑，务必穿防滑鞋。但雨后瀑布水量充沛，反而更壮观。</p>
+      </div>
+      <div class="tip-card terra">
+        <h4>🐒 猕猴谷注意安全</h4>
+        <p>不要主动喂食猕猴，不要露出食物和塑料袋。背包建议背在胸前，保持安全距离。带小孩的游客尤其注意。</p>
+      </div>
+      <div class="tip-card gold">
+        <h4>🏨 提前预订住宿</h4>
+        <p>7月是旺季，岸上服务区住宿紧张。建议提前在携程/美团预订。经济型农家宾馆150-200元，中档酒店200-300元。</p>
+      </div>
+      <div class="tip-card">
+        <h4>📱 景区内交通</h4>
+        <p>观光车已含在门票内，各景点之间有固定乘车点。红石峡→猕猴谷/潭瀑峡/泉瀑峡在同一片区，茱萸峰需另坐车去凤凰岭换乘索道。</p>
+      </div>
+      <div class="tip-card terra">
+        <h4>🚡 索道下午去人少</h4>
+        <p>凤凰岭索道上午排队较长，下午4点后人少。建议下午从泉瀑峡出来后直接去乘索道上茱萸峰，傍晚看落日云海。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== KNOWLEDGE ========== -->
+<section class="knowledge-section" id="knowledge">
+  <div class="container">
+    <div class="section-header">
+      <h2>行前充电</h2>
+      <p>懂一点地质与历史，看到的风景完全不同</p>
+      <div class="gradient-divider"></div>
+    </div>
+
+    <div class="knowledge-block">
+      <h3>地质奇观如何形成</h3>
+      <p>云台山地处南太行，是云台山世界地质公园的核心。要理解这里的地质奇观，得从太行山的隆起说起。太行山经历了28亿年的地质演化，岩层堆叠记录了不同地质年代的褶皱与沉积。新生代以来，尤其是近200万年内，太行山反复间隙性隆起，与东侧华北平原产生巨大地形落差。黄河等水系横向切割山体，形成了大量纵横交错的峡谷。太行山因此成为中国地势第二阶梯与第三阶梯的分界线。</p>
+      <img class="geo-img" src="http://gips1.baidu.com/it/u=2400654759,3697831955&fm=3074&app=3074&f=JPEG?w=1440&h=2530&type=normal&func=" alt="太行山大峡谷地质" onerror="this.style.display='none'">
+      <p>红石峡是云台山最负盛名的地质景观，被誉为"中原第一景"。峡内岩壁呈赤红色，属于典型的丹霞峡谷地貌——红色来自岩层中富含铁质的砂岩在长期氧化下的色彩。谷内碧水激流中发育有壶穴微地貌，九潭相连成串珠状。峡谷窄而深，最窄处仅数米宽、深度达数十米，这种"一线天"形态正是地壳抬升后流水下切侵蚀的典型产物。</p>
+      <p>叠彩洞形成于约2.8亿年前的石炭纪，是一套长达6.8公里的地下溶洞系统，属于典型的喀斯特地貌。洞内拥有钟乳石、石笋、石柱等丰富沉积景观，温度常年恒定在18度左右。景区内单级落差达314米的"云台天瀑"为亚洲单级落差之最。台状山峰（如茱萸峰）实为古老夷平面残留在山顶的平坦面，见证了太行山漫长而剧烈的地质运动。</p>
+    </div>
+
+    <div class="knowledge-block">
+      <h3>历史与人文底蕴</h3>
+      <p>云台山所在的修武县拥有超过3000年建县历史，是中原文明的摇篮之一。东汉末代皇帝汉献帝刘协禅让后被封为"山阳公"，死后葬于云台山南麓，该地因此被称为"古汉山"，至今仍有遗迹可寻。</p>
+      <p>云台山与竹林七贤的渊源最为深厚。公元241至262年间，嵇康、阮籍、向秀等七位名士因不满时政，在云台山百家岩一带竹林中隐居长达二十余年。他们纵酒佯狂、弹琴赋诗、谈玄论道，以特立独行的方式表达对自由的追求。如今景区内仍保留有"嵇山""刘伶醒酒台""嵇康淬剑池""阮籍竹林"等遗迹。</p>
+      <p>主峰茱萸峰因古时遍生山茱萸而得名。唐代王维的名篇《九月九日忆山东兄弟》——"独在异乡为异客，每逢佳节倍思亲。遥知兄弟登高处，遍插茱萸少一人"——便与此峰有着深厚的文化渊源。王维祖籍山西蒲州，地处太行山以南，古称"山东"，诗中的"山东兄弟"即指远在太行山以东的亲人。自明清地方志将此诗与茱萸峰关联以来，茱萸峰便成为重阳思亲的文化象征。</p>
+    </div>
+
+    <div class="knowledge-block">
+      <h3>推荐书单</h3>
+      <div class="book-list">
+        <div class="book-card">
+          <h4>《太行山之路》</h4>
+          <div class="author">中国地理系列丛书</div>
+          <p>以地理视角讲述太行山沿线的人文故事与自然风貌，兼具知识性与可读性，适合自驾出行前了解太行山的前世今生。</p>
+        </div>
+        <div class="book-card">
+          <h4>《太行山》（中国地理百科丛书）</h4>
+          <div class="author">中国地理百科丛书编委会</div>
+          <p>从地质构造到气候生态、从交通古道到民俗生活，全景式介绍太行山脉的地理百科，通俗好读。</p>
+        </div>
+        <div class="book-card">
+          <h4>《世说俗谈》</h4>
+          <div class="author">刘勃</div>
+          <p>以《世说新语》为蓝本，用诙谐笔法重讲魏晋名士逸事，一口气读懂竹林七贤的风流与苍凉，有料有趣。</p>
+        </div>
+        <div class="book-card">
+          <h4>《中国国家地理：河南专辑》</h4>
+          <div class="author">中国国家地理杂志社</div>
+          <p>以杂志专题形式深度呈现河南的自然地貌与人文脉络，其中涉及太行山、云台山、中原文化等内容，图文并茂。</p>
+        </div>
+        <div class="book-card">
+          <h4>《中国地书》</h4>
+          <div class="author">郑平</div>
+          <p>介绍中国各地质公园的科普著作，涵盖云台山世界地质公园等全国知名地质景观，用通俗语言讲解地质奇观背后的科学原理。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="knowledge-block">
+      <h3>推荐纪录片</h3>
+      <div class="doc-list">
+        <div class="doc-card">
+          <h4>《八百里太行》</h4>
+          <div class="platform">7集人文纪录片 · 2024年</div>
+          <p>以太行山八百里为线索，串联地质奇观、历史故事与太行人家的人文纪录片，全方位呈现太行山的自然与人文。</p>
+        </div>
+        <div class="doc-card">
+          <h4>《航拍中国》第四季（河南篇）</h4>
+          <div class="platform">央视CCTV · 2022年</div>
+          <p>从空中俯瞰云台山红石峡、茱萸峰等壮美风光，以航拍视角呈现太行山段的地理奇观，视觉震撼力极强。</p>
+        </div>
+        <div class="doc-card">
+          <h4>《中国通史》第33集《魏晋风度》</h4>
+          <div class="platform">央视CCTV-6 · 2013年</div>
+          <p>100集大型历史纪录片中的一集，系统讲述魏晋时期的文化风貌与竹林七贤的故事，与云台山的魏晋文化遗存相呼应。</p>
+        </div>
+        <div class="doc-card">
+          <h4>《地理中国》</h4>
+          <div class="platform">央视CCTV-10 · 系列纪录片</div>
+          <p>大型地质科普纪录片系列，其中多集涉及太行山地质构造与云台山峡谷地貌的形成原理，适合了解山川背后的科学故事。</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <p>运城 <span class="heart">→</span> 云台山 两日自驾攻略</p>
+  <p style="margin-top:0.5rem; font-size:0.78rem; opacity:0.5;">2026年7月11日出发 · 祝旅途愉快 🏔️</p>
+</footer>
+
+<script>
+// Timeline accordion
+function toggleItem(el) {
+  el.classList.toggle('open');
+}
+
+// Checklist toggle
+function toggleCheck(el) {
+  el.classList.toggle('checked');
+}
+
+// Sticky nav active state
+var navLinks = document.querySelectorAll('.nav-links a');
+var sections = document.querySelectorAll('section[id]');
+
+function updateActiveNav() {
+  var scrollY = window.scrollY + 120;
+  var currentId = '';
+  sections.forEach(function(sec) {
+    if (sec.offsetTop <= scrollY) {
+      currentId = sec.id;
+    }
+  });
+  navLinks.forEach(function(link) {
+    link.classList.remove('active');
+    if (link.getAttribute('href') === '#' + currentId) {
+      link.classList.add('active');
+    }
+  });
+}
+
+window.addEventListener('scroll', updateActiveNav, { passive: true });
+window.addEventListener('load', function() {
+  // Auto-open first item of each day
+  var firstItems = document.querySelectorAll('.timeline .tl-item:first-child');
+  firstItems.forEach(function(item) { item.classList.add('open'); });
+  updateActiveNav();
+});
+
+// Progress tracking for checklist
+var checklistItems = document.querySelectorAll('.checklist-group li');
+var totalItems = checklistItems.length;
+checklistItems.forEach(function(item) {
+  item.addEventListener('click', function() {
+    var checked = document.querySelectorAll('.checklist-group li.checked').length;
+    if (checked === totalItems) {
+      var footer = document.querySelector('footer p');
+      if (footer && !footer.dataset.celebrated) {
+        footer.dataset.celebrated = '1';
+        footer.innerHTML = '🎉 清单已全部勾选！出发吧！ <span class="heart">→</span> 云台山';
+      }
+    }
+  });
+});
+
+// Interactive budget calculator
+function calcBudget() {
+  var people = 4;
+  var rooms = 2;
+  var days = 2;
+
+  // Tickets
+  var ticketPerPerson = 0;
+  if (document.getElementById('bk-ticket').checked) {
+    ticketPerPerson = document.getElementById('bk-student').checked ? 90 : 180;
+  }
+  var ticketTotal = ticketPerPerson * people;
+
+  // Cable car
+  var cablePerPerson = document.getElementById('bk-cable').checked ? 120 : 0;
+  var cableTotal = cablePerPerson * people;
+
+  // Hotel
+  var hotelPerRoom = parseInt(document.querySelector('input[name="bk-hotel"]:checked').value);
+  var nights = parseInt(document.querySelector('input[name="bk-nights"]:checked').value);
+  var hotelTotal = hotelPerRoom * rooms * nights;
+
+  // Food
+  var foodPerPersonPerDay = parseInt(document.querySelector('input[name="bk-food"]:checked').value);
+  var foodTotal = foodPerPersonPerDay * people * days;
+
+  // Transport (fixed)
+  var transportTotal = 400 + 280;
+
+  // Grand total
+  var grandTotal = ticketTotal + cableTotal + hotelTotal + foodTotal + transportTotal;
+
+  // Display total
+  document.getElementById('bk-total').textContent = '¥ ' + grandTotal.toLocaleString();
+
+  // Build breakdown
+  var rows = [];
+  if (ticketTotal > 0) {
+    rows.push(['门票 ' + ticketPerPerson + '元 × 4人', '¥ ' + ticketTotal.toLocaleString()]);
+  }
+  if (cableTotal > 0) {
+    rows.push(['索道 120元 × 4人', '¥ ' + cableTotal.toLocaleString()]);
+  }
+  rows.push(['住宿 ' + hotelPerRoom + '元 × 2间 × ' + nights + '晚', '¥ ' + hotelTotal.toLocaleString()]);
+  rows.push(['餐饮 ' + foodPerPersonPerDay + '元 × 4人 × 2天', '¥ ' + foodTotal.toLocaleString()]);
+  rows.push(['交通（油费+过路费）', '¥ ' + transportTotal.toLocaleString()]);
+
+  var breakdown = document.getElementById('bk-breakdown');
+  breakdown.innerHTML = rows.map(function(r) {
+    return '<div class="bd-row"><span>' + r[0] + '</span><span class="bd-val">' + r[1] + '</span></div>';
+  }).join('');
+}
+
+// Initialize budget on load
+window.addEventListener('load', function() {
+  calcBudget();
+});
+</script>
+</body>
+</html>

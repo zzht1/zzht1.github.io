@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="五座城市的生长史：运城、运城中心城区、象山、攀枝花、上海。从地图上看一座城因何而兴、朝哪个方向长，结合产业结构与人口因素的城市地理读法。">
+<title>五座城市的生长史</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f7f4ec;
+  --paper-2:#fbf9f2;
+  --ink:#211d18;
+  --ink-soft:#5c554a;
+  --ink-faint:#9a9081;
+  --line:#e3dccb;
+  --accent:#a8791f;
+  --red:#b3271e;
+  --serif:'Noto Serif SC','Source Han Serif SC',serif;
+  --sans:'Noto Sans SC',-apple-system,BlinkMacSystemFont,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);
+  background:var(--paper);color:var(--ink);
+  line-height:1.8;-webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-color:var(--paper);
+  background-image:repeating-linear-gradient(0deg,transparent 0,transparent 3px,rgba(40,30,15,.012) 3px,rgba(40,30,15,.012) 4px);
+}
+::selection{background:rgba(168,121,31,.18);color:var(--ink)}
+.page{position:relative;z-index:1;max-width:920px;margin:0 auto;padding:0 24px}
+
+.back-home{
+  position:fixed;top:16px;left:18px;z-index:120;
+  font-size:.8rem;letter-spacing:.04em;
+  color:var(--ink-soft);text-decoration:none;
+  padding:8px 16px;border-radius:999px;
+  background:var(--paper-2);border:1px solid var(--line);
+  transition:all .25s;
+}
+.back-home:hover{color:var(--red);border-color:var(--red)}
+
+/* ===== HERO ===== */
+.hero{
+  min-height:88vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;
+  position:relative;padding:14vh 24px 8vh;overflow:hidden;
+}
+.hero-rings{
+  position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);
+  z-index:0;opacity:.5;pointer-events:none;
+}
+.hero-inner{position:relative;z-index:1;max-width:760px}
+.hero-eyebrow{
+  font-size:.78rem;letter-spacing:.46em;color:var(--ink-faint);
+  font-weight:500;margin-bottom:1.8rem;text-transform:uppercase;
+}
+.hero h1{
+  font-family:var(--serif);font-weight:900;
+  font-size:clamp(2.7rem,9.5vw,5.2rem);letter-spacing:.03em;line-height:1.08;
+  color:var(--ink);
+}
+.hero h1::after{
+  content:'';display:block;width:96px;height:3px;margin:1.5rem auto 0;
+  background:var(--accent);
+}
+.hero-sub{
+  margin-top:1.8rem;font-size:1.02rem;color:var(--ink-soft);
+  line-height:2;max-width:600px;margin-left:auto;margin-right:auto;
+}
+.hero-tags{
+  margin-top:2rem;display:flex;flex-wrap:wrap;gap:10px;justify-content:center;
+}
+.hero-tags span{
+  font-size:.78rem;letter-spacing:.1em;color:var(--ink-soft);
+  padding:5px 13px;border:1px solid var(--line);border-radius:999px;
+  background:var(--paper-2);
+}
+.hero-scroll{
+  margin-top:3rem;font-size:.8rem;letter-spacing:.24em;color:var(--ink-faint);
+  position:relative;z-index:1;animation:bob 2.2s ease-in-out infinite;
+}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
+
+/* ===== section ===== */
+section{padding:7vh 0;border-top:1px solid var(--line)}
+.sec-eyebrow{
+  font-size:.74rem;letter-spacing:.34em;color:var(--accent);font-weight:500;
+  text-transform:uppercase;margin-bottom:.9rem;
+}
+.sec-title{
+  font-family:var(--serif);font-weight:700;font-size:clamp(1.6rem,4.4vw,2.3rem);
+  letter-spacing:.04em;color:var(--ink);margin-bottom:.5rem;
+}
+.sec-kicker{
+  font-size:.85rem;color:var(--ink-faint);letter-spacing:.08em;margin-bottom:1.4rem;
+}
+.lead{font-size:1.04rem;color:var(--ink-soft);max-width:700px}
+.lead + .lead{margin-top:1rem}
+.lead strong{color:var(--ink);font-weight:700}
+em.q{font-style:normal;color:var(--red);font-weight:500}
+
+/* 门类色覆盖 */
+body.c-yuncheng{--accent:#a8791f}
+body.c-core{--accent:#8a6a1f}
+body.c-xiangshan{--accent:#2d6a8a}
+body.c-panzhihua{--accent:#b3271e}
+body.c-shanghai{--accent:#3a4a5a}
+
+/* 数据条 */
+.stats{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  margin:2rem 0;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden;
+}
+.stat{background:var(--paper-2);padding:16px 14px}
+.stat .k{font-size:.72rem;letter-spacing:.12em;color:var(--ink-faint)}
+.stat .v{font-family:var(--serif);font-weight:700;font-size:1.28rem;color:var(--ink);margin-top:4px;line-height:1.3}
+.stat .n{font-size:.72rem;color:var(--ink-faint);margin-top:3px}
+
+/* 地图示意图 */
+.mapwrap{
+  margin:2.2rem 0;padding:18px 16px 12px;border:1px solid var(--line);
+  border-radius:18px;background:var(--paper-2);
+}
+.mapwrap svg{display:block;width:100%;height:auto}
+.mapcap{margin-top:10px;font-size:.76rem;color:var(--ink-faint);letter-spacing:.04em;text-align:center}
+
+/* 时间轴 */
+.timeline{position:relative;margin:2.2rem 0 0;padding-left:1.6rem;border-left:2px solid var(--line)}
+.tl-item{position:relative;margin-bottom:1.9rem}
+.tl-item::before{
+  content:'';position:absolute;left:-1.6rem;top:.5rem;width:12px;height:12px;
+  margin-left:-7px;border-radius:50%;background:var(--accent);
+  border:3px solid var(--paper);box-shadow:0 0 0 1px var(--accent);
+}
+.tl-when{font-family:var(--serif);font-weight:700;font-size:.95rem;color:var(--accent);letter-spacing:.06em}
+.tl-what{font-size:.98rem;color:var(--ink);margin-top:3px;font-weight:500}
+.tl-desc{font-size:.92rem;color:var(--ink-soft);margin-top:4px;line-height:1.85}
+
+/* 结构表 */
+.struct{width:100%;border-collapse:collapse;margin:1.8rem 0;font-size:.92rem}
+.struct th,.struct td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
+.struct thead th{
+  font-size:.74rem;letter-spacing:.16em;color:var(--ink-faint);font-weight:500;
+  border-bottom:2px solid var(--line);
+}
+.struct tbody th{
+  font-family:var(--serif);font-weight:700;color:var(--ink);white-space:nowrap;width:92px;
+}
+.struct td{color:var(--ink-soft)}
+.struct td b{color:var(--ink);font-weight:700}
+
+/* 四向 */
+.dirs{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:1.8rem 0}
+.dir{
+  padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--paper-2);
+}
+.dir .h{
+  font-family:var(--serif);font-weight:700;font-size:1rem;color:var(--ink);
+  display:flex;align-items:center;gap:8px;margin-bottom:6px;
+}
+.dir .h .arrow{color:var(--accent);font-size:1.1rem}
+.dir p{font-size:.9rem;color:var(--ink-soft);line-height:1.8}
+.dir .tagx{
+  display:inline-block;margin-top:8px;font-size:.72rem;letter-spacing:.08em;
+  padding:2px 9px;border-radius:999px;background:rgba(0,0,0,.04);color:var(--ink-faint);
+}
+
+/* 提示卡 */
+.aside{
+  margin:2.2rem 0;padding:1.6rem 1.8rem;border-radius:18px;
+  background:var(--paper-2);border:1px solid var(--line);border-left:3px solid var(--accent);
+}
+.aside h3{font-family:var(--serif);font-size:1.02rem;font-weight:700;margin-bottom:.7rem;color:var(--ink)}
+.aside p{font-size:.94rem;color:var(--ink-soft);margin:0}
+.aside p + p{margin-top:.6rem}
+
+/* 方法卡 */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:2rem 0}
+.card{
+  padding:18px;border:1px solid var(--line);border-radius:16px;background:var(--paper-2);
+}
+.card .no{font-family:var(--serif);font-weight:900;font-size:1.5rem;color:var(--accent);line-height:1}
+.card h4{font-family:var(--serif);font-weight:700;font-size:1rem;color:var(--ink);margin:.5rem 0 .5rem}
+.card p{font-size:.88rem;color:var(--ink-soft);line-height:1.8}
+
+/* 词典 */
+.gloss{margin:1.6rem 0}
+.gloss dt{font-family:var(--serif);font-weight:700;color:var(--ink);margin-top:14px;font-size:.98rem}
+.gloss dd{font-size:.92rem;color:var(--ink-soft);margin-top:3px;line-height:1.85}
+
+/* 对照表 */
+.cmp{width:100%;border-collapse:collapse;margin:1.8rem 0;font-size:.88rem}
+.cmp th,.cmp td{padding:11px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.cmp thead th{font-size:.74rem;letter-spacing:.14em;color:var(--ink-faint);font-weight:500}
+.cmp tbody th{font-family:var(--serif);font-weight:700;color:var(--ink);white-space:nowrap}
+.cmp td{color:var(--ink-soft)}
+
+footer.site-foot{
+  margin-top:9vh;padding:26px 0 8vh;border-top:1px solid var(--line);
+  font-size:.8rem;color:var(--ink-faint);letter-spacing:.06em;
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+}
+
+@media(max-width:760px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .dirs{grid-template-columns:1fr}
+  .cards{grid-template-columns:1fr}
+  .struct tbody th{width:auto;white-space:normal}
+}
+</style>
+</head>
+<body class="c-yuncheng">
+<div class="page">
+
+<a class="back-home" href="index.html">← zzht</a>
+
+<header class="hero">
+  <div class="hero-rings">
+    <svg width="620" height="620" viewBox="0 0 620 620" fill="none">
+      <circle cx="310" cy="310" r="300" stroke="#e0d8c6" stroke-width="1"/>
+      <circle cx="310" cy="310" r="230" stroke="#e6dfd0" stroke-width="1"/>
+      <circle cx="310" cy="310" r="160" stroke="#ebe5d8" stroke-width="1"/>
+      <circle cx="310" cy="310" r="90" stroke="#f0ebdf" stroke-width="1"/>
+      <path d="M310 10v600M10 310h600" stroke="#eee9dd" stroke-width="1"/>
+    </svg>
+  </div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">城市地理 · 五城读法</div>
+    <h1>五座城市的生长史</h1>
+    <p class="hero-sub">运城、运城中心城区、象山、攀枝花、上海。<br>每座城都有三个问题：最早在哪一小片地上长起来、因为什么需要往外拓宽、接下来朝东南西北哪一头去。</p>
+    <div class="hero-tags">
+      <span>因何而兴</span><span>老城与新区</span><span>行政与 CBD</span><span>产业结构</span><span>人口</span><span>四向未来</span>
+    </div>
+  </div>
+  <div class="hero-scroll">↓ 往下读</div>
+</header>
+
+<!-- ========== 方法论 ========== -->
+<section id="method">
+  <div class="sec-eyebrow">先立一把尺子</div>
+  <h2 class="sec-title">怎样才算读懂一座城市</h2>
+  <div class="sec-kicker">不要先看 GDP 排名，先看地图</div>
+  <p class="lead">城市不是平地上长出来的方块，而是<strong>一件事反复发生留下的痕迹</strong>。看一座城，本质上是在问：<em class="q">必须在这里发生的那件事是什么？</em>——运城是盐、象山是港与渔、攀枝花是铁矿与水能、上海是江海交汇的装卸与交易。那件事变了，城市就要换一个方向长。</p>
+
+  <div class="cards">
+    <div class="card"><div class="no">壹</div><h4>起点</h4><p>最早的一小片地在地图上落在哪里。水（港、渡口）、矿、关口、衙署，四选一。起点决定了老城的位置，也决定了后面几十年的路网骨架。</p></div>
+    <div class="card"><div class="no">贰</div><h4>第一次拓宽</h4><p>因为什么新需求——铁路、港口扩建、大工厂、机场、高铁站、大学城。每一次拓宽都能在地图上找到一条线：一条路、一条江、一条轨道。</p></div>
+    <div class="card"><div class="no">叁</div><h4>老城 / 新区</h4><p>老城是起点，通常窄、密、有衙署和老商业街；新区是每一次拓宽的产物，宽、直、有新的行政中心和产业平台。两者之间往往隔着一条河、一道塬或一片田。</p></div>
+    <div class="card"><div class="no">肆</div><h4>政府与 CBD</h4><p>政府往哪搬，哪就是下一轮城市重心（这是中国城市最可靠的信号）。CBD 跟着资本类型走：金融 CBD 要最高最密，工业城市往往根本没有 CBD。</p></div>
+    <div class="card"><div class="no">伍</div><h4>产业与人口</h4><p>产业决定形态：矿业呈点状组团、港口沿江呈带状、平原农业城呈方格棋盘。人口决定动作：人在流入就摊大饼，人在流出就只能更新存量。</p></div>
+    <div class="card"><div class="no">陆</div><h4>东南西北四问</h4><p>东边是产业还是居住？南边是不是被山或生态红线挡死？<strong>被禁止的方向，往往比被鼓励的方向信息量更大。</strong></p></div>
+  </div>
+
+  <div class="aside">
+    <h3>关于本页的地图</h3>
+    <p>下面每一张都是<strong>示意图</strong>，只表达各板块之间的相对方位与结构关系（比如“盐池在南、老城在池北、工业在江对岸”），不按比例尺、不作为行政区划依据。要看准确的界线，请以各地自然资源和规划局公布的总规图件为准。</p>
+  </div>
+</section>
+
+<!-- ========== 壹 运城 ========== -->
+<section id="yuncheng">
+  <div class="sec-eyebrow">壹 · 山西</div>
+  <h2 class="sec-title">运城市</h2>
+  <div class="sec-kicker">一池盐养出来的一座“盐务专城”</div>
+
+  <div class="stats">
+    <div class="stat"><div class="k">2024 年 GDP</div><div class="v">2190.6 亿</div><div class="n">山西第 3，增长 3.5%</div></div>
+    <div class="stat"><div class="k">常住人口</div><div class="v">467.19 万</div><div class="n">山西第 2，较上年 −3.36 万</div></div>
+    <div class="stat"><div class="k">三次产业比</div><div class="v">15.9 : 34.0 : 50.1</div><div class="n">农业占比仍近 16%</div></div>
+    <div class="stat"><div class="k">城镇化率</div><div class="v">54.47%</div><div class="n">低于全国平均</div></div>
+  </div>
+
+  <div class="mapwrap">
+    <svg viewBox="0 0 680 400" role="img" aria-label="运城市域空间结构示意图">
+      <rect x="0" y="0" width="680" height="400" fill="#fbf9f2"/>
+      <!-- 方格底 -->
+      <g stroke="#efe9dc" stroke-width="1">
+        <path d="M0 50h680M0 100h680M0 150h680M0 200h680M0 250h680M0 300h680M0 350h680"/>
+        <path d="M60 0v400M120 0v400M180 0v400M240 0v400M300 0v400M360 0v400M420 0v400M480 0v400M540 0v400M600 0v400M660 0v400"/>
+      </g>
+      <!-- 中条山（南） -->
+      <path d="M40 340 L150 316 L250 330 L360 310 L470 326 L580 306 L650 322 L650 400 L40 400 Z" fill="#cdc4ad"/>
+      <text x="352" y="382" font-family="'Noto Serif SC',serif" font-size="15" fill="#6b6354" text-anchor="middle">中条山 · 生态屏障（城不可越）</text>
+      <!-- 盐池 -->
+      <path d="M210 292 L420 280 L470 300 L400 316 L250 316 Z" fill="#a8c3cd"/>
+      <text x="335" y="305" font-family="'Noto Serif SC',serif" font-size="14" fill="#3f5b66" text-anchor="middle">运城盐池</text>
+      <!-- 黄河（西） -->
+      <path d="M34 60 q22 60 6 120 q-16 60 12 120 q22 52 -6 100" stroke="#8ea9b8" stroke-width="9" fill="none" stroke-linecap="round"/>
+      <text x="20" y="150" font-family="'Noto Serif SC',serif" font-size="13" fill="#4f6b78">黄</text>
+      <text x="20" y="172" font-family="'Noto Serif SC',serif" font-size="13" fill="#4f6b78">河</text>
+      <!-- 老城 -->
+      <rect x="272" y="210" width="112" height="52" rx="8" fill="#c9a24a" opacity=".85"/>
+      <text x="328" y="241" font-family="'Noto Serif SC',serif" font-size="15" fill="#3a2f13" text-anchor="middle">老城 / 盐务专城</text>
+      <!-- 东：禹都 空港 -->
+      <rect x="404" y="200" width="76" height="42" rx="8" fill="#e0c98d" opacity=".8"/>
+      <text x="442" y="226" font-family="'Noto Sans SC',sans-serif" font-size="12" fill="#5a4a20" text-anchor="middle">禹都 · 商贸</text>
+      <rect x="500" y="152" width="80" height="42" rx="8" fill="#e0c98d" opacity=".65"/>
+      <text x="540" y="178" font-family="'Noto Sans SC',sans-serif" font-size="12" fill="#5a4a20" text-anchor="middle">空港 / 机场</text>
+      <!-- 北：北部新城 + 高新区 + 高铁 -->
+      <rect x="270" y="120" width="112" height="52" rx="8" fill="#e6d5ab" opacity=".8"/>
+      <text x="326" y="148" font-family="'Noto Serif SC',serif" font-size="14" fill="#5a4a20" text-anchor="middle">北部新城</text>
+      <text x="326" y="164" font-family="'Noto Sans SC',sans-serif" font-size="11" fill="#6d5c31" text-anchor="middle">高铁 · 行政疏解</text>
+      <rect x="270" y="56" width="112" height="46" rx="8" fill="#e6d5ab" opacity=".55"/>
+      <text x="326" y="84" font-family="'Noto Sans SC',sans-serif" font-size="12" fill="#6d5c31" text-anchor="middle">盐湖高新区（北相）</text>
+      <!-- 西：解州 -->
+      <rect x="150" y="238" width="92" height="44" rx="8" fill="#e0c98d" opacity=".7"/>
+      <text x="196" y="266" font-family="'Noto Sans SC',sans-serif" font-size="12" fill="#5a4a20" text-anchor="middle">解州 · 关帝庙</text>
+      <!-- 箭头 -->
+      <g stroke="#a8791f" stroke-width="2" fill="none">
+        <path d="M326 116 V72" marker-end="url(#ah)"/>
+        <path d="M392 236 h10" />
+        <path d="M326 208 V128"/>
+      </g>
+      <defs>
+        <marker id="ah" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0 0 L7 3 L0 6 Z" fill="#a8791f"/>
+        </marker>
+      </defs>
+      <!-- 方位 -->
+      <g font-family="'Noto Serif SC',serif" font-size="13" fill="#9a9081">
+        <text x="640" y="26">北 ↑</text>
+        <text x="18" y="26">西</text>
+        <text x="662" y="215">东</text>
+      </g>
+      <text x="60" y="240" font-family="'Noto Sans SC',sans-serif" font-size="11" fill="#9a9081">临猗（同城化方向）</text>
+    </svg>
+    <div class="mapcap">运城市域：南依中条山、西临黄河、盐池嵌在城南——城市只能向北、向东长</div>
+  </div>
+
+  <p class="lead"><strong>因何而兴：盐。</strong>运城是全国唯一一座“为盐而设的城”。它不因山得名、不因河得名，而是因“盐运”得名。运城盐湖面积约 132 平方公里，是世界三大硫酸钠型内陆盐湖之一；早在四千多年前先民就在此采盐，靠的是中条山吹来的南风——“南风起，盐始生”。春秋时这里叫“盐氏”，汉代叫“司盐城”，<em class="q">元末由盐运使主持筑城，因设运司而定名“运城”</em>。唐代盐利一度占全国赋税的一半中的四分之一、全国收入的八分之一，宋代占六分之一。一池盐，撑起一座专城。</p>
+
+  <p class="lead">有意思的是，运城地区两千多年里的行政中心一直在<strong>移动</strong>：秦的河东郡治在安邑（今夏县），唐的河东道治在河中府（今永济），盐务与军事重镇在解州。最终定在盐池北岸，是因为盐运司衙门、盐商与盐丁都聚在这里——<strong>行政跟着税源走</strong>。</p>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-when">元末—明清</div>
+      <div class="tl-what">筑城：盐运司城</div>
+      <div class="tl-desc">在盐池北岸筑起周长数里的城池，城内是盐运衙署、运学、书院与五百余家盐商的宅邸，城外是环池 58 公里的禁墙与七十二条护长堤。城与池是一套装置：城管盐的运销，堤防管盐的生产（治客水、保盐池，姚暹渠就是为把洪水导离盐池而挖的）。</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-when">1950s—1980s</div>
+      <div class="tl-what">第一次转向：从“产盐”到“产化工”</div>
+      <div class="tl-desc">潞盐停产，盐池转为无机盐化工基地（芒硝、元明粉、硫化碱，后来是南风化工的日化产品）。城市第一次有了现代工业与产业工人，也第一次有了烟囱。</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-when">1990s</div>
+      <div class="tl-what">第一次拓宽：向东，禹都</div>
+      <div class="tl-desc">禹都经济技术开发区与禹都市场在老城以东兴起，靠商贸物流把城市从老城墙里拉出来——运城的“东进”从这里开始。</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-when">2000s 至今</div>
+      <div class="tl-what">第二次拓宽：向东北要门户，向北要新城</div>
+      <div class="tl-desc">关公机场（山西第二大机场）与空港经济开发区落在东北方向；大西高铁运城北站落地后，涑水街以北到复旦大街一带被规划为<strong>北部新城</strong>（约 80 平方公里范围、50 平方公里建设用地），承接行政、教育、医疗与居住疏解；盐湖高新区（北相镇，距市中心 8 公里）承载生物医药、高端装备与新材料。</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-when">2020s 起</div>
+      <div class="tl-what">第三次拓宽：向西、向南“退”，向北“进”</div>
+      <div class="tl-desc">盐池实施“退盐还湖”，由工业基地转为城市生态空间；与此同时市城区规划从 88.9 平方公里向 200 平方公里、200 万人口铺排，并推进盐湖—临猗—夏县同城化，中心城区辖区面积规划拓展到近 4000 平方公里。</div>
+    </div>
+  </div>
+
+  <table class="struct">
+    <thead><tr><th>板块</th><th>位置与内容</th></tr></thead>
+    <tbody>
+      <tr><th>老城区</th><td>盐池北岸的老城（今东城、西城、南城、北城街道一带，解放路—红旗街—河东街—官道河围合的区域）。<b>池神庙、盐池禁墙、河东池盐博物馆、中国死海</b>都在这一片。元明清的城池肌理、盐务衙署与盐商宅院是它的底子。</td></tr>
+      <tr><th>新城区</th><td><b>北部新城</b>（涑水街以北至复旦大街）：创新活力片区，承接行政、科教、医疗与新建居住；<b>空港片区</b>在东北，产城融合；<b>西部片区</b>指向解州与盐湖，“池城相映”。</td></tr>
+      <tr><th>政府办公区</th><td>市人民政府驻 <b>盐湖区河东街 248 号</b>，仍在老城东段。市级行政主轴沿“河东街—涑水街”向北延伸，新的政务服务与市民功能向北部新城疏解；盐湖区政府亦在老城一侧。</td></tr>
+      <tr><th>CBD / 商业中心</th><td>运城没有典型的摩天楼 CBD。商业重心仍是<b>老城的人民路—解放路—河东街传统商圈</b>，北部新城正在长出新的商务与商业设施，整体呈“一主一次”的弱中心结构。</td></tr>
+      <tr><th>产业平台</th><td><b>盐湖高新区</b>（北部，生物医药—石药银湖、稀土永磁—中磁科技、制版印刷、水泵与矿用风机）；<b>运城经济技术开发区</b>；<b>空港经济开发区</b>。全市形成“2+8”开发区格局。市域产业：现代农业（粮、果、菜、畜）、煤电铝材、金属镁、运输装备（大运汽车）、医药（亚宝）、文旅（关公、盐湖、黄河）。</td></tr>
+    </tbody>
+  </table>
+
+  <div class="aside">
+    <h3>人口这道题</h3>
+    <p>运城 2024 年常住人口 467.19 万，一年减少 3.36 万，自然增长率 −2.38‰，出生率已低于死亡率。城镇化率 54.47%，仍低于全国平均。<strong>总量在收缩、城镇化仍在推进</strong>——这类城市的典型动作是“做大城市中心城区、收缩乡村”，用首位度对抗人口外流。盐湖区常住人口 2024 年突破 100 万（100.13 万），正是这一策略的直接结果：人没多，但往城里集中。</p>
+  </div>
+
+  <div class="dirs">
+    <div class="dir"><div class="h"><span class="arrow">↑</span>北：主方向</div><p>北部新城 + 盐湖高新区 + 运城北站。行政、教育、医疗、科创、产业增量都往这边放，是“大运城”真正的增长面。</p><span class="tagx">创新 · 产业 · 新城</span></div>
+    <div class="dir"><div class="h"><span class="arrow">↗</span>东 / 东北：门户</div><p>禹都商贸 + 空港经济开发区 + 关公机场。走的是“铁公机”枢纽与物流，也是对接晋陕豫黄河金三角的出口。</p><span class="tagx">门户 · 物流</span></div>
+    <div class="dir"><div class="h"><span class="arrow">↓</span>南：不可越</div><p>中条山与盐湖。城市在这里是“退”的：退盐还湖、生态修复、文旅化。南面是运城最好的风景，也是最硬的一条红线。</p><span class="tagx">生态 · 文旅</span></div>
+    <div class="dir"><div class="h"><span class="arrow">←</span>西：文脉与同城化</div><p>解州关帝庙、常平家庙、西塬一带，是文旅主轴；远期沿临猗方向推进盐临夏同城化，把“一市一区”做成“一市三区”。</p><span class="tagx">文旅 · 同城化</span></div>
+  </div>
+
+  <p class="lead"><strong>一句话理解运城：</strong>一座为收盐税而生的城，盐停产后靠化工接续，如今把盐池还给城市当公园，然后掉头向北、向东找新的产业与人口。</p>
+</section>
+
+<!-- ========== 贰 运城中心城区 ========== -->
+<section id="core">
+  <div class="sec-eyebrow">贰 · 山西</div>
+  <h2 class="sec-title">运城市中心城区</h2>
+  <div class="sec-kicker">把上一张图放大到街道尺度：盐湖区</div>
+
+  <div class="stats">
+    <div class="stat"><div class="k">常住人口</div><div class="v">100.13 万</div><div class="n">2024 年，盐湖区破百万</div></div>
+    <div class="stat"><div class="k">市城区建成规模</div><div class="v">88.9 → 200 km²</div><div class="n">规划 2035 年建设面积</div></div>
+    <div class="stat"><div class="k">规划人口</div><div class="v">200 万</div><div class="n">2035 年市城区常住人口</div></div>
+    <div class="stat"><div class="k">空间结构</div><div class="v">一核统领</div><div class="n">两轴带动 · 城湖相映 · 组团发展</div></div>
+  </div>
+
+  <div class="mapwrap">
+    <svg viewBox="0 0 680 400" role="img" aria-label="运城中心城区空间结构示意图">
+      <rect x="0" y="0" width="680" height="400" fill="#fbf9f2"/>
+      <g stroke="#efe9dc" stroke-width="1">
+        <path d="M0 50h680M0 100h680M0 150h680M0 200h680M0 250h680M0 300h680M0 350h680"/>
+        <path d="M60 0v400M120 0v400M180 0v400M240 0v400M300 0v400M360 0v400M420 0v400M480 0v400M540 0v400M600 0v400M660 0v400"/>
+      </g>
+      <!-- 盐池 -->
+      <path d="M170 320 L470 306 L520 330 L430 348 L200 348 Z" fill="#a8c3cd"/>
+      <text x="340" y="336" font-family="'Noto Serif SC',serif" font-size="15" fill="#3f5b66" text-anchor="middle">盐　池（退盐还湖 · 城市内湖）</text>
+      <!-- 中条山 -->
+      <path d="M120 358 L250 344 L380 356 L520 342 L640 358 L640 400 L120 400 Z" fill="#cdc4ad"/>
+      <text x="380" y="388" font-family="'Noto Serif SC',serif" font-size="13" fill="#6b6354" text-anchor="middle">中条山</text>
+      <!-- 老城 -->
+      <rect x="250" y="200" width="180" height="94" rx="10" fill="#c9a24a" opacity=".85"/>
+      <text x="340" y="232" font-family="'Noto Serif SC',serif" font-size="16" fill="#3a2f13" text-anchor="middle">老城片区</text>
+      <text x="340" y="252" font-family="'Noto Sans SC',sans-serif" font-size="11.5" fill="#4f4020" text-anchor="middle">东城 · 西城 · 南城 · 北城街道</text>
+      <text x="340" y="270" font-family="'Noto Sans SC',sans-serif" font-size="11.5" fill="#4f4020" text-anchor="middle">池神庙 · 禁墙 · 老商圈 · 传统居住</text>
+      <text x="340" y="286" font-family="'Noto Sans SC',sans-serif" font-size="11.5" fill="#6b5826" text-anchor="middle">市政府：河东街 248 号</text>
+      <!-- 行政轴 -->
+      <path d="M340 200 V120" stroke="#a8791f" stroke-width="2.5"/>
+      <text x="352" y="170" font-family="'Noto Sans SC',sans-serif" font-size="11" fill="#8a6a1f">河东街—涑水街 行政轴</text>
+      <!-- 北部新城 -->
+      <rect x="230" y="52" width="220" height="76" rx="10" fill="#e6d5ab" opacity=".85"/>
+      <text x="340" y="84" font-family="'Noto Serif SC',serif" font-size="15" fill="#5a4a20" text-anchor="middle">北部新城</text>
+      <text x="340" y="102" font-family="'Noto Sans SC',sans-serif" font-size="11.5" fill="#6d5c31" text-anchor="middle">涑水街 → 复旦大街｜行政疏解 · 教科文卫 · 新居住</text>
+      <text x="340" y="118" font-family="'Noto Sans SC',sans-serif" font-size="11.5" fill="#6d5c31" text-anchor="middle">运城北站（大西高铁）在北</text>
+      <!-- 高新区 -->
+      <rect x="240" y="14" width="200" height="30" rx="8" fill="#e6d5ab" opacity=".5"/>
+      <text x="340" y="34" font-family="'Noto Sans SC',sans-serif" font-size="11.5" fill="#6d5c31" text-anchor="middle">盐湖高新区（北相镇）· 生物医药 / 永磁 / 装备</text>
+      <!-- 东：禹都 -->
+      <rect x="452" y="196" width="96" height="60" rx="10" fill="#e0c98d" opacity=".8"/>
+      <text x="500" y="222" font-family="'Noto Serif SC',serif" font-size="14" fill="#5a4a20" text-anchor="middle">禹都片区</text>
+      <text x="500" y="240" font-family="'Noto Sans SC',sans-serif" font-size="11" fill="#6d5c31" text-anchor="middle">市场 · 商贸物流</text>
+      <!-- 东北：空港 -->
+      <rect x="560" y="96" width="96" height="60" rx="10" fill="#e0c98d" opacity=".65"/>
+      <text x="608" y="122" font-family="'Noto Serif SC',serif" font-size="14" fill="#5a4a20" text-anchor="middle">空港片区</text>
+      <text x="608" y="140" font-family="'Noto Sans SC',sans-serif" font-size="11" fill="#6d5c31" text-anchor="middle">关公机场 · 临空产业</text>
+      <!-- 西：西部片区 -->
+      <rect x="96" y="212" width="132" height="66" rx="10" fill="#e0c98d" opacity=".7"/>
+      <text x="162" y="240" font-family="'Noto Serif SC',serif" font-size="14" fill="#5a4a20" text-anchor="middle">西部片区</text>
+      <text x="162" y="258" font-family="'Noto Sans SC',sans-serif" font-size="11" fill="#6d5c31" text-anchor="middle">解州 · 关帝庙 · 池城相映</text>
+      <!-- 生态廊道 -->
+      <path d="M60 190 q120 -18 190 6" stroke="#8fa88c" stroke-width="3" fill="none" stroke-dasharray="7 5"/>
+      <text x="70" y="182" font-family="'Noto Sans SC',sans-serif" font-size="11" fill="#5f7a5c">官道河 / 姚暹渠 生态廊道</text>
+      <!-- 方位 -->
+      <g font-family="'Noto Serif SC',serif" font-size="13" fill="#9a9081">
+        <text x="640" y="26">北 ↑</text>
+        <text x="18" y="26">西</text>
+        <text x="664" y="205">东</text>
+      </g>
+    </svg>
+    <div class="mapcap">中心城区四片区：北部新城（创新活力）、老城（宜居宜业）、空港（产城融合）、西部（池城相映）</div>
+  </div>
+
+  <p class="lead">把市域那张图放大到街道尺度，运城中心城区的生长逻辑就非常直白了：<em class="q">老城贴着盐池北岸，新城往北铺，产业往北与东北走，文旅往西南走，南面一律不动。</em></p>
+
+  <table class="struct">
+    <thead><tr><th>板块</th><th>位置与内容</th></tr></thead>
+    <tbody>
+      <tr><th>老城区</th><td>盐池以北的老城片区，四条街道（东城、西城、南城、北城）围合的老城肌理。<b>池神庙</b>（全国唯一祭祀盐池之神的庙宇，三大殿横列）、盐池禁墙残段、河东池盐博物馆、老商业街与传统居住区。这里也是运城最早的公共服务与教育底盘（运学、书院都起于盐务官办）。</td></tr>
+      <tr><th>新城区</th><td><b>北部新城</b>（南起涑水街、北到复旦大街）是主战场：新行政与市民服务、教育医疗、新建居住与商务。<b>禹都</b>（东）是上一轮拓宽的产物，以市场与商贸物流为主；<b>空港片区</b>（东北）围绕关公机场做临空产业。</td></tr>
+      <tr><th>政府办公区</th><td>市政府在<b>河东街 248 号</b>（老城东段）。行政功能沿“河东街—涑水街”向北延伸——判断一个城市往哪走，看政府新楼往哪盖，比看规划图更准。</td></tr>
+      <tr><th>CBD / 商业</th><td>老城的人民路—解放路—河东街传统商圈仍是商业主中心，北部新城形成次级商务商业中心。整体是<b>“老城强商业、新城强商务”的双心结构</b>，不是单核 CBD。</td></tr>
+      <tr><th>产业平台</th><td>盐湖高新区构建“一谷两城六园”：生物医药（石药银湖为龙头）、稀土永磁（中磁科技，奔着全国最大永磁材料基地）、制版印刷（运城制版智能化工厂）、水泵与矿用风机、空调产业链、医疗义齿（“中国牙城”）。<b>产业在北，文旅在西南</b>，是这个城区最清楚的一条分工线。</td></tr>
+    </tbody>
+  </table>
+
+  <div class="aside">
+    <h3>两个必须记住的细节</h3>
+    <p><strong>一、生态廊道就是城市骨架。</strong>官道河、姚暹渠这两条线在规划中被当作中心城区的生态廊道。它们原本是盐业的水利工程——为保护盐池而疏洪水。一千年前的产业设施，成了今天城市的绿轴。</p>
+    <p><strong>二、南面是“退”的方向。</strong>盐池退盐还湖之后，运城第一次拥有了一个真正意义上的“城市内湖”。这类动作在资源型城市里很典型：把污染型产业退掉，换成生态与文旅，然后指望它带动城市能级。</p>
+  </div>
+
+  <div class="dirs">
+    <div class="dir"><div class="h"><span class="arrow">↑</span>北：创新与新城</div><p>北部新城 + 高铁站 + 盐湖高新区。行政、教科文卫、产业增量都往这边堆，是未来十年运城城区最实的一面。</p><span class="tagx">主增长面</span></div>
+    <div class="dir"><div class="h"><span class="arrow">→</span>东：商贸与门户</div><p>禹都市场群、空港与机场。老一轮的商贸底盘 + 新一轮的临空经济。</p><span class="tagx">门户</span></div>
+    <div class="dir"><div class="h"><span class="arrow">↓</span>南：湖与山</div><p>盐湖 + 中条山，生态与文旅，禁开发。城湖相映是运城最独特的城市意象，也是它不能摊大饼的原因。</p><span class="tagx">生态红线</span></div>
+    <div class="dir"><div class="h"><span class="arrow">←</span>西 / 西北：文脉 + 同城化</div><p>解州关帝庙、常平家庙、西塬；再往西北是临猗同城化方向。“一市三区”如果落地，城区的西边界会被重写。</p><span class="tagx">文旅 · 行政区划</span></div>
+  </div>
+</section>
+
+<!-- ========== 叁 象山 ========== -->
+<section id="xiangshan">
+  <div class="sec-eyebrow">叁 · 浙江宁波</div>
+  <h2 class="sec-title">象山县</h2>
+  <div class="sec-kicker">一个半岛的两副骨架：主城在中，能源与港在南</div>
+
+  <div class="stats">
+    <div class="stat"><div class="k">2024 年 GDP</div><div class="v">942.99 亿</div><div class="n">增长 4.5%，人均 16.31 万元</div></div>
+    <div class="stat"><div class="k">常住人口</div><div class="v">57.9 万</div><div class="n">户籍 53.36 万，城镇化率 64.6%</div></div>
+    <div class="stat"><div class="k">三次产业比</div><div class="v">16.6 : 35.6 : 47.8</div><div class="n">渔业产值 149.69 亿</div></div>
+    <div class="stat"><div class="k">城镇开发边界</div><div class="v">106.24 km²</div><div class="n">县域，2035 年控制规模</div></div>
+  </div>
+
+  <div class="mapwrap">
+    <svg viewBox="0 0 680 400" role="img" aria-label="象山县空间结构示意图">
+      <rect x="0" y="0" width="680" height="400" fill="#fbf9f2"/>
+      <!-- 海 -->
+      <path d="M0 0 h680 v400 h-680 Z" fill="#eaf1f4"/>
+      <!-- 陆域半岛 -->
+      <path d="M150 40 L220 30 L300 46 L360 40 L400 70 L420 120 L440 170 L430 220 L450 260 L440 300 L400 330 L330 344 L260 330 L200 296 L176 250 L190 200 L170 150 L150 110 Z" fill="#f2ece0" stroke="#ddd3bd" stroke-width="1.5"/>
+      <!-- 西侧象山港 -->
+      <path d="M60 60 q40 90 20 170 q-14 60 30 110" stroke="#9dc2d1" stroke-width="18" fill="none" stroke-linecap="round"/>
+      <text x="40" y="180" font-family="'Noto Serif SC',serif" font-size="13" fill="#3f6d80" text-anchor="middle">象</text>
+      <text x="40" y="200" font-family="'Noto Serif SC',serif" font-size="13" fill="#3f6d80" text-anchor="middle">山</text>
+      <text x="40" y="220" font-family="'Noto Serif SC',serif" font-size="13" fill="#3f6d80" text-anchor="middle">港</text>
+      <!-- 东侧大目洋 -->
+      <text x="596" y="150" font-family="'Noto Serif SC',serif" font-size="13" fill="#7fa2b0" text-anchor="middle">大</text>
+      <text x="596" y="170" font-family="'Noto Serif SC',serif" font-size="13" fill="#7fa2b0" text-anchor="middle">目</text>
+      <text x="596" y="190" font-family="'Noto Serif SC',serif" font-size="13" fill="#7fa2b0" text-anchor="middle">洋</text>
+      <!-- 南北分区虚线 -->
+      <path d="M170 250 q120 -20 260 10" stroke="#cfc6b2" stroke-width="2" stroke-dasharray="6 5" fill="none"/>
+      <!-- 丹城 主城 -->
+      <rect x="248" y="118" width="112" height="66" rx="10" fill="#4f89a8" opacity=".85"/>
+      <text x="304" y="144" font-family="'Noto Serif SC',serif" font-size="15" fill="#f4f9fb" text-anchor="middle">丹城（主城）</text>
+      <text x="304" y="162" font-family="'Noto Sans SC',sans-serif" font-size="11" fill="#dbe9ef" text-anchor="middle">丹东 · 丹西街道</text>
+      <text x="304" y="176" font-family="'Noto Sans SC',sans-serif" font-size="11" fill="#dbe9ef" text-anchor="middle">人民广场主核心</text>
+      <!-- 南部新城 -->
+      <rect x="258" y="196" width="104" height="40" rx="9" fill="#7fa8bd" opacity=".85"/>
+      <text x="310" y="221" font-family="'Noto Sans SC',sans-serif" font-size="11.5" fill="#f2f7f9" text-anchor="middle">南部新城（行政 · 科创）</text>
+      <!-- 大目湾 东 -->
+      <rect x="374" y="196" width="92" height="46" rx="9" fill="#7fa8bd" opacity=".6"/>
+      <text x="420" y="219" font-family="'Noto Sans SC',sans-serif" font-size="11.5" fill="#21485a" text-anchor="middle">大目湾</text>
+      <text x="420" y="234" font-family="'Noto Sans SC',sans-serif" font-size="10.5" fill="#2c5468" text-anchor="middle">青创 · 松兰山 · 旅游</text>
+      <!-- 爵溪 东 -->
+      <rect x="382" y="126" width="80" height="40" rx="9" fill="#9dbf8e" opacity=".8"/>
+      <text x="422" y="151" font-family="'Noto Sans SC',sans-serif" font-size="11.5" fill="#2f4a26" text-anchor="middle">爵溪（针织）</text>
+      <!-- 西周 北 -->
+      <rect x="212" y="52" width="84" height="40" rx="9" fill="#9dbf8e" opacity=".8"/>
+      <text x="254" y="77" font-family="'Noto Sans SC',sans-serif" font-size="11.5" fill="#2f4a26" text-anchor="middle">西周（汽配）</text>
+      <!-- 石浦 南 -->
+      <rect x="252" y="284" width="96" height="46" rx="9" fill="#4f89a8" opacity=".75"/>
+      <text x="300" y="308" font-family="'Noto Serif SC',serif" font-size="14" fill="#f4f9fb" text-anchor="middle">石浦（副中心）</text>
+      <text x="300" y="324" font-family="'Noto Sans SC',sans-serif" font-size="10.5" fill="#dbe9ef" text-anchor="middle">渔港经济区 · 浙台经贸区</text>
+      <!-- 鹤浦 金七门 -->
+      <rect x="356" y="296" width="104" height="44" rx="9" fill="#c8811f" opacity=".85"/>
+      <text x="408" y="320" font-family="'Noto Serif SC',serif" font-size="13" fill="#fff8ec" text-anchor="middle">鹤浦 · 金七门核电</text>
+      <!-- 影视城 -->
+      <text x="196" y="258" font-family="'Noto Sans SC',sans-serif" font-size="11" fill="#6b7f5c">网络视听文创港 ▸</text>
+      <!-- 桥 -->
+      <path d="M150 90 L96 96" stroke="#a8791f" stroke-width="3"/>
+      <text x="66" y="112" font-family="'Noto Sans SC',sans-serif" font-size="10.5" fill="#8a6a1f">象山港大桥</text>
+      <text x="66" y="126" font-family="'Noto Sans SC',sans-serif" font-size="10.5" fill="#8a6a1f">→ 宁波主城</text>
+      <!-- 方位 -->
+      <g font-family="'Noto Serif SC',serif" font-size="13" fill="#9a9081">
+        <text x="640" y="26">北 ↑</text>
+        <text x="18" y="330">西</text>
+        <text x="664" y="200">东</text>
+        <text x="340" y="392">南 ↓</text>
+      </g>
+    </svg>
+    <div class="mapcap">象山县域：“双核两翼四极点”——主城丹城在中，石浦副中心在南，象山港经济区在北，环石浦港在东南</div>
+  </div>
+
+  <p class="lead"><strong>因何而兴：海。</strong>象山是一个陆域半岛——三面环山、一面向海，陆上被山体切成一块块，真正把它串起来的是海。历史上象山的命门有两个：<em class="q">一个是渔（石浦港），一个是盐与农（半岛内部的平地与滩涂）</em>。行政中心长期落在相对内陆的丹城，而真正的财富在海岸线上的石浦。</p>
+
+  <p class="lead">这个格局到 2012 年被改写了一次：<strong>象山港大桥通车</strong>，象山从“半岛末端”变成宁波的半小时圈。这是象山城市史上最关键的一次“拓宽”——不是拓土地，而是拓关系：它开始被纳入宁波都市区的分工。</p>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-when">唐代立县以来</div>
+      <div class="tl-what">丹城：内陆型的县城</div>
+      <div class="tl-desc">行政中心选在半岛中部相对开阔的丹城，背山面田，不直接临外海——典型的“防海盗、管田赋”的县城选址。石浦则因避风良港而成长为渔港与市镇，是另一个中心。</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-when">1970s—1990s</div>
+      <div class="tl-what">第一次工业化：针织与渔</div>
+      <div class="tl-desc">爵溪街道做起针织，从一台圆机到“中国针织之乡”，出口面料供应国际品牌；石浦港成为全国重要渔港与渔业基地。象山的产业底盘由此定型：<b>一块布、一条船、一网鱼</b>。</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-when">2012 年</div>
+      <div class="tl-what">象山港大桥通车</div>
+      <div class="tl-desc">半岛不再靠轮渡与绕行，北部象山港沿线（西周汽配、临港装备）进入宁波产业链，城市第一次有了“向北融入”的物理通道。</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-when">2000s—2020s</div>
+      <div class="tl-what">第二次拓宽：主城向南，东面海</div>
+      <div class="tl-desc">丹城老城饱和后，行政与科创功能向南延伸到<b>南部新城</b>，东面向海长出<b>大目湾—松兰山</b>片区的青创、高教与旅游集散，形成“一轴三心五片区”的格局（山海田城主轴：巨鹰路—来薰路—天安路）。</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-when">2023 年至今</div>
+      <div class="tl-what">第三次拓宽：向南要能源</div>
+      <div class="tl-desc">金七门核电落子鹤浦镇金七门村（南田岛南缘、猫头洋北岸），规划 6 台“华龙一号”、约 720 万千瓦、年发电约 550 亿千瓦时，相当于宁波市 2025 年全社会用电量的近一半。一期 2023 年 12 月核准，1、2 号机组计划 2030、2031 年投产；二期是“华龙一号 2.0”国家级示范项目，民资参股 20%。2024 年金七门核电投资已占全县固定资产投资的 <b>24.7%</b>。配套的石浦港海底隧道 2025 年 9 月开工，将解决南田岛的交通难题。</div>
+    </div>
+  </div>
+
+  <table class="struct">
+    <thead><tr><th>板块</th><th>位置与内容</th></tr></thead>
+    <tbody>
+      <tr><th>老城区</th><td><b>丹城</b>（丹东、丹西街道）的老城中心，以<b>人民广场</b>为核心——老县政府、老商业街、步行街与密集居住区。规划给它定位“象山城市第一芯”：商业综合体、文化场馆、城市形象界面。</td></tr>
+      <tr><th>新城区</th><td><b>南部新城</b>：城市行政办公中心、科创服务中心、生活休闲中心，生态廊道穿城；<b>大目湾—松兰山</b>：海洋青创中心、新兴产业与高教服务、滨海旅游集散；<b>爵溪</b>（针织转型）、<b>东陈</b>。</td></tr>
+      <tr><th>政府办公区</th><td>县级行政主中心长期在丹城（人民广场一带），规划明确把<b>行政办公中心放在南部新城副核心</b>——政务服务、商务楼宇与孵化向南延伸。这是县城版的“政府南迁”。</td></tr>
+      <tr><th>CBD / 商业中心</th><td>县城没有严格意义的 CBD，实际是<b>“人民广场—南部新城—大目湾”三个现代服务业集群</b>：人民广场（文化商务、综合商业、总部经济）、南部新城（行政配套、生态办公、小微孵化）、大目湾（青创、电商、研发服务）。</td></tr>
+      <tr><th>产业平台</th><td>规上工业前列是<b>汽车制造业</b>（25.95 亿）、<b>针纺织业</b>（23.28 亿，出口 63.7 亿）、通用与专用设备、电气机械；鹤浦修造船（规上船舶产业产值 28 亿+，南极磷虾船“甬利”号）；影视与网络视听文创港；渔业（水产品 72.73 万吨，红美人柑橘）；新能源（涂茨海上风电、长大涂光伏，<b>县域新能源装机已超过全社会最高用电负荷</b>）。</td></tr>
+      <tr><th>县域格局</th><td>“双核两翼四极点”：<b>双核</b>＝中心城区主核 + 石浦副核（丹石联动）；<b>两翼</b>＝象山港经济区（北，临港装备）、环石浦港渔港经济区（南，浙台经贸、渔港经济）；<b>四极点</b>＝西周汽配、星光影视、临港装备、南田零碳。</td></tr>
+    </tbody>
+  </table>
+
+  <div class="aside">
+    <h3>人口这道题</h3>
+    <p>2024 年象山户籍人口 53.36 万、常住人口 57.9 万——<strong>常住多于户籍，说明它在吸人</strong>（这在县域里并不常见）。但结构偏老：户籍人口中 60 周岁以上占 31.1%，自然增长率 −2.95‰。所以象山的核心人口命题不是“拉总量”，而是<strong>换结构</strong>：核电、深远海风电母港、临港装备与影视文创要的是年轻技术工人与工程师，能不能留住这批人，决定了“能源大县”能不能变成“产业强县”。</p>
+  </div>
+
+  <div class="dirs">
+    <div class="dir"><div class="h"><span class="arrow">↓</span>南：最强增长极</div><p>石浦副中心 + 环石浦港（浙台经贸合作区、渔港经济区）+ 鹤浦/南田岛（金七门核电、船舶修造）。能源、港、渔三件事叠在一起，是未来十年象山增量最大的一头。</p><span class="tagx">能源 · 港 · 渔</span></div>
+    <div class="dir"><div class="h"><span class="arrow">↑</span>北：融入宁波</div><p>象山港经济区（西周汽配、临港装备）+ 象山港大桥 + 正在推进的宁波至象山市域（郊）铁路。北向是“被纳入”的方向：承接宁波主城的产业与通勤。</p><span class="tagx">同城化 · 轨道</span></div>
+    <div class="dir"><div class="h"><span class="arrow">→</span>东：面海一面</div><p>爵溪—大目湾—松兰山—亚帆中心的时尚活力海岸带：滨海文旅、海洋运动、青创与未来人居。这是象山最像“城市”的一面，也是它对外展示的形象面。</p><span class="tagx">文旅 · 青创</span></div>
+    <div class="dir"><div class="h"><span class="arrow">←</span>西：生态与风景</div><p>群山依港、群湾连村，以生态保护与美丽风景线为主，不做大规模开发。西面被“锁住”，才逼着城市向南、向东走。</p><span class="tagx">生态</span></div>
+  </div>
+
+  <p class="lead"><strong>一句话理解象山：</strong>一个被山切成两半的半岛，主城守在中间的田里，钱一直在海边的港口上；现在南边来了一座核电站，等于把“能源”这个全新的重量压在了半岛南端。</p>
+</section>
+
+<!-- ========== 肆 攀枝花 ========== -->
+<section id="panzhihua">
+  <div class="sec-eyebrow">肆 · 四川</div>
+  <h2 class="sec-title">攀枝花市</h2>
+  <div class="sec-kicker">一座在江与山之间被硬挤出来的三线建设城</div>
+
+  <div class="stats">
+    <div class="stat"><div class="k">2024 年 GDP</div><div class="v">1395.24 亿</div><div class="n">增长 6.3%，二产占 56.6%</div></div>
+    <div class="stat"><div class="k">常住人口</div><div class="v">122.3 万</div><div class="n">城镇化率 71.46%</div></div>
+    <div class="stat"><div class="k">三次产业比</div><div class="v">7.3 : 56.6 : 36.1</div><div class="n">工业化率 47.9%</div></div>
+    <div class="stat"><div class="k">辖区</div><div class="v">3 区 2 县</div><div class="n">东区 · 西区 · 仁和 · 米易 · 盐边</div></div>
+  </div>
+
+  <div class="mapwrap">
+    <svg viewBox="0 0 680 400" role="img" aria-label="攀枝花市空间结构示意图">
+      <rect x="0" y="0" width="680" height="400" fill="#fbf9f2"/>
+      <g stroke="#efe9dc" stroke-width="1">
+        <path d="M0 50h680M0 100h680M0 150h680M0 200h680M0 250h680M0 300h680M0 350h680"/>
+        <path d="M60 0v400M120 0v400M180 0v400M240 0v400M300 0v400M360 0v400M420 0v400M480 0v400M540 0v400M600 0v400M660 0v400"/>
+      </g>
+      <!-- 山体（北/南） -->
+      <path d="M0 0 h680 v54 L560 40 L440 56 L320 36 L200 52 L80 34 L0 50 Z" fill="#d5cbb5"/>
+      <text x="340" y="30" font-family="'Noto Sans SC',sans-serif" font-size="12" fill="#6b6354" text-anchor="middle">北：山地（米易方向 · 安宁河谷）</text>
+      <path d="M0 400 h680 v-52 L560 336 L430 352 L300 334 L170 350 L60 336 L0 352 Z" fill="#d5cbb5"/>
+      <text x="340" y="380" font-family="'Noto Sans SC',sans-serif" font-size="12" fill="#6b6354" text-anchor="middle">南：川滇方向（云南 · 南向开放门户）</text>
+      <!-- 金沙江 -->
+      <path d="M0 200 q80 -14 160 4 q80 18 160 0 q80 -18 160 6 q80 24 200 -2" stroke="#8ea9b8" stroke-width="16" fill="none"/>
+      <text x="24" y="192" font-family="'Noto Serif SC',serif" font-size="13" fill="#3f5b66">金沙江</text>
+      <!-- 江北：弄弄坪 攀钢 -->
+      <rect x="150" y="128" width="128" height="56" rx="9" fill="#b3271e" opacity=".75"/>
+      <text x="214" y="154" font-family="'Noto Serif SC',serif" font-size="14" fill="#fdf1ee" text-anchor="middle">弄弄坪 · 瓜子坪</text>
+      <text x="214" y="172" font-family="'Noto Sans SC',sans-serif" font-size="11" fill="#f8ddd8" text-anchor="middle">攀钢主厂区｜江北工业片区</text>
+      <!-- 江南：炳草岗 老城 -->
+      <rect x="292" y="222" width="132" height="62" rx="9" fill="#c8811f" opacity=".85"/>
+      <text x="358" y="248" font-family="'Noto Serif SC',serif" font-size="15" fill="#4a2f06" text-anchor="middle">炳草岗（老城）</text>
+      <text x="358" y="266" font-family="'Noto Sans SC',sans-serif" font-size="11" fill="#5c3d0d" text-anchor="middle">市委市政府 · 商业 · 医疗教育</text>
+      <text x="358" y="280" font-family="'Noto Sans SC',sans-serif" font-size="11" fill="#6b4a14" text-anchor="middle">老城综合服务核心</text>
+      <!-- 花城新区 南 -->
+      <rect x="286" y="298" width="150" height="46" rx="9" fill="#e0b46a" opacity=".85"/>
+      <text x="361" y="322" font-family="'Noto Serif SC',serif" font-size="13" fill="#4a2f06" text-anchor="middle">花城新区 / 攀西科技城</text>
+      <text x="361" y="338" font-family="'Noto Sans SC',sans-serif" font-size="10.5" fill="#5c3d0d" text-anchor="middle">市民中心 · 政务服务中心 · 三线建设博物馆</text>
+      <!-- 仁和 -->
+      <rect x="286" y="348" width="92" height="30" rx="8" fill="#e0b46a" opacity=".55"/>
+      <text x="332" y="368" font-family="'Noto Sans SC',sans-serif" font-size="11" fill="#5c3d0d" text-anchor="middle">仁和（河谷新城）</text>
+      <!-- 东：钒钛高新区 -->
+      <rect x="470" y="238" width="150" height="58" rx="9" fill="#b3271e" opacity=".55"/>
+      <text x="545" y="264" font-family="'Noto Serif SC',serif" font-size="14" fill="#4a1512" text-anchor="middle">钒钛高新区 / 钒钛新城</text>
+      <text x="545" y="282" font-family="'Noto Sans SC',sans-serif" font-size="10.5" fill="#6b2a24" text-anchor="middle">金江 · 团山 · 马店河｜产业主阵地</text>
+      <!-- 西：西区 -->
+      <rect x="30" y="214" width="112" height="56" rx="9" fill="#b3271e" opacity=".4"/>
+      <text x="86" y="240" font-family="'Noto Serif SC',serif" font-size="13" fill="#4a1512" text-anchor="middle">西区</text>
+      <text x="86" y="258" font-family="'Noto Sans SC',sans-serif" font-size="10.5" fill="#6b2a24" text-anchor="middle">格里坪 · 清香坪｜煤电建材</text>
+      <!-- 成昆铁路 -->
+      <path d="M0 300 q120 -30 240 -10 q120 20 240 -6 q100 -22 200 -18" stroke="#6b6354" stroke-width="2" stroke-dasharray="8 6" fill="none"/>
+      <text x="470" y="318" font-family="'Noto Sans SC',sans-serif" font-size="10.5" fill="#6b6354">成昆铁路</text>
+      <!-- 箭头：向南 -->
+      <path d="M430 300 q10 30 -4 46" stroke="#c8811f" stroke-width="2.5" fill="none" marker-end="url(#ah2)"/>
+      <defs>
+        <marker id="ah2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0 0 L7 3 L0 6 Z" fill="#c8811f"/>
+        </marker>
+      </defs>
+      <text x="446" y="330" font-family="'Noto Sans SC',sans-serif" font-size="11" fill="#8a5f18">城市向南延伸</text>
+      <!-- 方位 -->
+      <g font-family="'Noto Serif SC',serif" font-size="13" fill="#9a9081">
+        <text x="640" y="76">北 ↑</text>
+        <text x="18" y="96">西</text>
+        <text x="664" y="212">东</text>
+      </g>
+    </svg>
+    <div class="mapcap">攀枝花：沿金沙江“带状 + 组团”——江北是厂，江南是城，东南是新区，产业与新城一起往南走</div>
+  </div>
+
+  <p class="lead"><strong>因何而兴：三线建设的一次资源组合。</strong>1965 年建市（初名渡口市，1987 年改名攀枝花），起因是把四样东西凑到了一起：<em class="q">攀西的钒钛磁铁矿（兰尖、朱家包包）、宝鼎的煤、金沙江与雅砻江的水能、以及成昆铁路</em>。缺任何一样，这座城都不会出现。它是在荒谷里“先生产、后生活”式地长出来的——最早的厂区在金沙江北岸的弄弄坪，行政与生活中心却在江南的炳草岗，<strong>跨江而治</strong>的格局从第一天就定下了。</p>
+
+  <p class="lead">攀枝花的城市形态在全国都少见：<strong>沿江带状 + 组团式</strong>。山与江把可用的平地切成一块块，城市只能在仁和沟与金沙江两条轴上伸展。总规把它写成“一心两轴四片”：江北的弄弄坪—瓜子坪（工业）、江南的炳草岗—仁和（中心）、城西的格里坪—清香坪（煤电建材）、城东的金江—团山—马店河（钒钛产业）。</p>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-when">1965—1970s</div>
+      <div class="tl-what">第一段：钢铁基地</div>
+      <div class="tl-desc">攀钢在弄弄坪那片逼仄的山坡上建成，1970 年成昆铁路通车、攀钢出铁。“七户人家一棵树”的荒谷变成钢城，人口几乎全部是外地迁入的——<b>攀枝花是一座彻头彻尾的移民城市</b>。</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-when">1990s—2000s</div>
+      <div class="tl-what">第二段：清洁能源基地</div>
+      <div class="tl-desc">二滩水电站（雅砻江）建成投产，攀枝花从“钢城”多了一重身份：水电基地。后来又叠加光伏，形成“水风光氢储”的清洁能源体系。</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-when">2000s—2010s</div>
+      <div class="tl-what">第一次拓宽：向东南，钒钛高新区</div>
+      <div class="tl-desc">金江—团山—马店河一带沿江向东展开，成为钒钛产业主阵地。资源综合利用（高钛型高炉渣提钛、钒电解液、钛材深加工）成为攀枝花区别于普通钢城的技术底牌。</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-when">2011 年至今</div>
+      <div class="tl-what">第二次拓宽：向南，花城新区 / 攀西科技城</div>
+      <div class="tl-desc">老城炳草岗被山与江夹住、无法摊大饼，城市沿仁和沟向南开辟新区：流沙坡、炳四区、渡仁片区、沙沟，规划约 28.8 平方公里。<b>市民中心、政务服务中心、“五馆一院”、中国三线建设博物馆、三线建设干部学院</b>都落在这里——行政功能与城市重心整体南移。累计入住约 3.5 万人，目标是把它从开发新区做成宜居新城。</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-when">2020s 起</div>
+      <div class="tl-what">新格局：“双核引领、三带贯通”</div>
+      <div class="tl-desc">老城综合服务核心（炳草岗—炳三区，做服务）+ 钒钛科创产业核心（钒钛高新区—攀西科技城，做实业）；三条带：金沙江沿江产城发展带、安宁河—大河河谷城镇带（<b>未来城建的黄金主轴</b>，向南直达米易）、南向川滇协同发展带。</div>
+    </div>
+  </div>
+
+  <table class="struct">
+    <thead><tr><th>板块</th><th>位置与内容</th></tr></thead>
+    <tbody>
+      <tr><th>老城区</th><td><b>炳草岗—炳三区</b>（东区）：全市政务、商业、医疗教育、消费文旅的密集区，也是攀枝花真正的“市中心”。<b>江北的弄弄坪、瓜子坪</b>是最老的工业生产片区（攀钢），工矿社区与生活区混杂，正以城市更新为主，不再新增大规模重工业。</td></tr>
+      <tr><th>新城区</th><td><b>花城新区 / 攀西科技城</b>（南，流沙坡—炳四区—渡仁—沙沟）：科技新城、公园新城、宜居新城；<b>仁和河谷新城</b>（大河河谷向南）：品质居住、康养文旅与配套产业；<b>钒钛高新区 / 钒钛新城</b>（东南沿江）：产业主阵地。</td></tr>
+      <tr><th>政府办公区</th><td>市委、市政府仍在<b>东区炳草岗</b>（老城中心）；<b>市民中心与政务服务中心、五馆一院</b>已落到花城新区渡仁片区——行政服务的重心在往南走，这是判断攀枝花城市方向最直观的证据。</td></tr>
+      <tr><th>CBD / 商业中心</th><td>攀枝花<b>没有典型 CBD</b>。商业中心就在炳草岗的老城核心，新的商务办公在花城新区市民中心一带。工业城市 + 山地城市的组合，决定了它是“强中心、弱 CBD”。</td></tr>
+      <tr><th>产业平台</th><td>钒钛高新区锚定“产业发展主阵地、创新驱动示范区”：钛材深加工、绿色钛化工、钒及钒储能（12 万立方米钒电解液、100MW/500MWh 全钒液流储能示范电站）、新能源材料（磷酸锰铁锂）、氢能、绿色磷化工、循环经济七条链。市域另有康养（阳光花城）、现代农业（芒果、枇杷、蔬菜南菜北运）。2024 年东区 600.52 亿、仁和 287.32 亿、米易 210.57 亿、盐边 191.20 亿、西区 105.63 亿。</td></tr>
+    </tbody>
+  </table>
+
+  <div class="aside">
+    <h3>人口这道题</h3>
+    <p>攀枝花常住人口 122.3 万，城镇化率 71.46%（很高），但总量小、老龄化重——建设者那一代是同时期迁入的，也就同时期老去。这是三线建设城市的共同命运：<strong>人口曲线是一条“一次性涌入 + 缓慢老化”的曲线</strong>。它的应对不是抢人，而是换赛道：把冬天 20℃ 的阳光做成康养产业，把钒钛做成新材料，把共同富裕试验区做成留人的理由。</p>
+  </div>
+
+  <div class="dirs">
+    <div class="dir"><div class="h"><span class="arrow">↓</span>南：城建与康养主轴</div><p>花城新区—仁和—安宁河谷，向南直达米易。这是唯一能拿出大片平缓河谷用地的方向，新城、居住、康养、科研都在这条带上。</p><span class="tagx">新城 · 康养 · 宜居</span></div>
+    <div class="dir"><div class="h"><span class="arrow">↘</span>东南 / 东：产业核</div><p>钒钛高新区—金江—团山—马店河，沿江向东。钒钛新材料、钒储能、新能源材料、临港物流，全市实体经济的主要承载面。</p><span class="tagx">钒钛 · 科创</span></div>
+    <div class="dir"><div class="h"><span class="arrow">↑</span>北：安宁河谷与县域</div><p>米易方向：现代农业、阳光康养与河谷城镇带。北面是“县域增长极”，不是主城扩张方向。</p><span class="tagx">农业 · 康养</span></div>
+    <div class="dir"><div class="h"><span class="arrow">←</span>西：老工矿改造</div><p>西区格里坪—清香坪：煤电建材的绿色技改、临港物流、滨江生态修复。西面是“存量提升”，不再上新重工业。</p><span class="tagx">更新 · 技改</span></div>
+  </div>
+
+  <p class="lead"><strong>一句话理解攀枝花：</strong>一座为了把矿、煤、水和铁路凑在一起而凭空造出来的城，前半生靠钢，后半生靠钒钛和阳光；老城被山夹住动不了，于是把未来整个搬到了南边的河谷里。</p>
+</section>
+
+<!-- ========== 伍 上海 ========== -->
+<section id="shanghai">
+  <div class="sec-eyebrow">伍 · 上海</div>
+  <h2 class="sec-title">上海市</h2>
+  <div class="sec-kicker">从一条江开始，到两条轴、五个新城</div>
+
+  <div class="stats">
+    <div class="stat"><div class="k">2024 年 GDP</div><div class="v">53926.71 亿</div><div class="n">增长 5.0%，全国城市首位</div></div>
+    <div class="stat"><div class="k">常住人口</div><div class="v">2480.26 万</div><div class="n">2035 年规划控制在 2500 万左右</div></div>
+    <div class="stat"><div class="k">三次产业比</div><div class="v">0.2 : 21.6 : 78.2</div><div class="n">金融业 8072.73 亿（+7.9%）</div></div>
+    <div class="stat"><div class="k">建设用地</div><div class="v">≤ 3200 km²</div><div class="n">负增长约束，已锁总量</div></div>
+  </div>
+
+  <div class="mapwrap">
+    <svg viewBox="0 0 680 400" role="img" aria-label="上海市域空间结构示意图">
+      <rect x="0" y="0" width="680" height="400" fill="#fbf9f2"/>
+      <!-- 长江口（北） -->
+      <path d="M0 0 h680 v46 L520 34 L360 48 L200 32 L0 44 Z" fill="#dbe7ec"/>
+      <text x="70" y="28" font-family="'Noto Serif SC',serif" font-size="13" fill="#5c7a86">长江口</text>
+      <!-- 杭州湾（南） -->
+      <path d="M0 400 h680 v-42 L520 346 L340 360 L160 344 L0 358 Z" fill="#dbe7ec"/>
+      <text x="70" y="380" font-family="'Noto Serif SC',serif" font-size="13" fill="#5c7a86">杭州湾</text>
+      <!-- 东海（东） -->
+      <path d="M660 40 L680 40 L680 360 L660 356 Z" fill="#eaf1f4"/>
+      <text x="672" y="200" font-family="'Noto Serif SC',serif" font-size="12" fill="#7fa2b0" text-anchor="middle">东海</text>
+      <!-- 黄浦江 -->
+      <path d="M300 60 q-28 60 -6 112 q22 52 -34 96 q-46 38 -22 86" stroke="#8ea9b8" stroke-width="13" fill="none"/>
+      <text x="150" y="150" font-family="'Noto Serif SC',serif" font-size="12" fill="#3f5b66">黄浦江</text>
+      <!-- 苏州河 -->
+      <path d="M180 130 q70 8 118 -4" stroke="#a8c0ca" stroke-width="6" fill="none"/>
+      <text x="176" y="122" font-family="'Noto Sans SC',sans-serif" font-size="10.5" fill="#4f6b78">苏州河</text>
+      <!-- 中心城 / CAZ -->
+      <ellipse cx="256" cy="196" rx="76" ry="62" fill="#3a4a5a" opacity=".82"/>
+      <text x="256" y="186" font-family="'Noto Serif SC',serif" font-size="15" fill="#f2f5f8" text-anchor="middle">中心城 · CAZ</text>
+      <text x="256" y="206" font-family="'Noto Sans SC',sans-serif" font-size="10.5" fill="#cfd8e0" text-anchor="middle">外滩 · 人民广场 · 南京路</text>
+      <text x="256" y="220" font-family="'Noto Sans SC',sans-serif" font-size="10.5" fill="#cfd8e0" text-anchor="middle">老城厢 · 淮海路 · 徐家汇</text>
+      <!-- 市政府 -->
+      <circle cx="238" cy="176" r="6" fill="#b3271e"/>
+      <text x="222" y="164" font-family="'Noto Sans SC',sans-serif" font-size="10" fill="#b3271e">市政府（人民大道 200 号）</text>
+      <!-- 浦东 陆家嘴 -->
+      <rect x="330" y="150" width="96" height="58" rx="9" fill="#b3271e" opacity=".7"/>
+      <text x="378" y="176" font-family="'Noto Serif SC',serif" font-size="14" fill="#fdf1ee" text-anchor="middle">陆家嘴</text>
+      <text x="378" y="194" font-family="'Noto Sans SC',sans-serif" font-size="10.5" fill="#f8ddd8" text-anchor="middle">金融 CBD · 世纪大道</text>
+      <!-- 张江 东 -->
+      <rect x="438" y="150" width="88" height="40" rx="9" fill="#5f7f96" opacity=".75"/>
+      <text x="482" y="175" font-family="'Noto Sans SC',sans-serif" font-size="11.5" fill="#f2f5f8" text-anchor="middle">张江（科学城）</text>
+      <!-- 临港 东南 -->
+      <rect x="520" y="252" width="106" height="44" rx="9" fill="#5f7f96" opacity=".6"/>
+      <text x="573" y="278" font-family="'Noto Sans SC',sans-serif" font-size="11.5" fill="#22394a" text-anchor="middle">临港 / 南汇新城</text>
+      <!-- 金桥 -->
+      <rect x="440" y="86" width="82" height="38" rx="9" fill="#5f7f96" opacity=".45"/>
+      <text x="481" y="109" font-family="'Noto Sans SC',sans-serif" font-size="11" fill="#22394a" text-anchor="middle">金桥</text>
+      <!-- 虹桥 西 -->
+      <rect x="72" y="176" width="106" height="48" rx="9" fill="#5f7f96" opacity=".75"/>
+      <text x="125" y="202" font-family="'Noto Serif SC',serif" font-size="14" fill="#f2f5f8" text-anchor="middle">虹桥</text>
+      <text x="125" y="220" font-family="'Noto Sans SC',sans-serif" font-size="10.5" fill="#cfd8e0" text-anchor="middle">枢纽 · 会展 · 商务</text>
+      <!-- 五大新城 -->
+      <circle cx="104" cy="92" r="20" fill="#c8b899" opacity=".8"/><text x="104" y="96" font-family="'Noto Sans SC',sans-serif" font-size="10.5" fill="#4a3f2a" text-anchor="middle">嘉定</text>
+      <circle cx="66" cy="256" r="20" fill="#c8b899" opacity=".8"/><text x="66" y="260" font-family="'Noto Sans SC',sans-serif" font-size="10.5" fill="#4a3f2a" text-anchor="middle">青浦</text>
+      <circle cx="106" cy="316" r="20" fill="#c8b899" opacity=".8"/><text x="106" y="320" font-family="'Noto Sans SC',sans-serif" font-size="10.5" fill="#4a3f2a" text-anchor="middle">松江</text>
+      <circle cx="230" cy="336" r="20" fill="#c8b899" opacity=".8"/><text x="230" y="340" font-family="'Noto Sans SC',sans-serif" font-size="10.5" fill="#4a3f2a" text-anchor="middle">奉贤</text>
+      <circle cx="562" cy="256" r="20" fill="#c8b899" opacity=".8"/><text x="562" y="300" font-family="'Noto Sans SC',sans-serif" font-size="10.5" fill="#4a3f2a" text-anchor="middle">南汇</text>
+      <!-- 宝山 北 -->
+      <rect x="230" y="62" width="86" height="34" rx="9" fill="#c8b899" opacity=".7"/>
+      <text x="273" y="84" font-family="'Noto Sans SC',sans-serif" font-size="11" fill="#4a3f2a" text-anchor="middle">宝山（钢 · 吴淞）</text>
+      <!-- 金山 西南 -->
+      <rect x="140" y="330" width="76" height="32" rx="9" fill="#c8b899" opacity=".7"/>
+      <text x="178" y="351" font-family="'Noto Sans SC',sans-serif" font-size="11" fill="#4a3f2a" text-anchor="middle">金山（化工）</text>
+      <!-- 两轴 -->
+      <path d="M40 200 h520" stroke="#3a4a5a" stroke-width="2.4" stroke-dasharray="9 6"/>
+      <text x="300" y="196" font-family="'Noto Sans SC',sans-serif" font-size="10.5" fill="#3a4a5a">延安路—世纪大道（东西轴）</text>
+      <path d="M256 256 q-40 60 -18 110" stroke="#3a4a5a" stroke-width="2.4" stroke-dasharray="9 6"/>
+      <text x="120" y="300" font-family="'Noto Sans SC',sans-serif" font-size="10.5" fill="#3a4a5a">黄浦江（南北轴）</text>
+      <!-- 方位 -->
+      <g font-family="'Noto Serif SC',serif" font-size="13" fill="#9a9081">
+        <text x="640" y="70">北 ↑</text>
+        <text x="18" y="70">西</text>
+        <text x="664" y="220">东</text>
+      </g>
+    </svg>
+    <div class="mapcap">上海：“一主、两轴、四翼；多廊、多核、多圈”——中心城沿两轴伸，五个新城在外围各自成核</div>
+  </div>
+
+  <p class="lead"><strong>因何而兴：江海交汇的那条缝。</strong>上海卡在长江入海口与中国海岸线的中点上，背靠太湖平原与整个长江流域腹地。它是“T 字型”水运的交点——<em class="q">货物必须在这里从江换到海、从海换到江</em>。明清时已是“江海通津、东南都会”（棉纺织、沙船、豆麦贸易），1843 年开埠后，租界沿黄浦江与苏州河展开，上海从一座县城变成远东最大的埠。</p>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-when">1843—1930s</div>
+      <div class="tl-what">沿江生长：外滩—南京路—苏州河工厂带</div>
+      <div class="tl-desc">金融贸易贴着黄浦江（外滩），商业沿南京路向西推进，工厂沿苏州河与杨树浦铺开（沪西、沪东工业区）。<b>城市的东西差距就是从这时定下的</b>——所谓“上只角 / 下只角”，是工业在下风下水处、住宅在上风上水处的直接结果。</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-when">1950s—1980s</div>
+      <div class="tl-what">第一次跳出中心城：卫星城与工业区</div>
+      <div class="tl-desc">闵行（机电）、吴泾（化工）、嘉定（科学卫星城，后来是汽车城）、松江、金山石化（1972，杭州湾）、宝钢（1978，长江口北翼）。上海第一次沿“黄浦江—杭州湾—长江口”三个方向铺开，工业把城市骨架拉大了一圈。</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-when">1990 年</div>
+      <div class="tl-what">过江：浦东开发与陆家嘴</div>
+      <div class="tl-desc">陆家嘴金融贸易区设立，CBD 从外滩跨到浦江对岸。“宁要浦西一张床”的说法被这一轮彻底翻掉，上海也第一次有了真正的<b>摩天楼 CBD</b>。</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-when">2000s—2010s</div>
+      <div class="tl-what">枢纽与跨境：虹桥、洋山、世博、自贸区</div>
+      <div class="tl-desc">虹桥枢纽（西，面向长三角）、张江（东，科创）、洋山深水港（东南，跨海到舟山群岛）、世博会带动黄浦江两岸整体更新（2010）、自贸试验区（2013）。上海从“城市”变成“区域枢纽”。</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-when">2019 至今</div>
+      <div class="tl-what">临港新片区 + 五个新城</div>
+      <div class="tl-desc">临港新片区（东南，2019）承担对外开放与先进制造（大飞机、芯片、新能源汽车）；2021 年起重点建设嘉定、青浦、松江、奉贤、南汇五个新城，定位是<b>独立的综合性节点城市</b>，不是睡城。同时“一江一河”两岸贯通，把工业岸线还给市民。</div>
+    </div>
+  </div>
+
+  <table class="struct">
+    <thead><tr><th>板块</th><th>位置与内容</th></tr></thead>
+    <tbody>
+      <tr><th>老城区</th><td><b>老城厢</b>（黄浦，明代城墙范围内，上海县城原址，豫园一带）、<b>外滩—外滩源</b>、<b>南京东路 / 淮海中路</b>（原公共租界与法租界商业街）、武康路—愚园路的花园住宅区、石库门里弄、杨浦滨江与苏州河沿岸的工业遗存。中心城的保护逻辑已从“拆改留”转为<b>“留改拆”，以保护保留为主</b>。</td></tr>
+      <tr><th>新城区</th><td><b>陆家嘴—世纪大道</b>（1990 起）、<b>前滩</b>、<b>徐汇滨江（西岸）</b>、<b>北外滩</b>、<b>苏河湾</b>、<b>大虹桥</b>（西）、<b>张江</b>（东）、<b>金桥</b>（东北）、<b>临港南汇新城</b>（东南）。</td></tr>
+      <tr><th>政府办公区</th><td>市人民政府在<b>黄浦区人民大道 200 号</b>（人民广场，城市的几何原点）；浦东新区政府在<b>世纪大道 2001 号</b>（花木行政中心）——1990 年代的行政东移，本身就是浦东开发的产物。上海是<b>市级主中心 + 十六个区的多中心</b>，没有第二个“市政府级”的单核。</td></tr>
+      <tr><th>CBD / 中心体系</th><td>四级公共活动中心：<b>城市主中心＝中央活动区 CAZ</b>（小陆家嘴、外滩、人民广场、徐家汇等十几个区域，装金融、总部、商务、文化、创新、旅游）；<b>16 个城市副中心</b>（9 个主城副中心如五角场、花木—龙阳路、金桥、张江、虹桥等 + 5 个新城中心 + 金山滨海、崇明城桥）；再加地区中心与社区中心。</td></tr>
+      <tr><th>产业平台</th><td>三二一结构，但工业仍占 21.6%：<b>金融</b>（8072.73 亿，+7.9%；持牌金融机构 1782 家，金融市场成交 3650 万亿元）、<b>信息服务业</b>（6062.33 亿，+12.9%）、三大先导产业（集成电路 +20.8%、生物医药 +3.3%、人工智能 +7.1%）；口岸进出口超 11 万亿元，集装箱吞吐量破纪录。空间上：汽车在嘉定安亭、化工在金山与漕泾、钢铁在宝山、大飞机在浦东、芯片在张江与临港、造船在长兴岛。</td></tr>
+    </tbody>
+  </table>
+
+  <div class="aside">
+    <h3>人口这道题</h3>
+    <p>上海 2024 年常住人口 2480.26 万，规划到 2035 年<strong>控制在 2500 万左右</strong>，建设用地总规模<strong>负增长</strong>、锁定 3200 平方公里以内。这意味着上海已经不是“扩张型城市”，而是<strong>“总量封顶、结构优化”型</strong>：人不许再多，地不许再增，只能靠更新存量、提高地均产出、把功能往外圈的五个新城疏解。所有关于上海的判断，都要放在这个前提下做。</p>
+  </div>
+
+  <div class="dirs">
+    <div class="dir"><div class="h"><span class="arrow">→</span>东：开放与科创</div><p>陆家嘴—张江—金桥—临港，延安路—世纪大道这条东西轴的东半段。金融、科创、先进制造、自贸与口岸功能叠加，是上海最强的增长面。</p><span class="tagx">金融 · 科创 · 制造</span></div>
+    <div class="dir"><div class="h"><span class="arrow">←</span>西：对内辐射</div><p>虹桥枢纽 + 长三角一体化示范区（青浦—吴江—嘉善）+ 沪湖廊道。西向是“上海对长三角输出”的方向，也是进博会与会展经济的承载面。</p><span class="tagx">一体化 · 枢纽</span></div>
+    <div class="dir"><div class="h"><span class="arrow">↑</span>北：产业与生态</div><p>沪宁廊道上的嘉定（汽车）、宝山（吴淞创新城、新材料），再往北是崇明世界级生态岛。北面既有老工业转型，也有生态底线。</p><span class="tagx">转型 · 生态</span></div>
+    <div class="dir"><div class="h"><span class="arrow">↘</span>南 / 东南：滨海与未来</div><p>金山（化工新材料）、奉贤（东方美谷、数字江海）、南汇 / 临港新片区（大飞机、芯片、新能源车、洋山港）。沿湾发展廊道 + 东南的临港，是上海最像“新增量”的一端。</p><span class="tagx">沿湾 · 临港</span></div>
+  </div>
+
+  <p class="lead"><strong>一句话理解上海：</strong>因“江换海”这个必然而生，一百八十年里沿江、过江、跨海三次跳，如今总量封顶，只能靠往外圈的五个新城疏解功能、往存量的更新要效率。</p>
+</section>
+
+<!-- ========== 对照 ========== -->
+<section id="compare">
+  <div class="sec-eyebrow">横向对照</div>
+  <h2 class="sec-title">五张图叠在一起看</h2>
+  <div class="sec-kicker">同一套问题，五种答案</div>
+
+  <table class="cmp">
+    <thead><tr><th>城市</th><th>因何而兴</th><th>城市形态</th><th>人口状态</th><th>最确定的方向</th></tr></thead>
+    <tbody>
+      <tr><th>运城市</th><td>盐池（盐运专城）</td><td>平原单核，南有山湖锁边</td><td>467 万，净流出，城镇化推进中</td><td>北（新城 + 产业）、东北（空港）</td></tr>
+      <tr><th>运城中心城区</th><td>盐务衙署 + 盐商聚落</td><td>四片区组团：老城 / 北部新城 / 空港 / 西部</td><td>破 100 万，靠县域人口进城</td><td>北（行政与产业疏解）</td></tr>
+      <tr><th>象山县</th><td>渔港与海（+ 盐农）</td><td>半岛双核，主城在中、港在南</td><td>57.9 万，常住＞户籍，结构偏老</td><td>南（核电 + 港）、北（融入宁波）</td></tr>
+      <tr><th>攀枝花市</th><td>铁矿 + 煤 + 水能 + 成昆铁路</td><td>沿江带状组团，跨江而治</td><td>122 万，移民城市老化</td><td>南（新城 + 康养）、东南（钒钛）</td></tr>
+      <tr><th>上海市</th><td>江海交汇的转运与交易</td><td>两轴 + 多核 + 五个新城</td><td>2480 万，总量封顶、结构优化</td><td>东（金融科创）、东南（临港）、西（一体化）</td></tr>
+    </tbody>
+  </table>
+
+  <div class="aside">
+    <h3>从这五座城里能提炼出的四条规律</h3>
+    <p><strong>一、起点即约束。</strong>盐池、铁矿、渔港、江口——最早让城市存在的那个东西，同时决定了它不能往哪长（运城的南、攀枝花的山、象山的西）。</p>
+    <p><strong>二、政府往哪搬，城市往哪长。</strong>运城的行政轴北延、象山的行政中心南移、攀枝花的市民中心落到花城新区、上海的区级中心分散化——四座城都用同一条信号。</p>
+    <p><strong>三、CBD 是资本形态的产物。</strong>只有上海有真正的摩天楼 CBD（金融资本要最高最密）；运城、攀枝花是“老城强商业、新区强商务”的双心；象山是三个服务业集群——工业城市与县城本来就不长 CBD。</p>
+    <p><strong>四、人口决定动作。</strong>人在流入就摊大饼（运城向北、象山向南），人不流入就只能换赛道（攀枝花做康养、上海做更新）。看规划图之前，先看人口曲线。</p>
+  </div>
+
+  <h3 style="font-family:var(--serif);font-size:1.15rem;font-weight:700;margin-top:2.6rem;color:var(--ink)">名词小词典</h3>
+  <dl class="gloss">
+    <dt>中心城区</dt><dd>一个城市行政辖区内真正“连片做城”的那部分，通常就是主城 + 紧邻的开发区，与“市域”（全市范围，含县与乡村）相对。总规里对中心城区的管控最细。</dd>
+    <dt>CBD（中央商务区）</dt><dd>商务办公、金融与总部最密集的一小片地，特征是高楼密度与地价双峰。它需要金融/总部类资本支撑，纯工业城市往往没有。</dd>
+    <dt>CAZ（中央活动区）</dt><dd>上海 2035 的用法，比 CBD 更大：不只是办公，还混合文化、旅游、创新、居住的全球城市核心区（小陆家嘴、外滩、人民广场、徐家汇等）。</dd>
+    <dt>组团式 / 带状城市</dt><dd>被山体、江河、矿区切碎，无法摊成完整圆饼的城市形态。攀枝花沿江呈带状、各片区之间靠桥与路连接，是典型样本。</dd>
+    <dt>开发区 / 高新区 / 新城</dt><dd>三级递进：开发区先解决“工业放哪”，高新区解决“技术型产业放哪”，新城则要同时装下产业、居住与公共服务（产城融合）。象山的南部新城、攀枝花的花城新区都在第三级。</dd>
+    <dt>城镇开发边界</dt><dd>国土空间规划画的硬线，城镇建设原则上不能越界。象山县域 2035 年是 106.24 平方公里，中心城区 51.63 平方公里——这是判断“还能长多大”的硬数字。</dd>
+    <dt>同城化</dt><dd>相邻行政区按一个城市来统筹（交通、公共服务、产业布局一体化），运城的“盐临夏”（盐湖—临猗—夏县）就是这一思路。</dd>
+    <dt>退盐还湖</dt><dd>运城把盐池从工业生产基地转为生态与文旅空间的工程，是资源型城市“把产业退掉、把生态还给城市”的代表动作。</dd>
+    <dt>三线建设</dt><dd>1964—1980 年前后国家在中西部纵深地区大规模建设工业与国防体系的战略，攀枝花（1965 建市）是其中最典型的“从无到有”的城市案例。</dd>
+    <dt>五个新城</dt><dd>上海 2035 明确的嘉定、青浦、松江、奉贤、南汇，定位是独立综合性节点城市，规划人口规模 50 万以上，用来把中心城的功能与人口向外疏解。</dd>
+  </dl>
+</section>
+
+<footer class="site-foot">
+  <span>资料来源：各地人民政府 / 统计局公开数据，国土空间总体规划批后公布文本（2024—2025）</span>
+  <span>© zzht</span>
+</footer>
+
+</div>
+</body>
+</html>

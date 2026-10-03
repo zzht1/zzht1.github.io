@@ -1,0 +1,1595 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="《巴比伦柏林》前四季全回顾：魏玛时代背景、四季剧情、贯穿主线图、人物去向与关键名词——第五季开演前的完整补课。ARD / Sky 2017—2026。">
+<title>巴比伦柏林 · Babylon Berlin — 前四季回顾，直抵 1933</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Oswald:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* 做旧海报纸 + 表现主义墨与红 + 暮金 */
+  --bg: #e9e2cf;
+  --bg-deep: #ddd3b9;
+  --paper: #f6f0e0;
+  --paper-deep: #efe7d1;
+  --ink: #211d17;
+  --ink-soft: #554a3a;
+  --ink-faint: #8f8471;
+  --border: #cdc1a4;
+  --border-soft: #dbd1b8;
+  --red: #a0251c;          /* 表现主义猩红 */
+  --red-deep: #7e1d16;
+  --gold: #a67c2e;         /* 黄金二十年代 */
+  --gold-soft: #c9a45c;
+  /* 四季色 */
+  --s1: #8a6a2f;   /* 暗金 · 胶片与吗啡 */
+  --s2: #9c2b22;   /* 猩红 · 政变与炸弹 */
+  --s3: #2f5a78;   /* 钴蓝 · 片场与股灾 */
+  --s4: #3d3348;   /* 墨紫 · 街战与长夜 */
+  --night: #17141d; /* 第五季 · 夜幕 */
+  --mono: 'JetBrains Mono', 'Courier New', monospace;
+  --sans: 'Noto Sans SC', -apple-system, sans-serif;
+  --serif: 'Noto Serif SC', 'STSong', serif;
+  --display: 'Oswald', 'Noto Sans SC', sans-serif;
+  --fraktur: 'UnifrakturMaguntia', 'Noto Serif SC', serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  color: var(--ink);
+  line-height: 1.75;
+  overflow-x: hidden;
+  background-color: var(--bg);
+  background-image:
+    repeating-linear-gradient(0deg, rgba(90,70,40,.03) 0px, rgba(90,70,40,.03) 1px, transparent 1px, transparent 3px),
+    radial-gradient(circle at 88% 12%, rgba(160,37,28,.045), transparent 40%),
+    radial-gradient(circle at 8% 82%, rgba(166,124,46,.05), transparent 42%);
+}
+::selection { background: rgba(160,37,28,.18); color: var(--ink); }
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-deep); }
+::-webkit-scrollbar-thumb { background: #b9ad8e; border-radius: 4px; }
+
+/* back home */
+.back-home {
+  position: fixed; top: 16px; left: 18px; z-index: 120;
+  font-family: var(--mono); font-size: .78rem;
+  color: var(--ink-soft); text-decoration: none;
+  padding: 8px 16px; border-radius: 999px;
+  background: var(--paper); border: 1px solid var(--border);
+  transition: all .25s; letter-spacing: .04em;
+}
+.back-home:hover { color: var(--red); border-color: var(--red); transform: translateX(-2px); }
+
+/* ========================================================
+   HERO · 崩塌的巴别塔
+   ======================================================== */
+.hero {
+  min-height: 94vh;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  text-align: center; padding: 12vh 24px 9vh;
+  position: relative;
+  background: linear-gradient(180deg, var(--bg-deep) 0%, var(--bg) 55%);
+  overflow: hidden;
+}
+.hero-rays {
+  position: absolute; top: -40%; left: 50%; transform: translateX(-50%);
+  width: 160vw; max-width: 1900px; opacity: .07; z-index: 1;
+  pointer-events: none;
+}
+.hero-content { position: relative; z-index: 2; max-width: 940px; }
+.hero-eyebrow {
+  font-family: var(--mono); font-size: .76rem; letter-spacing: .42em;
+  color: var(--red); margin-bottom: 26px; font-weight: 500; text-transform: uppercase;
+}
+.hero h1 {
+  font-family: var(--fraktur);
+  font-size: clamp(3.2rem, 12vw, 8.2rem);
+  font-weight: 400; letter-spacing: .02em; line-height: 1.05;
+  color: var(--ink); margin-bottom: 8px;
+}
+.hero h1 .bb-red { color: var(--red); }
+.hero-subtitle {
+  font-family: var(--serif); font-weight: 900;
+  font-size: clamp(1.15rem, 3vw, 1.7rem);
+  color: var(--ink); letter-spacing: .5em; text-indent: .5em;
+  margin-bottom: .9rem;
+}
+.hero-sub {
+  font-family: var(--display); font-size: clamp(.85rem, 2vw, 1.05rem);
+  font-weight: 300; color: var(--ink-soft); letter-spacing: .22em;
+  margin-bottom: 2.2rem;
+}
+.hero-quote {
+  max-width: 640px; margin: 0 auto 2.2rem;
+  font-family: var(--serif); font-style: italic;
+  color: var(--ink-soft); font-size: 1rem; line-height: 2;
+  padding: 18px 28px; border-left: 2px solid var(--red);
+  background: var(--paper); border-radius: 0 20px 20px 0;
+  text-align: left;
+}
+.hero-quote .author {
+  display: block; font-style: normal; font-family: var(--mono);
+  font-size: .74rem; color: var(--ink-faint); margin-top: 10px; letter-spacing: .08em;
+}
+.hero-meta {
+  display: flex; gap: 2.6rem; justify-content: center; flex-wrap: wrap; margin-top: 1.6rem;
+}
+.hero-meta-item { display: flex; flex-direction: column; align-items: center; gap: .3rem; }
+.hero-meta-item .value {
+  font-family: var(--display); font-size: 2rem; font-weight: 600;
+  color: var(--red); line-height: 1;
+}
+.hero-meta-item .label {
+  font-family: var(--mono); font-size: .7rem; color: var(--ink-faint);
+  letter-spacing: .18em; text-transform: uppercase;
+}
+.scroll-hint {
+  position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  color: var(--ink-faint); font-family: var(--mono); font-size: .72rem;
+  letter-spacing: .25em; text-transform: uppercase; cursor: pointer;
+}
+.scroll-hint .arrow { font-size: 1.1rem; animation: bob 1.8s ease-in-out infinite; }
+@keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+
+/* ========================================================
+   NAV
+   ======================================================== */
+.nav-bar {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--paper);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: flex; overflow-x: auto; scrollbar-width: none;
+  padding: 0 12px;
+}
+.nav-inner::-webkit-scrollbar { display: none; }
+.nav-tab {
+  flex: 0 0 auto; padding: 16px 18px; cursor: pointer;
+  font-family: var(--mono); font-size: .82rem; font-weight: 500;
+  color: var(--ink-soft); letter-spacing: .08em;
+  position: relative; transition: color .25s; white-space: nowrap;
+  user-select: none;
+}
+.nav-tab::after {
+  content: ''; position: absolute; left: 18px; right: 18px; bottom: 0;
+  height: 2px; border-radius: 2px;
+  background: linear-gradient(90deg, var(--red), var(--gold));
+  transform: scaleX(0); transition: transform .3s;
+}
+.nav-tab:hover { color: var(--ink); }
+.nav-tab.active { color: var(--red); }
+.nav-tab.active::after { transform: scaleX(1); }
+
+/* ========================================================
+   SECTIONS
+   ======================================================== */
+.section { max-width: 1100px; margin: 0 auto; padding: 90px 24px 16px; }
+.section.kicker {
+  font-family: var(--fraktur); font-size: 1.5rem; color: var(--red);
+  display: block; margin-bottom: 4px; letter-spacing: .06em;
+}
+.section-title {
+  font-family: var(--serif); font-weight: 900;
+  font-size: clamp(1.7rem, 4vw, 2.3rem);
+  letter-spacing: .12em; color: var(--ink);
+}
+.section-title::after {
+  content: ''; display: block; width: 84px; height: 3px; margin-top: 14px;
+  background: linear-gradient(90deg, var(--red), var(--gold), transparent);
+  border-radius: 2px;
+}
+.section-desc {
+  margin-top: 20px; color: var(--ink-soft); max-width: 780px;
+  font-size: .96rem; line-height: 2; margin-bottom: 12px;
+}
+.section-desc b { color: var(--ink); }
+.fade-in { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* 无声电影字幕卡 intertitle */
+.intertitle {
+  max-width: 720px; margin: 42px auto 8px; padding: 30px 34px 26px;
+  background: var(--paper); text-align: center; position: relative;
+  border: 1px solid var(--ink); border-radius: 4px;
+  box-shadow: 0 0 0 5px var(--paper), 0 0 0 6px var(--border);
+}
+.intertitle::before {
+  content: '❦'; display: block; font-size: 1.1rem; color: var(--red);
+  margin-bottom: 12px; line-height: 1;
+}
+.intertitle p {
+  font-family: var(--serif); font-size: 1.02rem; line-height: 2.1;
+  color: var(--ink); letter-spacing: .04em;
+}
+.intertitle .it-source {
+  display: block; margin-top: 12px; font-family: var(--mono);
+  font-size: .72rem; color: var(--ink-faint); letter-spacing: .12em;
+}
+
+/* ========================================================
+   背景 · 政治光谱卡片
+   ======================================================== */
+.spectrum-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+  gap: 18px; margin-top: 40px;
+}
+.spectrum-card {
+  background: var(--paper); border: 1px solid var(--border);
+  border-radius: 20px; padding: 26px 24px;
+  position: relative; overflow: hidden;
+  transition: transform .3s, border-color .3s;
+}
+.spectrum-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--sp, var(--red)); opacity: .75;
+}
+.spectrum-card:hover { transform: translateY(-4px); border-color: var(--sp, var(--red)); }
+.spectrum-card .sp-no {
+  font-family: var(--mono); font-size: .7rem; color: var(--ink-faint);
+  letter-spacing: .2em; margin-bottom: 8px; text-transform: uppercase;
+}
+.spectrum-card h4 {
+  font-family: var(--serif); font-weight: 900; font-size: 1.12rem;
+  letter-spacing: .06em; margin-bottom: 10px; color: var(--ink);
+}
+.spectrum-card h4 .de {
+  font-family: var(--fraktur); font-weight: 400; font-size: 1.02rem;
+  color: var(--sp, var(--red)); margin-left: 8px;
+}
+.spectrum-card p { font-size: .88rem; color: var(--ink-soft); line-height: 1.9; }
+
+/* ========================================================
+   四季 · 胶片轨道时间线
+   ======================================================== */
+.season-timeline {
+  position: relative; padding-left: 52px; margin-top: 40px;
+}
+.season-timeline::before {
+  content: ''; position: absolute; left: 12px; top: 4px; bottom: 4px;
+  width: 26px; border-radius: 6px;
+  background:
+    repeating-linear-gradient(180deg,
+      rgba(246,240,224,.95) 0px, rgba(246,240,224,.95) 10px,
+      transparent 10px, transparent 24px),
+    linear-gradient(180deg, var(--s1), var(--s2), var(--s3), var(--s4));
+  background-size: 100% 24px, 100% 100%;
+  opacity: .92;
+}
+.season-block { position: relative; margin-bottom: 30px; }
+.season-dot {
+  position: absolute; left: -48px; top: 24px;
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--paper);
+  border: 3px solid var(--sc, var(--s1));
+  z-index: 2; transition: transform .25s;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-size: .82rem; font-weight: 600;
+  color: var(--sc, var(--s1));
+}
+.season-block:hover .season-dot { transform: scale(1.12); }
+.season-header {
+  display: flex; align-items: center; gap: 20px;
+  padding: 22px 26px; cursor: pointer;
+  background: var(--paper); border: 1px solid var(--border);
+  border-radius: 20px; transition: all .3s;
+  position: relative; overflow: hidden;
+}
+.season-header::before {
+  content: ''; position: absolute; top: 0; left: 0; bottom: 0; width: 5px;
+  background: var(--sc, var(--s1));
+}
+.season-block:hover .season-header {
+  border-color: var(--sc, var(--s1));
+  transform: translateX(4px);
+}
+.season-number {
+  font-family: var(--display); font-size: 2.6rem; font-weight: 700;
+  line-height: 1; color: var(--sc, var(--s1));
+  min-width: 54px; letter-spacing: .04em;
+}
+.season-header-text { flex: 1; }
+.season-header-text h3 {
+  font-family: var(--serif); font-weight: 900; font-size: 1.28rem;
+  letter-spacing: .05em; color: var(--ink);
+}
+.season-header-text .season-meta-line {
+  font-family: var(--mono); font-size: .76rem;
+  color: var(--ink-faint); margin-top: 5px; letter-spacing: .03em;
+}
+.countdown-chip {
+  display: inline-block; margin-left: 10px; padding: 2px 10px;
+  border-radius: 999px; background: rgba(160,37,28,.09);
+  color: var(--red); border: 1px solid rgba(160,37,28,.28);
+  font-family: var(--mono); font-size: .68rem; letter-spacing: .05em;
+  vertical-align: 1px;
+}
+.season-toggle {
+  font-size: 1.3rem; color: var(--ink-faint);
+  transition: transform .3s; font-family: var(--mono);
+}
+.season-block.open .season-toggle { transform: rotate(180deg); }
+.season-detail {
+  max-height: 0; overflow: hidden;
+  transition: max-height .5s ease, padding .3s ease;
+  background: var(--paper-deep); border-radius: 0 0 20px 20px;
+  margin-top: -6px; padding: 0 26px;
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.season-block.open .season-detail { max-height: 12000px; padding: 26px; }
+.season-detail-grid {
+  display: grid; grid-template-columns: 1.35fr 1fr;
+  gap: 18px;
+}
+.detail-card {
+  background: var(--paper); border: 1px solid var(--border-soft);
+  border-radius: 16px; padding: 20px 20px;
+}
+.detail-card h4 {
+  font-family: var(--mono); font-size: .74rem; font-weight: 600;
+  letter-spacing: .18em; color: var(--ink-faint);
+  margin-bottom: 12px; text-transform: uppercase;
+  display: flex; align-items: center; gap: 8px;
+  padding-bottom: 8px; border-bottom: 1px dashed var(--border);
+}
+.detail-card h4 .icon { font-size: .9rem; }
+.detail-card p, .detail-card li { font-size: .89rem; color: var(--ink-soft); line-height: 1.92; }
+.detail-card ul { list-style: none; padding: 0; }
+.detail-card ul li { padding: 5px 0 5px 16px; position: relative; }
+.detail-card ul li::before {
+  content: ''; position: absolute; left: 0; top: 14px;
+  width: 6px; height: 6px; background: var(--sc, var(--s1));
+  border-radius: 1px; opacity: .7;
+}
+.detail-card ul li strong { color: var(--ink); font-weight: 600; }
+.char-tag {
+  display: inline-block; padding: 4px 11px; margin: 3px 3px 3px 0;
+  border-radius: 999px; font-size: .78rem;
+  background: var(--paper-deep); border: 1px solid var(--border);
+  color: var(--ink-soft); transition: all .2s; cursor: help;
+  font-family: var(--mono);
+}
+.char-tag:hover { background: var(--paper); color: var(--ink); border-color: var(--sc, var(--s1)); }
+/* 钩子卡：看下一季前记住 */
+.hook-card {
+  grid-column: 1 / -1;
+  background: var(--paper);
+  border: 1px solid var(--border-soft);
+  border-left: 4px solid var(--sc, var(--s1));
+  border-radius: 16px; padding: 20px 22px;
+}
+.hook-card h4 {
+  font-family: var(--serif); font-weight: 900; font-size: 1rem;
+  letter-spacing: .1em; color: var(--sc, var(--s1));
+  margin-bottom: 10px; display: flex; align-items: center; gap: 10px;
+  text-transform: none;
+}
+.hook-card h4::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.hook-card ul { list-style: none; padding: 0; }
+.hook-card li {
+  padding: 7px 0 7px 20px; position: relative;
+  font-size: .9rem; color: var(--ink-soft); line-height: 1.85;
+}
+.hook-card li::before {
+  content: '▸'; position: absolute; left: 2px; top: 7px;
+  color: var(--sc, var(--s1)); font-size: .8rem;
+}
+.hook-card li strong { color: var(--ink); font-weight: 600; }
+
+/* ========================================================
+   三线收敛 · 剧情导读新结构（DESIGN.md 第五节）
+   ======================================================== */
+.season-position {
+  font-family: var(--serif); font-weight: 900; font-size: 1.05rem;
+  line-height: 1.7; color: var(--ink); margin: 4px 0 18px;
+  padding: 15px 20px; background: var(--paper);
+  border: 1px solid var(--border-soft); border-left: 4px solid var(--sc, var(--s1));
+  border-radius: 12px;
+}
+.season-position b { color: var(--sc, var(--s1)); }
+.three-lines {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 14px;
+}
+.line-card {
+  background: var(--paper); border: 1px solid var(--border-soft);
+  border-radius: 16px; padding: 18px 18px 16px; position: relative; overflow: hidden;
+  transition: transform .2s, border-color .2s;
+}
+.line-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: var(--lc, var(--sc, var(--s1)));
+}
+.line-card:hover { transform: translateY(-2px); border-color: var(--lc); }
+.line-card h4 {
+  font-family: var(--mono); font-size: .74rem; font-weight: 600;
+  letter-spacing: .12em; color: var(--lc, var(--sc, var(--s1)));
+  margin-bottom: 10px; display: flex; align-items: center; gap: 8px; text-transform: uppercase;
+}
+.line-card h4 .lc-de {
+  font-family: var(--fraktur); font-size: 1.15rem; font-weight: 400;
+  color: var(--lc, var(--sc, var(--s1)));
+}
+.line-card p { font-size: .87rem; color: var(--ink-soft); line-height: 1.95; }
+.line-card.line-case { --lc: var(--red); }
+.line-card.line-political { --lc: #2f5a78; }
+.line-card.line-character { --lc: var(--gold); }
+.converge-block {
+  background: linear-gradient(180deg, rgba(160,37,28,.06), rgba(160,37,28,0));
+  border: 1px solid var(--border-soft); border-radius: 14px;
+  padding: 16px 20px; margin-bottom: 14px;
+}
+.converge-block h4 {
+  font-family: var(--serif); font-weight: 900; font-size: 1.02rem;
+  letter-spacing: .08em; color: var(--red); margin-bottom: 8px;
+}
+.converge-block p { font-size: .9rem; color: var(--ink-soft); line-height: 1.9; }
+.history-note {
+  background: var(--paper); border: 1px dashed var(--border);
+  border-radius: 14px; padding: 14px 20px; margin-bottom: 16px;
+}
+.history-note h4 {
+  font-family: var(--mono); font-size: .72rem; font-weight: 600;
+  letter-spacing: .16em; color: var(--ink-faint); margin-bottom: 8px; text-transform: uppercase;
+}
+.history-note ul { list-style: none; padding: 0; margin: 0; }
+.history-note li {
+  font-size: .85rem; color: var(--ink-soft); line-height: 1.8;
+  padding: 5px 0 5px 18px; position: relative;
+}
+.history-note li::before {
+  content: ''; position: absolute; left: 0; top: 13px;
+  width: 7px; height: 7px; border-radius: 50%; background: var(--gold); opacity: .85;
+}
+.history-note li b { color: var(--ink); font-weight: 600; }
+@media (max-width: 720px) { .three-lines { grid-template-columns: 1fr; } }
+
+/* ========================================================
+   主线全景图
+   ======================================================== */
+.threads-section { max-width: 1180px; margin: 0 auto; padding: 90px 24px 16px; }
+.thread-diagram-wrap {
+  background: var(--paper); border-radius: 20px; padding: 30px 20px 20px;
+  border: 1px solid var(--border); overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  box-shadow: 0 8px 24px rgba(70,50,20,.08);
+  margin-top: 36px;
+}
+#masterDiagram { width: 100%; min-width: 780px; display: block; }
+.thread-legend {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 10px; margin-top: 24px;
+}
+.thread-legend-item {
+  display: flex; gap: 10px; align-items: flex-start;
+  padding: 10px 14px; border-radius: 12px;
+  background: var(--paper); border: 1px solid var(--border-soft);
+}
+.thread-legend-bar {
+  width: 4px; min-height: 34px; border-radius: 2px; flex-shrink: 0; align-self: stretch;
+}
+.thread-legend-text .tl-name {
+  font-family: var(--mono); font-size: .78rem; font-weight: 600;
+  color: var(--ink); margin-bottom: 2px;
+}
+.thread-legend-text .tl-chars { font-size: .72rem; color: var(--ink-faint); line-height: 1.5; }
+
+/* ========================================================
+   人物
+   ======================================================== */
+.char-controls { display: flex; gap: 8px; flex-wrap: wrap; margin: 30px 0 20px; }
+.filter-btn {
+  padding: 7px 16px; border-radius: 999px;
+  border: 1px solid var(--border); background: var(--paper);
+  color: var(--ink-soft); font-family: var(--mono); font-size: .78rem;
+  cursor: pointer; transition: all .2s;
+}
+.filter-btn:hover { color: var(--ink); border-color: var(--ink-soft); }
+.filter-btn.active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.char-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+  gap: 16px;
+}
+.char-card {
+  background: var(--paper); border: 1px solid var(--border);
+  border-radius: 18px; padding: 20px 20px 18px;
+  position: relative; overflow: hidden;
+  transition: transform .25s, border-color .25s, opacity .3s;
+}
+.char-card::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+  background: var(--fc, var(--red)); border-radius: 0 4px 4px 0;
+}
+.char-card:hover { transform: translateY(-3px); border-color: var(--fc, var(--red)); }
+.char-card.hidden { display: none; }
+.char-card .cc-name {
+  font-family: var(--serif); font-weight: 900; font-size: 1.08rem;
+  letter-spacing: .03em; color: var(--ink);
+}
+.char-card .cc-actor {
+  font-family: var(--mono); font-size: .72rem; color: var(--ink-faint);
+  margin: 2px 0 10px; letter-spacing: .04em;
+}
+.char-card .cc-desc { font-size: .86rem; color: var(--ink-soft); line-height: 1.85; }
+.char-card .cc-now {
+  margin-top: 12px; padding: 10px 12px; border-radius: 10px;
+  background: var(--paper-deep); border: 1px dashed var(--border);
+  font-size: .82rem; color: var(--ink-soft); line-height: 1.7;
+}
+.char-card .cc-now .now-tag {
+  font-family: var(--mono); font-size: .68rem; color: var(--red);
+  letter-spacing: .14em; display: block; margin-bottom: 3px;
+}
+
+/* ========================================================
+   名词
+   ======================================================== */
+.glossary-section { background: var(--bg-deep); padding: 90px 0; }
+.glossary-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+.glossary-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px; margin-top: 36px;
+}
+.glossary-card {
+  background: var(--paper); border: 1px solid var(--border);
+  border-radius: 18px; padding: 22px 22px;
+  transition: transform .25s, border-color .25s;
+}
+.glossary-card:hover { transform: translateY(-3px); border-color: var(--gold); }
+.glossary-card h4 {
+  font-family: var(--serif); font-weight: 900; font-size: 1rem;
+  letter-spacing: .05em; color: var(--ink); margin-bottom: 8px;
+}
+.glossary-card h4 .de {
+  font-family: var(--fraktur); font-weight: 400; color: var(--red);
+  font-size: .95rem; margin-left: 6px;
+}
+.glossary-card p { font-size: .86rem; color: var(--ink-soft); line-height: 1.88; }
+
+/* ========================================================
+   进入第五季 · 暗夜舞场（全页唯一深色区）
+   ======================================================== */
+.finale-section {
+  background: var(--night);
+  color: #e8dfc9;
+  padding: 90px 0 70px;
+  position: relative; overflow: hidden;
+}
+.finale-section::before {
+  content: ''; position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 170vw; height: 170vw; max-width: 2000px; max-height: 2000px;
+  border-radius: 50%;
+  background: repeating-radial-gradient(circle at center,
+    transparent 0px, transparent 54px,
+    rgba(201,164,92,.045) 54px, rgba(201,164,92,.045) 55px);
+  pointer-events: none;
+}
+.finale-inner {
+  max-width: 1100px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1;
+}
+.finale-section .section-title { color: #f2ead6; }
+.finale-section .section-desc { color: #b5a98d; }
+.finale-section .section-title::after {
+  background: linear-gradient(90deg, var(--gold-soft), var(--red), transparent);
+}
+.finale-intertitle {
+  max-width: 760px; margin: 44px auto 10px; padding: 28px 32px;
+  border: 1px solid rgba(201,164,92,.5); border-radius: 4px;
+  text-align: center; background: rgba(23,20,29,.35);
+  box-shadow: 0 0 0 5px rgba(23,20,29,.35), 0 0 0 6px rgba(201,164,92,.25);
+}
+.finale-intertitle::before {
+  content: '✦'; display: block; color: var(--gold-soft); font-size: 1rem;
+  margin-bottom: 12px; line-height: 1;
+}
+.finale-intertitle p {
+  font-family: var(--serif); font-size: 1.04rem; line-height: 2.1;
+  color: #efe6cf; letter-spacing: .04em;
+}
+.finale-intertitle .it-source {
+  display: block; margin-top: 12px; font-family: var(--mono);
+  font-size: .72rem; color: #8f8471; letter-spacing: .12em;
+}
+.finale-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px; margin-top: 40px;
+}
+.finale-card {
+  background: rgba(246,240,224,.045);
+  border: 1px solid rgba(201,164,92,.28);
+  border-radius: 18px; padding: 24px 22px;
+}
+.finale-card h4 {
+  font-family: var(--mono); font-size: .74rem; font-weight: 600;
+  letter-spacing: .2em; color: var(--gold-soft);
+  margin-bottom: 14px; text-transform: uppercase;
+  padding-bottom: 9px; border-bottom: 1px dashed rgba(201,164,92,.3);
+}
+.finale-card p, .finale-card li { font-size: .87rem; color: #cfc4a8; line-height: 1.9; }
+.finale-card ul { list-style: none; padding: 0; }
+.finale-card ul li { padding: 5px 0 5px 16px; position: relative; }
+.finale-card ul li::before {
+  content: ''; position: absolute; left: 0; top: 15px;
+  width: 6px; height: 6px; background: var(--gold-soft);
+  border-radius: 1px; opacity: .8;
+}
+.finale-card ul li strong { color: #f2ead6; font-weight: 600; }
+.dangling-list {
+  margin-top: 44px; padding: 30px 30px;
+  background: rgba(246,240,224,.045);
+  border: 1px solid rgba(201,164,92,.28); border-radius: 20px;
+}
+.dangling-list h4 {
+  font-family: var(--serif); font-weight: 900; font-size: 1.15rem;
+  color: #f2ead6; letter-spacing: .1em; margin-bottom: 16px;
+}
+.dangling-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 8px 26px;
+}
+.dangling-item {
+  padding: 9px 0 9px 20px; position: relative;
+  font-size: .88rem; color: #cfc4a8; line-height: 1.8;
+  border-bottom: 1px solid rgba(201,164,92,.14);
+}
+.dangling-item::before {
+  content: '▸'; position: absolute; left: 0; top: 9px;
+  color: var(--gold-soft); font-size: .8rem;
+}
+.dangling-item strong { color: #f2ead6; font-weight: 600; }
+.finale-close {
+  margin-top: 46px; text-align: center;
+  font-family: var(--serif); font-style: italic;
+  color: #b5a98d; font-size: 1rem; line-height: 2.1;
+}
+.finale-close .de-line {
+  font-family: var(--fraktur); font-style: normal; display: block;
+  font-size: 1.5rem; color: var(--gold-soft); margin-bottom: 8px;
+}
+
+/* ========================================================
+   FOOTER
+   ======================================================== */
+.footer {
+  max-width: 1100px; margin: 0 auto; padding: 30px 24px 52px;
+  border-top: 1px solid var(--border);
+  font-size: .8rem; color: var(--ink-faint); text-align: center;
+}
+.footer a { color: var(--red); text-decoration: none; transition: color .2s; }
+.footer a:hover { color: var(--ink); }
+.footer-mark {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--mono); letter-spacing: .12em;
+}
+
+/* ========================================================
+   RESPONSIVE
+   ======================================================== */
+@media (max-width: 860px) {
+  .season-timeline { padding-left: 44px; }
+  .season-timeline::before { left: 8px; width: 22px; }
+  .season-dot { left: -42px; width: 36px; height: 36px; font-size: .72rem; }
+  .season-detail-grid { grid-template-columns: 1fr; }
+  .season-header { padding: 18px 18px; gap: 14px; }
+  .season-number { font-size: 2rem; min-width: 42px; }
+  .countdown-chip { display: none; }
+}
+@media (max-width: 520px) {
+  .section, .threads-section { padding-top: 66px; }
+  .hero { min-height: 88vh; padding-top: 13vh; }
+  .hero-meta { gap: 1.4rem 1.8rem; }
+  .hero-meta-item .value { font-size: 1.6rem; }
+  .nav-tab { padding: 14px 13px; font-size: .74rem; }
+  .intertitle, .finale-intertitle { padding: 22px 20px; }
+  .thread-legend { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<a href="/" class="back-home">← 返回首页</a>
+
+<!-- ========================================================
+     HERO · 崩塌的巴别塔
+======================================================== -->
+<section class="hero" id="top">
+  <svg class="hero-rays" viewBox="0 0 1200 500" preserveAspectRatio="none" aria-hidden="true">
+    <g stroke="#211d17" stroke-width="1" opacity=".5" fill="none">
+      <path d="M600 0 L600 500"/><path d="M600 0 L380 500"/><path d="M600 0 L820 500"/>
+      <path d="M600 0 L160 500"/><path d="M600 0 L1040 500"/>
+      <path d="M600 0 L-60 480"/><path d="M600 0 L1260 480"/>
+    </g>
+  </svg>
+  <svg style="position:absolute; right:4%; bottom:0; width:min(340px,38vw); opacity:.16; z-index:1;" viewBox="0 0 300 420" aria-hidden="true">
+    <g fill="none" stroke="#211d17" stroke-width="2.4">
+      <rect x="96" y="330" width="120" height="26" transform="rotate(-3 156 343)"/>
+      <rect x="100" y="298" width="112" height="26" transform="rotate(2 156 311)"/>
+      <rect x="98" y="266" width="110" height="26" transform="rotate(-2 153 279)"/>
+      <rect x="104" y="234" width="100" height="26" transform="rotate(3 154 247)"/>
+      <rect x="106" y="202" width="94" height="26" transform="rotate(-4 153 215)"/>
+      <rect x="112" y="170" width="84" height="26" transform="rotate(4 154 183)"/>
+      <rect x="116" y="138" width="74" height="26" transform="rotate(-3 153 151)"/>
+      <rect x="122" y="106" width="62" height="26" transform="rotate(5 153 119)"/>
+      <rect x="128" y="74" width="50" height="26" transform="rotate(-6 153 87)"/>
+      <rect x="136" y="44" width="36" height="24" transform="rotate(7 154 56)"/>
+    </g>
+    <g fill="#a0251c">
+      <circle cx="238" cy="140" r="4"/><circle cx="252" cy="196" r="4"/><circle cx="230" cy="252" r="4"/>
+    </g>
+    <g fill="none" stroke="#211d17" stroke-width="2">
+      <path d="M240 140 q6 -10 0 -18"/><path d="M254 196 q6 -10 0 -18"/><path d="M232 252 q6 -10 0 -18"/>
+    </g>
+  </svg>
+  <div class="hero-content">
+    <span class="hero-eyebrow">ARD · Sky · 2017—2026 · Weimarer Republik</span>
+    <h1><span class="bb-red">B</span>abylon <span class="bb-red">B</span>erlin</h1>
+    <p class="hero-subtitle">巴 比 伦 柏 林</p>
+    
+    <blockquote class="hero-quote">
+      “在德国历史最黑暗的时期，这部剧找到了它最耀眼的时刻：人们战斗、起舞、恳求、背叛、歌唱、尖叫、憎恨、相爱——仿佛没有明天。”
+      <span class="author">— 汤姆·提克威 / 亨克·汉德罗滕 / 阿希姆·冯·博里斯（三位主创谈最终季）</span>
+    </blockquote>
+    <div class="hero-meta">
+      <div class="hero-meta-item"><span class="value">4</span><span class="label">季回顾</span></div>
+      <div class="hero-meta-item"><span class="value">40</span><span class="label">集剧情</span></div>
+      <div class="hero-meta-item"><span class="value">1929→31</span><span class="label">剧中时间</span></div>
+      <div class="hero-meta-item"><span class="value">1933</span><span class="label">第五季终点</span></div>
+    </div>
+  </div>
+  <div class="scroll-hint" onclick="document.getElementById('content').scrollIntoView({behavior:'smooth'})">
+    <span>向下进入柏林</span><span class="arrow">▾</span>
+  </div>
+</section>
+
+<!-- ========================================================
+     NAV
+======================================================== -->
+<nav class="nav-bar" id="content">
+  <div class="nav-inner">
+    <div class="nav-tab active" data-section="background">时代背景</div>
+    <div class="nav-tab" data-section="seasons">四季剧情</div>
+    <div class="nav-tab" data-section="threads">贯穿主线</div>
+    <div class="nav-tab" data-section="characters">人物去向</div>
+    <div class="nav-tab" data-section="glossary">关键名词</div>
+    <div class="nav-tab" data-section="finale">进入第五季</div>
+  </div>
+</nav>
+
+<!-- ========================================================
+     时代背景
+======================================================== -->
+<section class="section fade-in" id="background">
+  <span class="section kicker">Kapitel Eins</span>
+  <h2 class="section-title">时代背景 · 这座城市为什么必然坠落</h2>
+  <p class="section-desc">
+    《巴比伦柏林》的故事发生在<b>魏玛共和国</b>（1919—1933）的最后一程。要看懂第五季的 1933 年，得先明白之前的柏林是一座怎样的城市：地面之上是爵士乐、歌舞厅和有轨电车，地面之下全是干柴——战败的耻辱、天文数字的赔款、街头互砍的准军事组织、靠美国短期贷款硬撑的虚假繁荣。
+  </p>
+  <p class="section-desc">
+    1919 年的《凡尔赛条约》把德国军队限制在十万人、禁止拥有空军。于是军队上层一边供养秘密武装（剧中的“黑色国防军”），一边与苏联合作在境外练兵（Lipetsk 空军基地）；一边散播“背后一刀”神话——军队不是战败的，是被“十一月罪人”从背后出卖的。这套谎言成了整个右翼的政治燃料，也是剧中将军们政变、军火商投机的心理底座。而柏林警察，是这个四面漏风的共和国最后一道防线。
+  </p>
+
+  <div class="spectrum-grid">
+    <div class="spectrum-card" style="--sp:#2f5a78">
+      <div class="sp-no">Die Republik · 01</div>
+      <h4>共和的守护者<span class="de">Republik</span></h4>
+      <p>社民党主导的普鲁士政府，与以政治警察首领 Benda 为代表的共和派警察高层。他们相信法律和程序能挡住街头暴力——直到炸弹在他们自己的书房里爆炸。第五季开始时，这道防线还剩下什么，正是全剧最大的悬念。</p>
+    </div>
+    <div class="spectrum-card" style="--sp:#9c2b22">
+      <div class="sp-no">KPD · 02</div>
+      <h4>共产党与红色阵线<span class="de">Rotfront</span></h4>
+      <p>台尔曼领导的共产党受莫斯科指挥，准军事组织“红色阵线战士同盟”与警察在街头对撞。剧中 1929 年“血五月”（Blutmai）警察向示威人群开枪，是真实历史事件。Völcker 医生、Marie-Luise 等角色属于这个阵营。</p>
+    </div>
+    <div class="spectrum-card" style="--sp:#8a6a2f">
+      <div class="sp-no">NSDAP · 03</div>
+      <h4>纳粹党与冲锋队<span class="de">SA / SS</span></h4>
+      <p>希特勒 1923 年政变失败后转向“合法路线”，冲锋队（SA）负责街头暴力，党卫军（SS）当时只是其内部的小单位。1930 年 9 月大选，纳粹党跃升为国会第二大党。第四季的 Stennes 暴动，就是柏林 SA 对希特勒路线的一次公开造反。</p>
+    </div>
+    <div class="spectrum-card" style="--sp:#3d3348">
+      <div class="sp-no">Die Rechte · 04</div>
+      <h4>旧精英与黑色国防军<span class="de">Kamarilla</span></h4>
+      <p>容克军官团、大工业家、保守政客——他们厌恶共和国甚于厌恶纳粹。剧中的“普兰格塔格”政变（拥立鲁登道夫、迎回皇帝）失败后，这批人（Seegers 将军、Nyssen、Wendt）转而与纳粹合流。第四季 Nyssen 向希特勒献上火箭，正是这条路的终点。</p>
+    </div>
+    <div class="spectrum-card" style="--sp:#a67c2e">
+      <div class="sp-no">Polizei · 05</div>
+      <h4>亚历山大广场警察总局<span class="de">Rotes Schloss</span></h4>
+      <p>“红堡”——全剧最重要的舞台。Gennat 的凶杀组是现代刑侦的摇篮；政治警察对冲左右两翼极端组织；风化组、鉴识科各司其职。Gereon 与 Charlotte 在这里的循环电梯（Paternoster）里初遇。1933 年，这套体制将被它保卫过的人从内部接管。</p>
+    </div>
+    <div class="spectrum-card" style="--sp:#a0251c">
+      <div class="sp-no">Nachtleben · 06</div>
+      <h4>黄金二十年代的地下<span class="de">Moka Efti</span></h4>
+      <p>爵士乐、歌舞、电影工业、可卡因与性产业构成柏林的另一半：白天有人排队领救济，夜里 Moka Efti 座无虚席。这种“末日前的狂欢”气质是全剧的美学底色——第五季的官方说法是：跳完最后一支舞，天就亮了。</p>
+    </div>
+  </div>
+
+  <div class="intertitle">
+    <p>所有人都知道塔下是深渊，<br>但塔顶的音乐实在太好了。</p>
+    <span class="it-source">— 关于巴比伦柏林，也关于这部剧</span>
+  </div>
+</section>
+
+<!-- ========================================================
+     四季剧情
+======================================================== -->
+<section class="section fade-in" id="seasons">
+  <span class="section kicker">Kapitel Zwei</span>
+  <h2 class="section-title">四季剧情 · 从勒索胶片到长夜将至</h2>
+  <p class="section-desc">左侧是胶片轨道——胶片正是全剧的起点（勒索胶片）与中段（片厂谋杀）。每一季的编号旁是<b>距离希特勒上台的倒数天数</b>：这部剧的每一桩案件，都发生在通往 1933 年 1 月 30 日的下坡路上。点击展开。</p>
+
+  <div class="season-timeline">
+
+    <!-- ============ S1 ============ -->
+    <div class="season-block" data-season="1" style="--sc:var(--s1)">
+      <div class="season-dot">I</div>
+      <div class="season-header">
+        <span class="season-number">01</span>
+        <div class="season-header-text">
+          <h3>秘密胶片 · 1929 年春</h3>
+          <div class="season-meta-line">1929.4—5 · 8 集 · 原著《湿鱼》（Der nasse Fisch）<span class="countdown-chip">距 1933.1.30 约 1400 天</span></div>
+        </div>
+        <span class="season-toggle">▾</span>
+      </div>
+      <div class="season-detail">
+        <p class="season-position">1929 年春，科隆警探 Gereon Rath 带着一桩秘密使命来到柏林——他卷进的，是一盘色情勒索胶片、一列苏联黄金列车、和一个被战争撕裂的年轻人；三条线在季末的保险箱前撞了个正着。</p>
+        <div class="three-lines">
+          <div class="line-card line-case">
+            <h4><span class="lc-de">A</span> 案件线</h4>
+            <p><b>起点</b>：Rath 表面借调进柏林风化组扫黄，真实任务来自科隆市长阿登纳——大选前必须找回一盘勒索他的色情胶片并销毁。<b>发展</b>：胶片流进了“亚美尼亚人”Edgar Kasabian 的夜总会保险箱，里面远不止一盘胶片；Rath 与搭档 Bruno 顺线追到地下色情片拍摄窝点，眼看黑帮、政客、警察彼此缠绕。<b>结局</b>：季末 Rath 终于撬开那只保险箱，取回胶片（里面除阿登纳，还有他父亲等一众权贵），当众销毁，把柄就此湮灭。</p>
+          </div>
+          <div class="line-card line-political">
+            <h4><span class="lc-de">B</span> 政治线</h4>
+            <p><b>起点</b>：一列苏联列车开进柏林，末节车厢满载索罗金黄金，托派流亡者 Kardakov、苏联特工与双面“歌女”Svetlana 各怀鬼胎。<b>发展</b>：黑色国防军（一支非法重整军备的地下军队）盯上了列车上的毒气；Rath 的搭档 Bruno 正是这条线上的人。<b>结局</b>：黄金与毒气在季末成了悬案——谁也没能独占，只留下黑国防军第一次清晰的轮廓。</p>
+          </div>
+          <div class="line-card line-character">
+            <h4><span class="lc-de">C</span> 人物线</h4>
+            <p><b>起点</b>：贫民区姑娘 Charlotte 白天在警局凶杀组做临时速记员，夜里在 Moka Efti 伴舞、兼职卖淫养活全家，被 Bruno 逼作眼线。<b>发展</b>：5 月 1 日“血五月”，警察向被禁的工人示威开枪，Rath 的战争创伤当场发作。<b>结局</b>：两个主角都被柏林咬了一口——Charlotte 看清了城市的底，Rath 的手还在抖；而他庆功那夜被下药，遭一名神秘神父雨夜追杀。</p>
+          </div>
+        </div>
+        <div class="converge-block">
+          <h4>季终交汇</h4>
+          <p>三条线在 Edgar 的保险箱前收束：Rath 抢回并销毁了勒索胶片，黄金列车与毒气就此成谜；庆功夜他却被下药，神秘神父在雨夜里追他不放。</p>
+        </div>
+        <div class="history-note">
+          <h4>史实对照</h4>
+          <ul>
+            <li><b>血五月（Blutmai）</b>：1929 年 5 月 1 日，柏林警察向被禁的五一示威者开枪，死者数十人。史实。</li>
+            <li><b>黑色国防军（Schwarze Reichswehr）</b>：规避《凡尔赛条约》的秘密武装，真实存在；剧中政变与毒气线以此为本。</li>
+          </ul>
+        </div>
+        <div class="hook-card">
+          <h4>看完这一季，请记住</h4>
+          <ul>
+            <li>勒索胶片已销毁，但 Rath 被神父追杀——这个悬念直接带进第二季。</li>
+            <li>黄金列车和毒气去向成谜；Bruno 不可信，Benda 正在查黑国防军。</li>
+            <li>Charlotte 懂速记、懂街头、正挨穷——她是后面真正的女主。</li>
+            <li>Greta（Charlotte 好友）已出场，记住她：她是第二、三季最重的悲剧。</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ S2 ============ -->
+    <div class="season-block" data-season="2" style="--sc:var(--s2)">
+      <div class="season-dot">II</div>
+      <div class="season-header">
+        <span class="season-number">02</span>
+        <div class="season-header-text">
+          <h3>政变与炸弹 · 1929 年夏</h3>
+          <div class="season-meta-line">1929.5—夏 · 8 集 · 原著《湿鱼》下半部<span class="countdown-chip">距 1933.1.30 约 1300 天</span></div>
+        </div>
+        <span class="season-toggle">▾</span>
+      </div>
+      <div class="season-detail">
+        <p class="season-position">1929 年夏，红堡印刷厂挖出十五具尸体，Rath 正式调入凶杀组；与此同时一场拥戴旧皇帝的政变正在地下酝酿，而女佣 Greta 手里那枚炸弹，将亲手炸碎共和国最坚固的盾。</p>
+        <div class="three-lines">
+          <div class="line-card line-case">
+            <h4><span class="lc-de">A</span> 案件线</h4>
+            <p><b>起点</b>：托派印刷厂“红堡”的乱葬岗挖出十五具尸体，Rath 借机调入 Gennat 的凶杀组，与 Charlotte 正式并肩。<b>发展</b>：调查顺藤摸瓜，牵出苏联使馆的清洗、黑国防军的非法军火，以及苏联境内 Lipetsk 秘密德军空军基地的证据；政治警察首领 Benda 终于拿到足以起诉 Seegers 等将军的罪证。<b>结局</b>：但兴登堡总统一纸特赦令放了人——案件赢了推理，却输给了权力。</p>
+          </div>
+          <div class="line-card line-political">
+            <h4><span class="lc-de">B</span> 政治线</h4>
+            <p><b>起点</b>：Bruno 倒向黑国防军的政变计划——要在庆典日发难，拥立鲁登道夫为总理、迎回德皇。<b>发展</b>：与此同时，一个更阴毒的局在底层运转：纳粹特工伪装成共产党人，诱使女佣 Greta 在 Benda 书房放下炸弹。<b>结局</b>：政变流产，Benda 与女儿却被炸死；共和最坚固的盾就此碎裂，Greta 顶罪入狱。</p>
+          </div>
+          <div class="line-card line-character">
+            <h4><span class="lc-de">C</span> 人物线</h4>
+            <p><b>起点</b>：季末催眠中，Rath 被迫直面西线记忆，发现他以为阵亡的兄长 Anno 没死——毁容归来、化名心理医生 Schmidt 的正是他。<b>发展</b>：妻子 Helga 携子 Moritz 来到柏林，家庭的裂缝在战争阴影下越撕越大。<b>结局</b>：Bruno 在黄金列车上与 Rath 摊牌，死于毒气爆炸；黄金之谜揭底——Svetlana 是冒名双面间谍、假金条是障眼法、真金藏在罐车夹层，Kardakov 流亡巴黎。</p>
+          </div>
+        </div>
+        <div class="converge-block">
+          <h4>季终交汇</h4>
+          <p>政变、炸案、黄金列车三线在季末汇成一声闷响：Benda 殒命、Bruno 身死、Wendt 接管政治警察。Rath 偷录下的认罪唱片，成了钉死 Wendt 的唯一把柄。</p>
+        </div>
+        <div class="history-note">
+          <h4>史实对照</h4>
+          <ul>
+            <li><b>鲁登道夫（Ludendorff）</b>：一战德军名将，真实人物；战后参与多起右翼政变，剧中拥立对象。</li>
+            <li><b>兴登堡特赦</b>：总统以行政权为将领脱罪，映射魏玛“军权凌驾共和”的真实困局。</li>
+          </ul>
+        </div>
+        <div class="hook-card">
+          <h4>看完这一季，请记住</h4>
+          <ul>
+            <li>Benda 之死＝共和国失去最坚固的盾；Wendt 上位，记住他——他贯穿到第五季。</li>
+            <li>Anno 活着，是心理医生 Schmidt；他与 Rath 的兄弟恩怨是后面的大线。</li>
+            <li>Greta 顶罪，她的死刑是第三季最痛的一笔。</li>
+            <li>Rath 录下了 Wendt 的认罪唱片——证据还在。</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ S3 ============ -->
+    <div class="season-block" data-season="3" style="--sc:var(--s3)">
+      <div class="season-dot">III</div>
+      <div class="season-header">
+        <span class="season-number">03</span>
+        <div class="season-header-text">
+          <h3>恶魔激情 · 1929 年秋</h3>
+          <div class="season-meta-line">1929.9.20—10 月末 · 12 集 · 原著《哑然之死》（Der stumme Tod）<span class="countdown-chip">距 1933.1.30 约 1190 天</span></div>
+        </div>
+        <span class="season-toggle">▾</span>
+      </div>
+      <div class="season-detail">
+        <p class="season-position">1929 年秋，有声电影时代降临，女星在片场被一盏聚光灯砸死；而警局内部的真凶、一桩被加速的死刑、和十月末那场吞没柏林的股灾，把魏玛的体面一层层剥下。</p>
+        <div class="three-lines">
+          <div class="line-card line-case">
+            <h4><span class="lc-de">A</span> 案件线</h4>
+            <p><b>起点</b>：有声电影来临，女星 Betty Winter 在片场被做了手脚的聚光灯砸死，投资二百万马克的黑帮教父 Edgar 施压破案。<b>发展</b>：Rath 的调查搅进片场阴谋、接替者 Lohmann 之死，真凶却出在警局内部——鉴识科技术员 Ullrich 为证明“鉴识科学碾压传统刑侦”，炮制连环杀手假象、伪造证据、直至劫持上司 Gennat。<b>结局</b>：Ullrich 终落网，但警徽之下的裂缝再藏不住。</p>
+          </div>
+          <div class="line-card line-political">
+            <h4><span class="lc-de">B</span> 政治线</h4>
+            <p><b>起点</b>：Wendt 为掩盖 Benda 案真相步步灭口——枪杀特工“Fritz”本尊、把知情人 Greta 的死刑提前执行。<b>发展</b>：他甚至放任外长斯特雷泽曼（史实 1929.10.3 病逝）在权力真空里死去。<b>结局</b>：季末 1929.10.29 华尔街股灾引爆柏林交易所挤兑，探长 Böhm 血本无归、举枪挟持交易所，被 Rath 从自杀边缘劝回。</p>
+          </div>
+          <div class="line-card line-character">
+            <h4><span class="lc-de">C</span> 人物线</h4>
+            <p><b>起点</b>：Charlotte 为救 Greta 四处奔走，律师 Litten 带着缓刑令赶到时，断头台已经落下。<b>发展</b>：Helga 怀着 Rath 的孩子离开他、走向军火商 Nyssen；Moritz 加入希特勒青年团。<b>结局</b>：Rath 在兄长 Schmidt 的“治疗”中戒断吗啡——可这治疗本身，是另一种控制。</p>
+          </div>
+        </div>
+        <div class="converge-block">
+          <h4>季终交汇</h4>
+          <p>Greta 之死＝魏玛司法亲手执行的谋杀；Wendt 全身而退，但 Rath 偷录的认罪唱片仍在。股灾全面爆发，Helga 离开，Nyssen 靠崩盘翻身——所有人都嗅到了长夜的味道。</p>
+        </div>
+        <div class="history-note">
+          <h4>史实对照</h4>
+          <ul>
+            <li><b>古斯塔夫·斯特雷泽曼（Gustav Stresemann）</b>：魏玛外长、诺贝尔和平奖得主，1929.10.3 病逝，史实。</li>
+            <li><b>1929 年华尔街股灾</b>：10 月 29 日“黑色星期二”，引爆全球大萧条；剧中柏林交易所崩盘即此。</li>
+          </ul>
+        </div>
+        <div class="hook-card">
+          <h4>看完这一季，请记住</h4>
+          <ul>
+            <li>Greta 之死是魏玛司法的谋杀；Wendt 脱罪，但认罪唱片在 Rath 手里。</li>
+            <li>Nyssen 靠崩盘翻身，下一步要找的靠山叫希特勒。</li>
+            <li>Moritz 入希特勒青年团；Helga 离开；Rath 戒断吗啡却落入兄长控制。</li>
+            <li>Edgar 的 Moka Efti 帝国照转，妻子 Esther 长成导演。</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ S4 ============ -->
+    <div class="season-block" data-season="4" style="--sc:var(--s4)">
+      <div class="season-dot">IV</div>
+      <div class="season-header">
+        <span class="season-number">04</span>
+        <div class="season-header-text">
+          <h3>长夜将至 · 1930/31 之交</h3>
+          <div class="season-meta-line">1930 岁末—1931.4.1 · 12 集 · 原著《戈德斯坦》（Goldstein）<span class="countdown-chip">距 1933.1.30 约 670 天</span></div>
+        </div>
+        <span class="season-toggle">▾</span>
+      </div>
+      <div class="season-detail">
+        <p class="season-position">1930 岁末至 1931 年春，大萧条把柏林拖进街头暴力；Rath 穿上褐衫卧底冲锋队，Charlotte 扳倒一个私刑组织，而 1931 年 4 月 1 日那场 SA 暴动，被 Wendt 亲手按了回去。</p>
+        <div class="three-lines">
+          <div class="line-card line-case">
+            <h4><span class="lc-de">A</span> 案件线</h4>
+            <p><b>起点</b>：Charlotte 盯上一连串被草草结案为“意外”的流浪儿死亡，挖出由法官 Voss、检察官与警察组成的私刑组织“白手”。<b>发展</b>：其间妹妹 Toni 卷入盗窃与一桩警察被杀案，Charlotte 为护妹丢掉警徽，靠舞蹈马拉松糊口。<b>结局</b>：她终究扳倒“白手”、复职归队——这是四季里她最硬的一次翻身。</p>
+          </div>
+          <div class="line-card line-political">
+            <h4><span class="lc-de">B</span> 政治线</h4>
+            <p><b>起点</b>：Rath 接下全剧最险的任务——卧底冲锋队（SA），接近柏林 SA 头目 Stennes，警方的算盘是挑动 SA 内讧、从内部撕裂纳粹。<b>发展</b>：1931 年 4 月 1 日（史实），Stennes 的 SA 占领纳粹党部与印刷厂公开造反，警方本可坐视纳粹分裂。<b>结局</b>：Wendt 却调来警察武装的 SS 镇压暴动，亲手把纳粹党从内战边缘拉回，向希特勒递上了投名状。</p>
+          </div>
+          <div class="line-card line-character">
+            <h4><span class="lc-de">C</span> 人物线</h4>
+            <p><b>起点</b>：纽约犹太黑帮 Goldstein 为追回家族蓝钻“蓝色罗柴尔德”来到柏林，绑架了 Helga 与 Nyssen 老夫人。<b>发展</b>：真相揭开——当年窃钻的是律师 Wegener；Goldstein 把钻石留给欧洲亲人，乘齐柏林飞艇返美，Helga 获释。<b>结局</b>：地下世界同样洗牌——Edgar 在警察总局的“和谈会”上把各路头目尽数枪杀；Gereon 与 Charlotte 第一次真正走到一起，而 Dr. Schmidt 的院子里，一支由战争伤员组成的灰色“破碎者军团”正在列队。</p>
+          </div>
+        </div>
+        <div class="converge-block">
+          <h4>季终交汇</h4>
+          <p>Stennes 暴动失败，Rath 卧底暴露、九死一生；Wendt 用 SS 按住 SA，完成向纳粹的转身。Goldstein 查明真相返美，Nyssen 颗粒无收、转身向希特勒献上火箭。Edgar 屠场洗牌——所有人都在为 1933 排位。</p>
+        </div>
+        <div class="history-note">
+          <h4>史实对照</h4>
+          <ul>
+            <li><b>Stennes 暴动（Stennes-Revolte）</b>：1931.4.1，柏林 SA 头目 Stennes 公开反叛希特勒，史实；剧中警方镇压使其失败。</li>
+            <li><b>冲锋队（SA）与党卫军（SS）</b>：史实准军事组织；SS 当时尚是 SA 内小单位，剧中已为警察所用。</li>
+          </ul>
+        </div>
+        <div class="hook-card">
+          <h4>大结局 · 距离长夜还有 670 天</h4>
+          <ul>
+            <li>Wendt 用 SS 镇压 SA＝他正式投靠纳粹；这是通向 1933 的关键一步。</li>
+            <li>Nyssen 向希特勒献火箭——军火巨头与纳粹的结合。</li>
+            <li>Gereon 与 Charlotte 第一次真正在一起；Gereon 对兄长说“我不再需要你了”。</li>
+            <li>“破碎者军团”在 Schmidt 院中列队——第五季的关键伏笔。</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div></section>
+
+<!-- ========================================================
+     贯穿主线
+======================================================== -->
+<section class="threads-section fade-in" id="threads">
+  <span class="section kicker">Kapitel Drei</span>
+  <h2 class="section-title">贯穿主线 · 五条线滑向 1933</h2>
+  <p class="section-desc">《巴比伦柏林》没有单一大反派——它的“主线”是历史本身。下图把四条叙事线叠在历史轨道上：每个圆点都是一次转折，右端被涂黑的区域就是第五季。悬停可查看细节。</p>
+
+  <div class="thread-diagram-wrap">
+    <svg id="masterDiagram" viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg" font-family="'Noto Sans SC',sans-serif">
+      <!-- 季度色带 -->
+      <g>
+        <rect x="120" y="46" width="160" height="34" rx="8" fill="#8a6a2f" opacity=".92"/>
+        <rect x="284" y="46" width="156" height="34" rx="8" fill="#9c2b22" opacity=".92"/>
+        <rect x="444" y="46" width="156" height="34" rx="8" fill="#2f5a78" opacity=".92"/>
+        <rect x="604" y="46" width="156" height="34" rx="8" fill="#3d3348" opacity=".92"/>
+        <rect x="764" y="46" width="96" height="34" rx="8" fill="#c8bc9e" opacity=".5"/>
+        <rect x="864" y="46" width="116" height="34" rx="8" fill="#17141d" opacity=".92"/>
+        <text x="200" y="68" text-anchor="middle" font-size="13" fill="#f6f0e0" font-family="'JetBrains Mono',monospace">S1 · 1929 春</text>
+        <text x="362" y="68" text-anchor="middle" font-size="13" fill="#f6f0e0" font-family="'JetBrains Mono',monospace">S2 · 1929 夏</text>
+        <text x="522" y="68" text-anchor="middle" font-size="13" fill="#f6f0e0" font-family="'JetBrains Mono',monospace">S3 · 1929 秋</text>
+        <text x="682" y="68" text-anchor="middle" font-size="13" fill="#f6f0e0" font-family="'JetBrains Mono',monospace">S4 · 1930/31</text>
+        <text x="812" y="68" text-anchor="middle" font-size="12" fill="#8f8471" font-family="'JetBrains Mono',monospace">空白期</text>
+        <text x="922" y="68" text-anchor="middle" font-size="13" fill="#f6f0e0" font-family="'JetBrains Mono',monospace">S5 · 1933</text>
+      </g>
+      <!-- 第五季黑幕 + 红色终止线 -->
+      <rect x="864" y="86" width="116" height="590" fill="#17141d" opacity=".07"/>
+      <line x1="864" y1="86" x2="864" y2="676" stroke="#a0251c" stroke-width="1.6" stroke-dasharray="5 5"/>
+      <text x="864" y="694" text-anchor="middle" font-size="10.5" fill="#a0251c" font-family="'JetBrains Mono',monospace">1933.1.30</text>
+
+      <!-- 车道基线 -->
+      <g stroke-width="2" fill="none">
+        <line x1="120" y1="140" x2="862" y2="140" stroke="#8a8578"/>
+        <line x1="864" y1="140" x2="975" y2="140" stroke="#8a8578" stroke-dasharray="4 4"/>
+        <line x1="120" y1="268" x2="862" y2="268" stroke="#8a6a2f"/>
+        <line x1="864" y1="268" x2="975" y2="268" stroke="#8a6a2f" stroke-dasharray="4 4"/>
+        <line x1="120" y1="396" x2="862" y2="396" stroke="#9c2b22"/>
+        <line x1="864" y1="396" x2="975" y2="396" stroke="#9c2b22" stroke-dasharray="4 4"/>
+        <line x1="120" y1="524" x2="862" y2="524" stroke="#3d3348"/>
+        <line x1="864" y1="524" x2="975" y2="524" stroke="#3d3348" stroke-dasharray="4 4"/>
+        <line x1="120" y1="652" x2="862" y2="652" stroke="#2f5a78"/>
+        <line x1="864" y1="652" x2="975" y2="652" stroke="#2f5a78" stroke-dasharray="4 4"/>
+      </g>
+      <!-- 车道标签 -->
+      <g font-size="12" fill="#554a3a" font-family="'JetBrains Mono',monospace" text-anchor="end">
+        <text x="110" y="144">历史大势</text>
+        <text x="110" y="272">Gereon Rath</text>
+        <text x="110" y="400">Charlotte Ritter</text>
+        <text x="110" y="528">阴谋与权力</text>
+        <text x="110" y="656">夜柏林</text>
+      </g>
+
+      <!-- 历史大势 -->
+      <g font-size="11" fill="#554a3a">
+        <circle cx="152" cy="140" r="5.5" fill="#8a8578" stroke="#f6f0e0" stroke-width="2"><title>1929 年 4 月：Gereon Rath 带着秘密使命抵达柏林</title></circle>
+        <text x="152" y="122" text-anchor="middle">拉特抵柏林</text>
+        <circle cx="252" cy="140" r="5.5" fill="#8a8578" stroke="#f6f0e0" stroke-width="2"><title>1929 年 5 月 1 日血五月：警察向示威人群开枪</title></circle>
+        <text x="252" y="166" text-anchor="middle">血五月</text>
+        <circle cx="474" cy="140" r="5.5" fill="#8a8578" stroke="#f6f0e0" stroke-width="2"><title>1929 年 10 月 3 日：外长斯特雷泽曼中风逝世（剧中 Wendt 见死不救）</title></circle>
+        <text x="474" y="122" text-anchor="middle">斯特雷泽曼病逝</text>
+        <circle cx="588" cy="140" r="5.5" fill="#8a8578" stroke="#f6f0e0" stroke-width="2"><title>1929 年 10 月末：华尔街股灾引发柏林交易所挤兑，第三季终章</title></circle>
+        <text x="588" y="166" text-anchor="middle">股灾爆发</text>
+        <circle cx="742" cy="140" r="5.5" fill="#8a8578" stroke="#f6f0e0" stroke-width="2"><title>1931 年 4 月 1 日：Stennes 暴动（史实），第四季终章</title></circle>
+        <text x="742" y="122" text-anchor="middle">Stennes 暴动</text>
+        <circle cx="798" cy="140" r="5.5" fill="#8a8578" stroke="#f6f0e0" stroke-width="2"><title>1930 年 9 月 14 日国会选举：纳粹党 107 席跃居第二大党（剧中空白期）</title></circle>
+        <text x="798" y="166" text-anchor="middle">纳粹 107 席</text>
+        <circle cx="846" cy="140" r="5.5" fill="#8a8578" stroke="#f6f0e0" stroke-width="2"><title>1931 年夏：信贷危机与银行倒闭潮（空白期）</title></circle>
+        <text x="846" y="122" text-anchor="middle">银行危机</text>
+        <circle cx="906" cy="140" r="5.5" fill="#a0251c" stroke="#f6f0e0" stroke-width="2"><title>1933 年 1 月 30 日：兴登堡任命希特勒为总理，第五季开演</title></circle>
+        <text x="906" y="166" text-anchor="middle" fill="#a0251c">希特勒上台</text>
+        <circle cx="950" cy="140" r="5.5" fill="#a0251c" stroke="#f6f0e0" stroke-width="2"><title>1933 年 2 月 27 日：国会纵火案，第五季终点</title></circle>
+        <text x="950" y="122" text-anchor="middle" fill="#a0251c">国会纵火</text>
+      </g>
+
+      <!-- Gereon Rath -->
+      <g font-size="11" fill="#6d5322">
+        <circle cx="160" cy="268" r="5.5" fill="#8a6a2f" stroke="#f6f0e0" stroke-width="2"><title>吗啡成瘾与战争创伤：他来柏林是替阿登纳找一盘勒索胶片</title></circle>
+        <text x="160" y="250" text-anchor="middle">吗啡与秘密使命</text>
+        <circle cx="428" cy="268" r="5.5" fill="#8a6a2f" stroke="#f6f0e0" stroke-width="2"><title>催眠治疗中揭开战争记忆：哥哥 Anno 没死，就是心理医生 Schmidt</title></circle>
+        <text x="428" y="294" text-anchor="middle">催眠 · 兄长生还</text>
+        <circle cx="530" cy="268" r="5.5" fill="#8a6a2f" stroke="#f6f0e0" stroke-width="2"><title>在兄长的“治疗”中戒断吗啡——治疗本身是另一种控制</title></circle>
+        <text x="530" y="250" text-anchor="middle">戒断与“治疗”</text>
+        <circle cx="652" cy="268" r="5.5" fill="#8a6a2f" stroke="#f6f0e0" stroke-width="2"><title>卧底冲锋队，接近 Stennes，挑动 SA 内讧以撕裂纳粹党</title></circle>
+        <text x="652" y="294" text-anchor="middle">卧底冲锋队</text>
+        <circle cx="756" cy="268" r="5.5" fill="#8a6a2f" stroke="#f6f0e0" stroke-width="2"><title>身份暴露九死一生之后：与 Charlotte 相恋，对哥哥说“我不再需要你了”</title></circle>
+        <text x="756" y="250" text-anchor="middle">戒断后的幸福</text>
+      </g>
+
+      <!-- Charlotte Ritter -->
+      <g font-size="11" fill="#7e221b">
+        <circle cx="172" cy="396" r="5.5" fill="#9c2b22" stroke="#f6f0e0" stroke-width="2"><title>临时速记员、Moka Efti 舞女，被迫给 Bruno 当眼线</title></circle>
+        <text x="172" y="378" text-anchor="middle">速记员 · 舞女</text>
+        <circle cx="404" cy="396" r="5.5" fill="#9c2b22" stroke="#f6f0e0" stroke-width="2"><title>升任凶杀组助理探员——普鲁士第一批女性刑侦人员</title></circle>
+        <text x="404" y="422" text-anchor="middle">晋升凶杀组</text>
+        <circle cx="566" cy="396" r="5.5" fill="#9c2b22" stroke="#f6f0e0" stroke-width="2"><title>没能救下好友 Greta——缓刑令赶到时断头台已落下</title></circle>
+        <text x="566" y="378" text-anchor="middle">Greta 之死</text>
+        <circle cx="668" cy="396" r="5.5" fill="#9c2b22" stroke="#f6f0e0" stroke-width="2"><title>为保护妹妹 Toni 丢掉警徽，靠舞蹈马拉松糊口</title></circle>
+        <text x="668" y="422" text-anchor="middle">停职 · 马拉松</text>
+        <circle cx="762" cy="396" r="5.5" fill="#9c2b22" stroke="#f6f0e0" stroke-width="2"><title>扳倒私刑组织“白手”，复职归队，与 Gereon 相恋</title></circle>
+        <text x="762" y="378" text-anchor="middle">扳倒“白手”复职</text>
+      </g>
+
+      <!-- 阴谋与权力 -->
+      <g font-size="11" fill="#3d3348">
+        <circle cx="204" cy="524" r="5.5" fill="#3d3348" stroke="#f6f0e0" stroke-width="2"><title>黑色国防军：Seegers 将军、Nyssen、Bruno，毒气列车与非法军备</title></circle>
+        <text x="204" y="506" text-anchor="middle">黑色国防军</text>
+        <circle cx="392" cy="524" r="5.5" fill="#3d3348" stroke="#f6f0e0" stroke-width="2"><title>普兰格塔格政变：拥立鲁登道夫、迎回皇帝，失败告终</title></circle>
+        <text x="392" y="550" text-anchor="middle">政变未遂</text>
+        <circle cx="462" cy="524" r="5.5" fill="#3d3348" stroke="#f6f0e0" stroke-width="2"><title>Benda 遇刺：纳粹设局、Greta 被利用，Wendt 渔利上位</title></circle>
+        <text x="462" y="506" text-anchor="middle">Benda 遇刺</text>
+        <circle cx="580" cy="524" r="5.5" fill="#3d3348" stroke="#f6f0e0" stroke-width="2"><title>Wendt 灭口灭到断头台：提前处决 Greta，掩盖 Benda 案真相</title></circle>
+        <text x="580" y="550" text-anchor="middle">处决 Greta 灭口</text>
+        <circle cx="746" cy="524" r="5.5" fill="#3d3348" stroke="#f6f0e0" stroke-width="2"><title>Wendt 用警察武装的 SS 镇压 Stennes 暴动，向纳粹递上投名状；Nyssen 向希特勒献上火箭</title></circle>
+        <text x="746" y="506" text-anchor="middle">旧精英拥抱纳粹</text>
+      </g>
+
+      <!-- 夜柏林 -->
+      <g font-size="11" fill="#2f5a78">
+        <circle cx="220" cy="652" r="5.5" fill="#2f5a78" stroke="#f6f0e0" stroke-width="2"><title>黄金列车：Svetlana 的双面游戏、假金条与罐车夹层里的真金</title></circle>
+        <text x="220" y="634" text-anchor="middle">黄金列车</text>
+        <circle cx="540" cy="652" r="5.5" fill="#2f5a78" stroke="#f6f0e0" stroke-width="2"><title>Edgar 投资有声电影，妻子 Esther 执导《恶魔激情》</title></circle>
+        <text x="540" y="678" text-anchor="middle">Edgar 注资片厂</text>
+        <circle cx="692" cy="652" r="5.5" fill="#2f5a78" stroke="#f6f0e0" stroke-width="2"><title>Goldstein 为家族蓝钻而来，真相大白后乘飞艇返美</title></circle>
+        <text x="692" y="634" text-anchor="middle">Goldstein 与蓝钻</text>
+        <circle cx="772" cy="652" r="5.5" fill="#2f5a78" stroke="#f6f0e0" stroke-width="2"><title>警察总局和谈会上的大屠杀：Edgar 一夜洗牌地下世界</title></circle>
+        <text x="772" y="678" text-anchor="middle">警局大屠杀</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="thread-legend">
+    <div class="thread-legend-item"><div class="thread-legend-bar" style="background:#8a8578"></div><div class="thread-legend-text"><div class="tl-name">历史大势</div><div class="tl-chars">真实事件：血五月、股灾、Stennes 暴动、1933 夺权</div></div></div>
+    <div class="thread-legend-item"><div class="thread-legend-bar" style="background:#8a6a2f"></div><div class="thread-legend-text"><div class="tl-name">Gereon Rath</div><div class="tl-chars">创伤与成瘾 → 兄长的秘密 → 卧底 → 短暂的幸福</div></div></div>
+    <div class="thread-legend-item"><div class="thread-legend-bar" style="background:#9c2b22"></div><div class="thread-legend-text"><div class="tl-name">Charlotte Ritter</div><div class="tl-chars">速记员 → 凶杀组 → 停职 → 复职警探</div></div></div>
+    <div class="thread-legend-item"><div class="thread-legend-bar" style="background:#3d3348"></div><div class="thread-legend-text"><div class="tl-name">阴谋与权力</div><div class="tl-chars">黑色国防军 → Wendt 上位 → 旧精英拥抱纳粹</div></div></div>
+    <div class="thread-legend-item"><div class="thread-legend-bar" style="background:#2f5a78"></div><div class="thread-legend-text"><div class="tl-name">夜柏林</div><div class="tl-chars">黄金列车 → Moka Efti 与片厂 → Edgar 的地下王国</div></div></div>
+  </div>
+</section>
+
+<!-- ========================================================
+     人物
+======================================================== -->
+<section class="section fade-in" id="characters">
+  <span class="section kicker">Kapitel Vier</span>
+  <h2 class="section-title">人物去向 · 第四季结束时他们在哪里</h2>
+  <p class="section-desc">按阵营筛选。每张卡片末尾是第四季大结局时的人物状态——这就是你进入第五季时每个人身上的“存档”。</p>
+
+  <div class="char-controls">
+    <div class="filter-btn active" data-f="all">全部</div>
+    <div class="filter-btn" data-f="police">警察系统</div>
+    <div class="filter-btn" data-f="private">家人与私人</div>
+    <div class="filter-btn" data-f="night">夜柏林 · 犯罪</div>
+    <div class="filter-btn" data-f="power">政治与阴谋</div>
+  </div>
+
+  <div class="char-grid">
+
+    <div class="char-card" data-f="police" style="--fc:#2f5a78">
+      <div class="cc-name">Gereon Rath</div>
+      <div class="cc-actor">Volker Bruch</div>
+      <div class="cc-desc">科隆来的警探：风化组 → 凶杀组骨干。一战西线老兵，PTSD 与吗啡缠斗了三季；第四季穿上 SA 褐衫卧底。</div>
+      <div class="cc-now"><span class="now-tag">S4 末状态</span>戒断成功，与 Charlotte 相恋，向哥哥宣告“我不再需要你了”——黑暗降临前难得的平静。</div>
+    </div>
+
+    <div class="char-card" data-f="police" style="--fc:#2f5a78">
+      <div class="cc-name">Charlotte “Lotte” Ritter</div>
+      <div class="cc-actor">Liv Lisa Fries</div>
+      <div class="cc-desc">贫民区长女，Moka Efti 舞女、警局临时速记员；凭才干与执拗成为凶杀组第一批女刑侦人员。</div>
+      <div class="cc-now"><span class="now-tag">S4 末状态</span>扳倒“白手”后复职，确认了同母异父的兄弟，与 Gereon 相恋。第五季由她挑大梁查连环谋杀。</div>
+    </div>
+
+    <div class="char-card" data-f="police" style="--fc:#2f5a78">
+      <div class="cc-name">Bruno Wolter</div>
+      <div class="cc-actor">Peter Kurth</div>
+      <div class="cc-desc">Gereon 在风化组的老大哥式搭档，黑色国防军同谋，一边替 Gereon 打掩护一边把他往坑里带。</div>
+      <div class="cc-now"><span class="now-tag">结局（S2）</span>黄金列车上与 Gereon 摊牌，死于毒气爆炸。</div>
+    </div>
+
+    <div class="char-card" data-f="police" style="--fc:#2f5a78">
+      <div class="cc-name">August Benda</div>
+      <div class="cc-actor">Matthias Brandt</div>
+      <div class="cc-desc">政治警察首领，犹太裔，魏玛法制最忠诚的守夜人；黑国防军最忌惮的人。</div>
+      <div class="cc-now"><span class="now-tag">结局（S2）</span>被纳粹设局、Greta 误置的炸弹炸死于书房，与女儿同殁。他的死是共和派的转折点。</div>
+    </div>
+
+    <div class="char-card" data-f="police" style="--fc:#2f5a78">
+      <div class="cc-name">Ernst Gennat</div>
+      <div class="cc-actor">Udo Samel</div>
+      <div class="cc-desc">凶杀组组长，绰号“亚历山大广场的佛陀”——历史上真实存在的现代刑侦奠基人。</div>
+      <div class="cc-now"><span class="now-tag">S4 末状态</span>仍执掌凶杀组。1933 年，这位法制的信徒将迎来最难堪的一年。</div>
+    </div>
+
+    <div class="char-card" data-f="police" style="--fc:#2f5a78">
+      <div class="cc-name">Wilhelm Böhm</div>
+      <div class="cc-actor">Godehard Giese</div>
+      <div class="cc-desc">凶杀组探长，粗声粗气的保守派，对 Charlotte 的晋升百般刁难，办案却是硬手。</div>
+      <div class="cc-now"><span class="now-tag">S4 末状态</span>仍在凶杀组（S3 股灾中几乎破产，被 Rath 从自杀边缘劝回）。</div>
+    </div>
+
+    <div class="char-card" data-f="police" style="--fc:#2f5a78">
+      <div class="cc-name">Reinhold Gräf</div>
+      <div class="cc-actor">Christian Friedel</div>
+      <div class="cc-desc">警局摄影师，Gereon 最忠实的战友，S2 曾随他飞赴 Lipetsk 秘密基地取证。</div>
+      <div class="cc-now"><span class="now-tag">S4 末状态</span>仍在警局。第五季将由他先摸到失踪案的线索。</div>
+    </div>
+
+    <div class="char-card" data-f="police" style="--fc:#2f5a78">
+      <div class="cc-name">Leopold Ullrich</div>
+      <div class="cc-actor">Luc Feit</div>
+      <div class="cc-desc">鉴识科技术员，第三季的真正反派：为证明鉴识科学的优越性，炮制连环杀手骗局、伪造证据。</div>
+      <div class="cc-now"><span class="now-tag">结局（S3）</span>罪行败露落网。</div>
+    </div>
+
+    <div class="char-card" data-f="private" style="--fc:#a67c2e">
+      <div class="cc-name">Greta Overbeck</div>
+      <div class="cc-actor">Leonie Benesch</div>
+      <div class="cc-desc">Charlotte 的好友，Benda 家女佣；被伪装成共产党人的纳粹特工“Fritz”欺骗操控，成了刺杀 Benda 的炸弹手。</div>
+      <div class="cc-now"><span class="now-tag">结局（S3）</span>被 Wendt 提前处决。她的死是全剧对“体制杀人”最重的一笔。</div>
+    </div>
+
+    <div class="char-card" data-f="private" style="--fc:#a67c2e">
+      <div class="cc-name">Helga Rath</div>
+      <div class="cc-actor">Hannah Herzsprung</div>
+      <div class="cc-desc">Gereon 的嫂子、也是他的秘密恋人。S2 携子投奔，S3 怀上 Gereon 的孩子后离去，S4 成为 Nyssen 夫人。</div>
+      <div class="cc-now"><span class="now-tag">S4 末状态</span>遭 Goldstein 绑架后获释；身边是献身纳粹军工的 Nyssen。第五季回归。</div>
+    </div>
+
+    <div class="char-card" data-f="private" style="--fc:#a67c2e">
+      <div class="cc-name">Moritz Rath</div>
+      <div class="cc-actor">Ivo Pietzcker</div>
+      <div class="cc-desc">Anno 之子，Gereon 的侄子。S3 起加入希特勒青年团，S4 曾帮卧底的叔叔打掩护。</div>
+      <div class="cc-now"><span class="now-tag">S4 末状态</span>仍在希特勒青年团——这个家庭在 1933 年将如何分裂，是第五季最揪心的暗线。</div>
+    </div>
+
+    <div class="char-card" data-f="private" style="--fc:#a67c2e">
+      <div class="cc-name">Anno Rath / “Dr. Schmidt”</div>
+      <div class="cc-actor">Jens Harzer</div>
+      <div class="cc-desc">Gereon 的哥哥：一战中被认定阵亡，毁容后化名心理医生归来，用“治疗”之名控制弟弟。</div>
+      <div class="cc-now"><span class="now-tag">S4 末状态</span>Gereon 与他告别后，他继续操练那支由战争伤员组成的灰色“破碎者军团”。第五季的关键人物。</div>
+    </div>
+
+    <div class="char-card" data-f="private" style="--fc:#a67c2e">
+      <div class="cc-name">Elisabeth Behnke</div>
+      <div class="cc-actor">Fritzi Haberlandt</div>
+      <div class="cc-desc">Gereon 的房东太太，Behnke 公寓的女主人；乱世里少有的好人，S4 还搭救过落难的记者 Katelbach。</div>
+      <div class="cc-now"><span class="now-tag">S4 末状态</span>继续经营公寓。第五季回归。</div>
+    </div>
+
+    <div class="char-card" data-f="private" style="--fc:#a67c2e">
+      <div class="cc-name">Toni Ritter</div>
+      <div class="cc-actor">Irene Böhm</div>
+      <div class="cc-desc">Charlotte 的妹妹。S4 卷入盗窃与警察被杀案，是姐姐丢警徽的原因，也间接促成“白手”案的告破。</div>
+      <div class="cc-now"><span class="now-tag">S4 末状态</span>洗清嫌疑回家，结尾遇到了一位盟友。她是 Charlotte 最软的软肋。</div>
+    </div>
+
+    <div class="char-card" data-f="night" style="--fc:#a0251c">
+      <div class="cc-name">Edgar “der Armenier” Kasabian</div>
+      <div class="cc-actor">Mišel Matičević</div>
+      <div class="cc-desc">“亚美尼亚人”，Moka Efti 的主人，夜柏林教父；与 Gereon 维持着危险的共生关系——互相利用，偶尔互相救命。</div>
+      <div class="cc-now"><span class="now-tag">S4 末状态</span>在警察总局的帮派“和谈会”上枪杀各路头目，一战洗牌地下世界。纳粹治下的“外族人”黑帮皇帝，命运可想而知。</div>
+    </div>
+
+    <div class="char-card" data-f="night" style="--fc:#a0251c">
+      <div class="cc-name">Esther Kasabian</div>
+      <div class="cc-desc">Edgar 之妻，从歌女一路成长为电影导演（S3《恶魔激情》），夜柏林帝国真正的经营头脑。</div>
+      <div class="cc-now"><span class="now-tag">S4 末状态</span>在丈夫的屠杀与帝国之间寻找自己的位置。</div>
+    </div>
+
+    <div class="char-card" data-f="night" style="--fc:#a0251c">
+      <div class="cc-name">Walter Weintraub</div>
+      <div class="cc-actor">Ronald Zehrfeld</div>
+      <div class="cc-desc">Edgar 的老搭档，出狱后被卷入 S3 片厂谋杀案、险遭灭口，与 Edgar 的关系经受了最狠的考验。</div>
+      <div class="cc-now"><span class="now-tag">S4 末状态</span>仍是夜柏林的二号人物。</div>
+    </div>
+
+    <div class="char-card" data-f="night" style="--fc:#a0251c">
+      <div class="cc-name">Svetlana Sorokina</div>
+      <div class="cc-actor">Severija Janušauskaitė</div>
+      <div class="cc-desc">化名 Nikoros 的 Moka Efti 歌姬，苏联双面间谍、黄金案的核心——她冒用的是索罗金家继承人的身份。</div>
+      <div class="cc-now"><span class="now-tag">结局（S2）</span>身份败露后消失在巴黎的舞台上。</div>
+    </div>
+
+    <div class="char-card" data-f="night" style="--fc:#a0251c">
+      <div class="cc-name">Alexei Kardakov</div>
+      <div class="cc-actor">Ivan Shvedoff</div>
+      <div class="cc-desc">托派小组领袖，“红堡”清洗的唯一幸存者——躲在粪坑里活了下来，为黄金付出一切。</div>
+      <div class="cc-now"><span class="now-tag">结局（S2）</span>流亡巴黎，最后在台下看 Svetlana 演唱。</div>
+    </div>
+
+    <div class="char-card" data-f="night" style="--fc:#a0251c">
+      <div class="cc-name">Abraham Goldstein</div>
+      <div class="cc-actor">Mark Ivanir</div>
+      <div class="cc-desc">纽约犹太黑帮，S4 为追回家族蓝钻“蓝色罗柴尔德”而来；绑架、复仇、然后是真相。</div>
+      <div class="cc-now"><span class="now-tag">结局（S4）</span>查明窃钻真相后，把钻石留给欧洲亲人，乘齐柏林飞艇返美。</div>
+    </div>
+
+    <div class="char-card" data-f="power" style="--fc:#3d3348">
+      <div class="cc-name">Gottfried Wendt</div>
+      <div class="cc-actor">Benno Fürmann</div>
+      <div class="cc-desc">全剧最持久的权力玩家：从 Benda 的政治警察到内政部顾问，每一次清洗他都站得更稳——Benda 之死、Greta 之死背后都有他的手。</div>
+      <div class="cc-now"><span class="now-tag">S4 末状态</span>用警察武装的 SS 镇压 Stennes 暴动，向纳粹递上投名状。1933 年他在哪一边，已不言自明。</div>
+    </div>
+
+    <div class="char-card" data-f="power" style="--fc:#3d3348">
+      <div class="cc-name">Alfred Nyssen</div>
+      <div class="cc-actor">Lars Eidinger</div>
+      <div class="cc-desc">军火世家继承人的完整堕落轨迹：资助黑国防军政变 → 借股灾做空翻身 → 迎娶 Helga → 向希特勒献上火箭。</div>
+      <div class="cc-now"><span class="now-tag">S4 末状态</span>母亲之死让他失去继承权；他转身为纳粹战争机器造火箭，与元首的晚餐已在日程上。第五季回归。</div>
+    </div>
+
+    <div class="char-card" data-f="power" style="--fc:#3d3348">
+      <div class="cc-name">Marie-Luise Seegers</div>
+      <div class="cc-desc">保守派 Seegers 将军的女儿，身在右翼家庭却为莫斯科当间谍，长期潜伏在 Wendt 的轨道上。</div>
+      <div class="cc-now"><span class="now-tag">结局（S4）</span>把火箭情报送回苏联后，登上飞艇逃往美国。</div>
+    </div>
+
+    <div class="char-card" data-f="power" style="--fc:#3d3348">
+      <div class="cc-name">Malu Seegers</div>
+      <div class="cc-actor">Saskia Rosendahl</div>
+      <div class="cc-desc">S4 新登场的神枪手，与共产党医生 Völcker 密谋刺杀 Wendt 复仇。</div>
+      <div class="cc-now"><span class="now-tag">S4 末状态</span>在设局的关键时刻动摇、收枪。枪还在，仇恨也还在。</div>
+    </div>
+
+    <div class="char-card" data-f="power" style="--fc:#3d3348">
+      <div class="cc-name">Walter Stennes</div>
+      <div class="cc-actor">Hanno Koffler</div>
+      <div class="cc-desc">真实历史人物：柏林 SA 头目，不满希特勒的“合法路线”，主张立刻夺权。</div>
+      <div class="cc-now"><span class="now-tag">结局（S4）</span>1931 年 4 月 1 日率 SA 占领党部造反，被 SS 镇压，兵败下野。</div>
+    </div>
+
+    <div class="char-card" data-f="power" style="--fc:#3d3348">
+      <div class="cc-name">Hans Litten</div>
+      <div class="cc-actor">Trystan Pütter</div>
+      <div class="cc-desc">真实历史人物：人权律师，为 Greta 辩护到断头台下——魏玛法制理想的化身。</div>
+      <div class="cc-now"><span class="now-tag">历史后记</span>1933 年 2 月底被捕，1940 年死于达豪集中营。看第五季时，请记得这句话。</div>
+    </div>
+
+    <div class="char-card" data-f="power" style="--fc:#3d3348">
+      <div class="cc-name">Konrad Adenauer</div>
+      <div class="cc-desc">科隆市长（真实人物，后来的西德首任总理）。一切的起点：那盘勒索胶片，就是他请 Rath 去柏林找的。</div>
+      <div class="cc-now"><span class="now-tag">结局（S1）</span>胶片销毁，把柄湮灭。他将继续在科隆政坛沉浮。</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ========================================================
+     关键名词
+======================================================== -->
+<section class="glossary-section" id="glossary">
+  <div class="glossary-inner fade-in">
+    <span class="section kicker">Kapitel Fünf</span>
+    <h2 class="section-title">关键名词 · 看第五季前的字典</h2>
+    <p class="section-desc">第一季到第四季反复出现、第五季还会继续出现的名词。</p>
+
+    <div class="glossary-grid">
+      <div class="glossary-card">
+        <h4>魏玛共和国<span class="de">Weimarer Republik</span></h4>
+        <p>1919—1933 年，德国第一个也是当时唯一的民主政体，因制宪会议在魏玛召开而得名。天生背负战败与赔款，14 年间内阁更迭二十余次，1933 年 1 月 30 日寿终正寝——第五季讲的就是它的最后五周。</p>
+      </div>
+      <div class="glossary-card">
+        <h4>血五月<span class="de">Blutmai</span></h4>
+        <p>1929 年 5 月 1 日，警察局长策尔吉贝尔禁令下的工人示威演变为流血冲突，警察动用机枪，三十余人死亡。剧中 Gereon 亲历全程，警局随后的洗白运作是全剧“体制自保”主题的第一次亮相。</p>
+      </div>
+      <div class="glossary-card">
+        <h4>黑色国防军<span class="de">Schwarze Reichswehr</span></h4>
+        <p>为规避凡尔赛条约而存在的秘密武装，由国防军高层暗中供养。剧中 Seegers 将军的政变、毒气列车、Lipetsk 秘密空军基地，全都挂在这条线上——它是第二、三季阴谋线的总后台。</p>
+      </div>
+      <div class="glossary-card">
+        <h4>托派与斯大林派<span class="de">Trotzkisten</span></h4>
+        <p>苏联党内斗争的柏林回声：托洛茨基的流亡追随者（Kardakov 的“红堡”小组）被斯大林一派的特工清洗。第一季的黄金列车、Svetlana 的双面身份都属于这条线。</p>
+      </div>
+      <div class="glossary-card">
+        <h4>Moka Efti<span class="de">Nachtflohmarkt</span></h4>
+        <p>剧中最著名的夜总会，Edgar Kasabian 的产业、Charlotte 的第二个家、“黄金二十年代”的化身。这个名字在历史上的柏林真实存在。第五季的最后一支舞，仍要在这里跳。</p>
+      </div>
+      <div class="glossary-card">
+        <h4>戒指会<span class="de">Ringvereine</span></h4>
+        <p>柏林传统的“互助型”犯罪帮派，成员各戴戒指为记。第四季，Edgar 在警察总局的帮派和谈会上把他们连同各路头目一锅端——地下世界的旧秩序就此终结。</p>
+      </div>
+      <div class="glossary-card">
+        <h4>白手<span class="de">Weiße Hand</span></h4>
+        <p>第四季的虚构私刑组织：由法官、检察官与警察组成，把“意外死亡”当作判决执行。它的历史影子是魏玛司法系统对右翼暴力的系统性纵容——这也是 Greta 案的真正题眼。</p>
+      </div>
+      <div class="glossary-card">
+        <h4>冲锋队与党卫军<span class="de">SA / SS</span></h4>
+        <p>SA（冲锋队）是纳粹的街头暴力部队；SS（党卫军）当时只是其内部的小单位。第四季的 Stennes 暴动（1931 年 4 月 1 日，史实）是柏林 SA 对希特勒的公开造反——被 Wendt 用警察武装的 SS 镇压。</p>
+      </div>
+      <div class="glossary-card">
+        <h4>兴登堡<span class="de">Hindenburg</span></h4>
+        <p>一战元帅、魏玛总统。剧中他一纸命令赦免了政变将军；历史上，正是他在 1933 年 1 月 30 日把总理之印交给希特勒——第五季第一集的第一个镜头。</p>
+      </div>
+      <div class="glossary-card">
+        <h4>国会纵火案<span class="de">Reichstagsbrand</span></h4>
+        <p>1933 年 2 月 27 日，国会大厦起火。纳粹以此为由颁布紧急法令，基本权利一夜清零。第五季的时间终点就在这里——“最后的舞蹈”跳到这一夜为止。</p>
+      </div>
+      <div class="glossary-card">
+        <h4>循环电梯<span class="de">Paternoster</span></h4>
+        <p>警局里那部永不停歇的循环升降梯，Gereon 与 Charlotte 初遇的地方，也是全剧最著名的空间符号：车厢一直向上，也一直向下，周而复始——像这座城市的命运。</p>
+      </div>
+      <div class="glossary-card">
+        <h4>原著小说<span class="de">Gereon-Rath-Reihe</span></h4>
+        <p>改编自 Volker Kutscher 的“格列翁·拉特探案”系列：S1—2 取自《湿鱼》、S3 取自《哑然之死》、S4 化用《戈德斯坦》、S5 取自《Märzgefallene（三月分子）》。剧集只借了小说的骨架，血肉是三位主创自己的。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================
+     进入第五季 · 暗夜舞场
+======================================================== -->
+<section class="finale-section" id="finale">
+  <div class="finale-inner fade-in">
+    <span class="section kicker" style="color:var(--gold-soft)">Kapitel Sechs</span>
+    <h2 class="section-title">进入第五季 · 跳完最后一支舞</h2>
+    <p class="section-desc">最终季《巴比伦柏林》第五季已于 2026 年 9 月 10 日在 ARD 全八集上线——全剧在它开始的地方结束：1933 年的柏林。以下信息全部来自官方物料，不含剧透。</p>
+
+    <div class="finale-intertitle">
+      <p>1933 年 2 月，<br>柏林在迷醉与沉沦之间踉跄。</p>
+      <span class="it-source">— 官方宣传片语</span>
+    </div>
+
+    <div class="finale-grid">
+      <div class="finale-card">
+        <h4>时间与格局</h4>
+        <ul>
+          <li><strong>1933 年 1 月 30 日</strong>：兴登堡任命希特勒为总理——本季第一个镜头。</li>
+          <li>约五周的剧情，收束于<strong>国会纵火案</strong>（2 月 27 日）与 <strong>3 月 5 日大选</strong>之间：魏玛的“巴比伦”自由时代就此终结。</li>
+          <li>场景去往科隆、巴黎，最终回到柏林——从夜店跳完最后的舞，走进黎明的冷光。</li>
+        </ul>
+      </div>
+      <div class="finale-card">
+        <h4>官方剧情前提</h4>
+        <ul>
+          <li><strong>Charlotte 查连环命案</strong>：被害者都是一战前线老兵，线索一路回溯到 1918 年。</li>
+          <li><strong>一份敏感档案失踪</strong>：它可能改写希特勒的一战履历——政治炸药，知情者不惜杀人灭口。</li>
+          <li><strong>Gereon 失踪</strong>：首集的新闻舞会上，Charlotte 在共舞人群里认出一名杀人嫌犯；逮捕未成，福斯特医生消失——随之消失的还有 Gereon。</li>
+        </ul>
+      </div>
+      <div class="finale-card">
+        <h4>空白期补课（1931→1933）</h4>
+        <ul>
+          <li><strong>1931 年夏</strong>：信贷危机，银行倒闭潮，大萧条最深处。</li>
+          <li><strong>1932 年</strong>：失业六百万；纳粹成为国会第一大党；普鲁士民主政府被中央接管（“普鲁士政变”）——Benda 们守的堡垒其实早已陷落。</li>
+          <li><strong>1933 年 1 月 30 日</strong>：你回到了剧集开始倒计时的那一天。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="dangling-list">
+      <h4>悬而未决 · 带着这些问题进第五季</h4>
+      <div class="dangling-grid">
+        <div class="dangling-item"><strong>Gereon 与 Charlotte</strong>：刚相爱就撞上 1933——警察将被逼选边，这对恋人的第一段平静期能撑多久？</div>
+        <div class="dangling-item"><strong>Anno 与“破碎者军团”</strong>：被弟弟拒绝后，这位心理医生会拿他那支灰色军团做什么？他与 Gereon 的失踪有关吗？</div>
+        <div class="dangling-item"><strong>Wendt</strong>：镇压 Stennes 暴动的投名状已递，他在新政权里要的位置是什么？Rath 手里还有他的认罪录音。</div>
+        <div class="dangling-item"><strong>Nyssen 与火箭</strong>：与元首的晚餐之后，军工新贵与 Helga 的婚姻将驶向哪里？</div>
+        <div class="dangling-item"><strong>Moritz</strong>：还在希特勒青年团。这个家（Gereon / Helga / Anno / Moritz）将在 1933 年被撕成几块？</div>
+        <div class="dangling-item"><strong>Edgar 的夜柏林</strong>：屠杀之后登顶的“外族人”黑帮皇帝，在纳粹的“一体化”面前如何自保？</div>
+        <div class="dangling-item"><strong>Greta 案的余波</strong>：Litten 已为它押上职业生涯——历史上，他在 1933 年 2 月底被捕。剧中呢？</div>
+        <div class="dangling-item"><strong>1918</strong>：连环命案的动机回到 Gereon 创伤的源头。一战战地医院里发生过什么？</div>
+      </div>
+    </div>
+
+    <div class="finale-grid" style="margin-top:16px">
+      <div class="finale-card">
+        <h4>观演小贴士</h4>
+        <ul>
+          <li>全季 8 集，改编自原著小说《Märzgefallene（三月分子）》，为全剧最终章。</li>
+          <li>新面孔：Clemens Schick、Ulrich Noethen（饰福斯特医生）、Devid Striesow。</li>
+          <li>Bryan Ferry（Roxy Music 主唱）现身歌舞厅，翻唱了本剧标志性曲目《Zu Asche, zu Staub》（化为灰烬，化为尘土）。</li>
+          <li>主创的话：这是关于“捍卫民主这类脆弱体制”的一季——每个人都必须现出原形：服从、冒死反对、内心流亡，或者流亡他乡。</li>
+        </ul>
+      </div>
+      <div class="finale-card">
+        <h4>观看前的心理准备</h4>
+        <p>前四季的每一桩案件，都有一个夏洛克式的答案。第五季没有——它的谜底写在历史书里。这部剧用四十集教会你的事只有一件：<b style="color:#f2ead6">灾难不是一夜到来的，它是被无数个“还能更糟吗”的日子一天天铺成的。</b>现在，你终于走到了那些日子的尽头。</p>
+      </div>
+    </div>
+
+    <div class="finale-close">
+      <span class="de-line">Zu Asche, zu Staub</span>
+      化为灰烬，化为尘土。<br>
+      这是巴比伦的最后一夜——音乐还在放，塔已经开始塌了。
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================
+     FOOTER
+======================================================== -->
+<footer class="footer">
+  <p class="footer-mark">
+    <svg viewBox="0 0 60 20" width="60" height="20" aria-hidden="true">
+      <g fill="none" stroke="#a0251c" stroke-width="1.6">
+        <rect x="22" y="14" width="16" height="4" transform="rotate(-2 30 16)"/>
+        <rect x="23" y="8" width="14" height="4" transform="rotate(2 30 10)"/>
+        <rect x="25" y="2" width="10" height="4" transform="rotate(-4 30 4)"/>
+      </g>
+    </svg>
+    Babylon Berlin · 2017—2026 · ARD Degeto / X Filme / Beta Film · Volker Kutscher 原著
+  </p>
+  <p style="margin-top:.6rem;">本页面为粉丝制作的非官方回顾指南 · 所有版权归版权方所有 · © zzht</p>
+  <p style="margin-top:.8rem;">
+    <a href="https://en.wikipedia.org/wiki/Babylon_Berlin" target="_blank" rel="noopener">Wikipedia</a> ·
+    <a href="https://www.imdb.com/title/tt4378376/" target="_blank" rel="noopener">IMDb</a> ·
+    <a href="/">返回首页</a>
+  </p>
+</footer>
+
+<script>
+// ===== 季节手风琴 =====
+document.querySelectorAll('.season-block').forEach(block => {
+  block.querySelector('.season-header').addEventListener('click', () => {
+    const wasOpen = block.classList.contains('open');
+    document.querySelectorAll('.season-block').forEach(b => b.classList.remove('open'));
+    if (!wasOpen) block.classList.add('open');
+  });
+});
+
+// ===== 导航 + 滚动侦测 =====
+const tabs = document.querySelectorAll('.nav-tab');
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    tabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    const target = document.getElementById(tab.dataset.section);
+    if (target) {
+      const offset = document.querySelector('.nav-bar').offsetHeight;
+      const top = target.getBoundingClientRect().top + window.pageYOffset - offset - 16;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  });
+});
+const sectionIds = ['background', 'seasons', 'threads', 'characters', 'glossary', 'finale'];
+window.addEventListener('scroll', () => {
+  const navHeight = document.querySelector('.nav-bar').offsetHeight;
+  let current = sectionIds[0];
+  sectionIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && el.getBoundingClientRect().top <= navHeight + 60) current = id;
+  });
+  tabs.forEach(t => t.classList.toggle('active', t.dataset.section === current));
+}, { passive: true });
+
+// ===== 人物筛选 =====
+const filterBtns = document.querySelectorAll('.filter-btn');
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.f;
+    document.querySelectorAll('.char-card').forEach(card => {
+      card.classList.toggle('hidden', f !== 'all' && card.dataset.f !== f);
+    });
+  });
+});
+
+// ===== 滚动淡入 =====
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+}, { threshold: 0.06 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

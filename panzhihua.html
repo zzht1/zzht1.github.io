@@ -83,7 +83,6 @@
   .hero-badge {
     display: inline-block;
     background: rgba(255,255,255,0.15);
-    backdrop-filter: blur(10px);
     border: 1px solid rgba(255,255,255,0.25);
     padding: 8px 24px;
     border-radius: 50px;
@@ -103,12 +102,7 @@
     animation: fadeInUp 0.8s ease 0.2s both;
   }
 
-  .hero h1 span {
-    background: linear-gradient(90deg, var(--accent), var(--primary-light));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
+  .hero h1 span {; color: #FFB300;}
 
   .hero-sub {
     font-size: clamp(1rem, 2.5vw, 1.4rem);
@@ -244,12 +238,7 @@
   .section-header h2 {
     font-size: 2.2rem;
     font-weight: 700;
-    margin-bottom: 12px;
-    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
+    margin-bottom: 12px; color: #E85D3A;}
 
   .section-header p {
     color: var(--text-light);
@@ -970,6 +959,19 @@
     box-shadow: 0 2px 8px rgba(0,0,0,0.06);
   }
   .back-home:hover { background: #fff; color: #E85D3A; border-color: #E85D3A; }
+/* ── HERO-AXIS v1 ── */
+.hero{display:flex!important;flex-direction:column!important;
+  justify-content:center!important;align-items:center!important;
+  text-align:center!important;padding-left:24px!important;padding-right:24px!important;}
+.hero>*{margin-left:auto!important;margin-right:auto!important;
+  justify-content:center!important;text-align:center!important;}
+/* 绝对定位的装饰层/水印保持原位，不被裁切或位移 */
+.hero>.hero-particles{grid-column:auto!important;}
+.hero>.scroll-hint{grid-column:auto!important;}
+
+.hero .hero-divider,.hero .hero-scroll,.hero .scroll-hint,.hero .hero-meta,.hero-meta-item{margin-left:auto!important;margin-right:auto!important;}
+.hero h1::after,.hero h2::after{margin-left:auto!important;margin-right:auto!important;}
+/* ── /HERO-AXIS v1 ── */
 </style>
 </head>
 <body>
@@ -981,7 +983,7 @@
   <div class="hero-content">
     <div class="hero-badge">SICHUAN PANZHIHUA</div>
     <h1>攀枝花 <span>7日深度游</span></h1>
-    <p class="hero-sub">阳光花城 · 康养胜地 — 从城东区青年人才公寓出发</p>
+    
     <button class="hero-cta" onclick="scrollToNav()">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
       开始探索

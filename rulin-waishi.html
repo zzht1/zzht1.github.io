@@ -3,892 +3,844 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>儒林外史 · 人物志</title>
+<meta name="description" content="《儒林外史》人物志：吴敬梓笔下士林群像，白描勾勒，冷隽讽刺。收录二十位人物小传、关系图谱、游历地图与情节时间线。">
+<title>儒林外史 · 人物志 — zzht</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+:root {
+  --paper: #f5ecd6;
+  --paper-deep: #ede1c0;
+  --paper-light: #fbf5e2;
+  --paper-warm: #f0e4c8;
+  --ink: #2b2620;
+  --ink-soft: #5c5346;
+  --ink-faint: #8c836f;
+  --red: #a8281c;
+  --red-bright: #c4341e;
+  --red-soft: #b8493a;
+  --jade: #5b7a78;
+  --jade-light: #7a9a98;
+  --brown: #8c7a5e;
+  --brown-light: #a89878;
+  --border: #d9c89e;
+  --border-soft: #e4d8b8;
+  --shadow: rgba(90, 70, 30, 0.08);
+  --serif: 'Noto Serif SC', 'STSong', 'SimSun', serif;
+  --sans: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  color: var(--ink);
+  line-height: 1.8;
+  overflow-x: hidden;
+  /* 泛黄书页底色 + 极淡竖向版心栏线 */
+  background-color: var(--paper);
+  background-image:
+    repeating-linear-gradient(90deg,
+      transparent 0px, transparent 119px,
+      rgba(140,122,94,0.06) 119px, rgba(140,122,94,0.06) 120px,
+      transparent 120px, transparent 240px,
+      rgba(140,122,94,0.10) 240px, rgba(140,122,94,0.10) 241px),
+    linear-gradient(180deg, rgba(237,225,192,0.4) 0%, rgba(245,236,214,0) 400px);
+}
+::selection { background: rgba(168,40,28,0.15); }
 
-  :root {
-    --ink: #2c2c2c;
-    --ink-light: #555;
-    --ink-faint: #888;
-    --paper: #faf6f0;
-    --paper-deep: #f0e8d8;
-    --accent: #8b2500;
-    --accent-light: #c4533a;
-    --accent-bg: rgba(139,37,0,0.06);
-    --gold: #b8860b;
-    --gold-light: #daa520;
-    --jade: #2e8b57;
-    --jade-light: #3cb371;
-    --blue: #4a6fa5;
-    --purple: #6b4c8a;
-    --border: #d4c5a9;
-    --shadow: rgba(44,44,44,0.08);
-    --radius: 8px;
-    --transition: 0.3s ease;
-  }
+/* 顶部朱栏 */
+.top-red-bar {
+  height: 4px;
+  background: var(--red);
+  position: relative;
+  z-index: 50;
+}
+.top-red-bar::after {
+  content: '';
+  position: absolute; left: 0; right: 0; bottom: -2px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--red), transparent);
+  opacity: 0.4;
+}
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+/* back home */
+.back-home {
+  position: fixed; top: 16px; left: 20px; z-index: 120;
+  font-size: 0.82rem; color: var(--ink-soft); text-decoration: none;
+  padding: 6px 14px; border-radius: 999px;
+  background: rgba(245,236,214,0.9);
+  border: 1px solid var(--border);
+  transition: all 0.25s;
+  letter-spacing: 0.05em;
+}
+.back-home:hover { color: var(--red); border-color: var(--red); transform: translateX(-2px); }
 
-  body {
-    font-family: 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
-    background: var(--paper);
-    color: var(--ink);
-    line-height: 1.8;
-    min-height: 100vh;
-  }
+/* ===== HERO：线装书封面 ===== */
+.hero {
+  position: relative;
+  padding: 60px 24px 50px;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 0%, rgba(168,40,28,0.06), transparent 60%),
+    linear-gradient(180deg, var(--paper-warm) 0%, var(--paper) 70%);
+}
+.hero-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: flex; align-items: flex-start; gap: 60px;
+  flex-wrap: wrap;
+}
+.hero-text { flex: 1; min-width: 280px; }
+.hero-eyebrow {
+  font-size: 0.82rem; letter-spacing: 0.3em; color: var(--brown);
+  margin-bottom: 18px; font-weight: 400;
+}
+.hero h1 {
+  font-family: var(--serif); font-size: clamp(2.4rem, 6vw, 3.8rem);
+  font-weight: 900; letter-spacing: 0.12em; color: var(--ink);
+  line-height: 1.15;
+}
+.hero h1 .sep { color: var(--red); opacity: 0.5; margin: 0 0.15em; font-weight: 400; }
+.hero-sub {
+  margin-top: 14px; color: var(--ink-soft); font-size: 0.92rem;
+  letter-spacing: 0.2em; font-weight: 300;
+}
+/* 乌纱帽分隔 */
+.hero-divider {
+  display: flex; align-items: center; gap: 14px;
+  margin: 26px 0 22px;
+}
+.hero-divider::before, .hero-divider::after {
+  content: ''; height: 1px; flex: 0 0 80px;
+}
+.hero-divider::before { background: linear-gradient(90deg, transparent, var(--red)); }
+.hero-divider::after { background: linear-gradient(270deg, transparent, var(--red)); }
+.hero-tagline {
+  font-family: var(--serif); font-size: 1rem; color: var(--ink-soft);
+  line-height: 2.1; max-width: 480px;
+}
+.hero-tagline .em { color: var(--red); font-weight: 600; }
+.hero-stats {
+  display: flex; flex-wrap: wrap; gap: 8px 40px;
+  margin-top: 32px;
+}
+.hero-stat { text-align: left; }
+.hero-stat .val {
+  display: block; font-family: var(--serif); font-weight: 900;
+  font-size: 1.5rem; color: var(--red); line-height: 1.2;
+}
+.hero-stat .lbl { font-size: 0.76rem; color: var(--ink-faint); letter-spacing: 0.1em; margin-top: 2px; }
 
-  /* ===== Header ===== */
-  .hero {
-    position: relative;
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%);
-    color: #fff;
-    text-align: center;
-    padding: 60px 20px 50px;
-    overflow: hidden;
-  }
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-    opacity: 0.5;
-  }
-  .hero-content { position: relative; z-index: 1; }
-  .hero h1 {
-    font-family: 'Noto Serif SC', serif;
-    font-size: 3em;
-    font-weight: 900;
-    letter-spacing: 0.15em;
-    margin-bottom: 8px;
-    text-shadow: 0 2px 20px rgba(0,0,0,0.3);
-  }
-  .hero h1 span {
-    display: inline-block;
-    color: var(--gold-light);
-    font-size: 0.5em;
-    vertical-align: middle;
-    margin: 0 12px;
-    opacity: 0.7;
-  }
-  .hero .subtitle {
-    font-family: 'Noto Serif SC', serif;
-    font-size: 1.15em;
-    color: rgba(255,255,255,0.75);
-    letter-spacing: 0.3em;
-    margin-bottom: 6px;
-  }
-  .hero .author-info {
-    font-size: 0.9em;
-    color: rgba(255,255,255,0.5);
-    margin-top: 10px;
-  }
-  .hero .stats-bar {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    margin-top: 30px;
-    flex-wrap: wrap;
-  }
-  .hero .stat-item {
-    text-align: center;
-  }
-  .hero .stat-num {
-    font-family: 'Noto Serif SC', serif;
-    font-size: 2em;
-    font-weight: 700;
-    color: var(--gold-light);
-  }
-  .hero .stat-label {
-    font-size: 0.85em;
-    color: rgba(255,255,255,0.6);
-  }
+/* 竖标题 + 朱砂方印 */
+.hero-title-block {
+  display: flex; align-items: flex-start; gap: 20px;
+  padding: 10px 20px 10px 40px;
+  border-right: 1px solid var(--border);
+}
+.hero-vtitle {
+  writing-mode: vertical-rl;
+  font-family: var(--serif);
+  font-size: clamp(3rem, 7vw, 4.5rem);
+  font-weight: 900; letter-spacing: 0.22em;
+  color: var(--ink); line-height: 1.05;
+}
+.hero-seal {
+  display: flex; flex-direction: column; gap: 8px;
+  margin-top: 10px;
+}
+.seal-stamp {
+  display: inline-flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  background: var(--red); color: var(--paper-light);
+  font-family: var(--serif); font-weight: 900;
+  font-size: 0.82rem; padding: 8px 11px;
+  border-radius: 3px;
+  transform: rotate(-3deg);
+  letter-spacing: 0.12em; line-height: 1.35;
+  box-shadow: 0 0 0 2px var(--red), 0 0 0 4px var(--paper), 0 3px 10px rgba(168,40,28,0.25);
+}
+.seal-stamp span { display: block; }
 
-  /* ===== Navigation Tabs ===== */
-  .nav-bar {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: rgba(250,246,240,0.95);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--border);
-    padding: 0 20px;
-  }
-  .nav-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    gap: 0;
-    overflow-x: auto;
-  }
-  .nav-tab {
-    padding: 14px 22px;
-    font-size: 0.95em;
-    cursor: pointer;
-    border: none;
-    background: none;
-    color: var(--ink-light);
-    font-family: 'Noto Sans SC', sans-serif;
-    white-space: nowrap;
-    position: relative;
-    transition: color var(--transition);
-  }
-  .nav-tab:hover { color: var(--accent); }
-  .nav-tab.active {
-    color: var(--accent);
-    font-weight: 600;
-  }
-  .nav-tab.active::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 22px; right: 22px;
-    height: 3px;
-    background: var(--accent);
-    border-radius: 3px 3px 0 0;
-  }
+/* ===== NAV ===== */
+.nav-bar {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(245,236,214,0.98);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: flex; overflow-x: auto; scrollbar-width: none;
+  padding: 0 16px;
+}
+.nav-inner::-webkit-scrollbar { display: none; }
+.nav-tab {
+  flex: 0 0 auto; padding: 14px 20px; cursor: pointer;
+  font-size: 0.9rem; color: var(--ink-soft); letter-spacing: 0.08em;
+  position: relative; transition: color 0.25s; white-space: nowrap;
+  user-select: none; background: none; border: none;
+  font-family: var(--sans);
+}
+.nav-tab::after {
+  content: ''; position: absolute; left: 20px; right: 20px; bottom: 0;
+  height: 2px; border-radius: 2px;
+  background: linear-gradient(90deg, var(--red), var(--brown));
+  transform: scaleX(0); transition: transform 0.3s;
+}
+.nav-tab:hover { color: var(--ink); }
+.nav-tab.active { color: var(--red); font-weight: 600; }
+.nav-tab.active::after { transform: scaleX(1); }
 
-  /* ===== Main Layout ===== */
-  .main-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 30px 20px 60px;
-  }
-  .section { display: none; }
-  .section.active { display: block; }
+/* ===== MAIN ===== */
+.main-container {
+  max-width: 1100px; margin: 0 auto;
+  padding: 40px 24px 60px;
+}
+.section { display: none; }
+.section.active { display: block; }
 
-  /* ===== Search & Filter ===== */
-  .toolbar {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 28px;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-  .search-box {
-    flex: 1;
-    min-width: 240px;
-    position: relative;
-  }
-  .search-box input {
-    width: 100%;
-    padding: 12px 16px 12px 44px;
-    border: 2px solid var(--border);
-    border-radius: var(--radius);
-    font-size: 0.95em;
-    font-family: 'Noto Sans SC', sans-serif;
-    background: #fff;
-    transition: border-color var(--transition);
-    outline: none;
-  }
-  .search-box input:focus { border-color: var(--accent); }
-  .search-box::before {
-    content: '🔍';
-    position: absolute;
-    left: 14px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 1.1em;
-    opacity: 0.5;
-  }
+/* section title */
+.sec-title {
+  font-family: var(--serif); font-size: clamp(1.5rem, 3.5vw, 2rem);
+  font-weight: 900; letter-spacing: 0.1em; color: var(--ink);
+  display: flex; align-items: baseline; gap: 14px;
+  flex-wrap: wrap;
+}
+.sec-title::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(90deg, var(--border), transparent);
+  min-width: 60px;
+}
+.sec-title .sub {
+  font-size: 0.78rem; color: var(--ink-faint);
+  font-weight: 400; letter-spacing: 0.12em;
+}
+.sec-desc {
+  margin-top: 14px; color: var(--ink-soft); max-width: 760px;
+  font-size: 0.92rem; line-height: 2;
+}
 
-  .filter-chips {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-  .chip {
-    padding: 8px 16px;
-    border: 1.5px solid var(--border);
-    border-radius: 20px;
-    background: #fff;
-    cursor: pointer;
-    font-size: 0.85em;
-    transition: all var(--transition);
-    font-family: 'Noto Sans SC', sans-serif;
-  }
-  .chip:hover { border-color: var(--accent); color: var(--accent); }
-  .chip.active {
-    background: var(--accent);
-    color: #fff;
-    border-color: var(--accent);
-  }
+/* 乌纱帽小分隔 */
+.hat-sep {
+  display: flex; align-items: center; justify-content: center;
+  gap: 16px; margin: 36px 0;
+}
+.hat-sep::before, .hat-sep::after {
+  content: ''; height: 1px; flex: 1; max-width: 200px;
+}
+.hat-sep::before { background: linear-gradient(90deg, transparent, var(--border)); }
+.hat-sep::after { background: linear-gradient(270deg, transparent, var(--border)); }
 
-  /* ===== Character Cards Grid ===== */
-  .cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
-  }
-  .char-card {
-    background: #fff;
-    border-radius: var(--radius);
-    border: 1px solid var(--border);
-    padding: 24px;
-    cursor: pointer;
-    transition: all var(--transition);
-    position: relative;
-    overflow: hidden;
-  }
-  .char-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px var(--shadow);
-    border-color: var(--accent-light);
-  }
-  .char-card .card-header {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-bottom: 14px;
-  }
-  .char-card .avatar {
-    width: 52px;
-    height: 52px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Noto Serif SC', serif;
-    font-size: 1.3em;
-    font-weight: 700;
-    color: #fff;
-    flex-shrink: 0;
-  }
-  .char-card .card-name {
-    font-family: 'Noto Serif SC', serif;
-    font-size: 1.25em;
-    font-weight: 700;
-    color: var(--ink);
-  }
-  .char-card .card-alias {
-    font-size: 0.82em;
-    color: var(--ink-faint);
-    margin-top: 2px;
-  }
-  .char-card .card-tags {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-    margin-bottom: 12px;
-  }
-  .tag {
-    padding: 3px 10px;
-    border-radius: 12px;
-    font-size: 0.75em;
-    font-weight: 500;
-  }
-  .tag-category { background: var(--accent-bg); color: var(--accent); }
-  .tag-chapter { background: rgba(74,111,165,0.1); color: var(--blue); }
-  .char-card .card-desc {
-    font-size: 0.88em;
-    color: var(--ink-light);
-    line-height: 1.7;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-  .char-card .card-footer {
-    margin-top: 14px;
-    padding-top: 12px;
-    border-top: 1px solid #eee;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.8em;
-    color: var(--ink-faint);
-  }
-  .char-card .card-footer .famous {
-    font-style: italic;
-    max-width: 70%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  .card-indicator {
-    position: absolute;
-    top: 0; left: 0;
-    width: 4px;
-    height: 100%;
-  }
+/* ===== OVERVIEW ===== */
+.ov-intro {
+  background: var(--paper-light);
+  border: 1px solid var(--border-soft); border-radius: 20px;
+  padding: 32px 34px; margin-top: 28px;
+  box-shadow: 0 8px 20px var(--shadow);
+  position: relative;
+}
+.ov-intro::before {
+  content: ''; position: absolute; top: 0; left: 34px; right: 34px; height: 3px;
+  background: linear-gradient(90deg, var(--red), transparent 60%);
+  border-radius: 0 0 4px 4px;
+}
+.ov-intro h2 {
+  font-family: var(--serif); font-size: 1.25rem; font-weight: 700;
+  color: var(--red); margin-bottom: 14px; letter-spacing: 0.06em;
+}
+.ov-intro p {
+  font-size: 0.92rem; color: var(--ink-soft); line-height: 2.1;
+  margin-bottom: 12px;
+}
+.ov-intro p b { color: var(--ink); font-weight: 600; }
+.ov-intro .lede {
+  font-family: var(--serif); font-size: 1.05rem; color: var(--ink);
+  line-height: 2.1;
+}
+.ov-intro .lede::first-letter {
+  font-size: 2.4em; float: left; line-height: 1; padding-right: 0.1em;
+  color: var(--red); font-weight: 900;
+}
+.ov-cats-title {
+  font-family: var(--serif); font-size: 1.05rem; color: var(--ink);
+  margin: 32px 0 16px; letter-spacing: 0.06em;
+}
+.cat-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 14px;
+}
+.cat-card {
+  background: var(--paper-light); border: 1px solid var(--border-soft);
+  border-radius: 18px; padding: 20px 18px;
+  cursor: pointer; transition: all 0.25s;
+  position: relative; overflow: hidden;
+}
+.cat-card::before {
+  content: ''; position: absolute; top: 0; left: 18px; right: 18px; height: 2px;
+  background: var(--gc, var(--red)); opacity: 0.7; border-radius: 0 0 3px 3px;
+}
+.cat-card:hover {
+  transform: translateY(-3px); box-shadow: 0 8px 20px var(--shadow);
+  border-color: var(--gc, var(--red));
+}
+.cat-card .cat-head {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 8px;
+}
+.cat-card .cat-icon {
+  width: 36px; height: 36px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; color: var(--paper-light);
+  background: var(--gc, var(--red));
+  flex-shrink: 0;
+}
+.cat-card .cat-name {
+  font-family: var(--serif); font-size: 1.02rem; font-weight: 700;
+  color: var(--ink); letter-spacing: 0.03em;
+}
+.cat-card .cat-count {
+  font-size: 0.78rem; color: var(--ink-faint); margin-top: 2px;
+}
+.cat-card .cat-desc {
+  font-size: 0.82rem; color: var(--ink-soft); line-height: 1.7; margin-top: 6px;
+}
 
-  /* ===== Modal ===== */
-  .modal-overlay {
-    display: none;
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0,0,0,0.5);
-    z-index: 200;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 40px 20px;
-    overflow-y: auto;
-  }
-  .modal-overlay.show { display: flex; }
-  .modal {
-    background: var(--paper);
-    border-radius: 12px;
-    max-width: 720px;
-    width: 100%;
-    position: relative;
-    animation: modalIn 0.3s ease;
-    overflow: hidden;
-  }
-  @keyframes modalIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .modal-close {
-    position: absolute;
-    top: 16px; right: 16px;
-    width: 36px; height: 36px;
-    border-radius: 50%;
-    border: none;
-    background: rgba(255,255,255,0.9);
-    font-size: 1.3em;
-    cursor: pointer;
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background var(--transition);
-  }
-  .modal-close:hover { background: #fff; }
-  .modal-banner {
-    height: 120px;
-    display: flex;
-    align-items: center;
-    padding: 0 40px;
-    position: relative;
-  }
-  .modal-banner::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 40px;
-    background: linear-gradient(transparent, var(--paper));
-  }
-  .modal-avatar {
-    width: 80px; height: 80px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Noto Serif SC', serif;
-    font-size: 2em;
-    font-weight: 900;
-    color: #fff;
-    border: 4px solid var(--paper);
-    position: relative;
-    z-index: 5;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  }
-  .modal-header-info {
-    margin-left: 20px;
-    position: relative;
-    z-index: 5;
-  }
-  .modal-header-info h2 {
-    font-family: 'Noto Serif SC', serif;
-    font-size: 1.8em;
-    font-weight: 700;
-    color: #fff;
-    text-shadow: 0 1px 6px rgba(0,0,0,0.3);
-  }
-  .modal-header-info .modal-sub {
-    color: rgba(255,255,255,0.8);
-    font-size: 0.9em;
-  }
-  .modal-body {
-    padding: 30px 40px 40px;
-  }
-  .modal-section {
-    margin-bottom: 24px;
-  }
-  .modal-section h3 {
-    font-family: 'Noto Serif SC', serif;
-    font-size: 1.05em;
-    font-weight: 600;
-    color: var(--accent);
-    margin-bottom: 10px;
-    padding-bottom: 6px;
-    border-bottom: 2px solid var(--accent-bg);
-  }
-  .modal-section p, .modal-section ul {
-    font-size: 0.92em;
-    color: var(--ink-light);
-    line-height: 1.9;
-  }
-  .modal-section ul {
-    padding-left: 1.2em;
-  }
-  .modal-section li {
-    margin-bottom: 6px;
-  }
-  .info-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
-  .info-item {
-    background: #fff;
-    padding: 12px 16px;
-    border-radius: var(--radius);
-    border: 1px solid #eee;
-  }
-  .info-item .info-label {
-    font-size: 0.78em;
-    color: var(--ink-faint);
-    margin-bottom: 4px;
-  }
-  .info-item .info-value {
-    font-size: 0.92em;
-    font-weight: 500;
-    color: var(--ink);
-  }
-  .quote-block {
-    background: var(--accent-bg);
-    border-left: 4px solid var(--accent);
-    padding: 16px 20px;
-    border-radius: 0 var(--radius) var(--radius) 0;
-    font-family: 'Noto Serif SC', serif;
-    font-size: 0.95em;
-    color: var(--ink);
-    line-height: 1.8;
-  }
-  .relation-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-  .relation-tag {
-    padding: 6px 14px;
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    font-size: 0.85em;
-    cursor: pointer;
-    transition: all var(--transition);
-  }
-  .relation-tag:hover {
-    background: var(--accent);
-    color: #fff;
-    border-color: var(--accent);
-  }
+/* ===== CHARACTERS：科举金榜 ===== */
+.toolbar {
+  display: flex; gap: 12px; margin: 28px 0 24px;
+  flex-wrap: wrap; align-items: center;
+}
+.search-box {
+  flex: 1; min-width: 220px; position: relative;
+}
+.search-box input {
+  width: 100%; padding: 11px 16px 11px 42px;
+  border: 1.5px solid var(--border); border-radius: 999px;
+  font-size: 0.9rem; font-family: var(--sans);
+  background: var(--paper-light); color: var(--ink);
+  transition: border-color 0.25s; outline: none;
+}
+.search-box input:focus { border-color: var(--red); }
+.search-box input::placeholder { color: var(--ink-faint); }
+.search-box .sb-icon {
+  position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
+  width: 16px; height: 16px; opacity: 0.4;
+}
+.filter-chips {
+  display: flex; gap: 8px; flex-wrap: wrap;
+}
+.chip {
+  padding: 7px 16px; border: 1.5px solid var(--border);
+  border-radius: 999px; background: var(--paper-light);
+  cursor: pointer; font-size: 0.82rem; color: var(--ink-soft);
+  transition: all 0.25s; font-family: var(--sans);
+  letter-spacing: 0.03em;
+}
+.chip:hover { border-color: var(--red); color: var(--red); transform: translateY(-1px); }
+.chip.active {
+  background: var(--red); color: var(--paper-light); border-color: var(--red);
+  font-weight: 500;
+}
 
-  /* ===== Relationship Map ===== */
-  .relation-map-container {
-    background: #fff;
-    border-radius: 12px;
-    border: 1px solid var(--border);
-    overflow: hidden;
-    position: relative;
-  }
-  .map-toolbar {
-    padding: 14px 20px;
-    border-bottom: 1px solid #eee;
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-  .map-toolbar .legend {
-    display: flex;
-    gap: 16px;
-    margin-left: auto;
-    flex-wrap: wrap;
-  }
-  .legend-item {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 0.82em;
-    color: var(--ink-light);
-  }
-  .legend-dot {
-    width: 12px; height: 12px;
-    border-radius: 50%;
-  }
-  .map-svg-wrap {
-    width: 100%;
-    overflow: auto;
-    padding: 20px;
-  }
-  .map-svg-wrap svg {
-    display: block;
-    margin: 0 auto;
-  }
+/* 人物卡片卷轴容器 */
+.scroll-wrap {
+  position: relative; margin-top: 8px;
+}
+.scroll-wrap::before, .scroll-wrap::after {
+  content: ''; position: absolute; top: 0; bottom: 0; width: 12px;
+  background: linear-gradient(90deg, var(--paper-deep), transparent);
+  z-index: 1; pointer-events: none;
+}
+.scroll-wrap::before { left: 0; }
+.scroll-wrap::after { right: 0; background: linear-gradient(270deg, var(--paper-deep), transparent); }
 
-  /* ===== Timeline ===== */
-  .timeline-era {
-    text-align: center;
-    font-family: 'Noto Serif SC', serif;
-    font-size: 1.1em;
-    color: var(--accent);
-    font-weight: 600;
-    margin-bottom: 40px;
-    letter-spacing: 0.1em;
-  }
-  .timeline-era small {
-    display: block;
-    font-size: 0.72em;
-    color: var(--ink-faint);
-    font-weight: 400;
-    margin-top: 4px;
-    letter-spacing: 0;
-  }
-  .timeline-container {
-    position: relative;
-    padding: 0;
-    max-width: 920px;
-    margin: 0 auto;
-  }
-  .timeline-container::before {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: 0; bottom: 0;
-    width: 2px;
-    background: linear-gradient(to bottom, transparent 0%, var(--border) 4%, var(--border) 96%, transparent 100%);
-    transform: translateX(-50%);
-  }
-  .timeline-item {
-    position: relative;
-    width: 43%;
-    margin-bottom: 48px;
-    padding: 22px 26px;
-    border-radius: 20px;
-    border: 1px solid var(--border);
-    background: #fff;
-    transition: all 0.35s cubic-bezier(.4,0,.2,1);
-  }
-  .timeline-item:nth-child(odd) { margin-right: auto; }
-  .timeline-item:nth-child(even) { margin-left: auto; }
-  .timeline-item:hover {
-    box-shadow: 0 8px 32px rgba(139,37,0,0.08);
-    border-color: var(--accent-light);
-    transform: translateY(-4px);
-  }
-  .timeline-dot {
-    position: absolute;
-    top: 28px;
-    width: 16px; height: 16px;
-    border-radius: 50%;
-    background: var(--accent);
-    border: 3px solid var(--paper);
-    box-shadow: 0 0 0 2px var(--accent), 0 0 14px rgba(139,37,0,0.18);
-    z-index: 2;
-  }
-  .timeline-item:nth-child(odd) .timeline-dot { right: -9%; transform: translateX(50%); }
-  .timeline-item:nth-child(even) .timeline-dot { left: -9%; transform: translateX(-50%); }
-  .timeline-year-badge {
-    position: absolute;
-    top: 22px;
-    background: var(--accent);
-    color: #fff;
-    padding: 4px 14px;
-    border-radius: 14px;
-    font-size: 0.74em;
-    font-weight: 600;
-    white-space: nowrap;
-    font-family: 'Noto Serif SC', serif;
-    z-index: 3;
-    box-shadow: 0 2px 8px rgba(139,37,0,0.2);
-  }
-  .timeline-item:nth-child(odd) .timeline-year-badge { right: -52%; transform: translateX(50%); }
-  .timeline-item:nth-child(even) .timeline-year-badge { left: -52%; transform: translateX(-50%); }
-  .timeline-chapter {
-    font-family: 'Noto Serif SC', serif;
-    font-size: 0.8em;
-    color: var(--accent);
-    font-weight: 600;
-    margin-bottom: 6px;
-    opacity: 0.75;
-  }
-  .timeline-title {
-    font-family: 'Noto Serif SC', serif;
-    font-size: 1.15em;
-    font-weight: 700;
-    margin-bottom: 10px;
-    color: var(--ink);
-  }
-  .timeline-chars {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-    margin-bottom: 10px;
-  }
-  .timeline-char-tag {
-    padding: 3px 10px;
-    background: var(--accent-bg);
-    color: var(--accent);
-    border-radius: 12px;
-    font-size: 0.78em;
-    cursor: pointer;
-    transition: all var(--transition);
-  }
-  .timeline-char-tag:hover { background: var(--accent); color: #fff; }
-  .timeline-desc {
-    font-size: 0.86em;
-    color: var(--ink-light);
-    line-height: 1.8;
-  }
-  @media (max-width: 768px) {
-    .timeline-container::before { left: 24px; }
-    .timeline-item, .timeline-item:nth-child(odd), .timeline-item:nth-child(even) {
-      width: calc(100% - 56px);
-      margin-left: 56px;
-      margin-right: 0;
-    }
-    .timeline-item:nth-child(odd) .timeline-dot,
-    .timeline-item:nth-child(even) .timeline-dot {
-      left: -32px; right: auto; transform: none;
-    }
-    .timeline-item:nth-child(odd) .timeline-year-badge,
-    .timeline-item:nth-child(even) .timeline-year-badge {
-      position: static; transform: none; display: inline-block; margin-bottom: 8px;
-    }
-  }
+.cards-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 18px;
+  counter-reset: rank;
+}
+.char-card {
+  background: var(--paper-light);
+  border: 1px solid var(--border-soft); border-radius: 20px;
+  padding: 22px 22px 18px; cursor: pointer;
+  position: relative; overflow: hidden;
+  counter-increment: rank;
+  transition: transform 0.3s cubic-bezier(0.34,1.4,0.5,1), box-shadow 0.3s, border-color 0.3s;
+}
+.char-card::before {
+  content: ''; position: absolute; top: 0; left: 22px; right: 22px; height: 3px;
+  border-radius: 0 0 4px 4px;
+  background: linear-gradient(90deg, var(--gc, var(--red)), transparent 70%);
+  opacity: 0.8;
+}
+.char-card::after {
+  content: '第 ' counter(rank, cjk-ideographic) ' 位';
+  position: absolute; top: 13px; right: 18px;
+  font-family: var(--serif); font-size: 0.74rem;
+  color: rgba(168,40,28,0.35); letter-spacing: 0.05em;
+}
+.char-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px var(--shadow);
+  border-color: var(--gc, var(--red));
+}
+.char-card .c-head {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 12px;
+}
+/* 朱笔圈点人名 */
+.c-name-stamped {
+  position: relative; display: inline-block;
+  font-family: var(--serif); font-size: 1.15rem; font-weight: 700;
+  color: var(--ink); padding: 2px 4px; letter-spacing: 0.03em;
+}
+.c-name-stamped::after {
+  content: ''; position: absolute;
+  left: -3px; top: 50%; transform: translateY(-50%);
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--red); opacity: 0.85;
+}
+.c-alias {
+  font-size: 0.78rem; color: var(--ink-faint); margin-top: 3px;
+}
+.c-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+.c-tag {
+  font-size: 0.72rem; padding: 3px 10px; border-radius: 999px;
+  letter-spacing: 0.03em;
+}
+.c-tag-cat {
+  color: var(--gc, var(--red));
+  background: color-mix(in srgb, var(--gc, var(--red)) 8%, var(--paper-light));
+  border: 1px solid color-mix(in srgb, var(--gc, var(--red)) 22%, var(--paper-light));
+}
+.c-tag-chap {
+  color: var(--jade); background: rgba(91,122,120,0.08);
+  border: 1px solid rgba(91,122,120,0.2);
+}
+.c-desc {
+  font-size: 0.84rem; color: var(--ink-soft); line-height: 1.75;
+  display: -webkit-box; -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical; overflow: hidden;
+}
+.c-foot {
+  margin-top: 12px; padding-top: 10px;
+  border-top: 1px dashed var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 0.78rem; color: var(--ink-faint);
+}
+.c-foot .c-scene {
+  font-family: var(--serif); color: var(--red); opacity: 0.7;
+  max-width: 65%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  font-size: 0.76rem;
+}
 
-  /* ===== Overview Section ===== */
-  .overview-intro {
-    background: #fff;
-    border-radius: 12px;
-    border: 1px solid var(--border);
-    padding: 36px 40px;
-    margin-bottom: 30px;
-  }
-  .overview-intro h2 {
-    font-family: 'Noto Serif SC', serif;
-    font-size: 1.5em;
-    font-weight: 700;
-    color: var(--accent);
-    margin-bottom: 16px;
-  }
-  .overview-intro p {
-    font-size: 0.95em;
-    color: var(--ink-light);
-    line-height: 2;
-    margin-bottom: 12px;
-  }
-  .category-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 16px;
-    margin-top: 24px;
-  }
-  .cat-card {
-    background: linear-gradient(135deg, var(--paper) 0%, var(--paper-deep) 100%);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 20px;
-    text-align: center;
-    cursor: pointer;
-    transition: all var(--transition);
-  }
-  .cat-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px var(--shadow);
-  }
-  .cat-card .cat-icon {
-    font-size: 2em;
-    margin-bottom: 10px;
-  }
-  .cat-card .cat-name {
-    font-family: 'Noto Serif SC', serif;
-    font-size: 1.1em;
-    font-weight: 600;
-    color: var(--ink);
-    margin-bottom: 4px;
-  }
-  .cat-card .cat-count {
-    font-size: 0.82em;
-    color: var(--ink-faint);
-  }
+/* no results */
+.no-results {
+  text-align: center; padding: 60px 20px;
+  color: var(--ink-faint); font-size: 1rem;
+}
+.no-results .nr-icon {
+  font-family: var(--serif); font-size: 2.4rem; color: var(--border);
+  margin-bottom: 12px;
+}
 
-  /* ===== No Results ===== */
-  .no-results {
-    text-align: center;
-    padding: 60px 20px;
-    color: var(--ink-faint);
-    font-size: 1.1em;
-  }
-  .no-results .big-icon { font-size: 3em; margin-bottom: 12px; }
+/* ===== MODAL：人物档案 ===== */
+.modal-overlay {
+  display: none; position: fixed; inset: 0; z-index: 200;
+  background: rgba(43,38,32,0.45);
+  justify-content: center; align-items: flex-start;
+  padding: 40px 20px; overflow-y: auto;
+  opacity: 0; transition: opacity 0.3s;
+}
+.modal-overlay.show { display: flex; opacity: 1; }
+.modal {
+  background: var(--paper-light); border-radius: 22px;
+  max-width: 680px; width: 100%; position: relative;
+  overflow: hidden;
+  border-top: 4px solid var(--red);
+  box-shadow: 0 20px 50px rgba(43,38,32,0.2);
+  transform: translateY(16px); transition: transform 0.3s;
+}
+.modal-overlay.show .modal { transform: translateY(0); }
+.modal-close {
+  position: absolute; top: 14px; right: 18px; z-index: 10;
+  width: 34px; height: 34px; border-radius: 50%;
+  border: none; background: rgba(245,236,214,0.9);
+  font-size: 1.2rem; cursor: pointer; color: var(--ink-soft);
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+}
+.modal-close:hover { background: var(--red); color: var(--paper-light); }
+.modal-banner {
+  padding: 28px 36px 20px;
+  background:
+    linear-gradient(180deg, var(--paper-warm) 0%, var(--paper-light) 100%);
+  border-bottom: 1px solid var(--border-soft);
+  position: relative;
+}
+.modal-banner::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--gc, var(--red));
+}
+.modal-banner h2 {
+  font-family: var(--serif); font-size: 1.7rem; font-weight: 900;
+  color: var(--ink); display: flex; align-items: center; gap: 8px;
+}
+.modal-banner h2 .mb-seal {
+  display: inline-block; background: var(--red); color: var(--paper-light);
+  font-size: 0.6em; font-weight: 900; padding: 3px 8px;
+  border-radius: 3px; transform: rotate(-3deg);
+  letter-spacing: 0.1em; vertical-align: middle;
+}
+.modal-banner .mb-sub {
+  color: var(--ink-faint); font-size: 0.86rem; margin-top: 6px;
+  font-family: var(--serif);
+}
+.modal-banner .mb-tags {
+  display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap;
+}
+.modal-body { padding: 26px 36px 34px; }
+.modal-section { margin-bottom: 22px; }
+.modal-section h3 {
+  font-family: var(--serif); font-size: 0.96rem; font-weight: 700;
+  color: var(--red); margin-bottom: 10px; letter-spacing: 0.06em;
+  display: flex; align-items: center; gap: 8px;
+}
+.modal-section h3::before {
+  content: ''; width: 3px; height: 14px; border-radius: 2px;
+  background: var(--red);
+}
+.modal-section p, .modal-section ul {
+  font-size: 0.9rem; color: var(--ink-soft); line-height: 2;
+}
+.modal-section ul { padding-left: 1.2em; }
+.modal-section li { margin-bottom: 4px; }
+.info-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+}
+.info-item {
+  background: var(--paper); border: 1px solid var(--border-soft);
+  padding: 12px 14px; border-radius: 14px;
+}
+.info-item .info-label {
+  font-size: 0.74rem; color: var(--ink-faint); margin-bottom: 4px;
+  letter-spacing: 0.05em;
+}
+.info-item .info-value {
+  font-size: 0.88rem; font-weight: 500; color: var(--ink);
+}
+.quote-block {
+  background: rgba(168,40,28,0.05);
+  border-left: 3px solid var(--red);
+  padding: 14px 18px; border-radius: 0 14px 14px 0;
+  font-family: var(--serif); font-size: 0.95rem; color: var(--ink);
+  line-height: 1.9; position: relative;
+}
+.quote-block::before {
+  content: '朱批'; position: absolute; top: 8px; right: 14px;
+  font-size: 0.68rem; color: var(--red); opacity: 0.4;
+  letter-spacing: 0.1em; font-weight: 600;
+}
+.relation-list {
+  display: flex; flex-wrap: wrap; gap: 8px;
+}
+.relation-tag {
+  padding: 6px 14px; background: var(--paper);
+  border: 1px solid var(--border); border-radius: 999px;
+  font-size: 0.82rem; cursor: pointer; transition: all 0.25s;
+  color: var(--ink-soft);
+}
+.relation-tag:hover {
+  background: var(--red); color: var(--paper-light); border-color: var(--red);
+}
+.relation-tag small {
+  color: var(--ink-faint); margin-left: 4px; font-size: 0.78em;
+}
+.relation-tag:hover small { color: rgba(251,245,226,0.7); }
 
-  /* ===== Footer ===== */
-  .site-footer {
-    text-align: center;
-    padding: 40px 20px;
-    color: var(--ink-faint);
-    font-size: 0.85em;
-    border-top: 1px solid var(--border);
-  }
+/* ===== RELATIONS：关系图谱 ===== */
+.graph-wrap {
+  margin-top: 28px; background: var(--paper-light);
+  border: 1px solid var(--border-soft); border-radius: 24px;
+  padding: 24px; position: relative;
+  box-shadow: 0 8px 20px var(--shadow);
+}
+.graph-toolbar {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 10px; margin-bottom: 16px;
+}
+.graph-toolbar .gt-title {
+  font-family: var(--serif); font-size: 1.05rem; font-weight: 700;
+  color: var(--ink); letter-spacing: 0.04em;
+}
+.graph-legend {
+  display: flex; gap: 14px; flex-wrap: wrap;
+}
+.lg-item {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 0.78rem; color: var(--ink-soft);
+}
+.lg-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+}
+.lg-dash {
+  width: 18px; height: 2px; border-radius: 2px;
+  background: repeating-linear-gradient(90deg, var(--ink-faint) 0 4px, transparent 4px 7px);
+}
+#relationMap { width: 100%; overflow: auto; }
+#relationMap svg { display: block; margin: 0 auto; }
+.map-node { cursor: pointer; }
+.map-node circle { transition: all 0.2s; }
+.map-node:hover .node-halo { opacity: 0.25 !important; }
 
-  /* ===== Responsive ===== */
-  @media (max-width: 768px) {
-    .hero h1 { font-size: 2em; letter-spacing: 0.08em; }
-    .hero .stats-bar { gap: 24px; }
-    .nav-tab { padding: 12px 16px; font-size: 0.88em; }
-    .main-container { padding: 20px 14px 40px; }
-    .modal-body { padding: 24px 20px 30px; }
-    .modal-banner { padding: 0 20px; height: 100px; }
-    .info-grid { grid-template-columns: 1fr; }
-    .cards-grid { grid-template-columns: 1fr; }
-    .overview-intro { padding: 24px 20px; }
-  }
-  @media (max-width: 480px) {
-    .hero { padding: 40px 14px 30px; }
-    .hero h1 { font-size: 1.6em; }
-    .modal-header-info h2 { font-size: 1.4em; }
-  }
+/* ===== TIMELINE：卷轴展开 ===== */
+.tl-era {
+  text-align: center; font-family: var(--serif);
+  font-size: 1rem; color: var(--red); font-weight: 700;
+  letter-spacing: 0.15em; margin-bottom: 36px;
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: var(--paper-light);
+  border-radius: 20px;
+}
+.tl-era small {
+  display: block; font-size: 0.74rem; color: var(--ink-faint);
+  font-weight: 400; margin-top: 4px; letter-spacing: 0;
+  font-family: var(--sans);
+}
+.tl-container {
+  position: relative; max-width: 900px; margin: 0 auto;
+  padding: 0 0 0 0;
+}
+.tl-container::before {
+  content: ''; position: absolute; left: 28px; top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, transparent 0%, var(--border) 4%, var(--border) 96%, transparent 100%);
+}
+.tl-item {
+  position: relative; margin-left: 60px; margin-bottom: 24px;
+  padding: 18px 22px;
+  background: var(--paper-light); border: 1px solid var(--border-soft);
+  border-radius: 18px;
+  transition: all 0.3s;
+}
+.tl-item:hover {
+  box-shadow: 0 8px 24px var(--shadow);
+  border-color: var(--red);
+  transform: translateX(4px);
+}
+.tl-dot {
+  position: absolute; left: -38px; top: 24px;
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--paper); border: 2.5px solid var(--red);
+  z-index: 2; transition: all 0.3s;
+}
+.tl-item:hover .tl-dot { background: var(--red); transform: scale(1.15); }
+.tl-year {
+  display: inline-block; font-family: var(--serif);
+  font-size: 0.76rem; font-weight: 700; color: var(--red);
+  background: rgba(168,40,28,0.06);
+  padding: 3px 12px; border-radius: 999px;
+  margin-bottom: 8px; letter-spacing: 0.03em;
+}
+.tl-chapter {
+  font-family: var(--serif); font-size: 0.78rem; color: var(--brown);
+  font-weight: 600; margin-bottom: 4px; letter-spacing: 0.03em;
+}
+.tl-title {
+  font-family: var(--serif); font-size: 1.1rem; font-weight: 700;
+  color: var(--ink); margin-bottom: 8px;
+}
+.tl-chars {
+  display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px;
+}
+.tl-char-tag {
+  padding: 3px 10px; background: rgba(168,40,28,0.06);
+  color: var(--red); border-radius: 999px;
+  font-size: 0.76rem; cursor: pointer; transition: all 0.25s;
+  border: 1px solid rgba(168,40,28,0.15);
+}
+.tl-char-tag:hover { background: var(--red); color: var(--paper-light); }
+.tl-desc {
+  font-size: 0.86rem; color: var(--ink-soft); line-height: 1.85;
+}
 
-  /* ===== Travel Route Map ===== */
-  .travel-map-wrap {
-    background: #fff;
-    border-radius: 12px;
-    border: 1px solid var(--border);
-    overflow: hidden;
+/* ===== TRAVEL MAP：江南水乡 ===== */
+.travel-wrap {
+  background: var(--paper-light); border: 1px solid var(--border-soft);
+  border-radius: 24px; overflow: hidden;
+  box-shadow: 0 8px 20px var(--shadow);
+  margin-top: 28px;
+}
+.travel-header {
+  padding: 20px 28px; border-bottom: 1px solid var(--border-soft);
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 10px;
+}
+.travel-header h3 {
+  font-family: var(--serif); font-size: 1.15rem; font-weight: 700;
+  color: var(--ink); letter-spacing: 0.04em;
+}
+.travel-header .th-hint {
+  font-size: 0.8rem; color: var(--ink-faint);
+}
+.travel-content {
+  display: flex; min-height: 400px;
+}
+.map-svg-container {
+  flex: 1; padding: 16px; min-width: 0;
+  background:
+    repeating-linear-gradient(90deg,
+      transparent 0px, transparent 79px,
+      rgba(91,122,120,0.04) 79px, rgba(91,122,120,0.04) 80px),
+    var(--paper-warm);
+}
+.map-svg-container svg { width: 100%; height: auto; }
+.route-sidebar {
+  width: 260px; padding: 22px;
+  border-left: 1px solid var(--border-soft);
+  flex-shrink: 0; background: var(--paper-light);
+}
+.route-sidebar h4 {
+  font-family: var(--serif); font-size: 0.98rem; font-weight: 700;
+  margin-bottom: 14px; color: var(--ink); letter-spacing: 0.04em;
+}
+.route-btn {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 12px 14px; margin-bottom: 8px;
+  border: 1.5px solid var(--border-soft); border-radius: 14px;
+  background: var(--paper); cursor: pointer;
+  transition: all 0.25s; width: 100%; text-align: left;
+  font-family: var(--sans);
+}
+.route-btn:hover {
+  border-color: var(--jade); box-shadow: 0 2px 8px var(--shadow);
+}
+.route-btn.active {
+  border-color: var(--red); background: rgba(168,40,28,0.04);
+}
+.route-color {
+  width: 4px; min-height: 32px; border-radius: 2px;
+  flex-shrink: 0; margin-top: 2px;
+}
+.route-info { flex: 1; }
+.route-name {
+  font-weight: 600; font-size: 0.9rem; color: var(--ink);
+  display: block; margin-bottom: 2px;
+  font-family: var(--serif);
+}
+.route-path {
+  font-size: 0.78rem; color: var(--ink-faint); line-height: 1.5;
+}
+.route-note {
+  margin-top: 14px; padding-top: 12px;
+  border-top: 1px dashed var(--border);
+  font-size: 0.8rem; color: var(--ink-faint); line-height: 1.75;
+}
+.route-note strong { color: var(--ink); }
+.map-legend-bar {
+  padding: 12px 24px; border-top: 1px solid var(--border-soft);
+  display: flex; gap: 16px; flex-wrap: wrap;
+  font-size: 0.8rem; color: var(--ink-soft);
+  background: var(--paper);
+}
+.map-legend-bar .leg-item {
+  display: flex; align-items: center; gap: 6px;
+}
+.map-legend-bar .leg-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+}
+@keyframes routeDashFlow { to { stroke-dashoffset: -24; } }
+
+/* ===== FOOTER ===== */
+.site-footer {
+  max-width: 1100px; margin: 60px auto 0;
+  padding: 26px 24px 40px;
+  border-top: 1px solid var(--border);
+  font-size: 0.82rem; color: var(--ink-faint);
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+}
+.site-footer a { color: var(--ink-soft); text-decoration: none; transition: color 0.2s; }
+.site-footer a:hover { color: var(--red); }
+.foot-mark { display: inline-flex; align-items: center; gap: 8px; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 820px) {
+  .hero-inner { gap: 30px; }
+  .hero-title-block {
+    border-right: none; border-bottom: 1px solid var(--border);
+    padding: 0 0 20px 0;
   }
-  .travel-map-header {
-    padding: 20px 28px;
-    border-bottom: 1px solid #eee;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  .travel-map-header h3 {
-    font-family: 'Noto Serif SC', serif;
-    font-size: 1.2em;
-    font-weight: 700;
-    color: var(--ink);
-  }
-  .map-content {
-    display: flex;
-    min-height: 400px;
-  }
-  .map-svg-container {
-    flex: 1;
-    padding: 20px;
-    min-width: 0;
-  }
-  .map-svg-container svg { width: 100%; height: auto; }
-  .route-sidebar {
-    width: 280px;
-    padding: 24px;
-    border-left: 1px solid #eee;
-    flex-shrink: 0;
-  }
-  .route-sidebar h4 {
-    font-family: 'Noto Serif SC', serif;
-    font-size: 1em;
-    font-weight: 600;
-    margin-bottom: 16px;
-    color: var(--ink);
-  }
-  .route-btn {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 14px 16px;
-    margin-bottom: 10px;
-    border: 1.5px solid var(--border);
-    border-radius: var(--radius);
-    background: #fff;
-    cursor: pointer;
-    transition: all var(--transition);
-    width: 100%;
-    text-align: left;
-    font-family: 'Noto Sans SC', sans-serif;
-  }
-  .route-btn:hover {
-    border-color: var(--accent-light);
-    box-shadow: 0 2px 8px var(--shadow);
-  }
-  .route-btn.active {
-    border-color: var(--accent);
-    background: var(--accent-bg);
-  }
-  .route-color {
-    width: 4px;
-    min-height: 36px;
-    border-radius: 2px;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-  .route-info { flex: 1; }
-  .route-name {
-    font-weight: 600;
-    font-size: 0.95em;
-    color: var(--ink);
-    display: block;
-    margin-bottom: 2px;
-  }
-  .route-path {
-    font-size: 0.8em;
-    color: var(--ink-faint);
-    line-height: 1.5;
-  }
-  .map-legend-bar {
-    padding: 12px 24px;
-    border-top: 1px solid #eee;
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-    font-size: 0.82em;
-    color: var(--ink-light);
-  }
-  .map-legend-bar .leg-item {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .map-legend-bar .leg-dot {
-    width: 10px; height: 10px;
-    border-radius: 50%;
-  }
-  @keyframes routeDashFlow {
-    to { stroke-dashoffset: -24; }
-  }
-  @media (max-width: 900px) {
-    .map-content { flex-direction: column; }
-    .route-sidebar { width: 100%; border-left: none; border-top: 1px solid #eee; }
-  }
-  .back-home {
-    position: fixed; top: 20px; left: 20px; z-index: 999;
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 8px 16px; border-radius: 20px;
-    background: rgba(250,246,240,0.92); color: #555;
-    font-size: 0.85rem; text-decoration: none;
-    border: 1px solid rgba(0,0,0,0.1);
-    backdrop-filter: blur(8px);
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  }
-  .back-home:hover { background: #fff; color: #b8860b; border-color: #b8860b; }
+  .hero-vtitle { font-size: 3.2rem; }
+  .travel-content { flex-direction: column; }
+  .route-sidebar { width: 100%; border-left: none; border-top: 1px solid var(--border-soft); }
+  .info-grid { grid-template-columns: 1fr; }
+  .modal-body { padding: 20px 22px 26px; }
+  .modal-banner { padding: 22px 24px 16px; }
+}
+@media (max-width: 520px) {
+  .hero { padding: 40px 16px 36px; }
+  .hero h1 { font-size: 2rem; }
+  .hero-vtitle { font-size: 2.6rem; }
+  .main-container { padding: 28px 14px 40px; }
+  .nav-tab { padding: 12px 14px; font-size: 0.84rem; }
+  .cards-grid { grid-template-columns: 1fr; }
+  .ov-intro { padding: 22px 20px; }
+  .tl-item { margin-left: 48px; padding: 14px 16px; }
+  .tl-dot { left: -34px; }
+  .hero-stats { gap: 8px 24px; }
+  .hero-stat .val { font-size: 1.3rem; }
+}
+/* ── HERO-AXIS v1 ── */
+.hero{display:flex!important;flex-direction:column!important;
+  justify-content:center!important;align-items:center!important;
+  text-align:center!important;padding-left:60px!important;padding-right:60px!important;}
+.hero>*{margin-left:auto!important;margin-right:auto!important;
+  justify-content:center!important;text-align:center!important;}
+.hero .hero-divider,.hero .hero-scroll,.hero .scroll-hint,.hero .hero-meta,.hero-meta-item{margin-left:auto!important;margin-right:auto!important;}
+.hero h1::after,.hero h2::after{margin-left:auto!important;margin-right:auto!important;}
+/* ── /HERO-AXIS v1 ── */
 </style>
 </head>
 <body>
-<a href="/" class="back-home">← 返回</a>
 
-<!-- Hero Header -->
+<div class="top-red-bar"></div>
+<a href="/" class="back-home">← 返回首页</a>
+
+<!-- ===== HERO ===== -->
 <header class="hero">
-  <div class="hero-content">
-    <div class="subtitle">吴敬梓 著 · 清代讽刺小说</div>
-    <h1>儒<span>林</span>外<span>史</span></h1>
-    <div class="subtitle" style="letter-spacing:0.5em; font-size:0.9em; margin-top:2px;">人 物 志</div>
-    <div class="author-info">全书五十六回 · 描绘明清士林百态</div>
-    <div class="stats-bar">
-      <div class="stat-item"><div class="stat-num" id="totalChars">0</div><div class="stat-label">收录人物</div></div>
-      <div class="stat-item"><div class="stat-num">56</div><div class="stat-label">全书回目</div></div>
-      <div class="stat-item"><div class="stat-num" id="totalCats">0</div><div class="stat-label">人物分类</div></div>
-      <div class="stat-item"><div class="stat-num" id="totalEvents">0</div><div class="stat-label">经典事件</div></div>
+  <div class="hero-inner">
+    <div class="hero-title-block">
+      <div class="hero-vtitle">儒林外史</div>
+      <div class="hero-seal">
+        <div class="seal-stamp"><span>儒林</span><span>外史</span></div>
+        <div class="seal-stamp" style="transform:rotate(2deg); background:var(--ink); box-shadow:0 0 0 2px var(--ink), 0 0 0 4px var(--paper), 0 3px 10px rgba(43,38,32,0.2);"><span>吴敬梓</span></div>
+      </div>
+    </div>
+    <div class="hero-text">
+      <div class="hero-eyebrow">吴敬梓 著 · 清代讽刺小说 · 乾隆十四年成书</div>
+      <h1>儒<span class="sep">·</span>林<span class="sep">·</span>外<span class="sep">·</span>史</h1>
+      
+      <div class="hero-divider">
+        <svg viewBox="0 0 80 36" width="56" height="26" aria-hidden="true">
+          <path d="M16 30 Q16 18 26 14 L54 14 Q64 18 64 30 Z" fill="#2b2620"/>
+          <ellipse cx="40" cy="14" rx="14" ry="5" fill="#2b2620"/>
+          <line x1="2" y1="22" x2="16" y2="22" stroke="#2b2620" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="64" y1="22" x2="78" y2="22" stroke="#2b2620" stroke-width="2.5" stroke-linecap="round"/>
+          <rect x="1" y="20" width="3" height="5" fill="#2b2620" rx="1"/>
+          <rect x="76" y="20" width="3" height="5" fill="#2b2620" rx="1"/>
+          <circle cx="40" cy="9" r="2.5" fill="#a8281c"/>
+        </svg>
+      </div>
+      <p class="hero-tagline">白描勾勒士林群像，<span class="em">冷隽讽刺</span>笑中带酸。全书五十六回，描绘明清士人科举浮沉、功名冷暖——从王冕高洁开篇，到市井奇人收束。</p>
+      <div class="hero-stats">
+        <div class="hero-stat"><span class="val" id="totalChars">0</span><span class="lbl">收录人物</span></div>
+        <div class="hero-stat"><span class="val">56</span><span class="lbl">全书回目</span></div>
+        <div class="hero-stat"><span class="val" id="totalCats">0</span><span class="lbl">人物分类</span></div>
+        <div class="hero-stat"><span class="val" id="totalEvents">0</span><span class="lbl">经典事件</span></div>
+      </div>
     </div>
   </div>
 </header>
 
-<!-- Navigation -->
+<!-- ===== NAV ===== -->
 <nav class="nav-bar">
   <div class="nav-inner">
     <button class="nav-tab active" data-section="overview">概览</button>
@@ -899,82 +851,93 @@
   </div>
 </nav>
 
-<!-- Main Content -->
+<!-- ===== MAIN ===== -->
 <div class="main-container">
 
-  <!-- ====== Overview Section ====== -->
+  <!-- ====== OVERVIEW ====== -->
   <section id="overview" class="section active">
-    <div class="overview-intro">
-      <h2>关于本书</h2>
-      <p>《儒林外史》是清代吴敬梓所著的长篇讽刺小说，全书共五十六回，成书于乾隆十四年（1749年）。作品以封建社会知识分子为主要描写对象，通过描绘士林群像，深刻揭露了科举制度对读书人灵魂的腐蚀与毒害。</p>
-      <p>全书没有贯穿始终的中心人物和核心事件，而是以"连环套"式的结构，一个个人物故事前后衔接，展现了一幅封建社会士人阶层的生活画卷。从王冕的高洁隐逸开篇，到市井奇人的收束，吴敬梓以冷峻犀利的笔触，刻画了形形色色的读书人——有痴迷功名者，有慷慨豪侠者，有迂腐可笑者，也有洁身自好者。</p>
+    <h2 class="sec-title">关于本书 <span class="sub">儒林百态 · 讽刺之书</span></h2>
+    <div class="ov-intro">
+      <h2>白描士林，冷隽讽刺</h2>
+      <p class="lede">《儒林外史》是清代吴敬梓所著的长篇讽刺小说，全书共五十六回，成书于乾隆十四年（1749年）。作品以封建社会知识分子为主要描写对象，通过描绘士林群像，深刻揭露了科举制度对读书人灵魂的腐蚀与毒害。</p>
+      <p>全书没有贯穿始终的中心人物和核心事件，而是以<b>"连环套"式的结构</b>，一个个人物故事前后衔接，展现了一幅封建社会士人阶层的生活画卷。从王冕的高洁隐逸开篇，到市井奇人的收束，吴敬梓以冷峻犀利的笔触，刻画了形形色色的读书人——有痴迷功名者，有慷慨豪侠者，有迂腐可笑者，也有洁身自好者。</p>
     </div>
-    <h3 style="font-family:'Noto Serif SC',serif; font-size:1.2em; margin-bottom:16px; color:var(--ink);">人物分类</h3>
-    <div class="category-cards" id="categoryCards"></div>
+    <h3 class="ov-cats-title">人物分类</h3>
+    <div class="cat-grid" id="categoryCards"></div>
   </section>
 
-  <!-- ====== Characters Section ====== -->
+  <!-- ====== CHARACTERS ====== -->
   <section id="characters" class="section">
+    <h2 class="sec-title">人物图鉴 <span class="sub">儒林谱 · 朱笔圈点</span></h2>
+    <p class="sec-desc">二十位人物，按类分卷。点击卡片查看小传、性格、经典情节与人物关系。朱笔圈点处为诸公名讳，乌纱帽下尽是酸楚。</p>
     <div class="toolbar">
       <div class="search-box">
+        <svg class="sb-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
         <input type="text" id="searchInput" placeholder="搜索人物姓名、字号、身份...">
       </div>
       <div class="filter-chips" id="filterChips"></div>
     </div>
-    <div class="cards-grid" id="cardsGrid"></div>
+    <div class="scroll-wrap">
+      <div class="cards-grid" id="cardsGrid"></div>
+    </div>
     <div class="no-results" id="noResults" style="display:none;">
-      <div class="big-icon">📜</div>
-      <div>未找到匹配的人物</div>
+      <div class="nr-icon">墨</div>
+      <div>未寻得此人</div>
     </div>
   </section>
 
-  <!-- ====== Relations Section ====== -->
+  <!-- ====== RELATIONS ====== -->
   <section id="relations" class="section">
-    <div class="relation-map-container">
-      <div class="map-toolbar">
-        <span style="font-family:'Noto Serif SC',serif; font-weight:600; color:var(--ink);">人物关系图谱</span>
-        <div class="legend">
-          <div class="legend-item"><div class="legend-dot" style="background:#8b2500;"></div>师承/举荐</div>
-          <div class="legend-item"><div class="legend-dot" style="background:#b8860b;"></div>亲属</div>
-          <div class="legend-item"><div class="legend-dot" style="background:#2e8b57;"></div>交游/知己</div>
-          <div class="legend-item"><div class="legend-dot" style="background:#4a6fa5;"></div>同僚/同年</div>
-          <div class="legend-item"><div class="legend-dot" style="background:#999; border:1px dashed #666;"></div>对立/恩怨</div>
+    <h2 class="sec-title">关系图谱 <span class="sub">师承 · 亲属 · 交游 · 对立</span></h2>
+    <p class="sec-desc">儒林中人，以师承举荐相连，以亲属交游相系，亦以恩怨对立相割。点击节点查看人物小传，虚线为对立关系。</p>
+    <div class="graph-wrap">
+      <div class="graph-toolbar">
+        <span class="gt-title">人物关系图谱</span>
+        <div class="graph-legend">
+          <div class="lg-item"><div class="lg-dot" style="background:#a8281c;"></div>师承/举荐</div>
+          <div class="lg-item"><div class="lg-dot" style="background:#8c7a5e;"></div>亲属</div>
+          <div class="lg-item"><div class="lg-dot" style="background:#5b7a78;"></div>交游/知己</div>
+          <div class="lg-item"><div class="lg-dot" style="background:#4a6fa5;"></div>同僚/同年</div>
+          <div class="lg-item"><div class="lg-dash"></div>对立/恩怨</div>
         </div>
       </div>
-      <div class="map-svg-wrap" id="relationMap"></div>
+      <div id="relationMap"></div>
     </div>
   </section>
 
-  <!-- ====== Timeline Section ====== -->
+  <!-- ====== TIMELINE ====== -->
   <section id="timeline" class="section">
-    <h3 style="font-family:'Noto Serif SC',serif; font-size:1.2em; margin-bottom:24px; color:var(--ink);">经典情节 · 时间线</h3>
-    <div class="timeline-container" id="timelineContainer"></div>
+    <h2 class="sec-title">情节时间线 <span class="sub">卷轴展开 · 自元末至万历</span></h2>
+    <p class="sec-desc">全书故事跨越约二百三十年，涵盖成化、弘治、正德、嘉靖、隆庆、万历六朝。点击人物名可跳转小传。</p>
+    <div id="timelineContainer"></div>
   </section>
 
-  <!-- ====== Travel Map Section ====== -->
+  <!-- ====== TRAVEL MAP ====== -->
   <section id="travelmap" class="section">
-    <div class="travel-map-wrap">
-      <div class="travel-map-header">
+    <h2 class="sec-title">游历地图 <span class="sub">江南水乡 · 儒林足迹</span></h2>
+    <p class="sec-desc">故事遍及大江南北，从京城到岭南，从东海之滨到川陕大地。点击右侧人物按钮查看路线，可同时选择多人对比。红色菱形标记为各事件发生地点。</p>
+    <div class="travel-wrap">
+      <div class="travel-header">
         <h3>人物游历地图</h3>
-        <span style="font-size:0.85em; color:var(--ink-faint);">点击人物按钮查看路线，可同时选择多人对比</span>
+        <span class="th-hint">点击人物按钮查看路线，可同时选择多人对比</span>
       </div>
-      <div class="map-content">
+      <div class="travel-content">
         <div class="map-svg-container" id="travelMapSvg"></div>
         <div class="route-sidebar">
           <h4>人物游历路线</h4>
           <div id="routeButtons"></div>
-          <div style="margin-top:16px; padding-top:14px; border-top:1px solid #eee; font-size:0.82em; color:var(--ink-faint);">
-            <div style="margin-bottom:6px;"><strong style="color:var(--ink);">地图说明</strong></div>
-            <div>《儒林外史》故事遍及大江南北，从京城到岭南，从东海之滨到川陕大地。可同时点选多个人物查看路线，地图上红色菱形标记为各事件发生地点，悬停城市可查看关联人物与事件。</div>
+          <div class="route-note">
+            <strong>地图说明</strong><br>
+            《儒林外史》故事遍及大江南北。可同时点选多个人物查看路线，地图上红色菱形标记为各事件发生地点，悬停城市可查看关联人物与事件。
           </div>
         </div>
       </div>
       <div class="map-legend-bar">
-        <div class="leg-item"><div class="leg-dot" style="background:#8b2500;"></div>科举迷途</div>
-        <div class="leg-item"><div class="leg-dot" style="background:#2e8b57;"></div>高士隐者</div>
+        <div class="leg-item"><div class="leg-dot" style="background:#a8281c;"></div>科举迷途</div>
+        <div class="leg-item"><div class="leg-dot" style="background:#5b7a78;"></div>高士隐者</div>
         <div class="leg-item"><div class="leg-dot" style="background:#6b4c8a;"></div>名士风流</div>
         <div class="leg-item"><div class="leg-dot" style="background:#4a6fa5;"></div>官僚士绅</div>
-        <div class="leg-item"><div class="leg-dot" style="background:#b8860b;"></div>市井小人</div>
+        <div class="leg-item"><div class="leg-dot" style="background:#8c7a5e;"></div>市井小人</div>
         <div class="leg-item"><div class="leg-dot" style="background:#2e8b57;"></div>市井奇人</div>
       </div>
     </div>
@@ -982,27 +945,31 @@
 
 </div>
 
-<!-- Modal -->
+<!-- ===== MODAL ===== -->
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal" id="modalContent"></div>
 </div>
 
 <footer class="site-footer">
-  儒林外史 · 人物志 — 基于吴敬梓原著整理 · 仅供学习参考
+  <span class="foot-mark">
+    <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M4 4 L4 20 L20 20 L20 4 Z M8 8 L16 8 M8 12 L16 12 M8 16 L13 16" fill="none" stroke="#a8281c" stroke-width="1.5"/></svg>
+    功名富贵无凭据 · 费尽心情 · 总把流光误 · © zzht
+  </span>
+  <span><a href="/">返回首页</a> · <a href="https://github.com/zzht1">GitHub ↗</a></span>
 </footer>
 
 <script>
 // =====================================================
-// DATA
+// DATA — 保留全部原始数据
 // =====================================================
 const CATEGORIES = {
-  'all':      { name: '全部',   icon: '📖', color: '#555' },
-  'gaoshi':   { name: '高士隐者', icon: '🏔️', color: '#2e8b57', desc: '洁身自好、不慕功名' },
-  'keming':   { name: '科举迷途', icon: '📜', color: '#8b2500', desc: '痴迷功名、可悲可叹' },
-  'mingshi':  { name: '名士风流', icon: '🍶', color: '#6b4c8a', desc: '放浪形骸、慷慨豪侠' },
-  'liaoguan': { name: '官僚士绅', icon: '🏛️', color: '#4a6fa5', desc: '宦海沉浮、形形色色' },
-  'xiaoren':  { name: '市井小人', icon: '🎭', color: '#b8860b', desc: '趋炎附势、丑态百出' },
-  'qiren':     { name: '市井奇人', icon: '✨', color: '#2e8b57', desc: '身怀绝技、不随流俗' }
+  'all':      { name: '全部',   icon: '全', color: '#5c5346' },
+  'gaoshi':   { name: '高士隐者', icon: '隐', color: '#5b7a78', desc: '洁身自好、不慕功名' },
+  'keming':   { name: '科举迷途', icon: '科', color: '#a8281c', desc: '痴迷功名、可悲可叹' },
+  'mingshi':  { name: '名士风流', icon: '名', color: '#6b4c8a', desc: '放浪形骸、慷慨豪侠' },
+  'liaoguan': { name: '官僚士绅', icon: '官', color: '#4a6fa5', desc: '宦海沉浮、形形色色' },
+  'xiaoren':  { name: '市井小人', icon: '俗', color: '#8c7a5e', desc: '趋炎附势、丑态百出' },
+  'qiren':     { name: '市井奇人', icon: '奇', color: '#2e8b57', desc: '身怀绝技、不随流俗' }
 };
 
 const CHARACTERS = [
@@ -1011,7 +978,7 @@ const CHARACTERS = [
     name: '王冕',
     alias: '字元章，号煮石山农',
     category: 'gaoshi',
-    color: '#2e8b57',
+    color: '#5b7a78',
     chapters: '第1回',
     identity: '诸暨农家子弟，自学成才的画家隐士',
     personality: '孤傲清高、孝顺母亲、蔑视权贵、不与世俗同流合污',
@@ -1029,7 +996,7 @@ const CHARACTERS = [
     name: '周进',
     alias: '字蒉轩',
     category: 'keming',
-    color: '#8b2500',
+    color: '#a8281c',
     chapters: '第2-3回',
     identity: '老童生，后官至国子监司业',
     personality: '痴迷科举、屡试不第而不放弃、迂腐执着、得志后知恩图报',
@@ -1048,7 +1015,7 @@ const CHARACTERS = [
     name: '范进',
     alias: '',
     category: 'keming',
-    color: '#8b2500',
+    color: '#a8281c',
     chapters: '第3-4回',
     identity: '老童生，后中举人，钦点山东学道',
     personality: '深陷科举执念、贫寒卑微、中举后喜极而疯、后来也变得世故圆滑',
@@ -1067,7 +1034,7 @@ const CHARACTERS = [
     name: '严监生',
     alias: '名致和，字大育',
     category: 'xiaoren',
-    color: '#b8860b',
+    color: '#8c7a5e',
     chapters: '第5-6回',
     identity: '监生，严贡生之弟',
     personality: '胆小怕事、极其吝啬、守财奴形象',
@@ -1085,7 +1052,7 @@ const CHARACTERS = [
     name: '严贡生',
     alias: '名大位，字致中',
     category: 'xiaoren',
-    color: '#b8860b',
+    color: '#8c7a5e',
     chapters: '第5-6回',
     identity: '贡生，严监生之兄',
     personality: '横行霸道、欺压良善、仗势欺人、无耻之尤',
@@ -1102,7 +1069,7 @@ const CHARACTERS = [
     name: '匡超人',
     alias: '名迥',
     category: 'keming',
-    color: '#8b2500',
+    color: '#a8281c',
     chapters: '第15-20回',
     identity: '拆字少年出身，后为秀才',
     personality: '早期质朴孝顺，后期黑化堕落、忘恩负义、吹牛撒谎',
@@ -1160,7 +1127,7 @@ const CHARACTERS = [
     name: '马二先生',
     alias: '名纯上，字静',
     category: 'xiaoren',
-    color: '#b8860b',
+    color: '#8c7a5e',
     chapters: '第13-15回',
     identity: '选家（编选八股文范本为生），处州人',
     personality: '迂腐老实、迷信科举、但本性善良、乐于助人',
@@ -1229,7 +1196,7 @@ const CHARACTERS = [
     name: '庄绍光',
     alias: '名尚志',
     category: 'gaoshi',
-    color: '#2e8b57',
+    color: '#5b7a78',
     chapters: '第34-35回',
     identity: '南京名士，真儒',
     personality: '淡泊名利、学问渊博、不慕荣华',
@@ -1246,7 +1213,7 @@ const CHARACTERS = [
     name: '虞博士',
     alias: '名育德',
     category: 'gaoshi',
-    color: '#2e8b57',
+    color: '#5b7a78',
     chapters: '第36-37回',
     identity: '国子监博士，真儒',
     personality: '中规中矩、与世无争、博爱乡邻、温厚纯良',
@@ -1264,7 +1231,7 @@ const CHARACTERS = [
     name: '胡屠户',
     alias: '',
     category: 'xiaoren',
-    color: '#b8860b',
+    color: '#8c7a5e',
     chapters: '第3回',
     identity: '范进的岳父，屠户',
     personality: '势利眼、前倨后恭、嫌贫爱富',
@@ -1280,7 +1247,7 @@ const CHARACTERS = [
     name: '牛浦郎',
     alias: '',
     category: 'xiaoren',
-    color: '#b8860b',
+    color: '#8c7a5e',
     chapters: '第21-24回',
     identity: '杂货店少年，后冒充诗人',
     personality: '虚荣浅薄、不学无术、招摇撞骗',
@@ -1296,7 +1263,7 @@ const CHARACTERS = [
     name: '郭孝子',
     alias: '名力，字铁山',
     category: 'gaoshi',
-    color: '#2e8b57',
+    color: '#5b7a78',
     chapters: '第38-40回',
     identity: '王惠之子，一生寻父',
     personality: '至孝、坚韧不拔、不畏艰险',
@@ -1330,7 +1297,7 @@ const CHARACTERS = [
     name: '潘三爷',
     alias: '潘自业',
     category: 'xiaoren',
-    color: '#b8860b',
+    color: '#8c7a5e',
     chapters: '第18-20回',
     identity: '衙门中人，包揽词讼',
     personality: '奸诈狡猾、胆大包天、教唆人犯罪',
@@ -1407,6 +1374,7 @@ function initNavTabs() {
       document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
       tab.classList.add('active');
       document.getElementById(tab.dataset.section).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   });
 }
@@ -1419,10 +1387,16 @@ function initOverview() {
     const count = CHARACTERS.filter(c => c.category === key).length;
     const card = document.createElement('div');
     card.className = 'cat-card';
+    card.style.setProperty('--gc', cat.color);
     card.innerHTML = `
-      <div class="cat-icon">${cat.icon}</div>
-      <div class="cat-name">${cat.name}</div>
-      <div class="cat-count">${count} 人 · ${cat.desc}</div>
+      <div class="cat-head">
+        <div class="cat-icon">${cat.icon}</div>
+        <div>
+          <div class="cat-name">${cat.name}</div>
+          <div class="cat-count">${count} 人</div>
+        </div>
+      </div>
+      <div class="cat-desc">${cat.desc}</div>
     `;
     card.addEventListener('click', () => {
       document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
@@ -1486,23 +1460,22 @@ function renderCards() {
     const cat = CATEGORIES[char.category];
     const card = document.createElement('div');
     card.className = 'char-card';
+    card.style.setProperty('--gc', char.color);
     card.innerHTML = `
-      <div class="card-indicator" style="background:${char.color};"></div>
-      <div class="card-header">
-        <div class="avatar" style="background:${char.color};">${char.name.charAt(0)}</div>
+      <div class="c-head">
         <div>
-          <div class="card-name">${char.name}</div>
-          ${char.alias ? `<div class="card-alias">${char.alias}</div>` : ''}
+          <div class="c-name-stamped">${char.name}</div>
+          ${char.alias ? `<div class="c-alias">${char.alias}</div>` : ''}
         </div>
       </div>
-      <div class="card-tags">
-        <span class="tag tag-category" style="background:${char.color}15; color:${char.color};">${cat.icon} ${cat.name}</span>
-        <span class="tag tag-chapter">${char.chapters}</span>
+      <div class="c-tags">
+        <span class="c-tag c-tag-cat">${cat.icon} ${cat.name}</span>
+        <span class="c-tag c-tag-chap">${char.chapters}</span>
       </div>
-      <div class="card-desc">${char.story.substring(0, 100)}...</div>
-      <div class="card-footer">
+      <div class="c-desc">${char.story.substring(0, 100)}...</div>
+      <div class="c-foot">
         <span>${char.identity.substring(0, 16)}${char.identity.length > 16 ? '...' : ''}</span>
-        <span>${char.famousScene ? char.famousScene.substring(0, 12) : ''}</span>
+        <span class="c-scene">${char.famousScene ? char.famousScene.substring(0, 12) : ''}</span>
       </div>
     `;
     card.addEventListener('click', () => showModal(char));
@@ -1516,6 +1489,8 @@ function showModal(char) {
   const overlay = document.getElementById('modalOverlay');
   const modal = document.getElementById('modalContent');
 
+  modal.style.setProperty('--gc', char.color);
+
   let relationsHTML = '';
   if (char.relations && char.relations.length > 0) {
     relationsHTML = `
@@ -1526,7 +1501,7 @@ function showModal(char) {
             const rchar = CHARACTERS.find(c => c.name === r.name || c.alias.includes(r.name));
             return `<span class="relation-tag" data-charid="${rchar ? rchar.id : ''}" title="${r.desc}">
               ${r.name}
-              <small style="color:var(--ink-faint); margin-left:4px;">${r.type}</small>
+              <small>${r.type}</small>
             </span>`;
           }).join('')}
         </div>
@@ -1545,12 +1520,13 @@ function showModal(char) {
   }
 
   modal.innerHTML = `
-    <button class="modal-close" onclick="closeModal()">✕</button>
-    <div class="modal-banner" style="background: linear-gradient(135deg, ${char.color} 0%, ${char.color}cc 100%);">
-      <div class="modal-avatar" style="background:${char.color};">${char.name.charAt(0)}</div>
-      <div class="modal-header-info">
-        <h2>${char.name}</h2>
-        <div class="modal-sub">${char.alias || char.identity}</div>
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div class="modal-banner">
+      <h2><span class="c-name-stamped" style="font-size:1.7rem;">${char.name}</span> <span class="mb-seal">${cat.icon}</span></h2>
+      <div class="mb-sub">${char.alias || char.identity}</div>
+      <div class="mb-tags">
+        <span class="c-tag c-tag-cat" style="color:${char.color}; background:${char.color}15; border-color:${char.color}33;">${cat.icon} ${cat.name}</span>
+        <span class="c-tag c-tag-chap">${char.chapters}</span>
       </div>
     </div>
     <div class="modal-body">
@@ -1615,28 +1591,29 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal()
 // ===== Timeline =====
 function initTimeline() {
   const container = document.getElementById('timelineContainer');
+
   const eraDiv = document.createElement('div');
-  eraDiv.className = 'timeline-era';
+  eraDiv.className = 'tl-era';
   eraDiv.innerHTML = '元末明初 至 万历年间<small>全书故事跨越约二百三十年（约1360—1595），涵盖成化、弘治、正德、嘉靖、隆庆、万历六朝</small>';
-  container.parentNode.insertBefore(eraDiv, container);
+  container.appendChild(eraDiv);
 
   TIMELINE_EVENTS.forEach((evt, idx) => {
     const item = document.createElement('div');
-    item.className = 'timeline-item';
+    item.className = 'tl-item';
     item.innerHTML = `
-      <div class="timeline-dot"></div>
-      <div class="timeline-year-badge">${evt.year || ''}</div>
-      <div class="timeline-chapter">${evt.chapter}</div>
-      <div class="timeline-title">${evt.title}</div>
-      <div class="timeline-chars">
+      <div class="tl-dot"></div>
+      <div class="tl-year">${evt.year || ''}</div>
+      <div class="tl-chapter">${evt.chapter}</div>
+      <div class="tl-title">${evt.title}</div>
+      <div class="tl-chars">
         ${evt.chars.map(name => {
           const ch = CHARACTERS.find(c => c.name === name);
-          return `<span class="timeline-char-tag" data-charid="${ch ? ch.id : ''}">${name}</span>`;
+          return `<span class="tl-char-tag" data-charid="${ch ? ch.id : ''}">${name}</span>`;
         }).join('')}
       </div>
-      <div class="timeline-desc">${evt.desc}</div>
+      <div class="tl-desc">${evt.desc}</div>
     `;
-    item.querySelectorAll('.timeline-char-tag').forEach(tag => {
+    item.querySelectorAll('.tl-char-tag').forEach(tag => {
       tag.addEventListener('click', e => {
         e.stopPropagation();
         const ch = CHARACTERS.find(c => c.id === tag.dataset.charid);
@@ -1653,46 +1630,46 @@ function initRelationMap() {
 
   // Define nodes with positions
   const nodes = [
-    { id: 'wangmian', x: 100, y: 80, name: '王冕', color: '#2e8b57', group: 'gaoshi' },
-    { id: 'zhoujin', x: 300, y: 60, name: '周进', color: '#8b2500', group: 'keming' },
-    { id: 'fanjin', x: 450, y: 60, name: '范进', color: '#8b2500', group: 'keming' },
-    { id: 'hutuohu', x: 540, y: 130, name: '胡屠户', color: '#b8860b', group: 'xiaoren' },
-    { id: 'yanjiansheng', x: 300, y: 200, name: '严监生', color: '#b8860b', group: 'xiaoren' },
-    { id: 'yangongsheng', x: 440, y: 200, name: '严贡生', color: '#b8860b', group: 'xiaoren' },
+    { id: 'wangmian', x: 100, y: 80, name: '王冕', color: '#5b7a78', group: 'gaoshi' },
+    { id: 'zhoujin', x: 300, y: 60, name: '周进', color: '#a8281c', group: 'keming' },
+    { id: 'fanjin', x: 450, y: 60, name: '范进', color: '#a8281c', group: 'keming' },
+    { id: 'hutuohu', x: 540, y: 130, name: '胡屠户', color: '#8c7a5e', group: 'xiaoren' },
+    { id: 'yanjiansheng', x: 300, y: 200, name: '严监生', color: '#8c7a5e', group: 'xiaoren' },
+    { id: 'yangongsheng', x: 440, y: 200, name: '严贡生', color: '#8c7a5e', group: 'xiaoren' },
     { id: 'louer', x: 600, y: 200, name: '娄公子', color: '#4a6fa5', group: 'liaoguan' },
     { id: 'qugongzi', x: 730, y: 140, name: '蘧公孙', color: '#4a6fa5', group: 'liaoguan' },
-    { id: 'maer', x: 170, y: 330, name: '马二先生', color: '#b8860b', group: 'xiaoren' },
-    { id: 'kuangchaoren', x: 340, y: 340, name: '匡超人', color: '#8b2500', group: 'keming' },
-    { id: 'panSan', x: 470, y: 380, name: '潘三爷', color: '#b8860b', group: 'xiaoren' },
+    { id: 'maer', x: 170, y: 330, name: '马二先生', color: '#8c7a5e', group: 'xiaoren' },
+    { id: 'kuangchaoren', x: 340, y: 340, name: '匡超人', color: '#a8281c', group: 'keming' },
+    { id: 'panSan', x: 470, y: 380, name: '潘三爷', color: '#8c7a5e', group: 'xiaoren' },
     { id: 'niubuyi', x: 600, y: 340, name: '牛布衣', color: '#6b4c8a', group: 'mingshi' },
-    { id: 'niupulang', x: 730, y: 380, name: '牛浦郎', color: '#b8860b', group: 'xiaoren' },
+    { id: 'niupulang', x: 730, y: 380, name: '牛浦郎', color: '#8c7a5e', group: 'xiaoren' },
     { id: 'gongshenglu', x: 170, y: 460, name: '鲍文卿', color: '#2e8b57', group: 'qiren' },
     { id: 'baotingxi', x: 340, y: 490, name: '鲍廷玺', color: '#2e8b57', group: 'qiren' },
     { id: 'dushaoqing', x: 500, y: 500, name: '杜少卿', color: '#6b4c8a', group: 'mingshi' },
     { id: 'chihs', x: 660, y: 490, name: '迟衡山', color: '#6b4c8a', group: 'mingshi' },
-    { id: 'zhuangshaoguang', x: 780, y: 540, name: '庄绍光', color: '#2e8b57', group: 'gaoshi' },
-    { id: 'yuboshi', x: 660, y: 600, name: '虞博士', color: '#2e8b57', group: 'gaoshi' },
-    { id: 'guxiaozi', x: 340, y: 600, name: '郭孝子', color: '#2e8b57', group: 'gaoshi' },
+    { id: 'zhuangshaoguang', x: 780, y: 540, name: '庄绍光', color: '#5b7a78', group: 'gaoshi' },
+    { id: 'yuboshi', x: 660, y: 600, name: '虞博士', color: '#5b7a78', group: 'gaoshi' },
+    { id: 'guxiaozi', x: 340, y: 600, name: '郭孝子', color: '#5b7a78', group: 'gaoshi' },
   ];
 
   const edges = [
-    { from: 'zhoujin', to: 'fanjin', type: '师承', color: '#8b2500' },
-    { from: 'fanjin', to: 'hutuohu', type: '亲属', color: '#b8860b' },
-    { from: 'yanjiansheng', to: 'yangongsheng', type: '亲属', color: '#b8860b' },
-    { from: 'louer', to: 'qugongzi', type: '交游', color: '#2e8b57' },
-    { from: 'maer', to: 'kuangchaoren', type: '师承', color: '#8b2500' },
-    { from: 'kuangchaoren', to: 'panSan', type: '交游', color: '#999', dash: true },
-    { from: 'niubuyi', to: 'niupulang', type: '对立', color: '#999', dash: true },
-    { from: 'gongshenglu', to: 'baotingxi', type: '亲属', color: '#b8860b' },
-    { from: 'baotingxi', to: 'dushaoqing', type: '交游', color: '#2e8b57' },
-    { from: 'dushaoqing', to: 'chihs', type: '交游', color: '#2e8b57' },
-    { from: 'chihs', to: 'zhuangshaoguang', type: '交游', color: '#2e8b57' },
-    { from: 'chihs', to: 'yuboshi', type: '交游', color: '#2e8b57' },
-    { from: 'dushaoqing', to: 'zhuangshaoguang', type: '交游', color: '#2e8b57' },
+    { from: 'zhoujin', to: 'fanjin', type: '师承', color: '#a8281c' },
+    { from: 'fanjin', to: 'hutuohu', type: '亲属', color: '#8c7a5e' },
+    { from: 'yanjiansheng', to: 'yangongsheng', type: '亲属', color: '#8c7a5e' },
+    { from: 'louer', to: 'qugongzi', type: '交游', color: '#5b7a78' },
+    { from: 'maer', to: 'kuangchaoren', type: '师承', color: '#a8281c' },
+    { from: 'kuangchaoren', to: 'panSan', type: '交游', color: '#5c5346', dash: true },
+    { from: 'niubuyi', to: 'niupulang', type: '对立', color: '#5c5346', dash: true },
+    { from: 'gongshenglu', to: 'baotingxi', type: '亲属', color: '#8c7a5e' },
+    { from: 'baotingxi', to: 'dushaoqing', type: '交游', color: '#5b7a78' },
+    { from: 'dushaoqing', to: 'chihs', type: '交游', color: '#5b7a78' },
+    { from: 'chihs', to: 'zhuangshaoguang', type: '交游', color: '#5b7a78' },
+    { from: 'chihs', to: 'yuboshi', type: '交游', color: '#5b7a78' },
+    { from: 'dushaoqing', to: 'zhuangshaoguang', type: '交游', color: '#5b7a78' },
     { from: 'dushaoqing', to: 'yuboshi', type: '同僚', color: '#4a6fa5' },
-    { from: 'dushaoqing', to: 'guxiaozi', type: '交游', color: '#2e8b57' },
-    { from: 'qugongzi', to: 'maer', type: '交游', color: '#2e8b57' },
-    { from: 'fanjin', to: 'niubuyi', type: '交游', color: '#2e8b57' },
+    { from: 'dushaoqing', to: 'guxiaozi', type: '交游', color: '#5b7a78' },
+    { from: 'qugongzi', to: 'maer', type: '交游', color: '#5b7a78' },
+    { from: 'fanjin', to: 'niubuyi', type: '交游', color: '#5b7a78' },
   ];
 
   const svgW = 900, svgH = 680;
@@ -1706,16 +1683,16 @@ function initRelationMap() {
     const dashAttr = e.dash ? 'stroke-dasharray="6,4"' : '';
     svg += `<line x1="${n1.x}" y1="${n1.y}" x2="${n2.x}" y2="${n2.y}" stroke="${e.color}" stroke-width="1.5" stroke-opacity="0.4" ${dashAttr}/>`;
     const mx = (n1.x + n2.x) / 2, my = (n1.y + n2.y) / 2;
-    svg += `<text x="${mx}" y="${my - 4}" text-anchor="middle" font-size="9" fill="${e.color}" opacity="0.7">${e.type}</text>`;
+    svg += `<text x="${mx}" y="${my - 4}" text-anchor="middle" font-size="9" fill="${e.color}" opacity="0.65" font-family="'Noto Serif SC',serif">${e.type}</text>`;
   });
 
   // Draw nodes
   nodes.forEach(n => {
     svg += `<g class="map-node" data-id="${n.id}" style="cursor:pointer;">`;
-    svg += `<circle cx="${n.x}" cy="${n.y}" r="26" fill="${n.color}" opacity="0.15" stroke="${n.color}" stroke-width="2"/>`;
+    svg += `<circle class="node-halo" cx="${n.x}" cy="${n.y}" r="26" fill="${n.color}" opacity="0.12" stroke="${n.color}" stroke-width="2"/>`;
     svg += `<circle cx="${n.x}" cy="${n.y}" r="18" fill="${n.color}"/>`;
-    svg += `<text x="${n.x}" y="${n.y + 5}" text-anchor="middle" font-size="11" fill="#fff" font-weight="700" font-family="'Noto Serif SC',serif">${n.name.charAt(0)}</text>`;
-    svg += `<text x="${n.x}" y="${n.y + 44}" text-anchor="middle" font-size="11" fill="#333" font-weight="500">${n.name}</text>`;
+    svg += `<text x="${n.x}" y="${n.y + 5}" text-anchor="middle" font-size="11" fill="#fbf5e2" font-weight="700" font-family="'Noto Serif SC',serif" pointer-events="none">${n.name.charAt(0)}</text>`;
+    svg += `<text x="${n.x}" y="${n.y + 44}" text-anchor="middle" font-size="11" fill="#2b2620" font-weight="500" font-family="'Noto Serif SC',serif" pointer-events="none">${n.name}</text>`;
     svg += `</g>`;
   });
 
@@ -1730,7 +1707,6 @@ function initRelationMap() {
     });
   });
 }
-
 
 // ===== Travel Route Map =====
 function initMap() {
@@ -1761,18 +1737,18 @@ function initMap() {
   };
 
   const routes = [
-    { id:'wangmian', name:'王冕', color:'#2e8b57', desc:'诸暨→会稽山（隐居）', path:['zhuji','kuaiji'] },
-    { id:'zhoujin', name:'周进', color:'#c0392b', desc:'汶上→济南→广东→京师', path:['wenshang','jinan','gaoYao','beijing'] },
-    { id:'fanjin', name:'范进', color:'#e74c3c', desc:'广东→高要→山东（学道）', path:['guangzhou','gaoYao','jinan'] },
-    { id:'kuangchaoren', name:'匡超人', color:'#d35400', desc:'乐清→杭州→京师→杭州', path:['yueqing','hangzhou','beijing','hangzhou'] },
+    { id:'wangmian', name:'王冕', color:'#5b7a78', desc:'诸暨→会稽山（隐居）', path:['zhuji','kuaiji'] },
+    { id:'zhoujin', name:'周进', color:'#a8281c', desc:'汶上→济南→广东→京师', path:['wenshang','jinan','gaoYao','beijing'] },
+    { id:'fanjin', name:'范进', color:'#c4341e', desc:'广东→高要→山东（学道）', path:['guangzhou','gaoYao','jinan'] },
+    { id:'kuangchaoren', name:'匡超人', color:'#8c4a1e', desc:'乐清→杭州→京师→杭州', path:['yueqing','hangzhou','beijing','hangzhou'] },
     { id:'dushaoqing', name:'杜少卿', color:'#6b4c8a', desc:'天长→南京（名士风流）', path:['tianchang','nanjing'] },
-    { id:'guxiaozi', name:'郭孝子', color:'#27ae60', desc:'南京→武昌→成都→西安', path:['nanjing','wuchang','chengdu','xian'] },
-    { id:'maer', name:'马二先生', color:'#e67e22', desc:'处州→杭州（选文游西湖）', path:['chuzhou_z','hangzhou'] },
-    { id:'louer', name:'娄公子', color:'#3498db', desc:'湖州→杭州（西湖诗会）', path:['huzhou','hangzhou'] },
-    { id:'niubuyi', name:'牛布衣', color:'#9b59b6', desc:'嘉兴→高要→芜湖（客死）', path:['jiaxing','gaoYao','wuhu'] },
-    { id:'baotingxi', name:'鲍廷玺', color:'#1abc9c', desc:'南京→天长→南京', path:['nanjing','tianchang','nanjing'] },
-    { id:'zhuangshaoguang', name:'庄绍光', color:'#16a085', desc:'南京→京师→南京（辞官）', path:['nanjing','beijing','nanjing'] },
-    { id:'niupulang', name:'牛浦郎', color:'#f39c12', desc:'芜湖→南京（冒名行骗）', path:['wuhu','nanjing'] },
+    { id:'guxiaozi', name:'郭孝子', color:'#2e8b57', desc:'南京→武昌→成都→西安', path:['nanjing','wuchang','chengdu','xian'] },
+    { id:'maer', name:'马二先生', color:'#8c7a5e', desc:'处州→杭州（选文游西湖）', path:['chuzhou_z','hangzhou'] },
+    { id:'louer', name:'娄公子', color:'#4a6fa5', desc:'湖州→杭州（西湖诗会）', path:['huzhou','hangzhou'] },
+    { id:'niubuyi', name:'牛布衣', color:'#7a5a8a', desc:'嘉兴→高要→芜湖（客死）', path:['jiaxing','gaoYao','wuhu'] },
+    { id:'baotingxi', name:'鲍廷玺', color:'#3cb371', desc:'南京→天长→南京', path:['nanjing','tianchang','nanjing'] },
+    { id:'zhuangshaoguang', name:'庄绍光', color:'#4a8a88', desc:'南京→京师→南京（辞官）', path:['nanjing','beijing','nanjing'] },
+    { id:'niupulang', name:'牛浦郎', color:'#a89878', desc:'芜湖→南京（冒名行骗）', path:['wuhu','nanjing'] },
   ];
 
   const events = [
@@ -1834,25 +1810,26 @@ function initMap() {
     const W = 780, H = 700;
     let svg = `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="font-family:'Noto Sans SC',sans-serif;">`;
     svg += `<defs>
-      <filter id="mapGlow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-      <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="none" stroke="var(--accent)" stroke-width="1.5"/></marker>
+      <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="none" stroke="#a8281c" stroke-width="1.5"/></marker>
     </defs>`;
-    svg += `<rect width="${W}" height="${H}" fill="#faf8f4" rx="8"/>`;
-    for (let i=100;i<W;i+=100) svg+=`<line x1="${i}" y1="0" x2="${i}" y2="${H}" stroke="#e8e0d0" stroke-width="0.3"/>`;
-    for (let i=100;i<H;i+=100) svg+=`<line x1="0" y1="${i}" x2="${W}" y2="${i}" stroke="#e8e0d0" stroke-width="0.3"/>`;
+    /* 米色底图 */
+    svg += `<rect width="${W}" height="${H}" fill="#f0e4c8" rx="8"/>`;
+    /* 淡青网格 */
+    for (let i=100;i<W;i+=100) svg+=`<line x1="${i}" y1="0" x2="${i}" y2="${H}" stroke="#5b7a78" stroke-width="0.3" opacity="0.1"/>`;
+    for (let i=100;i<H;i+=100) svg+=`<line x1="0" y1="${i}" x2="${W}" y2="${i}" stroke="#5b7a78" stroke-width="0.3" opacity="0.1"/>`;
 
-    // China outline
-    svg += `<path d="M600,65 C635,55 680,55 720,85 C745,105 755,125 748,145 C740,158 725,152 705,148 C685,145 665,150 652,158 C645,165 650,178 665,188 C680,198 695,195 710,210 C718,218 715,230 708,242 C700,258 695,275 690,295 C685,315 680,330 675,345 C668,358 662,370 658,382 C652,395 658,408 660,415 C658,425 655,435 658,448 C660,462 655,478 648,495 C640,510 630,525 618,540 C605,555 590,568 575,580 C560,592 545,605 530,620 C515,638 498,652 480,662 C460,672 440,670 418,660 C395,648 370,638 345,628 C320,618 295,600 272,578 C250,555 235,528 222,498 C210,468 198,438 188,405 C178,372 168,338 160,305 C152,272 148,240 150,210 C155,178 165,152 182,130 C200,108 225,92 255,80 C290,68 328,60 370,55 C415,50 460,50 505,52 C545,55 575,58 600,65 Z" fill="#f5f0e6" stroke="#c5b89e" stroke-width="1.8" stroke-linejoin="round"/>`;
+    // China outline — 江南淡青色调
+    svg += `<path d="M600,65 C635,55 680,55 720,85 C745,105 755,125 748,145 C740,158 725,152 705,148 C685,145 665,150 652,158 C645,165 650,178 665,188 C680,198 695,195 710,210 C718,218 715,230 708,242 C700,258 695,275 690,295 C685,315 680,330 675,345 C668,358 662,370 658,382 C652,395 658,408 660,415 C658,425 655,435 658,448 C660,462 655,478 648,495 C640,510 630,525 618,540 C605,555 590,568 575,580 C560,592 545,605 530,620 C515,638 498,652 480,662 C460,672 440,670 418,660 C395,648 370,638 345,628 C320,618 295,600 272,578 C250,555 235,528 222,498 C210,468 198,438 188,405 C178,372 168,338 160,305 C152,272 148,240 150,210 C155,178 165,152 182,130 C200,108 225,92 255,80 C290,68 328,60 370,55 C415,50 460,50 505,52 C545,55 575,58 600,65 Z" fill="#e8dfc8" stroke="#8c7a5e" stroke-width="1.5" stroke-linejoin="round" opacity="0.7"/>`;
 
-    // Rivers
-    svg += `<path d="M220,430 Q320,415 400,420 Q470,418 530,405 Q570,395 600,385 Q630,380 658,382" fill="none" stroke="#b8d4e8" stroke-width="2" stroke-dasharray="8,4" opacity="0.5"/>`;
-    svg += `<text x="420" y="408" font-size="10" fill="#7ba8c4" opacity="0.6" font-style="italic">长 江</text>`;
-    svg += `<path d="M200,260 Q300,230 380,250 Q450,265 500,260 Q550,255 585,248 Q620,230 660,188" fill="none" stroke="#c4b080" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.4"/>`;
-    svg += `<text x="430" y="248" font-size="9" fill="#a09060" opacity="0.5" font-style="italic">黄 河</text>`;
+    // Rivers — 淡青蓝
+    svg += `<path d="M220,430 Q320,415 400,420 Q470,418 530,405 Q570,395 600,385 Q630,380 658,382" fill="none" stroke="#7ba8b8" stroke-width="2" stroke-dasharray="8,4" opacity="0.45"/>`;
+    svg += `<text x="420" y="408" font-size="10" fill="#5b7a78" opacity="0.5" font-style="italic" font-family="'Noto Serif SC',serif">长 江</text>`;
+    svg += `<path d="M200,260 Q300,230 380,250 Q450,265 500,260 Q550,255 585,248 Q620,230 660,188" fill="none" stroke="#a89878" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.35"/>`;
+    svg += `<text x="430" y="248" font-size="9" fill="#8c7a5e" opacity="0.45" font-style="italic" font-family="'Noto Serif SC',serif">黄 河</text>`;
 
     // Province labels
     [{n:'直隶',x:585,y:118},{n:'山东',x:612,y:255},{n:'江苏',x:622,y:318},{n:'浙江',x:668,y:415},{n:'江西',x:535,y:478},{n:'安徽',x:555,y:388},{n:'河南',x:458,y:278},{n:'陕西',x:358,y:258},{n:'四川',x:265,y:448},{n:'湖广',x:468,y:448},{n:'广东',x:505,y:600},{n:'福建',x:638,y:525}].forEach(p => {
-      svg += `<text x="${p.x}" y="${p.y}" font-size="12" fill="#c5b89e" font-family="'Noto Serif SC',serif" opacity="0.5" text-anchor="middle">${p.n}</text>`;
+      svg += `<text x="${p.x}" y="${p.y}" font-size="12" fill="#8c7a5e" font-family="'Noto Serif SC',serif" opacity="0.4" text-anchor="middle">${p.n}</text>`;
     });
 
     // ====== ACTIVE ROUTES ======
@@ -1870,7 +1847,7 @@ function initMap() {
         svg += `<path d="M${from.x},${from.y} Q${cx},${cy} ${to.x},${to.y}" stroke="${route.color}" stroke-width="10" fill="none" opacity="0.08" stroke-linecap="round"/>`;
         svg += `<path d="M${from.x},${from.y} Q${cx},${cy} ${to.x},${to.y}" stroke="${route.color}" stroke-width="3" fill="none" stroke-dasharray="10,6" stroke-linecap="round" marker-end="url(#arrow)" style="animation:routeDashFlow 0.8s linear infinite;"/>`;
         svg += `<circle cx="${cx}" cy="${cy}" r="10" fill="${route.color}"/>`;
-        svg += `<text x="${cx}" y="${cy+4}" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">${i+1}</text>`;
+        svg += `<text x="${cx}" y="${cy+4}" text-anchor="middle" font-size="10" fill="#fbf5e2" font-weight="700" font-family="'Noto Serif SC',serif">${i+1}</text>`;
       }
     });
 
@@ -1881,8 +1858,8 @@ function initMap() {
       const ex = city.x + evt.dx, ey = city.y + evt.dy;
       svg += `<g style="cursor:pointer;">`;
       svg += `<title>${evt.chapter}：${evt.title}</title>`;
-      svg += `<rect x="${ex-3}" y="${ey-3}" width="6" height="6" rx="1" fill="#c0392b" transform="rotate(45,${ex},${ey})" stroke="#fff" stroke-width="1"/>`;
-      svg += `<text x="${ex+8}" y="${ey+3}" font-size="8.5" fill="#8b2500" font-weight="500">${evt.title}</text>`;
+      svg += `<rect x="${ex-3}" y="${ey-3}" width="6" height="6" rx="1" fill="#a8281c" transform="rotate(45,${ex},${ey})" stroke="#fbf5e2" stroke-width="1"/>`;
+      svg += `<text x="${ex+8}" y="${ey+3}" font-size="8.5" fill="#a8281c" font-weight="500" font-family="'Noto Serif SC',serif">${evt.title}</text>`;
       svg += `</g>`;
     });
 
@@ -1903,7 +1880,7 @@ function initMap() {
       const isActive = onRoutes.length > 0;
       const r = isActive ? 7 : 4.5;
       const sw = isActive ? 2.5 : 1.5;
-      const fc = isActive ? (routes.find(r=>r.id===onRoutes[0])?.color||'#333') : '#444';
+      const fc = isActive ? (routes.find(r=>r.id===onRoutes[0])?.color||'#2b2620') : '#2b2620';
       const charsHere = routes.filter(r=>r.path.includes(id)).map(r=>r.name);
       const evtsHere = events.filter(e=>e.city===id).map(e=>e.title);
       let tip = `${city.name}（${city.region}）`;
@@ -1912,15 +1889,15 @@ function initMap() {
 
       svg += `<g style="cursor:pointer;"><title>${tip}</title>`;
       if(isActive) svg += `<circle cx="${city.x}" cy="${city.y}" r="${r+4}" fill="${fc}" opacity="0.12"/>`;
-      svg += `<circle cx="${city.x}" cy="${city.y}" r="${r}" fill="${fc}" stroke="#fff" stroke-width="${sw}"/>`;
+      svg += `<circle cx="${city.x}" cy="${city.y}" r="${r}" fill="${fc}" stroke="#fbf5e2" stroke-width="${sw}"/>`;
       const lo = labelOffsets[id] || {x:10,y:4,a:'start'};
-      svg += `<text x="${city.x+lo.x}" y="${city.y+lo.y}" text-anchor="${lo.a}" font-size="${isActive?12:10.5}" fill="${isActive?fc:'#333'}" font-weight="${isActive?700:400}" font-family="'Noto Serif SC',serif">${city.name}</text>`;
+      svg += `<text x="${city.x+lo.x}" y="${city.y+lo.y}" text-anchor="${lo.a}" font-size="${isActive?12:10.5}" fill="${isActive?fc:'#2b2620'}" font-weight="${isActive?700:400}" font-family="'Noto Serif SC',serif">${city.name}</text>`;
       svg += `</g>`;
     });
 
     // Compass + Scale
-    svg += `<g transform="translate(720,620)"><circle cx="0" cy="0" r="22" fill="#f5f0e6" stroke="#c5b89e" stroke-width="1"/><text x="0" y="-8" text-anchor="middle" font-size="11" fill="#888" font-weight="600">N</text><path d="M0,-5 L3,8 L0,5 L-3,8 Z" fill="#c5b89e"/></g>`;
-    svg += `<g transform="translate(60,650)"><line x1="0" y1="0" x2="80" y2="0" stroke="#999" stroke-width="1.5"/><line x1="0" y1="-4" x2="0" y2="4" stroke="#999" stroke-width="1.5"/><line x1="80" y1="-4" x2="80" y2="4" stroke="#999" stroke-width="1.5"/><text x="40" y="14" text-anchor="middle" font-size="9" fill="#999">≈ 500里</text></g>`;
+    svg += `<g transform="translate(720,620)"><circle cx="0" cy="0" r="22" fill="#f0e4c8" stroke="#8c7a5e" stroke-width="1"/><text x="0" y="-8" text-anchor="middle" font-size="11" fill="#8c7a5e" font-weight="600">N</text><path d="M0,-5 L3,8 L0,5 L-3,8 Z" fill="#8c7a5e"/></g>`;
+    svg += `<g transform="translate(60,650)"><line x1="0" y1="0" x2="80" y2="0" stroke="#8c7a5e" stroke-width="1.5"/><line x1="0" y1="-4" x2="0" y2="4" stroke="#8c7a5e" stroke-width="1.5"/><line x1="80" y1="-4" x2="80" y2="4" stroke="#8c7a5e" stroke-width="1.5"/><text x="40" y="14" text-anchor="middle" font-size="9" fill="#8c7a5e">≈ 500里</text></g>`;
 
     svg += '</svg>';
     container.innerHTML = svg;

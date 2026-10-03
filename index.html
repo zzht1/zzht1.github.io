@@ -3,200 +3,475 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>zzht</title>
+<meta name="description" content="zzht.me — 一个人的阅读、行旅与杂览。文学艺术的深度导读、旅行规划的个人站点。">
+<title>zzht — 阅读 · 行旅 · 杂览</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700;900&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500&display=swap');
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: #fafaf8;
-    color: #2c2c2c;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-  .page {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 12vh 24px 10vh;
-  }
+:root{
+  --bg:#f6f4ee;            /* 米白底 */
+  --bg-card:#fbf9f3;
+  --ink:#232019;           /* 墨黑 */
+  --ink-soft:#5c5648;
+  --ink-faint:#9a9180;
+  --line:#e4ddcd;
+  /* 门类点缀色（克制） */
+  --c-classic:#a8281c;     /* 古典·朱砂红 */
+  --c-foreign:#3a4a5a;     /* 外国·墨蓝 */
+  --c-screen:#4a5568;      /* 影像·钢蓝灰 */
+  --c-travel:#5a6b3e;      /* 旅行·松绿 */
+  --c-science:#2d6a8a;     /* 科普·海蓝 */
+  --c-history:#a8791f;     /* 历史·赭石 */
+  --serif:'Noto Serif SC','Source Han Serif SC',serif;
+  --sans:'Noto Sans SC',-apple-system,BlinkMacSystemFont,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);
+  background:var(--bg);color:var(--ink);
+  line-height:1.75;overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+/* 极淡纸纹 */
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:repeating-linear-gradient(0deg,transparent 0,transparent 3px,rgba(120,100,60,.012) 3px,rgba(120,100,60,.012) 4px);
+}
+::selection{background:rgba(168,40,28,.14)}
 
-  /* Header */
-  .site-title {
-    font-family: 'Noto Serif SC', serif;
-    font-size: clamp(2.8rem, 8vw, 4.5rem);
-    font-weight: 900;
-    letter-spacing: -0.02em;
-    color: #1a1a1a;
-    line-height: 1.1;
-    margin-bottom: 6vh;
-  }
-  .site-sub {
-    font-size: 1.05rem;
-    color: #888;
-    font-weight: 300;
-    letter-spacing: 0.05em;
-    margin-bottom: 8vh;
-  }
-  .site-sub em {
-    font-style: normal;
-    color: #b8860b;
-  }
+.page{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:13vh 24px 9vh}
 
-  /* Projects */
-  .projects { list-style: none; }
-  .project {
-    padding: 36px 0;
-    border-bottom: 1px solid #e8e4dc;
-    position: relative;
-    transition: padding-left 0.4s cubic-bezier(.4,0,.2,1);
-  }
-  .project:first-child { border-top: 1px solid #e8e4dc; }
-  .project:hover { padding-left: 16px; }
-  .project:hover .project-arrow { opacity: 1; transform: translateX(0); }
-  .project:hover .project-name { color: #8b2500; }
-  .project-link {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-  }
-  .project-name {
-    font-family: 'Noto Serif SC', serif;
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: #333;
-    transition: color 0.3s;
-    display: inline;
-  }
-  .project-meta {
-    font-size: 0.82rem;
-    color: #aaa;
-    margin-top: 8px;
-    font-weight: 300;
-  }
-  .project-meta span + span::before {
-    content: '·';
-    margin: 0 8px;
-    color: #ccc;
-  }
-  .project-desc {
-    font-size: 0.92rem;
-    color: #777;
-    margin-top: 10px;
-    line-height: 1.7;
-    max-width: 560px;
-  }
-  .project-arrow {
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateX(-8px) translateY(-50%);
-    font-size: 1.5rem;
-    color: #8b2500;
-    opacity: 0;
-    transition: all 0.3s;
-    pointer-events: none;
-  }
+/* ===== 站名牌 ===== */
+.masthead{margin-bottom:9vh}
+.masthead .eyebrow{
+  font-size:.74rem;letter-spacing:.46em;color:var(--ink-faint);
+  font-weight:400;margin-bottom:1.3rem;text-transform:uppercase;
+}
+.masthead .site-title{
+  font-family:var(--serif);font-weight:900;
+  font-size:clamp(3.2rem,11vw,5.4rem);
+  letter-spacing:.02em;line-height:1;color:var(--ink);
+  display:flex;align-items:baseline;gap:.04em;
+}
+.masthead .site-title .dot{
+  width:11px;height:11px;border-radius:50%;background:var(--c-classic);
+  display:inline-block;margin-left:.16em;position:relative;top:-.18em;
+}
+.masthead .tagline{
+  display:flex;align-items:center;gap:14px;margin-top:1.5rem;
+}
+.masthead .tagline .rule{
+  flex:0 0 64px;height:1px;
+  background:linear-gradient(90deg,var(--c-classic),transparent);
+}
+.masthead .tagline .text{
+  font-family:var(--serif);font-size:1rem;color:var(--ink-soft);
+  letter-spacing:.22em;font-weight:400;
+}
+.masthead .lede{
+  margin-top:1.6rem;max-width:520px;font-size:.95rem;line-height:2;
+  color:var(--ink-soft);letter-spacing:.02em;
+}
 
-  /* Footer */
-  .site-footer {
-    margin-top: 10vh;
-    padding-top: 24px;
-    border-top: 1px solid #e8e4dc;
-    font-size: 0.82rem;
-    color: #bbb;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-  .site-footer a {
-    color: #999;
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .site-footer a:hover { color: #8b2500; }
+/* ===== 门类分组 ===== */
+.groups{display:flex;flex-direction:column;gap:7vh}
+.group{position:relative}
+.group-head{
+  display:flex;align-items:center;gap:14px;margin-bottom:2.2rem;
+}
+.group-icon{
+  width:34px;height:34px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:10px;background:var(--bg-card);
+  border:1px solid var(--line);
+}
+.group-icon svg{display:block}
+.group-meta{display:flex;flex-direction:column;gap:3px}
+.group-name{
+  font-family:var(--serif);font-size:1.18rem;font-weight:700;
+  letter-spacing:.1em;color:var(--ink);
+}
+.group-name .accent{margin-left:6px;font-size:.8rem;font-weight:400}
+.group-tag{font-size:.76rem;letter-spacing:.16em;color:var(--ink-faint)}
 
-  /* Decorative dot */
-  .dot-accent {
-    display: inline-block;
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: #8b2500;
-    margin-right: 10px;
-    vertical-align: middle;
-    position: relative;
-    top: -1px;
-  }
+/* 门类点缀色注入 */
+.group.classic .group-icon{border-color:rgba(168,40,28,.3)}
+.group.classic .group-icon svg{color:var(--c-classic)}
+.group.classic .group-name .accent{color:var(--c-classic)}
+.group.foreign .group-icon{border-color:rgba(58,74,90,.3)}
+.group.foreign .group-icon svg{color:var(--c-foreign)}
+.group.foreign .group-name .accent{color:var(--c-foreign)}
+.group.screen .group-icon{border-color:rgba(74,85,104,.3)}
+.group.screen .group-icon svg{color:var(--c-screen)}
+.group.screen .group-name .accent{color:var(--c-screen)}
+.group.travel .group-icon{border-color:rgba(90,107,62,.3)}
+.group.travel .group-icon svg{color:var(--c-travel)}
+.group.travel .group-name .accent{color:var(--c-travel)}
+.group.science .group-icon{border-color:rgba(45,106,138,.3)}
+.group.science .group-icon svg{color:var(--c-science)}
+.group.science .group-name .accent{color:var(--c-science)}
+.group.history .group-icon{border-color:rgba(168,121,31,.35)}
+.group.history .group-icon svg{color:var(--c-history)}
+.group.history .group-name .accent{color:var(--c-history)}
 
-  @media (max-width: 600px) {
-    .page { padding: 8vh 18px 6vh; }
-    .site-title { font-size: 2.2rem; }
-    .project-name { font-size: 1.15rem; }
-    .project-arrow { display: none; }
-  }
+/* 分隔渐变细线（有机，非硬边框） */
+.group + .group::before{
+  content:'';display:block;height:1px;margin-bottom:7vh;
+  background:linear-gradient(90deg,transparent,var(--line) 18%,var(--line) 82%,transparent);
+}
+
+/* ===== 条目列表 ===== */
+.projects{list-style:none}
+.project{
+  padding:24px 4px;border-bottom:1px solid var(--line);
+  position:relative;transition:padding-left .35s cubic-bezier(.4,0,.2,1);
+}
+.project:first-child{border-top:1px solid var(--line)}
+.project:hover{padding-left:18px}
+.project:hover .project-arrow{opacity:1;transform:translateX(0)}
+.project:hover .project-name{color:var(--ink)}
+.project:hover .project-name .marker{background:var(--ink-soft)}
+.project-link{text-decoration:none;color:inherit;display:block}
+.project-name{
+  font-family:var(--serif);font-size:1.32rem;font-weight:700;
+  color:var(--ink-soft);letter-spacing:.04em;
+  transition:color .3s;display:flex;align-items:center;
+}
+.project-name .marker{
+  display:inline-block;width:6px;height:6px;border-radius:50%;
+  background:var(--ink-faint);margin-right:14px;flex-shrink:0;
+  transition:background .3s;
+}
+.project-meta{
+  font-size:.78rem;color:var(--ink-faint);margin-top:7px;
+  font-weight:300;letter-spacing:.04em;margin-left:20px;
+}
+.project-meta span + span::before{content:'·';margin:0 9px;color:var(--line)}
+.project-desc{
+  font-size:.92rem;color:var(--ink-soft);margin-top:11px;
+  line-height:1.85;max-width:560px;margin-left:20px;
+}
+.project-arrow{
+  position:absolute;right:6px;top:50%;
+  transform:translateX(-10px) translateY(-50%);
+  font-family:var(--serif);font-size:1.3rem;color:var(--ink-faint);
+  opacity:0;transition:all .3s;pointer-events:none;
+}
+
+/* ===== footer ===== */
+.site-footer{
+  margin-top:11vh;padding-top:26px;
+  border-top:1px solid var(--line);
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:12px;
+}
+.site-footer .copy{font-size:.8rem;color:var(--ink-faint);letter-spacing:.06em}
+.site-footer .copy em{font-style:normal;color:var(--ink-soft)}
+.site-footer a{
+  color:var(--ink-soft);text-decoration:none;font-size:.82rem;
+  letter-spacing:.06em;transition:color .2s;
+}
+.site-footer a:hover{color:var(--c-classic)}
+
+@media(max-width:600px){
+  .page{padding:9vh 18px 6vh}
+  .masthead{margin-bottom:6vh}
+  .masthead .site-title{font-size:2.7rem}
+  .group + .group::before{margin-bottom:6vh}
+  .project-name{font-size:1.12rem}
+  .project-arrow{display:none}
+  .project:hover{padding-left:10px}
+}
 </style>
 </head>
 <body>
 <div class="page">
 
-  <h1 class="site-title">zzht</h1>
+  <header class="masthead">
+    <h1 class="site-title">zzht<span class="dot"></span></h1>
+  </header>
 
-  <ul class="projects">
-    <li class="project">
-      <a class="project-link" href="crime-and-punishment.html">
-        <div class="project-name"><span class="dot-accent"></span>罪与罚 · 全景梳理</div>
-        <div class="project-meta"><span>外国文学</span><span>陀思妥耶夫斯基</span></div>
-        <div class="project-desc">《罪与罚》阅读伴侣：九天罪案的故事脉络、14 位人物小传与关系图谱、六大主题、名句与译本改编指南。</div>
-      </a>
-      <div class="project-arrow">→</div>
-    </li>
-    <li class="project">
-      <a class="project-link" href="yuntaishan-guide.html">
-        <div class="project-name"><span class="dot-accent"></span>云台山旅游攻略</div>
-        <div class="project-meta"><span>旅行规划</span><span>交互式预算计算器</span></div>
-        <div class="project-desc">云台山深度游指南：行程时间轴、实景照片、可勾选的行前清单，还能用交互式预算计算器算出整趟行程的花费。</div>
-      </a>
-      <div class="project-arrow">→</div>
-    </li>
+  <main class="groups">
 
+    <!-- 文学艺术 -->
+    <section class="group classic">
+      <div class="group-head">
+        <div class="group-icon" aria-hidden="true">
+          <!-- 书脊 -->
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4">
+            <rect x="4" y="3" width="3.2" height="14" rx="0.5"/>
+            <rect x="8.4" y="3" width="3.2" height="14" rx="0.5"/>
+            <rect x="12.8" y="3" width="3.2" height="14" rx="0.5"/>
+          </svg>
+        </div>
+        <div class="group-meta">
+          <div class="group-name">文学<span class="accent">壹</span></div>
+        </div>
+      </div>
+      <!-- 排列规则：门内按生成时间倒序，最新在前 -->
+      <ul class="projects">
+        <li class="project">
+          <a class="project-link" href="prophet-trilogy.html">
+            <div class="project-name"><span class="marker"></span>先知三部曲</div>
+            <div class="project-meta"><span>多伊彻</span><span>托洛茨基传</span><span>三幕</span></div>
+            <div class="project-desc">武装的先知、被解除武装的先知、流亡的先知——档案纸横纹与三道幕布弧线，读完一场革命的全部荣光与代价。</div>
+          </a>
+          <div class="project-arrow">→</div>
+        </li>
+        <li class="project">
+          <a class="project-link" href="neapolitan.html">
+            <div class="project-name"><span class="marker"></span>那不勒斯四部曲</div>
+            <div class="project-meta"><span>费兰特</span><span>意大利</span><span>四部曲</span></div>
+            <div class="project-desc">我的天才女友、新名字的故事、离开的留下的、失踪的孩子——灰墙街区、维苏威火山与两个布娃娃，埃莱娜与莉拉的完整导读。</div>
+          </a>
+          <div class="project-arrow">→</div>
+        </li>
+        <li class="project">
+          <a class="project-link" href="borges.html">
+            <div class="project-name"><span class="marker"></span>博尔赫斯</div>
+            <div class="project-meta"><span>阿根廷</span><span>四部作品</span><span>镜子与迷宫</span></div>
+            <div class="project-desc">恶棍列传、小径分岔的花园、阿莱夫、沙之书——生平、思想与回响的综合肖像。图书馆的方格底纹，书架折成的迷宫与一面镜子。</div>
+          </a>
+          <div class="project-arrow">→</div>
+        </li>
+        <li class="project">
+          <a class="project-link" href="hesse.html">
+            <div class="project-name"><span class="marker"></span>赫尔曼·黑塞</div>
+            <div class="project-meta"><span>德国 / 瑞士</span><span>五部作品</span><span>荒原与河流</span></div>
+            <div class="project-desc">车轮下、荒原狼、悉达多、精神与爱欲、玻璃球游戏——生平、思想与回响的综合肖像。夜色靛蓝与东方金的底色，一条河从夜色里流出。</div>
+          </a>
+          <div class="project-arrow">→</div>
+        </li>
+        <li class="project">
+          <a class="project-link" href="calvino.html">
+            <div class="project-name"><span class="marker"></span>伊塔洛·卡尔维诺</div>
+            <div class="project-meta"><span>意大利</span><span>四部作品</span><span>轻逸与精确</span></div>
+            <div class="project-desc">树上的男爵、看不见的城市、如果在冬夜一个旅人、帕洛马尔——生平、思想与回响的综合肖像。点阵网格的底色，一串轻轻上行的几何图形。</div>
+          </a>
+          <div class="project-arrow">→</div>
+        </li>
+        <li class="project">
+          <a class="project-link" href="tolstoy.html">
+            <div class="project-name"><span class="marker"></span>列夫·托尔斯泰</div>
+            <div class="project-meta"><span>俄国</span><span>四部作品</span><span>草原地平线</span></div>
+            <div class="project-desc">战争与和平、安娜·卡列尼娜、忏悔录、复活——生平、思想与回响的综合肖像。麦田金与草原绿的时间流，地平线尽头一点烛火。</div>
+          </a>
+          <div class="project-arrow">→</div>
+        </li>
+        <li class="project">
+          <a class="project-link" href="laoshe.html">
+            <div class="project-name"><span class="marker"></span>老舍</div>
+            <div class="project-meta"><span>中国</span><span>四部代表作</span><span>京味设计语言</span></div>
+            <div class="project-desc">骆驼祥子、四世同堂、茶馆、月牙儿——生平、思想与回响的综合肖像。灰砖墙的底色，一弯月牙儿挂在屋脊线上。</div>
+          </a>
+          <div class="project-arrow">→</div>
+        </li>
+        <li class="project">
+          <a class="project-link" href="crime-and-punishment.html">
+            <div class="project-name"><span class="marker"></span>罪与罚</div>
+            <div class="project-meta"><span>陀思妥耶夫斯基</span><span>俄国</span><span>彼得堡</span></div>
+            <div class="project-desc">拉斯柯尔尼科夫的一把斧头与一间顶楼：泡黄壁纸的病态底色、五级下沉楼梯做成的时间线、烛光夜读的名句轮播，一路读完这场灵魂的审讯。</div>
+          </a>
+          <div class="project-arrow">→</div>
+        </li>
+        <li class="project">
+          <a class="project-link" href="dostoevsky.html">
+            <div class="project-name"><span class="marker"></span>陀思妥耶夫斯基</div>
+            <div class="project-meta"><span>俄国</span><span>六部作品</span><span>六种设计语言</span></div>
+            <div class="project-desc">罪与罚、卡拉马佐夫兄弟、白痴、群魔、地下室手记、被侮辱与被损害的——每部独立成页，各有其色调与气质，点进去即沉浸。</div>
+          </a>
+          <div class="project-arrow">→</div>
+        </li>
+        <li class="project">
+          <a class="project-link" href="rulin-waishi.html">
+            <div class="project-name"><span class="marker"></span>儒林外史</div>
+            <div class="project-meta"><span>吴敬梓</span><span>20 人物</span><span>5 条游历路线</span></div>
+            <div class="project-desc">线装书页上的士林群像。交互式地图、人物关系图谱与时间线，梳理科举功名下的众生相。</div>
+          </a>
+          <div class="project-arrow">→</div>
+        </li>
+        <li class="project">
+          <a class="project-link" href="songdongyang.html">
+            <div class="project-name"><span class="marker"></span>送东阳马生序</div>
+            <div class="project-meta"><span>宋濂</span><span>明代</span><span>劝学序文</span></div>
+            <div class="project-desc">宋濂写给同乡晚生的自述。负笈行旅五段人生阶段，配宣纸朱砂的沉浸式阅读与划词批注。</div>
+          </a>
+          <div class="project-arrow">→</div>
+        </li>
+        <li class="project">
+          <a class="project-link" href="moby-dick.html">
+            <div class="project-name"><span class="marker"></span>白鲸</div>
+            <div class="project-meta"><span>梅尔维尔</span><span>美国</span></div>
+            <div class="project-desc">《白鲸》阅读伴侣：三段式篇章结构、Pequod 号航行路线图、船员人物关系图谱与核心主题梳理。</div>
+          </a>
+          <div class="project-arrow">→</div>
+        </li>
+      </ul>
+    </section>
 
-    <li class="project">
-      <a class="project-link" href="rulin-waishi.html">
-        <div class="project-name"><span class="dot-accent"></span>儒林外史 · 人物志</div>
-        <div class="project-meta"><span>古典文学</span><span>20 人物 · 5 条游历路线</span></div>
-        <div class="project-desc">以交互式地图、关系图谱和时间线，梳理吴敬梓笔下形形色色的士林群像。可搜索、筛选、查看人物关系与游历路线。</div>
-      </a>
-      <div class="project-arrow">→</div>
-    </li>
-    <li class="project">
-      <a class="project-link" href="panzhihua.html">
-        <div class="project-name"><span class="dot-accent"></span>攀枝花 7 日游攻略</div>
-        <div class="project-meta"><span>旅行规划</span></div>
-        <div class="project-desc">以城东区青年人才公寓为基地的攀枝花深度游指南，含行程时间轴、景点地图、美食推荐与行前清单。</div>
-      </a>
-      <div class="project-arrow">→</div>
-    </li>
-    <li class="project">
-      <a class="project-link" href="songdongyang.html">
-        <div class="project-name"><span class="dot-accent"></span>送东阳马生序</div>
-        <div class="project-meta"><span>古典文学</span><span>宋濂</span></div>
-        <div class="project-desc">明代宋濂名篇，含原文精注、逐段译注与划词批注功能。可沉浸式阅读这篇劝学经典。</div>
-      </a>
-      <div class="project-arrow">→</div>
-    </li>
-    <li class="project">
-      <a class="project-link" href="the-wire.html">
-        <div class="project-name"><span class="dot-accent"></span>The Wire · 火线全解析</div>
-        <div class="project-meta"><span>美剧分析</span></div>
-        <div class="project-desc">对 HBO 经典美剧《火线》的全方位深度解析与人物梳理。</div>
-      </a>
-      <div class="project-arrow">→</div>
-    </li>
-  </ul>
+    <!-- 影视 -->
+    <section class="group screen">
+      <div class="group-head">
+        <div class="group-icon" aria-hidden="true">
+          <!-- 播放 / 银幕 -->
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4">
+            <rect x="3" y="4" width="14" height="12" rx="2"/>
+            <path d="M9 8 L13 10 L9 12 Z" fill="currentColor" stroke="none"/>
+          </svg>
+        </div>
+        <div class="group-meta">
+          <div class="group-name">影视<span class="accent">贰</span></div>
+        </div>
+      </div>
+      <!-- 排列规则：门内按生成时间倒序，最新在前 -->
+      <ul class="projects">
+        <li class="project">
+          <a class="project-link" href="hospital-playlist.html">
+            <div class="project-name"><span class="marker"></span>机智的医生生活 · 第一季总结</div>
+            <div class="project-meta"><span>tvN</span><span>2020 · 12 集</span><span>总结 + 开看前清单</span></div>
+            <div class="project-desc">看完第一季先停在这里：12 集合订本、五人帮季末坐标、五条感情线的进展，以及第二季开看前的回顾清单（可勾选、本机保存）与第一季留下的八个未解问号。</div>
+          </a>
+          <div class="project-arrow">→</div>
+        </li>
+        <li class="project">
+          <a class="project-link" href="hospital-playlist-episodes.html">
+            <div class="project-name"><span class="marker"></span>机智的医生生活 · 逐集剧情</div>
+            <div class="project-meta"><span>tvN</span><span>2020—2021</span><span>两季 24 集逐集讲解</span></div>
+            <div class="project-desc">两季 24 集，把每周四的手术、酒局与那支乐队都讲清楚：每集梗概加本集看点，五人团与感情线在每集如何推进，并附医学名词小词典（住院医、肝移植都讲清），追剧不卡壳。第二季部分含完整剧透。</div>
+          </a>
+          <div class="project-arrow">→</div>
+        </li>
+        <li class="project">
+          <a class="project-link" href="the-wire.html">
+            <div class="project-name"><span class="marker"></span>The Wire</div>
+            <div class="project-meta"><span>HBO</span><span>五季</span><span>巴尔的摩</span></div>
+            <div class="project-desc">对 HBO 经典美剧《火线》的全方位深度解析：五季机构对撞、人物群像、街区地图与经典台词。案卷式的冷峻纪实。</div>
+          </a>
+          <div class="project-arrow">→</div>
+        </li>
+        <li class="project">
+          <a class="project-link" href="babylon-berlin.html">
+            <div class="project-name"><span class="marker"></span>巴比伦柏林</div>
+            <div class="project-meta"><span>ARD / Sky</span><span>四季 40 集</span><span>魏玛柏林</span></div>
+            <div class="project-desc">第五季开演前的完整补课：1929—1931 的时代背景、四季剧情、五线贯穿的主线全景图、人物去向与关键名词，一路走向 1933 年的长夜。表现主义海报的墨与红。</div>
+          </a>
+          <div class="project-arrow">→</div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- 旅行规划 -->
+    <section class="group travel">
+      <div class="group-head">
+        <div class="group-icon" aria-hidden="true">
+          <!-- 路径线 -->
+          <svg width="22" height="20" viewBox="0 0 22 20" fill="none" stroke="currentColor" stroke-width="1.4">
+            <path d="M3 15c2-1 3-5 5-5s3 4 5 4 3-6 5-6" stroke-dasharray="2 2.5"/>
+            <circle cx="3" cy="15" r="1.6" fill="currentColor" stroke="none"/>
+            <circle cx="18" cy="8" r="1.6" fill="currentColor" stroke="none"/>
+          </svg>
+        </div>
+        <div class="group-meta">
+          <div class="group-name">旅行规划<span class="accent">叁</span></div>
+        </div>
+      </div>
+      <!-- 排列规则：门内按生成时间倒序，最新在前 -->
+      <ul class="projects">
+        <li class="project">
+          <a class="project-link" href="yuntaishan-guide.html">
+            <div class="project-name"><span class="marker"></span>云台山旅游攻略</div>
+            <div class="project-meta"><span>河南焦作</span><span>交互式预算</span></div>
+            <div class="project-desc">云台山深度游指南：行程时间轴、实景照片、可勾选的行前清单，还能用交互式预算计算器算出整趟行程的花费。</div>
+          </a>
+          <div class="project-arrow">→</div>
+        </li>
+        <li class="project">
+          <a class="project-link" href="panzhihua.html">
+            <div class="project-name"><span class="marker"></span>攀枝花 7 日游攻略</div>
+            <div class="project-meta"><span>四川</span><span>城东人才公寓为基地</span></div>
+            <div class="project-desc">以城东区青年人才公寓为基地的攀枝花深度游指南，含行程时间轴、景点地图、美食推荐与行前清单。</div>
+          </a>
+          <div class="project-arrow">→</div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- 历史地理 -->
+    <section class="group history">
+      <div class="group-head">
+        <div class="group-icon" aria-hidden="true">
+          <!-- 罗盘 -->
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4">
+            <circle cx="10" cy="10" r="7"/>
+            <path d="M10 5 L12 10 L10 15 L8 10 Z" fill="currentColor" stroke="none"/>
+          </svg>
+        </div>
+        <div class="group-meta">
+          <div class="group-name">历史地理<span class="accent">肆</span></div>
+        </div>
+      </div>
+      <!-- 排列规则：门内按生成时间倒序，最新在前 -->
+      <ul class="projects">
+        <li class="project">
+          <a class="project-link" href="city-growth.html">
+            <div class="project-name"><span class="marker"></span>五座城市的生长史</div>
+            <div class="project-meta"><span>运城 · 象山 · 攀枝花 · 上海</span><span>城市地理</span><span>手绘结构示意</span></div>
+            <div class="project-desc">每座城最早在哪一小片地上长起来、因为什么需要往外拓宽、接下来朝东南西北哪一头去。含老城与新区、政府办公区、CBD、产业结构与人口因素的四向拆解。</div>
+          </a>
+          <div class="project-arrow">→</div>
+        </li>
+        <li class="project">
+          <a class="project-link" href="middle-east.html">
+            <div class="project-name"><span class="marker"></span>没上完的建国课</div>
+            <div class="project-meta"><span>中东</span><span>1914—2026</span><span>一张会变色的地图</span></div>
+            <div class="project-desc">一百一十二年压成一条主线：容器是外人画的，名分从来没谈拢。四种名分抢同一个容器，九个时代点着看地图变色，最后用三问解码器拆开任意一条中东新闻。</div>
+          </a>
+          <div class="project-arrow">→</div>
+        </li>
+        <li class="project">
+          <a class="project-link" href="german-states.html">
+            <div class="project-name"><span class="marker"></span>德意志各州</div>
+            <div class="project-meta"><span>德国</span><span>十六联邦州</span><span>统一与碎片</span></div>
+            <div class="project-desc">从神圣罗马帝国的数百邦国，到 1871 年普鲁士主导的统一、1949 年的分裂与 1990 年的重聚。十六个州各自带着自己的渊源、派系与小九九——政治上的统一，压不住文化上的不统一。</div>
+          </a>
+          <div class="project-arrow">→</div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- 科普杂览 -->
+    <section class="group science">
+      <div class="group-head">
+        <div class="group-icon" aria-hidden="true">
+          <!-- 洋流 -->
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4">
+            <path d="M2 7c2-2 4 2 6 0s4-2 6 0 2 2 4 0" />
+            <path d="M2 13c2-2 4 2 6 0s4-2 6 0 2 2 4 0" opacity=".55"/>
+          </svg>
+        </div>
+        <div class="group-meta">
+          <div class="group-name">科普杂览<span class="accent">伍</span></div>
+        </div>
+      </div>
+      <!-- 排列规则：门内按生成时间倒序，最新在前 -->
+      <ul class="projects">
+        <li class="project">
+          <a class="project-link" href="elnino.html">
+            <div class="project-name"><span class="marker"></span>厄尔尼诺现象</div>
+            <div class="project-meta"><span>太平洋</span><span>海气相互作用</span><span>全球气候</span></div>
+            <div class="project-desc">赤道中东太平洋的海面温度一暖，全世界的天气牌局就要重洗。从沃克环流、暖池东移到 ENSO 冷暖相位，讲清这条改变了全球气候的太平洋暖流。</div>
+          </a>
+          <div class="project-arrow">→</div>
+        </li>
+      </ul>
+    </section>
+
+  </main>
 
   <footer class="site-footer">
-    <span>© zzht</span>
+    <span class="copy">© <em>zzht</em></span>
     <a href="https://github.com/zzht1">GitHub ↗</a>
   </footer>
 
