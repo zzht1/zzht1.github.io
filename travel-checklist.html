@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="出门旅行行前打包清单——可逐项勾选、本机自动保存，每次出发前清一下就能知道自己有哪些要带、哪些不带。">
+<meta name="description" content="出门旅行行前打包清单——按场景切换（旅行／出差／见朋友／探亲／户外／带娃／带宠／出境），逐项勾选、本机自动保存，每次出发前清一下就知道自己有哪些要带、哪些不带。">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23f6f4ee'/%3E%3Ctext x='16' y='22' font-family='serif' font-size='18' font-weight='700' text-anchor='middle' fill='%23232019'%3Ez%3C/text%3E%3Ccircle cx='25' cy='22' r='3' fill='%235a6b3e'/%3E%3C/svg%3E">
 <title>出门旅行 · 行前打包清单</title>
 
@@ -21,7 +21,6 @@
   --travel:#5a6b3e;
   --travel-dark:#46532f;
   --travel-soft:rgba(90,107,62,.10);
-  --warm:#a8791f;
   --serif:'Noto Serif SC','Source Han Serif SC',serif;
   --sans:'Noto Sans SC',-apple-system,BlinkMacSystemFont,sans-serif;
 }
@@ -41,7 +40,7 @@ body::before{
 .hero{
   position:relative;z-index:1;
   display:flex;flex-direction:column;align-items:center;text-align:center;
-  padding:13vh 24px 5vh;
+  padding:13vh 24px 4vh;
   max-width:760px;margin:0 auto;
 }
 .hero .eyebrow{
@@ -58,7 +57,7 @@ body::before{
   letter-spacing:.3em;margin-top:.4rem;
 }
 .hero .lede{
-  margin-top:1.6rem;max-width:480px;font-size:.95rem;line-height:2;
+  margin-top:1.6rem;max-width:500px;font-size:.95rem;line-height:2;
   color:var(--ink-soft);letter-spacing:.02em;
 }
 .hero .trip-line{
@@ -73,6 +72,23 @@ body::before{
 }
 .hero .trip-line input:focus{border-color:var(--travel)}
 .hero .today{font-size:.78rem;color:var(--ink-faint);letter-spacing:.06em;margin-top:1rem}
+
+/* ===== 场景选择 ===== */
+.scenarios{
+  position:relative;z-index:1;
+  max-width:1040px;margin:0 auto;padding:0 24px 2vh;
+}
+.scn-inner{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap}
+.scn-label{font-size:.85rem;color:var(--ink-faint);letter-spacing:.08em;white-space:nowrap}
+.chips{display:flex;gap:.5rem;flex-wrap:wrap}
+.chip{
+  font-family:var(--sans);font-size:.84rem;color:var(--ink-soft);
+  background:var(--card);border:1px solid var(--line);border-radius:999px;
+  padding:.4rem .95rem;cursor:pointer;transition:all .2s;white-space:nowrap;
+}
+.chip:hover{border-color:var(--travel);color:var(--travel-dark)}
+.chip.active{background:var(--travel);border-color:var(--travel);color:#fff}
+.scn-hint{font-size:.78rem;color:var(--ink-faint);letter-spacing:.04em;margin-left:auto}
 
 /* ===== 工具栏（吸顶，非玻璃）===== */
 .toolbar{
@@ -112,7 +128,7 @@ body::before{
 /* ===== 清单网格 ===== */
 .checklist{
   position:relative;z-index:1;
-  max-width:1040px;margin:0 auto;padding:5vh 24px 8vh;
+  max-width:1040px;margin:0 auto;padding:4vh 24px 8vh;
 }
 .grid{
   display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
@@ -145,6 +161,7 @@ ul.items{list-style:none;margin-top:.4rem}
   padding:.5rem 0;font-size:.9rem;color:var(--ink-soft);
   cursor:pointer;transition:color .2s;line-height:1.5;
 }
+.item.hidden{display:none}
 .item:hover{color:var(--travel-dark)}
 .box{
   flex-shrink:0;width:20px;height:20px;margin-top:1px;
@@ -157,6 +174,13 @@ ul.items{list-style:none;margin-top:.4rem}
 .item.checked .box::after{opacity:1}
 .item.checked .label{text-decoration:line-through;color:var(--ink-faint)}
 .item .label{flex:1}
+.scntag{
+  flex-shrink:0;align-self:center;
+  display:inline-block;font-size:.64rem;line-height:1;
+  padding:3px 7px;border-radius:999px;margin-left:.4rem;
+  background:var(--travel-soft);color:var(--travel-dark);
+  font-weight:500;letter-spacing:.02em;white-space:nowrap;
+}
 .item .del{
   flex-shrink:0;border:none;background:none;color:var(--ink-faint);
   font-size:1rem;line-height:1;cursor:pointer;padding:0 .1rem;opacity:.4;transition:opacity .2s,color .2s;
@@ -190,7 +214,9 @@ ul.items{list-style:none;margin-top:.4rem}
 .site-foot a:hover{color:var(--travel)}
 
 @media(max-width:600px){
-  .hero{padding:9vh 18px 4vh}
+  .hero{padding:9vh 18px 3vh}
+  .scenarios{padding:0 18px 1.5vh}
+  .scn-hint{width:100%;margin-left:0;order:3}
   .checklist{padding:4vh 18px 7vh}
   .toolbar{padding:.7rem 16px}
   .tool-btns{width:100%}
@@ -203,13 +229,30 @@ ul.items{list-style:none;margin-top:.4rem}
 <header class="hero">
   <div class="eyebrow">Travel · Packing</div>
   <h1>出门旅行，带什么<span class="accent">行前打包清单</span></h1>
-  <p class="lede">逐项勾选、本机自动保存。每次出发前打开，清一下勾选，就知道自己有哪些要带、哪些还不带。</p>
+  <p class="lede">先选这次是什么情况，清单会自动收起不相关的东西；再逐项勾选，本机自动保存。每次出发前打开、清一下勾选，就知道自己有哪些要带、哪些不带。</p>
   <div class="trip-line">
     <label for="tripName">这次去</label>
     <input id="tripName" type="text" placeholder="写个目的地或行程名" maxlength="24" autocomplete="off">
   </div>
   <div class="today" id="today"></div>
 </header>
+
+<section class="scenarios">
+  <div class="scn-inner">
+    <span class="scn-label">这次是</span>
+    <div class="chips" id="chips">
+      <button class="chip" data-scn="旅">旅行</button>
+      <button class="chip" data-scn="差">出差</button>
+      <button class="chip" data-scn="友">见朋友</button>
+      <button class="chip" data-scn="亲">探亲</button>
+      <button class="chip" data-scn="野">户外</button>
+      <button class="chip" data-scn="娃">带娃</button>
+      <button class="chip" data-scn="宠">带宠</button>
+      <button class="chip" data-scn="境">出境</button>
+    </div>
+    <span class="scn-hint" id="scnHint">未选场景 · 显示全部清单</span>
+  </div>
+</section>
 
 <div class="toolbar">
   <div class="toolbar-inner">
@@ -236,12 +279,12 @@ ul.items{list-style:none;margin-top:.4rem}
       </div>
       <ul class="items">
         <li class="item" data-id="docs-1"><span class="box"></span><span class="label">身份证（住宿、安检必备）</span></li>
-        <li class="item" data-id="docs-2"><span class="box"></span><span class="label">护照 / 签证（出境）</span></li>
-        <li class="item" data-id="docs-3"><span class="box"></span><span class="label">驾驶证 + 行驶证（自驾）</span></li>
+        <li class="item" data-id="docs-2" data-scn="境"><span class="box"></span><span class="label">护照 / 签证（出境）</span></li>
+        <li class="item" data-id="docs-3" data-scn="旅,亲,野"><span class="box"></span><span class="label">驾驶证 + 行驶证（自驾）</span></li>
         <li class="item" data-id="docs-4"><span class="box"></span><span class="label">学生证 / 军官证等优惠证件</span></li>
         <li class="item" data-id="docs-5"><span class="box"></span><span class="label">现金零钱 + 银行卡</span></li>
-        <li class="item" data-id="docs-6"><span class="box"></span><span class="label">机票 / 车票 / 酒店订单</span></li>
-        <li class="item" data-id="docs-7"><span class="box"></span><span class="label">旅行保险单</span></li>
+        <li class="item" data-id="docs-6" data-scn="旅,差,亲,境"><span class="box"></span><span class="label">机票 / 车票 / 酒店订单</span></li>
+        <li class="item" data-id="docs-7" data-scn="旅,野,境"><span class="box"></span><span class="label">旅行保险单</span></li>
       </ul>
       <div class="add-row"><input type="text" placeholder="加一项…" maxlength="30" autocomplete="off"><button>添加</button></div>
     </section>
@@ -258,9 +301,9 @@ ul.items{list-style:none;margin-top:.4rem}
         <li class="item" data-id="tech-2"><span class="box"></span><span class="label">充电宝</span></li>
         <li class="item" data-id="tech-3"><span class="box"></span><span class="label">数据线 / 转接头</span></li>
         <li class="item" data-id="tech-4"><span class="box"></span><span class="label">耳机</span></li>
-        <li class="item" data-id="tech-5"><span class="box"></span><span class="label">相机 + 存储卡 + 备用电池</span></li>
-        <li class="item" data-id="tech-6"><span class="box"></span><span class="label">插线板 / 转换插头（出境）</span></li>
-        <li class="item" data-id="tech-7"><span class="box"></span><span class="label">笔记本 / 平板（如需）</span></li>
+        <li class="item" data-id="tech-5" data-scn="旅,野"><span class="box"></span><span class="label">相机 + 存储卡 + 备用电池</span></li>
+        <li class="item" data-id="tech-6" data-scn="境"><span class="box"></span><span class="label">插线板 / 转换插头（出境）</span></li>
+        <li class="item" data-id="tech-7" data-scn="差,旅"><span class="box"></span><span class="label">笔记本 / 平板（如需）</span></li>
       </ul>
       <div class="add-row"><input type="text" placeholder="加一项…" maxlength="30" autocomplete="off"><button>添加</button></div>
     </section>
@@ -277,10 +320,13 @@ ul.items{list-style:none;margin-top:.4rem}
         <li class="item" data-id="clothes-2"><span class="box"></span><span class="label">内衣裤 + 袜子</span></li>
         <li class="item" data-id="clothes-3"><span class="box"></span><span class="label">外套 / 防风防雨层</span></li>
         <li class="item" data-id="clothes-4"><span class="box"></span><span class="label">舒适步行鞋</span></li>
-        <li class="item" data-id="clothes-5"><span class="box"></span><span class="label">拖鞋（酒店 / 沙滩）</span></li>
+        <li class="item" data-id="clothes-5" data-scn="旅,亲"><span class="box"></span><span class="label">拖鞋（酒店 / 沙滩）</span></li>
         <li class="item" data-id="clothes-6"><span class="box"></span><span class="label">睡衣</span></li>
-        <li class="item" data-id="clothes-7"><span class="box"></span><span class="label">帽子 / 围巾</span></li>
-        <li class="item" data-id="clothes-8"><span class="box"></span><span class="label">泳衣（水上项目）</span></li>
+        <li class="item" data-id="clothes-7" data-scn="旅,野,境"><span class="box"></span><span class="label">帽子 / 围巾</span></li>
+        <li class="item" data-id="clothes-8" data-scn="旅,野"><span class="box"></span><span class="label">泳衣（水上项目）</span></li>
+        <li class="item" data-id="clothes-9" data-scn="差,友"><span class="box"></span><span class="label">正装 / 商务着装</span></li>
+        <li class="item" data-id="clothes-10" data-scn="娃"><span class="box"></span><span class="label">儿童衣物 + 鞋</span></li>
+        <li class="item" data-id="clothes-11" data-scn="宠"><span class="box"></span><span class="label">宠物衣物（如需）</span></li>
       </ul>
       <div class="add-row"><input type="text" placeholder="加一项…" maxlength="30" autocomplete="off"><button>添加</button></div>
     </section>
@@ -300,6 +346,7 @@ ul.items{list-style:none;margin-top:.4rem}
         <li class="item" data-id="wash-5"><span class="box"></span><span class="label">化妆品（如需）</span></li>
         <li class="item" data-id="wash-6"><span class="box"></span><span class="label">梳子</span></li>
         <li class="item" data-id="wash-7"><span class="box"></span><span class="label">剃须刀</span></li>
+        <li class="item" data-id="wash-8" data-scn="娃"><span class="box"></span><span class="label">儿童洗漱用品</span></li>
       </ul>
       <div class="add-row"><input type="text" placeholder="加一项…" maxlength="30" autocomplete="off"><button>添加</button></div>
     </section>
@@ -314,11 +361,13 @@ ul.items{list-style:none;margin-top:.4rem}
       <ul class="items">
         <li class="item" data-id="med-1"><span class="box"></span><span class="label">常用药 / 处方药</span></li>
         <li class="item" data-id="med-2"><span class="box"></span><span class="label">创可贴</span></li>
-        <li class="item" data-id="med-3"><span class="box"></span><span class="label">晕车药</span></li>
-        <li class="item" data-id="med-4"><span class="box"></span><span class="label">肠胃药 / 止泻药</span></li>
+        <li class="item" data-id="med-3" data-scn="旅,野,亲"><span class="box"></span><span class="label">晕车药</span></li>
+        <li class="item" data-id="med-4" data-scn="旅,野,境"><span class="box"></span><span class="label">肠胃药 / 止泻药</span></li>
         <li class="item" data-id="med-5"><span class="box"></span><span class="label">感冒药</span></li>
-        <li class="item" data-id="med-6"><span class="box"></span><span class="label">抗过敏药</span></li>
+        <li class="item" data-id="med-6" data-scn="旅,野"><span class="box"></span><span class="label">抗过敏药</span></li>
         <li class="item" data-id="med-7"><span class="box"></span><span class="label">消毒湿巾 / 免洗洗手液</span></li>
+        <li class="item" data-id="med-8" data-scn="娃"><span class="box"></span><span class="label">儿童常备药</span></li>
+        <li class="item" data-id="med-9" data-scn="宠"><span class="box"></span><span class="label">宠物药品（如需）</span></li>
       </ul>
       <div class="add-row"><input type="text" placeholder="加一项…" maxlength="30" autocomplete="off"><button>添加</button></div>
     </section>
@@ -335,15 +384,19 @@ ul.items{list-style:none;margin-top:.4rem}
         <li class="item" data-id="stuff-2"><span class="box"></span><span class="label">水杯 / 保温杯</span></li>
         <li class="item" data-id="stuff-3"><span class="box"></span><span class="label">纸巾 / 湿巾</span></li>
         <li class="item" data-id="stuff-4"><span class="box"></span><span class="label">口罩</span></li>
-        <li class="item" data-id="stuff-5"><span class="box"></span><span class="label">墨镜（防晒）</span></li>
+        <li class="item" data-id="stuff-5" data-scn="旅,野,境"><span class="box"></span><span class="label">墨镜（防晒）</span></li>
         <li class="item" data-id="stuff-6"><span class="box"></span><span class="label">行李箱锁 / 背包</span></li>
-        <li class="item" data-id="stuff-7"><span class="box"></span><span class="label">购物袋 / 折叠袋</span></li>
-        <li class="item" data-id="stuff-8"><span class="box"></span><span class="label">垃圾袋（无痕出游）</span></li>
+        <li class="item" data-id="stuff-7" data-scn="旅,亲"><span class="box"></span><span class="label">购物袋 / 折叠袋</span></li>
+        <li class="item" data-id="stuff-8" data-scn="旅,野"><span class="box"></span><span class="label">垃圾袋（无痕出游）</span></li>
+        <li class="item" data-id="stuff-9" data-scn="差"><span class="box"></span><span class="label">名片 / 工作证</span></li>
+        <li class="item" data-id="stuff-10" data-scn="友,亲"><span class="box"></span><span class="label">伴手礼 / 礼物</span></li>
+        <li class="item" data-id="stuff-11" data-scn="娃"><span class="box"></span><span class="label">儿童推车 / 背带</span></li>
+        <li class="item" data-id="stuff-12" data-scn="宠"><span class="box"></span><span class="label">宠物粮 / 牵引绳 / 窝</span></li>
       </ul>
       <div class="add-row"><input type="text" placeholder="加一项…" maxlength="30" autocomplete="off"><button>添加</button></div>
     </section>
 
-    <!-- 按需勾选 -->
+    <!-- 按需（看目的地 / 天气）-->
     <section class="cat" data-cat="extra">
       <div class="cat-head">
         <span class="cat-mark"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v3M8 11v3M2 8h3M11 8h3"/><circle cx="8" cy="8" r="2.4"/></svg></span>
@@ -351,12 +404,12 @@ ul.items{list-style:none;margin-top:.4rem}
         <span class="cat-count"></span>
       </div>
       <ul class="items">
-        <li class="item" data-id="extra-1"><span class="box"></span><span class="label">登山杖（徒步）</span></li>
-        <li class="item" data-id="extra-2"><span class="box"></span><span class="label">驱蚊液（夏季 / 野外）</span></li>
-        <li class="item" data-id="extra-3"><span class="box"></span><span class="label">暖宝宝（冬季 / 高海拔）</span></li>
-        <li class="item" data-id="extra-4"><span class="box"></span><span class="label">浮潜 / 潜水装备</span></li>
-        <li class="item" data-id="extra-5"><span class="box"></span><span class="label">婴儿用品（带娃）</span></li>
-        <li class="item" data-id="extra-6"><span class="box"></span><span class="label">宠物用品（带宠物）</span></li>
+        <li class="item" data-id="extra-1" data-scn="野"><span class="box"></span><span class="label">登山杖（徒步）</span></li>
+        <li class="item" data-id="extra-2" data-scn="旅,野,亲"><span class="box"></span><span class="label">驱蚊液（夏季 / 野外）</span></li>
+        <li class="item" data-id="extra-3" data-scn="野,境"><span class="box"></span><span class="label">暖宝宝（冬季 / 高海拔）</span></li>
+        <li class="item" data-id="extra-4" data-scn="旅,野"><span class="box"></span><span class="label">浮潜 / 潜水装备</span></li>
+        <li class="item" data-id="extra-5" data-scn="娃"><span class="box"></span><span class="label">婴儿用品（带娃）</span></li>
+        <li class="item" data-id="extra-6" data-scn="宠"><span class="box"></span><span class="label">宠物用品（带宠物）</span></li>
       </ul>
       <div class="add-row"><input type="text" placeholder="加一项…" maxlength="30" autocomplete="off"><button>添加</button></div>
     </section>
@@ -364,7 +417,7 @@ ul.items{list-style:none;margin-top:.4rem}
   </div>
 
   <p class="site-foot">
-    勾选状态与自定义项都保存在你这台浏览器里，换设备不会同步。<br>
+    勾选状态、自定义项与所选场景都保存在你这台浏览器里，换设备不会同步。<br>
     想重新打包，点上方「清空勾选」即可。<a href="index.html">← 返回站点首页</a>
   </p>
 </main>
@@ -374,16 +427,30 @@ ul.items{list-style:none;margin-top:.4rem}
   var KEY = 'travel-checklist-v1';
   var grid = document.getElementById('grid');
   var state = load();
+  var selected = new Set(state.scn || []);
+
+  var SCN_NAME = {旅:'旅行',差:'出差',友:'见朋友',亲:'探亲',野:'户外',娃:'带娃',宠:'带宠',境:'出境'};
 
   function load(){
     try{
       var raw = localStorage.getItem(KEY);
-      if(raw){ var s = JSON.parse(raw); return {checked:s.checked||{}, custom:s.custom||{}, trip:s.trip||''}; }
+      if(raw){ var s = JSON.parse(raw); return {checked:s.checked||{}, custom:s.custom||{}, trip:s.trip||'', scn:s.scn||[]}; }
     }catch(e){}
-    return {checked:{}, custom:{}, trip:''};
+    return {checked:{}, custom:{}, trip:'', scn:[]};
   }
   function save(){
+    state.scn = Array.from(selected);
     try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){}
+  }
+
+  // 场景是否命中
+  function matches(li){
+    var scn = li.getAttribute('data-scn');
+    if(!scn) return true;                       // 通用项始终显示
+    if(selected.size === 0) return true;        // 未选场景显示全部
+    var arr = scn.split(',');
+    for(var i=0;i<arr.length;i++){ if(selected.has(arr[i])) return true; }
+    return false;
   }
 
   // 渲染自定义项
@@ -391,14 +458,14 @@ ul.items{list-style:none;margin-top:.4rem}
     document.querySelectorAll('.cat').forEach(function(cat){
       var catId = cat.getAttribute('data-cat');
       var ul = cat.querySelector('ul.items');
-      var olds = ul.querySelectorAll('.item.custom');
-      olds.forEach(function(n){ n.remove(); });
+      ul.querySelectorAll('.item.custom').forEach(function(n){ n.remove(); });
       var list = state.custom[catId] || [];
       list.forEach(function(it){
         var li = document.createElement('li');
         li.className = 'item custom';
         li.setAttribute('data-id', it.id);
         li.setAttribute('data-custom', '1');
+        if(it.scn) li.setAttribute('data-scn', it.scn.join(','));
         if(state.checked[it.id]) li.classList.add('checked');
         li.innerHTML = '<span class="box"></span><span class="label"></span><button class="del" title="删除">×</button>';
         li.querySelector('.label').textContent = it.label;
@@ -406,16 +473,15 @@ ul.items{list-style:none;margin-top:.4rem}
       });
     });
     bindItems();
-    updateCount();
+    filter();
   }
 
-  // 应用已保存勾选 + 绑定
+  // 应用已保存勾选
   function applyChecked(){
     document.querySelectorAll('.item').forEach(function(li){
       var id = li.getAttribute('data-id');
       if(state.checked[id]) li.classList.add('checked'); else li.classList.remove('checked');
     });
-    updateCount();
   }
 
   function bindItems(){
@@ -443,7 +509,27 @@ ul.items{list-style:none;margin-top:.4rem}
     });
   }
 
-  // 添加自定义项
+  // 场景筛选 + 小标签
+  function filter(){
+    document.querySelectorAll('.item').forEach(function(li){
+      li.classList.toggle('hidden', !matches(li));
+      li.querySelectorAll('.scntag').forEach(function(n){ n.remove(); });
+      if(selected.size > 0 && li.getAttribute('data-scn')){
+        var arr = li.getAttribute('data-scn').split(',').filter(function(t){ return selected.has(t); });
+        var label = li.querySelector('.label');
+        arr.forEach(function(t){
+          var s = document.createElement('span');
+          s.className = 'scntag';
+          s.textContent = SCN_NAME[t] || t;
+          if(li.querySelector('.del')) li.insertBefore(s, li.querySelector('.del'));
+          else li.appendChild(s);
+        });
+      }
+    });
+    updateCount();
+  }
+
+  // 添加自定义项（带上当前场景标签）
   document.querySelectorAll('.add-row').forEach(function(row){
     var input = row.querySelector('input');
     var btn = row.querySelector('button');
@@ -453,7 +539,8 @@ ul.items{list-style:none;margin-top:.4rem}
       var catId = row.closest('.cat').getAttribute('data-cat');
       if(!state.custom[catId]) state.custom[catId] = [];
       var id = 'c-' + Date.now() + '-' + Math.floor(Math.random()*1000);
-      state.custom[catId].push({id:id, label:v});
+      var scn = selected.size ? Array.from(selected) : [];
+      state.custom[catId].push({id:id, label:v, scn:scn});
       input.value = '';
       save(); renderCustom();
     }
@@ -462,26 +549,42 @@ ul.items{list-style:none;margin-top:.4rem}
   });
 
   function updateCount(){
-    var all = document.querySelectorAll('.item');
-    var total = all.length;
-    var done = document.querySelectorAll('.item.checked').length;
+    var visible = document.querySelectorAll('.item:not(.hidden)');
+    var total = visible.length;
+    var done = 0;
+    visible.forEach(function(li){ if(li.classList.contains('checked')) done++; });
     document.getElementById('progressText').textContent = '已打包 ' + done + ' / ' + total;
     var pct = total ? Math.round(done/total*100) : 0;
     document.getElementById('progressFill').style.width = pct + '%';
-    // 每类小计
     document.querySelectorAll('.cat').forEach(function(cat){
-      var items = cat.querySelectorAll('.item');
-      var c = cat.querySelectorAll('.item.checked').length;
-      var cnt = cat.querySelector('.cat-count');
-      cnt.textContent = c + ' / ' + items.length;
+      var items = cat.querySelectorAll('.item:not(.hidden)');
+      var c = 0; items.forEach(function(li){ if(li.classList.contains('checked')) c++; });
+      cat.querySelector('.cat-count').textContent = c + ' / ' + items.length;
     });
+  }
+
+  // 场景 chips
+  var chips = document.getElementById('chips');
+  chips.querySelectorAll('.chip').forEach(function(chip){
+    var code = chip.getAttribute('data-scn');
+    if(selected.has(code)) chip.classList.add('active');
+    chip.addEventListener('click', function(){
+      if(selected.has(code)) selected.delete(code); else selected.add(code);
+      chip.classList.toggle('active');
+      save(); filter(); updateHint();
+    });
+  });
+  function updateHint(){
+    if(selected.size === 0){ document.getElementById('scnHint').textContent = '未选场景 · 显示全部清单'; return; }
+    var names = Array.from(selected).map(function(c){ return SCN_NAME[c]||c; });
+    document.getElementById('scnHint').textContent = '场景：' + names.join(' · ');
   }
 
   // 工具栏
   document.getElementById('clearBtn').addEventListener('click', function(){
-    if(!confirm('清空本次所有勾选？自定义项会保留。')) return;
+    if(!confirm('清空本次所有勾选？自定义项与会选场景会保留。')) return;
     state.checked = {};
-    save(); applyChecked();
+    save(); applyChecked(); filter();
   });
   var filterBtn = document.getElementById('filterBtn');
   filterBtn.addEventListener('click', function(){
@@ -508,6 +611,7 @@ ul.items{list-style:none;margin-top:.4rem}
   // 初始化
   applyChecked();
   renderCustom();
+  updateHint();
 })();
 </script>
 </body>
