@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="出门旅行行前打包清单——可逐项勾选、本机自动保存，每次出发前清一下就能知道自己有哪些要带、哪些不带。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23f6f4ee'/%3E%3Ctext x='16' y='22' font-family='serif' font-size='18' font-weight='700' text-anchor='middle' fill='%23232019'%3Ez%3C/text%3E%3Ccircle cx='25' cy='22' r='3' fill='%235a6b3e'/%3E%3C/svg%3E">
+<title>出门旅行 · 行前打包清单</title>
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700;900&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700;900&family=Noto+Sans+SC:wght@300;400;500&display=swap"></noscript>
+<style>
+:root{
+  --bg:#f6f4ee;
+  --card:#fbf9f3;
+  --ink:#232019;
+  --ink-soft:#5c5648;
+  --ink-faint:#9a9180;
+  --line:#e4ddcd;
+  --travel:#5a6b3e;
+  --travel-dark:#46532f;
+  --travel-soft:rgba(90,107,62,.10);
+  --warm:#a8791f;
+  --serif:'Noto Serif SC','Source Han Serif SC',serif;
+  --sans:'Noto Sans SC',-apple-system,BlinkMacSystemFont,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);
+  background:var(--bg);color:var(--ink);
+  line-height:1.75;-webkit-font-smoothing:antialiased;
+}
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:repeating-linear-gradient(0deg,transparent 0,transparent 3px,rgba(120,100,60,.012) 3px,rgba(120,100,60,.012) 4px);
+}
+
+/* ===== HERO（居中）===== */
+.hero{
+  position:relative;z-index:1;
+  display:flex;flex-direction:column;align-items:center;text-align:center;
+  padding:13vh 24px 5vh;
+  max-width:760px;margin:0 auto;
+}
+.hero .eyebrow{
+  font-size:.74rem;letter-spacing:.42em;color:var(--ink-faint);
+  text-transform:uppercase;margin-bottom:1.4rem;
+}
+.hero h1{
+  font-family:var(--serif);font-weight:900;
+  font-size:clamp(2.4rem,8vw,3.6rem);line-height:1.15;
+  letter-spacing:.02em;color:var(--ink);
+}
+.hero h1 .accent{
+  display:block;font-size:.5em;font-weight:500;color:var(--travel);
+  letter-spacing:.3em;margin-top:.4rem;
+}
+.hero .lede{
+  margin-top:1.6rem;max-width:480px;font-size:.95rem;line-height:2;
+  color:var(--ink-soft);letter-spacing:.02em;
+}
+.hero .trip-line{
+  margin-top:1.8rem;display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;
+}
+.hero .trip-line label{font-size:.84rem;color:var(--ink-faint);letter-spacing:.08em}
+.hero .trip-line input{
+  font-family:var(--sans);font-size:.9rem;color:var(--ink);
+  background:var(--card);border:1px solid var(--line);border-radius:999px;
+  padding:.5rem 1.1rem;width:min(260px,70vw);text-align:center;outline:none;
+  transition:border-color .2s;
+}
+.hero .trip-line input:focus{border-color:var(--travel)}
+.hero .today{font-size:.78rem;color:var(--ink-faint);letter-spacing:.06em;margin-top:1rem}
+
+/* ===== 工具栏（吸顶，非玻璃）===== */
+.toolbar{
+  position:sticky;top:0;z-index:5;
+  background:var(--bg);
+  border-bottom:1px solid var(--line);
+  padding:.85rem 24px;
+}
+.toolbar-inner{
+  max-width:1040px;margin:0 auto;
+  display:flex;align-items:center;gap:1rem;flex-wrap:wrap;
+}
+.progress-wrap{flex:1;min-width:200px;display:flex;align-items:center;gap:.8rem}
+.progress-track{
+  flex:1;height:8px;border-radius:999px;background:var(--line);overflow:hidden;
+}
+.progress-fill{
+  height:100%;width:0;border-radius:999px;
+  background:linear-gradient(90deg,var(--travel),var(--travel-dark));
+  transition:width .35s cubic-bezier(.4,0,.2,1);
+}
+.progress-text{
+  font-family:var(--serif);font-weight:700;font-size:.95rem;color:var(--travel-dark);
+  white-space:nowrap;letter-spacing:.02em;
+}
+.tool-btns{display:flex;gap:.6rem;flex-wrap:wrap}
+.btn{
+  font-family:var(--sans);font-size:.82rem;letter-spacing:.04em;
+  color:var(--ink-soft);background:var(--card);
+  border:1px solid var(--line);border-radius:999px;
+  padding:.5rem 1rem;cursor:pointer;transition:all .2s;white-space:nowrap;
+}
+.btn:hover{border-color:var(--travel);color:var(--travel-dark)}
+.btn.active{background:var(--travel);border-color:var(--travel);color:#fff}
+.btn.warn:hover{border-color:#a8281c;color:#a8281c}
+
+/* ===== 清单网格 ===== */
+.checklist{
+  position:relative;z-index:1;
+  max-width:1040px;margin:0 auto;padding:5vh 24px 8vh;
+}
+.grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:1.5rem;align-items:start;
+}
+.cat{
+  background:var(--card);border:1px solid var(--line);border-radius:14px;
+  padding:1.4rem 1.4rem 1.2rem;box-shadow:0 1px 2px rgba(60,50,30,.04);
+}
+.cat-head{
+  display:flex;align-items:center;gap:.7rem;
+  padding-bottom:.8rem;margin-bottom:.4rem;
+  border-bottom:2px solid var(--travel-soft);
+}
+.cat-mark{
+  width:30px;height:30px;flex-shrink:0;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--travel-soft);color:var(--travel-dark);
+}
+.cat-mark svg{display:block}
+.cat-title{
+  font-family:var(--serif);font-size:1.1rem;font-weight:700;
+  letter-spacing:.06em;color:var(--ink);flex:1;
+}
+.cat-count{font-size:.76rem;color:var(--ink-faint);letter-spacing:.04em;white-space:nowrap}
+
+ul.items{list-style:none;margin-top:.4rem}
+.item{
+  display:flex;align-items:flex-start;gap:.7rem;
+  padding:.5rem 0;font-size:.9rem;color:var(--ink-soft);
+  cursor:pointer;transition:color .2s;line-height:1.5;
+}
+.item:hover{color:var(--travel-dark)}
+.box{
+  flex-shrink:0;width:20px;height:20px;margin-top:1px;
+  border:2px solid var(--line);border-radius:6px;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .2s;background:#fff;
+}
+.box::after{content:'✓';color:#fff;font-size:.8rem;font-weight:700;opacity:0;transition:opacity .15s}
+.item.checked .box{background:var(--travel);border-color:var(--travel)}
+.item.checked .box::after{opacity:1}
+.item.checked .label{text-decoration:line-through;color:var(--ink-faint)}
+.item .label{flex:1}
+.item .del{
+  flex-shrink:0;border:none;background:none;color:var(--ink-faint);
+  font-size:1rem;line-height:1;cursor:pointer;padding:0 .1rem;opacity:.4;transition:opacity .2s,color .2s;
+}
+.item:hover .del{opacity:1}
+.item .del:hover{color:#a8281c}
+
+/* 自定义添加 */
+.add-row{display:flex;gap:.5rem;margin-top:.7rem}
+.add-row input{
+  flex:1;font-family:var(--sans);font-size:.85rem;color:var(--ink);
+  background:#fff;border:1px dashed var(--line);border-radius:8px;
+  padding:.45rem .7rem;outline:none;transition:border-color .2s;
+}
+.add-row input:focus{border-color:var(--travel);border-style:solid}
+.add-row button{
+  font-family:var(--sans);font-size:.82rem;color:#fff;
+  background:var(--travel);border:none;border-radius:8px;
+  padding:0 .9rem;cursor:pointer;transition:background .2s;white-space:nowrap;
+}
+.add-row button:hover{background:var(--travel-dark)}
+
+/* 只看未打包 */
+.grid.hide-packed .item.checked{display:none}
+
+.site-foot{
+  margin-top:4vh;text-align:center;font-size:.8rem;color:var(--ink-faint);
+  letter-spacing:.04em;line-height:1.9;
+}
+.site-foot a{color:var(--ink-soft);text-decoration:none}
+.site-foot a:hover{color:var(--travel)}
+
+@media(max-width:600px){
+  .hero{padding:9vh 18px 4vh}
+  .checklist{padding:4vh 18px 7vh}
+  .toolbar{padding:.7rem 16px}
+  .tool-btns{width:100%}
+  .btn{flex:1}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="eyebrow">Travel · Packing</div>
+  <h1>出门旅行，带什么<span class="accent">行前打包清单</span></h1>
+  <p class="lede">逐项勾选、本机自动保存。每次出发前打开，清一下勾选，就知道自己有哪些要带、哪些还不带。</p>
+  <div class="trip-line">
+    <label for="tripName">这次去</label>
+    <input id="tripName" type="text" placeholder="写个目的地或行程名" maxlength="24" autocomplete="off">
+  </div>
+  <div class="today" id="today"></div>
+</header>
+
+<div class="toolbar">
+  <div class="toolbar-inner">
+    <div class="progress-wrap">
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="progress-text" id="progressText">已打包 0 / 0</div>
+    </div>
+    <div class="tool-btns">
+      <button class="btn" id="filterBtn">只看未打包</button>
+      <button class="btn warn" id="clearBtn">清空勾选</button>
+    </div>
+  </div>
+</div>
+
+<main class="checklist">
+  <div class="grid" id="grid">
+
+    <!-- 证件与财务 -->
+    <section class="cat" data-cat="docs">
+      <div class="cat-head">
+        <span class="cat-mark"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="12" height="10" rx="1.5"/><circle cx="6" cy="8" r="1.6"/><path d="M9 6.5h3M9 9.5h3"/></svg></span>
+        <span class="cat-title">证件与财务</span>
+        <span class="cat-count"></span>
+      </div>
+      <ul class="items">
+        <li class="item" data-id="docs-1"><span class="box"></span><span class="label">身份证（住宿、安检必备）</span></li>
+        <li class="item" data-id="docs-2"><span class="box"></span><span class="label">护照 / 签证（出境）</span></li>
+        <li class="item" data-id="docs-3"><span class="box"></span><span class="label">驾驶证 + 行驶证（自驾）</span></li>
+        <li class="item" data-id="docs-4"><span class="box"></span><span class="label">学生证 / 军官证等优惠证件</span></li>
+        <li class="item" data-id="docs-5"><span class="box"></span><span class="label">现金零钱 + 银行卡</span></li>
+        <li class="item" data-id="docs-6"><span class="box"></span><span class="label">机票 / 车票 / 酒店订单</span></li>
+        <li class="item" data-id="docs-7"><span class="box"></span><span class="label">旅行保险单</span></li>
+      </ul>
+      <div class="add-row"><input type="text" placeholder="加一项…" maxlength="30" autocomplete="off"><button>添加</button></div>
+    </section>
+
+    <!-- 电子设备 -->
+    <section class="cat" data-cat="tech">
+      <div class="cat-head">
+        <span class="cat-mark"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="2" width="10" height="7" rx="1.5"/><path d="M6 12h4M8 9v3"/></svg></span>
+        <span class="cat-title">电子设备</span>
+        <span class="cat-count"></span>
+      </div>
+      <ul class="items">
+        <li class="item" data-id="tech-1"><span class="box"></span><span class="label">手机 + 充电器</span></li>
+        <li class="item" data-id="tech-2"><span class="box"></span><span class="label">充电宝</span></li>
+        <li class="item" data-id="tech-3"><span class="box"></span><span class="label">数据线 / 转接头</span></li>
+        <li class="item" data-id="tech-4"><span class="box"></span><span class="label">耳机</span></li>
+        <li class="item" data-id="tech-5"><span class="box"></span><span class="label">相机 + 存储卡 + 备用电池</span></li>
+        <li class="item" data-id="tech-6"><span class="box"></span><span class="label">插线板 / 转换插头（出境）</span></li>
+        <li class="item" data-id="tech-7"><span class="box"></span><span class="label">笔记本 / 平板（如需）</span></li>
+      </ul>
+      <div class="add-row"><input type="text" placeholder="加一项…" maxlength="30" autocomplete="off"><button>添加</button></div>
+    </section>
+
+    <!-- 衣物鞋履 -->
+    <section class="cat" data-cat="clothes">
+      <div class="cat-head">
+        <span class="cat-mark"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 2l3 2 3-2 2 2-2 2v8H5V6L3 4z"/></svg></span>
+        <span class="cat-title">衣物鞋履</span>
+        <span class="cat-count"></span>
+      </div>
+      <ul class="items">
+        <li class="item" data-id="clothes-1"><span class="box"></span><span class="label">换洗衣物（按天数备）</span></li>
+        <li class="item" data-id="clothes-2"><span class="box"></span><span class="label">内衣裤 + 袜子</span></li>
+        <li class="item" data-id="clothes-3"><span class="box"></span><span class="label">外套 / 防风防雨层</span></li>
+        <li class="item" data-id="clothes-4"><span class="box"></span><span class="label">舒适步行鞋</span></li>
+        <li class="item" data-id="clothes-5"><span class="box"></span><span class="label">拖鞋（酒店 / 沙滩）</span></li>
+        <li class="item" data-id="clothes-6"><span class="box"></span><span class="label">睡衣</span></li>
+        <li class="item" data-id="clothes-7"><span class="box"></span><span class="label">帽子 / 围巾</span></li>
+        <li class="item" data-id="clothes-8"><span class="box"></span><span class="label">泳衣（水上项目）</span></li>
+      </ul>
+      <div class="add-row"><input type="text" placeholder="加一项…" maxlength="30" autocomplete="off"><button>添加</button></div>
+    </section>
+
+    <!-- 洗漱与护肤 -->
+    <section class="cat" data-cat="wash">
+      <div class="cat-head">
+        <span class="cat-mark"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 2h6l2 2v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z"/><path d="M6 6h4M6 9h4"/></svg></span>
+        <span class="cat-title">洗漱与护肤</span>
+        <span class="cat-count"></span>
+      </div>
+      <ul class="items">
+        <li class="item" data-id="wash-1"><span class="box"></span><span class="label">牙刷牙膏</span></li>
+        <li class="item" data-id="wash-2"><span class="box"></span><span class="label">洗发水 / 沐浴露（分装）</span></li>
+        <li class="item" data-id="wash-3"><span class="box"></span><span class="label">毛巾</span></li>
+        <li class="item" data-id="wash-4"><span class="box"></span><span class="label">护肤品 / 防晒霜</span></li>
+        <li class="item" data-id="wash-5"><span class="box"></span><span class="label">化妆品（如需）</span></li>
+        <li class="item" data-id="wash-6"><span class="box"></span><span class="label">梳子</span></li>
+        <li class="item" data-id="wash-7"><span class="box"></span><span class="label">剃须刀</span></li>
+      </ul>
+      <div class="add-row"><input type="text" placeholder="加一项…" maxlength="30" autocomplete="off"><button>添加</button></div>
+    </section>
+
+    <!-- 药品与健康 -->
+    <section class="cat" data-cat="med">
+      <div class="cat-head">
+        <span class="cat-mark"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="10" height="10" rx="2"/><path d="M8 6v4M6 8h4"/></svg></span>
+        <span class="cat-title">药品与健康</span>
+        <span class="cat-count"></span>
+      </div>
+      <ul class="items">
+        <li class="item" data-id="med-1"><span class="box"></span><span class="label">常用药 / 处方药</span></li>
+        <li class="item" data-id="med-2"><span class="box"></span><span class="label">创可贴</span></li>
+        <li class="item" data-id="med-3"><span class="box"></span><span class="label">晕车药</span></li>
+        <li class="item" data-id="med-4"><span class="box"></span><span class="label">肠胃药 / 止泻药</span></li>
+        <li class="item" data-id="med-5"><span class="box"></span><span class="label">感冒药</span></li>
+        <li class="item" data-id="med-6"><span class="box"></span><span class="label">抗过敏药</span></li>
+        <li class="item" data-id="med-7"><span class="box"></span><span class="label">消毒湿巾 / 免洗洗手液</span></li>
+      </ul>
+      <div class="add-row"><input type="text" placeholder="加一项…" maxlength="30" autocomplete="off"><button>添加</button></div>
+    </section>
+
+    <!-- 出行杂物 -->
+    <section class="cat" data-cat="stuff">
+      <div class="cat-head">
+        <span class="cat-mark"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 5h10l1 8H2z"/><path d="M6 5V3h4v2"/></svg></span>
+        <span class="cat-title">出行杂物</span>
+        <span class="cat-count"></span>
+      </div>
+      <ul class="items">
+        <li class="item" data-id="stuff-1"><span class="box"></span><span class="label">雨伞 / 雨衣</span></li>
+        <li class="item" data-id="stuff-2"><span class="box"></span><span class="label">水杯 / 保温杯</span></li>
+        <li class="item" data-id="stuff-3"><span class="box"></span><span class="label">纸巾 / 湿巾</span></li>
+        <li class="item" data-id="stuff-4"><span class="box"></span><span class="label">口罩</span></li>
+        <li class="item" data-id="stuff-5"><span class="box"></span><span class="label">墨镜（防晒）</span></li>
+        <li class="item" data-id="stuff-6"><span class="box"></span><span class="label">行李箱锁 / 背包</span></li>
+        <li class="item" data-id="stuff-7"><span class="box"></span><span class="label">购物袋 / 折叠袋</span></li>
+        <li class="item" data-id="stuff-8"><span class="box"></span><span class="label">垃圾袋（无痕出游）</span></li>
+      </ul>
+      <div class="add-row"><input type="text" placeholder="加一项…" maxlength="30" autocomplete="off"><button>添加</button></div>
+    </section>
+
+    <!-- 按需勾选 -->
+    <section class="cat" data-cat="extra">
+      <div class="cat-head">
+        <span class="cat-mark"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v3M8 11v3M2 8h3M11 8h3"/><circle cx="8" cy="8" r="2.4"/></svg></span>
+        <span class="cat-title">按需（看目的地 / 天气）</span>
+        <span class="cat-count"></span>
+      </div>
+      <ul class="items">
+        <li class="item" data-id="extra-1"><span class="box"></span><span class="label">登山杖（徒步）</span></li>
+        <li class="item" data-id="extra-2"><span class="box"></span><span class="label">驱蚊液（夏季 / 野外）</span></li>
+        <li class="item" data-id="extra-3"><span class="box"></span><span class="label">暖宝宝（冬季 / 高海拔）</span></li>
+        <li class="item" data-id="extra-4"><span class="box"></span><span class="label">浮潜 / 潜水装备</span></li>
+        <li class="item" data-id="extra-5"><span class="box"></span><span class="label">婴儿用品（带娃）</span></li>
+        <li class="item" data-id="extra-6"><span class="box"></span><span class="label">宠物用品（带宠物）</span></li>
+      </ul>
+      <div class="add-row"><input type="text" placeholder="加一项…" maxlength="30" autocomplete="off"><button>添加</button></div>
+    </section>
+
+  </div>
+
+  <p class="site-foot">
+    勾选状态与自定义项都保存在你这台浏览器里，换设备不会同步。<br>
+    想重新打包，点上方「清空勾选」即可。<a href="index.html">← 返回站点首页</a>
+  </p>
+</main>
+
+<script>
+(function(){
+  var KEY = 'travel-checklist-v1';
+  var grid = document.getElementById('grid');
+  var state = load();
+
+  function load(){
+    try{
+      var raw = localStorage.getItem(KEY);
+      if(raw){ var s = JSON.parse(raw); return {checked:s.checked||{}, custom:s.custom||{}, trip:s.trip||''}; }
+    }catch(e){}
+    return {checked:{}, custom:{}, trip:''};
+  }
+  function save(){
+    try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){}
+  }
+
+  // 渲染自定义项
+  function renderCustom(){
+    document.querySelectorAll('.cat').forEach(function(cat){
+      var catId = cat.getAttribute('data-cat');
+      var ul = cat.querySelector('ul.items');
+      var olds = ul.querySelectorAll('.item.custom');
+      olds.forEach(function(n){ n.remove(); });
+      var list = state.custom[catId] || [];
+      list.forEach(function(it){
+        var li = document.createElement('li');
+        li.className = 'item custom';
+        li.setAttribute('data-id', it.id);
+        li.setAttribute('data-custom', '1');
+        if(state.checked[it.id]) li.classList.add('checked');
+        li.innerHTML = '<span class="box"></span><span class="label"></span><button class="del" title="删除">×</button>';
+        li.querySelector('.label').textContent = it.label;
+        ul.appendChild(li);
+      });
+    });
+    bindItems();
+    updateCount();
+  }
+
+  // 应用已保存勾选 + 绑定
+  function applyChecked(){
+    document.querySelectorAll('.item').forEach(function(li){
+      var id = li.getAttribute('data-id');
+      if(state.checked[id]) li.classList.add('checked'); else li.classList.remove('checked');
+    });
+    updateCount();
+  }
+
+  function bindItems(){
+    document.querySelectorAll('.item').forEach(function(li){
+      if(li.dataset.bound) return;
+      li.dataset.bound = '1';
+      li.addEventListener('click', function(e){
+        if(e.target.classList.contains('del')) return;
+        var id = li.getAttribute('data-id');
+        var on = li.classList.toggle('checked');
+        if(on) state.checked[id] = 1; else delete state.checked[id];
+        save(); updateCount();
+      });
+      var del = li.querySelector('.del');
+      if(del){
+        del.addEventListener('click', function(e){
+          e.stopPropagation();
+          var id = li.getAttribute('data-id');
+          var catId = li.closest('.cat').getAttribute('data-cat');
+          state.custom[catId] = (state.custom[catId]||[]).filter(function(x){ return x.id !== id; });
+          delete state.checked[id];
+          save(); renderCustom();
+        });
+      }
+    });
+  }
+
+  // 添加自定义项
+  document.querySelectorAll('.add-row').forEach(function(row){
+    var input = row.querySelector('input');
+    var btn = row.querySelector('button');
+    function add(){
+      var v = input.value.trim();
+      if(!v) return;
+      var catId = row.closest('.cat').getAttribute('data-cat');
+      if(!state.custom[catId]) state.custom[catId] = [];
+      var id = 'c-' + Date.now() + '-' + Math.floor(Math.random()*1000);
+      state.custom[catId].push({id:id, label:v});
+      input.value = '';
+      save(); renderCustom();
+    }
+    btn.addEventListener('click', add);
+    input.addEventListener('keydown', function(e){ if(e.key === 'Enter') add(); });
+  });
+
+  function updateCount(){
+    var all = document.querySelectorAll('.item');
+    var total = all.length;
+    var done = document.querySelectorAll('.item.checked').length;
+    document.getElementById('progressText').textContent = '已打包 ' + done + ' / ' + total;
+    var pct = total ? Math.round(done/total*100) : 0;
+    document.getElementById('progressFill').style.width = pct + '%';
+    // 每类小计
+    document.querySelectorAll('.cat').forEach(function(cat){
+      var items = cat.querySelectorAll('.item');
+      var c = cat.querySelectorAll('.item.checked').length;
+      var cnt = cat.querySelector('.cat-count');
+      cnt.textContent = c + ' / ' + items.length;
+    });
+  }
+
+  // 工具栏
+  document.getElementById('clearBtn').addEventListener('click', function(){
+    if(!confirm('清空本次所有勾选？自定义项会保留。')) return;
+    state.checked = {};
+    save(); applyChecked();
+  });
+  var filterBtn = document.getElementById('filterBtn');
+  filterBtn.addEventListener('click', function(){
+    var on = grid.classList.toggle('hide-packed');
+    filterBtn.classList.toggle('active', on);
+  });
+
+  // 行程名
+  var tripInput = document.getElementById('tripName');
+  tripInput.value = state.trip || '';
+  tripInput.addEventListener('input', function(){
+    state.trip = tripInput.value;
+    save();
+  });
+
+  // 今日日期
+  (function(){
+    var d = new Date();
+    var wd = ['日','一','二','三','四','五','六'][d.getDay()];
+    document.getElementById('today').textContent =
+      '今日 ' + d.getFullYear() + '年' + (d.getMonth()+1) + '月' + d.getDate() + '日 · 周' + wd;
+  })();
+
+  // 初始化
+  applyChecked();
+  renderCustom();
+})();
+</script>
+</body>
+</html>
