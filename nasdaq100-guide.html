@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23f6f4ee'/%3E%3Ctext x='16' y='22' font-family='serif' font-size='18' font-weight='700' text-anchor='middle' fill='%23232019'%3Ez%3C/text%3E%3Ccircle cx='25' cy='22' r='3' fill='%23a8281c'/%3E%3C/svg%3E">
+<meta name="description" content="纳斯达克100指数基金购买指南：从基金→公募→QDII→指数基金→ETF 一层层拆解它到底是什么，它在投资体系里的位置，指数编制规则与前十大权重，四次历史深熊，场内ETF与场外联接的购买路径、费率、溢价与限购现状。">
+<title>纳斯达克100指数基金购买指南 — 从“它是什么”到“怎么买”</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#1d4e79;          /* 主色·深蓝 */
+  --blue:#2d6a8a;          /* 次蓝 */
+  --sky:#eaf2f8;           /* 浅蓝底 */
+  --gold:#b7791f;          /* 金·点缀 */
+  --gold-bg:#fbf3e4;
+  --ink:#1b2430;
+  --ink-soft:#4a5568;
+  --ink-faint:#8b95a5;
+  --line:#e2e8f0;
+  --card:#ffffff;
+  --bg:#f4f6f9;
+  --up:#c0392b;            /* 涨·红（A股习惯） */
+  --up-bg:#fdf0ee;
+  --down:#2e7d32;          /* 跌·绿 */
+  --down-bg:#edf7ee;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:-apple-system,"PingFang SC","Microsoft YaHei","Segoe UI",sans-serif;
+  color:var(--ink);background:var(--bg);line-height:1.85;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--blue)}
+
+/* ===== 顶部导航 ===== */
+.nav{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,255,255,.82);
+  -webkit-backdrop-filter:saturate(1.4) blur(10px);
+  backdrop-filter:saturate(1.4) blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{
+  max-width:900px;margin:0 auto;padding:.6rem 1.2rem;
+  display:flex;gap:.4rem;align-items:center;overflow-x:auto;
+  scrollbar-width:none;
+}
+.nav-inner::-webkit-scrollbar{display:none}
+.nav-brand{
+  font-weight:800;color:var(--navy);font-size:.95rem;flex-shrink:0;
+  margin-right:.6rem;letter-spacing:.02em;
+}
+.nav a{
+  text-decoration:none;color:var(--ink-soft);font-size:.85rem;
+  padding:.3rem .7rem;border-radius:16px;white-space:nowrap;flex-shrink:0;
+  transition:all .2s;
+}
+.nav a:hover{background:var(--sky);color:var(--navy)}
+
+/* ===== Hero（居中） ===== */
+.hero{
+  position:relative;min-height:92vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;overflow:hidden;
+  background:linear-gradient(180deg,#eef4fa 0%,#e3edf6 55%,#d8e7f2 100%);
+  padding:6rem 24px 4rem;
+}
+.hero-kicker{
+  font-size:.8rem;letter-spacing:.42em;color:var(--blue);
+  font-weight:600;margin-bottom:1.4rem;text-transform:uppercase;
+}
+.hero-title{
+  font-size:clamp(2rem,5.4vw,3.6rem);font-weight:800;letter-spacing:.02em;
+  color:var(--navy);z-index:2;position:relative;line-height:1.25;
+}
+.hero-sub{
+  font-size:clamp(.98rem,2vw,1.18rem);color:var(--ink-soft);margin-top:1rem;
+  z-index:2;position:relative;max-width:640px;
+}
+.hero-sub em{font-style:normal;color:var(--gold);font-weight:600}
+.hero-meta{
+  display:flex;gap:1.4rem;flex-wrap:wrap;justify-content:center;margin-top:2.2rem;
+  font-size:.82rem;color:var(--ink-faint);z-index:2;position:relative;
+}
+.hero-meta span::before{content:'·';margin-right:.6rem;color:var(--line)}
+.hero-meta span:first-child::before{content:'';margin:0}
+.hero-scroll{
+  margin-top:3rem;z-index:2;position:relative;color:var(--blue);
+  font-size:1.5rem;animation:bob 2s ease-in-out infinite;cursor:pointer;
+}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+.hero-chart{position:absolute;bottom:0;left:0;width:100%;height:38%;z-index:1;pointer-events:none}
+.hero-chart svg{width:100%;height:100%}
+
+/* ===== 通用区块 ===== */
+section{max-width:860px;margin:0 auto;padding:3.6rem 1.4rem}
+section h2{
+  font-size:1.65rem;font-weight:800;color:var(--navy);
+  margin-bottom:.4rem;position:relative;display:inline-block;
+}
+section h2::after{
+  content:'';position:absolute;bottom:-4px;left:0;width:100%;height:3px;
+  border-radius:2px;background:linear-gradient(90deg,var(--gold),#d9a84e);
+}
+.sec-no{
+  font-size:.78rem;letter-spacing:.3em;color:var(--gold);font-weight:700;
+  margin-bottom:.5rem;
+}
+section p{margin-bottom:1rem;font-size:1.02rem}
+section p.light{color:var(--ink-soft);font-size:.95rem}
+.note{
+  font-size:.8rem;color:var(--ink-faint);margin-top:.7rem;line-height:1.7;
+}
+.src{font-size:.78rem;color:var(--ink-faint);margin-top:.8rem;border-top:1px dashed var(--line);padding-top:.5rem}
+.src b{color:var(--ink-soft);font-weight:600}
+
+/* ===== 卡片 ===== */
+.card{
+  background:var(--card);border:1.5px solid var(--line);border-radius:18px;
+  padding:1.5rem 1.6rem;margin:1.2rem 0;
+}
+.card h3{font-size:1.1rem;font-weight:700;margin-bottom:.6rem;color:var(--ink)}
+.card p{font-size:.95rem;margin-bottom:.6rem}
+.card p:last-child{margin-bottom:0}
+
+/* ===== 速览数字 ===== */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin:1.6rem 0}
+.stat{
+  background:var(--card);border:1.5px solid var(--line);border-radius:16px;
+  padding:1.2rem 1rem;text-align:center;
+}
+.stat .v{font-size:1.7rem;font-weight:800;color:var(--navy)}
+.stat .v.red{color:var(--up)}
+.stat .v.green{color:var(--down)}
+.stat .v.gold{color:var(--gold)}
+.stat .l{font-size:.8rem;color:var(--ink-faint);margin-top:.3rem;line-height:1.5}
+
+/* ===== 层级拆解 ===== */
+.layers{counter-reset:layer;margin:1.6rem 0}
+.layer{
+  position:relative;background:var(--card);border:1.5px solid var(--line);
+  border-radius:18px;padding:1.5rem 1.6rem 1.4rem;margin-bottom:1.1rem;
+  counter-increment:layer;
+}
+.layer::before{
+  content:counter(layer,decimal-leading-zero);
+  position:absolute;top:-12px;left:1.3rem;
+  background:var(--navy);color:#fff;font-size:.75rem;font-weight:700;
+  padding:.15rem .65rem;border-radius:14px;letter-spacing:.1em;
+}
+.layer.q{font-size:1.08rem;font-weight:700;color:var(--navy);margin-bottom:.8rem}
+.layer .opts{display:flex;flex-wrap:wrap;gap:.6rem;margin:.9rem 0}
+.opt{
+  flex:1 1 200px;border:1.5px solid var(--line);border-radius:12px;
+  padding:.8rem 1rem;font-size:.86rem;line-height:1.65;background:#fbfcfe;
+}
+.opt b{display:block;font-size:.92rem;margin-bottom:.25rem;color:var(--ink)}
+.opt.pick{border-color:var(--gold);background:var(--gold-bg)}
+.opt.pick b{color:var(--gold)}
+.opt.pick b::after{content:'✓ 本指南走的这条路';font-size:.68rem;color:var(--gold);margin-left:.5rem;letter-spacing:.05em}
+.layer .verdict{
+  font-size:.9rem;color:var(--ink-soft);background:var(--sky);
+  border-radius:10px;padding:.7rem 1rem;margin-top:.4rem;
+}
+.layer .verdict b{color:var(--navy)}
+
+/* 身份证 */
+.idcard{
+  background:linear-gradient(135deg,#fdfbf6,#f7f1e3);
+  border:2px solid #e5d5b0;border-radius:20px;padding:1.8rem 1.7rem;margin:2rem 0 1rem;
+  box-shadow:0 2px 14px rgba(183,121,31,.08);
+}
+.idcard .id-title{
+  font-size:.78rem;letter-spacing:.34em;color:var(--gold);font-weight:700;margin-bottom:1rem;
+}
+.chain{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;justify-content:center;margin-bottom:1.1rem}
+.chain .node{
+  background:#fff;border:1.5px solid #e5d5b0;border-radius:10px;
+  padding:.45rem .85rem;font-size:.9rem;font-weight:600;color:var(--ink);
+}
+.chain .node.hot{background:var(--navy);color:#fff;border-color:var(--navy)}
+.chain .sep{color:var(--gold);font-weight:700}
+.idcard p{font-size:.96rem;text-align:center;color:var(--ink-soft)}
+.idcard p b{color:var(--navy)}
+
+/* ===== 资产配置地图 ===== */
+.map{margin:1.6rem 0}
+.map-row{display:flex;gap:.7rem;margin-bottom:.7rem;align-items:stretch;flex-wrap:wrap}
+.map-lv{flex:0 0 96px;display:flex;align-items:center;justify-content:center;
+  font-size:.78rem;color:var(--ink-faint);font-weight:600;border-right:2px dashed var(--line)}
+.map-cells{flex:1;display:flex;gap:.7rem;flex-wrap:wrap}
+.cell{
+  background:var(--card);border:1.5px solid var(--line);border-radius:12px;
+  padding:.55rem .9rem;font-size:.86rem;color:var(--ink-soft);
+}
+.cell.on{background:var(--navy);border-color:var(--navy);color:#fff;font-weight:600}
+.cell.on::after{content:'← 纳指100在这';font-size:.68rem;opacity:.85;margin-left:.45rem}
+
+/* ===== 表格 ===== */
+.tbl-wrap{overflow-x:auto;margin:1.3rem 0}
+table{width:100%;border-collapse:collapse;font-size:.88rem;background:#fff}
+th,td{padding:.65rem .8rem;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}
+th{background:var(--sky);color:var(--navy);font-weight:700;font-size:.84rem}
+tbody tr:hover{background:#f8fafc}
+td.num,th.num{text-align:right}
+.up-t{color:var(--up);font-weight:600}
+.down-t{color:var(--down);font-weight:600}
+.small-t{font-size:.8rem;color:var(--ink-faint)}
+
+/* ===== 条形图（纯 CSS） ===== */
+.bars{margin:1.2rem 0}
+.bar-row{display:grid;grid-template-columns:130px 1fr 52px;gap:.6rem;align-items:center;margin-bottom:.5rem;font-size:.86rem}
+.bar-track{background:#eef1f6;border-radius:6px;height:18px;overflow:hidden}
+.bar-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--navy),var(--blue))}
+.bar-val{text-align:right;color:var(--ink-soft);font-variant-numeric:tabular-nums}
+.bar-row .bar-name{color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* ===== 行业分布 ===== */
+.ind-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:.8rem 1.6rem;margin:1.3rem 0}
+.ind-item{font-size:.86rem}
+.ind-item .bar-track{height:12px;margin-top:.3rem}
+.ind-item .bar-fill{background:linear-gradient(90deg,#3a7ca8,#6aa6c9)}
+.ind-item.zero .bar-fill{background:#d8dee8}
+.ind-item .lab{display:flex;justify-content:space-between;color:var(--ink-soft)}
+.ind-item .lab b{color:var(--ink);font-weight:600}
+
+/* ===== 年度收益条纹 ===== */
+.stripe-wrap{background:var(--card);border:1.5px solid var(--line);border-radius:18px;padding:1.4rem 1.2rem 1rem;margin:1.4rem 0;overflow-x:auto}
+.stripe{display:flex;gap:3px;align-items:flex-end;min-width:640px;height:130px;padding:0 .2rem}
+.yr{flex:1;display:flex;flex-direction:column;justify-content:flex-end;height:100%;position:relative}
+.yr .b{border-radius:3px 3px 0 0;background:var(--up);min-height:2px}
+.yr.neg .b{background:var(--down);border-radius:0 0 3px 3px}
+.yr.mid::after{
+  content:'';position:absolute;left:-6px;right:-6px;top:64px;height:1px;background:var(--line);
+}
+.stripe-axis{display:flex;min-width:640px;gap:3px;padding:.4rem .2rem 0;font-size:.66rem;color:var(--ink-faint)}
+.stripe-axis span{flex:1;text-align:center}
+.legend{display:flex;gap:1.4rem;justify-content:center;margin-top:.8rem;font-size:.8rem;color:var(--ink-soft)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:.4rem;vertical-align:-1px}
+
+/* ===== 回撤卡 ===== */
+.dd-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem;margin:1.4rem 0}
+.dd{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:1.2rem 1.2rem}
+.dd .dd-yr{font-size:.85rem;font-weight:700;color:var(--ink-faint);letter-spacing:.06em}
+.dd .dd-v{font-size:2rem;font-weight:800;color:var(--down);margin:.2rem 0}
+.dd .dd-v small{font-size:.9rem;font-weight:600;color:var(--ink-soft)}
+.dd p{font-size:.84rem;color:var(--ink-soft);line-height:1.7;margin:0}
+.dd p b{color:var(--ink)}
+
+/* ===== 步骤路径 ===== */
+.path{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.2rem;margin:1.5rem 0}
+.path-card{background:var(--card);border:1.5px solid var(--line);border-radius:18px;padding:1.4rem;position:relative}
+.path-card .tag{
+  display:inline-block;font-size:.74rem;font-weight:700;letter-spacing:.12em;
+  padding:.2rem .75rem;border-radius:14px;margin-bottom:.7rem;
+}
+.path-card.a .tag{background:var(--sky);color:var(--navy)}
+.path-card.b .tag{background:var(--gold-bg);color:var(--gold)}
+.path-card.c .tag{background:#eef5ee;color:var(--down)}
+.path-card h3{font-size:1.08rem;font-weight:700;margin-bottom:.6rem}
+.path-card ol{padding-left:1.2rem;font-size:.9rem;color:var(--ink-soft)}
+.path-card ol li{margin-bottom:.45rem}
+.path-card ol li b{color:var(--ink)}
+.path-card .fit{font-size:.82rem;margin-top:.8rem;background:#f8fafc;border-radius:10px;padding:.6rem .8rem;color:var(--ink-soft)}
+.path-card .fit b{color:var(--navy)}
+
+/* ===== 警示框 ===== */
+.warn{
+  background:var(--up-bg);border:1.5px solid #f2c8c0;border-left:5px solid var(--up);
+  border-radius:14px;padding:1.2rem 1.4rem;margin:1.3rem 0;font-size:.95rem;
+}
+.warn b{color:var(--up)}
+.warn p{margin-bottom:.4rem;font-size:.95rem}
+.warn p:last-child{margin-bottom:0}
+.info{
+  background:var(--sky);border:1.5px solid #ccdfee;border-left:5px solid var(--blue);
+  border-radius:14px;padding:1.2rem 1.4rem;margin:1.3rem 0;font-size:.95rem;
+}
+.info b{color:var(--navy)}
+
+/* ===== 溢价计算器 ===== */
+.calc{display:flex;flex-wrap:wrap;gap:1rem;align-items:flex-end;margin:1rem 0}
+.calc label{font-size:.84rem;color:var(--ink-soft);display:block;margin-bottom:.3rem}
+.calc input{
+  width:110px;padding:.5rem .7rem;border:1.5px solid var(--line);border-radius:10px;
+  font-size:1rem;font-family:inherit;color:var(--ink);background:#fff;
+}
+.calc input:focus{outline:none;border-color:var(--navy)}
+.calc button{
+  padding:.6rem 1.4rem;border:none;border-radius:10px;background:var(--navy);
+  color:#fff;font-size:.92rem;font-weight:600;cursor:pointer;font-family:inherit;
+}
+.calc button:hover{background:#163d5f}
+.calc-out{
+  font-size:1rem;background:#f8fafc;border-radius:12px;padding:.9rem 1.2rem;
+  flex:1 1 240px;color:var(--ink-soft);
+}
+.calc-out b{font-size:1.4rem;color:var(--down)}
+
+/* ===== 分级表 ===== */
+.grade{display:flex;flex-wrap:wrap;gap:.6rem;margin:1.2rem 0}
+.g-item{flex:1 1 150px;border-radius:12px;padding:.8rem 1rem;font-size:.84rem;text-align:center;border:1.5px solid var(--line)}
+.g-item .r{font-weight:800;font-size:1.05rem;display:block;margin-bottom:.15rem}
+.g-1{background:#edf7ee}.g-1 .r{color:var(--down)}
+.g-2{background:#f4f9ec}.g-2 .r{color:#6a8f2e}
+.g-3{background:var(--gold-bg)}.g-3 .r{color:var(--gold)}
+.g-4{background:#fbeee4}.g-4 .r{color:#c05f1f}
+.g-5{background:var(--up-bg)}.g-5 .r{color:var(--up)}
+
+/* ===== 自检清单 ===== */
+.chk{background:var(--card);border:1.5px solid var(--line);border-radius:18px;padding:1.4rem 1.6rem;margin:1.3rem 0}
+.chk-item{display:flex;gap:.8rem;align-items:flex-start;padding:.7rem 0;border-bottom:1px dashed var(--line);cursor:pointer}
+.chk-item:last-child{border-bottom:none}
+.chk-item input{
+  width:19px;height:19px;margin-top:.32rem;accent-color:var(--navy);cursor:pointer;flex-shrink:0;
+}
+.chk-item span{font-size:.94rem;color:var(--ink);transition:color .2s}
+.chk-item input:checked + span{color:var(--ink-faint);text-decoration:line-through}
+.chk-item small{display:block;font-size:.78rem;color:var(--ink-faint);margin-top:.15rem}
+.chk-status{font-size:.8rem;color:var(--ink-faint);margin-top:.8rem;text-align:right}
+
+/* ===== FAQ ===== */
+.faq-item{
+  background:var(--card);border:1.5px solid var(--line);border-radius:14px;
+  margin-bottom:.8rem;overflow:hidden;
+}
+.faq-item summary{
+  padding:1rem 1.3rem;font-weight:600;font-size:.97rem;cursor:pointer;list-style:none;
+  display:flex;justify-content:space-between;align-items:center;color:var(--ink);
+}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary::after{content:'+';font-size:1.3rem;color:var(--gold);font-weight:400;transition:transform .2s}
+.faq-item[open] summary::after{transform:rotate(45deg)}
+.faq-item .faq-body{padding:0 1.3rem 1.1rem;font-size:.92rem;color:var(--ink-soft)}
+.faq-item .faq-body p{margin-bottom:.6rem}
+.faq-item .faq-body b{color:var(--ink)}
+
+/* ===== 词典 ===== */
+.dict-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:.9rem;margin:1.4rem 0}
+.d-term{
+  background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:1rem 1.1rem;
+}
+.d-term dt{font-weight:700;color:var(--navy);font-size:.94rem;margin-bottom:.3rem}
+.d-term dt small{color:var(--ink-faint);font-weight:400;margin-left:.4rem;font-size:.72rem}
+.d-term dd{font-size:.84rem;color:var(--ink-soft);line-height:1.7;margin:0}
+
+/* ===== 来源 & 免责声明 ===== */
+.refs{font-size:.85rem;color:var(--ink-soft);line-height:2}
+.refs li{margin-bottom:.2rem}
+.disclaimer{
+  background:#f8fafc;border:1.5px solid var(--line);border-radius:16px;
+  padding:1.4rem 1.6rem;font-size:.85rem;color:var(--ink-soft);margin-top:1.6rem;line-height:2;
+}
+.disclaimer b{color:var(--ink)}
+
+footer{
+  text-align:center;padding:3rem 1rem;color:var(--ink-faint);font-size:.84rem;
+  border-top:1px solid var(--line);margin-top:2rem;
+}
+footer a{color:var(--ink-soft);text-decoration:none}
+footer a:hover{color:var(--navy)}
+
+/* ===== Fade-in ===== */
+.fade-in{opacity:0;transform:translateY(22px);transition:opacity .6s,transform .6s}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:640px){
+  .bar-row{grid-template-columns:104px 1fr 46px}
+  .stripe-axis{font-size:.6rem}
+  .map-lv{flex:0 0 100%;border-right:none;border-bottom:2px dashed var(--line);justify-content:flex-start;padding-bottom:.3rem;margin-bottom:.2rem}
+  .chain .node{font-size:.8rem;padding:.35rem .6rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <span class="nav-brand">纳指100指南</span>
+    <a href="#tldr">速览</a>
+    <a href="#what">是什么</a>
+    <a href="#map">体系定位</a>
+    <a href="#index">指数本体</a>
+    <a href="#history">历史回撤</a>
+    <a href="#how">怎么买</a>
+    <a href="#risk">溢价与限购</a>
+    <a href="#check">自检</a>
+    <a href="#faq">FAQ</a>
+    <a href="#dict">词典</a>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<div class="hero">
+  <div class="hero-kicker">Fund Buying Guide</div>
+  <h1 class="hero-title">纳斯达克100指数基金<br>购买指南</h1>
+  <p class="hero-sub">先回答“它到底是个什么东西”——从<em>基金</em>到<em>公募</em>，从<em>指数基金</em>到<em>ETF</em>再到<em>QDII</em>，一层层拆到最小零件；再讲清它在整个投资体系里站在哪个位置、怎么买、当下要躲哪些坑。</p>
+  <div class="hero-meta">
+    <span>数据截至 2026-10-02</span>
+    <span>场内溢价与限购数据截至 2026-09-30</span>
+    <span>阅读约 25 分钟</span>
+  </div>
+  <div class="hero-scroll" onclick="document.querySelector('#tldr').scrollIntoView({behavior:'smooth'})">&#8595;</div>
+  <div class="hero-chart" aria-hidden="true">
+    <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
+      <polyline fill="none" stroke="rgba(29,78,121,0.28)" stroke-width="2.5"
+        points="0,280 90,268 180,272 270,250 360,256 450,236 540,208 630,180 720,192 810,150 900,120 990,136 1080,96 1170,72 1260,84 1350,48 1440,32"/>
+      <polyline fill="none" stroke="rgba(183,121,31,0.35)" stroke-width="2" stroke-dasharray="6 7"
+        points="0,300 90,296 180,288 270,292 360,282 450,284 540,270 630,262 720,266 810,248 900,238 990,244 1080,222 1170,214 1260,218 1350,200 1440,192"/>
+      <circle cx="1440" cy="32" r="5" fill="rgba(29,78,121,0.55)"/>
+      <circle cx="1440" cy="192" r="4" fill="rgba(183,121,31,0.5)"/>
+    </svg>
+  </div>
+</div>
+
+<!-- ============ TLDR ============ -->
+<section id="tldr" class="fade-in">
+  <div class="sec-no">00 · 速览</div>
+  <h2>一分钟版本</h2>
+  <p>如果你只读一段，读这段：<b>纳斯达克100指数基金</b>是一只<b>公募基金</b>，通过<b>QDII</b>通道投资境外市场，采用<b>被动指数</b>方式复制<b>纳斯达克100指数</b>——也就是纳斯达克交易所里市值最大的 100 家<b>非金融</b>公司（英伟达、苹果、微软、亚马逊……）。你可以用证券账户在场内买它的 <b>ETF</b>，也可以在支付宝、银行 APP 里场外申购它的<b>联接基金</b>。</p>
+  <p>但眼下（2026 年 9–10 月）它处于一个非常特殊的时刻：<b>场内溢价 8%–15%，场外限购 2 元–1000 元/日</b>。换句话说，能随便买的渠道要贵一成左右，按原价买的渠道每天只让你买几十块钱。这个矛盾贯穿全文，是理解“当下怎么买”的钥匙。</p>
+  <div class="stats">
+    <div class="stat"><div class="v">1985</div><div class="l">指数诞生年份<br>基点 125 点</div></div>
+    <div class="stat"><div class="v red">约14.25%</div><div class="l">成立以来年化收益<br>（价格指数，官方口径）</div></div>
+    <div class="stat"><div class="v">约46%</div><div class="l">前十大成分股权重<br>（2026 年 9 月末）</div></div>
+    <div class="stat"><div class="v green">−83%</div><div class="l">2000–2002 年最大回撤<br>修复耗时约 15 年</div></div>
+    <div class="stat"><div class="v gold">8%–15%</div><div class="l">国内场内 ETF 溢价率<br>（2026-09-30）</div></div>
+  </div>
+  <p class="src"><b>数据来源：</b>纳斯达克官方 40 周年新闻稿（2025-01-31）；Xtrackers 纳指100 ETF 持仓（2026-09-30）；CME 研究；格隆汇 ETF 溢折率榜单（2026-09-30）。详见文末“数据来源与免责声明”。</p>
+</section>
+
+<!-- ============ WHAT ============ -->
+<section id="what" class="fade-in">
+  <div class="sec-no">01 · 是什么</div>
+  <h2>它到底是个什么东西：五问拆到底</h2>
+  <p class="light">别被“QDII-ETF 联接基金（人民币 A 类）”这种全称吓住——那只是五个分类问题层层叠加的结果。下面每个问题都会把这只基金往里推一层，推到最后，它的全称就变得毫无神秘感。</p>
+
+  <div class="layers">
+    <div class="layer">
+      <div class="q">起点：这笔钱是自己管，还是交给别人管？</div>
+      <p style="font-size:.94rem;color:var(--ink-soft)">你的钱投资有两条路。一是<b>直接投资</b>：自己开户买股票、买债券，赚亏全凭自己判断。二是<b>间接投资</b>：把钱汇进一个池子，交给专业机构统一打理——这个池子就是<b>基金</b>。基金本身不是一种资产，而是一种“代客理财的容器”，池子里装的可以是股票、债券、黄金，也可以是别国的股票。</p>
+      <div class="verdict">纳斯达克100指数基金走第二条路：<b>它是一只基金</b>，池子里装的是一篮子美国上市公司的股票。</div>
+    </div>
+
+    <div class="layer">
+      <div class="q">第一问：这笔钱向谁募集？</div>
+      <div class="opts">
+        <div class="opt pick"><b>公募基金</b>面向全社会公开募集，1 元、10 元就能起购，证监会强监管，每天公布净值，持仓定期披露，信息高度透明。</div>
+        <div class="opt"><b>私募基金</b>只面向“合格投资者”（有金融资产门槛）非公开募集，通常 100 万元起，策略更灵活，但透明度低、流动性差。</div>
+      </div>
+      <div class="verdict">答案：<b>公募</b>。你在支付宝里能搜到的、几块钱就能买的，全是公募基金。</div>
+    </div>
+
+    <div class="layer">
+      <div class="q">第二问：这个池子主要买什么？</div>
+      <div class="opts">
+        <div class="opt"><b>货币基金</b>余钱站脚用（如余额宝），几乎不波动，收益也低。</div>
+        <div class="opt"><b>债券基金</b>主要买债券，波动小，收益略高于货基。</div>
+        <div class="opt"><b>混合基金</b>股债混着买，比例由基金经理定。</div>
+        <div class="opt"><b>股票基金（境内）</b>80% 以上买 A 股等境内股票。</div>
+        <div class="opt pick"><b>QDII 基金</b>特殊通道：基金公司拿到国家外汇管理局批准的额度，把人民币换成美元，去投资境外市场。想通过公募基金买美股、日股、欧股，几乎都得走 QDII。</div>
+      </div>
+      <div class="verdict">答案：<b>股票型 · QDII</b>。它买的股票在美国上市，所以必须走 QDII 通道——记住这一点，后文“限购”的根源就在 QDII 额度上。</div>
+    </div>
+
+    <div class="layer">
+      <div class="q">第三问：谁来决定买哪只股票？</div>
+      <div class="opts">
+        <div class="opt"><b>主动型基金</b>基金经理自己选股、择时，目标是大盘，收更高的管理费；业绩高度依赖基金经理个人水平，分化极大。</div>
+        <div class="opt pick"><b>被动型（指数）基金</b>完全复制某条指数的成分股和权重，目标是“贴着指数走”，不追求跑赢。优点：费率低、规则透明、不存在“换基金经理就变味”的问题。</div>
+      </div>
+      <div class="verdict">答案：<b>被动指数型</b>。它复制的是纳斯达克100指数——指数里有什么、各占多少，基金就照抄什么。基金经理的任务不是选股，而是“抄得像”。</div>
+    </div>
+
+    <div class="layer">
+      <div class="q">第四问：以什么形态卖给你？</div>
+      <div class="opts">
+        <div class="opt"><b>场外基金</b>不进交易所，在支付宝、天天基金、银行 APP、基金公司 APP 里按“当日净值”申购赎回，每天一个价，适合设自动定投。</div>
+        <div class="opt pick"><b>ETF（交易所交易基金）</b>在证券交易所里像股票一样实时买卖，需要证券账户，最少 1 手（100 份）。跨境 ETF 还支持 T+0 当天回转交易。ETF 旁边通常还挂一只“联接基金”——它 90% 以上的钱拿去买母 ETF，是给没有证券账户的人准备的场外入口。</div>
+      </div>
+      <div class="verdict">答案：<b>两种形态都有</b>。国内纳指100基金既有场内 ETF（如 513100、159941），也有对应的场外联接基金。同一指数、两种买法，各有各的坑，后文详说。</div>
+    </div>
+
+    <div class="layer">
+      <div class="q">第五问：复制哪条指数？</div>
+      <div class="opts">
+        <div class="opt"><b>境内指数</b>沪深300、中证500、创业板指……跟踪 A 股。</div>
+        <div class="opt pick"><b>海外指数</b>纳斯达克100、标普500、日经225……QDII 的地盘。本指南的主角跟踪的是<b>纳斯达克100指数（Nasdaq-100，代码 NDX）</b>：纳斯达克交易所市值最大的 100 家非金融公司。</div>
+      </div>
+      <div class="verdict">答案：<b>纳斯达克100</b>。注意它不是“纳斯达克综合指数”（那是 3000 多只股票的全市值指数），也不是“美股大盘”——第 03 节专门辨析。</div>
+    </div>
+  </div>
+
+  <div class="idcard">
+    <div class="id-title">它 的 身 份 证</div>
+    <div class="chain">
+      <span class="node">公募基金</span><span class="sep">→</span>
+      <span class="node">QDII · 跨境股票型</span><span class="sep">→</span>
+      <span class="node">被动指数基金</span><span class="sep">→</span>
+      <span class="node">ETF / 场外联接</span><span class="sep">→</span>
+      <span class="node hot">跟踪纳斯达克100指数</span>
+    </div>
+    <p>翻译成人话：它把“纳斯达克交易所市值最大的 100 家非金融公司”打包成一篮子股票，再切成一份份基金份额卖给你。<b>你买的不是某家公司，而是这 100 家公司按市值排好的一个组合</b>——英伟达涨了它跟着涨，篮子整体的涨跌就是你的盈亏。</p>
+  </div>
+  <p class="note">一只基金全称里的每个词都对应上面某一层：例如“国泰纳斯达克100交易型开放式指数证券投资基金（QDII）”——“交易型开放式”= ETF，“指数”= 被动，“纳斯达克100”= 跟踪的指数，“QDII”= 跨境通道。拆完就是一句话的事。</p>
+</section>
+
+<!-- ============ MAP ============ -->
+<section id="map" class="fade-in">
+  <div class="sec-no">02 · 体系定位</div>
+  <h2>它在投资体系里站在哪</h2>
+  <p>搞清“是什么”之后，第二个问题是“它在我全部资产里算哪一块”。任何一只基金都能放进下面这张地图里定位——纳指100基金的位置一路向右：</p>
+
+  <div class="map">
+    <div class="map-row">
+      <div class="map-lv">第一层<br>按资产性质</div>
+      <div class="map-cells">
+        <span class="cell">现金类</span>
+        <span class="cell">固收类（债券）</span>
+        <span class="cell on">权益类（股票）</span>
+        <span class="cell">另类（黄金/商品/REITs）</span>
+      </div>
+    </div>
+    <div class="map-row">
+      <div class="map-lv">第二层<br>权益按地域</div>
+      <div class="map-cells">
+        <span class="cell">境内（A股、港股通）</span>
+        <span class="cell on">海外（美股、日股、欧股……）</span>
+      </div>
+    </div>
+    <div class="map-row">
+      <div class="map-lv">第三层<br>美股按风格</div>
+      <div class="map-cells">
+        <span class="cell">宽基均衡（标普500）</span>
+        <span class="cell on">风格化（大盘成长 · 科技浓度约六成）</span>
+      </div>
+    </div>
+    <div class="map-row">
+      <div class="map-lv">第四层<br>落地工具</div>
+      <div class="map-cells">
+        <span class="cell on">纳指100指数基金（ETF / 联接）</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>核心—卫星框架：它更适合当“卫星”</h3>
+    <p>资产配置里有个常用框架：<b>核心仓</b>放波动相对可控的宽基资产（比如标普500、A股宽基、债券），负责打底；<b>卫星仓</b>放进攻性更强、更集中的品种，负责增强收益。纳指100因为行业高度集中于科技、波动明显大于大盘宽基（见第 04 节回撤史），多数配置思路把它放在<b>海外权益中的卫星/增强仓</b>，而不是唯一重仓。</p>
+    <p class="note">这是通行的配置框架描述，不构成对你个人仓位的建议——合适的比例取决于你的风险承受能力、期限和总资产结构。</p>
+  </div>
+
+  <div class="card">
+    <h3>一个容易踩的坑：纳指100 ≠ 美股大盘</h3>
+    <p>很多人把“买纳指”当成“买美国经济的整体表现”，这是个误解。三个事实：</p>
+    <p>① <b>零金融</b>——指数规则把银行、保险、券商等金融公司全部排除，而金融是美股的重要板块（标普500 里约占一成）；<br>
+    ② <b>科技浓度约六成</b>——按纳斯达克官方行业口径，信息技术权重约 60%，加上亚马逊、特斯拉这类“科技味”的消费股，广义科技敞口超过八成；<br>
+    ③ <b>它更像一支“押注全球科技产业”的基金</b>——走势高度绑定半导体周期、AI 资本开支和利率环境，而不是美国 GDP。</p>
+  </div>
+
+  <h3 style="font-size:1.15rem;margin-top:1.8rem">四大美股指数对比</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>指数</th><th>成份数量</th><th>怎么选样</th><th>金融股</th><th>科技占比</th><th>前十大集中度</th><th>像什么</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><b>纳斯达克100</b></td><td>约100只</td><td>纳斯达克上市、市值最大、非金融</td><td class="down-t">0%</td><td class="up-t">约60%</td><td class="up-t">约46%</td><td>全球科技/AI 集中表达</td></tr>
+        <tr><td>标普500</td><td>约500只</td><td>全美主要交易所、规模与盈利达标</td><td>约一成</td><td>约三成</td><td>约30%–38%</td><td>美国经济晴雨表</td></tr>
+        <tr><td>纳斯达克综合</td><td>3000+只</td><td>纳斯达克全部上市公司</td><td>含金融</td><td>高</td><td>高</td><td>纳斯达克全市值</td></tr>
+        <tr><td>道琼斯工业</td><td>30只</td><td>价格加权、委员会挑选</td><td>含金融</td><td>低</td><td>—</td><td>老牌蓝筹象征</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="src"><b>数据来源：</b>纳斯达克官方指数资料（2026-06-30 行业口径）、标普道琼斯指数公司公开资料。集中度为 2026 年中口径，随股价波动。</p>
+
+  <div class="warn">
+    <p><b>重叠警告：</b>纳指100 约 87–100 只成分股同时在标普500 里，两者日收益相关系数约 93%。同时持有标普500 基金和纳指100 基金，<b>不是“100+500=600 只股票”的分散</b>，而是把同一批头部科技股买了两遍、只是配比不同——买之前想清楚你想要的是“更分散”还是“更浓的科技”。</p>
+  </div>
+</section>
+
+<!-- ============ INDEX ============ -->
+<section id="index" class="fade-in">
+  <div class="sec-no">03 · 指数本体</div>
+  <h2>纳斯达克100：这个指数本身</h2>
+  <p>买指数基金之前必须先看懂指数。纳斯达克100 指数 1985 年 1 月 31 日发布，基点 125 点，四十年后涨到了三万点上方。它的规则核心就一句话：<b>只看纳斯达克、只挑最大的、剔除金融</b>。</p>
+
+  <div class="card">
+    <h3>编制规则速览</h3>
+    <p>① <b>选样范围</b>：仅在纳斯达克上市的公司（普通股、ADR 均可）；② <b>排除金融</b>：银行、保险、资管等金融类及 REITs 全部剔除；③ <b>规模门槛</b>：按市值排名取前 100 家（因同公司多类股票等原因，实际证券数 101 只左右）；④ <b>加权方式</b>：修正市值加权——公司越大权重越高，但设了上限：单一公司权重最高 24%，年度调整时不超过 15%；⑤ <b>定期换血</b>：每年 12 月年度重构，2026 年 5 月起新增 3/6/9 月季度审查，排名跌出前 125 名就被移出；优质新股还有“快通道”，上市第 7 个交易日评估、约 15 个交易日后即可纳入。</p>
+    <p class="note">市值加权意味着指数会“追涨杀跌”：涨得越多的公司权重越大。它的好处是永远自动持有市场选出的赢家，坏处是泡沫期会被动重仓最贵的股票。历史上仅触发过 3 次特别再平衡（1998、2011、2023 年，均因头部权重过度集中）。</p>
+  </div>
+
+  <h3 style="font-size:1.15rem;margin-top:1.6rem">前十大权重股（2026 年 9 月末）</h3>
+  <div class="bars" id="weightBars"></div>
+  <p class="src"><b>数据来源：</b>Xtrackers 纳指100 UCITS ETF 持仓披露（2026-09-30）、Stocknear 汇总（2026-09-26）。权重随股价每日变动，此处为约数；谷歌 A/C 两类若合并计算约 6%，实际排名升至第四。</p>
+
+  <div class="card" style="margin-top:1.6rem">
+    <h3>读图要点</h3>
+    <p>① <b>前十大合计约 46%–47%</b>——半只基金的命运由这十家公司决定；<br>
+    ② <b>半导体是隐藏的巨型敞口</b>：英伟达＋美光＋AMD＋博通＋英特尔合计约占五分之一，这只基金的波动里有很大一块是半导体周期；<br>
+    ③ <b>“七巨头”（英伟达、苹果、微软、亚马逊、谷歌、Meta、特斯拉）合计约四成上下</b>——买纳指100 本质上是重仓押注这几家公司的未来。</p>
+  </div>
+
+  <h3 style="font-size:1.15rem;margin-top:1.6rem">行业分布（2026-06-30）</h3>
+  <div class="ind-grid">
+    <div class="ind-item"><div class="lab"><b>信息技术</b><span>59.8%（45只）</span></div><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div></div>
+    <div class="ind-item"><div class="lab"><b>非必需消费</b><span>21.2%（16只）</span></div><div class="bar-track"><div class="bar-fill" style="width:35%"></div></div></div>
+    <div class="ind-item"><div class="lab"><b>医疗保健</b><span>5.1%（10只）</span></div><div class="bar-track"><div class="bar-fill" style="width:9%"></div></div></div>
+    <div class="ind-item"><div class="lab"><b>电信服务</b><span>3.8%（4只）</span></div><div class="bar-track"><div class="bar-fill" style="width:6%"></div></div></div>
+    <div class="ind-item"><div class="lab"><b>工业</b><span>3.7%（11只）</span></div><div class="bar-track"><div class="bar-fill" style="width:6%"></div></div></div>
+    <div class="ind-item"><div class="lab"><b>日常消费</b><span>2.6%（6只）</span></div><div class="bar-track"><div class="bar-fill" style="width:4%"></div></div></div>
+    <div class="ind-item"><div class="lab"><b>公用/材料/能源</b><span>合计约3.8%</span></div><div class="bar-track"><div class="bar-fill" style="width:6%"></div></div></div>
+    <div class="ind-item zero"><div class="lab"><b>金融</b><span>0.00%（0只）</span></div><div class="bar-track"><div class="bar-fill" style="width:0.5%"></div></div></div>
+  </div>
+  <p class="src"><b>数据来源：</b>纳斯达克官方指数资料（2026-06-30，ICB 行业口径）。有趣的是：按公司数量算，非科技公司其实超过一半（沃尔玛、开市客、百事都在内），但市值权重高度集中在科技巨头——“科技股指数”的名声是权重给的，不是数量给的。</p>
+
+  <div class="stats" style="margin-top:1.8rem">
+    <div class="stat"><div class="v red">30,808</div><div class="l">指数点位（2026-10-02 收盘）</div></div>
+    <div class="stat"><div class="v red">+22.0%</div><div class="l">2026 年初至今涨幅</div></div>
+    <div class="stat"><div class="v gold">约29.5倍</div><div class="l">市盈率 PE（TTM）</div></div>
+    <div class="stat"><div class="v">约1.7%</div><div class="l">股息率（滚动）</div></div>
+  </div>
+  <p class="src"><b>数据来源：</b>行情与估值取自 2026-10-02 收盘口径。纳指100 是“价格指数”，不含股息；基金持有股票会把分红再投资计入净值，所以基金长期表现应对照含息的“总回报指数”。</p>
+</section>
+
+<!-- ============ HISTORY ============ -->
+<section id="history" class="fade-in">
+  <div class="sec-no">04 · 历史回撤</div>
+  <h2>买之前，先看它跌起来什么样</h2>
+  <p>纳指100 长期收益确实耀眼：1985 年发布以来年化约 14.25%（价格指数，官方口径），含股息的总回报年化约 14.8%，同期标普500 约 11.5%。但这份收益的另一半名字叫<b>波动</b>——四十年里它经历过四次 30% 以上的深跌，其中一次几乎消灭了整个指数的市值。</p>
+
+  <div class="dd-grid">
+    <div class="dd">
+      <div class="dd-yr">2000–2002 · 互联网泡沫</div>
+      <div class="dd-v">−83%<small> · 最深一次</small></div>
+      <p>从 2000 年 3 月高点 4,816 点跌到 2002 年 10 月的 795 点。大量成分公司根本不盈利，指数顶部市盈率高达约 85 倍。<b>直到 2015 年才收复前高——在最高点满仓的人，账面亏损挂了约 15 年</b>。</p>
+    </div>
+    <div class="dd">
+      <div class="dd-yr">2007–2009 · 全球金融危机</div>
+      <div class="dd-v">−53.6%</div>
+      <p>2008 年单年跌约 41.9%，是该指数史上最差的年份。2009 年 3 月见底后约 3 年收复前高。科技龙头盈利韧性较强，跌幅反而小于重仓金融的宽基。</p>
+    </div>
+    <div class="dd">
+      <div class="dd-yr">2020 · 新冠冲击</div>
+      <div class="dd-v">−30.5%<small> · 最快一次</small></div>
+      <p>33 个交易日跌完 30%，历史上最急促的一次；随后放水＋科技受益，约 3–7 个月内收复并创新高，典型 V 型反转。</p>
+    </div>
+    <div class="dd">
+      <div class="dd-yr">2022 · 加息熊市</div>
+      <div class="dd-v">−35.6%</div>
+      <p>美联储从 0% 激进加息至 5% 以上，长端利率飙升重挫高估值成长股。与 2000 年不同：龙头盈利稳健，<b>约 2 年（2023 年 12 月）即收复前高</b>。</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>两条规律，一条提醒</h3>
+    <p><b>规律一：跌得越深，修得越久。</b>−83%→修复 15 年；−54%→约 3 年；−30% 到 −35%→约 1–2 年；−20% 到 −25%→3–6 个月。<br>
+    <b>规律二：每一轮深熊最终都创了新高</b>——这是“长牛之王”叙事的根基，但代价是时间与心理承受力。<br>
+    <b>提醒：估值顶部是最重要的风险信号。</b>2000 年顶部 PE 约 85 倍（极端泡沫）、2021 年顶部约 38–43 倍、2008 年底部 12–18 倍、2022 年底部约 24 倍；当前约 29.5 倍，处于历史中枢偏上——不算极端，但绝不便宜。</p>
+    <p class="src"><b>数据来源：</b>CME 研究（2024）、纳斯达克官方 40 周年研究（2025-01）、公开市场数据整理。</p>
+  </div>
+
+  <h3 style="font-size:1.15rem;margin-top:1.8rem">四十一年年度涨跌幅（1985–2025）</h3>
+  <div class="stripe-wrap">
+    <div class="stripe" id="yearStripe"></div>
+    <div class="stripe-axis" id="yearAxis"></div>
+    <div class="legend">
+      <span><i style="background:var(--up)"></i>上涨年份</span>
+      <span><i style="background:var(--down)"></i>下跌年份</span>
+      <span>鼠标悬停查看精确数值</span>
+    </div>
+  </div>
+  <p class="src"><b>数据来源：</b>公开市场数据整理（价格指数口径，未含股息）。41 年里 30 年上涨、11 年下跌；连续下跌最深的一段是 2000–2002 三年连挫。红涨绿跌为 A 股配色习惯。</p>
+
+  <div class="info">
+    <p><b>为什么要看回撤史：</b>因为“能拿得住”比“看得准”更决定最终收益。如果你会在 −35% 时割肉，那历史年化 14% 就和你无关；如果你能承受、甚至有余钱在低位补仓，深跌反而是这个指数馈赠的礼物。买之前请诚实地问自己一次：账户腰斩（2008 年级别）时我会怎么做？</p>
+  </div>
+</section>
+
+<!-- ============ HOW ============ -->
+<section id="how" class="fade-in">
+  <div class="sec-no">05 · 怎么买</div>
+  <h2>三条购买路径</h2>
+  <p>普通人参与纳指100 有三条路：场内买 ETF、场外买联接基金、境外账户直接买美股 ETF。前两条是主体，第三条顺带说明。</p>
+
+  <div class="path">
+    <div class="path-card a">
+      <span class="tag">路径 A · 场内 ETF</span>
+      <h3>像买股票一样买</h3>
+      <ol>
+        <li><b>开一个证券账户</b>（任意券商 APP，线上办理）</li>
+        <li><b>搜索代码</b>，如 513100、159941</li>
+        <li>输入价格和数量下单，<b>最少 1 手＝100 份</b>，几百元即可参与</li>
+        <li>跨境 ETF 支持 <b>T+0</b>：当天买当天可以卖</li>
+        <li>成本＝券商佣金（普遍万分之一到万分之三，注意有无“最低 5 元”）＋基金运作期内每日计提的管理费托管费</li>
+      </ol>
+      <div class="fit"><b>要盯什么：</b>场内价格由买卖盘实时决定，会偏离基金净值——买前必须看溢价率（第 06 节）。<b>当心：溢价买入等于为同样的资产多付钱。</b></div>
+    </div>
+
+    <div class="path-card b">
+      <span class="tag">路径 B · 场外联接基金</span>
+      <h3>按净值申购，适合定投</h3>
+      <ol>
+        <li><b>不需要证券账户</b>：支付宝、天天基金、银行 APP、基金公司 APP 里直接搜代码</li>
+        <li>按<b>当日收盘核算的净值</b>成交，一天一个价，<b>没有溢价折价</b></li>
+        <li>份额分 A 类 / C 类：<b>A 类</b>收一次性申购费（原价约 1.2%，第三方平台常打 1 折到 0.12%），适合长持；<b>C 类</b>免申购费、按天收销售服务费（约 0.4%/年），适合一两年内的短持</li>
+        <li>可以设置<b>自动定投</b>，按月/周自动扣款</li>
+      </ol>
+      <div class="fit"><b>要盯什么：</b>QDII 额度紧张时限购是常态（当下单日限额普遍 10–1000 元，个别只有 2 元），大额买入可能被拒。</div>
+    </div>
+
+    <div class="path-card c">
+      <span class="tag">路径 C · 境外账户</span>
+      <h3>直接买美股 ETF（顺带一提）</h3>
+      <ol>
+        <li>美国市场上的原型产品：<b>Invesco QQQ（1999 年成立，费率 0.20%）</b>，全球流动性最好的 ETF 之一；长期持有可看费率更低的 QQQM（0.15%）</li>
+        <li>通过境外券商账户购买，直接以美元计价、无 QDII 额度与溢价问题</li>
+        <li>但涉及跨境开户合规、外汇额度、税务申报等事项，门槛与责任都更高，<b>本指南不展开</b></li>
+      </ol>
+      <div class="fit"><b>定位：</b>已有合规境外账户者的选项；对多数刚起步的投资者，A/B 两条路已足够。</div>
+    </div>
+  </div>
+
+  <h3 style="font-size:1.15rem;margin-top:1.8rem">场内：12 只纳指100 ETF 一览</h3>
+  <p class="light">都跟踪同一条指数，区别主要在规模、费率、流动性和当前溢价。规模为 2026 年 9 月末口径（含溢价带来的“虚增”，括号内为按净值计的规模）。</p>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>代码</th><th>场内简称</th><th>管理人</th><th class="num">规模（亿元）</th><th class="num">溢价率</th><th>成立</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>159941</td><td>纳指ETF广发</td><td>广发基金</td><td class="num">约392（347）</td><td class="num up-t">13.69%</td><td>2015</td></tr>
+        <tr><td>513100</td><td>纳指ETF国泰</td><td>国泰基金</td><td class="num">约224（195）</td><td class="num up-t">15.40%</td><td>2013（境内首只）</td></tr>
+        <tr><td>513300</td><td>纳斯达克ETF华夏</td><td>华夏基金</td><td class="num">约152</td><td class="num up-t">11.32%</td><td>—</td></tr>
+        <tr><td>159501</td><td>纳指ETF嘉实</td><td>嘉实基金</td><td class="num">约151</td><td class="num up-t">15.16%</td><td>—</td></tr>
+        <tr><td>159632</td><td>纳斯达克ETF华安</td><td>华安基金</td><td class="num">约129（113）</td><td class="num up-t">10.78%</td><td>2022</td></tr>
+        <tr><td>159659</td><td>纳斯达克100ETF招商</td><td>招商基金</td><td class="num">约112</td><td class="num up-t">11.42%</td><td>2023</td></tr>
+        <tr><td>159513</td><td>纳指100ETF大成</td><td>大成基金</td><td class="num">约89</td><td class="num up-t">约8%*</td><td>2023</td></tr>
+        <tr><td>513390</td><td>纳指100ETF博时</td><td>博时基金</td><td class="num">约85</td><td class="num up-t">约10%*</td><td>2023</td></tr>
+        <tr><td>159660</td><td>纳指ETF汇添富</td><td>汇添富基金</td><td class="num">约63</td><td class="num up-t">11.18%</td><td>—</td></tr>
+        <tr><td>159696</td><td>纳指ETF易方达</td><td>易方达基金</td><td class="num">约63</td><td class="num up-t">11.93%</td><td>—</td></tr>
+        <tr><td>513110</td><td>纳指ETF华泰柏瑞</td><td>华泰柏瑞基金</td><td class="num">约57</td><td class="num up-t">约10.5%*</td><td>—</td></tr>
+        <tr><td>513870</td><td>纳指100ETF富国</td><td>富国基金</td><td class="num">约31</td><td class="num up-t">10.96%</td><td>2023</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="src"><b>数据来源：</b>溢价率来自格隆汇 ETF 溢折率榜单（2026-09-30 收盘）；带 * 为同口径估算值（2026-09-28/30，来源雪球、HaoETF 汇总）。规模为公开行情与基金公告汇总（2026 年 9 月末）。费率方面，场内 ETF 管理费＋托管费多在每年 0.6%–0.8%（嘉实、易方达相对更低，广发、大成更高），具体以基金公司最新公告为准。<b>注意：另有一只常被混淆的“纳指科技ETF（159509）”跟踪的是纳斯达克科技市值加权指数，不是纳指100，当前溢价超 30%，务必分清。</b></p>
+
+  <h3 style="font-size:1.15rem;margin-top:1.8rem">场外：主要联接基金与当前限购</h3>
+  <p class="light">联接基金按净值成交、无溢价，但 QDII 额度紧张下普遍处于严格限购状态（2026 年 9 月口径）。限额以基金公司最新公告为准，随时会变。</p>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>代码</th><th>场外简称（示例）</th><th>管理人</th><th>当前单日申购限制（2026-09）</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>270042 / 006479</td><td>广发纳指100ETF联接 A/C</td><td>广发基金</td><td class="up-t">A/C 类限 2 元，F 类 30 元</td></tr>
+        <tr><td>161130</td><td>易方达纳斯达克100ETF联接（LOF）</td><td>易方达基金</td><td class="up-t">暂停申购，上限 10 元</td></tr>
+        <tr><td>018967 等</td><td>汇添富纳斯达克100ETF发起式联接 C</td><td>汇添富基金</td><td class="up-t">10 元（直销渠道 100 元）</td></tr>
+        <tr><td>018043 / 018044</td><td>天弘纳斯达克100指数发起 A/C</td><td>天弘基金</td><td class="up-t">限 100 元</td></tr>
+        <tr><td>019441 / 019442</td><td>万家纳斯达克100指数发起式 A/C</td><td>万家基金</td><td class="up-t">限 100 元（曾一日放宽至 5000 元又收回）</td></tr>
+        <tr><td>040046 / 014978</td><td>华安纳斯达克100ETF联接 A/C</td><td>华安基金</td><td class="up-t">直销 1000 元 / 代销 10 元</td></tr>
+        <tr><td>016055</td><td>博时纳斯达克100ETF发起式联接 A</td><td>博时基金</td><td class="up-t">直销渠道约 1 万元（此前曾暂停）</td></tr>
+        <tr><td>000834</td><td>大成纳斯达克100ETF联接 A</td><td>大成基金</td><td class="up-t">直销限 1000 元</td></tr>
+        <tr><td>019547</td><td>招商纳斯达克100ETF发起式联接 A</td><td>招商基金</td><td class="up-t">以最新公告为准</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="src"><b>数据来源：</b>各基金公司公告（2026-09-01 至 09-16）、中国基金报、证券时报报道。限购额度变化极快（“一日游”式松绑常见），下单前以基金公司当日公告为准。</p>
+
+  <div class="card">
+    <h3>费用总览：一年到底花多少</h3>
+    <p><b>场内 ETF</b>：管理费＋托管费约 0.6%–0.8%/年（持有期间每日计提，不用单独交）＋交易佣金（万几，卖出同样收，无印花税）。<br>
+    <b>场外联接 A 类</b>：申购费约 0.12%（打 1 折后，一次性）＋管理托管费（与母基金相当时另有约定）＋赎回费（持有 7 天内 1.5%，之后多数降为 0）。<br>
+    <b>场外联接 C 类</b>：无申购费，销售服务费约 0.4%/年 按天计提，持有一段时间后赎回费为 0。<br>
+    <b>粗略比较</b>：长持（两三年以上）A 类或场内 ETF 更省；一两年内的短持 C 类更划算；场外定投小金额的隐性优势是不用操心溢价。</p>
+  </div>
+
+  <div class="card">
+    <h3>别忘了汇率这层滤镜</h3>
+    <p>人民币份额以人民币计价，但底层资产是美元股票。你的真实收益＝<b>指数涨跌 × 美元兑人民币涨跌</b>。美元对人民币升值，收益加成；贬值，收益打折。国内纳指基金多数<b>不做汇率对冲</b>——2022 年那种“美股跌＋美元升”的年份，汇率反而垫了缓冲；反过来“美股涨＋美元贬”的年份，到手的钱会少于指数涨幅。这是跨境基金与生俱来的属性，不是基金经理的错。</p>
+  </div>
+</section>
+
+<!-- ============ RISK ============ -->
+<section id="risk" class="fade-in">
+  <div class="sec-no">06 · 溢价与限购</div>
+  <h2>当下最特殊的两件事</h2>
+  <p class="light">以下内容描述的是 2026 年 9–10 月的现场，时效性强，但机制值得永久理解——QDII 产品的溢价与限购将来还会反复出现。</p>
+
+  <div class="card">
+    <h3>先懂机制：溢价是怎么来的</h3>
+    <p>ETF 有两个“价”：<b>净值（IOPV）</b>是篮子里股票的真实价值，<b>市价</b>是交易所里买卖盘撮合出来的价格。正常情况下两者接近，因为一旦市价高于净值，机构可以“按净值申购份额→拿到场内按市价卖出”套利，把价差抹平。</p>
+    <p>但 QDII 额度用完时，基金公司<b>停止或限制按净值申购</b>——套利的原料断供，抹平价差的机器停转。此时场内需求（想买纳指的资金）只能互相抬价，市价被推到远高于净值的位置，<b>溢价</b>就固化了。2026 年 8 月末外汇局新批 68.4 亿美元 QDII 额度（2021 年 6 月以来最大单次，总额度累计约 1,830 亿美元），仍远不够消化需求：截至 9 月中旬，全市场 27 只 QDII 暂停申购、129 只暂停大额申购，热门纳指产品限额普遍在 100 元以内。</p>
+    <p class="src"><b>数据来源：</b>国家外汇管理局 QDII 额度审批表（2026-08-28）；Wind 数据（2026-09-14，经中国基金报报道）。</p>
+  </div>
+
+  <div class="warn">
+    <p><b>溢价买入的真实代价，算笔账：</b>假设基金净值 2.00 元，你按 2.35 元（溢价约 15%，正是 9 月末国泰 513100 的水平）买入。此后哪怕纳斯达克指数横盘不动，只要溢价回落到正常的 2%，价格就会回到约 2.04 元——<b>你先亏掉约 11%，而这 11% 与英伟达、苹果涨不涨毫无关系，纯粹是“买贵了”</b>。9 月单月，相关产品已密集发布数百份溢价风险提示公告，多只 ETF 一再公告“若溢价未回落将申请盘中临时停牌”。</p>
+  </div>
+
+  <div class="card">
+    <h3>溢价亏损试算器</h3>
+    <p style="font-size:.9rem;color:var(--ink-soft)">填入你观察到的溢价率，看看溢价回落到目标水平时，光是“价差回归”就会吃掉多少本金（假设指数本身不动）。</p>
+    <div class="calc">
+      <div>
+        <label>买入溢价率（%）</label>
+        <input type="number" id="premIn" value="15" step="0.5" min="0">
+      </div>
+      <div>
+        <label>溢价回落至（%）</label>
+        <input type="number" id="premTarget" value="2" step="0.5" min="0">
+      </div>
+      <button onclick="calcPrem()">算一算</button>
+      <div class="calc-out" id="calcOut">输入后点“算一算”</div>
+    </div>
+    <p class="note">计算式：亏损 =（1＋目标溢价）÷（1＋买入溢价）−1。仅为价差回归的算术演示，不含指数本身涨跌、汇率与管理费。</p>
+  </div>
+
+  <h3 style="font-size:1.15rem;margin-top:1.6rem">溢价率怎么判断：一个民间经验分级</h3>
+  <div class="grade">
+    <div class="g-item g-1"><span class="r">0–2%</span>正常状态<br>可以按需买</div>
+    <div class="g-item g-2"><span class="r">2–5%</span>可接受<br>但要知道自己多付了</div>
+    <div class="g-item g-3"><span class="r">5–8%</span>明显偏贵<br>谨慎，别追</div>
+    <div class="g-item g-4"><span class="r">8% 以上</span>原则上不追<br>等回落或走场外</div>
+    <div class="g-item g-5"><span class="r">10% 以上</span>买的是“门票”<br>不是资产本身</div>
+  </div>
+  <p class="note">该分级整理自雪球投资者经验帖（2026-09），<b>非官方标准，仅供参考</b>；但“高溢价时不追”是多数机构风险提示的共同结论。</p>
+
+  <div class="card" style="margin-top:1.6rem">
+    <h3>当下怎么应对：条件化思路（不是投资建议）</h3>
+    <p>① <b>看到 10%+ 溢价</b>：这是在用 110 元买价值 100 元的资产。理性选择通常是等——溢价会随额度放松、情绪降温而收窄（9 月最后一周已从高点回落 1–1.5 个百分点）。<br>
+    ② <b>就是想现在开始定投</b>：优先走<b>场外联接基金</b>，按净值成交没有溢价；哪怕每天限购几十元，小额定投反而和限购天生一对。<br>
+    ③ <b>非要场内买</b>：买前看当日 IOPV 与溢价率（行情软件里都有），12 只 ETF 里挑溢价相对低、规模大的；别用市价单追。<br>
+    ④ <b>已经有底仓、想加仓</b>：限购让“补仓”变得不可控，把预期放宽——额度这种东西，急不来。</p>
+  </div>
+
+  <div class="info">
+    <p><b>正面看限购：</b>QDII 限购某种意义上是保护性的——它防止你在情绪最热、溢价最高的时候一把梭进去。历史上 2021 年初、2024 年底的纳指 ETF 溢价潮，最后都以溢价回落、追高者亏损收场。“买不进”有时候是市场在帮你踩刹车。</p>
+  </div>
+</section>
+
+<!-- ============ CHECKLIST ============ -->
+<section id="check" class="fade-in">
+  <div class="sec-no">07 · 自检</div>
+  <h2>买之前的八道自检</h2>
+  <p class="light">全部勾成“是”再下单也不为过。勾选状态只保存在你自己这台设备的浏览器里。</p>
+  <div class="chk" id="chkBox">
+    <label class="chk-item"><input type="checkbox" data-i="0"><span>这笔钱 3–5 年内用不到<small>不是生活费、不是应急钱、更不是借来的钱</small></span></label>
+    <label class="chk-item"><input type="checkbox" data-i="1"><span>我能承受账户浮亏 30%–50% 而不割肉<small>回看第 04 节：−35% 级别的下跌在它的历史里是常客</small></span></label>
+    <label class="chk-item"><input type="checkbox" data-i="2"><span>我知道它不是“美股大盘”，而是科技浓度约六成的成长风格指数<small>零金融股，七巨头占四成权重</small></span></label>
+    <label class="chk-item"><input type="checkbox" data-i="3"><span>买场内前，我会先看当日溢价率<small>高于 5% 就该停下来想一想</small></span></label>
+    <label class="chk-item"><input type="checkbox" data-i="4"><span>我没有使用杠杆、借贷或“下周要还”的钱<small>波动会放大，杠杆会把回撤变成爆仓</small></span></label>
+    <label class="chk-item"><input type="checkbox" data-i="5"><span>它只占我权益仓位的一部分，不是全部<small>单一风格指数重仓＝把命运押在一个行业上</small></span></label>
+    <label class="chk-item"><input type="checkbox" data-i="6"><span>我分得清场内市价与基金净值是两回事<small>第 06 节溢价机制的来历</small></span></label>
+    <label class="chk-item"><input type="checkbox" data-i="7"><span>我了解限购可能导致想补仓补不进<small>QDII 额度紧张时的常态</small></span></label>
+    <div class="chk-status" id="chkStatus">已勾选 0 / 8</div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq" class="fade-in">
+  <div class="sec-no">08 · 常见问题</div>
+  <h2>FAQ</h2>
+
+  <details class="faq-item">
+    <summary>“纳指100”和“纳斯达克指数”是一回事吗？</summary>
+    <div class="faq-body">
+      <p><b>不是。</b>日常说的“纳指”多数指纳斯达克<b>综合</b>指数（代码 IXIC），覆盖纳斯达克全部 3000 多只上市股票；纳斯达克<b>100</b>（代码 NDX）只取其中市值最大的约 100 家非金融公司。两者走势高度相似（都被同样的科技巨头驱动），但基金产品跟踪的是纳指100。买之前看清楚基金全称里的“纳斯达克100”——还有“纳指科技ETF”跟踪的是另一条科技市值加权指数，别买错。</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>同一个指数有 12 只 ETF，到底选哪只？</summary>
+    <div class="faq-body">
+      <p>同一条指数，长期收益差异极小，挑选就三件事：<b>① 当前溢价率</b>（当下最重要，同样跟踪误差下溢价低的等于打了折）；<b>② 规模与流动性</b>（规模大、成交活跃的买卖冲击小，两三只百亿级的第一梯队都可以）；<b>③ 费率</b>（管理＋托管每年差零点几个百分点，长持会累积出差距，具体以最新公告为准）。把这三项放到一起比，通常答案自然浮现——而不是看哪个名字顺眼。</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>定投纳指100 靠谱吗？</summary>
+    <div class="faq-body">
+      <p>定投的作用是<b>把买入时点摊平</b>，它不创造超额收益，但对波动大的品种心理友好。公开回测显示：即使倒霉如在 2000 年泡沫顶点开始定投，坚持到 2015 年也有约 6% 的年化；正常年份开始的十年期定投年化多在 12%–18% 区间。<b>但请注意：这些全是历史回测，不构成对未来收益的承诺</b>——定投成立的前提是指数长期向上且你有足够长的耐心，缺一个都不成立。</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>人民币升值或贬值，对我的收益有什么影响？</summary>
+    <div class="faq-body">
+      <p>你的收益 ≈ 指数涨跌 × 美元兑人民币涨跌。人民币贬值（美元升值）时，以人民币计价的基金额外受益；人民币升值时收益被侵蚀。国内多数纳指基金不做汇率对冲，所以汇率是收益里一层不由你控制的“滤镜”。长期看这层滤镜有涨有跌、大体互相抵消，短期（一两年内）却可能让到手收益与指数表现差出五到十个百分点。</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>场内买和场外买，核心区别到底是什么？</summary>
+    <div class="faq-body">
+      <p>一句话：<b>场内买的是“价格”，场外买的是“净值”</b>。场内价格由买卖盘决定，情绪热时会溢价（也可能折价），好处是实时成交、T+0、佣金低；场外永远按当天一个净值成交，没有溢价，适合定投和无账户的新手，但要忍限购、且申购赎回确认慢（QDII 通常 T+2 以上）。溢价正常时两者差别不大；溢价高企时（比如现在），这个区别就是百分之十几的真金白银。</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>现在溢价这么高，要不要等一等？</summary>
+    <div class="faq-body">
+      <p>没有人能预判溢价何时回落，但可以给你思考框架：① 溢价的本质是“额度稀缺税”，额度扩容或热度降温都会压它回落，9 月最后一周它已在缓慢收窄；② 等待的机会成本是“指数上涨时你不在场”，回看历史，纳指100 错过涨幅最好的少数月份，长期收益会大打折扣；③ 折中方案是<b>场外小额定投先启动</b>（无溢价、限购反而逼你小额），场内等溢价收窄到 5% 以内再考虑。哪种适合你，取决于你的期限和急迫程度——这题没有标准答案，只有想清楚的和没想清楚的。</p>
+    </div>
+  </details>
+</section>
+
+<!-- ============ DICT ============ -->
+<section id="dict" class="fade-in">
+  <div class="sec-no">09 · 词典</div>
+  <h2>名词小词典</h2>
+  <p class="light">全文涉及的术语集中放在这里，忘了随时回来查。</p>
+  <div class="dict-grid">
+    <dl class="d-term"><dt>基金<small>Fund</small></dt><dd>把众多投资者的钱汇成一个池子、交给专业机构统一管理的投资容器。基金不是资产，池子里装什么它才是什么。</dd></dl>
+    <dl class="d-term"><dt>公募基金<small>Public Fund</small></dt><dd>面向公众公开募集的基金，门槛低（1 元起）、监管严、每天披露净值。与面向高净值人群的私募基金相对。</dd></dl>
+    <dl class="d-term"><dt>QDII<small>合格境内机构投资者</small></dt><dd>Qualified Domestic Institutional Investor。基金公司等机构获批的外汇投资额度，用它可以“把钱换出去”投资境外市场。国内公募基金买美股的正规通道，额度由国家外汇管理局审批。</dd></dl>
+    <dl class="d-term"><dt>指数<small>Index</small></dt><dd>按既定规则选出一篮子证券并加权计算出的价格数字，用来度量一个市场的表现。指数本身不能直接投资，要通过跟踪它的基金。</dd></dl>
+    <dl class="d-term"><dt>指数基金 / 被动基金<small>Index Fund</small></dt><dd>完全复制某指数成分与权重的基金，目标是“贴住指数”，不追求跑赢。与依赖基金经理选股的主动基金相对。</dd></dl>
+    <dl class="d-term"><dt>ETF<small>交易所交易基金</small></dt><dd>Exchange Traded Fund。在证券交易所像股票一样实时买卖的基金。兼具“基金的一篮子分散”和“股票的实时流动性”。</dd></dl>
+    <dl class="d-term"><dt>联接基金<small>Feeder Fund</small></dt><dd>把绝大部分资金（通常 90% 以上）投资于某只母 ETF 的场外基金，为没有证券账户的投资者提供按净值申赎的入口。</dd></dl>
+    <dl class="d-term"><dt>LOF<small>上市开放式基金</small></dt><dd>既能在场外按净值申赎、又能到场内按市价买卖的基金形态，可视为场内外的“两栖”版本。</dd></dl>
+    <dl class="d-term"><dt>净值<small>NAV</small></dt><dd>基金单位份额的真实价值＝总资产减负债后除以份额数。场外基金按每日净值成交。</dd></dl>
+    <dl class="d-term"><dt>IOPV<small>参考净值</small></dt><dd>Indicative Optimized Portfolio Value，ETF 的实时估算净值，行情软件里与市价并排显示。市价高于它＝溢价，低于它＝折价。</dd></dl>
+    <dl class="d-term"><dt>溢价率<small>Premium</small></dt><dd>（市价 − 净值）÷ 净值。QDII 额度紧张时，场内 ETF 常年大幅溢价，溢价买入者独自承担回落损失。</dd></dl>
+    <dl class="d-term"><dt>跟踪误差<small>Tracking Error</small></dt><dd>基金净值表现与标的指数的偏离程度。误差来源：费用、现金拖累、汇率、申赎冲击。判断一只指数基金“抄得像不像”的核心指标。</dd></dl>
+    <dl class="d-term"><dt>市值加权<small>Cap-weighted</small></dt><dd>公司市值越大、在指数中权重越高的编制方式。纳指100 采用修正版：设单一公司权重上限（24%）。</dd></dl>
+    <dl class="d-term"><dt>成分股 / 重构<small>Constituent / Rebalance</small></dt><dd>指数里的公司叫成分股；按规则定期换血叫重构（纳指100 每年 12 月大调＋季度审查），跌出排名的公司会被移出。</dd></dl>
+    <dl class="d-term"><dt>T+0 回转交易<small>Day Trade</small></dt><dd>当天买入、当天即可卖出的交易机制。跨境 ETF（含纳指 ETF）适用；A 股股票和普通 A 股 ETF 是 T+1。</dd></dl>
+    <dl class="d-term"><dt>A 类 / C 类份额<small>Share Class</small></dt><dd>同一只基金的两种收费模式：A 类一次性收申购费、适合长持；C 类免申购费、按天收销售服务费、适合短持。</dd></dl>
+    <dl class="d-term"><dt>定投<small>定期定额</small></dt><dd>按固定周期投入固定金额的策略，买入时点被摊平，适合波动大、长期向上的品种，前提是拿得住。</dd></dl>
+    <dl class="d-term"><dt>最大回撤<small>Max Drawdown</small></dt><dd>从历史最高点到最低点的最大跌幅，衡量“最惨的时候有多惨”。纳指100 历史最大回撤约 −83%（2000–2002）。</dd></dl>
+    <dl class="d-term"><dt>市盈率 PE<small>P/E</small></dt><dd>股价÷每股盈利，衡量估值的常用尺子。纳指100 当前约 29.5 倍（TTM），2000 年泡沫顶约 85 倍。</dd></dl>
+    <dl class="d-term"><dt>七巨头<small>Mag 7</small></dt><dd>英伟达、苹果、微软、亚马逊、谷歌（Alphabet）、Meta、特斯拉七家超大市值科技公司的合称，合计约占纳指100 四成权重。</dd></dl>
+  </div>
+</section>
+
+<!-- ============ SOURCES ============ -->
+<section id="source" class="fade-in">
+  <div class="sec-no">10 · 来源</div>
+  <h2>数据来源与免责声明</h2>
+  <ul class="refs">
+    <li>纳斯达克官方：Nasdaq-100 指数资料与 40 周年新闻稿（2025-01-31，含“成立以来年化 14.25%”官方口径）；行业分布为 2026-06-30 官方口径。</li>
+    <li>CME Group 经济研究《纳斯达克指数的出色回报与未来面临的潜在风险》：1985 年以来总回报年化约 14.8%、2000–2002 年回撤与修复周期。</li>
+    <li>前十大权重：Xtrackers 纳指100 UCITS ETF 持仓（2026-09-30）、Stocknear 汇总（2026-09-26）。</li>
+    <li>场内溢价率：格隆汇 ETF 溢折率榜单（2026-09-30 收盘，<a href="https://cj.sina.com.cn/articles/view/5115326071/130e5ae77020031uy6" target="_blank" rel="noopener">新浪财经转载</a>）；部分估算值来自雪球、HaoETF（2026-09-28/30）。</li>
+    <li>基金规模、成立时间、基金经理：各基金公司公开资料与场内行情汇总（2026 年 9 月末）。</li>
+    <li>限购与 QDII 额度：各基金公司公告（2026-09）；国家外汇管理局 QDII 额度审批表（2026-08-28）；中国基金报、证券时报相关报道（2026-09）。</li>
+    <li>年度收益序列：公开市场数据整理（<a href="https://xueqiu.com/3176623645/378137209" target="_blank" rel="noopener">雪球</a>，价格指数口径，1985–2025）。</li>
+    <li>历史回撤与定投回测：CME 研究、公开市场数据整理与雪球回测帖，具体见正文各处标注。</li>
+  </ul>
+  <p class="note">页面中所有行情、溢价、限购数据均为写作时点（2026-09/10）的快照，具有强时效性，实际操作时请以基金公司当日公告与实时行情为准。媒体与第三方平台数据属于非一手来源，请以交易所与基金公司公告为最终核对依据。</p>
+
+  <div class="disclaimer">
+    <b>免责声明</b>：以上内容基于公开数据和量化分析，仅供参考，不构成投资建议。市场有风险，投资需谨慎。任何投资决策应结合个人风险承受能力、资金状况和投资目标独立判断，必要时咨询持牌专业机构。过往表现不预示未来收益。
+  </div>
+</section>
+
+<footer>
+  <span>zzht · 科普杂览</span> · <a href="index.html">← 返回目录</a>
+</footer>
+
+<script>
+/* ===== 前十大权重条形图 ===== */
+(function(){
+  var weights=[["英伟达","NVDA",8.4],["苹果","AAPL",7.5],["微软","MSFT",5.8],["美光科技","MU",5.0],["AMD","AMD",4.2],["亚马逊","AMZN",4.1],["Meta","META",3.2],["谷歌 A 类","GOOGL",3.1],["特斯拉","TSLA",2.9],["谷歌 C 类","GOOG",2.9]];
+  var max=weights[0][2];
+  var host=document.getElementById('weightBars');
+  if(!host){return;}
+  var html='';
+  for(var i=0;i<weights.length;i++){
+    var w=weights[i];
+    var pct=Math.round(w[2]/max*100);
+    html+='<div class="bar-row" title="'+w[0]+'（'+w[1]+'）：约 '+w[2]+'%">'
+      +'<div class="bar-name">'+w[0]+' '+w[1]+'</div>'
+      +'<div class="bar-track"><div class="bar-fill" style="width:'+pct+'%"></div></div>'
+      +'<div class="bar-val">'+w[2]+'%</div></div>';
+  }
+  host.innerHTML=html;
+})();
+
+/* ===== 年度收益条纹 ===== */
+(function(){
+  var yrs=[[1985,14.5],[1986,12.3],[1987,-13.2],[1988,15.8],[1989,27.1],[1990,-17.1],[1991,56.8],[1992,15.5],[1993,27.7],[1994,2.8],[1995,41.6],[1996,39.6],[1997,21.6],[1998,81.7],[1999,85.6],[2000,-41.9],[2001,-32.7],[2002,-31.7],[2003,50.0],[2004,10.1],[2005,7.3],[2006,10.8],[2007,17.0],[2008,-41.9],[2009,54.6],[2010,19.2],[2011,2.7],[2012,16.8],[2013,34.9],[2014,17.9],[2015,7.4],[2016,7.3],[2017,33.0],[2018,0.0],[2019,39.5],[2020,48.9],[2021,27.5],[2022,-32.4],[2023,55.1],[2024,25.9],[2025,21.0]];
+  var maxAbs=85.6;
+  var stripe=document.getElementById('yearStripe');
+  var axis=document.getElementById('yearAxis');
+  if(!stripe||!axis){return;}
+  var html='',ax='';
+  for(var i=0;i<yrs.length;i++){
+    var y=yrs[i][0],v=yrs[i][1];
+    var h=Math.max(2,Math.round(Math.abs(v)/maxAbs*58));
+    var neg=v<0;
+    var cls=neg?'yr neg':'yr';
+    var style=neg
+      ?'height:'+h+'px;margin-top:'+(62-h)+'px'
+      :'height:'+h+'px;margin-top:'+(64-h)+'px';
+    var label=(v>0?'+':'')+v+'%';
+    html+='<div class="'+cls+'" title="'+y+' 年：'+label+'"><div class="b" style="'+style+'"></div></div>';
+    ax+=(y%5===0||y===2025)?'<span>'+String(y).slice(2)+'</span>':'<span></span>';
+  }
+  stripe.innerHTML=html;
+  axis.innerHTML=ax;
+})();
+
+/* ===== 溢价试算器 ===== */
+function calcPrem(){
+  var p=parseFloat(document.getElementById('premIn').value);
+  var t=parseFloat(document.getElementById('premTarget').value);
+  var out=document.getElementById('calcOut');
+  if(isNaN(p)||isNaN(t)||p<0||t<0){
+    out.innerHTML='请输入有效的溢价率（≥0）';
+    return;
+  }
+  var loss=((1+t/100)/(1+p/100)-1)*100;
+  out.innerHTML='溢价从 <b>'+p+'%</b> 回落到 '+t+'%：光是价差回归就亏 <b>'+loss.toFixed(1)+'%</b>（指数不动的前提下）';
+}
+
+/* ===== 自检清单（本机保存） ===== */
+(function(){
+  var KEY='nq100-checklist-v1';
+  var boxes=document.querySelectorAll('#chkBox input[type=checkbox]');
+  var status=document.getElementById('chkStatus');
+  var saved=null;
+  try{saved=JSON.parse(localStorage.getItem(KEY)||'[]');}catch(e){saved=null;}
+  for(var i=0;i<boxes.length;i++){
+    if(saved&&saved.indexOf(i)>=0){boxes[i].checked=true;}
+    boxes[i].addEventListener('change',function(){
+      var cur=[];
+      for(var j=0;j<boxes.length;j++){
+        if(boxes[j].checked){cur.push(j);}
+      }
+      try{localStorage.setItem(KEY,JSON.stringify(cur));}catch(e){}
+      status.textContent='已勾选 '+cur.length+' / '+boxes.length;
+    });
+  }
+  var cnt=0;
+  for(var k=0;k<boxes.length;k++){if(boxes[k].checked){cnt++;}}
+  if(status){status.textContent='已勾选 '+cnt+' / '+boxes.length;}
+})();
+
+/* ===== 滚动渐显 ===== */
+(function(){
+  var obs=new IntersectionObserver(function(entries){
+    for(var i=0;i<entries.length;i++){
+      if(entries[i].isIntersecting){
+        entries[i].target.classList.add('visible');
+        obs.unobserve(entries[i].target);
+      }
+    }
+  },{threshold:.08});
+  var els=document.querySelectorAll('.fade-in');
+  for(var i=0;i<els.length;i++){obs.observe(els[i]);}
+})();
+</script>
+</body>
+</html>
