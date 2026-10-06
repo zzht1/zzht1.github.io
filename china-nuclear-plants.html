@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>中国核电站分布图 · 集团归属与机组档案</title>
+<style>
+:root{
+  --bg:#f4f6f9; --card:#ffffff; --ink:#1b2430; --muted:#5b6875; --line:#e3e8ef;
+  --cnnc:#1f6fc4; --cgn:#0e9b7a; --spic:#e2661f; --hn:#8b4ea8;
+  --run:#0f8a6a; --build:#e08a12; --appr:#8a94a3;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);
+  font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB","Helvetica Neue",Arial,sans-serif;
+  font-size:14px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:var(--cnnc);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:1560px;margin:0 auto;padding:20px 18px 60px}
+
+header.hd{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin-bottom:14px}
+header.hd h1{margin:0 0 6px;font-size:24px;letter-spacing:.5px}
+header.hd p{margin:0;color:var(--muted);font-size:13px}
+.hd-badges{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px}
+.bd{display:inline-flex;align-items:center;gap:6px;background:#f0f4f9;border:1px solid var(--line);
+  border-radius:999px;padding:4px 12px;font-size:12px;color:#33404d}
+.bd b{font-size:15px;color:var(--ink)}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:14px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.stat .k{font-size:12px;color:var(--muted)}
+.stat .v{font-size:22px;font-weight:700;line-height:1.3}
+.stat .u{font-size:12px;color:var(--muted);font-weight:400}
+
+.main{display:grid;grid-template-columns:288px minmax(0,1fr) 400px;gap:14px;align-items:start}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px}
+.side{padding:14px;position:sticky;top:14px;max-height:calc(100vh - 40px);overflow:auto}
+.side h3,.panel h3{margin:0 0 10px;font-size:14px;font-weight:700}
+.fgroup{margin-bottom:14px}
+.fgroup .t{font-size:12px;color:var(--muted);margin-bottom:6px}
+.chip{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--line);background:#fff;
+  border-radius:999px;padding:3px 10px;font-size:12px;cursor:pointer;user-select:none;margin:0 5px 5px 0}
+.chip.on{color:#fff}
+.chip .dot{width:8px;height:8px;border-radius:50%;background:currentColor;opacity:.9}
+.chip:not(.on) .dot{opacity:1}
+input.search{width:100%;border:1px solid var(--line);border-radius:9px;padding:7px 10px;font-size:13px;outline:none}
+input.search:focus{border-color:var(--cnnc)}
+
+.list{margin-top:4px;border-top:1px solid var(--line);padding-top:8px}
+.item{padding:7px 9px;border-radius:9px;cursor:pointer;display:flex;justify-content:space-between;gap:8px;align-items:center}
+.item:hover{background:#f2f6fb}
+.item.sel{background:#eaf2fd}
+.item .nm{font-size:13px;font-weight:600}
+.item .sub{font-size:11px;color:var(--muted)}
+.item .cnt{font-size:11px;color:var(--muted);white-space:nowrap}
+.item .bar{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px}
+
+.mapwrap{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#fff}
+#map{width:100%;height:640px}
+.legend{position:absolute;left:12px;bottom:12px;background:rgba(255,255,255,.94);border:1px solid var(--line);
+  border-radius:10px;padding:9px 11px;font-size:12px;box-shadow:0 2px 10px rgba(20,30,45,.08)}
+.legend .r{display:flex;align-items:center;gap:6px;margin:3px 0}
+.legend .sw{width:12px;height:12px;border-radius:50%}
+.maptools{position:absolute;right:12px;top:12px;display:flex;gap:6px}
+.maptools button{border:1px solid var(--line);background:#fff;border-radius:8px;padding:5px 10px;font-size:12px;cursor:pointer;color:var(--ink)}
+.maptools button:hover{background:#f2f6fb}
+.mapfallback{position:absolute;inset:0;display:none;align-items:center;justify-content:center;
+  background:#eef2f7;color:var(--muted);font-size:13px;text-align:center;padding:30px}
+
+.panel{padding:16px;position:sticky;top:14px;max-height:calc(100vh - 40px);overflow:auto}
+.panel .ttl{font-size:19px;font-weight:700;margin:0}
+.panel .meta{color:var(--muted);font-size:12px;margin:2px 0 12px}
+.tagrow{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.tag{font-size:11px;border-radius:6px;padding:2px 8px;background:#f0f4f9;color:#33404d;border:1px solid var(--line)}
+.tag.g{background:#eaf2fd;color:#14508f;border-color:#cfe0f7}
+.kv{display:grid;grid-template-columns:88px 1fr;gap:6px 10px;font-size:13px;margin-bottom:12px}
+.kv .k{color:var(--muted)}
+.mini{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
+.mini div{background:#f6f9fc;border:1px solid var(--line);border-radius:10px;padding:7px;text-align:center}
+.mini .n{font-size:17px;font-weight:700}
+.mini .l{font-size:11px;color:var(--muted)}
+table.u{width:100%;border-collapse:collapse;font-size:12.5px}
+table.u th,table.u td{border-bottom:1px solid var(--line);padding:6px 5px;text-align:left;vertical-align:top}
+table.u th{background:#f6f9fc;color:#33404d;font-weight:600;white-space:nowrap}
+.pill{display:inline-block;font-size:11px;border-radius:5px;padding:1px 6px;color:#fff;white-space:nowrap}
+.pill.run{background:var(--run)} .pill.build{background:var(--build)} .pill.appr{background:var(--appr)}
+.note{background:#fffaf0;border:1px solid #f3e2c0;border-radius:10px;padding:9px 11px;font-size:12.5px;color:#6b5330;margin-top:10px}
+.wxbox{border:1px dashed var(--cgn);border-radius:10px;padding:9px 11px;font-size:12.5px;background:#f4fbf8;margin-top:10px}
+.wxbox b{color:#0b6e56}
+.sub-ttl{font-size:13px;font-weight:700;margin:14px 0 6px;padding-left:8px;border-left:3px solid var(--cnnc)}
+
+.notes{margin-top:16px}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.tabs button{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:999px;
+  padding:6px 14px;font-size:13px;cursor:pointer}
+.tabs button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.tabpane{display:none;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+.tabpane.on{display:block}
+.tabpane h4{margin:16px 0 8px;font-size:15px}
+.tabpane h4:first-child{margin-top:0}
+table.g{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:6px}
+table.g th,table.g td{border:1px solid var(--line);padding:7px 9px;text-align:left}
+table.g th{background:#f6f9fc}
+dl.gloss{margin:0}
+dl.gloss dt{font-weight:700;font-size:13px;margin-top:10px}
+dl.gloss dd{margin:2px 0 0;color:#3d4a57;font-size:13px}
+ul.tl{margin:0;padding-left:18px}
+ul.tl li{margin-bottom:6px;font-size:13px}
+ul.tl b{color:#14508f}
+.src{font-size:12.5px;color:var(--muted)}
+footer{margin-top:22px;text-align:center;color:var(--muted);font-size:12px}
+
+@media (max-width:1200px){
+  .main{grid-template-columns:1fr}
+  .side,.panel{position:static;max-height:none}
+  .side{max-height:300px}
+  #map{height:460px}
+  .panel{max-height:none}
+}
+</style>
+<script type="text/javascript">
+  window._TMapSecurityConfig = {
+    serviceHost: 'http://127.0.0.1:__WB_HTTP_PORT__/_TMapService/_wbt/__WB_TMAP_SECRET__',
+  };
+</script>
+<script src="https://map.qq.com/api/gljs?v=1.exp"></script>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hd">
+  <h1>中国核电站分布图 · 集团归属与机组档案</h1>
+  <p>点任意核电站 → 看它属于哪家集团、有几号机组、用什么堆型、是建成还是在建、公众号叫什么。数据截至 2026 年 8 月底。</p>
+  <div class="hd-badges">
+    <span class="bd">在运机组 <b id="b-run">–</b> 台</span>
+    <span class="bd">在建机组 <b id="b-build">–</b> 台</span>
+    <span class="bd">已核准待建 <b id="b-appr">–</b> 台</span>
+    <span class="bd">核电基地 <b id="b-base">–</b> 座</span>
+    <span class="bd">在运装机 <b id="b-mw">–</b> 万千瓦</span>
+    <span class="bd">覆盖省份 <b id="b-prov">–</b> 个</span>
+  </div>
+</header>
+
+<div class="stats" id="stats"></div>
+
+<div class="main">
+
+  <aside class="card side">
+    <h3>筛选</h3>
+    <div class="fgroup">
+      <input class="search" id="q" placeholder="搜索基地 / 省份 / 城市 / 堆型">
+    </div>
+    <div class="fgroup">
+      <div class="t">控股集团</div>
+      <div id="f-group"></div>
+    </div>
+    <div class="fgroup">
+      <div class="t">机组状态（含任一机组）</div>
+      <div id="f-status"></div>
+    </div>
+    <div class="fgroup">
+      <div class="t">省份</div>
+      <div id="f-prov"></div>
+    </div>
+    <h3>核电基地 <span id="listcount" style="color:var(--muted);font-weight:400"></span></h3>
+    <div class="list" id="list"></div>
+  </aside>
+
+  <div class="mapwrap">
+    <div id="map"></div>
+    <div class="maptools">
+      <button id="btn-fit">全览</button>
+      <button id="btn-reset">重置筛选</button>
+    </div>
+    <div class="legend">
+      <div style="font-weight:700;margin-bottom:4px">集团</div>
+      <div class="r"><span class="sw" style="background:var(--cnnc)"></span>中核集团 CNNC</div>
+      <div class="r"><span class="sw" style="background:var(--cgn)"></span>中国广核集团 CGN</div>
+      <div class="r"><span class="sw" style="background:var(--spic)"></span>国家电投 SPIC</div>
+      <div class="r"><span class="sw" style="background:var(--hn)"></span>中国华能 CHNG</div>
+      <div style="font-weight:700;margin:7px 0 4px">标记读法</div>
+      <div class="r">圆圈内数字 = 在运机组数</div>
+      <div class="r">右侧黄标 = 在建+待建机组数</div>
+    </div>
+    <div class="mapfallback" id="fallback">地图未能加载（可能是网络或本地代理未就绪）。<br>左侧基地列表与点击详情仍可正常使用。</div>
+  </div>
+
+  <aside class="card panel" id="panel"></aside>
+</div>
+
+<section class="notes">
+  <div class="tabs">
+    <button class="on" data-t="g">四大集团格局</button>
+    <button data-t="tech">堆型图鉴</button>
+    <button data-t="gloss">名词小词典</button>
+    <button data-t="time">关键时间线</button>
+    <button data-t="more">你可能还想知道</button>
+    <button data-t="src">数据口径与来源</button>
+  </div>
+
+  <div class="tabpane on" id="p-g"></div>
+  <div class="tabpane" id="p-tech"></div>
+  <div class="tabpane" id="p-gloss"></div>
+  <div class="tabpane" id="p-time"></div>
+  <div class="tabpane" id="p-more"></div>
+  <div class="tabpane" id="p-src"></div>
+</section>
+
+<footer>坐标取厂址近似位置（GCJ-02），仅供科普与检索示意，不作为工程或导航依据。</footer>
+</div>
+
+<script>
+/* ============ 集团 ============ */
+const G = {
+  CNNC:{n:'中核集团（中国核工业集团）',s:'中核',c:'#1f6fc4',site:'https://www.cnnc.com.cn/',wx:'中核集团',
+        lic:'中国核电 601985.SH',tech:'华龙一号 / CNP 系列 / 引进 VVER 与 CANDU'},
+  CGN :{n:'中国广核集团（中广核）',s:'中广核',c:'#0e9b7a',site:'https://www.cgnpc.com.cn/',wx:'中国广核集团',
+        lic:'中国广核电力 003816.SZ / 1816.HK',tech:'华龙一号 / CPR1000 / ACPR1000 / 引进 EPR'},
+  SPIC:{n:'国家电力投资集团（国家电投）',s:'国家电投',c:'#e2661f',site:'https://www.spic.com.cn/',wx:'国家电投',
+        lic:'电投产融 000958.SZ',tech:'国和一号 CAP1400 / CAP1000 / 引进 AP1000'},
+  HN  :{n:'中国华能集团',s:'华能',c:'#8b4ea8',site:'https://www.chng.com.cn/',wx:'中国华能',
+        lic:'华能国际 600011.SH（核电板块）',tech:'高温气冷堆 HTR-PM / 华龙一号'}
+};
+const ST = {run:{n:'在运',c:'#0f8a6a'},build:{n:'在建',c:'#e08a12'},appr:{n:'核准待建',c:'#8a94a3'}};
+
+/* ============ 基地数据 ============
+   状态 run=在运 / build=在建 / appr=已核准未开工
+   node 取值：在运填「首次装料」（国家核安全局口径），在建填「FCD 核岛第一罐混凝土」           */
+const B = [
+{id:'qinshan',name:'秦山核电基地',prov:'浙江',city:'嘉兴市海盐县',site:'杭州湾北岸秦山—方家山厂址',
+ lng:120.951,lat:30.438,g:'CNNC',
+ owner:'秦山核电有限公司 / 核电秦山联营有限公司 / 秦山第三核电有限公司（运营：中核核电运行管理有限公司）',
+ wx:'秦山核电',
+ tags:['中国大陆核电的起点','唯一在运重水堆机组','同一基地 4 种堆型，被称为“核电博物馆”'],
+ note:'秦山一期是中国大陆第一座核电站，1991 年 12 月首次并网；秦山三期是我国唯一两台 CANDU 重水堆。',
+ units:[
+  {no:'秦山一期 1 号',m:'CNP300（自主 30 万千瓦原型堆）',mw:35,s:'run',n:'1991-07-30 首次装料'},
+  {no:'秦山二期 1 号',m:'CNP600（自主 60 万千瓦级）',mw:67,s:'run',n:'2001-10-09 首次装料'},
+  {no:'秦山二期 2 号',m:'CNP600',mw:70.8,s:'run',n:'2004-01-28 首次装料'},
+  {no:'秦山二期 3 号',m:'CNP600',mw:67,s:'run',n:'2010-05-28 首次装料'},
+  {no:'秦山二期 4 号',m:'CNP600',mw:67,s:'run',n:'2011-10-20 首次装料'},
+  {no:'秦山三期 1 号',m:'CANDU-6 重水堆（中加合作）',mw:72.8,s:'run',n:'2002-07-17 首次装料'},
+  {no:'秦山三期 2 号',m:'CANDU-6 重水堆（中加合作）',mw:72.8,s:'run',n:'2003-03-13 首次装料'},
+  {no:'方家山 1 号',m:'M310 改进型压水堆（二代+）',mw:108.9,s:'run',n:'2014-09-01 首次装料'},
+  {no:'方家山 2 号',m:'M310 改进型压水堆（二代+）',mw:108.9,s:'run',n:'2014-12-02 首次装料'}]},
+
+{id:'tianwan',name:'田湾核电基地',prov:'江苏',city:'连云港市连云区',site:'后云台山北麓，黄海之滨',
+ lng:119.454,lat:34.686,g:'CNNC',
+ owner:'江苏核电有限公司（1—6 号）；中核苏能核电有限公司（7、8 号）',
+ wx:'田湾核电',
+ tags:['中俄核能合作最大项目','全球在运+在建装机最大的核电基地之一','1—4 号引进俄罗斯 VVER'],
+ note:'1—4 号为俄罗斯 VVER-1000（AES-91）；5、6 号换用中核自主 M310+改进型；7、8 号为中俄合作 VVER-1200，7 号已于 2026 年 8 月首次装料。',
+ units:[
+  {no:'1 号',m:'VVER-1000 / AES-91（俄罗斯）',mw:106,s:'run',n:'2005-10-17 首次装料'},
+  {no:'2 号',m:'VVER-1000 / AES-91（俄罗斯）',mw:106,s:'run',n:'2007-03-15 首次装料'},
+  {no:'3 号',m:'VVER-1000 / AES-91（俄罗斯）',mw:112.6,s:'run',n:'2017-08-18 首次装料'},
+  {no:'4 号',m:'VVER-1000 / AES-91（俄罗斯）',mw:112.6,s:'run',n:'2018-08-23 首次装料'},
+  {no:'5 号',m:'M310+ 改进型压水堆（中核自主百万千瓦级）',mw:111.8,s:'run',n:'2020-07-07 首次装料'},
+  {no:'6 号',m:'M310+ 改进型压水堆（中核自主百万千瓦级）',mw:111.8,s:'run',n:'2021-04-14 首次装料'},
+  {no:'7 号',m:'VVER-1200 / V-491（中俄合作）',mw:126.5,s:'run',n:'2026-08-11 首次装料（调试中）'},
+  {no:'8 号',m:'VVER-1200 / V-491（中俄合作）',mw:126.5,s:'build',n:'2022-02-25 FCD'}]},
+
+{id:'sanmen',name:'三门核电',prov:'浙江',city:'台州市三门县健跳镇',site:'三门湾南岸',
+ lng:121.648,lat:29.106,g:'CNNC',
+ owner:'三门核电有限公司（中国核电控股）',
+ wx:'三门核电',
+ tags:['AP1000 全球首堆','中美三代核电合作标志性工程','二期改用国产化 CAP1000'],
+ note:'三门 1 号是全球首台并网发电的 AP1000 机组；3、4 号改用以 AP1000 为基础国产化的 CAP1000 技术。',
+ units:[
+  {no:'1 号',m:'AP1000（美国西屋三代，全球首堆）',mw:125.1,s:'run',n:'2018-04-25 首次装料'},
+  {no:'2 号',m:'AP1000（美国西屋三代）',mw:125.1,s:'run',n:'2018-07-04 首次装料'},
+  {no:'3 号',m:'CAP1000（AP1000 国产化）',mw:125.1,s:'build',n:'2022-06-28 FCD'},
+  {no:'4 号',m:'CAP1000（AP1000 国产化）',mw:125.1,s:'build',n:'2023-03-22 FCD'}]},
+
+{id:'fuqing',name:'福清核电',prov:'福建',city:'福州市福清市三山镇前薛村',site:'兴化湾北岸',
+ lng:119.443,lat:25.444,g:'CNNC',
+ owner:'福建福清核电有限公司（中国核电控股）',
+ wx:'福清核电',
+ tags:['华龙一号全球首堆（5 号机组）','“华龙一号”走向海外的参考电站'],
+ note:'5 号机组 2021 年 1 月投入商业运行，是华龙一号（HPR1000）全球首堆；6 号 2022 年 3 月商运。1—4 号为 M310 改进型二代+机组。',
+ units:[
+  {no:'1 号',m:'M310 改进型压水堆（二代+）',mw:108.9,s:'run',n:'2014-05-30 首次装料'},
+  {no:'2 号',m:'M310 改进型压水堆（二代+）',mw:108.9,s:'run',n:'2015-05-15 首次装料'},
+  {no:'3 号',m:'M310 改进型压水堆（二代+）',mw:108.9,s:'run',n:'2016-04-01 首次装料'},
+  {no:'4 号',m:'M310 改进型压水堆（二代+）',mw:108.9,s:'run',n:'2017-06-09 首次装料'},
+  {no:'5 号',m:'华龙一号 HPR1000（全球首堆）',mw:115,s:'run',n:'2020-09-03 首次装料'},
+  {no:'6 号',m:'华龙一号 HPR1000',mw:115,s:'run',n:'2021-11-04 首次装料'}]},
+
+{id:'zhangzhou',name:'漳州核电',prov:'福建',city:'漳州市云霄县列屿镇',site:'东山湾西岸',
+ lng:117.428,lat:23.893,g:'CNNC',
+ owner:'中核国电漳州能源有限公司',
+ wx:'漳州核电',
+ tags:['华龙一号批量化第二基地','中核与国电投合资（中核控股）'],
+ note:'1 号 2025 年 1 月商运、2 号 2026 年 1 月商运，均为华龙一号。',
+ units:[
+  {no:'1 号',m:'华龙一号 HPR1000',mw:121.2,s:'run',n:'2024-10-12 首次装料'},
+  {no:'2 号',m:'华龙一号 HPR1000',mw:121.2,s:'run',n:'2025-10-10 首次装料'},
+  {no:'3 号',m:'华龙一号 HPR1000',mw:121.2,s:'build',n:'2024-02-22 FCD'},
+  {no:'4 号',m:'华龙一号 HPR1000',mw:121.2,s:'build',n:'在建'}]},
+
+{id:'changjiang',name:'昌江核电',prov:'海南',city:'昌江县海尾镇',site:'海南岛西海岸',
+ lng:108.895,lat:19.296,g:'CNNC',co:'华能（二期 3、4 号）',
+ owner:'海南核电有限公司 / 中核海南核电有限公司（一期、小堆）；华能海南昌江核电有限公司（二期 3、4 号）',
+ wx:'海南核电',
+ tags:['海南唯一核电基地','玲龙一号（ACP100）全球首个陆上商用模块化小堆','一个基地两个业主：一期归中核，二期归华能'],
+ note:'1、2 号（CNP600）归中核；3、4 号（华龙一号）由华能控股，3 号 2026 年 4 月首次装料、7 月首次临界；玲龙一号小堆示范工程由中核建设。',
+ units:[
+  {no:'1 号',m:'CNP600（二代+）',mw:65,s:'run',n:'2015-08-25 首次装料',g:'CNNC'},
+  {no:'2 号',m:'CNP600（二代+）',mw:65,s:'run',n:'2016-05-06 首次装料',g:'CNNC'},
+  {no:'3 号',m:'华龙一号 HPR1000',mw:120,s:'run',n:'2026-04-30 首次装料',g:'HN'},
+  {no:'4 号',m:'华龙一号 HPR1000',mw:120,s:'build',n:'在建',g:'HN'},
+  {no:'玲龙一号示范',m:'ACP100 多用途模块式小型堆',mw:12.5,s:'build',n:'在建（全球首个通过 IAEA 安全审查的陆上商用小堆）',g:'CNNC'}]},
+
+{id:'xudabao',name:'徐大堡核电',prov:'辽宁',city:'葫芦岛市兴城市徐大堡镇',site:'辽东湾西岸',
+ lng:120.607,lat:40.354,g:'CNNC',
+ owner:'中核辽宁核电有限公司（中核集团控股，大唐发电、国投、浙能、江苏国信参股）',
+ wx:'徐大堡核电',
+ tags:['我国纬度最高的在建核电站','中俄核能合作（3、4 号 VVER-1200）','规划“核电+供热”联产'],
+ note:'规划 6 台机组：1、2 号为 CAP1000（2023、2024 年开工），3、4 号为中俄合作 VVER-1200（2021、2022 年开工，两国元首共同见证）。',
+ units:[
+  {no:'1 号',m:'CAP1000（AP1000 国产化）',mw:129.1,s:'build',n:'2023-11-15 FCD'},
+  {no:'2 号',m:'CAP1000（AP1000 国产化）',mw:129.1,s:'build',n:'2024-07-17 FCD'},
+  {no:'3 号',m:'VVER-1200 / V-491（中俄合作）',mw:127.4,s:'build',n:'2021-07-28 FCD'},
+  {no:'4 号',m:'VVER-1200 / V-491（中俄合作）',mw:127.4,s:'build',n:'2022-05-19 FCD'}]},
+
+{id:'jinqimen',name:'金七门核电',prov:'浙江',city:'宁波市象山县',site:'象山南部沿海',
+ lng:121.860,lat:29.240,g:'CNNC',
+ owner:'中核浙能能源有限公司 / 中核（象山）核能有限公司',
+ wx:'金七门核电',
+ tags:['华龙一号 2.0 版首批示范（3、4 号）','规划 6 台百万千瓦级机组'],
+ note:'一期 1、2 号为华龙一号（1 号 2024 年 2 月 FCD）；二期 3、4 号 2026 年 7 月核准，采用华龙一号 2.0 版。',
+ units:[
+  {no:'1 号',m:'华龙一号 HPR1000',mw:121,s:'build',n:'2024-02-18 FCD'},
+  {no:'2 号',m:'华龙一号 HPR1000',mw:121,s:'build',n:'在建'},
+  {no:'3 号',m:'华龙一号 2.0 版',mw:121,s:'appr',n:'2026-07-31 核准'},
+  {no:'4 号',m:'华龙一号 2.0 版',mw:121,s:'appr',n:'2026-07-31 核准'}]},
+
+{id:'xuwei',name:'徐圩核电（徐圩核能供热发电站）',prov:'江苏',city:'连云港市徐圩新区',site:'埒子口以北海滨',
+ lng:119.630,lat:34.590,g:'CNNC',
+ owner:'中核苏能核电有限公司',
+ wx:'徐圩核电',
+ tags:['“华龙一号 + 高温气冷堆”组合','为石化基地供汽供电供热'],
+ note:'规划 2 台华龙一号压水堆机组，并配套高温气冷堆机组（规划 6×10 万千瓦模块），是国内少见的“发电+工业供汽”核能综合利用项目。高温气冷堆部分处于规划/筹建阶段，未计入在建机组统计。',
+ units:[
+  {no:'1 号',m:'华龙一号 HPR1000',mw:120.8,s:'build',n:'在建'},
+  {no:'2 号',m:'华龙一号 HPR1000',mw:120.8,s:'build',n:'在建'}]},
+
+{id:'zhuanghe',name:'庄河核电',prov:'辽宁',city:'大连市庄河市栗子房镇陶屯村',site:'庄河东部沿海',
+ lng:123.300,lat:39.720,g:'CNNC',
+ owner:'中核大唐庄河核电有限公司',
+ wx:'庄河核电',
+ tags:['东北首个华龙一号项目','辽宁第三个核电基地','2026 年 7 月新核准'],
+ note:'一期 1、2 号采用华龙一号，2026 年 7 月 31 日经国务院常务会议核准，尚未浇筑核岛第一罐混凝土（FCD）。',
+ units:[
+  {no:'1 号',m:'华龙一号 HPR1000',mw:121,s:'appr',n:'2026-07-31 核准'},
+  {no:'2 号',m:'华龙一号 HPR1000',mw:121,s:'appr',n:'2026-07-31 核准'}]},
+
+{id:'hongyanhe',name:'红沿河核电',prov:'辽宁',city:'大连市瓦房店红沿河镇',site:'辽东湾东岸',
+ lng:121.500,lat:39.780,g:'CGN',
+ owner:'辽宁红沿河核电有限公司（中广核控股并运营，国家电投等参股）',
+ wx:'红沿河核电',
+ tags:['东北首座核电站','6 台机组全部在运','已开展核能供热'],
+ note:'1—4 号为 CPR1000，5、6 号为中广核自主 ACPR1000；是东北地区电力供应的主力电源之一。',
+ units:[
+  {no:'1 号',m:'CPR1000（M310 改进二代+）',mw:111.9,s:'run',n:'2012-11-15 首次装料'},
+  {no:'2 号',m:'CPR1000',mw:111.9,s:'run',n:'2013-08-30 首次装料'},
+  {no:'3 号',m:'CPR1000',mw:111.9,s:'run',n:'2014-09-11 首次装料'},
+  {no:'4 号',m:'CPR1000',mw:111.9,s:'run',n:'2016-01-15 首次装料'},
+  {no:'5 号',m:'ACPR1000（中广核自主三代）',mw:111.9,s:'run',n:'2021-05-14 首次装料'},
+  {no:'6 号',m:'ACPR1000（中广核自主三代）',mw:111.9,s:'run',n:'2022-03-25 首次装料'}]},
+
+{id:'dayawan',name:'大亚湾核电基地',prov:'广东',city:'深圳市大鹏新区大鹏街道',site:'大亚湾西岸（含大亚湾、岭澳、岭东）',
+ lng:114.543,lat:22.598,g:'CGN',
+ owner:'广东核电合营有限公司 / 岭东核电有限公司（运营：大亚湾核电运营管理有限责任公司）',
+ wx:'大亚湾核电（科普号：核宝一族）',
+ tags:['中国大陆首座大型商用核电站（1994 年）','中广核的发源地','每年 8 月 7 日公众开放体验日'],
+ note:'大亚湾 1、2 号与岭澳 1、2 号引进法国 M310；岭澳 3、4 号（岭东）改用中广核自主 CPR1000。',
+ units:[
+  {no:'大亚湾 1 号',m:'M310（法国法马通，二代）',mw:102.6,s:'run',n:'1993-05-24 首次装料'},
+  {no:'大亚湾 2 号',m:'M310（法国法马通，二代）',mw:102.6,s:'run',n:'1993-11-22 首次装料'},
+  {no:'岭澳 1 号',m:'M310（法国法马通，二代）',mw:99,s:'run',n:'2001-12-03 首次装料'},
+  {no:'岭澳 2 号',m:'M310（法国法马通，二代）',mw:99,s:'run',n:'2002-06-21 首次装料'},
+  {no:'岭澳 3 号（岭东）',m:'CPR1000（中广核自主二代+）',mw:108.6,s:'run',n:'2010-04-20 首次装料'},
+  {no:'岭澳 4 号（岭东）',m:'CPR1000（中广核自主二代+）',mw:108.6,s:'run',n:'2010-12-30 首次装料'}]},
+
+{id:'yangjiang',name:'阳江核电',prov:'广东',city:'阳江市东平镇',site:'南海之滨',
+ lng:112.300,lat:21.820,g:'CGN',
+ owner:'阳江核电有限公司',
+ wx:'阳江核电',
+ tags:['中广核装机最大的在运基地（6 台）','CPR1000/ACPR1000 系列'],
+ note:'6 台机组全部在运，单机 108.6 万千瓦，是中广核一次建成机组最多的基地。',
+ units:[
+  {no:'1 号',m:'CPR1000 / ACPR1000 系列',mw:108.6,s:'run',n:'2013-10-25 首次装料'},
+  {no:'2 号',m:'CPR1000 / ACPR1000 系列',mw:108.6,s:'run',n:'2015-01-23 首次装料'},
+  {no:'3 号',m:'CPR1000 / ACPR1000 系列',mw:108.6,s:'run',n:'2015-09-08 首次装料'},
+  {no:'4 号',m:'CPR1000 / ACPR1000 系列',mw:108.6,s:'run',n:'2016-11-15 首次装料'},
+  {no:'5 号',m:'CPR1000 / ACPR1000 系列',mw:108.6,s:'run',n:'2018-04-17 首次装料'},
+  {no:'6 号',m:'CPR1000 / ACPR1000 系列',mw:108.6,s:'run',n:'2019-04-28 首次装料'}]},
+
+{id:'taishan',name:'台山核电',prov:'广东',city:'江门市台山市赤溪镇',site:'黄茅海西岸',
+ lng:112.978,lat:21.925,g:'CGN',
+ owner:'台山核电合营有限公司（中广核与法国电力 EDF 合资）',
+ wx:'台上台下',
+ tags:['EPR 全球首批两台','单机容量全国最大（175 万千瓦）','中法核电合作最大项目'],
+ note:'采用法国三代技术 EPR，单机 175 万千瓦，是目前我国单机容量最大的在运核电机组。',
+ units:[
+  {no:'1 号',m:'EPR（法国三代，全球首批）',mw:175,s:'run',n:'2018-04-09 首次装料'},
+  {no:'2 号',m:'EPR（法国三代，全球首批）',mw:175,s:'run',n:'2019-04-04 首次装料'}]},
+
+{id:'ningde',name:'宁德核电',prov:'福建',city:'宁德市福鼎市太姥山镇备湾村',site:'晴川湾畔',
+ lng:120.278,lat:27.155,g:'CGN',
+ owner:'福建宁德核电有限公司（1—4 号）；福建宁德第二核电有限公司（5、6 号）',
+ wx:'微美宁核',
+ tags:['海峡西岸首个核电基地','二期升级为华龙一号'],
+ note:'1—4 号为 CPR1000；5、6 号改用华龙一号，在建。',
+ units:[
+  {no:'1 号',m:'CPR1000（二代+）',mw:108.9,s:'run',n:'2012-09-27 首次装料'},
+  {no:'2 号',m:'CPR1000（二代+）',mw:108.9,s:'run',n:'2013-11-08 首次装料'},
+  {no:'3 号',m:'CPR1000（二代+）',mw:108.9,s:'run',n:'2014-12-15 首次装料'},
+  {no:'4 号',m:'CPR1000（二代+）',mw:108.9,s:'run',n:'2015-12-31 首次装料'},
+  {no:'5 号',m:'华龙一号 HPR1000',mw:120,s:'build',n:'在建'},
+  {no:'6 号',m:'华龙一号 HPR1000',mw:120,s:'build',n:'在建'}]},
+
+{id:'fangchenggang',name:'防城港核电',prov:'广西',city:'防城港市港口区光坡镇红沙村',site:'北部湾畔',
+ lng:108.534,lat:21.665,g:'CGN',
+ owner:'广西防城港核电有限公司',
+ wx:'防城港核电',
+ tags:['西部（广西）首个核电基地','华龙一号西部首堆（3 号）'],
+ note:'1、2 号为 CPR1000；3、4 号为华龙一号，3 号 2023 年商运、4 号 2024 年商运，是中广核“华龙一号”的西部示范。',
+ units:[
+  {no:'1 号',m:'CPR1000（二代+）',mw:108.6,s:'run',n:'2015-09-02 首次装料'},
+  {no:'2 号',m:'CPR1000（二代+）',mw:108.6,s:'run',n:'2016-05-17 首次装料'},
+  {no:'3 号',m:'华龙一号 HPR1000',mw:118,s:'run',n:'2022-11-25 首次装料'},
+  {no:'4 号',m:'华龙一号 HPR1000',mw:118,s:'run',n:'2024-02-23 首次装料'}]},
+
+{id:'sanao',name:'三澳核电（苍南）',prov:'浙江',city:'温州市苍南县霞关镇三澳村',site:'浙南沿海',
+ lng:120.505,lat:27.186,g:'CGN',
+ owner:'中广核苍南核电有限公司',
+ wx:'核携苍南',
+ tags:['浙江南部首个核电基地','4 台华龙一号一次规划'],
+ note:'1 号 2025 年 12 月首次装料、2026 年起参与电力市场交易；2—4 号在建。',
+ units:[
+  {no:'1 号',m:'华龙一号 HPR1000',mw:120.8,s:'run',n:'2025-12-24 首次装料'},
+  {no:'2 号',m:'华龙一号 HPR1000',mw:120.8,s:'build',n:'在建'},
+  {no:'3 号',m:'华龙一号 HPR1000',mw:120.8,s:'build',n:'在建'},
+  {no:'4 号',m:'华龙一号 HPR1000',mw:120.8,s:'build',n:'在建'}]},
+
+{id:'taipingling',name:'太平岭核电（惠州）',prov:'广东',city:'惠州市惠东县',site:'红海湾畔',
+ lng:114.930,lat:22.630,g:'CGN',
+ owner:'中广核惠州核电有限公司（一期）／中广核惠州第二核电有限公司（二期）／中广核惠州第三核电有限公司（三期）',
+ wx:'惠众核谐',
+ tags:['华龙一号 2.0 版首批示范（5、6 号）','粤港澳大湾区东翼电源'],
+ note:'1、2 号已投入运行（华龙一号，120.2 万千瓦）；3、4 号在建；5、6 号 2026 年 7 月核准，单机 121.7 万千瓦，采用华龙一号 2.0 版。',
+ units:[
+  {no:'1 号',m:'华龙一号 HPR1000',mw:120.2,s:'run',n:'2025-12-24 首次装料'},
+  {no:'2 号',m:'华龙一号 HPR1000',mw:120.2,s:'run',n:'2026-04-30 首次装料'},
+  {no:'3 号',m:'华龙一号 HPR1000',mw:120.2,s:'build',n:'在建'},
+  {no:'4 号',m:'华龙一号 HPR1000',mw:120.2,s:'build',n:'在建'},
+  {no:'5 号',m:'华龙一号 2.0 版',mw:121.7,s:'appr',n:'2026-07-31 核准'},
+  {no:'6 号',m:'华龙一号 2.0 版',mw:121.7,s:'appr',n:'2026-07-31 核准'}]},
+
+{id:'lufeng',name:'陆丰核电',prov:'广东',city:'汕尾市陆丰市',site:'粤东沿海',
+ lng:115.720,lat:22.850,g:'CGN',
+ owner:'中广核陆丰核电有限公司（1、2 号）／中广核粤东（陆丰）核电有限公司（5、6 号）',
+ wx:'陆丰核电',
+ tags:['粤东核电基地','分两期推进（1、2 号与 5、6 号）'],
+ note:'5、6 号分别于 2022 年 9 月、2023 年 8 月浇筑核岛第一罐混凝土；1、2 号随后开工。全部采用华龙一号。',
+ units:[
+  {no:'1 号',m:'华龙一号 HPR1000',mw:120,s:'build',n:'在建'},
+  {no:'2 号',m:'华龙一号 HPR1000',mw:120,s:'build',n:'在建'},
+  {no:'5 号',m:'华龙一号 HPR1000',mw:120,s:'build',n:'2022-09-08 FCD'},
+  {no:'6 号',m:'华龙一号 HPR1000',mw:120,s:'build',n:'2023-08-26 FCD'}]},
+
+{id:'zhaoyuan',name:'招远核电',prov:'山东',city:'烟台市招远市',site:'渤海湾南岸',
+ lng:120.320,lat:37.450,g:'CGN',
+ owner:'中广核山东招远核电有限公司',
+ wx:'招远核电',
+ tags:['中广核在山东的首个核电基地','华龙一号'],
+ note:'1、2 号采用华龙一号（单机约 121.4 万千瓦），在建。注意：招远核电不属于国家电投。',
+ units:[
+  {no:'1 号',m:'华龙一号 HPR1000',mw:121.4,s:'build',n:'在建'},
+  {no:'2 号',m:'华龙一号 HPR1000',mw:121.4,s:'build',n:'在建'}]},
+
+{id:'haiyang',name:'海阳核电',prov:'山东',city:'烟台市海阳市辛安镇',site:'黄海之滨',
+ lng:121.138,lat:36.708,g:'SPIC',
+ owner:'山东核电有限公司（国家电投控股）',
+ wx:'海阳核电 / 山东核电',
+ tags:['AP1000 全球首批','国内首个核能供热商用项目','二期改用 CAP1000'],
+ note:'1、2 号为 AP1000；3、4 号采用国产化 CAP1000 在建。海阳也是国内较早开展核能供热的基地。',
+ units:[
+  {no:'1 号',m:'AP1000（美国西屋三代）',mw:125,s:'run',n:'2018-06-21 首次装料'},
+  {no:'2 号',m:'AP1000（美国西屋三代）',mw:125,s:'run',n:'2018-08-07 首次装料'},
+  {no:'3 号',m:'CAP1000（AP1000 国产化）',mw:125,s:'build',n:'在建'},
+  {no:'4 号',m:'CAP1000（AP1000 国产化）',mw:125,s:'build',n:'在建'}]},
+
+{id:'guohe',name:'国和一号示范工程（石岛湾）',prov:'山东',city:'威海市荣成市石岛湾',site:'石岛湾厂址（与华能高温堆相邻）',
+ lng:122.560,lat:36.956,g:'SPIC',
+ owner:'国核示范电站有限责任公司',
+ wx:'国和一号',
+ tags:['CAP1400“国和一号”示范工程','国产化三代核电功率最大的机型（153.4 万千瓦）'],
+ note:'1 号 2024 年 7 月首次装料、2024 年 9 月首次并网；2 号 2025 年 5 月首次装料。技术来源为国家电投上海核工院。',
+ units:[
+  {no:'1 号',m:'国和一号 CAP1400',mw:153.4,s:'run',n:'2024-07-19 首次装料'},
+  {no:'2 号',m:'国和一号 CAP1400',mw:153.4,s:'run',n:'2025-05-08 首次装料'}]},
+
+{id:'lianjiang',name:'廉江核电',prov:'广东',city:'湛江市廉江市车板镇',site:'北部湾东岸',
+ lng:109.828,lat:21.474,g:'SPIC',
+ owner:'国核湛江核电有限公司',
+ wx:'湛江核电',
+ tags:['国家电投在粤首个核电项目','国内首个海水二次循环冷却核电项目','规划 6 台 CAP 系列'],
+ note:'一期 1、2 号采用 CAP1000（1 号 2023-09-29 FCD，2 号 2024-04-26 FCD），规划总装机约 862 万千瓦。',
+ units:[
+  {no:'1 号',m:'CAP1000（AP1000 国产化）',mw:125,s:'build',n:'2023-09-29 FCD'},
+  {no:'2 号',m:'CAP1000（AP1000 国产化）',mw:125,s:'build',n:'2024-04-26 FCD'}]},
+
+{id:'bailong',name:'白龙核电',prov:'广西',city:'防城港市防城区江山半岛南端',site:'江山半岛南端',
+ lng:108.408,lat:21.545,g:'SPIC',
+ owner:'国家电投广西核电有限公司',
+ wx:'广西核电',
+ tags:['国家电投在桂首个核电项目','一期 CAP1000，后续规划 4 台 CAP1400','距中广核防城港核电约 30 公里'],
+ note:'一期 1、2 号采用 CAP1000，1 号 2025 年 12 月浇筑核岛第一罐混凝土，力争 2030 年建成投运；规划总装机约 862 万千瓦。',
+ units:[
+  {no:'1 号',m:'CAP1000（AP1000 国产化）',mw:125,s:'build',n:'2025-12-22 FCD'},
+  {no:'2 号',m:'CAP1000（AP1000 国产化）',mw:125,s:'build',n:'在建'}]},
+
+{id:'laiyang',name:'莱阳核电',prov:'山东',city:'烟台市莱阳市团旺镇',site:'莱阳南部',
+ lng:120.680,lat:36.830,g:'SPIC',
+ owner:'国电投核电（莱阳）核能有限公司',
+ wx:'国和一号（国家电投核电）',
+ tags:['国和一号首个批量化项目','山东新开辟的核电基地','2026 年 7 月新核准'],
+ note:'规划 6 台国和一号（单机 150 万千瓦），一期 1、2 号 2026 年 7 月 31 日核准，总投资约 1283 亿元。',
+ units:[
+  {no:'1 号',m:'国和一号 CAP1400',mw:150,s:'appr',n:'2026-07-31 核准'},
+  {no:'2 号',m:'国和一号 CAP1400',mw:150,s:'appr',n:'2026-07-31 核准'}]},
+
+{id:'shidaowan',name:'石岛湾核电（华能）',prov:'山东',city:'威海市荣成市宁津街道',site:'石岛湾厂址',
+ lng:122.534,lat:36.932,g:'HN',
+ owner:'华能山东石岛湾核电有限公司（高温堆）／华能石岛湾核电开发有限公司（扩建压水堆）',
+ wx:'华能石岛湾核电',
+ tags:['全球首座第四代核电商业示范电站（高温气冷堆）','北方首台华龙一号（扩建一期）'],
+ note:'高温气冷堆示范工程 HTR-PM 于 2021 年 12 月首次并网、2023 年 12 月投入商业运行（电功率约 20 万千瓦，NNSA 登记 15 万千瓦）；扩建一期 1、2 号为华龙一号，2024 年 7 月开工，计划 2029 年建成。',
+ units:[
+  {no:'高温气冷堆示范工程',m:'HTR-PM（第四代，球床模块式高温气冷堆）',mw:20,s:'run',n:'2021-08-20 首次装料'},
+  {no:'扩建一期 1 号',m:'华龙一号 HPR1000',mw:120,s:'build',n:'2024-07-28 FCD'},
+  {no:'扩建一期 2 号',m:'华龙一号 HPR1000',mw:120,s:'build',n:'在建'}]}
+];
+
+/* ============ 计算 ============ */
+B.forEach(b=>{
+  b.units.forEach(u=>{ if(!u.g) u.g = b.g; });
+  b.cnt = {run:0,build:0,appr:0};
+  b.mwRun = 0; b.mwAll = 0;
+  b.units.forEach(u=>{ b.cnt[u.s]++; b.mwAll += u.mw; if(u.s==='run') b.mwRun += u.mw; });
+  b.total = b.units.length;
+  b.pend = b.cnt.build + b.cnt.appr;
+});
+const TOT = {run:0,build:0,appr:0,mwRun:0,mwAll:0};
+B.forEach(b=>{ TOT.run+=b.cnt.run; TOT.build+=b.cnt.build; TOT.appr+=b.cnt.appr; TOT.mwRun+=b.mwRun; TOT.mwAll+=b.mwAll; });
+const PROVS = [...new Set(B.map(b=>b.prov))];
+const ORDER = ['辽宁','山东','江苏','浙江','福建','广东','广西','海南'];
+
+const el = id => document.getElementById(id);
+const wxSearch = n => 'https://weixin.sogou.com/weixin?type=2&query=' + encodeURIComponent(n);
+
+/* 顶部统计 */
+el('b-run').textContent = TOT.run;
+el('b-build').textContent = TOT.build;
+el('b-appr').textContent = TOT.appr;
+el('b-base').textContent = B.length;
+el('b-mw').textContent = TOT.mwRun.toFixed(0);
+el('b-prov').textContent = PROVS.length;
+
+el('stats').innerHTML = [
+  ['在运机组', TOT.run, '台 · 装机 '+TOT.mwRun.toFixed(0)+' 万千瓦', 'var(--run)'],
+  ['在建机组', TOT.build, '台 · 在建规模连续多年世界第一', 'var(--build)'],
+  ['核准待建', TOT.appr, '台（2026-07-31 本轮新核准 8 台）', 'var(--appr)'],
+  ['全部纳入统计', TOT.run+TOT.build+TOT.appr, '台 · 总装机约 '+TOT.mwAll.toFixed(0)+' 万千瓦', 'var(--cnnc)']
+].map(s=>`<div class="stat"><div class="k">${s[0]}</div><div class="v" style="color:${s[3]}">${s[1]} <span class="u">${s[2]}</span></div></div>`).join('');
+
+/* ============ 筛选 ============ */
+const FS = {g:new Set(), s:new Set(), p:new Set(), q:''};
+function chip(label,color,val,bucket){
+  return `<span class="chip" data-b="${bucket}" data-v="${val}" style="${color?`--c:${color}`:''}">${color?`<span class="dot" style="background:${color}"></span>`:''}${label}</span>`;
+}
+el('f-group').innerHTML = Object.keys(G).map(k=>chip(G[k].s,G[k].c,k,'g')).join('') + chip('全部','',  '','g-all');
+el('f-status').innerHTML = Object.keys(ST).map(k=>chip(ST[k].n,ST[k].c,k,'s')).join('');
+el('f-prov').innerHTML = ORDER.filter(p=>PROVS.includes(p)).map(p=>chip(p,'',p,'p')).join('') + chip('全部','','','p-all');
+
+function match(b){
+  if(FS.g.size && !FS.g.has(b.g)) return false;
+  if(FS.p.size && !FS.p.has(b.prov)) return false;
+  if(FS.s.size && !Object.keys(ST).some(k=>FS.s.has(k)&&b.cnt[k]>0)) return false;
+  if(FS.q){
+    const q = FS.q.toLowerCase();
+    const hay = [b.name,b.prov,b.city,b.owner,b.wx,b.site,...b.units.map(u=>u.m),...b.tags].join(' ').toLowerCase();
+    if(!hay.includes(q)) return false;
+  }
+  return true;
+}
+document.addEventListener('click', e=>{
+  const c = e.target.closest('.chip'); if(!c) return;
+  const bk = c.dataset.b, v = c.dataset.v;
+  if(bk==='g-all'){ FS.g.clear(); }
+  else if(bk==='p-all'){ FS.p.clear(); }
+  else {
+    const set = FS[bk];
+    set.has(v) ? set.delete(v) : set.add(v);
+  }
+  syncChips(); renderList(); renderMarkers();
+});
+function syncChips(){
+  document.querySelectorAll('.chip').forEach(c=>{
+    const bk=c.dataset.b.replace('-all',''), v=c.dataset.v;
+    let on = false;
+    if(c.dataset.b.endsWith('-all')) on = FS[bk].size===0;
+    else on = FS[bk].has(v);
+    c.classList.toggle('on',on);
+    if(on && c.style.getPropertyValue('--c')) c.style.background = c.style.getPropertyValue('--c');
+    else if(on) c.style.background = 'var(--ink)';
+    else c.style.background = '#fff';
+  });
+}
+el('q').addEventListener('input', e=>{ FS.q=e.target.value.trim(); renderList(); renderMarkers(); });
+el('btn-reset').addEventListener('click', ()=>{ FS.g.clear();FS.s.clear();FS.p.clear();FS.q='';el('q').value='';syncChips();renderList();renderMarkers();fit(); });
+
+/* ============ 列表 ============ */
+let cur = null;
+function renderList(){
+  const arr = B.filter(match).sort((a,b)=> ORDER.indexOf(a.prov)-ORDER.indexOf(b.prov) || b.total-a.total);
+  el('listcount').textContent = '（'+arr.length+'）';
+  el('list').innerHTML = arr.map(b=>`
+    <div class="item ${cur===b.id?'sel':''}" data-id="${b.id}">
+      <div>
+        <div class="nm"><span class="bar" style="background:${G[b.g].c}"></span>${b.name}</div>
+        <div class="sub">${b.prov}·${G[b.g].s}</div>
+      </div>
+      <div class="cnt">运${b.cnt.run}${b.pend?'/待'+b.pend:''}</div>
+    </div>`).join('') || '<div class="sub" style="padding:10px;color:var(--muted)">没有符合条件的基地</div>';
+}
+el('list').addEventListener('click', e=>{
+  const it = e.target.closest('.item'); if(!it) return;
+  select(it.dataset.id, true);
+});
+
+/* ============ 详情面板 ============ */
+function select(id, pan){
+  const b = B.find(x=>x.id===id); if(!b) return;
+  cur = id; renderList();
+  const gg = G[b.g];
+  const rows = b.units.map(u=>{
+    const g = G[u.g] || gg;
+    return `<tr>
+      <td><b>${u.no}</b></td>
+      <td>${u.m}</td>
+      <td style="white-space:nowrap">${u.mw}</td>
+      <td><span class="pill ${u.s}">${ST[u.s].n}</span></td>
+      <td style="color:var(--muted)">${u.n||''}</td>
+      <td style="white-space:nowrap;color:${g.c}">${g.s}</td>
+    </tr>`;
+  }).join('');
+
+  el('panel').innerHTML = `
+    <h2 class="ttl">${b.name}</h2>
+    <div class="meta">${b.prov} · ${b.city} · 控股集团：${gg.n}</div>
+    <div class="tagrow">
+      <span class="tag g" style="background:${gg.c};color:#fff;border-color:${gg.c}">${gg.s}</span>
+      ${b.co?`<span class="tag" style="background:#f3e9fa;color:#6a3a91;border-color:#e3d0f0">另有业主：${b.co}</span>`:''}
+      ${b.tags.map(t=>`<span class="tag">${t}</span>`).join('')}
+    </div>
+    <div class="mini">
+      <div><div class="n">${b.total}</div><div class="l">机组总数</div></div>
+      <div><div class="n" style="color:var(--run)">${b.cnt.run}</div><div class="l">在运</div></div>
+      <div><div class="n" style="color:var(--build)">${b.cnt.build}</div><div class="l">在建</div></div>
+      <div><div class="n" style="color:var(--appr)">${b.cnt.appr}</div><div class="l">待建</div></div>
+    </div>
+    <div class="kv">
+      <div class="k">在运装机</div><div>${b.mwRun.toFixed(1)} 万千瓦（全口径 ${b.mwAll.toFixed(1)}）</div>
+      <div class="k">厂址</div><div>${b.site}</div>
+      <div class="k">业主/运营</div><div>${b.owner}</div>
+      <div class="k">坐标</div><div style="color:var(--muted)">${b.lat.toFixed(3)}°N, ${b.lng.toFixed(3)}°E（厂址近似位置）</div>
+    </div>
+    <div class="sub-ttl">机组档案（${b.total} 台）</div>
+    <table class="u">
+      <thead><tr><th>机组</th><th>技术型号</th><th>万千瓦</th><th>状态</th><th>关键节点</th><th>归属</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+    ${b.note?`<div class="note"><b>要点：</b>${b.note}</div>`:''}
+    <div class="wxbox">
+      <b>微信公众号：</b>${b.wx}　<a href="${wxSearch(b.wx)}" target="_blank" rel="noopener">去微信搜索核对 →</a>
+      <div style="color:var(--muted);margin-top:4px">集团号：${gg.wx}　<a href="${wxSearch(gg.wx)}" target="_blank" rel="noopener">搜索</a>　|　<a href="${gg.site}" target="_blank" rel="noopener">集团官网</a></div>
+      <div style="color:var(--muted);margin-top:4px">公众号会改名或迁移，建议在微信内按“基地名+核电”搜索确认。</div>
+    </div>`;
+  if(markerLayer || mode==='svg') renderMarkers();
+  if(pan && map){ map.setCenter(new TMap.LatLng(b.lat,b.lng)); if(map.getZoom()<7) map.setZoom(7); }
+}
+function overview(){
+  const perGroup = Object.keys(G).map(k=>{
+    const bs = B.filter(b=>b.g===k);
+    const r = bs.reduce((s,b)=>s+b.cnt.run,0), u = bs.reduce((s,b)=>s+b.cnt.build,0), a = bs.reduce((s,b)=>s+b.cnt.appr,0);
+    const mw = bs.reduce((s,b)=>s+b.mwRun,0);
+    return `<tr><td><span class="bar" style="display:inline-block;width:9px;height:9px;border-radius:50%;background:${G[k].c};margin-right:6px"></span><b>${G[k].s}</b></td>
+      <td>${bs.length}</td><td>${r}</td><td>${u}</td><td>${a}</td><td>${mw.toFixed(0)}</td></tr>`;
+  }).join('');
+  const perProv = ORDER.filter(p=>PROVS.includes(p)).map(p=>{
+    const bs = B.filter(b=>b.prov===p);
+    const r = bs.reduce((s,b)=>s+b.cnt.run,0), u = bs.reduce((s,b)=>s+b.cnt.build,0), a = bs.reduce((s,b)=>s+b.cnt.appr,0);
+    const mw = bs.reduce((s,b)=>s+b.mwRun,0);
+    return `<tr><td><b>${p}</b></td><td>${bs.map(b=>b.name).join('、')}</td><td>${r}</td><td>${u}</td><td>${a}</td><td>${mw.toFixed(0)}</td></tr>`;
+  }).join('');
+  el('panel').innerHTML = `
+    <h2 class="ttl">全国概览</h2>
+    <div class="meta">点地图上的任一核电站，看它的机组档案</div>
+    <div class="mini">
+      <div><div class="n">${TOT.run}</div><div class="l">在运（台）</div></div>
+      <div><div class="n">${TOT.build}</div><div class="l">在建（台）</div></div>
+      <div><div class="n">${TOT.appr}</div><div class="l">待建（台）</div></div>
+      <div><div class="n">${TOT.mwRun.toFixed(0)}</div><div class="l">在运装机（万千瓦）</div></div>
+    </div>
+    <div class="sub-ttl">按集团</div>
+    <table class="u"><thead><tr><th>集团</th><th>基地</th><th>在运</th><th>在建</th><th>待建</th><th>在运装机</th></tr></thead><tbody>${perGroup}</tbody></table>
+    <div class="sub-ttl">按省份（自北向南）</div>
+    <table class="u"><thead><tr><th>省</th><th>基地</th><th>在运</th><th>在建</th><th>待建</th><th>在运装机</th></tr></thead><tbody>${perProv}</tbody></table>
+    <div class="note">所有机组都建在沿海：核电需要大量冷却水和便捷的大件运输通道，目前内陆核电尚未开工。</div>`;
+}
+
+/* ============ 地图 ============ */
+let map=null, markerLayer=null, mode=null;
+function icon(b, sel){
+  const name = b.name.replace('（华能）','').replace('（苍南）','').replace('核电基地','核电').replace('（惠州）','').replace('国和一号示范工程（石岛湾）','国和一号示范');
+  const w = 36 + name.length*13 + (b.pend? 34 : 8);
+  const h = sel?34:30, r = h/2, cy = h/2;
+  const sw = sel?3:2, stroke = sel? '#111827' : G[b.g].c;
+  const badge = b.pend ? `<g><rect x="${w-34}" y="${cy-8}" width="28" height="16" rx="8" fill="#e08a12"/>
+     <text x="${w-20}" y="${cy+4}" font-size="11" font-weight="700" fill="#ffffff" text-anchor="middle" font-family="Microsoft YaHei,PingFang SC,sans-serif">${b.pend}</text></g>` : '';
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">
+    ${sel?`<rect x="0" y="0" width="${w}" height="${h}" rx="${r}" fill="${G[b.g].c}" opacity="0.18"/>`:''}
+    <rect x="${sw/2}" y="${sw/2}" width="${w-sw}" height="${h-sw}" rx="${r}" fill="#ffffff" stroke="${stroke}" stroke-width="${sw}"/>
+    <circle cx="19" cy="${cy}" r="9.5" fill="${G[b.g].c}"/>
+    <text x="19" y="${cy+4.5}" font-size="12" font-weight="700" fill="#ffffff" text-anchor="middle" font-family="Microsoft YaHei,PingFang SC,sans-serif">${b.cnt.run}</text>
+    <text x="33" y="${cy+4.5}" font-size="13" fill="${sel?'#0b1220':'#1b2430'}" font-family="Microsoft YaHei,PingFang SC,sans-serif">${name}</text>
+    ${badge}</svg>`;
+  return {url:'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg), w, h};
+}
+function buildStyles(){
+  const styles = {};
+  B.forEach(b=>{
+    const a = icon(b,false), s = icon(b,true);
+    styles['n_'+b.id] = new TMap.MarkerStyle({width:a.w,height:a.h,anchor:{x:a.w/2,y:a.h/2},src:a.url});
+    styles['s_'+b.id] = new TMap.MarkerStyle({width:s.w,height:s.h,anchor:{x:s.w/2,y:s.h/2},src:s.url});
+  });
+  return styles;
+}
+function renderMarkers(){
+  if(mode==='svg'){ drawSchematic(); return; }
+  if(!markerLayer) return;
+  const arr = B.filter(match);
+  markerLayer.setGeometries(arr.map(b=>({
+    id:b.id, styleId:(cur===b.id?'s_':'n_')+b.id, position:new TMap.LatLng(b.lat,b.lng)
+  })));
+}
+function fit(){
+  if(mode==='svg'){ drawSchematic(); return; }
+  if(!map) return;
+  const arr = B.filter(match);
+  if(!arr.length) return;
+  const lats = arr.map(b=>b.lat), lngs = arr.map(b=>b.lng);
+  map.fitBounds(new TMap.LatLngBounds(
+    new TMap.LatLng(Math.min(...lats)-0.4, Math.min(...lngs)-0.4),
+    new TMap.LatLng(Math.max(...lats)+0.4, Math.max(...lngs)+0.4)
+  ), {padding:60});
+}
+/* ---- 降级：无地图服务时，用真实经纬度画一张坐标示意图（不依赖任何外部底图） ---- */
+function shortName(n){
+  return n.replace('国和一号示范工程（石岛湾）','国和一号')
+          .replace('徐圩核电（徐圩核能供热发电站）','徐圩')
+          .replace('三澳核电（苍南）','三澳').replace('太平岭核电（惠州）','太平岭')
+          .replace('石岛湾核电（华能）','石岛湾').replace('核电基地','')
+          .replace('核电','').replace(/[（）()]/g,'') || n;
+}
+function drawSchematic(){
+  const box = el('map');
+  const W = Math.max(box.clientWidth || 900, 640), H = 640;
+  const pad = {l:46,r:18,t:24,b:34};
+  const lng0=107.4, lng1=124.6, lat0=17.4, lat1=41.6;
+  const X = l => pad.l + (l-lng0)/(lng1-lng0)*(W-pad.l-pad.r);
+  const Y = a => pad.t + (lat1-a)/(lat1-lat0)*(H-pad.t-pad.b);
+  let grid = '';
+  for(let a=18;a<=41;a+=3){
+    grid += `<line x1="${pad.l}" y1="${Y(a)}" x2="${W-pad.r}" y2="${Y(a)}" stroke="#e8edf3"/>
+      <text x="${pad.l-8}" y="${Y(a)+4}" font-size="11" fill="#9aa4b2" text-anchor="end" font-family="Microsoft YaHei,sans-serif">${a}°N</text>`;
+  }
+  for(let l=108;l<=124;l+=3){
+    grid += `<line x1="${X(l)}" y1="${pad.t}" x2="${X(l)}" y2="${H-pad.b}" stroke="#e8edf3"/>
+      <text x="${X(l)}" y="${H-pad.b+17}" font-size="11" fill="#9aa4b2" text-anchor="middle" font-family="Microsoft YaHei,sans-serif">${l}°E</text>`;
+  }
+  const pts = B.filter(match).map(b=>{
+    const r = 5 + Math.min(b.cnt.run,8)*0.9;
+    const cx = X(b.lng).toFixed(1), cy = Y(b.lat).toFixed(1);
+    return `<g class="sp" data-id="${b.id}" style="cursor:pointer">
+      <circle cx="${cx}" cy="${cy}" r="${r+5}" fill="${G[b.g].c}" opacity="${cur===b.id?0.25:0}"/>
+      <circle cx="${cx}" cy="${cy}" r="${r}" fill="${G[b.g].c}" stroke="#ffffff" stroke-width="2"/>
+      ${b.pend?`<circle cx="${(+cx+r*0.8).toFixed(1)}" cy="${(+cy-r*0.8).toFixed(1)}" r="3.6" fill="#e08a12" stroke="#ffffff" stroke-width="1"/>`:''}
+      <text x="${cx}" y="${(+cy+r+11).toFixed(1)}" font-size="10.5" fill="#3d4a57" text-anchor="middle" font-family="Microsoft YaHei,sans-serif">${shortName(b.name)}</text>
+      <title>${b.name}｜${G[b.g].s}｜在运 ${b.cnt.run} 台${b.pend?'｜在建+待建 '+b.pend+' 台':''}｜${b.prov}${b.city}</title>
+    </g>`;
+  }).join('');
+  box.innerHTML = `<svg width="100%" height="${H}" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet" style="background:#fbfcfd">
+    <text x="${pad.l}" y="14" font-size="11.5" fill="#9aa4b2" font-family="Microsoft YaHei,sans-serif">横轴＝经度，纵轴＝纬度；点的相对方位即真实方位（示意图，非标准地图）</text>
+    ${grid}${pts}</svg>`;
+  box.querySelectorAll('.sp').forEach(n=>n.addEventListener('click',()=>select(n.dataset.id,false)));
+}
+
+function initMap(){
+  // 没有本地代理（例如发布到静态站点）时，直接走坐标示意图，避免底图空白
+  const svc = (window._TMapSecurityConfig && window._TMapSecurityConfig.serviceHost) || '';
+  const hasProxy = svc && svc.indexOf('__WB_') === -1;
+  if(!hasProxy || typeof TMap === 'undefined'){ mode='svg'; el('fallback').style.display='none'; drawSchematic(); return; }
+  try{
+    map = new TMap.Map('map', {center:new TMap.LatLng(31.5,117.6), zoom:5, pitch:0, rotation:0, showControl:false});
+  }catch(err){ mode='svg'; el('fallback').style.display='none'; drawSchematic(); return; }
+  mode = 'map';
+  markerLayer = new TMap.MultiMarker({map, styles:buildStyles(), geometries:[]});
+  markerLayer.on('click', e=>{ if(e.geometry && e.geometry.id) select(e.geometry.id, false); });
+  renderMarkers();
+  fit();
+}
+el('btn-fit').addEventListener('click', fit);
+window.addEventListener('load', ()=>{ setTimeout(initMap, 60); });
+let rz; window.addEventListener('resize', ()=>{ if(mode==='svg'){ clearTimeout(rz); rz=setTimeout(drawSchematic,200); } });
+
+/* ============ 底部知识区 ============ */
+const gRows = [
+  ['中核集团 CNNC','中国核电 601985.SH','秦山、田湾、三门、福清、漳州、昌江（一期）、徐大堡、金七门、徐圩、庄河','华龙一号；同时拥有引进的 VVER、CANDU 重水堆','核电全产业链（“走出去”主力）'],
+  ['中国广核集团 CGN','中国广核电力 003816.SZ / 1816.HK','大亚湾、岭澳、阳江、台山、宁德、红沿河、防城港、三澳、太平岭、陆丰、招远','华龙一号；CPR1000/ACPR1000；引进 EPR','在运机组最多的集团'],
+  ['国家电投 SPIC','电投产融 000958.SZ','海阳、国和一号示范、廉江、白龙、莱阳','国和一号 CAP1400、CAP1000；引进 AP1000','三代非能动技术路线的主导方'],
+  ['中国华能 CHNG','华能国际 600011.SH','石岛湾（高温气冷堆+扩建）、昌江二期','高温气冷堆 HTR-PM（四代）；华龙一号','四代堆示范的业主']
+];
+const techRows = [
+  ['华龙一号 HPR1000','三代','中核 + 中广核联合研发（两个技术流派融合）','当前批量化建设主力，国内外在运及核准在建机组数居全球三代首位；2.0 版已在金七门二期、太平岭三期启动示范'],
+  ['国和一号 CAP1400','三代','国家电投（上海核工院）','在 AP1000 基础上再创新的国产大型机型，153.4 万千瓦，单机功率最大'],
+  ['CAP1000','三代','国家电投（AP1000 国产化）','AP1000 的国产化版本，非能动安全系统；海阳二期、三门二期、廉江、白龙、徐大堡一期使用'],
+  ['AP1000','三代','美国西屋（引进）','全球首批 4 台全部在中国：三门 1、2 号与海阳 1、2 号'],
+  ['EPR','三代','法国法马通/EDF（引进）','台山 1、2 号，单机 175 万千瓦，为国内单机容量最大'],
+  ['VVER-1000 / VVER-1200','三代','俄罗斯（引进，中俄合作）','田湾 1—4 号（VVER-1000）、田湾 7、8 号与徐大堡 3、4 号（VVER-1200）'],
+  ['CPR1000 / ACPR1000','二代+','中广核（M310 消化吸收再创新）','岭东、阳江、宁德、红沿河、防城港的主力机型'],
+  ['M310 / M310 改进型','二代 / 二代+','法国法马通（引进后国产化）','大亚湾、岭澳；福清 1—4 号、方家山、田湾 5、6 号'],
+  ['CNP300 / CNP600','二代','中核自主设计','秦山一期（30 万千瓦）、秦山二期与昌江 1、2 号（60 万千瓦级）'],
+  ['CANDU-6 重水堆','二代','加拿大（引进）','秦山三期 1、2 号，我国唯一的重水堆机组'],
+  ['HTR-PM 高温气冷堆','四代','清华 + 华能','石岛湾示范工程，全球首座第四代核电商业示范电站'],
+  ['ACP100 玲龙一号','三代小堆','中核','昌江多用途模块式小型堆，全球首个通过 IAEA 安全审查的陆上商用模块化小堆']
+];
+const gloss = [
+  ['控股集团 / 业主公司','核电站的“产权方”和“运营方”经常不是同一个法人。例如岭澳核电站的持证单位是岭东核电有限公司，运营由大亚湾核电运营管理有限责任公司负责。看归属要看控股集团。'],
+  ['机组编号','1 号、2 号是同一基地内的机组序号；扩建项目会沿用大序号（如陆丰 5、6 号），所以看到“5 号”不等于前面一定已有 4 台建成。'],
+  ['堆型 / 技术型号','反应堆的技术路线，决定安全系统架构与供应商体系。同一基地可以有多种堆型（秦山最典型）。'],
+  ['二代 / 二代+ / 三代 / 四代','按安全理念划分的代际：二代靠能动安全系统；三代增加非能动安全与更长的应对时间；四代指高温气冷堆、快堆、熔盐堆等新堆型。代际高不等于风险低，但安全冗余更强。'],
+  ['装机容量 vs 额定功率','“万千瓦”是机组额定电功率。同一机型不同机组的登记值可能略有差异（如福清 5 号 115 万千瓦，商运口径常写 116.1 万千瓦）。'],
+  ['FCD（核岛第一罐混凝土）','核电项目正式开工的标志性节点，也是统计“在建”的起点。'],
+  ['首次装料','把第一炉核燃料装入反应堆，标志机组进入带核调试阶段，国家核安全局逐台公布此日期。'],
+  ['首次并网 / 商运（商业运行）','装料后先并网发电，再通过 168 小时满功率连续运行考核，才算正式商运。所以“并网”和“建成”之间通常隔几个月。'],
+  ['换料大修','机组每 12—18 个月停堆更换部分燃料并做检修，期间不发电，这也是核电年发电量不等于“装机×8760 小时”的原因。'],
+  ['负荷因子 / 利用小时数','衡量机组一年里实际发电饱满程度的指标，核电通常在 80%—90% 以上，远高于风电光伏。'],
+  ['核岛 / 常规岛 / BOP','核岛是反应堆及安全系统部分；常规岛是汽轮机发电机部分；BOP 是配套辅助设施。造价大致占 52% / 28% / 20%。'],
+  ['核准 vs 开工','国务院常务会议核准 ≠ 开工。核准后还要完成选址、建造许可证、FCD 等程序，可能间隔一两年。'],
+  ['核安全许可证','国家核安全局（生态环境部）对每台机组分别颁发建造许可证、运行许可证，可在其“监管对象数据库”查询，是最权威的机组状态来源。']
+];
+const timeline = [
+  ['1991-12','秦山一期首次并网，中国大陆核电零的突破'],
+  ['1994','大亚湾 1、2 号投入商业运行，中国大陆首座大型商用核电站'],
+  ['2002—2003','岭澳 1、2 号、秦山二期、秦山三期（重水堆）陆续投产'],
+  ['2007','田湾 1、2 号商运，中俄核能合作落地'],
+  ['2018','三门 1 号、海阳 1 号（AP1000 全球首堆）与台山 1 号（EPR 全球首堆）同年前后投产，中国成为三代核电的首堆试验场'],
+  ['2021-01','福清 5 号商运，华龙一号全球首堆'],
+  ['2021-12 / 2023-12','石岛湾高温气冷堆示范工程首次并网 / 投入商业运行，全球首座四代核电商业示范电站'],
+  ['2024-09','国和一号示范工程 1 号首次并网，CAP1400 打通'],
+  ['2025—2026','漳州 1、2 号、三澳 1 号、太平岭 1、2 号、田湾 7 号、昌江 3 号相继装料或投产，在运规模升至全球第二'],
+  ['2026-07-31','国务院常务会议核准金七门二期、太平岭三期、庄河一期、莱阳一期共 8 台机组；金七门二期与太平岭三期为“华龙一号 2.0 版”首批示范']
+];
+const more = [
+  ['核电到底占多少电？','2025 年全国运行核电机组累计发电量约 4677 亿千瓦时，占全国总发电量约 4.82%（中国核能行业协会《中国核能发展报告 2026》）。福建、辽宁、海南三省核电发电量占比最高，分别约 27%、23%、23%。'],
+  ['为什么全在沿海？','核电需要大量冷却水（一次通过或冷却塔）、大件设备海运通道、以及相对低人口密度的厂址。目前国内在运和在建机组全部位于东部沿海，内陆核电尚未开工。'],
+  ['一座百万千瓦机组多少钱？','单台百万千瓦级机组总投资约 200 亿元，每千瓦造价约 1.1—1.8 万元，设备投资约占一半。按年均核准 10 台估算，年市场空间约 1100—1800 亿元。'],
+  ['能去参观吗？','可以。中广核每年 8 月 7 日前后举办“公众开放体验日”，六大基地开放网络报名（关注中广核科普号“核宝一族”）；中核各基地也有公众开放日与科普展厅，通常在各自公众号或集团官网发布报名通知。'],
+  ['想了解技术细节去哪看？','堆型与安全分析看国家核安全局（生态环境部）审评文件与环境影响报告书批复；产业数据看中国核能行业协会年度蓝皮书；上市公司机组清单看中国核电、中国广核电力、电投产融的定期报告与公告。'],
+  ['容易踩的坑','①“某核电属于国家电投”这类说法常错，山东招远、广东陆丰实际是中广核；②昌江基地一期归中核、二期归华能；③石岛湾厂址上同时有华能的高温气冷堆和国家电投的国和一号示范工程；④“核准”不等于“在建”。']
+];
+
+el('p-g').innerHTML = `<h4>四大集团怎么分</h4>
+<table class="g"><thead><tr><th>集团</th><th>上市平台</th><th>主要基地</th><th>主力技术</th><th>一句话</th></tr></thead><tbody>
+${gRows.map(r=>`<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td></tr>`).join('')}
+</tbody></table>
+<div class="note">口径说明：按“控股方”归类。核电站普遍是多方合资，例如红沿河由中广核控股运营但国家电投参股，昌江基地一期归中核、二期归华能，徐圩与田湾 7、8 号由中核苏能作为业主。机组表里每台机组都单独标了归属。</div>`;
+
+el('p-tech').innerHTML = `<h4>堆型图鉴：一座核电站到底用什么技术</h4>
+<table class="g"><thead><tr><th>型号</th><th>代际</th><th>技术来源</th><th>用在哪 / 看点</th></tr></thead><tbody>
+${techRows.map(r=>`<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td></tr>`).join('')}
+</tbody></table>
+<div class="note">规律：2018 年前投产的多为二代/二代+（M310、CPR1000、CNP600、VVER-1000、CANDU）；2018 年后投产和新开工的基本全是三代（华龙一号、国和一号/CAP1000、AP1000、EPR、VVER-1200）；四代目前只有石岛湾高温气冷堆一座商业示范。</div>`;
+
+el('p-gloss').innerHTML = `<h4>名词小词典（看到不懂的词先查这里）</h4><dl class="gloss">
+${gloss.map(g=>`<dt>${g[0]}</dt><dd>${g[1]}</dd>`).join('')}</dl>`;
+
+el('p-time').innerHTML = `<h4>关键时间线</h4><ul class="tl">
+${timeline.map(t=>`<li><b>${t[0]}</b> — ${t[1]}</li>`).join('')}</ul>`;
+
+el('p-more').innerHTML = `<h4>你可能还想知道</h4><dl class="gloss">
+${more.map(m=>`<dt>${m[0]}</dt><dd>${m[1]}</dd>`).join('')}</dl>`;
+
+el('p-src').innerHTML = `<h4>数据口径与来源</h4>
+<ul class="tl">
+<li><b>机组状态：</b>国家核安全局（生态环境部）“监管对象数据库—核动力厂”运行核电机组 / 在建核电机组清单，更新日期 2026-08-31。</li>
+<li><b>新增核准项目：</b>2026 年 7 月 31 日国务院常务会议核准名单（金七门二期、太平岭三期、庄河一期、莱阳一期，共 8 台）及三家公司当晚公告。</li>
+<li><b>堆型与技术：</b>生态环境部环境影响报告书批复、项目建设单位公开报道、中国核能行业协会与 IAEA 公开数据。</li>
+<li><b>装机容量：</b>采用国家核安全局登记的装机容量（万千瓦）；少数机型公开报道值与登记值不同（如高温气冷堆示范工程），已在页内注明。</li>
+<li><b>坐标：</b>厂址近似位置（GCJ-02），用于分布示意，非工程坐标，不做导航用途。</li>
+<li><b>微信公众号：</b>给出的是公开报道与集团微信矩阵中的常见名称，会随改版变化；页内提供一键跳转微信搜索的链接，请以搜索结果为准。</li>
+</ul>
+<div class="note">统计口径提醒：不同机构对“在运”的定义不同——本页以持有运行许可证/完成首次装料为准（65 台），部分机构按“已商运”统计（约 63 台），差异来自刚装料、尚在调试的机组。</div>`;
+
+document.querySelector('.tabs').addEventListener('click', e=>{
+  const b = e.target.closest('button'); if(!b) return;
+  document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('on', x===b));
+  document.querySelectorAll('.tabpane').forEach(p=>p.classList.toggle('on', p.id==='p-'+b.dataset.t));
+});
+
+/* 初始 */
+syncChips(); renderList(); overview();
+</script>
+</body>
+</html>
